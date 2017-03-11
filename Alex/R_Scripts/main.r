@@ -10,33 +10,22 @@ dir.create("./products")
 
 #print("Getting the data from the Abbvie FB Page")
 
-abbviePageData <- retrieveAbbviePageData()
+#abbviePageData <- retrieveAbbviePageData()
 
-write.csv(abbviePageData, file="./products/AbbviePageData.csv", row.names=FALSE)
+#write.csv(abbviePageData, file="./products/AbbviePageData.csv", row.names=FALSE)
 
 
 ## Get all the data of pages for 'Humira' ## 
-#getPagesDataWithKey("Humira")
 getPagesDataWithKeySingleFile("Humira","./products/")
 
 ## Get all the data of pages for 'Adalimumab' ## 
-#getPagesDataWithKey("Adalimumab")
 getPagesDataWithKeySingleFile("Adalimumab","./products/")
 
 ## Get all the data of pages for 'Enbrel' ## 
-#getPagesDataWithKey("Enbrel")
 getPagesDataWithKeySingleFile("Enbrel","./products/")
 
-## !!!! THROWS ERROR !!!! ##
 ## Get all the data of pages for 'Trilipix' ## 
-#getPagesDataWithKey("Trilipix")
 getPagesDataWithKeySingleFile("Trilipix","./products/")
 
 ## Get all the data of pages for 'Imbruvica' ## 
-#getPagesDataWithKey("Imbruvica")
-
-
 getPagesDataWithKeySingleFile("Imbruvica","./products/")
-
-
-#getGroupsDataWithKey("Humira")

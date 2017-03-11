@@ -20,7 +20,6 @@ retrieveAbbviePageData <- function(){
   return(abbviePageData)
 }
 
-
 getPagesDataWithKey <- function(key){
   print(paste("Getting the data from all FB Pages with the keyword",key, sep = " "))
   
@@ -59,6 +58,7 @@ getPagesDataWithKey <- function(key){
   }
 }
 
+
 getPagesDataWithKeySingleFile <- function(key, directory){
 
   print(paste("Getting the data from all FB Pages with the keyword",key, sep = " "))
@@ -88,21 +88,12 @@ getPagesDataWithKeySingleFile <- function(key, directory){
     }
   }
   
-  #View(pagesSearchResult)
-  #View(postsOnPages)
-  #View(commentsOnPosts)
-  #View(reactionsOnPosts)
-  
-  list <- list("posts"=commentsOnPosts)
   dir.create(paste(directory,key, sep = ""))
-  write.csv(pagesSearchResult, file = paste(directory,"/",key,"/","pages.csv", sep = ""), row.names=FALSE)
-  write.csv(postsOnPages, file = paste(directory,"/",key,"/","posts.csv", sep = ""),row.names=FALSE)
-  write.csv(commentsOnPosts, file = paste(directory,"/",key,"/","comments.csv", sep = ""),row.names=FALSE)
-  write.csv(reactionsOnPosts, file = paste(directory,"/",key,"/","reactions.csv", sep = ""),row.names=FALSE)
-  
+  write.csv(pagesSearchResult, file = paste(directory,"/",key,"/","pages.csv", sep = ""), row.names=FALSE, qmethod='escape', quote=TRUE)
+  write.csv(postsOnPages, file = paste(directory,"/",key,"/","posts.csv", sep = ""),row.names=FALSE, qmethod='escape', quote=TRUE)
+  write.csv(commentsOnPosts, file = paste(directory,"/",key,"/","comments.csv", sep = ""),row.names=FALSE, qmethod='escape', quote=TRUE)
+  write.csv(reactionsOnPosts, file = paste(directory,"/",key,"/","reactions.csv", sep = ""),row.names=FALSE, qmethod='escape', quote=TRUE)
 }
-
-
 
 getGroupsDataWithKey <- function(key){
   search_groups <- searchGroup(key, facebook_oauth)
