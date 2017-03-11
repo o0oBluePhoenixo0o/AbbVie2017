@@ -20,54 +20,137 @@ library(dplyr)
 fb_oauth <- fbOAuth(app_id="204227866723896", 
                     app_secret="e39f8a7750fd165276e0d36709201f92",
                     extended_permissions = TRUE)
-token <- fb_oauth
 
-#random Testing
-me <- getUsers("me", token = fb_oauth)
+x <- fb_oauth
 
-searchGroup("AbbVie",token)
-" Group ID (the only open and official group)
-278782302258949  Abbvie"
-AbbVie_group <- getGroup(278782302258949, token, n = 5000)
+searchFB <- function(key, directory){
+  
+  print(paste("Getting data for keyword: ",key, sep = " "))
+  
+  pagelist<- select(filter(searchPages(key,x), 
+                           category == "Medical Company" | category =="Pharmaceuticals"),id)
+  
+  begin = "2012-01-01"
+  today = Sys.Date()
+  
+  # Initiate variables
+  
+  page_df <- data.frame()
+  #post_df <- data.frame()
+  comment_df <- data.frame()
+  replies_df <- data.frame()
+  
+  #pulling data for page_df and comment_df 
+  for (i in 1:nrow(pagelist))
+  {
+    target_page <- getPage(pagelist[i,],x,n=10000, since=begin , until = today,
+                           feed = TRUE, reactions = TRUE)
+    page_df <- try(rbind(page_df,target_page))
+    for (j in 1:nrow(target_page))
+    {
+      target_post <- getPost(target_page$id[j], n=10000,  x, comments = TRUE, likes = TRUE)
+      #post_df<- try(rbind(post_df,target_post$post))
+      comment_df <-try(rbind(comment_df,target_post$comments))
+      if (class(comment_df)=="try-error")next;
+    }
+    if(class(page_df)=="try-error")next;
+  }
+  # Join 2 data frame to create 1 consolidated dataset for each keyword
+  
+  #the 2nd part of ID
+  for (i in 1:nrow(page_df))
+  {
+    x<-strsplit(page_df[i,]$id,"_")[[1]]
+    y<-tolower(x)[2]
+    page_df$join_id[i] <-y
+  }
+  #the 1st part of ID
+  for (i in 1:nrow(comment_df))
+  {
+    x<-strsplit(comment_df[i,]$id,"_")[[1]]
+    y<-tolower(x)[1]
+    comment_df$join_id[i] <-y
+  }
+  
+  final_dataset<-full_join(page_df,comment_df,by = c("join_id"))
+  
+  dir.create(paste(directory,key, sep = ""))
+  write.csv(final_dataset, file = paste(directory,key,".csv", sep = ""), 
+            quote = TRUE, sep= ";",
+            row.names=FALSE, qmethod='escape',
+            fileEncoding = "UTF-16LE", na = "NA")
+}
 
-#AbbvieGlobal page
-searchPages("AbbVieGlobal",token)
-AbbvieGlobal <- getPage(1213879395322100, token, n = 5000)
+searchFB("AbbVie","./companies/")
+searchFB("Amgen","./companies/")
+searchFB("Bristol","/companies/")
+#####################################################
+#             IGNORE THIS PART AND ONWARDS          #
+#####################################################
 
-#Amgen page
-#################################################################################
+pagelist<- select(filter(searchPages("AbbVie",x), 
+                         category == "Medical Company" | category =="Pharmaceuticals"),id)
 
 begin = "2012-01-01"
 today = Sys.Date()
 
-pagelist<-searchPages("AbbVie",token)
-a<- select(filter(pagelist, category == "Medical Company"),id)
-b<- nrow(a)
+# Initiate variables
 
-#Insert first page
-e <- getPage(a[1,],fb_oauth,n=10000, since=begin , until = today)
+page_df <- data.frame()
+#post_df <- data.frame()
+comment_df <- data.frame()
+replies_df <- data.frame()
 
-for(i in 2:b)
+#pulling data for page_df and comment_df 
+for (i in 1:nrow(pagelist))
 {
-  e<-try(rbind(e,getPage(a[i,], fb_oauth,n=10000, since=begin , until = today)))
-  if(class(e)=="try-error")next;
+  target_page <- getPage(pagelist[i,],x,n=10000, since=begin , until = today,
+                         feed = TRUE, reactions = TRUE)
+  page_df <- try(rbind(page_df,target_page))
+  for (j in 1:nrow(target_page))
+  {
+    target_post <- getPost(target_page$id[j], n=10000,  x, comments = TRUE, likes = TRUE)
+    #post_df<- try(rbind(post_df,target_post$post))
+    comment_df <-try(rbind(comment_df,target_post$comments))
+    if (class(comment_df)=="try-error")next;
+  }
+  if(class(page_df)=="try-error")next;
 }
 
-e <- data.frame(e)
+# Join 2 data frame to create 1 consolidated dataset for each keyword
 
-setwd("C:/Users/D065347/Downloads/Team Proj")
-write.table(e, file = "Abbvie.csv", quote = TRUE, sep= ";",
-            col.names = TRUE, qmethod = "double",
+#the 2nd part of ID
+for (i in 1:nrow(page_df))
+{
+  x<-strsplit(page_df[i,]$id,"_")[[1]]
+  y<-tolower(x)[2]
+  page_df$join_id[i] <-y
+}
+#the 1st part of ID
+for (i in 1:nrow(comment_df))
+{
+  x<-strsplit(comment_df[i,]$id,"_")[[1]]
+  y<-tolower(x)[1]
+  comment_df$join_id[i] <-y
+}
+
+final_dataset<-full_join(page_df,comment_df,by = c("join_id"))
+
+setwd("C:/Users/BluePhoenix/Documents/GitHub/AbbVie2017/Philipp")
+write.csv(e, file = "Abbvie.csv", quote = TRUE, sep= ";",
+            row.names=FALSE, qmethod='escape',
             fileEncoding = "UTF-16LE", na = "NA")
-#Insert list of "crawling pages"?
 
-page_crawl <- 1213879395322100
-#Crawl all post from specific page
+################## Random Testing #####################
+me <- getUsers("me", x)
 
-e=getPage(page_crawl, fb_oauth, n= 1000, since=begin ,  until = today)
+searchGroup("AbbVie",x)
 
+" Group ID (the only open and official group)
+278782302258949  Abbvie"
+AbbVie_group <- getGroup(278782302258949, x, n = 5000)
 
-#######################################################################
+#######################################################
 # Visualization for comments/likes/shares of AbbiveGlobal page
 
 page <- getPage("AbbVieGlobal", token, n = 5000)
