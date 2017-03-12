@@ -23,7 +23,7 @@ fb_oauth <- fbOAuth(app_id="204227866723896",
 
 x <- fb_oauth
 
-searchFB <- function(key, directory){
+searchFB <- function(key){
   
   print(paste("Getting data for keyword: ",key, sep = " "))
   
@@ -74,16 +74,15 @@ searchFB <- function(key, directory){
   
   final_dataset<-full_join(page_df,comment_df,by = c("join_id"))
   
-  dir.create(paste(directory,key, sep = ""))
-  write.csv(final_dataset, file = paste(directory,key,".csv", sep = ""), 
+  write.csv(final_dataset, file = paste(key,".csv", sep = ""), 
             quote = TRUE, sep= ";",
             row.names=FALSE, qmethod='escape',
             fileEncoding = "UTF-16LE", na = "NA")
 }
 
-searchFB("AbbVie","./companies/")
-searchFB("Amgen","./companies/")
-searchFB("Bristol","/companies/")
+searchFB("AbbVie")
+searchFB("Amgen")
+searchFB("Bristol")
 #####################################################
 #             IGNORE THIS PART AND ONWARDS          #
 #####################################################
