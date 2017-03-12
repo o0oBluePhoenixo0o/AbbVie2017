@@ -16,16 +16,16 @@ dir.create("./products")
 
 
 ## Get all the data of pages for 'Humira' ## 
-getPagesDataWithKeySingleFile("Humira","./products/")
+searchFB("Humira")
 
 ## Get all the data of pages for 'Adalimumab' ## 
-getPagesDataWithKeySingleFile("Adalimumab","./products/")
+searchFB("Adalimumab")
 
 ## Get all the data of pages for 'Enbrel' ## 
-getPagesDataWithKeySingleFile("Enbrel","./products/")
+searchFB("Enbrel")
 
 ## Get all the data of pages for 'Trilipix' ## 
-getPagesDataWithKeySingleFile("Trilipix","./products/")
+searchFB("Trilipix")
 
 ## Get all the data of pages for 'Imbruvica' ## 
-getPagesDataWithKeySingleFile("Imbruvica","./products/")
+searchFB("Imbruvica")
