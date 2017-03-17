@@ -35,7 +35,13 @@ searchFB <- function(key){
   {
     target_page <- getPage(pagelist[i,],x,n=10000, since=begin , until = today,
                            feed = TRUE, reactions = TRUE)
+
+    #Adding keyword to table
+    if(!empty(target_page)){
+      target_page <- cbind(keyword = key, target_page)
+    }
     page_df <- try(rbind(page_df,target_page))
+    
     for (j in 1:nrow(target_page))
     {
       print(target_page$id[j])
@@ -81,94 +87,72 @@ searchFB <- function(key){
     final_dataset<-full_join(page_df,comment_df,by = c("join_id"))
   }
   
-  View(final_dataset)
-  
-  write.csv2(final_dataset, file = paste(key,".csv", sep = ""),row.names=FALSE, qmethod='escape', quote=TRUE)
-  
-  
+  write.csv2(final_dataset, file = paste("./products/",key,".csv", sep = ""),row.names=FALSE, qmethod='escape', quote=TRUE)#
 }
-
-
 
 # Helper function for iterating over rows in a data.frame
 rows = function(tab) lapply(
   seq_len(nrow(tab)),
   function(i) unclass(tab[i,,drop=F])
 )
-getPagesDataWithKey <- function(key){
-  print(paste("Getting the data from all FB Pages with the keyword",key, sep = " "))
-  
-  dir <- paste("./products/",key,"/",sep="")
-  dirPages <- paste(dir,"/pages/",sep="")
-  dir.create(dir) 
-  dir.create(dirPages)
-  pageSearchResult <- searchPages(key, facebook_oauth, n = 200)
-  for(page in rows(pageSearchResult)){
-    
-    currentDir <- paste(dirPages,page$id,sep = "")
-    dir.create(currentDir)
-    
-    #Get the page with it's posts#
-    pageData <- getPage(page$id, token = facebook_oauth, feed=TRUE, n = 1000 )
-    write.csv(pageData, file=paste(currentDir,"/",page$id,".csv", sep = ""), row.names=FALSE)
-    
-    
-    currentDirPosts <- paste(currentDir,"/posts", sep="")
-    dir.create(currentDirPosts)
-    for (post in rows(pageData)) {
-      
-      postDetailDir <- paste(currentDirPosts,"/",post$id, sep = "")
-      postDetail <- getPost(post$id, facebook_oauth, n = 500, comments = TRUE, likes = TRUE)
-      postReactions <- getReactions(post$id, facebook_oauth)
-      
-      
-      dir.create(postDetailDir)
-      
-      write.csv(postDetail$post, file=paste(postDetailDir,"/postDetail",".csv", sep = ""),row.names=FALSE)
-      write.csv(postDetail$comments, file=paste(postDetailDir,"/postComments",".csv", sep = ""),row.names=FALSE)
-      write.csv(postDetail$likes, file=paste(postDetailDir,"/postLikes",".csv", sep = ""),row.names=FALSE)
-      write.csv(postReactions, file=paste(postDetailDir,"/postReactions",".csv", sep = ""),row.names=FALSE)
-      
-    }
-  }
-}
 
-getPagesDataWithKeySingleFile <- function(key, directory){
-  
-  print(paste("Getting the data from all FB Pages with the keyword",key, sep = " "))
-  
-  pagesSearchResult <- searchPages(key, facebook_oauth, n = 200)
-  postsOnPages <- data.frame()
-  commentsOnPosts <- data.frame()
-  reactionsOnPosts <- data.frame()
-  
-  for(page in rows(pagesSearchResult)){
-    
-    #Get the page with it's posts#
-    pageData <- getPage(page$id, token = facebook_oauth, feed=TRUE, n = 1000 )
-    postsOnPages <- rbind(postsOnPages, pageData)
-    
-    for (post in rows(pageData)) {
-      
-      postDetail <- getPost(post$id, facebook_oauth, n = 5000, comments = TRUE, likes = TRUE)
-      postReactions <- getReactions(post$id, facebook_oauth)
-      
-      
-      comments <- postDetail$comments
-      commentsOnPosts <- rbind(commentsOnPosts, comments)
-      
-      reactionsOnPosts <-  rbind(reactionsOnPosts, postReactions)
-      
-    }
-  }
-  
-  dir.create(paste(directory,key, sep = ""))
-  write.csv(pagesSearchResult, file = paste(directory,"/",key,"/","pages.csv", sep = ""), row.names=FALSE, qmethod='escape', quote=TRUE)
-  write.csv(postsOnPages, file = paste(directory,"/",key,"/","posts.csv", sep = ""),row.names=FALSE, qmethod='escape', quote=TRUE)
-  write.csv(commentsOnPosts, file = paste(directory,"/",key,"/","comments.csv", sep = ""),row.names=FALSE, qmethod='escape', quote=TRUE)
-  write.csv(reactionsOnPosts, file = paste(directory,"/",key,"/","reactions.csv", sep = ""),row.names=FALSE, qmethod='escape', quote=TRUE)
-}
 
+mergeCSVs <- function(...){
+  files <- list(...)
+  print(files)
+  
+  masterDF <- data.frame()
+  
+  
+  for(file in files){
+    fileData <- tryCatch(
+      {
+        # Just to highlight: if you want to use more than one 
+        # R expression in the "try" part then you'll have to 
+        # use curly brackets.
+        # 'tryCatch()' will return the last evaluated expression 
+        # in case the "try" part was completed successfully
+        
+        message("This is the 'try' part")
+        
+        read.csv(file=file, header=TRUE, sep=";")
+        # The return value of `readLines()` is the actual value 
+        # that will be returned in case there is no condition 
+        # (e.g. warning or error). 
+        # You don't need to state the return value via `return()` as code 
+        # in the "try" part is not wrapped insided a function (unlike that
+        # for the condition handlers for warnings and error below)
+      },
+      error=function(cond) {
+        message("Error reading csv")
+        message("Here's the original error message:")
+        message(cond)
+        # Choose a return value in case of error
+        return(NA)
+      },
+      warning=function(cond) {
+        message("Error reading csv")
+        message("Here's the original warning message:")
+        message(cond)
+        # Choose a return value in case of warning
+        return(NULL)
+      },
+      finally={
+        # NOTE:
+        # Here goes everything that should be executed at the end,
+        # regardless of success or error.
+        # If you want more than one expression to be executed, then you 
+        # need to wrap them in curly brackets ({...}); otherwise you could
+        # just have written 'finally=<expression>' 
+        message("Read CSV successfully")
+        message("Some other message at the end")
+      }
+    )    
+    masterDF <- rbind(masterDF, fileData)
+  }
+  View(masterDF)
+  write.csv2(masterDF, file = paste("./products/masterProducts",".csv", sep = ""),row.names=FALSE, qmethod='escape', quote=TRUE)
+}
 
 
 

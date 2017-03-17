@@ -29,3 +29,6 @@ searchFB("Trilipix")
 
 ## Get all the data of pages for 'Imbruvica' ## 
 searchFB("Imbruvica")
+
+
+mergeCSVs("./products/Adalimumab.csv","./products/Enbrel.csv","./products/Humira.csv","./products/Imbruvica.csv","./products/Trilipix.csv")
