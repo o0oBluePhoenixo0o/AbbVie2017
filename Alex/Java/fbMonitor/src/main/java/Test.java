@@ -1,5 +1,6 @@
 
 import org.json.simple.JSONArray;
+import utils.LanguageUtil;
 
 import java.io.IOException;
 
@@ -14,9 +15,8 @@ public class Test {
 
     public static void main (String [] args) {
 
-        FacebookMonitor facebookMonitor = new FacebookMonitor("EAACEdEose0cBAMLwO5FScBt9DKi7TNF4LwrUi2vF6QZC7VxyvTwAZAGUxdIXJ07jHKW75DwHoaey44gf1hQnpfPlyXGsxUuEMMAdt0MiBDTBP32c6DmGYpxNXI3yzMU3UwyIq4iVshqk3FOKn4yyQy7e8yGZAmcaOzFctZAbyYf8OIa1ZCb5R3XsbHu0NnJoZD");
+        FacebookMonitor facebookMonitor = new FacebookMonitor("EAACEdEose0cBAA5v4VJFKt8YQ8bYk8G1QLirlyorEQ4bM94foPhkXZCUenirseFURfB2k7jlKDb71LQ4AIqWfLgFSSLbyFLxbZAc8oqIZCvcu3G44DQ6sUNfU4G6ePorUOZBuXvlJGz6SW1aMATgInJRwS2E0182kFjvTHgx9unVy1peVR8iWSJP2cYI8HoZD");
         try {
-
 
             JSONArray humiraJSON = facebookMonitor.searchPagesData("Humira");
             JSONArray adalimumabJSON = facebookMonitor.searchPagesData("Adalimumab");
@@ -32,12 +32,12 @@ public class Test {
             facebookMonitor.writeJSONToFile(imbruvicaJSON.toJSONString(), "imbruvicaPages");
 
 
-            /*facebookMonitor.writeJSONtoCSV(humiraJSON.toJSONString(), "humiraPages");
+            facebookMonitor.writeJSONtoCSV(humiraJSON.toJSONString(), "humiraPages");
             facebookMonitor.writeJSONtoCSV(adalimumabJSON.toJSONString(), "adalimumabPages");
             facebookMonitor.writeJSONtoCSV(enbrelJSON.toJSONString(), "enbrelPages");
             facebookMonitor.writeJSONtoCSV(trilipixJSON.toJSONString(), "trilipixPages");
-            facebookMonitor.writeJSONtoCSV(imbruvicaJSON.toJSONString(), "imbruvicaPages");*/
-        } catch (IOException e) {
+            facebookMonitor.writeJSONtoCSV(imbruvicaJSON.toJSONString(), "imbruvicaPages");
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

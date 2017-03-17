@@ -5,9 +5,12 @@ import com.restfb.types.Page;
 import com.restfb.types.Post;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import utils.LanguageUtil;
 
 import java.io.*;
+import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,7 @@ public class FacebookMonitor {
 
     private String accessToken;
     private FacebookClient fbClient;
+    private LanguageUtil languageUtil;
 
     /**
      * Default constructor
@@ -29,6 +33,7 @@ public class FacebookMonitor {
     public FacebookMonitor(String accessToken){
         this.accessToken = accessToken;
         this.fbClient = new DefaultFacebookClient(accessToken, Version.VERSION_2_8);;
+        this.languageUtil = new LanguageUtil();
     }
 
 
@@ -71,21 +76,14 @@ public class FacebookMonitor {
         Connection<Page> pages =
                 fbClient.fetchConnection("search", Page.class,
                         Parameter.with("q", keyWord), Parameter.with("type", "page"));
-
-        ArrayList<Page> pagesList = new ArrayList<Page>();
-        ArrayList<Post> postsList = new ArrayList<Post>();
-        ArrayList<Comment> commentsList = new ArrayList<Comment>();
-
-        System.out.println("Getting data...");
-
+        System.out.println("Getting data for keyword..." + keyWord);
 
         for (List<Page> pagesConnection : pages) {
             for (Page page : pagesConnection) {
-                pagesList.add(page);
-
                 JSONObject pageJSON = new JSONObject();
                 pageJSON.put("name", page.getName());
                 pageJSON.put("id", page.getId());
+                pageJSON.put("keyword" , keyWord);
                 JSONArray postsJSON = new JSONArray();
 
                 System.out.println(".page");
@@ -96,7 +94,14 @@ public class FacebookMonitor {
                         JSONObject postJSON = new JSONObject();
                         postJSON.put("id", post.getId());
                         postJSON.put("message", post.getMessage());
+                        if(post.getMessage() !=null && !post.getMessage().contentEquals("") && !isValidURL(post.getMessage())){
+                            postJSON.put("origLang",  languageUtil.detect(post.getMessage()));
+                        } else {
+                            postJSON.put("origLang",  "");
+                        }
+                        //postJSON.put("lang": LANG)
 
+                        //Get reactions on the post
                         JSONArray reactionsJSON = new JSONArray();
                         if (post.getReactions() != null){
                             post.getReactions().getData().forEach(reactionOnPost ->{
@@ -107,10 +112,10 @@ public class FacebookMonitor {
                                 reactionsJSON.add(reactionOnPostJSON);
                             });
                         }
-
                         postJSON.put("reactions", reactionsJSON);
 
 
+                        //Get the comments on that post
                         JSONArray commentsJSON = new JSONArray();
                         System.out.println(".post");
                         this.getCommentsFromPost(post.getId()).forEach(comment ->{
@@ -118,6 +123,12 @@ public class FacebookMonitor {
                             commentJSON.put("id", comment.getId());
                             commentJSON.put("message", comment.getMessage());
                             commentJSON.put("likes", comment.getLikeCount());
+                            if(comment.getMessage() !=null && !comment.getMessage().contentEquals("") && !isValidURL(comment.getMessage())){
+                                commentJSON.put("origLang",  languageUtil.detect(comment.getMessage()));
+                            } else {
+                                commentJSON.put("origLang",  "");
+                            }
+                            //commentJSON.put("lang": LANG)
 
                             JSONArray commentsOnCommentJSON = new JSONArray();
 
@@ -127,6 +138,14 @@ public class FacebookMonitor {
                                     JSONObject commentOnCommentJSON =  new JSONObject();
                                     commentOnCommentJSON.put("id", commentOnComment.getId());
                                     commentOnCommentJSON.put("message", commentOnComment.getMessage());
+                                    if(commentOnComment.getMessage() !=null && !commentOnComment.getMessage().contentEquals("") && !isValidURL(commentOnComment.getMessage())){
+                                        commentOnCommentJSON.put("origLang",  languageUtil.detect(commentOnComment.getMessage()));
+                                    } else {
+                                        commentOnCommentJSON.put("origLang",  "");
+                                    }
+
+                                    //commentOnCommentJSON.put("lang": LANG)
+
                                     commentsOnCommentJSON.add(commentOnComment);
                                 });
 
@@ -158,8 +177,8 @@ public class FacebookMonitor {
      * @throws IOException
      */
     public void writeJSONToFile(String jsonString ,String fileName) throws IOException{
+        this.createDir("json");
         FileWriter file = null;
-
         try  {
             file= new FileWriter(fileName+".json");
             file.write(jsonString);
@@ -181,7 +200,32 @@ public class FacebookMonitor {
     public void writeJSONtoCSV(String jsonString ,String fileName) throws IOException {
         JFlat flatMe = new JFlat(jsonString);
         //directly write the JSON document to CSV
+        this.createDir("csv");
         flatMe.json2Sheet().write2csv("./csv/"+fileName+".csv");
+    }
+
+    public  boolean isValidURL(String urlString)
+    {
+        try
+        {
+            URL url = new URL(urlString);
+            url.toURI();
+            return true;
+        } catch (Exception exception)
+        {
+            return false;
+        }
+    }
+
+    private void createDir(String directoryName){
+        Path path = Paths.get("./"+directoryName);
+        if(!Files.exists(path)) {
+            try {
+                Files.createDirectories(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
