@@ -19,16 +19,16 @@ dir.create("./products")
 searchFB("Humira")
 
 ## Get all the data of pages for 'Adalimumab' ## 
-searchFB("Adalimumab")
+#searchFB("Adalimumab")
 
 ## Get all the data of pages for 'Enbrel' ## 
 searchFB("Enbrel")
 
 ## Get all the data of pages for 'Trilipix' ## 
-searchFB("Trilipix")
+#searchFB("Trilipix")
 
 ## Get all the data of pages for 'Imbruvica' ## 
-searchFB("Imbruvica")
+#searchFB("Imbruvica")
 
 
-mergeCSVs("./products/Adalimumab.csv","./products/Enbrel.csv","./products/Humira.csv","./products/Imbruvica.csv","./products/Trilipix.csv")
+#mergeCSVs("./products/Adalimumab.csv","./products/Enbrel.csv","./products/Humira.csv","./products/Imbruvica.csv","./products/Trilipix.csv")

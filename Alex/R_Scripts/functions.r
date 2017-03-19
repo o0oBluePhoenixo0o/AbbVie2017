@@ -2,6 +2,7 @@ library(Rfacebook)
 library(openxlsx)
 library(dplyr)
 library(plyr)
+library(textcat)
 
 #facebook_oauth <- fbOAuth(app_id="1752159831691319", app_secret="352ab92354e2a3532496db02a6a680cc")
 
@@ -44,7 +45,7 @@ searchFB <- function(key){
     
     for (j in 1:nrow(target_page))
     {
-      print(target_page$id[j])
+      print(textcat(target_page$message[j]))
       if(is.null(target_page$id[j])){
       } else {
         target_post <- getPost(target_page$id[j], n=10000,  x, comments = TRUE, likes = TRUE)

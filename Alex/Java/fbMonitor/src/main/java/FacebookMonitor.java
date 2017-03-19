@@ -3,15 +3,12 @@ import com.restfb.*;
 import com.restfb.types.Comment;
 import com.restfb.types.Page;
 import com.restfb.types.Post;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import utils.LanguageUtil;
+import utils.Validator;
 
 import java.io.*;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,34 +33,8 @@ public class FacebookMonitor {
         this.languageUtil = new LanguageUtil();
     }
 
-
     /**
-     * Get a list of comments for a specific post id
-     * @param post_id
-     * @return
-     */
-    public List<Comment> getCommentsFromPost( String post_id){
-        List<Comment> comments = new ArrayList<Comment>();
-
-        Connection<Comment> allComments = this.fbClient.fetchConnection(post_id+"/comments", Comment.class);
-
-        // Iterate over the feed to access the particular pages
-        for (List<Comment> comments1 : allComments) {
-
-            // Iterate over the list of contained data
-            // to access the individual object
-            for (Comment comment : comments1) {
-                comments.add(comment);
-                System.out.println(".comment");
-            }
-        }
-
-        return comments;
-    }
-
-
-    /**
-     * Get all pages for a keyword from Facbook
+     * Get all pages for a keyword from Facbook and already apply the language tag to it
      * @param keyWord
      * @return
      * @throws IOException
@@ -94,7 +65,7 @@ public class FacebookMonitor {
                         JSONObject postJSON = new JSONObject();
                         postJSON.put("id", post.getId());
                         postJSON.put("message", post.getMessage());
-                        if(post.getMessage() !=null && !post.getMessage().contentEquals("") && !isValidURL(post.getMessage())){
+                        if(post.getMessage() !=null && !post.getMessage().contentEquals("") && !Validator.isValidURL(post.getMessage())){
                             postJSON.put("origLang",  languageUtil.detect(post.getMessage()));
                         } else {
                             postJSON.put("origLang",  "");
@@ -109,7 +80,7 @@ public class FacebookMonitor {
                                 JSONObject reactionOnPostJSON =  new JSONObject();
                                 reactionOnPostJSON.put("type", reactionOnPost.getType());
                                 reactionOnPostJSON.put("name", reactionOnPost.getName());
-                                reactionsJSON.add(reactionOnPostJSON);
+                                reactionsJSON.put(reactionOnPostJSON);
                             });
                         }
                         postJSON.put("reactions", reactionsJSON);
@@ -123,7 +94,7 @@ public class FacebookMonitor {
                             commentJSON.put("id", comment.getId());
                             commentJSON.put("message", comment.getMessage());
                             commentJSON.put("likes", comment.getLikeCount());
-                            if(comment.getMessage() !=null && !comment.getMessage().contentEquals("") && !isValidURL(comment.getMessage())){
+                            if(comment.getMessage() !=null && !comment.getMessage().contentEquals("") && !Validator.isValidURL(comment.getMessage())){
                                 commentJSON.put("origLang",  languageUtil.detect(comment.getMessage()));
                             } else {
                                 commentJSON.put("origLang",  "");
@@ -138,7 +109,7 @@ public class FacebookMonitor {
                                     JSONObject commentOnCommentJSON =  new JSONObject();
                                     commentOnCommentJSON.put("id", commentOnComment.getId());
                                     commentOnCommentJSON.put("message", commentOnComment.getMessage());
-                                    if(commentOnComment.getMessage() !=null && !commentOnComment.getMessage().contentEquals("") && !isValidURL(commentOnComment.getMessage())){
+                                    if(commentOnComment.getMessage() !=null && !commentOnComment.getMessage().contentEquals("") && !Validator.isValidURL(commentOnComment.getMessage())){
                                         commentOnCommentJSON.put("origLang",  languageUtil.detect(commentOnComment.getMessage()));
                                     } else {
                                         commentOnCommentJSON.put("origLang",  "");
@@ -146,86 +117,50 @@ public class FacebookMonitor {
 
                                     //commentOnCommentJSON.put("lang": LANG)
 
-                                    commentsOnCommentJSON.add(commentOnComment);
+                                    commentsOnCommentJSON.put(commentOnComment);
                                 });
 
                                 commentJSON.put("comments", commentsOnCommentJSON);
                             } else {
-                                commentJSON.put("comments", null);
+                                commentJSON.put("comments", new JSONArray());
                             }
 
 
-                            commentsJSON.add(commentJSON);
+                            commentsJSON.put(commentJSON);
                         });
 
                         postJSON.put("comments", commentsJSON);
-                        postsJSON.add(postJSON);
+                        postsJSON.put(postJSON);
                     }
                 }
                 pageJSON.put("posts", postsJSON);
-                pagesJSON.add(pageJSON);
+                pagesJSON.put(pageJSON);
             }
         }
         return pagesJSON;
     }
 
-
     /**
-     * Write a JSON string to a file
-     * @param jsonString
-     * @param fileName
-     * @throws IOException
+     * Get a list of comments for a specific post id
+     * @param post_id
+     * @return
      */
-    public void writeJSONToFile(String jsonString ,String fileName) throws IOException{
-        this.createDir("json");
-        FileWriter file = null;
-        try  {
-            file= new FileWriter(fileName+".json");
-            file.write(jsonString);
-            System.out.println("Successfully Copied JSON Object to File...");
-        } catch (IOException ioe){
-            ioe.printStackTrace();
-        } finally {
-            file.flush();
-            file.close();
-        }
-    }
+    private List<Comment> getCommentsFromPost( String post_id){
+        List<Comment> comments = new ArrayList<Comment>();
 
-    /**
-     * Convert JSON to CSV
-     * @param jsonString
-     * @param fileName
-     * @throws IOException
-     */
-    public void writeJSONtoCSV(String jsonString ,String fileName) throws IOException {
-        JFlat flatMe = new JFlat(jsonString);
-        //directly write the JSON document to CSV
-        this.createDir("csv");
-        flatMe.json2Sheet().write2csv("./csv/"+fileName+".csv");
-    }
+        Connection<Comment> allComments = this.fbClient.fetchConnection(post_id+"/comments", Comment.class);
 
-    public  boolean isValidURL(String urlString)
-    {
-        try
-        {
-            URL url = new URL(urlString);
-            url.toURI();
-            return true;
-        } catch (Exception exception)
-        {
-            return false;
-        }
-    }
+        // Iterate over the feed to access the particular pages
+        for (List<Comment> comments1 : allComments) {
 
-    private void createDir(String directoryName){
-        Path path = Paths.get("./"+directoryName);
-        if(!Files.exists(path)) {
-            try {
-                Files.createDirectories(path);
-            } catch (IOException e) {
-                e.printStackTrace();
+            // Iterate over the list of contained data
+            // to access the individual object
+            for (Comment comment : comments1) {
+                comments.add(comment);
+                System.out.println(".comment");
             }
         }
-    }
 
+        return comments;
+    }
 }
