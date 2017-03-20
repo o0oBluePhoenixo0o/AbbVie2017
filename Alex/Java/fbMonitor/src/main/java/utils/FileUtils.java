@@ -1,14 +1,14 @@
 package utils;
 
 import com.github.opendevl.JFlat;
+import opennlp.tools.doccat.DoccatModel;
+import opennlp.tools.util.model.BaseModel;
 import org.apache.commons.io.IOUtils;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,10 +18,6 @@ import java.nio.file.Paths;
  * Class containing some useful methods for reading and writing files
  */
 public class FileUtils {
-
-
-    public FileUtils(){
-    }
 
     /**
      * Read JSON Object from a file
@@ -121,6 +117,28 @@ public class FileUtils {
     }
 
 
+    /**
+     * Write a model to a file for later usage
+     * @param model
+     * @param fileName
+     */
+    public static void writeModelToFile(BaseModel model, String fileName){
+        File outFile = null;
+        try {
+            outFile = new File(fileName);
+            FileOutputStream outFileStream = new FileOutputStream(outFile);
+            model.serialize(outFileStream);
+        }
+        catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    /**
+     * Read a file from the resource folder
+     * @param fileName
+     * @return
+     */
     public static String readFileFromResources(String fileName){
         String result = "";
 

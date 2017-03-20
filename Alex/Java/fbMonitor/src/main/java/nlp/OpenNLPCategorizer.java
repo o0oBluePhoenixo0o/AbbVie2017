@@ -9,11 +9,14 @@ import opennlp.tools.util.InputStreamFactory;
 import opennlp.tools.util.ObjectStream;
 import opennlp.tools.util.PlainTextByLineStream;
 import opennlp.tools.util.TrainingParameters;
+import org.apache.commons.io.FilenameUtils;
+import utils.FileUtils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.nio.file.Paths;
 
 /**
  * Created by alexanderweiss on 18.03.17.
@@ -24,17 +27,12 @@ public class OpenNLPCategorizer {
 
     /**
      * Train a model from the resource directory
-     * @param resourceFile
+     * @param fileName
      */
-    public void trainModel(String resourceFile) {
+    public void trainModel(String fileName) {
         InputStream dataIn = null;
         try {
-            InputStreamFactory inputStreamFactory = new InputStreamFactory() {
-                @Override
-                public InputStream createInputStream() throws IOException {
-                    return this.getClass().getResourceAsStream(resourceFile); // new FileInputStream(fileName);
-                }
-            };
+            InputStreamFactory inputStreamFactory = () -> new FileInputStream(fileName);
 
             ObjectStream lineStream = new PlainTextByLineStream(inputStreamFactory, Charset.forName("UTF-8"));
             ObjectStream sampleStream = new DocumentSampleStream(lineStream);
@@ -46,6 +44,7 @@ public class OpenNLPCategorizer {
             params.put(TrainingParameters.ALGORITHM_PARAM, NaiveBayesTrainer.NAIVE_BAYES_VALUE);
 
             model = DocumentCategorizerME.train("en", sampleStream, params, new DoccatFactory());
+            FileUtils.writeModelToFile(model, "./models/"+ FilenameUtils.getBaseName(fileName).toString()+"Model.bin");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -61,7 +60,7 @@ public class OpenNLPCategorizer {
 
     public void classifyNewTweet(String tweet) {
         DocumentCategorizerME myCategorizer = new DocumentCategorizerME(model);
-        double[] outcomes = myCategorizer.categorize(tweet);
+        double[] outcomes = myCategorizer.categorize(new StopWords().removeStopWords(tweet));
         String category = myCategorizer.getBestCategory(outcomes);
 
         if (category.equalsIgnoreCase("1")) {

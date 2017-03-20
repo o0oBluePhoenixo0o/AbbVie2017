@@ -60,10 +60,10 @@ public class StopWords {
      * @param sentence
      * @return
      */
-    public String removeStopWords(String sentence){
+    public String [] removeStopWords(String sentence){
 
         SimpleTokenizer simpleTokenizer= SimpleTokenizer.INSTANCE;
-        String[] words = simpleTokenizer.tokenize(sentence);
+        String [] words = simpleTokenizer.tokenize(sentence);
         ArrayList<String> tokens = new ArrayList<>(Arrays.asList(words));
 
         for (int i = 0; i<tokens.size(); i++){
@@ -72,8 +72,7 @@ public class StopWords {
             }
         }
 
-        StringBuilder stringBuilder = new StringBuilder();
-        tokens.forEach(word -> stringBuilder.append(word + " "));
-        return stringBuilder.toString().trim();
+        String [] returnArray = tokens.toArray(new String[0]);
+        return returnArray;
     }
 }
