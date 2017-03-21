@@ -36,7 +36,7 @@ searchFB <- function(key){
   {
     target_page <- getPage(pagelist[i,],x,n=10000, since=begin , until = today,
                            feed = TRUE, reactions = TRUE)
-
+    
     #Adding keyword to table
     if(!empty(target_page)){
       target_page <- cbind(keyword = key, target_page)
@@ -45,7 +45,7 @@ searchFB <- function(key){
     
     for (j in 1:nrow(target_page))
     {
-      print(textcat(target_page$message[j]))
+      #print(textcat(target_page$message[j]))
       if(is.null(target_page$id[j])){
       } else {
         target_post <- getPost(target_page$id[j], n=10000,  x, comments = TRUE, likes = TRUE)
@@ -154,6 +154,5 @@ mergeCSVs <- function(...){
   View(masterDF)
   write.csv2(masterDF, file = paste("./products/masterProducts",".csv", sep = ""),row.names=FALSE, qmethod='escape', quote=TRUE)
 }
-
 
 

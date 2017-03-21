@@ -1,7 +1,10 @@
 
-import nlp.OpenNLPCategorizer;
-import nlp.StopWords;
+import model.CustomPage;
+import nlp.Preprocessor;
+import nlp.pos.POSTagger;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -14,14 +17,35 @@ public class Main {
 
     public static void main (String [] args) {
 
-        FacebookMonitor facebookMonitor = new FacebookMonitor("EAACEdEose0cBAHnZCPG7ie6NXpaeOrX1js8ALIZAO1uMWZC54c2X3Mjx2XXrh1ZBrZAtyBPCK9N3wZAmzvF9lQDFLPMHNlG1hCCgR44otTKPTjwmi3mBSlcgOCjonBKHsQ3salb6sTZCfBRbTpoVU86bl8y0N2oAAUML3g0fyTpGrMb2gB3iVF7OEyZBvvQZC35MZD");
+        FacebookMonitor facebookMonitor = new FacebookMonitor("EAACEdEose0cBADBOvQEzsa2l1BzcAJetpRSYHppdXWEX382lsYqEBcjKSKBz0iAI6S8gJiZBZB8SxBEpOTzH8CLoWohZAyD04UYGNuIDZBsQhYAEZA2f8ZAZBSj2BtRjTnni37ZAlgxiROpMZCtMZA6AEMNOzzleDsby1PQ0pKJ68nx2qKOaNgdXsVRqYBgJhyfSsZD");
 
+        try {
+           /* ArrayList<CustomPage> humiraPages = facebookMonitor.searchPagesDataObject("Humira");
+            ArrayList<CustomPage> enbrelPages = facebookMonitor.searchPagesDataObject("Enbrel");
+            ArrayList<CustomPage> adalimumabPages = facebookMonitor.searchPagesDataObject("Adalimumab");
+            ArrayList<CustomPage> trilipixPages = facebookMonitor.searchPagesDataObject("Trilipix");
+           */
+
+            ArrayList<CustomPage> imbruvicaPages = facebookMonitor.searchPagesDataObject("Imbruvica");
+            Preprocessor preprocessor = new Preprocessor();
+            ArrayList<CustomPage> preprocessedImbruvicaPages = preprocessor.preProcessData(imbruvicaPages);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*
         OpenNLPCategorizer twitterCategorizer = new OpenNLPCategorizer();
         twitterCategorizer.trainModel("./training/tweets.txt");
-        twitterCategorizer.classifyNewTweet("I hate this product"); //out: "This tweet is negative"
+        twitterCategorizer.classifyNewTweet(new StopWords().removeStopWords("I hate this product")); //out: "This tweet is negative"
 
         StopWords stopWords = new StopWords();
         String [] removedStopWords = stopWords.removeStopWords("Hello I will learn how to use Humira today".toLowerCase());
         Arrays.stream(removedStopWords).forEach(System.out::println);
+
+
+        POSTagger posTagger = new POSTagger("./models/en-pos-maxent.bin");
+        Arrays.stream(posTagger.tagSentence(new String[]{"Most", "large", "cities", "in", "the", "US", "had",
+                "morning", "and", "afternoon", "newspapers", "."})).forEach(System.out::println);*/
     }
 }
