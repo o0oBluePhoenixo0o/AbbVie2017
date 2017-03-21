@@ -34,7 +34,7 @@ searchFB <- function(key){
                            category == "Medical Company" | category =="Pharmaceuticals" |
                              category == "Biotechnology Company"| category =="Medical & Health"),id)
   
-  cat(paste("\n","Total of relevant pages is: ",nrow(pagelist),"\n"))
+  cat(paste("\nTotal of relevant pages is: ",nrow(pagelist),"\n"))
   
   begin = "2012-01-01"
   today = Sys.Date()
@@ -114,9 +114,29 @@ searchFB <- function(key){
 # Get data for AbbVie and competitors
 
 searchFB("AbbVie")
-searchFB("Pfizer")
 searchFB("Bristol-Myers Squibb")
 searchFB("Amgen")
+
+#merge csv files
+AbbVie = read.csv2(file = "AbbVie.csv", header = TRUE, 
+                  sep=",",
+                  fileEncoding = "UTF-16LE")
+
+Amgen = read.csv2(file = "Amgen.csv", header = TRUE, 
+                  sep=",",
+                  fileEncoding = "UTF-16LE")
+
+Bristol = read.csv2(file = "Bristol-Myers Squibb.csv", header = TRUE, 
+                    sep=",",
+                    fileEncoding = "UTF-16LE")
+
+masterDF <- data.frame()
+masterDF <- rbind(AbbVie, masterDF)
+masterDF <- rbind(Amgen, masterDF)
+masterDF <- rbind(Bristol, masterDF)
+write.csv(masterDF, file = "FB_Companies_1903.csv", 
+          quote = TRUE, row.names=FALSE, 
+          fileEncoding = "UTF-16LE", na = "NA")
 
 #####################################################
 #             IGNORE THIS PART AND ONWARDS          #
@@ -126,7 +146,7 @@ pagelist<- select(filter(searchPages("Amgen",x, n=10000),
                          category == "Medical Company" | category =="Pharmaceuticals" |
                            category == "Biotechnology Company"| category =="Medical & Health"),id)
 
-a<-filter(searchPages("Bristol-Myers Squibb",x, n=10000), 
+a<-filter(searchPages("Pfizer",x, n=10000), 
           category == "Medical Company" | category =="Pharmaceuticals" |
             category == "Biotechnology Company"| category =="Medical & Health")
 
