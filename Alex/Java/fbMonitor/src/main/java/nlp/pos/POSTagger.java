@@ -61,20 +61,6 @@ public class POSTagger {
             // Failed to read or parse training data, training failed
             e.printStackTrace();
         }
-        finally {
-            if (dataIn != null) {
-                try {
-                    dataIn.close();
-                }
-                catch (IOException e) {
-                    // Not an issue, training already finished.
-                    // The exception should be logged and investigated
-                    // if part of a production system.
-                    e.printStackTrace();
-                }
-            }
-        }
-
     }
 
     /**

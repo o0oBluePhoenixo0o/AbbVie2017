@@ -53,19 +53,20 @@ public class Preprocessor {
 
     /**
      * Pre process the data of a post
-     * 1. lower case
+     * 1. lower case and remove punctuation
      * 2. detect language
      * 3. remove stopwords
      * 4. tag pos
      * @param post
+     * //TODO think about not removing punctuation and not lower case, Data Mining Vorlesung 6 Text Mining Slide 37 !!
      * @return
      */
     private CustomPost preProcessPost(CustomPost post){
 
         if (post.getMessage()!=null) {
 
-            //lower case
-            post.setMessage(post.getMessage().toLowerCase());
+            //lower case and remove punctuation
+            post.setMessage(post.getMessage().toLowerCase().replaceAll("\\p{P}", ""));
 
             //Detect language
             post.setLanguage(languageUtil.detect(post.getMessage()));
@@ -93,19 +94,20 @@ public class Preprocessor {
 
     /**
      * Pre process the data of a comment
-     * 1. lower case
+     * 1. lower case and remove punctuation
      * 2. detect language
      * 3. remove stopwords
      * 4. tag pos
      * @param comment
+     * //TODO think about not removing punctuation and not lower case, Data Mining Vorlesung 6 Text Mining Slide 37 !!
      * @return
      */
     private CustomComment preProcessComment(CustomComment comment){
 
         if(comment.getMessage()!=null) {
 
-            //lower case
-            comment.setMessage(comment.getMessage().toLowerCase());
+            //lower case and remove punctuation
+            comment.setMessage(comment.getMessage().toLowerCase().replaceAll("\\p{P}", ""));
 
             //detect language
             comment.setLanguage(languageUtil.detect(comment.getMessage()));

@@ -37,7 +37,7 @@ public class OpenNLPCategorizer {
 
     /**
      * Constructor which automatically loads a model from file
-     * @param categoryModelFile
+     * @param categoryModelFile file containing the category model
      */
     public OpenNLPCategorizer(String categoryModelFile){
         this.loadCategoryModelFromFile(categoryModelFile);
@@ -45,9 +45,12 @@ public class OpenNLPCategorizer {
 
     /**
      * Train a model from a file and have the option to save it to models directory for later usage
-     * @param trainingDataFileName
+     * @param trainingDataFileName file containing the training data
+     * @param algorithm Name of the algorithm to use, ex: NaiveBayesTrainer.NAIVE_BAYES_VALUE
+     * @param save should the calculated model saved to disk ?
+     *
      */
-    public void trainModel(String trainingDataFileName, boolean save) {
+    public void trainModel(String trainingDataFileName, String algorithm, boolean save) {
         InputStream dataIn = null;
         try {
             InputStreamFactory inputStreamFactory = () -> new FileInputStream(trainingDataFileName);
@@ -59,7 +62,8 @@ public class OpenNLPCategorizer {
             TrainingParameters params = new TrainingParameters();
             params.put(TrainingParameters.CUTOFF_PARAM, Integer.toString(2));
             params.put(TrainingParameters.ITERATIONS_PARAM, Integer.toString(30));
-            params.put(TrainingParameters.ALGORITHM_PARAM, NaiveBayesTrainer.NAIVE_BAYES_VALUE);
+            params.put(TrainingParameters.ALGORITHM_PARAM, algorithm);
+
 
             this.model = DocumentCategorizerME.train("en", sampleStream, params, new DoccatFactory());
 
@@ -68,14 +72,6 @@ public class OpenNLPCategorizer {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (dataIn != null) {
-                try {
-                    dataIn.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 

@@ -1,25 +1,22 @@
+#This files contains methods to crawl facebook data 
+
 library(Rfacebook)
 library(openxlsx)
-library(dplyr)
 library(plyr)
-library(textcat)
+library(dplyr)
 
 #facebook_oauth <- fbOAuth(app_id="1752159831691319", app_secret="352ab92354e2a3532496db02a6a680cc")
-
-
 #save(facebook_oauth, file="facebook_oauth")
 load("facebook_oauth")
 
 x<-facebook_oauth
-
-
 
 #Taken from Trung Nguyen Ngoc Nam(@BluePhoenix1908), added if-statement for checking if page has no posts
 searchFB <- function(key){
   
   print(paste("Getting data for keyword: ",key, sep = " "))
   
-  pagelist<- select(filter(searchPages(key,x)),id)
+  pagelist <- select(filter(searchPages(key,x)),id)
   
   begin = "2012-01-01"
   today = Sys.Date()
@@ -39,7 +36,7 @@ searchFB <- function(key){
     
     #Adding keyword to table
     if(!empty(target_page)){
-      target_page <- cbind(keyword = key, target_page)
+      target_page <- cbind(key = key, target_page)
     }
     page_df <- try(rbind(page_df,target_page))
     
@@ -58,7 +55,7 @@ searchFB <- function(key){
   }
   
   # Join 2 data frame to create 1 consolidated dataset for each keyword but also check if the dfs are empty
-  #Check if the dataframes are empty
+  # Check if the dataframes are empty
   
   if(!empty(page_df)){
     #the 2nd part of ID
@@ -88,14 +85,8 @@ searchFB <- function(key){
     final_dataset<-full_join(page_df,comment_df,by = c("join_id"))
   }
   
-  write.csv2(final_dataset, file = paste("./products/",key,".csv", sep = ""),row.names=FALSE, qmethod='escape', quote=TRUE)#
+  write.csv(final_dataset, file = paste("./products/",key,".csv", sep = ""), fileEncoding = "UTF-8", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
 }
-
-# Helper function for iterating over rows in a data.frame
-rows = function(tab) lapply(
-  seq_len(nrow(tab)),
-  function(i) unclass(tab[i,,drop=F])
-)
 
 
 mergeCSVs <- function(...){
@@ -108,51 +99,28 @@ mergeCSVs <- function(...){
   for(file in files){
     fileData <- tryCatch(
       {
-        # Just to highlight: if you want to use more than one 
-        # R expression in the "try" part then you'll have to 
-        # use curly brackets.
-        # 'tryCatch()' will return the last evaluated expression 
-        # in case the "try" part was completed successfully
-        
-        message("This is the 'try' part")
-        
-        read.csv(file=file, header=TRUE, sep=";")
-        # The return value of `readLines()` is the actual value 
-        # that will be returned in case there is no condition 
-        # (e.g. warning or error). 
-        # You don't need to state the return value via `return()` as code 
-        # in the "try" part is not wrapped insided a function (unlike that
-        # for the condition handlers for warnings and error below)
+        read.csv(file=file, header=TRUE, sep=",")
       },
       error=function(cond) {
         message("Error reading csv")
-        message("Here's the original error message:")
         message(cond)
         # Choose a return value in case of error
         return(NA)
       },
       warning=function(cond) {
-        message("Error reading csv")
-        message("Here's the original warning message:")
+        message("Warning reading csv")
         message(cond)
         # Choose a return value in case of warning
         return(NULL)
       },
       finally={
-        # NOTE:
-        # Here goes everything that should be executed at the end,
-        # regardless of success or error.
-        # If you want more than one expression to be executed, then you 
-        # need to wrap them in curly brackets ({...}); otherwise you could
-        # just have written 'finally=<expression>' 
         message("Read CSV successfully")
-        message("Some other message at the end")
       }
     )    
     masterDF <- rbind(masterDF, fileData)
   }
   View(masterDF)
-  write.csv2(masterDF, file = paste("./products/masterProducts",".csv", sep = ""),row.names=FALSE, qmethod='escape', quote=TRUE)
+  write.csv(masterDF, file = paste("./products/masterProducts",".csv", sep = ""), fileEncoding = "UTF-8", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
 }
 
 
