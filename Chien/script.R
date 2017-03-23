@@ -134,7 +134,7 @@ final_datasetHEV <- rbind.data.frame(final_dataset3,final_dataset4,final_dataset
 final_dataset <- rbind.data.frame(final_datasetHEV,final_datasetJIA)
 cat("\n Writing file to .csv")
 #write.csv(final_dataset, file = "combine_utf88.csv")
-write.table(final_dataset, file = paste("Combine_utf16",".csv", sep = ""), 
+write.csv(final_dataset, file = paste("Combine_utf16",".csv", sep = ""), 
           quote = TRUE, sep= ",",
           row.names=FALSE, qmethod='escape',
           fileEncoding = "UTF-16LE", na = "NA")
