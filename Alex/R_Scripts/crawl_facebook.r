@@ -16,7 +16,10 @@ searchFB <- function(key){
   
   print(paste("Getting data for keyword: ",key, sep = " "))
   
-  pagelist <- select(filter(searchPages(key,x)),id)
+  pagelist<- select(filter(searchPages(key,x, n = 10000), 
+                           category == "Medical Company" | category =="Pharmaceuticals" |
+                             category == "Biotechnology Company"| category =="Medical & Health" |
+                             category == "Community" | category == "Interest"),id)
   
   begin = "2012-01-01"
   today = Sys.Date()
@@ -89,7 +92,7 @@ searchFB <- function(key){
 }
 
 
-mergeCSVs <- function(...){
+mergeCSVsUTF8 <- function(...){
   files <- list(...)
   print(files)
   
@@ -119,8 +122,39 @@ mergeCSVs <- function(...){
     )    
     masterDF <- rbind(masterDF, fileData)
   }
-  View(masterDF)
-  write.csv(masterDF, file = paste("./products/masterProducts",".csv", sep = ""), fileEncoding = "UTF-8", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
+  write.csv(masterDF, file = paste("./products/Alex_FB_Products_utf8",".csv", sep = ""), fileEncoding = "UTF-8", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
 }
 
+mergeCSVsUTF16LE <- function(...){
+  files <- list(...)
+  print(files)
+  
+  masterDF <- data.frame()
+  
+  
+  for(file in files){
+    fileData <- tryCatch(
+      {
+        read.csv(file=file, header=TRUE, sep=",")
+      },
+      error=function(cond) {
+        message("Error reading csv")
+        message(cond)
+        # Choose a return value in case of error
+        return(NA)
+      },
+      warning=function(cond) {
+        message("Warning reading csv")
+        message(cond)
+        # Choose a return value in case of warning
+        return(NULL)
+      },
+      finally={
+        message("Read CSV successfully")
+      }
+    )    
+    masterDF <- rbind(masterDF, fileData)
+  }
+  write.csv(masterDF, file = paste("./products/Alex_FB_Products_utf16le",".csv", sep = ""), fileEncoding = "UTF-16LE", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
+}
 

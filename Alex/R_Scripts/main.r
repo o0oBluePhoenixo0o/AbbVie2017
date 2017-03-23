@@ -1,6 +1,7 @@
 #This is code to download products data from FB
 source("./crawl_facebook.r")
 source("./preprocess_facebook.r")
+library(ggplot2)
 
 #Set working directory to the directoy where the file is located 
 this.dir <- dirname(parent.frame(2)$ofile)
@@ -16,17 +17,12 @@ searchFB("Trilipix")
 searchFB("Imbruvica")
 
 #- Merge the data into one big .csv file -#
-mergeCSVs("./products/Adalimumab.csv","./products/Enbrel.csv","./products/Humira.csv","./products/Imbruvica.csv","./products/Trilipix.csv")
+mergeCSVsUTF8("./products/Adalimumab.csv","./products/Enbrel.csv","./products/Humira.csv","./products/Imbruvica.csv","./products/Trilipix.csv")
+mergeCSVsUTF16LE("./products/Adalimumab.csv","./products/Enbrel.csv","./products/Humira.csv","./products/Imbruvica.csv","./products/Trilipix.csv")
 
 
 #- Read in other files -#
-myMaster.df <- read.csv("Alex_FB_Products.csv", fileEncoding = "UTF-8", sep = ",", as.is = TRUE)
-chiensMaster.df <- read.csv("Chien_FB_Diseases.csv", encoding = "UTF-8", fileEncoding = "UTF-16LE", sep = ",", as.is = TRUE)
-philippsMaster.df <- read.csv("Philipp_FB_Companies.csv", fileEncoding = "UTF-16LE", sep = ",", as.is = TRUE, skipNul = TRUE)
-
-
-
-for (i in 1:nrow(myMaster.df)){
-  print(detectLanguage(myMaster.df[i]))
-}
-
+myMaster.df <- read.csv("Alex_FB_Products_utf8.csv", fileEncoding = "UTF-8", sep = ",", as.is = TRUE)
+chiensMaster.df <- read.csv("Chien_FB_Diseases_utf8.csv", fileEncoding = "UTF-8", sep = ",", as.is = TRUE)
+hailiensMaster.df <- read.csv("RheumatoidArthritisFinal.csv", fileEncoding = "UTF-8", sep = ",", as.is = TRUE)
+facebookMaster.df <- read.csv("Facebook_final_utf8.csv", fileEncoding = "UTF-8", sep = ",", as.is = TRUE)
