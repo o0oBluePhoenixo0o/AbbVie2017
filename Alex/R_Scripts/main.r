@@ -24,5 +24,4 @@ mergeCSVsUTF16LE("./products/Adalimumab.csv","./products/Enbrel.csv","./products
 #- Read in other files -#
 myMaster.df <- read.csv("Alex_FB_Products_utf8.csv", fileEncoding = "UTF-8", sep = ",", as.is = TRUE)
 chiensMaster.df <- read.csv("Chien_FB_Diseases_utf8.csv", fileEncoding = "UTF-8", sep = ",", as.is = TRUE)
-hailiensMaster.df <- read.csv("RheumatoidArthritisFinal.csv", fileEncoding = "UTF-8", sep = ",", as.is = TRUE)
-facebookMaster.df <- read.csv("Facebook_final_utf8.csv", fileEncoding = "UTF-8", sep = ",", as.is = TRUE)
+hailiensMaster.df <- read.csv("Hailian_FB_Diseases.csv", fileEncoding = "UTF-8", sep = ",", as.is = TRUE)
