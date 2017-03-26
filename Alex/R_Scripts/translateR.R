@@ -47,11 +47,11 @@ translateMyMemory <- function(text, source, target, email) {
   #   email: Valid email address if you want to gain access to an rate limit of 10.000 words/day, if not specified you only have a rate limit of 1.000 words/day
   #
   # Returns:
-  #   A translated text string, or NULL if the language is not supoorted
+  #   A translated text string, or NA if the language is not supoorted
 
   if (missing(source) || nchar(source)==0) {
     message("You need to specify a source language code!")
-    return(NA) ## stop all executions and exit the function
+    return(NA) # stop all executions and exit the function
   }
   
   if (missing(target) || nchar(target)==0) {
@@ -61,6 +61,11 @@ translateMyMemory <- function(text, source, target, email) {
   
   if (source == target){
     message(sprintf('Source (%s) and target (%s) can not be the same!', source, target))
+    return(NA) # stop all executions and exit the function
+  }
+  
+  if(is.na(text)){
+    message("Text was NA")
     return(NA) # stop all executions and exit the function
   }
 
@@ -89,7 +94,7 @@ translateMyMemory <- function(text, source, target, email) {
     if (!is.null(finalTranslation)) {
       return(finalTranslation)
     } else {
-      return("translation not found")
+      return(NA)
     }
   }
 }
