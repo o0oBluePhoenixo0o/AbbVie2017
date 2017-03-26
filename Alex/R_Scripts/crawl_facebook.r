@@ -1,17 +1,20 @@
 #This files contains methods to crawl facebook data 
 
+#install.packages("Rfacebook")
+#install.packages("plyr")
+#install.packages("dplyr")
+
 library(Rfacebook)
-library(openxlsx)
 library(plyr)
 library(dplyr)
 
-#facebook_oauth <- fbOAuth(app_id="1752159831691319", app_secret="352ab92354e2a3532496db02a6a680cc")
-#save(facebook_oauth, file="facebook_oauth")
+# facebook_oauth <- fbOAuth(app_id="1752159831691319", app_secret="352ab92354e2a3532496db02a6a680cc")
+# save(facebook_oauth, file="facebook_oauth")
 load("facebook_oauth")
 
 x<-facebook_oauth
 
-#Taken from Trung Nguyen Ngoc Nam(@BluePhoenix1908), added if-statement for checking if page has no posts
+#T aken from Trung Nguyen Ngoc Nam(@BluePhoenix1908), added if-statement for checking if page has no posts
 searchFB <- function(key){
   
   print(paste("Getting data for keyword: ",key, sep = " "))

@@ -54,8 +54,8 @@ posts.humira_month <- posts.humira
 posts.humira_month$created_time.x <- format(as.Date(posts.humira_month$created_time.x), format ="%m-%y")
 posts.humira_byTimeMonth <- ddply(posts.humira_month, 'created_time.x', function(x) c(count=nrow(x)))
 
-posts.humira_byTimeMonth <- posts.humira_byTimeMonth[order(as.yearmon(as.character(posts.humira_byTimeMonth$created_time.x),"%m-%Y")),] #use zoo's as.yearmon so that we can group by month
-posts.humira_byTimeMonth$created_time.x <- factor(posts.humira_byTimeMonth$created_time.x, levels=unique(as.character(posts.humira_byTimeMonth$created_time.x)) ) #so that ggplot2 respects the order of my dates
+posts.humira_byTimeMonth <- posts.humira_byTimeMonth[order(as.yearmon(as.character(posts.humira_byTimeMonth$created_time.x),"%m-%Y")),] # use zoo's as.yearmon so that we can group by month
+posts.humira_byTimeMonth$created_time.x <- factor(posts.humira_byTimeMonth$created_time.x, levels=unique(as.character(posts.humira_byTimeMonth$created_time.x)) ) # so that ggplot2 respects the order of my dates
 
 
 
@@ -72,7 +72,6 @@ ggsave("./img/humira_posts_timeline.png",posts.humira_byTimeMonth.plot)
 
 
 #- Plotting product post counts -#
-
 posts.plot.df <- data.frame(product=c("Humira", "Enbrel", "Trilipix", "Adalimumab", "Imbruvica"),
                             postCount=c(nrow(posts.humira), nrow(posts.enbrel), nrow(posts.trilipix), nrow(posts.adalimumab), nrow(posts.imbruvica)))
 
@@ -87,7 +86,7 @@ ggsave("./img/product_posts_counts.png",posts.plot)
 
 #- COMMENTS -#
 
-comments <- facebookMaster.df[complete.cases(facebookMaster.df[]), c("key", "message.y", "created_time.y")]  #key, message.y, created_time.y
+comments <- facebookMaster.df[complete.cases(facebookMaster.df[]), c("key", "message.y", "created_time.y")]  # key, message.y, created_time.y
 comments.unique <- unique(comments)
 
 
