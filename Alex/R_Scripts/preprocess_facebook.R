@@ -2,12 +2,18 @@
 
 #install.packages("plyr")
 #install.packages("dplyr")
+#install.packages("SnowballC")
+#install.packages("qdap")
 #install.packages("tm")
 
 library(plyr)
 library(dplyr)
 library(tm)
+library(qdap)
+library(SnowballC)
 
+Sys.setenv(JAVA_HOME = '/Library/Java//Home')
+Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')
 source("./translateR.R")
 
 #- Read master -#
@@ -18,45 +24,49 @@ posts <- unique(select(facebookMaster.df, 1, 6, 7)) # key, message.x, created_ti
 comments <- unique(facebookMaster.df[complete.cases(facebookMaster.df[]), c("key", "message.y", "created_time.y")])  #key, message.y, created_time.y
 
 
-#- Prepare message of posts and comments -#
-
-posts$message.x <- tolower(posts$message.x) # lower case
-posts$message.x <- gsub('[[:punct:]]', '', posts$message.x) # remove punctian
+# Product posts
+posts.products <- subset(posts, key == "Imbruvica" | key == "Adalimumab" | key == "Trilipix" | key == "Enbrel" | key == "Humira" )
 
 
-comments$message.x <- tolower(comments$message.x) # lower case
-comments$message.x <- gsub('[[:punct:]]', '', comments$message.x) # remove punctuation
+#- Pre process message of posts -#
 
+# lower case
+posts.products$message.x <- tolower(posts.products$message.x) 
 
-
-posts.humira <- subset(posts, key == "Humira")
-
-documents <- Corpus(VectorSource(posts.humira$message.x))
-documents = tm_map(documents, content_transformer(tolower))
-documents = tm_map(documents, removePunctuation)
-documents = tm_map(documents, removeWords, stopwords("english"))
-documents[[20]]$content
-
-documents
-
-
-
-# Detect and translate text, language detection uses 'franc' package 
-posts.humira$lang.x <- lapply(posts.humira$message.x, detectLanguage)# detect the language of all posts
-
+# detect the language of all posts
+posts.products$lang.x <- lapply(posts.products$message.x, detectLanguage)
 
 # Tanslate every message.x from the posts
-posts.humira <- posts.humira %>% 
+posts.products <- posts.products %>% 
   rowwise() %>% 
   dplyr::mutate(translated.x = translateMyMemory(message.x, toISO639_1(lang.x) ,"en", "weiss_alex@gmx.net"))
 
-# Replace original message with translated one if the lang.x is not "eng"
-posts.humira <- posts.humira %>% 
+
+# Replace original message with translated one if the lang.x is not "eng" not necessarily needed
+posts.products <- posts.products %>% 
   rowwise() %>% 
   dplyr::mutate(message.x = ifelse(lang.x=="eng", message.x, translated.x))
 
+# delete translated.x
+posts.products <- within(posts.products, rm(translated.x)) 
+
+# remove punctuation
+posts.products$message.x <- gsub('[[:punct:]]', '', posts.products$message.x) 
 
 
+# Remove stopwords
+posts.products <- posts.products %>% 
+  rowwise() %>% 
+  dplyr::mutate(message.x = paste(rm_stopwords(message.x, tm::stopwords("english"))[[1]], sep=" ", collapse = " "))
+
+# Stem words
+posts.products <- posts.products %>% 
+  rowwise() %>% 
+  dplyr::mutate(message.x =  wordStem(message.x))
+                      
+
+
+#- BACKLOG -#
 
 
 
