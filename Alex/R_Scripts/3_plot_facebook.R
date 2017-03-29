@@ -59,16 +59,19 @@ plotPostsByMonth <- function (posts, keyword){
 
 posts.products.humira.plot <- plotPostsByMonth(posts.products.humira, "Humira")
 posts.products.humira.plot
+ggsave("./img/humira_timeline_plot.png",posts.products.humira.plot)
 
 posts.products.adalimumab.plot <- plotPostsByMonth(posts.products.adalimumab, "Adalimumab")
 posts.products.adalimumab.plot
+ggsave("./img/adalimumab_timeline_plot.png",posts.products.adalimumab.plot)
 
 posts.products.enbrel.plot <- plotPostsByMonth(posts.products.enbrel, "Enbrel")
 posts.products.enbrel.plot
+ggsave("./img/enbrel_timeline_plot.png",posts.products.enbrel.plot)
 
 posts.products.imbruvica.plot <- plotPostsByMonth(posts.products.imbruvica, "Imbruvica")
 posts.products.imbruvica.plot
-
+ggsave("./img/imbruvica_timeline_plot.png",posts.products.imbruvica.plot)
 
 
 
