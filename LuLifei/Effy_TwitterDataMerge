@@ -1,13 +1,7 @@
 #label vectors
-label_ab <- matrix(rep("abbvie",length(ab[,1])),nrow=length(ab
-
-[,1]),byrow=TRUE)
-label_am <- matrix(rep("amgen",length(am[,1])),nrow=length(am
-
-[,1]),byrow=TRUE)
-label_br <- matrix(rep("bristol-myers",length(br
-
-[,1])),nrow=length(br[,1]),byrow=TRUE)
+label_ab <- matrix(rep("abbvie",length(ab[,1])),nrow=length(ab[,1]),byrow=TRUE)
+label_am <- matrix(rep("amgen",length(am[,1])),nrow=length(am[,1]),byrow=TRUE)
+label_br <- matrix(rep("bristol-myers",length(br[,1])),nrow=length(br[,1]),byrow=TRUE)
 
 #add name
 colnames(label_ab) <- c("label")
