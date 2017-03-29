@@ -16,61 +16,60 @@ facebookMaster.df$created_time.y <- as.Date(facebookMaster.df$created_time.y)
 posts <- unique(select(facebookMaster.df, 1, 3, 6, 7, 11,12)) #key, likes_count.x, message.x, created_time.x, comments_count, shares_count
 
 
-posts.humira <- subset(posts, key == "Humira")
-posts.enbrel <- subset(posts, key == "Enbrel")
-posts.trilipix <- subset(posts, key == "Trilipix")
-posts.adalimumab <- subset(posts, key == "Adalimumab")
-posts.imbruvica <- subset(posts, key == "Imbruvica")
 
 posts.products <- subset(posts, key == "Imbruvica" | key == "Adalimumab" | key == "Trilipix" | key == "Enbrel" | key == "Humira" )
 
-
-
-#-Plotting time lines -#
-
-## ADALIMUMAB
-posts.adalimumab_month <- posts.adalimumab
-posts.adalimumab_month$created_time.x <- format(as.Date(posts.adalimumab_month$created_time.x), format ="%m-%y")
-
-
-posts.adalimumab_byTimeMonth <- ddply(posts.adalimumab_month, 'created_time.x', function(x) c(count=nrow(x)))
-
-posts.adalimumab_byTimeMonth <- posts.adalimumab_byTimeMonth[order(as.yearmon(as.character(posts.adalimumab_byTimeMonth$created_time.x),"%m-%Y")),] #use zoo's as.yearmon so that we can group by month
-posts.adalimumab_byTimeMonth$created_time.x <- factor(posts.adalimumab_byTimeMonth$created_time.x, levels=unique(as.character(posts.adalimumab_byTimeMonth$created_time.x)) ) #so that ggplot2 respects the order of my dates
-
-posts.adalimumab_byTimeMonth.plot<-ggplot(data=posts.adalimumab_byTimeMonth, aes(x=posts.adalimumab_byTimeMonth$created_time.x, y=count, group = 1)) +
-  geom_point() +
-  geom_line(aes(colour = count), stat = "identity") + scale_colour_gradient(low="red",high = "green") +
-  geom_text(aes(label=count), vjust=-0.5, color="black", size=3.5) +
-  labs(x = "Month-Year", y = "Post count", 
-       title = "Post count on keyword 'Adalimumab' from 01.01.2012-24.03.2016")
-
-
-posts.adalimumab_byTimeMonth.plot
-ggsave("./img/adalimumab_posts_timeline.png",posts.adalimumab_byTimeMonth.plot)
+posts.products.humira <- subset(posts.products, key == "Humira")
+posts.products.enbrel <- subset(posts.products, key == "Enbrel")
+posts.products.trilipix <- subset(posts.products, key == "Trilipix")
+posts.products.adalimumab <- subset(posts.products, key == "Adalimumab")
+posts.products.imbruvica <- subset(posts.products, key == "Imbruvica")
 
 
 
-## HUMIRA
-posts.humira_month <- posts.humira
-posts.humira_month$created_time.x <- format(as.Date(posts.humira_month$created_time.x), format ="%m-%y")
-posts.humira_byTimeMonth <- ddply(posts.humira_month, 'created_time.x', function(x) c(count=nrow(x)))
+plotPostsByMonth <- function (posts, keyword){
+  # Plot a facebook post dataframe grouping by monthly posts counts. Dataframe needs at least $created_time.x attribute. 
+  #
+  # Args:
+  #   posts: Dataframe of Facebook posts with column created_time.x
+  #   keyword: String indicating the plotted keyword, used for title generation
+  #
+  # Returns:
+  #   A ggplot2 line plot
+  
+  posts.month <- posts
+  posts.month$created_time.x <- format(as.Date(posts.month$created_time.x), format ="%m-%y") # format to only show month and year
+  posts.month<- ddply(posts.month, 'created_time.x', function(x) c(count=nrow(x)))
+  
+  posts.month <-  posts.month[order(as.yearmon(as.character(posts.month$created_time.x),"%m-%Y")),] #use zoo's as.yearmon so that we can group by month/year
+  posts.month$created_time.x <- factor(posts.month$created_time.x, levels=unique(as.character(posts.month$created_time.x)) ) #so that ggplot2 respects the order of my dates
+  
+  
+  posts.month.plot<-ggplot(data=posts.month, aes(x=posts.month$created_time.x, y=count, group = 1)) +
+    geom_point() +
+    geom_line(aes(colour = count), stat = "identity") + scale_colour_gradient(low="red",high = "green") +
+    geom_text(aes(label=count), vjust=-0.5, color="black", size=3.5) +
+    labs(x = "Month-Year", y = "Post count", 
+         title = paste("Post count on keyword", keyword, sep = " "))
+  return(posts.month.plot)
+}
 
-posts.humira_byTimeMonth <- posts.humira_byTimeMonth[order(as.yearmon(as.character(posts.humira_byTimeMonth$created_time.x),"%m-%Y")),] # use zoo's as.yearmon so that we can group by month
-posts.humira_byTimeMonth$created_time.x <- factor(posts.humira_byTimeMonth$created_time.x, levels=unique(as.character(posts.humira_byTimeMonth$created_time.x)) ) # so that ggplot2 respects the order of my dates
 
 
 
-posts.humira_byTimeMonth.plot<-ggplot(data=posts.humira_byTimeMonth, aes(x=posts.humira_byTimeMonth$created_time.x, y=count, group = 1)) +
-  geom_point() +
-  geom_line(aes(colour = count)) + scale_colour_gradient(low="red",high = "green") +
-  geom_text(aes(label=count), vjust=-0.5, color="black", size=3.5) +
-  labs(x = "Month-Year", y = "Post count", 
-       title = "Post count on keyword 'Humira' from 01.01.2012-24.03.2016")
+posts.products.humira.plot <- plotPostsByMonth(posts.products.humira, "Humira")
+posts.products.humira.plot
+
+posts.products.adalimumab.plot <- plotPostsByMonth(posts.products.adalimumab, "Adalimumab")
+posts.products.adalimumab.plot
+
+posts.products.enbrel.plot <- plotPostsByMonth(posts.products.enbrel, "Enbrel")
+posts.products.enbrel.plot
+
+posts.products.imbruvica.plot <- plotPostsByMonth(posts.products.imbruvica, "Imbruvica")
+posts.products.imbruvica.plot
 
 
-posts.humira_byTimeMonth.plot
-ggsave("./img/humira_posts_timeline.png",posts.humira_byTimeMonth.plot)
 
 
 ## Plotting product post counts 

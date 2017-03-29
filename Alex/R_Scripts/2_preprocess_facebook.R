@@ -20,13 +20,14 @@ source("./translateR.R")
 facebookMaster.df <- read.csv("Final_FB_2403.csv", sep = ",", as.is = TRUE)
 
 #- Extract posts and comments -#
-posts <- unique(select(facebookMaster.df, 1, 6, 7)) # key, message.x, created_time.x
-comments <- unique(facebookMaster.df[complete.cases(facebookMaster.df[]), c("key", "message.y", "created_time.y")])  #key, message.y, created_time.y
+posts <- select(facebookMaster.df, 1, 6, 7) # key, message.x, created_time.x
+comments <- facebookMaster.df[complete.cases(facebookMaster.df[]),c("key", "message.y", "created_time.y")]  #key, message.y, created_time.y
 
+# First separate by key then do unique 
 
 # Product posts
 posts.products <- subset(posts, key == "Imbruvica" | key == "Adalimumab" | key == "Trilipix" | key == "Enbrel" | key == "Humira" )
-
+posts.products <- unique(posts.products)
 
 #- Pre process message of posts -#
 
@@ -42,17 +43,17 @@ posts.products <- posts.products %>%
   dplyr::mutate(translated.x = translateMyMemory(message.x, toISO639_1(lang.x) ,"en", "weiss_alex@gmx.net"))
 
 
+
 # Replace original message with translated one if the lang.x is not "eng" not necessarily needed
 posts.products <- posts.products %>% 
   rowwise() %>% 
   dplyr::mutate(message.x = ifelse(lang.x=="eng", message.x, translated.x))
 
 # delete translated.x
-posts.products <- within(posts.products, rm(translated.x)) 
+# posts.products <- within(posts.products, rm(translated.x)) 
 
 # remove punctuation
 posts.products$message.x <- gsub('[[:punct:]]', '', posts.products$message.x) 
-
 
 # Remove stopwords
 posts.products <- posts.products %>% 
@@ -64,6 +65,10 @@ posts.products <- posts.products %>%
   rowwise() %>% 
   dplyr::mutate(message.x =  wordStem(message.x))
                       
+
+#- Comments -# 
+
+comments <- unique(comments)
 
 
 #- BACKLOG -#
