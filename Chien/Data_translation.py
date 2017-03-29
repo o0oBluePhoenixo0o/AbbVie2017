@@ -13,10 +13,7 @@ def get_translation_direction(api_key,text):
     url=url+"key="+api_key
     if(text!=""):
       url=url+"&text="+text
-    #print(url)
     r = requests.get(url)
-    #print(type(r.json()['lang']))
-    #print(r.json()['lang'])
     return(r.json()['lang'])
     
 #Translate the text into English
@@ -27,9 +24,7 @@ def translation(api_key,text,lang):
       url=url+"&text="+text
     if(lang!= ""):
       url=url+"&lang="+lang
-    #print(url)
     r = requests.get(url)
-    #print(type(''.join(r.json()['text'])))
     return(''.join(r.json()['text']))
     
 #Add the text you want to detect and the language you want to translate
@@ -37,5 +32,33 @@ def translation(api_key,text,lang):
 text="******"
 lang="******"
 
-get_translation_direction(api_key,text)    
-translation(api_key,text,lang)
+import pandas as pd
+import numpy as np
+import csv
+import re
+df_disease = pd.read_csv('Combine_disease_utf16.csv', encoding = 'utf-16LE', sep=',')
+with open('trans_disease.csv', 'w', encoding='UTF-16LE', newline='') as csvfile:
+    column = [['id','id.x','message.x', 'lang', 'translate.x']]
+    writer = csv.writer(csvfile)
+    writer.writerows(column)
+for i in range(len(df_disease['message.x'])):    
+    features = []
+    features.append(i)
+    features.append(df_disease['id.x'][i])
+    features.append(df_disease['message.x'][i])
+    string=df_disease['message.x'][i]
+    if(str(df_disease['message.x'][i])=="nan"):
+        features.append('en')
+        features.append(df_disease['message.x'][i])
+    elif(get_translation_direction(api_key,str(string[1:len(string)]))!='en'):
+        features.append(get_translation_direction(api_key,str(string[1:len(string)])))
+        lang=get_translation_direction(api_key,str(string[1:len(string)]))+'-en'
+        features.append(translation(api_key,str(string),lang))
+    elif(get_translation_direction(api_key,str(string[1:len(string)]))=='en'):
+        features.append('en')
+        features.append(df_disease['message.x'][i])
+    with open('trans_disease.csv', 'a', encoding='UTF-16LE', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerows([features])
+#df_result = pd.read_csv('trans_disease.csv', encoding = 'utf-16LE', sep=',')
+#print(df_result)
