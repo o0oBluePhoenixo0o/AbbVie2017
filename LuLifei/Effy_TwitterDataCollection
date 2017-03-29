@@ -22,9 +22,9 @@ amgen <- searchTwitter("amgen",n=20,lang='en')
 bristol <- searchTwitter("bristol-myers",n=20,lang='en')
 
 #removal retweets
-strip_retweets(abbvie, strip_manual = TRUE, strip_mt = TRUE)
-strip_retweets(amgen, strip_manual = TRUE, strip_mt = TRUE)
-strip_retweets(bristol, strip_manual = TRUE, strip_mt = TRUE)
+#strip_retweets(abbvie, strip_manual = TRUE, strip_mt = TRUE)
+#strip_retweets(amgen, strip_manual = TRUE, strip_mt = TRUE)
+#strip_retweets(bristol, strip_manual = TRUE, strip_mt = TRUE)
 
 #transfer data to datafram
 ab=twListToDF(abbvie)
