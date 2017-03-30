@@ -5,16 +5,15 @@
 #install.packages("tidyr")
 #install.packages("wordcloud")
 
-#Tables manipulation
+#Table manipulation
 library(dplyr)
-library(plyr)
 #Text analytics
 library(tidyr)
 library(topicmodels)
 library(tidytext)
-require(tm)
-require(stringr)
-require(wordcloud)
+library(tm)
+library(stringr)
+library(wordcloud)
 #Visualization
 library(ggplot2)
 
@@ -31,12 +30,8 @@ finaldf$created_time.x <- format.facebook.date(finaldf$created_time.x)
 finaldf$created_time.y <- format.facebook.date(finaldf$created_time.y)
 
 #Get posts & comments from final df
-post <- subset(finaldf, select = c(message.x,created_time.x))
-comment <- subset(finaldf, select = c(message.y,created_time.y))
-
-#Clean duplicate
-post <- unique(post)
-comment <- unique(comment)
+post <- subset(finaldf, select = c(key,message.x,created_time.x))
+comment <- subset(finaldf, select = c(key,message.y,created_time.y))
 
 #Pulling in positive and negative wordlists
 pos.words <- scan('Positive.txt', what='character', comment.char=';') #folder with positive dictionary
@@ -79,37 +74,41 @@ score.sentiment <- function(sentences, pos.words, neg.words, .progress='none')
 }
 
 
-#Evaluate post and comment datasets
-post$message.x <- as.factor(post$message.x)
-scores <- score.sentiment(post$message.x, pos.words, neg.words, .progress='text')
-stat <- scores
-stat$created <- post$created_time.x
-stat$created <- as.Date(stat$created)
+SA.simple <- function(txt){
+  require(dplyr)
+  #filter original dataframe with key
+  temp <- subset(post, post$key == txt)
+  #clean duplicates and convert to factor
+  temp <- subset(temp, !duplicated(message.x))
+  temp$message.x <- as.factor(temp$message.x)
+  #evaluate sentiments
+  scores <- score.sentiment(temp$message.x, pos.words, neg.words, .progress='text')
+  stat <- scores
+  stat$created <- temp$created_time.x
+  stat$created <- as.Date(stat$created)
+  
+  #add new scores as a column
+  stat <- mutate(stat, message = ifelse(stat$score > 0, 'positive', 
+                                        ifelse(stat$score < 0, 'negative', 'neutral')))
+  
+  by.message <- group_by(stat, message, created)
+  by.message <- summarise(by.message, number=n())
 
-#add new scores as a column
-stat <- mutate(stat, message = ifelse(stat$score > 0, 'positive', 
-                                      ifelse(stat$score < 0, 'negative', 'neutral')))
+  #visualization
+  ggplot(by.message, aes(created, number)) + geom_line(aes(group=message, color=message), size=2) +
+    geom_point(aes(group=message, color=message), size=4) +
+    theme(text = element_text(size=18), axis.text.x = element_text(angle=90, vjust=1)) +
+    ggtitle(txt)
+  
+  #save plot
+  ggsave(file=paste(txt, '_plot.jpeg'))
+  
+}
 
-by.message <- group_by(stat, message, created)
-by.message <- summarise(by.message, number=n())
+#Companies
+SA.simple("AbbVie")
+SA.simple("Amgen")
+SA.simple("Bristol-Myers Squibb")
 
-#visualization
-ggplot(by.message, aes(created, number)) + geom_line(aes(group=message, color=message), size=2) +
-  geom_point(aes(group=message, color=message), size=4) +
-  theme(text = element_text(size=18), axis.text.x = element_text(angle=90, vjust=1))
+#Products
 
-#############################################
-#########       TEST ZONE       #############
-#############################################
-
-#Reading text to corpus
-post_corpus <- Corpus(VectorSource(post))
-comment_corpus <- Corpus(VectorSource(comment))
-
-# Remove stopwords
-post_corpus=tm_map(post_corpus,function(x) removeWords(x,stopwords()))
-comment_corpus=tm_map(comment_corpus,function(x) removeWords(x,stopwords()))
-
-# convert corpus to a Plain Text Document
-post_corpus=tm_map(post_corpus,PlainTextDocument)
-comment_corpus=tm_map(comment_corpus,PlainTextDocument)
