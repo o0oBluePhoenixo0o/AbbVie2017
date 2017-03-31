@@ -41,7 +41,7 @@ plotTweetsByMonth <- function (tweets, keywords){
     geom_point() +
     geom_line(aes(colour = count), stat = "identity") + scale_colour_gradient(low="red",high = "green") +
     geom_text(aes(label=count), vjust=-0.5, color="black", size=3.5) +
-    labs(x = "Month-Year", y = "Post count", 
+    labs(x = "Date", y = "Tweets count", 
          title = paste("Tweet count on keyword", keywords, sep = " "))
   return(tweets.month.plot)
 }
@@ -74,8 +74,8 @@ posts.plot.df <- data.frame(product=c("Humira", "Enbrel", "Trilipix", "Adalimuma
 
 posts.plot<-ggplot(data=posts.plot.df, aes(x=product, y=postCount)) +
   geom_bar(stat="identity")+
-  geom_text(aes(label=postCount), vjust=-0.5, color="black", size=3.5)+
-  labs(x = "Product", y = "Post count", 
+  geom_text(aes(label=tweetsCount), vjust=-0.5, color="black", size=3.5)+
+  labs(x = "Product", y = "tweets count", 
        title = "Post count on our different keywords")
 
 posts.plot
