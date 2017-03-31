@@ -22,18 +22,19 @@ tweets_products <- subset(tweets, label == "imbruvica" | label == "adalimumab" |
 
 tweets.humira <- subset(tweets, label == "humira")
 tweets.enbrel <- subset(tweets, label == "enbrel")
-#tweets.trilipix <- subset(tweets, label == "trilipix")
+tweets.trilipix <- subset(tweets, label == "trilipix")
 tweets.adalimumab <- subset(tweets, label == "adalimumab")
 tweets.imbruvica <- subset(tweets, label == "imbruvica")
 
 plotTweetsByMonth <- function (tweets, keywords){
  
+  tweets.month <- data.frame()
   tweets.month <- tweets
-  #tweets.month$created <- format(as.Date(tweets.month$created), format ="%m-%y") # format to only show month and year
+  #tweets.month$created <- as.Date(tweets.month$created) # format to only show month and year
   tweets.month<- ddply(tweets.month, 'created', function(x) c(count=nrow(x)))
   
   #tweets.month <-  tweets.month[order(as.yearmon(as.character(tweets.month$created),"%m-%Y")),] #use zoo's as.yearmon so that we can group by month/year
-  tweets.month$created <- factor(tweets.month$created, levels=unique(as.character(tweets.month$created)) ) #so that ggplot2 respects the order of my dates
+  #tweets.month$created <- factor(tweets.month$created, levels=unique(as.character(tweets.month$created)) ) #so that ggplot2 respects the order of my dates
   
   
   tweets.month.plot<-ggplot(data=tweets.month, aes(x=tweets.month$created, y=count, group = 1)) +
@@ -56,15 +57,16 @@ tweets.adalimumab.plot <- plotTweetsByMonth(tweets.adalimumab, "Adalimumab")
 tweets.adalimumab.plot
 ggsave("./img/adalimumab_timeline_plot.png",tweets.adalimumab.plot)
 
-posts.products.enbrel.plot <- plotPostsByMonth(posts.products.enbrel, "Enbrel")
-posts.products.enbrel.plot
-ggsave("./img/enbrel_timeline_plot.png",posts.products.enbrel.plot)
+tweets.enbrel.plot <- plotTweetsByMonth(tweets.enbrel, "enbrel")
+tweets.enbrel.plot
+ggsave("./img/enbrel_timeline_plot.png",tweets.enbrel.plot)
 
-posts.products.imbruvica.plot <- plotPostsByMonth(posts.products.imbruvica, "Imbruvica")
-posts.products.imbruvica.plot
-ggsave("./img/imbruvica_timeline_plot.png",posts.products.imbruvica.plot)
+tweets.imbruvica.plot <- plotTweetsByMonth(tweets.imbruvica, "Imbruvica")
+tweets.imbruvica.plot
+ggsave("./img/imbruvica_timeline_plot.png",tweets.imbruvica.plot)
 
-
+tweets.trilipix.plot <- plotTweetsByMonth(tweets.trilipix, "trilipix")
+tweets.trilipix.plot
 
 ## Plotting product post counts 
 posts.plot.df <- data.frame(product=c("Humira", "Enbrel", "Trilipix", "Adalimumab", "Imbruvica"),
