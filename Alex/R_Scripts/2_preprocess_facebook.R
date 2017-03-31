@@ -66,6 +66,13 @@ posts.products <- posts.products %>%
   dplyr::mutate(message.x =  wordStem(message.x))
                       
 
+
+preProcessMessages <- function(message){
+  
+}
+
+
+
 #- Comments -# 
 
 comments <- unique(comments)

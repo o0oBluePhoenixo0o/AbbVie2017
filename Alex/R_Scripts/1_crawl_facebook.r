@@ -124,6 +124,7 @@ mergeCSVsUTF8 <- function(...){
       }
     )    
     masterDF <- rbind(masterDF, fileData)
+    browser()
   }
   write.csv(masterDF, file = paste("./products/Alex_FB_Products_utf8",".csv", sep = ""), fileEncoding = "UTF-8", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
 }
