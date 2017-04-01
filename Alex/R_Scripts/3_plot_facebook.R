@@ -71,7 +71,7 @@ plotFacebookPostActivites <- function(labels,...){
   acitivities.plot.df.melted <- melt(acitivities.plot.df, id.var="product")
   acitivities.plot <- ggplot(acitivities.plot.df.melted, aes(x = product, y = value))
   acitivities.plot <-  acitivities.plot + facet_wrap(~ variable) +
-    geom_bar(stat = "identity") + labs(x = "Product", y = "Count", title = "Activities on different keywords")+
+    geom_bar(stat = "identity") + labs(x = "Keyword", y = "Count", title = "Activities on different keywords")+
     geom_text(aes(label=value), vjust=-0.5, color="red", size=3.5, position = position_stack(vjust = 0.5))
   
   return(acitivities.plot)

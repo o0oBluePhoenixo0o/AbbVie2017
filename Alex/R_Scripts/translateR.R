@@ -33,8 +33,8 @@ translateMyMemory.single <- function(text, source, target, email) {
   message(sprintf("Sending GET request to: %s", url))
   result <- GET(url)
   message(sprintf("Reponse returned with status code: %s", status_code(result)))
-  message(sprintf("Reponse content is : %s", content(result, "parsed")$responseData$translatedText))
-  return(content(result, "parsed")$responseData$translatedText)
+  message(sprintf("Reponse content is : %s", httr::content(result, "parsed")$responseData$translatedText))
+  return(httr::content(result, "parsed")$responseData$translatedText)
 }
 
 translateMyMemory <- function(text, source, target, email) {
