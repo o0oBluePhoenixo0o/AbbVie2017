@@ -20,7 +20,7 @@ data_tw$Label
 
 #nrow(data_tw)
 
-#data_tw$created
+
 
 tweets<-data_tw
 
