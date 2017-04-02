@@ -28,4 +28,4 @@ data_new[1,]
 #corpus1 <-tm_map(corpus, removePunctuation )
 #corpus1 <-tm_map(corpus1, stripWhitespace )
 #corpus1 <-tm_map(corpus1,stemDocument )
-
+#
