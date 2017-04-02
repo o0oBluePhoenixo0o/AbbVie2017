@@ -57,7 +57,7 @@ tweets.ankylosing$created <- as.Date(tweets.ankylosing$Created.At, format="%m/%d
 tweets.ankylosing<- tweets.ankylosing[!(is.na(tweets.ankylosing$created)),]
 
 plotTweetsByMonth <- function (tweets, keywords){
- 
+# 
   tweets.month <- data.frame()
   tweets.month <- tweets
   #tweets.month$created <- as.Date(tweets.month$created) # format to only show month and year
