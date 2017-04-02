@@ -1,10 +1,10 @@
 # This files contains methods on preprocess FB data
 
-#install.packages("plyr")
-#install.packages("dplyr")
-#install.packages("SnowballC")
-#install.packages("qdap")
-#install.packages("tm")
+#i nstall.packages("plyr")
+# install.packages("dplyr")
+# install.packages("SnowballC")
+# install.packages("qdap")
+# install.packages("tm")
 
 library(plyr)
 library(dplyr)
@@ -58,16 +58,21 @@ preProcessPosts <- function(posts, translate = FALSE, lowerCase = FALSE, removeP
   
   # Remove stopwords
   if (removeStopWords) {
+    message("Removing stopwords")
     posts <- posts %>% 
       rowwise() %>% 
-      dplyr::mutate(message.x = paste(rm_stopwords(message.x, tm::stopwords("english"))[[1]], sep=" ", collapse = " "))
+      dplyr::mutate(message.x = paste(qdap::rm_stopwords(message.x, tm::stopwords("english"))[[1]], sep=" ", collapse = " "))
   }
   
   # Stem words
   if (stemWords) {
+    message("Stem words")
     posts <- posts %>% 
       rowwise() %>% 
-      dplyr::mutate(message.x =  wordStem(message.x))
+      dplyr::mutate(message.x =  SnowballC::wordStem(message.x))
   }
+  
+  View(posts)
+  
   return(posts)
 }

@@ -1,8 +1,8 @@
-#This files contains methods to crawl facebook data 
+# This files contains methods to crawl facebook data 
 
-#install.packages("Rfacebook")
-#install.packages("plyr")
-#install.packages("dplyr")
+# install.packages("Rfacebook")
+# install.packages("plyr")
+# install.packages("dplyr")
 
 library(Rfacebook)
 library(plyr)

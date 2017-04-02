@@ -1,4 +1,11 @@
-#This file is used for computating the different plots on posts and comments to differnt products
+# This file is used for computating the different plots on posts and comments to differnt products
+
+# install.packages("ggplot2")
+# install.packages("plyr")
+# install.packages("dplyr")
+# install.packages("zoo")
+# install.packages("reshape2")
+
 library(ggplot2)
 library(plyr)
 library(dplyr)
