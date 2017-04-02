@@ -17,7 +17,7 @@ data_tw$created <- as.Date(data_tw$created)
 #Extracting product tweets
 tweets <- unique(select(data_tw, 1, 3, 5, 7, 14, 19)) #key, text, favorites_count, date, retweet_count, label
 tweets_products <- subset(tweets, label == "imbruvica" | label == "adalimumab" | label == "trilipix" | label == "enbrel" | label == "humira" )
-
+#
 
 
 tweets.humira <- subset(tweets, label == "humira")
