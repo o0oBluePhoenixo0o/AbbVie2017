@@ -11,22 +11,37 @@ library(e1071)
 library(tm)
 
 
-initTwitterClassifier <- function(trainingData){
-  # Create Document-Term Matrix
-  matrix <- RTextTools::create_matrix(trainingData[, 1], language = "english", removeStopwords = FALSE, removeNumbers = TRUE, stemWords = FALSE, tm::weightTfIdf)
-  mat <- as.matrix(matrix)
+initNaiveBayesClassifier <- function(trainingData, save = FALSE, filename){
+  # Create a classifier for sentiment anlysis based on Naive Bayes
+  #
+  # Args:
+  #   trainign data: Data to train the classifier
+  #   save: Should the classifier be saved to a file
+  #
+  # Returns:
+  #   A naive Bayes classifier
   
-  # Train Naive Bayes on the manually labeled tweets data
-  classifier <- naiveBayes(mat[1:10, ], as.factor(trainingData[1:10, 2]))
-  
-  predicted = predict(classifier, mat[1:15, ]) # Here we actually classify the tweets according their sentiment
-  message("Twitter classifier initalised and trained")
-  message("Confusion matrix and recall accuracy")
-  
-  print(table(trainingData[1:15, 2], predicted)) # Confusion Matrix
-  message(sprintf("Recall accuracy: %s", recall_accuracy(trainingData[11:15, 2], predicted) ))
-  return(classifier)
-  
+
+    # Create Document-Term Matrix
+    matrix <- RTextTools::create_matrix(trainingData[, 1], language = "english", removeStopwords = FALSE, removeNumbers = TRUE, stemWords = FALSE, tm::weightTfIdf)
+    mat <- as.matrix(matrix)
+    
+    # Train Naive Bayes on the manually labeled tweets data
+    classifier <- naiveBayes(mat[1:10, ], as.factor(trainingData[1:10, 2]))
+    
+    predicted = predict(classifier, mat[1:15, ]) # Here we actually classify the tweets according their sentiment
+    message("Twitter classifier initalised and trained")
+    message("Confusion matrix and recall accuracy")
+    
+    print(table(trainingData[1:15, 2], predicted)) # Confusion Matrix
+    message(sprintf("Recall accuracy: %s", recall_accuracy(trainingData[11:15, 2], predicted) ))
+    
+    
+    if (save) {
+      saveRDS(classifier, paste0(filename,".RDS"))
+    }
+    
+    return(classifier)
 }
 
 
@@ -48,8 +63,8 @@ sentimentTwitter<- function(tweets){
   }
 
   
-  if(is.null(sentiment.classifier.twitter)){
-    message("Classifier is not initalised!")
+  if(is.null(sentiment.classifier.twitter) || is.na(sentiment.classifier.twitter)){
+    message("Classifier is not initialised!")
     return(NA)
   }
   
@@ -80,5 +95,5 @@ test_tweets = rbind(c("feel happy this morning", "positive"),
 
 tweets = rbind(pos_tweets, neg_tweets, test_tweets)
 
-sentiment.classifier.twitter <- initTwitterClassifier(tweets)
+sentiment.classifier.twitter <- initNaiveBayesClassifier(tweets, save = TRUE, "twitterNaivesBayesModel")
 

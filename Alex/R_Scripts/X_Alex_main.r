@@ -35,12 +35,9 @@ posts.products <- subset(posts, key == "Imbruvica" | key == "Adalimumab" | key =
 
 posts.products.preprocessed <- preProcessPosts(posts.products, stemWords = TRUE, removeStopWords = TRUE)
 
-
-
 # Sentiment analysis with twitter 
 twitterMaster.df <- select(twitterMaster.df, 9) # text
 twitterMaster.df <- head(twitterMaster.df, 30)
-
 
 
 # sentimentr
