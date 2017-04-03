@@ -14,7 +14,7 @@ tweets.df = read.csv(file.choose(), header=T, sep=",", stringsAsFactors=FALSE)
 View(tweets.df)
 
 #Build Corpus of a char vectors, I am considering the Text column only for my future analysis
-myCorpus <- Corpus(VectorSource(tweets.df$text))
+myCorpus <- Corpus(VectorSource(tweets.df$Text))
 
 # convert to lower case
 myCorpus <- tm_map(myCorpus, content_transformer(tolower))
