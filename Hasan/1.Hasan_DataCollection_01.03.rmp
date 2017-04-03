@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="7.2.002">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="7.2.002" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="social_media:search_twitter" compatibility="7.2.000" expanded="true" height="68" name="Search Twitter" width="90" x="112" y="34">
+        <parameter key="connection" value="Twitter"/>
+        <parameter key="query" value="rheumatoid arthritis"/>
+        <parameter key="result_type" value="recent"/>
+        <parameter key="limit" value="5000"/>
+        <parameter key="language" value="en"/>
+        <parameter key="filter_by_geo_location" value="false"/>
+        <parameter key="radius_unit" value="miles"/>
+      </operator>
+      <operator activated="true" class="write_csv" compatibility="7.2.002" expanded="true" height="82" name="Write CSV" width="90" x="313" y="34">
+        <parameter key="csv_file" value="D:\Uni mannheim\TeamProject\5. Data\Preprocessed\1. Twitter\Diseases\Hasan\31.3\update_disease_31.3.csv"/>
+        <parameter key="column_separator" value=","/>
+        <parameter key="write_attribute_names" value="true"/>
+        <parameter key="quote_nominal_values" value="true"/>
+        <parameter key="format_date_attributes" value="true"/>
+        <parameter key="append_to_file" value="true"/>
+        <parameter key="encoding" value="UTF-16LE"/>
+      </operator>
+      <connect from_op="Search Twitter" from_port="output" to_op="Write CSV" to_port="input"/>
+      <connect from_op="Write CSV" from_port="through" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>
