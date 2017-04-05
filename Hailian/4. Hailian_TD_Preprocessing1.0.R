@@ -15,6 +15,8 @@ library(translateR)
 library(mscstexta4r)
 
 
+#remove links, symbols before detecting
+
 
 #detecting examples
 detectLanguage(a)
@@ -26,7 +28,6 @@ Diseases_posts_language<- detectLanguage(Hailian_Diseases_NoD[[3]])
 Diseases_posts_withlanguage<- cbind(Hailian_Diseases_NoD, Diseases_posts_language)
 Diseases_posts_foreignlanguage<- subset(Diseases_posts_withlanguage, detectedLanguage!="ENGLISH")
 
-#remove links, symbols...
 
 
 
