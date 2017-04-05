@@ -1,3 +1,5 @@
+##getGroupPosts&Comments random test (this one can be ignore)
+
 require(Rfacebook)
 
 fb_oauth <- fbOAuth(app_id="259715667786273", app_secret="7e35add14d76f215b4e3f3a5a3c74bb2",extended_permissions = TRUE)
