@@ -31,7 +31,6 @@ Diseases_posts_foreignlanguage<- subset(Diseases_posts_withlanguage, detectedLan
 
 
 
-
 ##remove Stopwords
 
 #change data.frame into corpus and removing stop words
