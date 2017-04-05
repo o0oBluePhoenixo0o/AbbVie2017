@@ -40,12 +40,16 @@ twitterMaster.df <- select(twitterMaster.df, 9) # text
 twitterMaster.df <- head(twitterMaster.df, 30)
 
 
+
+
 # sentimentr
 sentiment_by(posts.products$message.x) # 0 is negative and 1 is positive
 
 # e1071
 twitter.matrix = RTextTools::create_matrix(twitterMaster.df[, 1], language = "english", removeStopwords = FALSE, 
                                         removeNumbers = TRUE, stemWords = FALSE, tm::weightTfIdf) # It seems we can preprocess the data here also ;) 
+
 sentimentTwitter(as.matrix(twitter.matrix ))
+
 
 

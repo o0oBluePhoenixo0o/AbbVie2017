@@ -66,7 +66,6 @@ preProcessPosts <- function(posts, translate = FALSE, lowerCase = FALSE, removeP
   
   # Stem words
   if (stemWords) {
-    message("Stem words")
     posts <- posts %>% 
       rowwise() %>% 
       dplyr::mutate(message.x =  SnowballC::wordStem(message.x))
