@@ -10,10 +10,14 @@
 # install.packages("ggrepel")
 
 # loading packages
+library(ROAuth)
+library(tidyverse)
 library(text2vec)
 library(caret)
 library(glmnet)
 library(ggrepel)
+
+setwd("~/GitHub/AbbVie2017/Philipp")
 
 ### loading and preprocessing a training set of tweets
 # function for converting some symbols

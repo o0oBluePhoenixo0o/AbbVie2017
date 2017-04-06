@@ -1,7 +1,10 @@
-#install.packages("tm")
-#install.packages("stringr")
-#install.packages("tidyr")
-#install.packages("wordcloud")
+# 
+# install.packages("dplyr")
+# install.packages("plyr")
+# install.packages("tidyr")
+# install.packages("tm")
+# install.packages("stringr")
+# install.packages("ggplot2")
 
 #Table manipulation
 library(dplyr)
@@ -13,10 +16,7 @@ library(stringr)
 #Visualization
 library(ggplot2)
 
-#home lap
 setwd("~/GitHub/AbbVie2017/Philipp")
-#work lap
-setwd("~/R")
 
 #Pulling in positive and negative wordlists
 pos.words <- scan('Positive.txt', what='character', comment.char=';') #folder with positive dictionary
@@ -87,11 +87,33 @@ SA.simple <- function(txt,dataset){
   ggsave(file=paste(txt, '_plot.jpeg'))
   
 }
+# Post dataset
 
 #Companies
-SA.simple("AbbVie",postdf)
-SA.simple("Amgen",postdf)
-SA.simple("Bristol-Myers Squibb",postdf)
+SA.simple("abbvie",postdf)
+SA.simple("amgen",postdf)
+SA.simple("bristol myers",postdf)
+SA.simple("johnson & johnson",postdf)
 
 #Products
-SA.simple("Humira",postdf)
+SA.simple("humira",postdf)
+SA.simple("amgen",postdf)
+SA.simple("enbrel",postdf)
+SA.simple("trilipix",postdf)
+SA.simple("imbruvica",postdf)
+
+
+# Comment dataset
+
+#Companies
+SA.simple("abbvie",TW_df)
+SA.simple("amgen",TW_df)
+SA.simple("bristol myers",TW_df)
+SA.simple("johnson & johnson",TW_df)
+
+#Products
+SA.simple("humira",TW_df)
+SA.simple("amgen",TW_df)
+SA.simple("enbrel",TW_df)
+SA.simple("trilipix",TW_df)
+SA.simple("imbruvica",TW_df)

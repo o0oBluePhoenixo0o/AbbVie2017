@@ -10,11 +10,12 @@ setwd("~/GitHub/AbbVie2017/Philipp")
 
 #Get FB_Oauth
 fb_oauth <- fbOAuth(app_id="204227866723896", 
-                    app_secret="e39f8a7750fd165276e0d36709201f92",
+                    app_secret="05eb011fc8a93ad135f7e78a8355bb57",
                     extended_permissions = TRUE)
 
 x <- fb_oauth
 
+x <- "EAACEdEose0cBAELk3BuRwujLqlU1OEF0HiBZAolYqu0V99UjS9OfGC8qfE3MMxO7VPKmNSobf1M4KdvBAvvpbcYjsUj7WMtKy3uxBxe1wMGZBwPljcCOf0d9Bqeitw0SbR8PP1c3x9o7Q5DJMEnHzKSxF9z216IQZBd3iVFVjMkeebclxCKB2ijOBhImDLXPGkqZB6ux5wZDZD"
 #############################################
 # Visualization for comments/likes/shares   #
 #############################################
@@ -41,7 +42,7 @@ SummaryPage <- function(key){
     cat("\n")
     cat(paste("Getting posts from page number ",i," with ID: ", pagelist[i,1], "\n"))
     page <- getPage(pagelist[i,1],x,n=100000, since=begin , until = today,
-                           feed = TRUE, reactions = TRUE)
+                    feed = TRUE, reactions = TRUE)
     
     ## convert Facebook date format to R date format
     format.facebook.date <- function(datestring) {
@@ -71,5 +72,4 @@ SummaryPage <- function(key){
 SummaryPage("AbbVie")
 SummaryPage("Bristol-Myers Squibb")
 SummaryPage("Amgen")
-
 

@@ -5,11 +5,13 @@ install.packages("Rfacebook")
 install.packages("devtools")
 install.packages("ggplot2")
 install.packages("scales")
+install.packages("plyr")
 install.packages("dplyr")
-install.packages(c("curl", "httr"))
+install.packages("curl")
+install.packages("httr")
 
 #Using Rfacebook package
-require (Rfacebook)
+library (Rfacebook)
 library(devtools)
 # visualize evolution in metric
 library(ggplot2)
@@ -17,14 +19,17 @@ library(scales)
 #Table manipulation
 library(plyr)
 library(dplyr)
+library(curl)
 
 setwd("~/GitHub/AbbVie2017/Philipp")
-#Get FB_Oauth
-fb_oauth <- fbOAuth(app_id="204227866723896", 
-                    app_secret="e39f8a7750fd165276e0d36709201f92",
-                    extended_permissions = TRUE)
 
-x <- fb_oauth
+#Get FB_Oauth
+# fb_oauth <- fbOAuth(app_id="1345577925522492", 
+#                     app_secret="450cabfde5795973f6402617e8af11ab",
+#                     extended_permissions = TRUE)
+
+#x <- fb_oauth
+x<-"EAATHy8ZAEtDwBAGVZCXPKcTSSQvLrtZCTMGWQwSp4nP8tWj4JlPkst88WRkZAWNPmFkpbFZB2balwzreJucvSDduIpZA0QOD3pEPfAdlZAjj7ZBIjacxOG9jBVtrRbR6yZCmsgg8tUQKItBWHQGeUw5uyxDZCmZBrzM7MwZD"
 
 searchFB <- function(key){
   
@@ -79,22 +84,22 @@ searchFB <- function(key){
   # Join 2 data frame to create 1 consolidated dataset for each keyword
   
   if(!empty(page_df)){
-  #the 2nd part of ID
-  for (i in 1:nrow(page_df))
-  {
-    x<-strsplit(page_df[i,]$id,"_")[[1]]
-    y<-tolower(x)[2]
-    page_df$join_id[i] <-y
-  }}
+    #the 2nd part of ID
+    for (i in 1:nrow(page_df))
+    {
+      x<-strsplit(page_df[i,]$id,"_")[[1]]
+      y<-tolower(x)[2]
+      page_df$join_id[i] <-y
+    }}
   
   if(!empty(comment_df)){
-  #the 1st part of ID
-  for (i in 1:nrow(comment_df))
-  {
-    x<-strsplit(comment_df[i,]$id,"_")[[1]]
-    y<-tolower(x)[1]
-    comment_df$join_id[i] <-y
-  }}
+    #the 1st part of ID
+    for (i in 1:nrow(comment_df))
+    {
+      x<-strsplit(comment_df[i,]$id,"_")[[1]]
+      y<-tolower(x)[1]
+      comment_df$join_id[i] <-y
+    }}
   
   if(empty(page_df)) {
     final_dataset<-data.frame();
@@ -106,8 +111,7 @@ searchFB <- function(key){
   
   
   cat("\n Writing file to .csv")
-  write.csv(final_dataset, file = paste(key,".csv", sep = ""), 
-            quote = TRUE, sep= ";",
+  write.csv(final_dataset, file = paste(key,".csv", sep = ""),
             row.names=FALSE, qmethod='escape',
             fileEncoding = "UTF-8", na = "NA")
 }
@@ -119,8 +123,8 @@ searchFB("Amgen")
 
 #merge csv files
 AbbVie = read.csv2(file = "AbbVie.csv", header = TRUE, 
-                  sep=",",
-                  fileEncoding = "UTF-8")
+                   sep=",",
+                   fileEncoding = "UTF-8")
 
 Amgen = read.csv2(file = "Amgen.csv", header = TRUE, 
                   sep=",",
@@ -137,3 +141,6 @@ masterDF <- rbind(Bristol, masterDF)
 write.csv(masterDF, file = "FB_Companies.csv", 
           quote = TRUE, row.names=FALSE, 
           fileEncoding = "UTF-8", na = "NA")
+
+#Add more keywords 06.04.17
+searchFB("johnson & johnson")
