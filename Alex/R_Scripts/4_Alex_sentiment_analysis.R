@@ -9,9 +9,10 @@ library(sentimentr)
 library(RTextTools)
 library(e1071)
 library(tm)
+library(tidyverse)
 
 
-initNaiveBayesClassifier <- function(trainingData, save = FALSE, filename){
+initNaiveBayesClassifier <- function(tweets, save = FALSE, filename){
   # Create a classifier for sentiment anlysis based on Naive Bayes
   #
   # Args:
@@ -23,18 +24,23 @@ initNaiveBayesClassifier <- function(trainingData, save = FALSE, filename){
   
 
     # Create Document-Term Matrix
-    matrix <- RTextTools::create_matrix(trainingData[, 1], language = "english", removeStopwords = FALSE, removeNumbers = TRUE, stemWords = FALSE, tm::weightTfIdf)
-    mat <- as.matrix(matrix)
+  View(tweets)
+    matrix= RTextTools::create_matrix(tweets[,1], language="english", 
+                        removeStopwords=FALSE, removeNumbers=TRUE, 
+                        stemWords=FALSE)     
+    mat = as.matrix(matrix)
+    View(mat)
     
     # Train Naive Bayes on the manually labeled tweets data
-    classifier <- naiveBayes(mat[1:10, ], as.factor(trainingData[1:10, 2]))
+    # mat is the matrix with preprocessed tweets, as.factor() converts strings into factors
+  
+    classifier = naiveBayes(mat[1:10,], as.factor(tweets[1:10,2]) )
     
-    predicted = predict(classifier, mat[1:15, ]) # Here we actually classify the tweets according their sentiment
-    message("Twitter classifier initalised and trained")
-    message("Confusion matrix and recall accuracy")
-    
-    print(table(trainingData[1:15, 2], predicted)) # Confusion Matrix
-    message(sprintf("Recall accuracy: %s", recall_accuracy(trainingData[11:15, 2], predicted) ))
+    # test the validity
+    print(dim(mat[11:15,]))
+    predicted = predict(classifier, mat[11:15,]); predicted
+    print(table(tweets[11:15, 2], predicted))
+    recall_accuracy(tweets[11:15, 2], predicted)
     
     
     if (save) {
@@ -43,7 +49,6 @@ initNaiveBayesClassifier <- function(trainingData, save = FALSE, filename){
     
     return(classifier)
 }
-
 
 sentimentTwitter<- function(tweets){
   # Classifies twitter tweets according their sentiment level, using Naives Bayes trained with tweets
@@ -94,6 +99,20 @@ test_tweets = rbind(c("feel happy this morning", "positive"),
                     c("your song annoying", "negative"))
 
 tweets = rbind(pos_tweets, neg_tweets, test_tweets)
+print(class(tweets))
 
-sentiment.classifier.twitter <- initNaiveBayesClassifier(tweets, save = TRUE, "twitterNaivesBayesModel")
+conv_fun <- function(x) iconv(x, "latin1", "ASCII", "")
+tweets_classified <- read_csv('trainingandtestdata/training.1600000.processed.noemoticon.csv',
+                              col_names = c('sentiment', 'id', 'date', 'query', 'user', 'text')) %>%
+  # converting some symbols
+  dmap_at('text', conv_fun) %>%
+  # replacing class values
+  mutate(sentiment = ifelse(sentiment == 0, "negative", "positive"))
+
+tweets.classified.training <- select(tweets_classified , 1, 6)# sentiment, text
+tweets.classified.training <- head(tweets.classified.training, 15)
+tweets.classified.training <- tweets.classified.training[c("text", "sentiment")] # switch columns
+tweets.classified.training <- as.matrix(tweets.classified.training)
+print(dim(tweets.classified.training))
+sentiment.classifier.twitter <- initNaiveBayesClassifier(tweets.classified.training, save = TRUE, "twitterNaivesBayesModel")
 
