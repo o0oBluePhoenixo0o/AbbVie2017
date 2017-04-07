@@ -57,6 +57,47 @@ final_new <- cbind(final_new,a)
 
 final_news<- subset(final_new, select=c(4,7,14,15,16,17,6,1,12,11,8,5,13,2,3,9,10))
 
+for (i in 1:nrow(final_old)){
+  if(final_old[i,]$key == "Abbvie")
+  {
+    final_old[i,]$key <- "abbvie"
+  }
+}
+
+for (i in 1:nrow(final_old)){
+  if(final_old[i,]$key == "Amgen")
+  {
+    final_old[i,]$key <- "amgen"
+  }
+}
+
+for (i in 1:nrow(final_old)){
+  if(final_old[i,]$key == "Bristol-Myers")
+  {
+    final_old[i,]$key <- "bristol myers"
+  }
+}
+
+for (i in 1:nrow(final_old)){
+  if(final_old[i,]$key == "hcv")
+  {
+    final_old[i,]$key <- "hepatitis c"
+  }
+}
+for (i in 1:nrow(final_old)){
+  if(final_old[i,]$key == "Adalimumab")
+  {
+    final_old[i,]$key <- "adalimumab"
+  }
+}
+
+for (i in 1:nrow(final_old)){
+  if(final_old[i,]$key == "Bristol-myers")
+  {
+    final_old[i,]$key <- "bristol myers"
+  }
+}
+
 final <- rbind(final_old,final_news)
 
 #final <- subset(final, !duplicated(Text))
