@@ -2,7 +2,6 @@
 # - Comment out the train_model if you have the model file already with you
 
 # # install packages
-# install.packages("ROAuth")
 # install.packages("tidyverse")
 # install.packages("text2vec")
 # install.packages("caret")
@@ -10,7 +9,6 @@
 # install.packages("ggrepel")
 
 # loading packages
-library(ROAuth)
 library(tidyverse)
 library(text2vec)
 library(caret)
@@ -82,31 +80,32 @@ tfidf <- TfIdf$new()
 dtm_train_tfidf <- fit_transform(dtm_train, tfidf)
 dtm_test_tfidf <- fit_transform(dtm_test, tfidf)
 
-# # train the model
+# train the model
 # t1 <- Sys.time()
+# t1
 # glmnet_classifier <- cv.glmnet(x = dtm_train_tfidf,
-#                                y = tweets_train[['sentiment']], 
-#                                family = 'binomial', 
+#                                y = tweets_train[['sentiment']],
+#                                family = 'binomial',
 #                                # L1 penalty
 #                                alpha = 1,
 #                                # interested in the area under ROC curve
 #                                type.measure = "auc",
 #                                # 5-fold cross-validation
 #                                nfolds = 5,
-#                                # high value is less accurate, but has faster training
-#                                thresh = 1e-3,
-#                                # again lower number of iterations for faster training
-#                                maxit = 1e3)
+#                                # high value is less accurate, but has faster training (def: 1e-3)
+#                                thresh = 1e-5,
+#                                # again lower number of iterations for faster training (def: 1e3)
+#                                maxit = 1e4)
 # print(difftime(Sys.time(), t1, units = 'mins'))
-# 
-# plot(glmnet_classifier)
-# print(paste("max AUC =", round(max(glmnet_classifier$cvm), 4)))
-# 
-# preds <- predict(glmnet_classifier, dtm_test_tfidf, type = 'response')[ ,1]
-# auc(as.numeric(tweets_test$sentiment), preds)
-# 
-# # save the model for future using
-# saveRDS(glmnet_classifier, 'glmnet_classifier.RDS')
+
+plot(glmnet_classifier)
+print(paste("max AUC =", round(max(glmnet_classifier$cvm), 4)))
+
+preds <- predict(glmnet_classifier, dtm_test_tfidf, type = 'response')[ ,1]
+auc(as.numeric(tweets_test$sentiment), preds)
+
+# save the model for future using
+saveRDS(glmnet_classifier, paste(Sys.Date(),'_glmnet_classifier.RDS'))
 
 ###############################################################
 # PRE-PROCESSING
@@ -131,7 +130,7 @@ Doc2Vec.PreProcessing <- function (txt, dataset)
   dtm_txt_tfidf <- fit_transform(dtm_txt, tfidf)
   
   # loading classification model
-  glmnet_classifier <- readRDS('glmnet_classifier.RDS')
+  glmnet_classifier <- readRDS('Models/0204_glmnet_classifier.RDS')
   
   # predict probabilities of positiveness
   preds_txt <- predict(glmnet_classifier, dtm_txt_tfidf, type = 'response')[ ,1]
@@ -174,7 +173,6 @@ Doc2Vec.PreProcessing <- function (txt, dataset)
   
 }
 
-Doc2Vec.PreProcessing("Abbvie",TW_df)
 
 
 ################# TEST ZONE
