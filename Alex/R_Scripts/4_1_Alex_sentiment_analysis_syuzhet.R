@@ -19,7 +19,7 @@ library(stringr)
 
 # Remove twitter handles
 notwhandles <- str_replace_all(as.character(twitterMaster.df$Text), "@\\w+", "")
-mySentiment <- get_nrc_sentiment(as.character(notwhandles))
+mySentiment <- syuzhet::get_nrc_sentiment(as.character(notwhandles))
 
 tweets.sent <- cbind(Id=twitterMaster.df$Id,notwhandles, mySentiment, time = twitterMaster.df$Created.At)
 tweets.sent$Id <- format(tweets.sent$Id, scientific=FALSE)
@@ -33,6 +33,19 @@ ggplot(data = sentimentTotals, aes(x = sentiment, y = count)) +
   geom_bar(aes(fill = sentiment), stat = "identity") +
   theme(legend.position = "none") +
   xlab("Sentiment") + ylab("Total Count") + ggtitle("Total Sentiment Score for All Tweets")
+
+
+
+
+# Model Evaluation
+testNotwhandles <- str_replace_all(as.character(tweets_test$V6), "@\\w+", "")
+results.syuzhet <- syuzhet::get_nrc_sentiment(as.character(testNotwhandles))
+
+results.syuzhet <- as.data.frame(results.syuzhet[,9:10])
+results.syuzhet$sent <- ifelse((results.syuzhet$positive- results.syuzhet$negative) > 0, 4, 0)# translate sentiments back to the original training data
+
+print(table(results.syuzhet$sent, tweets_test$V1))
+
 
 
 

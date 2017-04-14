@@ -10,11 +10,15 @@ library(stringr)
 
 # Remove twitter handles
 notwhandles <- str_replace_all(as.character(twitterMaster.df$Text), "@\\w+", "")
-mySentiment.sentimentr <- sentiment_by(as.character(notwhandles))
-
-plot(mySentiment.sentimentr)
-
+mySentiment.sentimentr <- sentimentr::sentiment_by(as.character(notwhandles))
 
 tweets.sentr <- cbind(Id=twitterMaster.df$Id,notwhandles, mySentiment.sentimentr , time = twitterMaster.df$Created.At)
 tweets.sentr$Id <- format(tweets.sent$Id, scientific=F)
+
+
+# Model Evaluation
+results.sentimentR <- sentimentr::sentiment_by(as.character(tweets_test$V6))
+results.sentimentR$sent <- ifelse(results.sentimentR$ave_sentiment > 0, 4, 0) # translate sentiments back to the original training data
+print(table(results.sentimentR$sent, tweets_test$V1))
+
 

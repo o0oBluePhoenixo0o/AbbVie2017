@@ -111,16 +111,9 @@ trainClassifier <- function(tweets.classified, save = TRUE){
     saveRDS(model, paste0("./models/","naiveBayesModel.RDS"))
   }
 
-  # prediction
+  # Model Evaluation
   results <- predict(model,as.matrix(testmatrix[1:160,]));
-
-  print(table(testdata[1:160,2], results))
-  
-  
-  
-  
-  print(recall_accuracy(results,testdata[1:160,2]))
-  
+  print(table(results,testdata[1:160,2]))
   return(model)
   
 }
