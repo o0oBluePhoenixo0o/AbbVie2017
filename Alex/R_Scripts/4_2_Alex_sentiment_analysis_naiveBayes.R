@@ -1,4 +1,4 @@
-# This files contains method to do sentiment analysis on Facebook posts and Twitter tweets
+# This files contains a naive bayes method to do sentiment analysis on Facebook posts and Twitter tweets
 
 # install.packages("e1071")
 # install.packages("tm")
@@ -108,13 +108,17 @@ trainClassifier <- function(tweets.classified, save = TRUE){
   
   if (save){
     # Save model if value is set
-    saveRDS(model,"naiveBayesModel.RDS")
+    saveRDS(model, paste0("./models/","naiveBayesModel.RDS"))
   }
 
   # prediction
   results <- predict(model,as.matrix(testmatrix[1:160,]));
 
   print(table(testdata[1:160,2], results))
+  
+  
+  
+  
   print(recall_accuracy(results,testdata[1:160,2]))
   
   return(model)
@@ -133,7 +137,7 @@ initNaiveBayes <- function(){
   answer <- askUser()
   if (tolower(answer) == "y") {
     message("Load model from file")
-    naiveBayesModel <- readRDS("naiveBayesModel.RDS")
+    naiveBayesModel <- readRDS("./models/naiveBayesModel.RDS")
     return(naiveBayesModel)
   } else {
     message("Train model")

@@ -1,4 +1,4 @@
-# This files contains method to do sentiment analysis on Facebook posts and Twitter tweets
+# This files contains method to do sentiment analysis on Facebook posts and Twitter tweets with sentimentr
 
 
 # install.packages("sentimentr")
