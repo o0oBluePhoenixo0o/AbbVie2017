@@ -34,16 +34,28 @@ commentdf <- subset(commentdf, !duplicated(message))
 
 ################################################################################
 #Twitter
-TW_df <- read.csv("Final_TW_3103.csv",sep = ",", as.is = TRUE)
-#change "Label" to "key"
-colnames(TW_df)[13] <- "key"
-colnames(TW_df)[8] <- "message"
-colnames(TW_df)[1] <- "created"
-TW_df <- TW_df[!TW_df$text == "",]
+TW_df <- read.csv("Final_TW_0704.csv",sep = ",", as.is = TRUE)
+#delete the first column "X"
+TW_df <- TW_df[,-1]
+#change "Label" to fit with FB_df
+
+for (i in 1:ncol(TW_df)){
+  if (colnames(TW_df)[i]=="Text"){colnames(TW_df)[i] <- "message"}
+  else if(colnames(TW_df)[i] == "Created.At"){colnames(TW_df)[i] <- "created_time"}
+  
+  if (colnames(TW_df)[i] == "key"){
+    key<-TW_df[,i]
+    TW_df[,!(names(TW_df) %in% c("key"))]}
+}
+TW_df<-cbind(key,TW_df)
+TW_df <- TW_df[!TW_df$message == "",]
 
 #Create a Retweet dataset
 require(stringr)
-RT_df <- subset(TW_df,str_sub(TW_df$message, start = 1, end = 4) == "RT @")
+TW_RT <- subset(TW_df,str_sub(TW_df$message, start = 1, end = 4) == "RT @")
+
+#Tweets-only dataset
+TW_T <- TW_df[-grep("RT @",TW_df$message),]
 
 
 #####################

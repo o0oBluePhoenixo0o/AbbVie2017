@@ -19,8 +19,9 @@ library(ggplot2)
 setwd("~/GitHub/AbbVie2017/Philipp")
 
 #Pulling in positive and negative wordlists
-pos.words <- scan('Positive.txt', what='character', comment.char=';') #folder with positive dictionary
-neg.words <- scan('Negative.txt', what='character', comment.char=';') #folder with negative dictionary
+#BingLiu
+pos.words <- scan('Models/Positive.txt', what='character', comment.char=';') #folder with positive dictionary
+neg.words <- scan('Models/Negative.txt', what='character', comment.char=';') #folder with negative dictionary
 #Adding words to positive and negative databases
 pos.words=c(pos.words, 'Congrats', 'prizes', 'prize', 'thanks', 'thnx', 'Grt', 
             'gr8', 'plz', 'trending', 'recovering', 'brainstorm', 'leader')
@@ -56,7 +57,7 @@ score.sentiment <- function(sentences, pos.words, neg.words, .progress='none')
   return(scores.df)
 }
 
-SA.simple <- function(txt,dataset){
+SA.simple <- function(txt,dataset,folder){
   require(plyr)
   #filter original dataframe with key
   temp <- subset(dataset, dataset$key == txt)
@@ -84,36 +85,27 @@ SA.simple <- function(txt,dataset){
     ggtitle(txt)
   
   #save plot
-  ggsave(file=paste(txt, '_plot.jpeg'))
-  
+  ggsave(file= paste0('SA_Simple/',folder,'/',txt,'_plot.jpeg'))
 }
-# Post dataset
 
-#Companies
-SA.simple("abbvie",postdf)
-SA.simple("amgen",postdf)
-SA.simple("bristol myers",postdf)
-SA.simple("johnson & johnson",postdf)
+#######################################################
+keywords <- c("abbvie","bristol myers", "johnson & johnson","amgen",
+              "enbrel","hepatisis c","psoriasis","ankylosing spondylitis","rheumatoid arthritis",
+              "inbrutinib","humira","trilipix","imbruvica")
 
-#Products
-SA.simple("humira",postdf)
-SA.simple("amgen",postdf)
-SA.simple("enbrel",postdf)
-SA.simple("trilipix",postdf)
-SA.simple("imbruvica",postdf)
+Apply.SA.simple <- function(keywords, dataset){
+  folder <- ""
+  if (deparse(substitute(dataset)) == 'postdf'){folder <- "FB_post"}
+  if (deparse(substitute(dataset)) == 'commentdf'){folder <- "FB_comment"}
+  if (deparse(substitute(dataset)) == 'TW_T'){folder <- "TW_tweets"}
+  if (deparse(substitute(dataset)) == 'TW_RT'){folder <- "TW_RT"}
+  
+  for (i in 1:length(keywords)){
+    SA.simple(keywords[i],dataset,folder)
+  }
+}
 
-
-# Comment dataset
-
-#Companies
-SA.simple("abbvie",TW_df)
-SA.simple("amgen",TW_df)
-SA.simple("bristol myers",TW_df)
-SA.simple("johnson & johnson",TW_df)
-
-#Products
-SA.simple("humira",TW_df)
-SA.simple("amgen",TW_df)
-SA.simple("enbrel",TW_df)
-SA.simple("trilipix",TW_df)
-SA.simple("imbruvica",TW_df)
+Apply.SA.simple(keywords,postdf)
+Apply.SA.simple(keywords,commentdf)
+Apply.SA.simple(keywords,TW_T)
+Apply.SA.simple(keywords,TW_RT)
