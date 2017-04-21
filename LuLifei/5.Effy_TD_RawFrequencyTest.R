@@ -107,8 +107,8 @@ rawTermFrequencyD <- rowSums(as.matrix(tdmDictionary))
 rawTermFrequencyT <- rowSums(as.matrix(tdmTest))
 
 #term frequency
-termTotalD <- sum(termFrequencyD)
-termTotalT <- sum(termFrequencyT)
+termTotalD <- sum(rawTermFrequencyD)
+termTotalT <- sum(rawTermFrequencyT)
 termFrequencyD <- rawTermFrequencyD/termTotalD
 termFrequencyT <- rawTermFrequencyT/termTotalT
 dftfD <- data.frame(term=names(rawTermFrequencyD),rawFreq=rawTermFrequencyD,freq=termFrequencyD)
