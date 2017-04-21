@@ -27,7 +27,7 @@ tryCatch({
   
 })
 
-#random text for sentiment analysis
+#random test for sentiment analysis
 docsText <- c(
   "Loved the food, service and atmosphere! We'll definitely be back.",
   "Very good food, reasonable prices, excellent service.",
