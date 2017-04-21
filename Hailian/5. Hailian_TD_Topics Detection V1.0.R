@@ -95,6 +95,15 @@ corpus1<- TextReuseCorpus(text = fb_page$message, meta = list("description"="tex
 
 buckets<- lsh(corpus1, bands = 2)
 
+minhash <- minhash_generator(2)
+corpus <- TextReuseCorpus(text = documents,
+                          tokenizer = tokenize_ngrams, n = 3,
+                          minhash_func = minhash)
+buckets <- lsh(corpus, bands = 1)
+candidates<- lsh_candidates(buckets)
+compares<- lsh_compare(candidates,corpus,jaccard_similarity)
+
+
 
 
 
