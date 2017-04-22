@@ -2,7 +2,10 @@
 
 source("./1_Alex_crawl_facebook.r")
 source("./2_Alex_preprocess.r")
-source("./4_Alex_sentiment_analysis.r")
+source("./4_1_Alex_sentiment_analysis_syuzhet.r")
+source("./4_2_Alex_sentiment_analysis_naiveBayes.r")
+source("./4_3_Alex_sentiment_analysis_sentimentr.r")
+source("./4_4_Alex_sentiment_analysis_sentr.r")
 source("./translateR.r")
 
 # Set working directory to the directoy where the file is located 
@@ -23,13 +26,34 @@ mergeCSVsUTF8("./products/Adalimumab.csv","./products/Enbrel.csv","./products/Hu
 
 # Read master files
 facebookMaster.df <- read.csv("Final_FB_3103.csv", sep = ",", as.is = TRUE)
-twitterMaster.df <- read.csv("Final_TW_0704.csv", sep = ",", as.is = TRUE)
+twitterMaster.df <- read.csv("Final_TW_2104.csv", sep = ",", as.is = TRUE)
+
+# Training tweets
+
+set.seed(2340)
+trainIndex <- createDataPartition(tweets.classified$V1, p = 0.00070, 
+                                  list = FALSE, 
+                                  times = 1)
+
+tweets_train <- tweets.classified[trainIndex, ]
+tweets_test <- tweets.classified[-trainIndex, ]
+
+# Take only a small portion to test
+testIndex <- createDataPartition(tweets.classified$V1, p = 0.00010, 
+                                 list = FALSE, 
+                                 times = 1)
+tweets_test <- tweets_test[testIndex, ] 
+
+
+
 
 # Format dates on Facebook
 facebookMaster.df$created_time.x <- as.Date(facebookMaster.df$created_time.x)
 facebookMaster.df$created_time.y <- as.Date(facebookMaster.df$created_time.y)
 
-###################################
-# Sentiment Analysis Twitter #
-###################################
+
+
+
+
+
 

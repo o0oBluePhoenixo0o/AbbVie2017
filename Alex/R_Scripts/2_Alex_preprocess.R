@@ -1,11 +1,20 @@
-# This files contains methods on preprocess FB data
+# This files contains methods on preprocessing
 
-#i nstall.packages("plyr")
+# install.packages("plyr")
 # install.packages("dplyr")
 # install.packages("SnowballC")
 # install.packages("qdap")
 # install.packages("tm")
+# loadChromeLangDetect <- function(){
+#  url <- "http://cran.us.r-project.org/src/contrib/Archive/cldr/cldr_1.1.0.tar.gz"
+#  pkgFile<-"cldr_1.1.0.tar.gz"
+#  download.file(url = url, destfile = pkgFile)
+#  install.packages(pkgs=pkgFile, type = "source", repos = NULL)
+#  unlink(pkgFile)
+#}
+# loadChromeLangDetect()
 
+library(cldr)
 library(plyr)
 library(dplyr)
 library(tm)
@@ -16,7 +25,42 @@ Sys.setenv(JAVA_HOME = '/Library/Java//Home')
 Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')
 source("./translateR.R")
 
-preProcessPosts <- function(posts, translate = FALSE, lowerCase = FALSE, removePunct = FALSE, removeStopWords = FALSE, stemWords = FALSE){
+removeURL <- function(x) gsub('"(http.*) |(http.*)$|\n', "", x)
+removeTags <- function(x) gsub('<.*?>', "", x)
+convert <- function(x) iconv(x, "latin1", "ASCII", "")
+removeTwitterHandles <- function(x) str_replace_all(as.character(x), "@\\w+", "")
+myAbbrevs <- loadAbbrev()
+convertAbbreviations <- function(x) replace_abbreviation(x, abbreviation = myAbbrevs, ignore.case = TRUE)
+
+loadAbbrev <- function() {
+  # Concates my abbreviation dataset with the default one from qdap
+  #
+  # Returns:
+  #   A 2-column(abv,rep) data.frame
+  
+  myAbbrevs <- read.csv("abbrev.csv", sep = ",", as.is = TRUE)
+  return(rbind(abbreviations,myAbbrevs))
+}
+tryTolower = function(x){
+  # Tries to lower a string, sometimes emoticons can make this tricky
+  #
+  # Returns:
+  #   Lowered string
+  
+  y = x # we don't want to have NA where toLower() fails, so I jsut keep the original
+  # tryCatch error
+  
+  try_error = tryCatch(tolower(x), error = function(e) e)
+  
+  # if not an error
+  if (!inherits(try_error, "error"))
+    y = tolower(x)
+  return(y)
+}
+
+
+
+textProcessPosts <- function(posts, translate = FALSE, lowerCase = FALSE, removePunct = FALSE, removeStopWords = FALSE, stemWords = FALSE){
   # Preprocess a dataframe of posts containing at least a $message.x column
   #
   # Args:
@@ -71,12 +115,5 @@ preProcessPosts <- function(posts, translate = FALSE, lowerCase = FALSE, removeP
       dplyr::mutate(message.x =  SnowballC::wordStem(message.x))
   }
   
-  View(posts)
-  
   return(posts)
 }
-
-
-removeURL <- function(x) gsub('"(http.*) |(http.*)$|\n', "", x)
-removeTags <- function(x) gsub('<.*?>', "", x)
-convert <- function(x) iconv(x, "latin1", "ASCII", "")

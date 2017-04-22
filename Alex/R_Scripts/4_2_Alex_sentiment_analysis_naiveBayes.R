@@ -39,7 +39,7 @@ askUser <- function() {
   # Returns:
   #   The model of the naive bayes classifier
   
-  if (file.exists("naiveBayesModel.RDS")) {
+  if (file.exists("./models/naiveBayesModel.RDS")) {
     answer <- readline(prompt="It exists an naiveBayesModel.RDS in the current directory. Do you want to load it? [y] or train a new one ? [n]:  ")
   } else {
     message("It appears no existing model in the current directory. A new model will be trained.")
@@ -47,9 +47,6 @@ askUser <- function() {
   }
   return(answer)
 }
-
-
-conv_fun <- function(x) iconv(x, "latin1", "UTF-8", "")
 
 
 trainClassifier <- function(tweets.classified, save = TRUE){
@@ -143,4 +140,9 @@ naiveBayesModel <- initNaiveBayes()
 
 
 
-
+twitter34201 <- predict(naiveBayesModel,as.matrix(twitterMaster.df[34201,]$Text))
+twitter34201
+twitter6012 <- predict(naiveBayesModel,as.matrix("I love you"))
+twitter6012
+twitter34130 <- predict(naiveBayesModel,as.matrix(twitterMaster.df[34130,]$Text))
+twitter34130

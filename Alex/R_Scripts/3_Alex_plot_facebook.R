@@ -92,7 +92,7 @@ facebookMaster.df$created_time.x <- as.Date(facebookMaster.df$created_time.x)
 facebookMaster.df$created_time.y <- as.Date(facebookMaster.df$created_time.y)
 
 #Extracting product posts
-posts <- unique(select(facebookMaster.df, 2, 4, 7, 8, 12, 13)) #key, likes_count.x, message.x, created_time.x, comments_count, shares_count
+posts <- unique(select(facebookMaster.df, 2, 4, 5, 6, 7, 8, 12, 13)) #key, likes_count.x, message.x, from.id, from.name, created_time.x, comments_count, shares_count
 
 #Companies 
 posts.companies <- subset(posts, key == "AbbVie" | key == "Amgen" | key == "Bristol-Myers Squibb" )
