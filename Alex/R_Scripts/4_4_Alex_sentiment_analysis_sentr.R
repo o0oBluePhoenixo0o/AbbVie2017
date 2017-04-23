@@ -6,26 +6,21 @@ library(devtools)
 library(sentR)
 source('./2_Alex_preprocess.R')
 
-# PreProcess Twitter
-
-twitterMaster.df$Text <- removeURL(twitterMaster.df$Text)
-twitterMaster.df$Text <- convert(twitterMaster.df$Text)
-twitterMaster.df$Text <- removeTags(twitterMaster.df$Text)
-twitterMaster.df$Text <- removeTwitterHandles(twitterMaster.df$Text)
-twitterMaster.df$Text <- convertAbbreviations(twitterMaster.df$Text)
-twitterMaster.df$Text <- tryTolower(twitterMaster.df$Text)
-
 # Sentiment analysis Twitter
 
-mySentiment <- classify.naivebayes(twitterMaster.df$Text)
-tweets.sentr <- cbind(Id=twitterMaster.df$Id,twitterMaster.df$Text, mySentiment , time = twitterMaster.df$Created.At)
+mySentiment.sentr <- classify.naivebayes(twitterMaster.df$Text_stemmed)
+tweets.sentr <- cbind(Id=twitterMaster.df$Id,twitterMaster.df$Text, mySentiment.sentr , time = twitterMaster.df$Created.At)
 tweets.sentr$Id <- format(tweets.sentr$Id, scientific=F)
+
+# Sentiment analysis Facebook
+
+mySentiment.sentr.fb <- classify.naivebayes(facebook.posts.products.humira$message.x_stemmed)
+facebook.sentr <- cbind(Id=facebook.posts.products.humira$id.x, facebook.posts.products.humira$message.x, mySentiment.sentr.fb, time = facebook.posts.products.humira$created_time.x)
+facebook.sentr$Id <- format(facebook.sentr$Id, scientific=F)
+
 
 # Model Evaluation
 
-outBayes <- classify.naivebayes(testdata[1:160,1])
-print(table(testdata[1:160,2], outBayes[,4]))
-
-results.sentR <- sentR::classify.naivebayes(tweets_test$V6)
-results.sentR[,4] <- ifelse(results.sentR[,4] == 'positive'|results.sentR[,4] == 'neutral' , 4, 0) # translate sentiments back to the original training data
-print(table(results.sentR[,4], tweets_test$V1))
+test.sentR <- sentR::classify.naivebayes(tweets.test$text_stemmed)
+test.sentR[,4] <- ifelse(test.sentR[,4] == 'positive'|test.sentR[,4] == 'neutral' , 4, 0) # translate sentiments back to the original training data
+print(table(test.sentR[,4], tweets.test$sentiment))

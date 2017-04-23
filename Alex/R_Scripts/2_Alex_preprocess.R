@@ -20,32 +20,74 @@ library(dplyr)
 library(tm)
 library(qdap)
 library(SnowballC)
+library(stringr)
 
 Sys.setenv(JAVA_HOME = '/Library/Java//Home')
 Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')
 source("./translateR.R")
 
-removeURL <- function(x) gsub('"(http.*) |(http.*)$|\n', "", x)
-removeTags <- function(x) gsub('<.*?>', "", x)
-convert <- function(x) iconv(x, "latin1", "ASCII", "")
-removeTwitterHandles <- function(x) str_replace_all(as.character(x), "@\\w+", "")
-myAbbrevs <- loadAbbrev()
-convertAbbreviations <- function(x) replace_abbreviation(x, abbreviation = myAbbrevs, ignore.case = TRUE)
+removeURL <- function(x) {
+  # Removes all urls from a given text
+  #
+  # Returns:
+  #   String
+  
+  return(gsub('"(http.*) |(http.*)$|\n', "", x))
+} 
 
-loadAbbrev <- function() {
-  # Concates my abbreviation dataset with the default one from qdap
+removeTags <- function(x){
+  # Removes all types of HTML tags from a given text
+  #
+  # Returns:
+  #   String
+  
+  return(gsub('<.*?>', "", x))
+}
+
+convertLatin_ASCII <- function(x){
+  # Converts text into ASCII to avoid some text identification issues
+  #
+  # Returns:
+  #   String
+  
+  return(iconv(x, "latin1", "ASCII", ""))
+} 
+
+loadAbbrev <- function(filename) {
+  # Concates custom abbreviation dataset with the default one from qdap
   #
   # Returns:
   #   A 2-column(abv,rep) data.frame
   
-  myAbbrevs <- read.csv("abbrev.csv", sep = ",", as.is = TRUE)
+  myAbbrevs <- read.csv(filename, sep = ",", as.is = TRUE)
   return(rbind(abbreviations,myAbbrevs))
 }
+
+myAbbrevs <- loadAbbrev('abbrev.csv')
+
+convertAbbreviations <- function(x){
+  # Replaces abbreviation with the corresporending long form
+  #
+  # Returns:
+  #   String
+  
+  return(qdap::replace_abbreviation(x, abbreviation = myAbbrevs, ignore.case = TRUE))
+} 
+
+removeTwitterHandles <- function(x){
+  # Remove all twitter handles from a given text
+  #
+  # Returns:
+  #   String
+  
+  return(str_replace_all(as.character(x), "@\\w+", ""))
+} 
+
 tryTolower = function(x){
   # Tries to lower a string, sometimes emoticons can make this tricky
   #
   # Returns:
-  #   Lowered string
+  #    String
   
   y = x # we don't want to have NA where toLower() fails, so I jsut keep the original
   # tryCatch error
@@ -58,62 +100,29 @@ tryTolower = function(x){
   return(y)
 }
 
-
-
-textProcessPosts <- function(posts, translate = FALSE, lowerCase = FALSE, removePunct = FALSE, removeStopWords = FALSE, stemWords = FALSE){
-  # Preprocess a dataframe of posts containing at least a $message.x column
-  #
-  # Args:
-  #   translate: Should the posts be translated
-  #   posts: Dataframe of Facebook posts with column message.x 
-  #   lowerCase: should messages be lowered in case
-  #   removePunct: should the punctuation be removed 
-  #   stem: Should the words be stemmed
+translate <- function(x, to) {
+  # Translate a String into another language
   #
   # Returns:
-  #   The preprocessed data.frame
+  #   String
   
- 
-  #Translation
-  if (translate) {
-    # detect language ISO639_2
-    posts$lang.x <- lapply(posts$message.x, detectLanguage)
-    
-    # Tanslate every message.x from the posts
-    posts <- posts %>% 
-      rowwise() %>% 
-      dplyr::mutate(translated.x = translateMyMemory(message.x, toISO639_1(lang.x) ,"en", "weiss_alex@gmx.net"))
-    
-    # Replace original message with translated one if the lang.x is not "eng" not necessarily needed
-    posts <- posts %>% 
-      rowwise() %>% 
-      dplyr::mutate(message.x = ifelse(lang.x=="eng", message.x, translated.x))
-  }
+  return(translate(x, toISO639_1(detectLanguage(x)) ,to, "weiss_alex@gmx.net"))
+}
+
+removeStopWords <- function(x){
+  # Remove stopwords from a english text
+  #
+  # Returns:
+  #   String
   
-  # Lower case
-  if (lowerCase) {
-    posts$message.x <- tolower(posts$message.x) 
-  }
+  return(paste(qdap::rm_stopwords(message.x, tm::stopwords("english"))[[1]], sep=" ", collapse = " "))
+}
+
+stemWords <- function(x) {
+  # Stem words of a english text
+  #
+  # Returns:
+  #   String
   
-  # remove punctuation
-  if (removePunct) {
-    posts$message.x <- gsub('[[:punct:]]', '', posts$message.x) 
-  }
-  
-  # Remove stopwords
-  if (removeStopWords) {
-    message("Removing stopwords")
-    posts <- posts %>% 
-      rowwise() %>% 
-      dplyr::mutate(message.x = paste(qdap::rm_stopwords(message.x, tm::stopwords("english"))[[1]], sep=" ", collapse = " "))
-  }
-  
-  # Stem words
-  if (stemWords) {
-    posts <- posts %>% 
-      rowwise() %>% 
-      dplyr::mutate(message.x =  SnowballC::wordStem(message.x))
-  }
-  
-  return(posts)
+  return(tm::stemDocument(x))
 }

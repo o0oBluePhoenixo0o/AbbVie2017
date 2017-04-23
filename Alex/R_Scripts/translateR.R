@@ -9,6 +9,7 @@ library(httr)
 library(franc)
 library(ISOcodes)
 library(stringi)
+library(textcat)
 data("ISO_639_2") # needed for language code conversion
 
 translateMyMemory.single <- function(text, source, target, email) {
@@ -131,7 +132,7 @@ detectLanguage <- function(text){
   #   A ISO 639-2 encoded language code string
   
   if (!is.na(text)) {
-    return (franc(text, min_length = 3))
+      return (franc(text, min_length = 3))
   } else {
     message("Can not detect language of NA")
     return (NA)
