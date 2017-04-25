@@ -1,9 +1,4 @@
 
-install.packages("SnowballC")
-install.packages("slam")
-install.packages("qdap")
-install.packages("RWeka")
-
 library(SnowballC)
 library(cldr)
 library(tm)
@@ -16,9 +11,12 @@ library(textreuse)
 library(mscstexta4r)
 library(slam)
 library(qdap)
-library(RWeka)
+library(zoo)
+library(reshape2)
+library(ggplot2)  
+library(plyr)
 
-
+#use Hailian_Disease as traning dataset
 Hailian_Diseases_posts<- data.fraremome(unique(Hailian_Diseases[c(2,6,7)]))
 Hailian_Diseases_posts<-data.frame(na.omit(Hailian_Diseases_posts))
 colnames(Hailian_Diseases_posts)<-c("id","text","time")
@@ -36,7 +34,7 @@ Hailian_Diseases_posts_comments2<- data.frame(unique(subset(Hailian_Diseases_pos
 Hailian_Diseases_posts_comments3<- data.frame(removePunctuation(Hailian_Diseases_posts_comments2$text))
 colnames(Hailian_Diseases_posts_comments3)<-"text"
 
-
+#preprocessing
 doc.corpus<- Corpus(VectorSource(Hailian_Diseases_posts_comments3$text))
 
 doc.corpus <- tm_map(doc.corpus, removeNumbers)
