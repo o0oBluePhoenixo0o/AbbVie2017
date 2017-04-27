@@ -113,7 +113,7 @@ print_and_capture <- function(x){
 }
 
 
-facebookMaster.df <- read.csv("Final_FB_3103.csv", sep = ",", as.is = TRUE)
+facebookMaster.df <- read.csv("Final_FB_0604.csv", sep = ",", as.is = TRUE)
 
 #Format dates 
 facebookMaster.df$created_time.x <- as.Date(facebookMaster.df$created_time.x)
@@ -123,26 +123,26 @@ facebookMaster.df$created_time.y <- as.Date(facebookMaster.df$created_time.y)
 posts <- unique(select(facebookMaster.df, 2, 4, 5, 6, 7, 8, 12, 13)) #key, likes_count.x, message.x, from.id, from.name, created_time.x, comments_count, shares_count
 
 #Companies 
-posts.companies <- subset(posts, key == "AbbVie" | key == "Amgen" | key == "Bristol-Myers Squibb" )
-posts.companies.abbvie = subset(posts.companies, key == "AbbVie")
-posts.companies.amgen = subset(posts.companies, key == "Amgen")
-posts.companies.bristol = subset(posts.companies, key == "Bristol-Myers Squibb")
+posts.companies <- subset(posts, key == "abbvie" | key == "amgen" | key == "bristol myers" )
+posts.companies.abbvie = subset(posts.companies, key == "abbvie")
+posts.companies.amgen = subset(posts.companies, key == "amgen")
+posts.companies.bristol = subset(posts.companies, key == "bristol myers")
 
 
 #Products
-posts.products <- subset(posts, key == "Imbruvica" | key == "Adalimumab" | key == "Trilipix" | key == "Enbrel" | key == "Humira" )
-posts.products.humira <- subset(posts.products, key == "Humira")
-posts.products.enbrel <- subset(posts.products, key == "Enbrel")
-posts.products.trilipix <- subset(posts.products, key == "Trilipix")
-posts.products.adalimumab <- subset(posts.products, key == "Adalimumab")
-posts.products.imbruvica <- subset(posts.products, key == "Imbruvica")
+posts.products <- subset(posts, key == "imbruvica" | key == "adalimumab" | key == "trilipix" | key == "enbrel" | key == "humira" )
+posts.products.humira <- subset(posts.products, key == "humira")
+posts.products.enbrel <- subset(posts.products, key == "enbrel")
+posts.products.trilipix <- subset(posts.products, key == "trilipix")
+posts.products.adalimumab <- subset(posts.products, key == "adalimumab")
+posts.products.imbruvica <- subset(posts.products, key == "imbruvica")
 
 
 #Diseases
-posts.diseases <- subset(posts, key == "HepatitisC" | key == "JuvenileIdiopathicArthritis" | key == "JuvenileRheumatoidArthritis" | key == "Ankylosing Spondylitis" | key == "Rheumatoid Arthritis" | key == "Psoriasis")
-posts.diseases.hepatitisC <- subset(posts.diseases, key == "HepatitisC")
-posts.diseases.juvenileIdiopathicArthritis <- subset(posts.diseases, key == "JuvenileIdiopathicArthritis")
-posts.diseases.juvenileRheumatoidArthritis <- subset(posts.diseases, key == "JuvenileRheumatoidArthritis")
+posts.diseases <- subset(posts, key == "hepatitis c" | key == "rheumatoid arthritis " | key == "rheumatoid arthritis " | key == "ankylosing spondylitis" | key == "Psoriasis")
+posts.diseases.hepatitisC <- subset(posts.diseases, key == "hepatitis c")
+#posts.diseases.juvenileIdiopathicArthritis <- subset(posts.diseases, key == "JuvenileIdiopathicArthritis")
+#posts.diseases.juvenileRheumatoidArthritis <- subset(posts.diseases, key == "JuvenileRheumatoidArthritis")
 posts.diseases.ankylosing <- subset(posts.diseases, key == "Ankylosing Spondylitis")
 posts.diseases.rheumatoid <- subset(posts.diseases, key == "Rheumatoid Arthritis")
 posts.diseases.psoriasis <- subset(posts.diseases, key == "Psoriasis")
@@ -190,13 +190,13 @@ posts.diseases.hepatitisC.plot <- plotFacebookPostsByMonth(posts.diseases.hepati
 posts.diseases.hepatitisC.plot
 ggsave("./img/HepatitisC_timeline_plot.png", posts.diseases.hepatitisC.plot)
 
-posts.diseases.juvenileIdiopathicArthritis.plot <- plotFacebookPostsByMonth(posts.diseases.juvenileIdiopathicArthritis, "JuvenileIdiopathicArthritis")
-posts.diseases.juvenileIdiopathicArthritis.plot
-ggsave("./img/juvenileIdiopathicArthritis_timeline_plot.png", posts.diseases.juvenileIdiopathicArthritis.plot)
+#posts.diseases.juvenileIdiopathicArthritis.plot <- plotFacebookPostsByMonth(posts.diseases.juvenileIdiopathicArthritis, "JuvenileIdiopathicArthritis")
+#posts.diseases.juvenileIdiopathicArthritis.plot
+#ggsave("./img/juvenileIdiopathicArthritis_timeline_plot.png", posts.diseases.juvenileIdiopathicArthritis.plot)
 
-posts.diseases.juvenileRheumatoidArthritis.plot <- plotFacebookPostsByMonth(posts.diseases.juvenileRheumatoidArthritis, "JuvenileRheumatoidArthritis")
-posts.diseases.juvenileRheumatoidArthritis.plot
-ggsave("./img/juvenileRheumatoidArthritis_timeline_plot.png", posts.diseases.juvenileRheumatoidArthritis.plot )
+#posts.diseases.juvenileRheumatoidArthritis.plot <- plotFacebookPostsByMonth(posts.diseases.juvenileRheumatoidArthritis, "JuvenileRheumatoidArthritis")
+#posts.diseases.juvenileRheumatoidArthritis.plot
+#ggsave("./img/juvenileRheumatoidArthritis_timeline_plot.png", posts.diseases.juvenileRheumatoidArthritis.plot )
 
 posts.diseases.rheumatoid.plot <- plotFacebookPostsByMonth(posts.diseases.rheumatoid, "Rheumatoid Arthritis")
 posts.diseases.rheumatoid.plot
@@ -217,8 +217,8 @@ posts.companies.activities.plot <- plotFacebookPostActivites(c("Abbvie", "Amgen"
 posts.companies.activities.plot
 ggsave("./img/companies_activities_plot.png",posts.companies.activities.plot)
 
-posts.diseases.activities.plot <- plotFacebookPostActivites(c("HepatitisC", "JuvenileIdiopathicArthritis", "JuvenileRheumatoidArthritis", "Ankylosing Spondylitis","Rheumatoid Arthritis", "Psioriasis"),
-                                                            posts.diseases.hepatitisC, posts.diseases.juvenileIdiopathicArthritis, posts.diseases.juvenileRheumatoidArthritis, posts.diseases.ankylosing, posts.diseases.rheumatoid, posts.diseases.psoriasis)
+posts.diseases.activities.plot <- plotFacebookPostActivites(c("HepatitisC", "Ankylosing Spondylitis","Rheumatoid Arthritis", "Psioriasis"),
+                                                            posts.diseases.hepatitisC, posts.diseases.ankylosing, posts.diseases.rheumatoid, posts.diseases.psoriasis)
 posts.diseases.activities.plot
 ggsave("./img/diseases_activities_plot.png",posts.diseases.activities.plot)
 
