@@ -1,6 +1,7 @@
 # This is the main file to test
 
 library(caret)
+library(readr)
 source("./1_Alex_crawl_facebook.r")
 source("./2_Alex_preprocess.r")
 source("./4_1_Alex_sentiment_analysis_syuzhet.r")
@@ -42,11 +43,11 @@ tweets.train <- tweets.classified[trainIndex, ]
 tweets.test <- tweets.classified[-trainIndex, ]
 
 ## Take only a small portion to test
-testIndex <- caret::createDataPartition(tweets.classified$sentiment, p = 0.00080, 
+testIndex <- caret::createDataPartition(tweets.classified$sentiment, p = 0.00010, 
                                  list = FALSE, 
                                  times = 1)
 tweets.test <- tweets.test[testIndex, ] 
-
+write.csv(tweets.test, file = paste("./tweets_test.csv"), fileEncoding = "UTF-8", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
 
 # Preprocess twitter
 
@@ -88,15 +89,15 @@ facebook.posts <- unique(select(facebookMaster.df, 2, 3, 4, 5, 6, 7, 8, 12, 13, 
 facebook.posts$lang.x <- lapply(facebook.posts$message.x, detectLanguage)
 
 facebook.posts.products <- subset(facebook.posts, key == "Imbruvica" | key == "Adalimumab" | key == "Trilipix" | key == "Enbrel" | key == "Humira" )
-facebook.posts.products.humira <- subset(facebook.posts.products, key == "Humira")
-facebook.posts.products.enbrel <- subset(facebook.posts.products, key == "Enbrel")
-facebook.posts.products.trilipix <- subset(facebook.posts.products, key == "Trilipix")
-facebook.posts.products.adalimumab <- subset(facebook.posts.products, key == "Adalimumab")
-facebook.posts.products.imbruvica <- subset(facebook.posts.products, key == "Imbruvica")
+facebook.posts.products.humira <- subset(facebook.posts.products, key == "Humira" & lang.x == "eng")
+facebook.posts.products.enbrel <- subset(facebook.posts.products, key == "Enbrel" & lang.x == "eng")
+facebook.posts.products.trilipix <- subset(facebook.posts.products, key == "Trilipix" & lang.x == "eng")
+facebook.posts.products.adalimumab <- subset(facebook.posts.products, key == "Adalimumab" & lang.x == "eng")
+facebook.posts.products.imbruvica <- subset(facebook.posts.products, key == "Imbruvica" & lang.x == "eng")
 
 
 ## Extract comment subsets and detect language
 facebook.comments <- unique(select(facebookMaster.df, 2, 20, 21, 22, 23, 26, 28)) #key, from_id.y, from_name.y, message.y, created_time.y, id.y, message.y_stemmed
-facebook.comments$lang.y <- lappy(facebook.comments$message.y, detectLanguage)
+facebook.comments$lang.y <- lapply(facebook.comments$message.y, detectLanguage)
 
 ## Extract comment subsets

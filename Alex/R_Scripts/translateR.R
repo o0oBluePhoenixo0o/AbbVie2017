@@ -130,7 +130,7 @@ detectLanguage <- function(text){
   #
   # Returns:
   #   A ISO 639-2 encoded language code string
-  
+  message(text)
   if (!is.na(text)) {
       return (franc(text, min_length = 3))
   } else {

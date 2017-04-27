@@ -117,28 +117,28 @@ tweets.bristol
 
 
 #plotTweetsByMonth <- function (tweets, keywords){
- 
-  #tweets.month <- data.frame()
-  #tweets.month <- tweets
-  #tweets.month$created <- as.Date(tweets.month$created) # format to only show month and year
-  #tweets.month<- ddply(tweets.month, 'created', function(x) c(count=nrow(x)))
-  
-  #tweets.month <-  tweets.month[order(as.yearmon(as.character(tweets.month$created),"%m-%Y")),] #use zoo's as.yearmon so that we can group by month/year
-  #tweets.month$created <- factor(tweets.month$created, levels=unique(as.character(tweets.month$created)) ) #so that ggplot2 respects the order of my dates
-  
-  
-  #tweets.month.plot<-ggplot(data=tweets.month, aes(x=tweets.month$created, y=count, group = 1)) +
- #   geom_point() +
-    #geom_line(aes(colour = count), stat = "identity") + scale_colour_gradient(low="red",high = "green") +
-   # geom_text(aes(label=count), vjust=-0.5, color="black", size=3.5) +
-  #  labs(x = "Month-Year", y = "Post count", 
- #        title = paste("Tweet count on keyword", keywords, sep = " "))
+
+#tweets.month <- data.frame()
+#tweets.month <- tweets
+#tweets.month$created <- as.Date(tweets.month$created) # format to only show month and year
+#tweets.month<- ddply(tweets.month, 'created', function(x) c(count=nrow(x)))
+
+#tweets.month <-  tweets.month[order(as.yearmon(as.character(tweets.month$created),"%m-%Y")),] #use zoo's as.yearmon so that we can group by month/year
+#tweets.month$created <- factor(tweets.month$created, levels=unique(as.character(tweets.month$created)) ) #so that ggplot2 respects the order of my dates
+
+
+#tweets.month.plot<-ggplot(data=tweets.month, aes(x=tweets.month$created, y=count, group = 1)) +
+#   geom_point() +
+#geom_line(aes(colour = count), stat = "identity") + scale_colour_gradient(low="red",high = "green") +
+# geom_text(aes(label=count), vjust=-0.5, color="black", size=3.5) +
+#  labs(x = "Month-Year", y = "Post count", 
+#        title = paste("Tweet count on keyword", keywords, sep = " "))
 #  return(tweets.month.plot)
 #}
 
 
 plotTweetsByMonth <- function (tweets, keywords){
- 
+  
   tweets.month <- data.frame()
   tweets.month <- tweets
   #tweets.month$created <- as.Date(tweets.month$created) # format to only show month and year
@@ -165,5 +165,4 @@ tweets.amgen.plot
 
 tweets.bristol.plot <- plotTweetsByMonth(tweets.bristol, "Bristol-Myers")
 tweets.bristol.plot
-
 

@@ -27,7 +27,7 @@ tweets.adalimumab <- subset(tweets, label == "adalimumab")
 tweets.imbruvica <- subset(tweets, label == "imbruvica")
 
 plotTweetsByMonth <- function (tweets, keywords){
- 
+  
   tweets.month <- data.frame()
   tweets.month <- tweets
   #tweets.month$created <- as.Date(tweets.month$created) # format to only show month and year
@@ -92,4 +92,3 @@ comments.enbrel <- subset(comments.unique, key == "Enbrel")
 comments.trilipix <- subset(comments.unique, key == "Trilipix")
 comments.adalimumab <- subset(comments.unique, key == "Adalimumab")
 comments.imbruvica <- subset(comments.unique, key == "Imbruvica")
-

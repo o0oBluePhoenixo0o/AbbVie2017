@@ -14,7 +14,8 @@ library(reshape2)
 
 
 plotFacebookPostsByMonth <- function (posts, keyword){
-  # Plot a facebook post dataframe grouping by monthly posts counts. Dataframe needs at least $created_time.x attribute. 
+  # Plot a facebook post dataframe grouping by monthly posts counts. Dataframe needs at least $created_time.x attribute. It also
+  # visualized the standard derivation of posts in a month. Messages the data table for count,mean,sd per month. 
   #
   # Args:
   #   posts: Dataframe of Facebook posts with column created_time.x
@@ -23,21 +24,43 @@ plotFacebookPostsByMonth <- function (posts, keyword){
   # Returns:
   #   A ggplot2 line plot
   
-  posts.month <- posts
-  posts.month$created_time.x <- format(as.Date(posts.month$created_time.x), format ="%m-%y") # format to only show month and year
-  posts.month<- ddply(posts.month, 'created_time.x', function(x) c(count=nrow(x)))
-  
-  posts.month <-  posts.month[order(as.yearmon(as.character(posts.month$created_time.x),"%m-%Y")),] #use zoo's as.yearmon so that we can group by month/year
-  posts.month$created_time.x <- factor(posts.month$created_time.x, levels=unique(as.character(posts.month$created_time.x)) ) #so that ggplot2 respects the order of my dates
+  posts.copy <- posts
   
   
-  posts.month.plot<-ggplot(data=posts.month, aes(x=posts.month$created_time.x, y=count, group = 1)) +
+  # prepare df to work with m-y ordering
+  posts.copy$created_time.x <- ymd_hms(posts.copy$created_time.x)
+  posts.copy$created_time.x <- paste(year(posts.copy$created_time.x),month(posts.copy$created_time.x),day(posts.copy$created_time.x),sep = "-")
+  posts.copy <- ddply(posts.copy, 'created_time.x', function(x) c(count=nrow(x)))
+  posts.copy$created_time.x <- ymd(posts.copy$created_time.x)
+  
+  posts.copy$day <- lubridate::day(posts.copy$created_time.x)
+  posts.copy$month <- lubridate::month(posts.copy$created_time.x)
+  posts.copy$year <- lubridate::year(posts.copy$created_time.x)
+  
+  posts.copy.monthly <- aggregate( count ~ month + year , posts.copy , sum )
+  posts.copy.monthly$mean <- aggregate( count ~ month + year , posts.copy , mean )[3]
+  posts.copy.monthly$sd <- aggregate( count ~ month + year , posts.copy , sd )[3]
+  posts.copy.monthly$time.x <- paste(posts.copy.monthly$month,posts.copy.monthly$year, sep = "-")
+  
+  posts.copy.monthly <-  posts.copy.monthly[order(as.yearmon(as.character(posts.copy.monthly$time.x),"%m-%Y")),] # use zoo's as.yearmon so that we can group by month/year
+  posts.copy.monthly$time.x <- factor(posts.copy.monthly$time.x, levels=unique(as.character(posts.copy.monthly$time.x)) ) # sso that ggplot2 respects the order of my dates
+  
+  posts.monthly.plot<-ggplot(data=posts.copy.monthly, aes(x=posts.copy.monthly$time.x, y=count, group = 1)) +
     geom_point() +
+    geom_errorbar(aes(ymin=count-sd, ymax=count+sd), width=.8) +
     geom_line(aes(colour = count), stat = "identity") + scale_colour_gradient(low="red",high = "green") +
     geom_text(aes(label=count), vjust=-0.5, color="black", size=3.5) +
     labs(x = "Month-Year", y = "Post count", 
          title = paste("Post count on keyword", keyword, sep = " "))
-  return(posts.month.plot)
+  
+  
+  # Because of strange print and view error of the aggregated values
+  printDf <- data.frame()
+  printDf <- cbind(posts.copy.monthly$month,posts.copy.monthly$year,posts.copy.monthly$count,posts.copy.monthly$mean,posts.copy.monthly$sd)
+  names(printDf) <- c("month","year","count","mean","sd")
+  
+  message(paste("Data table for keyword ", keyword, "\n", print_and_capture(printDf), sep = " "))
+  return (posts.monthly.plot)
 }
 
 plotFacebookPostActivites <- function(labels,...){
@@ -82,6 +105,11 @@ plotFacebookPostActivites <- function(labels,...){
     geom_text(aes(label=value), vjust=-0.5, color="red", size=3.5, position = position_stack(vjust = 0.5))
   
   return(acitivities.plot)
+}
+
+
+print_and_capture <- function(x){
+  paste(capture.output(print(x)), collapse = "\n")
 }
 
 
@@ -190,7 +218,7 @@ posts.companies.activities.plot
 ggsave("./img/companies_activities_plot.png",posts.companies.activities.plot)
 
 posts.diseases.activities.plot <- plotFacebookPostActivites(c("HepatitisC", "JuvenileIdiopathicArthritis", "JuvenileRheumatoidArthritis", "Ankylosing Spondylitis","Rheumatoid Arthritis", "Psioriasis"),
-                                                           posts.diseases.hepatitisC, posts.diseases.juvenileIdiopathicArthritis, posts.diseases.juvenileRheumatoidArthritis, posts.diseases.ankylosing, posts.diseases.rheumatoid, posts.diseases.psoriasis)
+                                                            posts.diseases.hepatitisC, posts.diseases.juvenileIdiopathicArthritis, posts.diseases.juvenileRheumatoidArthritis, posts.diseases.ankylosing, posts.diseases.rheumatoid, posts.diseases.psoriasis)
 posts.diseases.activities.plot
 ggsave("./img/diseases_activities_plot.png",posts.diseases.activities.plot)
 
