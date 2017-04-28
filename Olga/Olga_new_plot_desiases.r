@@ -36,14 +36,34 @@ nrow(tweets.psoriasis)
 
 nrow(tweets.rheumatoid)
 
+#tweets.ankylosing1 <- subset(tweets, label == "ankylosing spondylitis")
+#tweets.ankylosing1<-tweets.ankylosing[grep("2017-[0-9]{2}-[0-9]{2}",tweets.ankylosing$Created.At),]
+#tweets.ankylosing1$created <- as.Date(tweets.ankylosing1$Created.At, format="%Y-%m-%d")
+#tweets.ankylosing1$created
+
+#tweets.ankylosing1 <- subset(tweets, label == "ankylosing spondylitis")
+#tweets.ankylosing1<-tweets.ankylosing[grep("2017-[0-9]{2}-[0-9]{2}",tweets.ankylosing$Created.At),]
+#tweets.ankylosing1$Created.At
+#nrow(tweets.ankylosing1)
+
+#tweets.ankylosing2 <- subset(tweets, label == "ankylosing spondylitis")
+#tweets.ankylosing2<-tweets.ankylosing[grep("[0-9]{1}/[0-9]{2}/2017",tweets.ankylosing$Created.At),]
+#nrow(tweets.ankylosing2)
+
+#tweets.ankylosing1 <- subset(tweets, label == "ankylosing spondylitis")
+#tweets.ankylosing1<-tweets.ankylosing[-grep("2017-[0-9]{2}-[0-9]{2}",tweets.ankylosing$Created.At),]
+#tweets.ankylosing1<-tweets.ankylosing[-grep("[0-9]{1}/[0-9]{2}/2017",tweets.ankylosing$Created.At),]
+#tweets.ankylosing1$Created.At
+
 tweets.ankylosing2 <- subset(tweets, label == "ankylosing spondylitis")
-tweets.ankylosing2<-tweets.ankylosing[grep("[0-9]{1}/[0-9]{2}/2017",tweets.ankylosing$Created.At),]
+tweets.ankylosing2<-tweets.ankylosing[grep("[0-9]{1}/[0-9]*/2017",tweets.ankylosing$Created.At),]
 tweets.ankylosing2$created <- as.Date(tweets.ankylosing2$Created.At, format="%m/%d/%Y")
 tweets.ankylosing3 <- subset(tweets, label == "ankylosing spondylitis")
 tweets.ankylosing3<-tweets.ankylosing[grep("[0-9]{1}/[0-9]{2}/2003",tweets.ankylosing$Created.At),]
 tweets.ankylosing3$Created.At<-gsub("/17/2003", "-03-2017", tweets.ankylosing3$Created.At)
 tweets.ankylosing3$created <- as.Date(tweets.ankylosing3$Created.At, format="%d-%m-%Y")
 tweets.ankylosing1 <- subset(tweets, label == "ankylosing spondylitis")
+tweets.ankylosing1<-tweets.ankylosing[grep("2017-[0-9]{2}-[0-9]{2}",tweets.ankylosing$Created.At),]
 tweets.ankylosing1$created <- as.Date(tweets.ankylosing1$Created.At, format="%Y-%m-%d")
 tweets.ankylosing <- rbind(tweets.ankylosing2,tweets.ankylosing3)
 tweets.ankylosing <- rbind(tweets.ankylosing,tweets.ankylosing1)
@@ -51,7 +71,7 @@ tweets.ankylosing<- tweets.ankylosing[!(is.na(tweets.ankylosing$created)),]
 #tweets.ankylosing$created
 
 tweets.hepatitis2 <- subset(tweets, label == "hepatitis c")
-tweets.hepatitis2<-tweets.hepatitis[grep("[0-9]{1}/[0-9]{2}/2017",tweets.hepatitis$Created.At),]
+tweets.hepatitis2<-tweets.hepatitis[grep("[0-9]{1}/[0-9]*/2017",tweets.hepatitis$Created.At),]
 tweets.hepatitis2$created <- as.Date(tweets.hepatitis2$Created.At, format="%m/%d/%Y")
 tweets.hepatitis3 <- subset(tweets, label == "hepatitis c")
 tweets.hepatitis3<-tweets.hepatitis[grep("[0-9]{1}/[0-9]{2}/2003",tweets.hepatitis$Created.At),]
@@ -64,7 +84,7 @@ tweets.hepatitis <- rbind(tweets.hepatitis,tweets.hepatitis1)
 tweets.hepatitis<- tweets.hepatitis[!(is.na(tweets.hepatitis$created)),]
 
 tweets.psoriasis2 <- subset(tweets, label == "psoriasis")
-tweets.psoriasis2<-tweets.psoriasis[grep("[0-9]{1}/[0-9]{2}/2017",tweets.psoriasis$Created.At),]
+tweets.psoriasis2<-tweets.psoriasis[grep("[0-9]{1}/[0-9]*/2017",tweets.psoriasis$Created.At),]
 tweets.psoriasis2$created <- as.Date(tweets.psoriasis2$Created.At, format="%m/%d/%Y")
 tweets.psoriasis3 <- subset(tweets, label == "psoriasis")
 tweets.psoriasis3<-tweets.psoriasis[grep("[0-9]{1}/[0-9]{2}/2003",tweets.psoriasis$Created.At),]
@@ -77,7 +97,7 @@ tweets.psoriasis <- rbind(tweets.psoriasis,tweets.psoriasis1)
 tweets.psoriasis<- tweets.psoriasis[!(is.na(tweets.psoriasis$created)),]
 
 tweets.rheumatoid2 <- subset(tweets, label == "rheumatoid arthritis")
-tweets.rheumatoid2<-tweets.rheumatoid[grep("[0-9]{1}/[0-9]{2}/2017",tweets.rheumatoid$Created.At),]
+tweets.rheumatoid2<-tweets.rheumatoid[grep("[0-9]{1}/[0-9]*/2017",tweets.rheumatoid$Created.At),]
 tweets.rheumatoid2$created <- as.Date(tweets.rheumatoid2$Created.At, format="%m/%d/%Y")
 tweets.rheumatoid3 <- subset(tweets, label == "rheumatoid arthritis")
 tweets.rheumatoid3<-tweets.rheumatoid[grep("[0-9]{1}/[0-9]{2}/2003",tweets.rheumatoid$Created.At),]
@@ -132,5 +152,7 @@ posts.plot<-ggplot(data=tweets.plot.df, aes(x=product, y=tweetsCount)) +
        title = "Tweets count on our different keywords")
 
 tweets.plot.df
+
+
 
 
