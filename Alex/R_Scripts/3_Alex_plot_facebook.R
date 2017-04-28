@@ -11,6 +11,7 @@ library(plyr)
 library(dplyr)
 library(zoo)
 library(reshape2)
+library(lubridate)
 
 
 plotFacebookPostsByMonth <- function (posts, keyword){
@@ -24,11 +25,16 @@ plotFacebookPostsByMonth <- function (posts, keyword){
   # Returns:
   #   A ggplot2 line plot
   
+  if(nrow(posts)==0){
+    message("Your data.frame is empty!")
+    return()
+  }
+  
   posts.copy <- posts
   
   
   # prepare df to work with m-y ordering
-  posts.copy$created_time.x <- ymd_hms(posts.copy$created_time.x)
+  posts.copy$created_time.x <- ymd(posts.copy$created_time.x)
   posts.copy$created_time.x <- paste(year(posts.copy$created_time.x),month(posts.copy$created_time.x),day(posts.copy$created_time.x),sep = "-")
   posts.copy <- ddply(posts.copy, 'created_time.x', function(x) c(count=nrow(x)))
   posts.copy$created_time.x <- ymd(posts.copy$created_time.x)
@@ -113,14 +119,17 @@ print_and_capture <- function(x){
 }
 
 
-facebookMaster.df <- read.csv("Final_FB_0604.csv", sep = ",", as.is = TRUE)
+facebookMaster.df <- read.csv("Final_FB_2804.csv", sep = ",", as.is = TRUE)
+facebookMaster.df <- subset(facebookMaster.df, language == "eng" | language == "sco" | language == "afr") # only english ones
 
 #Format dates 
 facebookMaster.df$created_time.x <- as.Date(facebookMaster.df$created_time.x)
 facebookMaster.df$created_time.y <- as.Date(facebookMaster.df$created_time.y)
 
-#Extracting product posts
-posts <- unique(select(facebookMaster.df, 2, 4, 5, 6, 7, 8, 12, 13)) #key, likes_count.x, message.x, from.id, from.name, created_time.x, comments_count, shares_count
+#Extracting  posts and comments
+posts <- unique(select(facebookMaster.df, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15, 16, 17, 18)) #key, language, likes_count.x, message.x, from.id, from.name, created_time.x, comments_count, shares_count, loves_count, haha_count, wow_count, sad_count, angry_count
+commments <- unique(select(facebookMaster.df, 20, 21, 22, 23, 24, 26)) # from.id_y, from.name_y, message_y, created_time.y, likes_count.y, id.y
+
 
 #Companies 
 posts.companies <- subset(posts, key == "abbvie" | key == "amgen" | key == "bristol myers" )
@@ -139,86 +148,86 @@ posts.products.imbruvica <- subset(posts.products, key == "imbruvica")
 
 
 #Diseases
-posts.diseases <- subset(posts, key == "hepatitis c" | key == "rheumatoid arthritis " | key == "rheumatoid arthritis " | key == "ankylosing spondylitis" | key == "Psoriasis")
+posts.diseases <- subset(posts, key == "hepatitis c" | key == "rheumatoid arthritis" | key == "rheumatoid arthritis" | key == "ankylosing spondylitis" | key == "psoriasis" | key == "juvenilerheumatoidarthritis" | key == "juvenileidiopathicarthritis")
 posts.diseases.hepatitisC <- subset(posts.diseases, key == "hepatitis c")
-#posts.diseases.juvenileIdiopathicArthritis <- subset(posts.diseases, key == "JuvenileIdiopathicArthritis")
-#posts.diseases.juvenileRheumatoidArthritis <- subset(posts.diseases, key == "JuvenileRheumatoidArthritis")
-posts.diseases.ankylosing <- subset(posts.diseases, key == "Ankylosing Spondylitis")
-posts.diseases.rheumatoid <- subset(posts.diseases, key == "Rheumatoid Arthritis")
-posts.diseases.psoriasis <- subset(posts.diseases, key == "Psoriasis")
+posts.diseases.juvenileIdiopathicArthritis <- subset(posts.diseases, key == "juvenileidiopathicarthritis")
+posts.diseases.juvenileRheumatoidArthritis <- subset(posts.diseases, key == "juvenilerheumatoidarthritis")
+posts.diseases.ankylosing <- subset(posts.diseases, key == "ankylosing spondylitis")
+posts.diseases.rheumatoid <- subset(posts.diseases, key == "rheumatoid arthritis")
+posts.diseases.psoriasis <- subset(posts.diseases, key == "psoriasis")
 
 #- Timelines -#
 
 #Companies
 posts.companies.abbvie.plot <- plotFacebookPostsByMonth(posts.companies.abbvie, "Abbvie")
 posts.companies.abbvie.plot
-ggsave("./img/abbvie_timeline_plot.png",posts.companies.abbvie.plot)
+ggsave("./img/abbvie_timeline_plot.png",posts.companies.abbvie.plot, width=20, height=4, dpi=100)
 
 posts.companies.amgen.plot <- plotFacebookPostsByMonth(posts.companies.amgen, "Amgen")
 posts.companies.amgen.plot
-ggsave("./img/amgen_timeline_plot.png",posts.companies.amgen.plot)
+ggsave("./img/amgen_timeline_plot.png",posts.companies.amgen.plot, width=10, height=4, dpi=100)
 
 posts.companies.bristol.plot <- plotFacebookPostsByMonth(posts.companies.bristol, "Bristol-Myers Squibb")
 posts.companies.bristol.plot
-ggsave("./img/bristol-meyers_timeline_plot.png",posts.companies.bristol.plot)
+ggsave("./img/bristol-meyers_timeline_plot.png",posts.companies.bristol.plot, width=10, height=4, dpi=100)
 
 
 #Products
 posts.products.humira.plot <- plotFacebookPostsByMonth(posts.products.humira, "Humira")
 posts.products.humira.plot
-ggsave("./img/humira_timeline_plot.png",posts.products.humira.plot)
+ggsave("./img/humira_timeline_plot.png",posts.products.humira.plot,width=10, height=4, dpi=100)
 
 posts.products.adalimumab.plot <- plotFacebookPostsByMonth(posts.products.adalimumab, "Adalimumab")
 posts.products.adalimumab.plot
-ggsave("./img/adalimumab_timeline_plot.png",posts.products.adalimumab.plot)
+ggsave("./img/adalimumab_timeline_plot.png",posts.products.adalimumab.plot,width=10, height=4, dpi=100)
 
 posts.products.enbrel.plot <- plotFacebookPostsByMonth(posts.products.enbrel, "Enbrel")
 posts.products.enbrel.plot
-ggsave("./img/enbrel_timeline_plot.png",posts.products.enbrel.plot)
+ggsave("./img/enbrel_timeline_plot.png",posts.products.enbrel.plot,width=10, height=4, dpi=100)
 
 posts.products.imbruvica.plot <- plotFacebookPostsByMonth(posts.products.imbruvica, "Imbruvica")
 posts.products.imbruvica.plot
-ggsave("./img/imbruvica_timeline_plot.png",posts.products.imbruvica.plot)
+ggsave("./img/imbruvica_timeline_plot.png",posts.products.imbruvica.plot,width=10, height=4, dpi=100)
 
 
 #Diseases
 posts.diseases.ankylosing.plot <- plotFacebookPostsByMonth(posts.diseases.ankylosing, "Ankylosing Spondylitis")
 posts.diseases.ankylosing.plot 
-ggsave("./img/ankylosing-spondylitis_timeline_plot.png", posts.diseases.ankylosing.plot )
+ggsave("./img/ankylosing-spondylitis_timeline_plot.png", posts.diseases.ankylosing.plot,width=10, height=4, dpi=100 )
 
 posts.diseases.hepatitisC.plot <- plotFacebookPostsByMonth(posts.diseases.hepatitisC, "HepatitisC")
 posts.diseases.hepatitisC.plot
-ggsave("./img/HepatitisC_timeline_plot.png", posts.diseases.hepatitisC.plot)
+ggsave("./img/HepatitisC_timeline_plot.png", posts.diseases.hepatitisC.plot,width=10, height=4, dpi=100)
 
-#posts.diseases.juvenileIdiopathicArthritis.plot <- plotFacebookPostsByMonth(posts.diseases.juvenileIdiopathicArthritis, "JuvenileIdiopathicArthritis")
-#posts.diseases.juvenileIdiopathicArthritis.plot
-#ggsave("./img/juvenileIdiopathicArthritis_timeline_plot.png", posts.diseases.juvenileIdiopathicArthritis.plot)
+posts.diseases.juvenileIdiopathicArthritis.plot <- plotFacebookPostsByMonth(posts.diseases.juvenileIdiopathicArthritis, "JuvenileIdiopathicArthritis")
+posts.diseases.juvenileIdiopathicArthritis.plot
+ggsave("./img/juvenileIdiopathicArthritis_timeline_plot.png", posts.diseases.juvenileIdiopathicArthritis.plot,width=10, height=4, dpi=100)
 
-#posts.diseases.juvenileRheumatoidArthritis.plot <- plotFacebookPostsByMonth(posts.diseases.juvenileRheumatoidArthritis, "JuvenileRheumatoidArthritis")
-#posts.diseases.juvenileRheumatoidArthritis.plot
-#ggsave("./img/juvenileRheumatoidArthritis_timeline_plot.png", posts.diseases.juvenileRheumatoidArthritis.plot )
+posts.diseases.juvenileRheumatoidArthritis.plot <- plotFacebookPostsByMonth(posts.diseases.juvenileRheumatoidArthritis, "JuvenileRheumatoidArthritis")
+posts.diseases.juvenileRheumatoidArthritis.plot
+ggsave("./img/juvenileRheumatoidArthritis_timeline_plot.png", posts.diseases.juvenileRheumatoidArthritis.plot ,width=10, height=4, dpi=100 )
 
 posts.diseases.rheumatoid.plot <- plotFacebookPostsByMonth(posts.diseases.rheumatoid, "Rheumatoid Arthritis")
 posts.diseases.rheumatoid.plot
-ggsave("./img/rheumatoid-Arthritis_timeline_plot.png", posts.diseases.rheumatoid.plot )
+ggsave("./img/rheumatoid-Arthritis_timeline_plot.png", posts.diseases.rheumatoid.plot ,width=10, height=4, dpi=100 )
 
 posts.diseases.psoriasis.plot <- plotFacebookPostsByMonth(posts.diseases.psoriasis, "Psoriasis")
 posts.diseases.psoriasis.plot
-ggsave("./img/psoriasis_timeline_plot.png", posts.diseases.psoriasis.plot )
+ggsave("./img/psoriasis_timeline_plot.png", posts.diseases.psoriasis.plot, width=10, height=4, dpi=100 )
 
 
 #- Activities -#
 
 posts.products.activities.plot <- plotFacebookPostActivites(c("Humira", "Enbrel","Adlimumab","Imbruvica","Trilipix"), posts.products.humira, posts.products.enbrel, posts.products.adalimumab, posts.products.imbruvica,posts.products.trilipix)
 posts.products.activities.plot
-ggsave("./img/products_activities_plot.png",posts.products.activities.plot)
+ggsave("./img/products_activities_plot.png",posts.products.activities.plot, width=10, height=4, dpi=300)
 
 posts.companies.activities.plot <- plotFacebookPostActivites(c("Abbvie", "Amgen", "Bristol-Myers Squibb"), posts.companies.abbvie, posts.companies.amgen, posts.companies.bristol)
 posts.companies.activities.plot
 ggsave("./img/companies_activities_plot.png",posts.companies.activities.plot)
 
-posts.diseases.activities.plot <- plotFacebookPostActivites(c("HepatitisC", "Ankylosing Spondylitis","Rheumatoid Arthritis", "Psioriasis"),
-                                                            posts.diseases.hepatitisC, posts.diseases.ankylosing, posts.diseases.rheumatoid, posts.diseases.psoriasis)
+posts.diseases.activities.plot <- plotFacebookPostActivites(c("HepatitisC", "Ankylosing Spondylitis","Rheumatoid Arthritis", "Psioriasis", "JIA", "JRA"),
+                                                            posts.diseases.hepatitisC, posts.diseases.ankylosing, posts.diseases.rheumatoid, posts.diseases.psoriasis, posts.diseases.juvenileIdiopathicArthritis, posts.diseases.juvenileRheumatoidArthritis)
 posts.diseases.activities.plot
 ggsave("./img/diseases_activities_plot.png",posts.diseases.activities.plot)
 
