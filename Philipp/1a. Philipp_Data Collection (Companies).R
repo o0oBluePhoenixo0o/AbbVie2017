@@ -120,6 +120,8 @@ searchFB <- function(key){
 searchFB("AbbVie")
 searchFB("Bristol-Myers Squibb")
 searchFB("Amgen")
+#Add more keywords 06.04.17
+searchFB("johnson & johnson")
 
 #merge csv files
 AbbVie = read.csv2(file = "AbbVie.csv", header = TRUE, 
@@ -142,5 +144,3 @@ write.csv(masterDF, file = "FB_Companies.csv",
           quote = TRUE, row.names=FALSE, 
           fileEncoding = "UTF-8", na = "NA")
 
-#Add more keywords 06.04.17
-searchFB("johnson & johnson")

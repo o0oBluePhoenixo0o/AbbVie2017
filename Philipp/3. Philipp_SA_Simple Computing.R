@@ -86,6 +86,15 @@ SA.simple <- function(txt,dataset,folder){
   
   #save plot
   ggsave(file= paste0('SA_Simple/',folder,'/',txt,'_plot.jpeg'))
+  
+  #Extract examples for top negative and positive observations
+  top_pos <- head(plyr::arrange(subset(temp,select = c(message,score)),desc(score)),n = 20)
+  top_neg <-  head(plyr::arrange(subset(temp,select = c(message,score)),score),n = 20)
+  examples <-rbind('Positive',top_pos,'Negative',top_neg)
+  
+  
+  #Write down examples to a csv file
+  write.csv2(examples,file = paste0('SA_Simple/',folder,'/',txt,'_examples.csv'))
 }
 
 #######################################################
