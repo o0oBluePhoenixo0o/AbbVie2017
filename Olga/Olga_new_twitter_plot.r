@@ -9,6 +9,16 @@ library(rccdates)
 setwd("~/Desktop/Products3/")
 data_tw <-  read.csv("Final_TW_2104.csv", sep = ",", as.is = TRUE)
 
+# Philip's here: I have some recommendation for your codes about the parsing issue
+# Instead of searching for different type of formats, you can use this package "lubridate"
+# Here are the 2 lines (the 1st one is yours though):
+data_tw$Created.At<-gsub("/17/2003", "-03-2017", data_tw$Created.At)
+data_tw$Created.At <- lubridate::parse_date_time(data_tw$Created.At, 
+                                                 c("%m/%d/%y %H:%M",
+                                                   "%d-%m-%y %H:%M",
+                                                   "%y-%m-%d %H:%M:%S"))
+# Cheers :)
+
 tweets<-data_tw
 
 colnames(tweets)[14]

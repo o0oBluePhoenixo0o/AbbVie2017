@@ -56,7 +56,8 @@ tweets_test <- tweets_classified[-trainIndex, ]
 ##### doc2vec #####
 # define preprocessing function and tokenization function
 prep_fun <- tolower
-tok_fun <- word_tokenizer
+tok_fun <- text2vec::word_tokenizer
+  
 
 it_train <- itoken(tweets_train$text, 
                    preprocessor = prep_fun, 

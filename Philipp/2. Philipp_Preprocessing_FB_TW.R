@@ -3,75 +3,73 @@ setwd("~/GitHub/AbbVie2017/Philipp")
 #FaceBook
 FB_df <- read.csv("Final_FB_2804.csv",sep = ",", as.is = TRUE)
 
-#convert all message.x and message.y to ASCII
-conv_fun <- function(x) iconv(x, "latin1", "ASCII", "")
 
-for (i in 1:nrow(FB_df))
-{
-  if (is.na(FB_df$message.x[i]) == FALSE){FB_df$message.x[i] <- conv_fun(FB_df$message.x[i])} 
-  if (is.na(FB_df$message.y[i]) == FALSE){FB_df$message.y[i] <- conv_fun(FB_df$message.y[i])}  
-}
-
-#delete unwanted columns
-FB_df <- FB_df[ , -which(names(FB_df) %in% c("X"))]
-
-#Clear AI bots
-FB_df <- FB_df[!FB_df$from_name.x %in% c("Investment Research on Amgen Inc",
-                                         "Investment Research on Bristol-Myers Squibb Company",
-                                         "Investment Research on AbbVie Inc"),]
+# for (i in 1:nrow(FB_df))
+# {
+#   if (is.na(FB_df$message.x[i]) == FALSE){FB_df$message.x[i] <- conv_fun(FB_df$message.x[i])} 
+#   if (is.na(FB_df$message.y[i]) == FALSE){FB_df$message.y[i] <- conv_fun(FB_df$message.y[i])}  
+# }
+# 
+# #delete unwanted columns
+# FB_df <- FB_df[ , -which(names(FB_df) %in% c("X"))]
+# 
+# #Clear AI bots
+# FB_df <- FB_df[!FB_df$from_name.x %in% c("Investment Research on Amgen Inc",
+#                                          "Investment Research on Bristol-Myers Squibb Company",
+#                                          "Investment Research on AbbVie Inc"),]
 
 
 ##################################################
-
-# Detect language by adding "language" column next to the dataset
-# Only detect languages of Posts since comments languages will be influenced mainly by posts
-
-# install.packages("franc")
-library(franc)
-detectLanguage <- function(text){
-  # Uses 'franc' package to detect the language of a given text
-  #
-  # Args:
-  #   text: The text to detect the language
-  #
-  # Returns:
-  #   A ISO 639-2 encoded language code string
-  
-  if (!is.na(text)) {
-    return (franc(text, min_length = 3))
-  } else {
-    message("Can not detect language of NA")
-    return (NA)
-  }
-}
-
-a<- unique(FB_df[,c("id.x","message.x")])
-x <- NA
-a <- cbind(a, x)
-
-for (i in 1:nrow(a)){
-  if (is.na(a$message.x[i])== FALSE){
-    a$x[i] <- conv_fun(a$message.x[i])
-  }
-}
-
-language.x <- NA
-
-a <- cbind(a,language.x)
-
-#This will take sometimes ~30min with 55k posts
-t1 <- Sys.time()
-t1
-for (i in 1:nrow(a)){
-  if (is.na(a$x[i]) == FALSE){
-    a$language.x[i] <- detectLanguage(a$x[i])} 
-}
-print(difftime(Sys.time(), t1, units = 'mins'))
-
-#list of language + counts
-agg <- dplyr::summarize(dplyr::group_by(a,language.x),n())
-
-FB_df <- dplyr::right_join(a[,c("id.x","language.x")],FB_df, by = "id.x")
+# 
+# # Detect language by adding "language" column next to the dataset
+# # Only detect languages of Posts since comments languages will be influenced mainly by posts
+# 
+# # install.packages("franc")
+# library(franc)
+# detectLanguage <- function(text){
+#   # Uses 'franc' package to detect the language of a given text
+#   #
+#   # Args:
+#   #   text: The text to detect the language
+#   #
+#   # Returns:
+#   #   A ISO 639-2 encoded language code string
+#   
+#   if (!is.na(text)) {
+#     return (franc(text, min_length = 3))
+#   } else {
+#     message("Can not detect language of NA")
+#     return (NA)
+#   }
+# }
+# 
+# a<- unique(FB_df[,c("id.x","message.x")])
+# x <- NA
+# a <- cbind(a, x)
+# 
+# for (i in 1:nrow(a)){
+#   if (is.na(a$message.x[i])== FALSE){
+#     a$x[i] <- conv_fun(a$message.x[i])
+#   }
+# }
+# 
+# language.x <- NA
+# 
+# a <- cbind(a,language.x)
+# 
+# #This will take sometimes ~30min with 55k posts
+# t1 <- Sys.time()
+# t1
+# for (i in 1:nrow(a)){
+#   if (is.na(a$x[i]) == FALSE){
+#     a$language.x[i] <- detectLanguage(a$x[i])} 
+# }
+# print(difftime(Sys.time(), t1, units = 'mins'))
+# 
+# #list of language + counts
+# agg <- dplyr::summarize(dplyr::group_by(a,language.x),n())
+# 
+# FB_df <- dplyr::right_join(a[,c("id.x","language.x")],FB_df, by = "id.x")
 
 #############################################################
 
@@ -108,8 +106,9 @@ colnames(commentdf)[4] <- "created_time"
 commentdf <- subset(commentdf, !duplicated(message))
 
 ################################################################################
+
 #Twitter
-TW_df <- read.csv("Final_TW_1404.csv",sep = ",", as.is = TRUE)
+TW_df <- read.csv("Final_TW_2804.csv",sep = ",", as.is = TRUE)
 #delete the first column "X"
 TW_df <- TW_df[,-1]
 #change "Label" to fit with FB_df
@@ -120,12 +119,11 @@ for (i in 1:ncol(TW_df)){
   
   if (colnames(TW_df)[i] == "key"){
     key<-TW_df[,i]
-    TW_df[,!(names(TW_df) %in% c("key"))]}
+    TW_df<-TW_df[,!(names(TW_df) %in% c("key"))]}
 }
 TW_df<-cbind(key,TW_df)
-TW_df <- TW_df[!TW_df$message == "",]
-TW_df <- TW_df[!is.na(TW_df$created_time),]
-
+TW_df <- TW_df[!(TW_df$message == "" | TW_df$key == 'Label' | TW_df$key == ""|
+                   TW_df$created_time ==""|is.na(TW_df$key) == TRUE),]
 
 #Filter only ENGLISH tweets
 TW_df <- TW_df[TW_df$Language == 'en',]
@@ -138,8 +136,23 @@ TW_RT <- subset(TW_df,str_sub(TW_df$message, start = 1, end = 4) == "RT @")
 TW_T <- TW_df[-grep("RT @",TW_df$message),]
 
 
-#####################
-# Combine TW and FB #
-#####################
+######################################
+# Preparation for Sentiment Analysis #
+######################################
 
+prep_fun <- tolower
+conv_fun <- function(x) iconv(x, "latin1", "ASCII", "")
 
+TW_df$message <- conv_fun(prep_fun(TW_df$message))
+
+time <- TW_df
+
+TW_df$created_time<-gsub("/17/2003", "-03-2017", TW_df$created_time)
+TW_df$created_time <- lubridate::parse_date_time(TW_df$created_time, 
+                                                c("%m/%d/%y %H:%M",
+                                                  "%d-%m-%y %H:%M",
+                                                  "%y-%m-%d %H:%M:%S"))
+# #Write new TW_df with date-time fixed and messages to lowercase + ASCII 29.04.17
+# write.csv(TW_df, file = "Final_TW_2804_prep",
+#            quote = TRUE, row.names=FALSE,
+#            fileEncoding = "UTF-8", na = "NA")
