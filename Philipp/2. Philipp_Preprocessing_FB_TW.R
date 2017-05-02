@@ -125,16 +125,6 @@ TW_df<-cbind(key,TW_df)
 TW_df <- TW_df[!(TW_df$message == "" | TW_df$key == 'Label' | TW_df$key == ""|
                    TW_df$created_time ==""|is.na(TW_df$key) == TRUE),]
 
-#Filter only ENGLISH tweets
-TW_df <- TW_df[TW_df$Language == 'en',]
-
-#Create a Retweet dataset
-require(stringr)
-TW_RT <- subset(TW_df,str_sub(TW_df$message, start = 1, end = 4) == "RT @")
-
-#Tweets-only dataset
-TW_T <- TW_df[-grep("RT @",TW_df$message),]
-
 
 ######################################
 # Preparation for Sentiment Analysis #
@@ -145,14 +135,65 @@ conv_fun <- function(x) iconv(x, "latin1", "ASCII", "")
 
 TW_df$message <- conv_fun(prep_fun(TW_df$message))
 
-time <- TW_df
+backup <- TW_df
 
-TW_df$created_time<-gsub("/17/2003", "-03-2017", TW_df$created_time)
-TW_df$created_time <- lubridate::parse_date_time(TW_df$created_time, 
-                                                c("%m/%d/%y %H:%M",
-                                                  "%d-%m-%y %H:%M",
-                                                  "%y-%m-%d %H:%M:%S"))
-# #Write new TW_df with date-time fixed and messages to lowercase + ASCII 29.04.17
-# write.csv(TW_df, file = "Final_TW_2804_prep",
-#            quote = TRUE, row.names=FALSE,
-#            fileEncoding = "UTF-8", na = "NA")
+# TW_df$created_time<-gsub("/17/2003", "-03-2017", TW_df$created_time)
+# 
+# #This one mixed up between both d/m/y and m/d/y
+# TW_df$created_time <- lubridate::parse_date_time(TW_df$created_time, 
+#                                                 c("%m/%d/%y %H:%M",
+#                                                   "%d-%m-%y %H:%M",
+#                                                   "%y-%m-%d %H:%M:%S"))
+
+# Test Olga's method to check how many were left out
+# About 600 tweets missing...
+
+TW_df1 <- TW_df
+TW_df1<-TW_df1[grep("[0-9]*/[0-9]{2}/2017",TW_df1$created_time),]
+TW_df1$created_time <- as.Date(TW_df1$created_time, format="%m/%d/%Y")
+
+TW_df2 <- TW_df
+TW_df2<-TW_df2[grep("[0-9]*/[0-9]{2}/2003",TW_df2$created_time),]
+TW_df2$created_time<-gsub("/17/2003", "-03-2017", TW_df2$created_time)
+TW_df2$created_time <- as.Date(TW_df2$created_time, format="%d-%m-%Y")
+
+TW_df3 <- TW_df
+TW_df3$created_time <- as.Date(TW_df3$created_time, format="%Y-%m-%d")
+
+test <- rbind(TW_df1,TW_df2,TW_df3)
+test<- test[!(is.na(test$created_time)),]
+
+TW_df <- test
+# differences <- test[!(test$created_time %in% TW_df$created_time),]
+
+#Add diseases_28_04.csv and delete duplicates
+
+disease <- read.csv("diseases_28_04.csv",sep = ",", as.is = TRUE)
+
+created <- disease$created
+key <- disease$label
+disease <- disease[ , -which(names(disease) %in% c("created","Created.At","X.1","X","label"))]
+disease<-cbind(created,disease)
+colnames(disease)[1]<- "created_time"
+colnames(disease)[8] <- "message"
+disease <- cbind(key,disease)
+disease$message <- conv_fun(prep_fun(disease$message))
+  
+#Merge and delete duplicates
+TW_df <- rbind(TW_df, disease)
+TW_df <- unique(TW_df)
+
+#Filter only ENGLISH tweets
+TW_df <- TW_df[TW_df$Language == 'en',]
+
+#Create a Retweet dataset
+require(stringr)
+TW_RT <- subset(TW_df,str_sub(TW_df$message, start = 1, end = 4) == "RT @")
+
+#Tweets-only dataset
+TW_T <- TW_df[-grep("RT @",TW_df$message),]
+
+ #Write new TW_df with date-time fixed and messages to lowercase + ASCII 29.04.17
+ # write.csv(TW_df, file = "Final_TW_0305_prep",
+ #           quote = TRUE, row.names=FALSE,
+ #            fileEncoding = "UTF-8", na = "NA")
