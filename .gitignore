@@ -5,4 +5,6 @@
 .DS_Store
 .idea
 *.csv
-*./img/*
+Alex/R_Scripts/img/*
+Alex/R_Scripts/trainingandtestdata/*
+Alex/R_Scripts/test/*
