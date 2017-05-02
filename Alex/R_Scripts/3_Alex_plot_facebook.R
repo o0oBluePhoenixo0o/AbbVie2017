@@ -151,12 +151,13 @@ posts.companies.johnson = subset(posts.companies, key == "johnson & johnson")
 
 
 #Products
-posts.products <- subset(posts, key == "imbruvica" | key == "adalimumab" | key == "trilipix" | key == "enbrel" | key == "humira" )
+posts.products <- subset(posts, key == "imbruvica" | key == "adalimumab" | key == "trilipix" | key == "enbrel" | key == "humira" | key == "ibrutinib")
 posts.products.humira <- subset(posts.products, key == "humira")
 posts.products.enbrel <- subset(posts.products, key == "enbrel")
 posts.products.trilipix <- subset(posts.products, key == "trilipix")
 posts.products.adalimumab <- subset(posts.products, key == "adalimumab")
 posts.products.imbruvica <- subset(posts.products, key == "imbruvica")
+posts.products.ibrutinib <- subset(posts.products, key == "ibrutinib")
 
 
 #Diseases
@@ -234,7 +235,7 @@ ggsave("./img/psoriasis_timeline_plot.png", posts.diseases.psoriasis.plot, width
 
 #- Activities -#
 
-posts.products.activities.plot <- plotFacebookPostActivites(c("Humira", "Enbrel","Adlimumab","Imbruvica","Trilipix"), posts.products.humira, posts.products.enbrel, posts.products.adalimumab, posts.products.imbruvica,posts.products.trilipix)
+posts.products.activities.plot <- plotFacebookPostActivites(c("Humira", "Enbrel","Adlimumab","Imbruvica","Trilipix", "Ibrutinib"), posts.products.humira, posts.products.enbrel, posts.products.adalimumab, posts.products.imbruvica,posts.products.trilipix, posts.products.ibrutinib)
 posts.products.activities.plot
 ggsave("./img/products_activities_plot.png",posts.products.activities.plot, width=14, height=4, dpi=300)
 

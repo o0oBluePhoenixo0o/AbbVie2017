@@ -21,9 +21,10 @@ searchFB("Adalimumab")
 searchFB("Enbrel")
 searchFB("Trilipix")
 searchFB("Imbruvica")
+searchFB("Ibrutinib")
 
 # Merge the data into one big .csv file
-mergeCSVsUTF8("./products/Adalimumab.csv","./products/Enbrel.csv","./products/Humira.csv","./products/Imbruvica.csv","./products/Trilipix.csv")
+mergeCSVsUTF8("./products/Adalimumab.csv","./products/Enbrel.csv","./products/Humira.csv","./products/Imbruvica.csv","./products/Trilipix.csv", "./products/Ibrutinib.csv")
 
 
 # Read master files

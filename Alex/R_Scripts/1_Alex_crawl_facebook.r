@@ -91,7 +91,7 @@ searchFB <- function(key){
     final_dataset<-full_join(page_df,comment_df,by = c("join_id"))
   }
   
-  write.csv(final_dataset, file = paste("./products/",key,".csv", sep = ""), fileEncoding = "UTF-8", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
+  write.csv(final_dataset, file = paste("",key,".csv", sep = ""), fileEncoding = "UTF-8", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
 }
 
 
