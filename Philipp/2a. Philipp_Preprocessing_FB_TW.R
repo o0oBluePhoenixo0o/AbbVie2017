@@ -92,6 +92,29 @@ FB_df$created_time.y <- format.facebook.date(FB_df$created_time.y)
 
 ##########################################################################
 
+# 03_05
+# Clean  dataset (remove punctuation, links)
+library(tidyr)
+library(tm)
+library(stringr)
+
+clean <- function (sentence){
+  #convert to lower-case 
+  sentence <- tolower(sentence)
+  removeURL <- function(x) gsub('"(http.*) |(https.*) |(http.*)$|\n', "", x)
+  sentence <- removeURL(sentence)
+}
+t1 <- Sys.time()
+
+FB_df$message.x <- sapply(FB_df$message.x, function(x) clean(x))
+FB_df$message.y <- sapply(FB_df$message.y, function(x) clean(x))
+
+print(difftime(Sys.time(), t1, units = 'mins'))
+# Write new FB_df_prep with messages cleaned (remove punctuation and links) 03.05.17
+# write.csv(FB_df, file = "Final_FB_0305_prep.csv",
+#           quote = TRUE, row.names=FALSE,
+#           fileEncoding = "UTF-8", na = "NA")
+
 #Get postdfs & comments from final df
 postdf <- subset(FB_df, select = c(key,id.x,message.x,created_time.x))
 colnames(postdf)[2] <- "id"
