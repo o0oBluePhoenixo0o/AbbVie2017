@@ -210,11 +210,11 @@ ggsave("./img/imbruvica_timeline_plot.png",posts.products.imbruvica.plot,width=1
 #Diseases
 posts.diseases.ankylosing.plot <- plotFacebookPostsByMonth(posts.diseases.ankylosing, "Ankylosing Spondylitis")
 posts.diseases.ankylosing.plot 
-ggsave("./img/ankylosing-spondylitis_timeline_plot.png", posts.diseases.ankylosing.plot,width=10, height=4, dpi=100 )
+ggsave("./img/ankylosing-spondylitis_timeline_plot.png", posts.diseases.ankylosing.plot,width=16, height=4, dpi=100 )
 
 posts.diseases.hepatitisC.plot <- plotFacebookPostsByMonth(posts.diseases.hepatitisC, "HepatitisC")
 posts.diseases.hepatitisC.plot
-ggsave("./img/HepatitisC_timeline_plot.png", posts.diseases.hepatitisC.plot,width=10, height=4, dpi=100)
+ggsave("./img/hepatitisC_timeline_plot.png", posts.diseases.hepatitisC.plot,width=10, height=4, dpi=100)
 
 posts.diseases.juvenileIdiopathicArthritis.plot <- plotFacebookPostsByMonth(posts.diseases.juvenileIdiopathicArthritis, "JuvenileIdiopathicArthritis")
 posts.diseases.juvenileIdiopathicArthritis.plot

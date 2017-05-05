@@ -28,8 +28,8 @@ mergeCSVsUTF8("./products/Adalimumab.csv","./products/Enbrel.csv","./products/Hu
 
 
 # Read master files
-facebookMaster.df <- read.csv("Final_FB_2804.csv", sep = ",", as.is = TRUE)
-twitterMaster.df <- read.csv("Final_TW_2804.csv", sep = ",", as.is = TRUE)
+facebookMaster.df <- read.csv("Final_FB_0405_prep.csv", sep = ",", as.is = TRUE)
+twitterMaster.df <- read.csv("Final_TW_0405_prep.csv", sep = ",", as.is = TRUE)
 tweets.classified <- read_csv('./trainingandtestdata/training.1600000.processed.noemoticon.csv',
                               col_names = c('sentiment', 'id', 'date', 'query', 'user', 'text'))
 
