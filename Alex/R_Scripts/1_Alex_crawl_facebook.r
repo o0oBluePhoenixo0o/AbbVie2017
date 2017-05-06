@@ -16,8 +16,12 @@ x<-facebook_oauth
 
 #T aken from Trung Nguyen Ngoc Nam(@BluePhoenix1908), added if-statement for checking if page has no posts
 searchFB <- function(key){
-  
-  print(paste("Getting data for keyword: ",key, sep = " "))
+  # Crawls all medical Facebook pages for a specific keyword and writes the resulting data.frame into a .csv
+  #
+  # Args:
+  #   key: Keyword to search for
+
+  message(paste("Getting data for keyword: ",key, sep = " "))
   
   pagelist<- select(filter(searchPages(key,x, n = 10000), 
                            category == "Medical Company" | category =="Pharmaceuticals" |
@@ -30,62 +34,60 @@ searchFB <- function(key){
   # Initiate variables
   
   page_df <- data.frame()
-  #post_df <- data.frame()
+  # post_df <- data.frame()
   comment_df <- data.frame()
   replies_df <- data.frame()
   
-  #pulling data for page_df and comment_df 
-  for (i in 1:nrow(pagelist))
-  {
+  # pulling data for page_df and comment_df 
+  for (i in 1:nrow(pagelist)) {
     target_page <- getPage(pagelist[i,],x,n=10000, since=begin , until = today,
                            feed = TRUE, reactions = TRUE)
     
-    #Adding keyword to table
-    if(!empty(target_page)){
+    # Adding keyword to table
+    if (!empty(target_page)) {
       target_page <- cbind(key = key, target_page)
     }
+    
     page_df <- try(rbind(page_df,target_page))
     
-    for (j in 1:nrow(target_page))
-    {
+    for (j in 1:nrow(target_page)) {
       #print(textcat(target_page$message[j]))
-      if(is.null(target_page$id[j])){
+      if (is.null(target_page$id[j])) {
+        #doNothing
       } else {
         target_post <- getPost(target_page$id[j], n=10000,  x, comments = TRUE, likes = TRUE)
         #post_df<- try(rbind(post_df,target_post$post))
         comment_df <-try(rbind(comment_df,target_post$comments))
-        if (class(comment_df)=="try-error")next;
+        if (class(comment_df)=="try-error") next;
       }
     }
-    if(class(page_df)=="try-error")next;
+    if (class(page_df)=="try-error") next;
   }
   
   # Join 2 data frame to create 1 consolidated dataset for each keyword but also check if the dfs are empty
   # Check if the dataframes are empty
   
-  if(!empty(page_df)){
-    #the 2nd part of ID
-    for (i in 1:nrow(page_df))
-    {
+  if (!empty(page_df)) {
+    # the 2nd part of ID
+    for (i in 1:nrow(page_df)) {
       x<-strsplit(page_df[i,]$id,"_")[[1]]
       y<-tolower(x)[2]
       page_df$join_id[i] <-y
     }
   }
   
-  if(!empty(comment_df)){
-    #the 1st part of ID
-    for (i in 1:nrow(comment_df))
-    {
+  if (!empty(comment_df)) {
+    # the 1st part of ID
+    for (i in 1:nrow(comment_df)) {
       x<-strsplit(comment_df[i,]$id,"_")[[1]]
       y<-tolower(x)[1]
       comment_df$join_id[i] <-y
     }
   }
   
-  if(empty(page_df)) {
+  if (empty(page_df)) {
     final_dataset<-data.frame();
-  } else if (empty(comment_df)){
+  } else if (empty(comment_df)) {
     final_dataset<-page_df
   } else {
     final_dataset<-full_join(page_df,comment_df,by = c("join_id"))
@@ -100,9 +102,8 @@ mergeCSVsUTF8 <- function(...){
   print(files)
   
   masterDF <- data.frame()
-  
-  
-  for(file in files){
+
+  for (file in files) {
     fileData <- tryCatch(
       {
         read.csv(file=file, header=TRUE, sep=",")
@@ -136,7 +137,7 @@ mergeCSVsUTF16LE <- function(...){
   masterDF <- data.frame()
   
   
-  for(file in files){
+  for (file in files) {
     fileData <- tryCatch(
       {
         read.csv(file=file, header=TRUE, sep=",")

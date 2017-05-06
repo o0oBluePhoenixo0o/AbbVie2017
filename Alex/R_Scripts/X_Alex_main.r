@@ -11,7 +11,7 @@ source("./4_4_Alex_sentiment_analysis_sentr.r")
 source("./translateR.r")
 
 # Set working directory to the directoy where the file is located 
-setwd("~/GitHub/AbbVie2017/Alex")
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 
 # Crawl the data from facebook
