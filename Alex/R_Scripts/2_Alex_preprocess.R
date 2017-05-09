@@ -161,8 +161,10 @@ string2Date <- function(text, dateFormats) {
   #   text: Text to parse in date
   #
   # Returns:
-  #   String
-   return (lubridate::parse_date_time(text, formats))
+  #   A Y-m-d formated date
+  
+  lubriDate <- lubridate::parse_date_time(text,dateFormats, tz = "UTC")
+  return (as.Date(paste(year(lubriDate),month(lubriDate),day(lubriDate),sep="-")))
 }
 
 

@@ -34,8 +34,8 @@ plotSyuzhetEmotions <- function(df) {
 
 # Sentiment analysis twitter (as we use lexicon based approach we use the stemmed text here)
 
-mySentiment.syuzhet <- syuzhet::get_nrc_sentiment(as.character(twitterMaster.df$Text_stemmed))
-tweets.syuzhet <- cbind(Id=twitterMaster.df$Id, twitterMaster.df$Text, mySentiment.syuzhet, time = twitterMaster.df$Created.At)
+mySentiment.syuzhet <- syuzhet::get_nrc_sentiment(as.character(twitterMaster.df$message))
+tweets.syuzhet <- cbind(Id=twitterMaster.df$Id, twitterMaster.df$message, mySentiment.syuzhet, time = twitterMaster.df$created_time)
 tweets.syuzhet$Id <- format(tweets.syuzhet$Id, scientific=FALSE)
 
 
@@ -54,6 +54,9 @@ plot
 
 
 # Model Evaluation
+
+
+tweets.test <- read_csv("./Alex_TW_Test160.csv")
 
 tweets.test$text <- removeURL(tweets.test$text)
 tweets.test$text <- convert(tweets.test$text)
