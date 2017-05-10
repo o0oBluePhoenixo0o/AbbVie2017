@@ -2,6 +2,7 @@
 
 library(caret)
 library(readr)
+library(purrr)
 source("./1_Alex_crawl_facebook.r")
 source("./2_Alex_preprocess.r")
 source("./4_1_Alex_sentiment_analysis_syuzhet.r")
@@ -29,22 +30,22 @@ mergeCSVsUTF8("./products/Adalimumab.csv","./products/Enbrel.csv","./products/Hu
 
 # Read master files
 facebookMaster.df <- read.csv("Final_FB_0405_prep.csv", sep = ",", as.is = TRUE)
-twitterMaster.df <- read.csv("Final_TW_0405_prep.csv", sep = ",", as.is = TRUE)
+twitterMaster.df <- read.csv("Final_TW_1005_prep.csv", sep = ",", as.is = TRUE)
 
 
 # Training tweets
 
-tweets.classified <- read_csv('./trainingandtestdata/Final_Manual_0805.csv')
-set.seed(2340)
-trainIndex <- caret::createDataPartition(tweets.classified$sentiment, p = 0.80, 
-                                  list = FALSE, 
-                                  times = 1)
+tweets.test_classified <- read_csv('./trainingandtestdata/Final_Manual_0805.csv')
 
-tweets.train <- tweets.classified[trainIndex, ]
-tweets.test <- tweets.classified[-trainIndex, ]
+tweets.classified <- read_csv('trainingandtestdata/training.1600000.processed.noemoticon.csv',
+                              col_names = c('sentiment', 'id', 'date', 'query', 'user', 'text')) %>%
+  # converting some symbols
+  dmap_at('text', convertLatin_ASCII) %>%
+  # replacing class values
+  mutate(sentiment = ifelse(sentiment == 0, 0, 1))
+
 
 # Preprocess twitter
-
 twitterMaster.df$message <- sapply(twitterMaster.df$message, removeURL)
 twitterMaster.df$message <- sapply(twitterMaster.df$message, removeTwitterHandles)
 twitterMaster.df$message <- sapply(twitterMaster.df$message, removeTags)

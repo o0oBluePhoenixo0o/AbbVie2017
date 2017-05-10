@@ -130,6 +130,7 @@ detectLanguage <- function(text){
   #
   # Returns:
   #   A ISO 639-2 encoded language code string
+  
   message(text)
   if (!is.na(text)) {
       return (franc(text, min_length = 3))
@@ -149,11 +150,9 @@ fixed_split <- function(text, n) {
   # Returns:
   #   A list containing all chunks
   
-  
   words <- stri_split_boundaries(text, tokens_only = TRUE, simplify = TRUE) # get a list of all words in the text
   allChunks <- list() # storing chunks of size
   text_chunk <- '' # a single chunk
-  
   
   for (word in words){
     if(nchar(text_chunk) < n){

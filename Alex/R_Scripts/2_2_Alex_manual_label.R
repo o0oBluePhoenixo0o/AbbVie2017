@@ -9,8 +9,6 @@ manual_tweets.bristol_myers <- head(subset(manual_tweets, key == "bristol myers"
 # enbrel
 manual_tweets.enbrel <- head(subset(manual_tweets, key == "enbrel"),50)
 
-
-
 myWork <- rbind(manual_tweets.ankylosing,manual_tweets.bristol_myers,manual_tweets.enbrel)
 write.csv(myWork, file = paste("Alex_TW_Manual",".csv", sep = ""), fileEncoding = "UTF-8", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
 

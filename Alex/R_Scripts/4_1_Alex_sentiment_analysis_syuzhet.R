@@ -34,10 +34,10 @@ plotSyuzhetEmotions <- function(df) {
 
 # Sentiment analysis twitter (as we use lexicon based approach we use the stemmed text here)
 
-mySentiment.syuzhet <- syuzhet::get_nrc_sentiment(as.character(twitterMaster.df$message))
+mySentiment.syuzhet.nrc <- syuzhet::get_nrc_sentiment(as.character(twitterMaster.df$message))
+mySentiment.syuzhet.stanford <- syuzhet::get_stanford_sentiment(as.character(twitterMaster.df$message))
 tweets.syuzhet <- cbind(Id=twitterMaster.df$Id, twitterMaster.df$message, mySentiment.syuzhet, time = twitterMaster.df$created_time)
 tweets.syuzhet$Id <- format(tweets.syuzhet$Id, scientific=FALSE)
-
 
 plot <- plotSyuzhetEmotions(tweets.syuzhet)
 plot
