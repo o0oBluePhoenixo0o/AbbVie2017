@@ -4,7 +4,7 @@
 
 
 #Twitter
-TW_df <- read.csv("Final_TW_0305_prep.csv",sep = ",", as.is = TRUE)
+TW_df <- read.csv("Final_TW_0405_prep.csv",sep = ",", as.is = TRUE)
 
 # Clean text
 
@@ -56,10 +56,20 @@ TW_df$Language <- sapply(TW_df$Language, function(x) ifelse(x == 'eng','en',x ))
 
 agg <- dplyr::summarize(dplyr::group_by(TW_df, Language),n())
 
-#Write new TW_df with language detection (supplement) and cleanned messages
-write.csv(TW_df, file = "Final_TW_0405_prep.csv",
-          quote = TRUE, row.names=FALSE,
-          fileEncoding = "UTF-8", na = "NA")
+# #Write new TW_df with language detection (supplement) and cleanned messages
+# write.csv(TW_df, file = "Final_TW_0405_prep.csv",
+#           quote = TRUE, row.names=FALSE,
+#           fileEncoding = "UTF-8", na = "NA")
+
+TW_df$Language <- sapply(TW_df$Language, function(x) ifelse(x == 'en','eng',x))
+TW_df$Language <- sapply(TW_df$Language, function(x) ifelse(x == 'de','deu',x))
+TW_df$Language <- sapply(TW_df$Language, function(x) ifelse(x %in% c('eng','deu'),x,'eng'))
+# 
+# #Write new TW_df with language detection (supplement) and cleanned messages
+# write.csv(TW_df, file = "Final_TW_1005_prep.csv",
+#           quote = TRUE, row.names=FALSE,
+#           fileEncoding = "UTF-8", na = "NA")
+
 
 ##########################################
 # Building TW dataset for manual sentiment and trend detection
@@ -95,3 +105,5 @@ agg1 <- dplyr::summarize(dplyr::group_by(TW_T, key),n())
 write.csv(TW_T, file = "TW_MANUAL_0405.CSV",
           quote = TRUE, row.names=FALSE,
           fileEncoding = "UTF-8", na = "NA")
+
+

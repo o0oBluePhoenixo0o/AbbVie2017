@@ -2,7 +2,7 @@ setwd("~/GitHub/AbbVie2017/Philipp")
 #Read data from final consolidate dataset
 #FaceBook
 FB_df <- read.csv("Final_FB_2804.csv",sep = ",", as.is = TRUE)
-
+FB_df_prep <- read.csv("Final_FB_0405_prep.csv",sep = ",", as.is = TRUE)
 
 # for (i in 1:nrow(FB_df))
 # {

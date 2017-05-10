@@ -45,6 +45,23 @@ tweets_classified <- tweets_classified %>%
   filter(!is.na(id)) %>%
   rbind(., tweets_classified_na)
 
+#convert to lower case / remove URLs
+
+# Clean text
+
+clean <- function (sentence){
+  #convert to lower-case 
+  sentence <- tolower(sentence)
+  removeURL <- function(x) gsub('"(http.*) |(https.*) |(http.*)$|\n', "", x)
+  sentence <- removeURL(sentence)
+}
+tweets_classified$text <- sapply(tweets_classified$text, function(x) clean(x))
+# 
+# #Clean message --> tolower, remove html / 10.05.17
+# write.csv(tweets_classified, "training.1600000.processed.noemoticon.prep.csv",
+#           quote = TRUE, row.names=FALSE,
+#           fileEncoding = "UTF-8", na = "NA")
+
 # data splitting on train and test
 set.seed(2340)
 trainIndex <- createDataPartition(tweets_classified$sentiment, p = 0.8, 
@@ -58,7 +75,6 @@ tweets_test <- tweets_classified[-trainIndex, ]
 prep_fun <- tolower
 tok_fun <- text2vec::word_tokenizer
   
-
 it_train <- itoken(tweets_train$text, 
                    preprocessor = prep_fun, 
                    tokenizer = tok_fun,
@@ -75,6 +91,9 @@ vocab <- create_vocabulary(it_train)
 vectorizer <- vocab_vectorizer(vocab)
 dtm_train <- create_dtm(it_train, vectorizer)
 dtm_test <- create_dtm(it_test, vectorizer)
+
+as.matrix(dtm_train)
+model <- naiveBayes(dtm_train,tweets_train)
 
 # define tf-idf model
 tfidf <- TfIdf$new()
