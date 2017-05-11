@@ -128,7 +128,7 @@ findMostFreqTerms(Final_FB_TW_Product)
 ############################################################################################################
 ### for large dataset, dtm>40000*200000 e.g. for dataset Disease
 
-doc.corpus<- Corpus(VectorSource(Final_FB_TW_Disease$Text))
+doc.corpus<- Corpus(VectorSource(lemmatize_strings(Final_Dataset$Text)))
 
 doc.corpus <- tm_map(doc.corpus, removeNumbers)
 doc.corpus <- tm_map(doc.corpus, removePunctuation)
