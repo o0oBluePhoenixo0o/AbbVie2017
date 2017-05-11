@@ -34,6 +34,12 @@ colnames(Final_TW_Tweets)<- c("key", "Text","time")
 Final_TW_Tweets_lag<- detectLanguage(Final_TW_Tweets[[2]])
 Final_TW_Tweets<- cbind(Final_TW_Tweets,Final_TW_Tweets_lag)
 Final_TW_Tweets<- subset(Final_TW_Tweets,detectedLanguage=="ENGLISH")[c(1,2,3)]
+Final_TW_Tweets<- subset.data.frame(Final_TW_Tweets, key!= "Label")
+
+#change TW time to FB time
+standardTime<- data.frame(anytime(Final_TW_Tweets$time))
+colnames(standardTime)<- "time"
+Final_TW_Tweets<- cbind(Final_TW_Tweets[c(1,2)], standardTime)
 
 #combine FB & TW
 Final_FB_TW<- rbind(Final_FB_PostsandComments,Final_TW_Tweets)
