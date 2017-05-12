@@ -2,7 +2,8 @@
 
 source('./2_Alex_preprocess.R')
 library(stringi)
-options(scipen=999)
+
+
 preprocessTWUpdate <- function(newData, oldData) {
   # 1. delete the first column (just a duplicate of the row numbers)
   # 2. change the 'created.at' date to a standard format
@@ -12,7 +13,7 @@ preprocessTWUpdate <- function(newData, oldData) {
   #
   # Returns:
   #   new merged dataset
-  
+  options(scipen=999)
   # 0.
   newData <- newData[,-1]
   
@@ -35,8 +36,11 @@ preprocessTWUpdate <- function(newData, oldData) {
 }
 
 
-weeklyUpdate <- read.csv("./weeklyUpdates/Final_TW_weekly_0405.csv",sep = ",", as.is = TRUE)
+weeklyUpdate <- read.csv("./weeklyUpdates/Final_TW_weekly_1205.csv",sep = ",", as.is = TRUE)
 twitterMaster.df <- read.csv("Final_TW_1005_prep.csv", sep = ",", as.is = TRUE)
-write.csv(preprocessTWUpdate(weeklyUpdate, twitterMaster.df), file = paste("./weeklyUpdates/Final_TW_",lubridate::day(Sys.Date()),lubridate::month(Sys.Date()),"_prep",".csv"), fileEncoding = "UTF-8", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
+update <- preprocessTWUpdate(weeklyUpdate, twitterMaster.df)
+update <- unique(update)
+
+write.csv(update, file = paste("./weeklyUpdates/Final_TW_",lubridate::day(Sys.Date()),lubridate::month(Sys.Date()),"_prep",".csv", sep = ""), fileEncoding = "UTF-8", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
 newTwitterMaster.df <- read.csv("./weeklyUpdates/Final_TW_105_prep.csv", sep = ",", as.is = TRUE)
 
