@@ -45,6 +45,14 @@ tweets.classified <- read_csv('trainingandtestdata/training.1600000.processed.no
   mutate(sentiment = ifelse(sentiment == 0, 0, 1))
 
 
+set.seed(2340)
+trainIndex <- createDataPartition(tweets.classified$sentiment, p = 0.8, 
+                                  list = FALSE, 
+                                  times = 1)
+tweets.train <- tweets.classified[trainIndex, ]
+tweets.test <- tweets.classified[-trainIndex, ]
+
+
 # Preprocess twitter
 twitterMaster.df$message <- sapply(twitterMaster.df$message, removeURL)
 twitterMaster.df$message <- sapply(twitterMaster.df$message, removeTwitterHandles)

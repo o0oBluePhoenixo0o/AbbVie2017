@@ -58,17 +58,18 @@ plot
 
 tweets.test <- read_csv("./Alex_TW_Test160.csv")
 
-tweets.test$text <- removeURL(tweets.test$text)
-tweets.test$text <- convert(tweets.test$text)
-tweets.test$text <- removeTags(tweets.test$text)
-tweets.test$text <- removeTwitterHandles(tweets.test$text)
-tweets.test$text <- convertAbbreviations(tweets.test$text)
-tweets.test$text <- tryTolower(tweets.test$text)
-tweets.test$text_stemmed <- stemWords(tweets.test$text)
+tweets.test$text <- sapply(tweets.test$text, removeURL)
+tweets.test$text <- sapply(tweets.test$text, removeTwitterHandles)
+tweets.test$text <- sapply(tweets.test$text, removeTags)
+tweets.test$text <- sapply(tweets.test$text, convertLatin_ASCII)
+tweets.test$text <- sapply(tweets.test$text, tryTolower)
+tweets.test$text <- sapply(tweets.test$text, convertAbbreviations)
+tweets.test$text <- sapply(tweets.test$text, removeStopWords)
+tweets.test$text_stemmed <- sapply(tweets.test$text, stemWords)
 
 test.syuzhet <- syuzhet::get_nrc_sentiment(as.character(tweets.test$text_stemmed))
 test.syuzhet <- as.data.frame(test.syuzhet[,9:10])
-test.syuzhet$sent <- ifelse((test.syuzhet$positive- test.syuzhet$negative) > 0, 4, 0)# translate sentiments back to the original training data
+test.syuzhet$sent <- ifelse((test.syuzhet$positive- test.syuzhet$negative) > 0, 1, 0)# translate sentiments back to the original training data
 
 print(table(test.syuzhet$sent, tweets.test$sentiment))
 
