@@ -223,8 +223,18 @@ Apply.Doc2Vec <- function(keywords, dataset){
   }
 }
 
+
 Apply.Doc2Vec(keywords,TW_T)
 Apply.Doc2Vec(keywords,TW_RT)
 
 Apply.Doc2Vec(keywords,postdf)
 Apply.Doc2Vec(keywords,commentdf)
+
+# Test with new manual test set
+testdf <- read.csv("Final_Manual_0805.csv", as.is = TRUE, sep = ",")
+backup <- testdf
+
+testdf$sentiment <- NA
+for (i in 1:length(keywords)){
+  Doc2Vec(keywords[i],testdf,"TEST")
+}

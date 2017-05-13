@@ -6,9 +6,6 @@
 # install.packages("stringr")
 # install.packages("ggplot2")
 
-#Table manipulation
-library(dplyr)
-library(plyr)
 #Text analytics
 library(tidyr)
 library(tm)
@@ -73,10 +70,9 @@ SA.simple <- function(txt,dataset,folder){
   stat <- mutate(stat, message = ifelse(stat$score > 0, 'positive', 
                                         ifelse(stat$score < 0, 'negative', 'neutral')))
   
-  by.message <- group_by(stat, message, created)
+  by.message <- dplyr::group_by(stat, message, created)
   
-  detach("package:plyr", unload=TRUE) 
-  by.message <- summarise(by.message, number=n())
+  by.message <- dplyr::summarise(by.message, number=n())
   
   #visualization
   ggplot(by.message, aes(created, number)) + geom_line(aes(group=message, color=message), size=2) +
@@ -88,8 +84,8 @@ SA.simple <- function(txt,dataset,folder){
   ggsave(file= paste0('SA_Simple/',folder,'/',txt,'_plot.jpeg'))
   
   #Extract examples for top negative and positive observations
-  top_pos <- head(plyr::arrange(subset(temp,select = c(message,score)),desc(score)),n = 20)
-  top_neg <-  head(plyr::arrange(subset(temp,select = c(message,score)),score),n = 20)
+  top_pos <- head(plyr::arrange(subset(stat,select = c(text,score)),desc(score)),n = 20)
+  top_neg <-  head(plyr::arrange(subset(stat,select = c(text,score)),score),n = 20)
   examples <-rbind('Positive',top_pos,'Negative',top_neg)
   
   
@@ -118,3 +114,12 @@ Apply.SA.simple(keywords,postdf)
 Apply.SA.simple(keywords,commentdf)
 Apply.SA.simple(keywords,TW_T)
 Apply.SA.simple(keywords,TW_RT)
+
+
+
+testdf$sentiment <- NA
+
+for (i in 1:length(keywords)){
+  SA.simple(keywords[i],testdf,"TEST")
+}
+
