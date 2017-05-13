@@ -28,12 +28,12 @@ In Sentiment Analysis we evaluated different libraries and packages from R and P
 
 | Package Name                                          | Language | Type                                | 
 |-------------------------------------------------------|----------|-------------------------------------|
-| [syuzhet](https://github.com/mjockers/syuzhet)        | R        | Lexicon based                       |
-| [sentimentR](https://github.com/trinker/sentimentr)   | R        | Lexicon based                       |
+| [syuzhet](https://github.com/mjockers/syuzhet)        | R        | Lexicon based SA                    |
+| [sentimentR](https://github.com/trinker/sentimentr)   | R        | Lexicon based SA                    |
 | [sentR](https://github.com/mananshah99/sentR)         | R        | Naive Bayes                         |
 | [e1071](https://github.com/cran/e1071)                | R        | Used to built own Naive Bayes Model |
 | [glmnet](https://github.com/cran/glmnet)              | R        | Used to built own Regression Model  |
-| [textblob](https://github.com/sloria/TextBlob)        | Python   | Used to built own Regression Model  |
+| [textblob](https://github.com/sloria/TextBlob)        | Python   | Lexicon based SA                    |
 
 
 
