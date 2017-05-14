@@ -23,7 +23,7 @@ format.date <- function(datestring) {
 
 #Twitter
 TW_df <- read.csv("Final_TW_1205_prep.csv", sep = ",", as.is = TRUE)
-
+TW_df$Id <- as.factor(TW_df$Id)
 #Filter only ENGLISH tweets
 TW_df <- TW_df[TW_df$Language == 'eng',]
 
@@ -36,13 +36,13 @@ TW_T <- TW_df[-grep("rt @",TW_df$message),]
 
 ###############################################################################
 # Test set 13.05.17
-testdf <- read.csv("Final_Manual_0805.csv", as.is = TRUE, sep = ",")
-#Update 13.05 for date time parse (again)
-testdf$created_time <- lubridate::parse_date_time(testdf$created_time, c("%m/%d/%y"))
+testdf <- read.csv("Final_Manual_1305.csv", as.is = TRUE, sep = ",")
+# #Update 13.05 for date time parse (again)
+# testdf$created_time <- lubridate::parse_date_time(testdf$created_time, c("%m/%d/%y"))
 
-write.csv(testdf,"Final_Manual_1305.csv",
-          quote = TRUE, row.names=FALSE,
-        fileEncoding = "UTF-8", na = "NA")
+# write.csv(testdf,"Final_Manual_1305.csv",
+#           quote = TRUE, row.names=FALSE,
+#         fileEncoding = "UTF-8", na = "NA")
 
 # for (i in 1:nrow(FB_df))
 # {

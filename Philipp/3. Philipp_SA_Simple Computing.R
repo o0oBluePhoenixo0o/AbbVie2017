@@ -117,9 +117,3 @@ Apply.SA.simple(keywords,TW_RT)
 
 
 
-testdf$sentiment <- NA
-
-for (i in 1:length(keywords)){
-  SA.simple(keywords[i],testdf,"TEST")
-}
-
