@@ -33,7 +33,7 @@ In Sentiment Analysis we evaluated different libraries and packages from R and P
 | [sentR](https://github.com/mananshah99/sentR)         | R        | Naive Bayes                         |
 | [e1071](https://github.com/cran/e1071)                | R        | Used to built own Naive Bayes Model |
 | [glmnet](https://github.com/cran/glmnet)              | R        | Used to built own Regression Model  |
-| [textblob](https://github.com/sloria/TextBlob)        | Python   | Lexicon based SA                    |
+| [textblob](https://github.com/sloria/TextBlob)        | Python   | Lexicon based SA + Naive Bayes      |
 | [vader](http://www.nltk.org/api/nltk.sentiment.html)  | Python   | Lexicon based SA                    |
 
 
