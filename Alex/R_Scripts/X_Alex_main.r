@@ -35,7 +35,7 @@ twitterMaster.df <- read.csv("Final_TW_1005_prep.csv", sep = ",", as.is = TRUE)
 
 # Training tweets
 
-tweets.test_classified <- read_csv('./trainingandtestdata/Final_Manual_0805.csv')
+tweets.test <- read_csv('./trainingandtestdata/Final_Manual_1305.csv')
 
 tweets.classified <- read_csv('trainingandtestdata/training.1600000.processed.noemoticon.csv',
                               col_names = c('sentiment', 'id', 'date', 'query', 'user', 'text')) %>%
@@ -50,7 +50,7 @@ trainIndex <- createDataPartition(tweets.classified$sentiment, p = 0.8,
                                   list = FALSE, 
                                   times = 1)
 tweets.train <- tweets.classified[trainIndex, ]
-tweets.test <- tweets.classified[-trainIndex, ]
+#tweets.test <- tweets.classified[-trainIndex, ]
 
 
 # Preprocess twitter

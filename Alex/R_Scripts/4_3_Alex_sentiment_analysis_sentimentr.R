@@ -22,17 +22,26 @@ facebook.sentimentr$Id <- format(facebook.sentimentr , scientific=FALSE)
 
 
 # Model Evaluation
-tweets.test$text <- removeURL(tweets.test$text)
-tweets.test$text <- convert(tweets.test$text)
-tweets.test$text <- removeTags(tweets.test$text)
-tweets.test$text <- removeTwitterHandles(tweets.test$text)
-tweets.test$text <- convertAbbreviations(tweets.test$text)
-tweets.test$text <- tryTolower(tweets.test$text)
-tweets.test$text_stemmed <- stemWords(tweets.test$text)
+tweets.test$message <- removeURL(tweets.test$message)
+tweets.test$message <- convert(tweets.test$message)
+tweets.test$message <- removeTags(tweets.test$message)
+tweets.test$message <- removeTwitterHandles(tweets.test$message)
+tweets.test$message <- convertAbbreviations(tweets.test$message)
+tweets.test$message <- tryTolower(tweets.test$message)
+tweets.test$message_stemmed <- stemWords(tweets.test$message)
+
+tweets.test$sentiment <-  ifelse(tweets.test$sentiment == "N", "neutral", ifelse(tweets.test$sentiment > 2, "positive", "negative"))
 
 
-test.sentimentR <- sentimentr::sentiment_by(as.character(tweets.test$text_stemmed))
-test.sentimentR$sent <- ifelse(test.sentimentR$ave_sentiment > 0, 4, 0) # translate sentiments back to the original training data
-print(table(test.sentimentR$sent, tweets.test$sentiment))
+test.sentimentR <- sentimentr::sentiment_by(as.character(tweets.test$message_stemmed))
+test.sentimentR$sent <- ifelse(test.sentimentR$ave_sentiment == 0, "neutral", ifelse(test.sentimentR$ave_sentiment > 0 , "positive", "negative")) # translate sentiments back to the original training data
 
+
+message("sentimentR")
+confusionMatrix(tweets.test$sentiment, test.sentimentR$sent )
+
+
+test.sentimentR$sent <- ifelse(test.sentimentR$ave_sentiment == 0, "pred_neutral", ifelse(test.sentimentR$ave_sentiment > 0 , "pred_positive", "pred_negative")) # translate sentiments back to the original training data
+
+print(table(test.sentimentR$sent,tweets.test$sentiment))
 

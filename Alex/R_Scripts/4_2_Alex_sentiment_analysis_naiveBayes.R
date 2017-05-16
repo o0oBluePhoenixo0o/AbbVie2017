@@ -57,7 +57,7 @@ trainClassifier <- function(tweets.classified, save = TRUE){
   
   # data splitting on train and test, I can only use a small amount of the training data because my system will crash with a higher number
   set.seed(2340)
-  trainIndex <- createDataPartition(tweets.classified$V1, p = 0.00070, 
+  trainIndex <- createDataPartition(tweets.classified$V1, p = 0.00100, 
                                     list = FALSE, 
                                     times = 1)
   
@@ -111,6 +111,9 @@ trainClassifier <- function(tweets.classified, save = TRUE){
   # Model Evaluation
   results <- predict(model,as.matrix(testmatrix[1:160,]));
   print(table(results,testdata[1:160,2]))
+  
+  print(confusionMatrix(testdata[1:160,2], results))
+  
   return(model)
   
 }
@@ -139,10 +142,6 @@ initNaiveBayes <- function(){
 naiveBayesModel <- initNaiveBayes()
 
 
+results <- predict(naiveBayesModel,as.matrix(tweets.train[1:160,]$text))
+results
 
-twitter34201 <- predict(naiveBayesModel,as.matrix(twitterMaster.df[34201,]$Text))
-twitter34201
-twitter6012 <- predict(naiveBayesModel,as.matrix("I love you"))
-twitter6012
-twitter34130 <- predict(naiveBayesModel,as.matrix(twitterMaster.df[34130,]$Text))
-twitter34130

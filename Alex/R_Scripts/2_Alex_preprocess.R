@@ -82,7 +82,11 @@ convertAbbreviations <- function(text){
   # Returns:
   #   String
   
-  return(qdap::replace_abbreviation(text, abbreviation = myAbbrevs, ignore.case = TRUE))
+  if(is.na(text) || text == ""){
+    return(text)
+  } else {
+    return(qdap::replace_abbreviation(text, abbreviation = myAbbrevs, ignore.case = TRUE))
+  }
 } 
 
 removeTwitterHandles <- function(text){

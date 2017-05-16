@@ -16,6 +16,7 @@ library(dplyr )
 library(stringr)
 library(qdap)
 source('./2_Alex_preprocess.R')
+source('./7_Alex_evaluation.R')
 source('./translateR.R')
 
 plotSyuzhetEmotions <- function(df) {
@@ -56,24 +57,31 @@ plot
 # Model Evaluation
 
 
-tweets.test <- read_csv("./Alex_TW_Test160.csv")
+tweets.test$message <- sapply(tweets.test$message, removeURL)
+tweets.test$message <- sapply(tweets.test$message, removeTwitterHandles)
+tweets.test$message <- sapply(tweets.test$message, removeTags)
+tweets.test$message <- sapply(tweets.test$message, convertLatin_ASCII)
+tweets.test$message <- sapply(tweets.test$message, tryTolower)
+tweets.test$message <- sapply(tweets.test$message, convertAbbreviations)
+tweets.test$message <- sapply(tweets.test$message, removeStopWords)
+tweets.test$message_stemmed <- sapply(tweets.test$message, stemWords)
 
-tweets.test$text <- sapply(tweets.test$text, removeURL)
-tweets.test$text <- sapply(tweets.test$text, removeTwitterHandles)
-tweets.test$text <- sapply(tweets.test$text, removeTags)
-tweets.test$text <- sapply(tweets.test$text, convertLatin_ASCII)
-tweets.test$text <- sapply(tweets.test$text, tryTolower)
-tweets.test$text <- sapply(tweets.test$text, convertAbbreviations)
-tweets.test$text <- sapply(tweets.test$text, removeStopWords)
-tweets.test$text_stemmed <- sapply(tweets.test$text, stemWords)
+tweets.test$sentiment <-  ifelse(tweets.test$sentiment == "N", "neutral", ifelse(tweets.test$sentiment > 2, "positive", "negative"))
 
-test.syuzhet <- syuzhet::get_nrc_sentiment(as.character(tweets.test$text_stemmed))
+test.syuzhet <- syuzhet::get_nrc_sentiment(as.character(tweets.test$message_stemmed))
 test.syuzhet <- as.data.frame(test.syuzhet[,9:10])
-test.syuzhet$sent <- ifelse((test.syuzhet$positive- test.syuzhet$negative) > 0, 1, 0)# translate sentiments back to the original training data
-
-print(table(test.syuzhet$sent, tweets.test$sentiment))
+test.syuzhet$sent <- ifelse((test.syuzhet$positive - test.syuzhet$negative) == 0, "neutral", ifelse(test.syuzhet$positive - test.syuzhet$negative > 0 , "positive", "negative"))# translate sentiments back to the original training data
 
 
+message("syuzhet")
+confusionMatrix(tweets.test$sentiment, test.syuzhet$sent)
+test.syuzhet$sent <- ifelse((test.syuzhet$positive - test.syuzhet$negative) == 0, "pred_neutral", ifelse(test.syuzhet$positive - test.syuzhet$negative > 0 , "pred_positive", "pred_negative"))# translate sentiments back to the original training data
 
+
+
+
+# Evlauation
+
+analyzeConfusinMatrix(tweets.test$sentiment,test.syuzhet$sent)
 
 

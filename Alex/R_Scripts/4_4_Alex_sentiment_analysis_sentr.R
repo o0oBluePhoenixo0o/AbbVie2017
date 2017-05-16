@@ -20,7 +20,20 @@ facebook.sentr$Id <- format(facebook.sentr$Id, scientific=F)
 
 
 # Model Evaluation
+tweets.test$message <- removeURL(tweets.test$message)
+tweets.test$message <- convert(tweets.test$message)
+tweets.test$message <- removeTags(tweets.test$message)
+tweets.test$message <- removeTwitterHandles(tweets.test$message)
+tweets.test$message <- convertAbbreviations(tweets.test$message)
+tweets.test$message <- tryTolower(tweets.test$message)
+tweets.test$message_stemmed <- stemWords(tweets.test$message)
 
-test.sentR <- sentR::classify.naivebayes(tweets.test$text_stemmed)
-test.sentR[,4] <- ifelse(test.sentR[,4] == 'positive'|test.sentR[,4] == 'neutral' , 4, 0) # translate sentiments back to the original training data
+tweets.test$sentiment <-  ifelse(tweets.test$sentiment == "N", "neutral", ifelse(tweets.test$sentiment > 2, "positive", "negative"))
+test.sentR <- sentR::classify.naivebayes(tweets.test$message_stemmed)
+
+message("sentR")
+confusionMatrix(tweets.test$sentiment, test.sentR[,4])
+
+
+test.sentR[,4] <- ifelse(test.sentR[,4] == 'neutral', "pred_neutral", ifelse(test.sentR[,4] == 'positive', "pred_positive", "pred_negative")) # translate sentiments back to the original training data
 print(table(test.sentR[,4], tweets.test$sentiment))
