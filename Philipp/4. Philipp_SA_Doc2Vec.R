@@ -86,14 +86,12 @@ it_test <- itoken(tweets_test$text,
                   ids = tweets_test$id,
                   progressbar = TRUE)
 
+#####################################################################################
 # creating vocabulary and document-term matrix
 vocab <- create_vocabulary(it_train)
 vectorizer <- vocab_vectorizer(vocab)
 dtm_train <- create_dtm(it_train, vectorizer)
 dtm_test <- create_dtm(it_test, vectorizer)
-
-as.matrix(dtm_train)
-model <- naiveBayes(dtm_train,tweets_train)
 
 # define tf-idf model
 tfidf <- TfIdf$new()
@@ -122,7 +120,7 @@ dtm_test_tfidf <- fit_transform(dtm_test, tfidf)
 
 # plot(glmnet_classifier)
 # print(paste("max AUC =", round(max(glmnet_classifier$cvm), 4)))
-# 
+#
 # preds <- predict(glmnet_classifier, dtm_test_tfidf, type = 'response')[ ,1]
 # auc(as.numeric(tweets_test$sentiment), preds)
 # 
@@ -230,11 +228,3 @@ Apply.Doc2Vec(keywords,TW_RT)
 Apply.Doc2Vec(keywords,postdf)
 Apply.Doc2Vec(keywords,commentdf)
 
-# Test with new manual test set
-testdf <- read.csv("Final_Manual_0805.csv", as.is = TRUE, sep = ",")
-backup <- testdf
-
-testdf$sentiment <- NA
-for (i in 1:length(keywords)){
-  Doc2Vec(keywords[i],testdf,"TEST")
-}

@@ -2,7 +2,7 @@ options(stringsAsFactors = FALSE)
 library(dplyr)
 library(stringr)
 library(rvest)
-
+library(Unicode)
 library(tm)
 library(ggplot2)
 
@@ -119,14 +119,34 @@ emojis <- emojis_raw %>%
 rm(emojis_raw)
 emojis <- emojis[ , -which(names(emojis) %in% c("block","negative","positive","neutral","position",
                                                 "occurrences"))]
-str(emojis)
 
-#### Merge sentiments to create complete sets with UNICODE and SENTIMENT scores
+# read in emoji dictionary (with R.encoding)
+# input your custom path to file
+emDict <- read.csv2("emDict.csv")
+colnames(emDict)[1] <- c("description")
+emDict$description <- tolower(emDict$description)
+
+emDict <- emDict[ , -which(names(emDict) %in% c("Native","Bytes"))]
+
+################################################################
+#### Merge sentiments to create complete sets with R.Encoding and SENTIMENT scores
+emoji_final <- data.frame()
+
 emoji_final <- inner_join(emojis,alltogether, by = "description")
 
-#Need to capitalize all messages
-Testdf <- subset(TW_df,select = c("message","Id"))
-Testdf$message <- toupper(Testdf$message)
+emoji_final <- inner_join(emoji_final,emDict, by = "description")
+
+##################################################################
+
+# Remove datasets
+rm(emDict)
+rm(alltogether)
+rm(emojis)
+
+# Get the anchors
+matchto <- emoji_final$R.encoding
+description <- emoji_final$description
+sentiment <- emoji_final$sentiment_score
 
 
 ###################################################################################
@@ -143,7 +163,7 @@ count_matches <- function(string, matchto, description, sentiment = NA) {
     cnt <- vec[matches]}
   
   df <- data.frame(text = string, description = descr, count = cnt, sentiment = NA)
-  
+
   if (!is.na(sentiment) & length(sentiment[matches]) != 0) {
     df$sentiment <- sentiment[matches]}
   return(df)
@@ -151,32 +171,31 @@ count_matches <- function(string, matchto, description, sentiment = NA) {
 
 # this function applies count_matches on a vector o texts and outputs a data.frame
 emojis_matching <- function(texts, matchto, description, sentiment = NA) {
-  
   texts %>% 
     lapply(count_matches, matchto = matchto, description = description, sentiment = sentiment) %>%
     bind_rows
-  
 }
 
+############################################################
+# Get samples
+#######################
 
-# read in emoji dictionary
-# input your custom path to file
-emDict <- read.csv2("emDict.csv")
-colnames(emDict)[1] <- c("description")
-emDict$description <- tolower(emDict_raw$description)
+#Need to capitalize all messages
+tmp <- read.csv("Final_TW_2804.csv",as.is = TRUE, sep = ",")
+tmp <- subset(tmp,select = c("Text","Id"))
+# tmp$message <- toupper(tmp$message)
+tmp <- tmp %>%
+  mutate(Text = iconv(Text, from = "latin1", to = "ASCII", sub = "byte"))
+tmp$Id <- as.factor(tmp$Id)
 
-# all emojis with more than one unicode codepoint become NA 
+tmp <- unique(tmp)
 
-matchto <- emDict$r.encoding
-description <- emDict$description
+tmp <- tmp[1:10000,]
 
+tmp <- "\xF0\x9F\x98\x8A"
+tmp <- data.frame(text = iconv(tmp, "latin1", "ASCII", "byte"), 
+                  stringsAsFactors = FALSE)
 
-#####################################################
+tmp
+result <- emojis_matching(tmp$Text, matchto, description,sentiment)
 
-emojis_matching <- function(texts, matchto, description, sentiment = NA) {
-  
-  texts %>% 
-    lapply(count_matches, matchto = matchto, description = description, sentiment = sentiment) %>%
-    bind_rows
-  
-}

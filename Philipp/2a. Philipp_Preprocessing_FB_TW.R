@@ -16,11 +16,12 @@ colnames(commentdf)[3] <- "message"
 colnames(commentdf)[4] <- "created_time"
 commentdf <- subset(commentdf, !duplicated(message))
 
-## convert date format to R date format
-format.date <- function(datestring) {
-  date <- as.POSIXct(datestring, format = "%Y-%m-%dT%H:%M:%S+0000", tz = "GMT")
-}
+# ## convert date format to R date format
+# format.date <- function(datestring) {
+#   date <- as.POSIXct(datestring, format = "%Y-%m-%dT%H:%M:%S+0000", tz = "GMT")
+# }
 
+###############################################################################
 #Twitter
 TW_df <- read.csv("Final_TW_1205_prep.csv", sep = ",", as.is = TRUE)
 TW_df$Id <- as.factor(TW_df$Id)
@@ -34,15 +35,49 @@ TW_RT <- subset(TW_df,str_sub(TW_df$message, start = 1, end = 4) == "rt @")
 #Tweets-only dataset
 TW_T <- TW_df[-grep("rt @",TW_df$message),]
 
-###############################################################################
-# Test set 13.05.17
-testdf <- read.csv("Final_Manual_1305.csv", as.is = TRUE, sep = ",")
-# #Update 13.05 for date time parse (again)
-# testdf$created_time <- lubridate::parse_date_time(testdf$created_time, c("%m/%d/%y"))
 
-# write.csv(testdf,"Final_Manual_1305.csv",
-#           quote = TRUE, row.names=FALSE,
-#         fileEncoding = "UTF-8", na = "NA")
+
+# 16.05.17
+# Re-merge the original "messages" of Twitter to the current set
+# Using Final_TW_2804.csv
+
+TW_df_2804 <- read.csv("Final_TW_2804.csv", as.is = TRUE, sep = ",")
+TW_df_2804 <- TW_df_2804[, which(names(TW_df_2804) %in% c("Text","Id"))]
+TW_df_2804$Id <- as.factor(TW_df_2804$Id)
+TW_df_2804 <- TW_df_2804[TW_df_2804$Id != 'Id',]
+
+TW_df_2804 <- unique(TW_df_2804)
+
+#Clean the 12.05 prep TW
+TW_df <- TW_df[TW_df$Geo.Location.Latitude != 'ibrutinib' & TW_df$Geo.Location.Latitude != 'humira',]
+TW_df$Id <- as.factor(TW_df$Id)
+TW_df <- unique(TW_df)
+
+TW_df_current <- TW_df[, which(names(TW_df) %in% c("message","Id"))]
+TW_df_current <- unique(TW_df_current)
+
+TW_df_final <- dplyr::left_join(TW_df,TW_df_2804, by = "Id")
+
+###############################################################################
+
+# 
+# testdf <- read.csv("Final_Manual_0805.csv", as.is = TRUE, sep = ",")
+# 
+# bkup <- testdf[testdf$key %in% c("enbrel","ankylosing spondylitis","bristol myers"),]
+# 
+# testdf <- testdf[!testdf$key %in% c("enbrel","ankylosing spondylitis","bristol myers"),]
+# 
+# # #Update 15.05 for date time parse (again)
+# 
+# testdf$created_time <- lubridate::parse_date_time(testdf$created_time,c("%m/%d/%y"))
+# 
+# #delete those "failed to parse"
+# testdf <- rbind(testdf, bkup)
+# 
+# 
+# write.csv(testdf,"Final_Manual_1505.csv",
+#            quote = TRUE, row.names=FALSE,
+#          fileEncoding = "UTF-8", na = "NA")
 
 # for (i in 1:nrow(FB_df))
 # {
