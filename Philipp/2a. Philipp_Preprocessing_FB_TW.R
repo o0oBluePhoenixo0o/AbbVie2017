@@ -25,38 +25,52 @@ commentdf <- subset(commentdf, !duplicated(message))
 #Twitter
 TW_df <- read.csv("Final_TW_1205_prep.csv", sep = ",", as.is = TRUE)
 TW_df$Id <- as.factor(TW_df$Id)
-#Filter only ENGLISH tweets
-TW_df <- TW_df[TW_df$Language == 'eng',]
+TW_df <- unique(TW_df)
 
-#Create a Retweet dataset
-require(stringr)
-TW_RT <- subset(TW_df,str_sub(TW_df$message, start = 1, end = 4) == "rt @")
+# not %in% function
+'%!in%' <- function(x,y)!('%in%'(x,y))
+##
 
-#Tweets-only dataset
-TW_T <- TW_df[-grep("rt @",TW_df$message),]
-
+TW_df <- TW_df[which(TW_df$Id %!in% c('Id',NA)),]
+TW_df<- TW_df[which(TW_df$Geo.Location.Latitude %!in% c('ibrutinib','humira')),]
 
 
-# 16.05.17
+# #Filter only ENGLISH tweets
+# TW_df <- TW_df[TW_df$Language == 'eng',]
+# 
+# #Create a Retweet dataset
+# require(stringr)
+# TW_RT <- subset(TW_df,str_sub(TW_df$message, start = 1, end = 4) == "rt @")
+# 
+# #Tweets-only dataset
+# TW_T <- TW_df[-grep("rt @",TW_df$message),]
+
+###############################################################
+# 18.05.17
 # Re-merge the original "messages" of Twitter to the current set
 # Using Final_TW_2804.csv
 
 TW_df_2804 <- read.csv("Final_TW_2804.csv", as.is = TRUE, sep = ",")
-TW_df_2804 <- TW_df_2804[, which(names(TW_df_2804) %in% c("Text","Id"))]
-TW_df_2804$Id <- as.factor(TW_df_2804$Id)
-TW_df_2804 <- TW_df_2804[TW_df_2804$Id != 'Id',]
-
 TW_df_2804 <- unique(TW_df_2804)
 
-#Clean the 12.05 prep TW
-TW_df <- TW_df[TW_df$Geo.Location.Latitude != 'ibrutinib' & TW_df$Geo.Location.Latitude != 'humira',]
-TW_df$Id <- as.factor(TW_df$Id)
-TW_df <- unique(TW_df)
+#cleanning some irrelevant data
+TW_df_2804$Id <- as.factor(TW_df_2804$Id)
 
-TW_df_current <- TW_df[, which(names(TW_df) %in% c("message","Id"))]
-TW_df_current <- unique(TW_df_current)
+TW_df_2804 <- TW_df_2804[which(TW_df_2804$Id %!in% c('Id',NA)),]
+TW_df_2804<- TW_df_2804[which(TW_df_2804$Geo.Location.Latitude %!in% c('ibrutinib','humira')),]
+TW_df_2804 <- TW_df_2804[, which(names(TW_df_2804) %in% c("Created.At","Text","Id"))]
 
-TW_df_final <- dplyr::left_join(TW_df,TW_df_2804, by = "Id")
+colnames(TW_df_2804) <- c("created_time","message","Id")
+
+
+# #Clean the 12.05 prep TW
+# TW_df$Id <- as.factor(TW_df$Id)
+# TW_df <- unique(TW_df)
+# 
+# TW_df_current <- TW_df[, which(names(TW_df) %in% c("message","Id"))]
+# TW_df_current <- unique(TW_df_current)
+# 
+# TW_df_final <- dplyr::left_join(TW_df,TW_df_2804, by = "Id")
 
 ###############################################################################
 
@@ -190,23 +204,23 @@ TW_df_final <- dplyr::left_join(TW_df,TW_df_2804, by = "Id")
 
 ################################################################################
 
-# #Twitter
-# TW_df <- read.csv("Final_TW_2804.csv",sep = ",", as.is = TRUE)
-# #delete the first column "X"
-# TW_df <- TW_df[,-1]
-#change "Label" to fit with FB_df
-# 
-# for (i in 1:ncol(TW_df)){
-#   if (colnames(TW_df)[i]=="Text"){colnames(TW_df)[i] <- "message"}
-#   else if(colnames(TW_df)[i] == "Created.At"){colnames(TW_df)[i] <- "created_time"}
-#   
-#   if (colnames(TW_df)[i] == "key"){
-#     key<-TW_df[,i]
-#     TW_df<-TW_df[,!(names(TW_df) %in% c("key"))]}
-# }
-# TW_df<-cbind(key,TW_df)
-# TW_df <- TW_df[!(TW_df$message == "" | TW_df$key == 'Label' | TW_df$key == ""|
-#                    TW_df$created_time ==""|is.na(TW_df$key) == TRUE),]
+#Twitter
+#TW_df <- read.csv("Final_TW_2804.csv",sep = ",", as.is = TRUE)
+#delete the first column "X"
+#  TW_df_2804 <- TW_df_2804[,-1]
+# #change "Label" to fit with FB_df
+#  
+#  for (i in 1:ncol(TW_df_2804)){
+#    if (colnames(TW_df_2804)[i]=="Text"){colnames(TW_df_2804)[i] <- "message"}
+#    else if(colnames(TW_df_2804)[i] == "Created.At"){colnames(TW_df_2804)[i] <- "created_time"}
+#    
+#    if (colnames(TW_df_2804)[i] == "key"){
+#      key<-TW_df_2804[,i]
+#      TW_df_2804<-TW_df_2804[,!(names(TW_df_2804) %in% c("key"))]}
+#  }
+#  TW_df_2804<-cbind(key,TW_df_2804)
+#  TW_df_2804 <- TW_df_2804[!(TW_df_2804$message == "" | TW_df_2804$key == 'Label' | TW_df_2804$key == ""|
+#                     TW_df_2804$created_time ==""|is.na(TW_df_2804$key) == TRUE),]
 
 
 ######################################
@@ -220,51 +234,63 @@ TW_df_final <- dplyr::left_join(TW_df,TW_df_2804, by = "Id")
 # 
 # backup <- TW_df
 
-# TW_df$created_time<-gsub("/17/2003", "-03-2017", TW_df$created_time)
-# 
-# #This one mixed up between both d/m/y and m/d/y
-# TW_df$created_time <- lubridate::parse_date_time(TW_df$created_time, 
-#                                                 c("%m/%d/%y %H:%M",
-#                                                   "%d-%m-%y %H:%M",
-#                                                   "%y-%m-%d %H:%M:%S"))
+###################
+# 18.05 Modify to reclean the data
 
-# Test Olga's method to check how many were left out
-# About 600 tweets missing...
-# 
-# TW_df1 <- TW_df
-# TW_df1<-TW_df1[grep("[0-9]*/[0-9]{2}/2017",TW_df1$created_time),]
-# TW_df1$created_time <- as.Date(TW_df1$created_time, format="%m/%d/%Y")
-# 
-# TW_df2 <- TW_df
-# TW_df2<-TW_df2[grep("[0-9]*/[0-9]{2}/2003",TW_df2$created_time),]
-# TW_df2$created_time<-gsub("/17/2003", "-03-2017", TW_df2$created_time)
-# TW_df2$created_time <- as.Date(TW_df2$created_time, format="%d-%m-%Y")
-# 
-# TW_df3 <- TW_df
-# TW_df3$created_time <- as.Date(TW_df3$created_time, format="%Y-%m-%d")
-# 
-# test <- rbind(TW_df1,TW_df2,TW_df3)
-# test<- test[!(is.na(test$created_time)),]
-# 
-# TW_df <- test
-# differences <- test[!(test$created_time %in% TW_df$created_time),]
-# 
-# #Add diseases_28_04.csv and delete duplicates
-# 
-# disease <- read.csv("diseases_28_04.csv",sep = ",", as.is = TRUE)
-# 
-# created <- disease$created
-# key <- disease$label
-# disease <- disease[ , -which(names(disease) %in% c("created","Created.At","X.1","X","label"))]
-# disease<-cbind(created,disease)
-# colnames(disease)[1]<- "created_time"
-# colnames(disease)[8] <- "message"
-# disease <- cbind(key,disease)
-# disease$message <- conv_fun(prep_fun(disease$message))
-#   
-# #Merge and delete duplicates
-# TW_df <- rbind(TW_df, disease)
-# TW_df <- unique(TW_df)
+backup <- TW_df_2804
+
+
+ TW_df_2804$created_time<-gsub("/17/2003", "-03-2017", TW_df_2804$created_time)
+
+ # This one mixed up between both d/m/y and m/d/y
+ TW_df_2804$created_time <- lubridate::parse_date_time(TW_df_2804$created_time,
+                                                 c("%m/%d/%y %H:%M",
+                                                   "%d-%m-%y %H:%M",
+                                                   "%y-%m-%d %H:%M:%S"))
+
+ # Test Olga's method to check how many were left out
+ # About 600 tweets missing...
+
+ TW_df_28041 <- TW_df_2804
+ TW_df_28041<-TW_df_28041[grep("[0-9]*/[0-9]{2}/2017",TW_df_28041$created_time),]
+ TW_df_28041$created_time <- lubridate::parse_date_time(TW_df_28041$created_time, "mdy HM")
+
+ TW_df_28042 <- TW_df_2804
+ TW_df_28042<-TW_df_28042[grep("[0-9]*/[0-9]{2}/2003",TW_df_28042$created_time),]
+ TW_df_28042$created_time<-gsub("/17/2003", "-03-2017", TW_df_28042$created_time)
+ TW_df_28042$created_time <- lubridate::parse_date_time(TW_df_28042$created_time, "dmy HM")
+
+ #stop here 18.05 1900
+ TW_df_28043 <- TW_df_2804
+ TW_df_28043$created_time <- as.Date(TW_df_28043$created_time, format="%Y-%m-%d")
+
+ #lubridate::parse_date_time(TW_df_28043$created_time, "ymd HM")
+ 
+ 
+ 
+ test <- rbind(TW_df_28041,TW_df_28042,TW_df_28043)
+ test<- test[!(is.na(test$created_time)),]
+
+ TW_df_2804 <- test
+ # differences <- test[!(test$created_time %in% TW_df_2804$created_time),]
+
+ #Add diseases_28_04.csv and delete duplicates
+
+ disease <- read.csv("diseases_28_04.csv",sep = ",", as.is = TRUE)
+ 
+ created <- lubridate::parse_date_time(disease$Created.At, "%m/%d/%y HM") 
+ 
+ key <- disease$label
+ disease <- disease[ , -which(names(disease) %in% c("created","Created.At","X.1","X","label"))]
+ disease<-cbind(created,disease)
+ colnames(disease)[1]<- "created_time"
+ colnames(disease)[8] <- "message"
+ disease <- cbind(key,disease)
+ #disease$message <- conv_fun(prep_fun(disease$message))
+
+ #Merge and delete duplicates
+ TW_df_2804 <- rbind(TW_df_2804, disease)
+ TW_df_2804 <- unique(TW_df_2804)
 # 
 # #Filter only ENGLISH tweets
 # TW_df <- TW_df[TW_df$Language == 'eng',]

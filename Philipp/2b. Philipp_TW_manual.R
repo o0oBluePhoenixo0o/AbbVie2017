@@ -2,6 +2,7 @@
 # Language == NA --> need to redetect language for Twitters
 # Clean text then extract original tweets
 
+setwd("~/GitHub/AbbVie2017/Philipp")
 
 #Twitter
 TW_df <- read.csv("Final_TW_1205_prep.csv",sep = ",", as.is = TRUE)
@@ -16,6 +17,18 @@ clean <- function (sentence){
 }
 
 TW_df$message <- sapply(TW_df$message, function(x) clean(x))
+
+##########################################
+# Building TW dataset for manual sentiment and trend detection
+
+require(stringr)
+TW_T <- subset(TW_df,str_sub(TW_df$message, start = 1, end = 4) != "rt @")
+
+TW_T <- subset(TW_T,TW_T$Language == 'eng')
+
+TW_T <- TW_T[ , which(names(TW_T) %in% c("key","created_time","Id","message"))]
+
+TW_T <- TW_T[!duplicated(TW_T[,c('message')]),]
 
 #Redetecting language in TW_0305
 
@@ -70,18 +83,6 @@ TW_df$message <- sapply(TW_df$message, function(x) clean(x))
 #           quote = TRUE, row.names=FALSE,
 #           fileEncoding = "UTF-8", na = "NA")
 
-
-##########################################
-# Building TW dataset for manual sentiment and trend detection
-
-require(stringr)
-TW_T <- subset(TW_df,str_sub(TW_df$message, start = 1, end = 4) != "rt @")
-
-TW_T <- subset(TW_T,TW_T$Language == 'eng')
-
-TW_T <- TW_T[ , which(names(TW_T) %in% c("key","created_time","Id","message"))]
-
-TW_T <- TW_T[!duplicated(TW_T[,c('message')]),]
 ############################################
 # 04.05.17
 # sentiment <- NA
@@ -101,8 +102,7 @@ TW_T <- TW_T[!duplicated(TW_T[,c('message')]),]
 #           quote = TRUE, row.names=FALSE,
 #           fileEncoding = "UTF-8", na = "NA")
 
-############################################3
-# 16.05.17 Remerge manual dataset to original
+############################################
 
 
 # Test set 15.05.17
