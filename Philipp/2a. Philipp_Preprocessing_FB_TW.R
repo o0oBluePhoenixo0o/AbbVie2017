@@ -54,10 +54,16 @@ TW_df_2804 <- read.csv("Final_TW_2804.csv", as.is = TRUE, sep = ",")
 TW_df_2804$Id <- as.factor(TW_df_2804$Id)
 TW_df_2804 <- unique(TW_df_2804)
 TW_df_2804 <- TW_df_2804[which(TW_df_2804$Id %!in% c('Id',NA)),]
+TW_df_2804 <- TW_df_2804[which(TW_df_2804$Text %!in% c(NA,'')),]
 TW_df_2804<- TW_df_2804[which(TW_df_2804$Geo.Location.Latitude %!in% c('ibrutinib','humira')),]
-TW_df_2804 <- TW_df_2804[, which(names(TW_df_2804) %in% c("Created.At","Text","Id"))]
 
-colnames(TW_df_2804) <- c("created_time","message","Id")
+#TW_df_2804 <- TW_df_2804[, which(names(TW_df_2804) %in% c("Created.At","Text","Id"))]
+TW_df_2804$From.User <- conv_fun(TW_df_2804$From.User)
+TW_df_2804 <- TW_df_2804[,-1]
+colnames(TW_df_2804)[1] <- "created_time"
+colnames(TW_df_2804)[8] <- "message"
+
+TW_df_2804 <- unique(TW_df_2804)
 
 
 # #Clean the 12.05 prep TW
@@ -106,29 +112,29 @@ colnames(TW_df_2804) <- c("created_time","message","Id")
 
 
 ##################################################
-# 
-# # Detect language by adding "language" column next to the dataset
-# # Only detect languages of Posts since comments languages will be influenced mainly by posts
-# 
-# # install.packages("franc")
-# library(franc)
-# detectLanguage <- function(text){
-#   # Uses 'franc' package to detect the language of a given text
-#   #
-#   # Args:
-#   #   text: The text to detect the language
-#   #
-#   # Returns:
-#   #   A ISO 639-2 encoded language code string
-#   
-#   if (!is.na(text)) {
-#     return (franc(text, min_length = 3))
-#   } else {
-#     message("Can not detect language of NA")
-#     return (NA)
-#   }
-# }
-# 
+
+# Detect language by adding "language" column next to the dataset
+# Only detect languages of Posts since comments languages will be influenced mainly by posts
+
+# install.packages("franc")
+library(franc)
+detectLanguage <- function(text){
+  # Uses 'franc' package to detect the language of a given text
+  #
+  # Args:
+  #   text: The text to detect the language
+  #
+  # Returns:
+  #   A ISO 639-2 encoded language code string
+
+  if (!is.na(text)) {
+    return (franc(text, min_length = 3))
+  } else {
+    message("Can not detect language of NA")
+    return (NA)
+  }
+}
+
 # a<- unique(FB_df[,c("id.x","message.x")])
 # x <- NA
 # a <- cbind(a, x)
@@ -181,12 +187,12 @@ colnames(TW_df_2804) <- c("created_time","message","Id")
 # library(tm)
 # library(stringr)
 # 
-# clean <- function (sentence){
-#   #convert to lower-case 
-#   sentence <- tolower(sentence)
-#   removeURL <- function(x) gsub('"(http.*) |(https.*) |(http.*)$|\n', "", x)
-#   sentence <- removeURL(sentence)
-# }
+clean <- function (sentence){
+  #convert to lower-case
+  sentence <- tolower(sentence)
+  removeURL <- function(x) gsub('"(http.*) |(https.*) |(http.*)$|\n', "", x)
+  sentence <- removeURL(sentence)
+}
 # t1 <- Sys.time()
 # 
 # FB_df$message.x <- sapply(FB_df$message.x, function(x) clean(x))
@@ -265,15 +271,19 @@ TW_df_2804 <- backup
  #remove df
  rm(TW_df_28041,TW_df_28042,TW_df_28043,test,tmp)
  
- 
+ #######################################################3
  #Add diseases_28_04.csv and delete duplicates
 
  disease <- read.csv("diseases_28_04.csv",sep = ",", as.is = TRUE)
  disease$Id  <- as.factor(disease$Id)
  
  disease <- disease[which(disease$Id %!in% c('Id',NA)),]
- disease <- disease[, which(names(disease) %in% c("Created.At","Text","Id"))]
- colnames(disease) <- c("created_time","message","Id")
+ disease <- disease[which(disease$Text %!in% c(NA,'')),]
+ disease <- disease[, which(names(disease) %!in% c("X.1","X","created"))]
+ colnames(disease)[1] <- "created_time"
+ colnames(disease)[8] <- "message"
+ colnames(disease)[13] <- "key"
+ disease$From.User <- conv_fun(disease$From.User)
  ###### 
  # Apply same method for "disease" dataset
  disease1 <- disease
@@ -299,6 +309,11 @@ TW_df_2804 <- backup
  #Remove dataset
  rm(disease1,disease2,disease3,tmp,test, disease)
  
+ #put column "key" to first
+ key  <- TW_df_2804$key
+ TW_df_2804 <- TW_df_2804[, which(names(TW_df_2804) %!in% c("key"))]
+ TW_df_2804 <- cbind(key,TW_df_2804)
+ rm(key)
  #####################################################
  # Add update of first 2 weeks of May 2017
  
@@ -307,25 +322,62 @@ TW_df_2804 <- backup
  
  #Clean updates
  
- update1$id <- as.factor(update1$id)
- update1 <- update1[which(update1$id %!in% c('Id',NA)),]
- update1 <- update1[, which(names(update1) %in% c("created","text","id"))]
- colnames(update1) <- c("message","created_time","Id")
- created_time <- update1$created_time
- update1 <- update1[,-2]
- update1 <- cbind(created_time,update1)
+ update1$Id <- as.factor(update1$Id)
+ update1 <- update1[which(update1$Id %!in% c('Id',NA)),]
+ update1 <- update1[which(update1$Text %!in% c(NA,'')),]
+ update1 <- update1[, which(names(update1) %!in% c("X.1","X","X.2"))]
+ update1$From.User <- conv_fun(update1$From.User)
+ colnames(update1)[1] <-"created_time"
+ colnames(update1)[8] <- "message"
  update1 <- unique(update1)
+ #put column "key" to first
+ key  <- update1$key
+ update1 <- update1[, which(names(update1) %!in% c("key"))]
+ update1 <- cbind(key,update1)
+ rm(key)
  
- update2$id <- as.factor(update2$Id)
+ update2$Id <- as.factor(update2$Id)
  update2 <- update2[which(update2$Id %!in% c('Id',NA)),]
- update2 <- update2[, which(names(update2) %in% c("created_time","message","Id"))]
- colnames(update2) <- c("created_time","message","Id")
+ update2 <- update2[which(update2$message %!in% c(NA,'')),]
+ update2 <- update2[, which(names(update2) %!in% c("X.1","X","X.2"))]
+ update2$From.User <- conv_fun(update2$From.User)
+ colnames(update2)[1] <-"created_time"
+ colnames(update2)[8] <- "message"
  update2 <- unique(update2)
- 
+
  
  TW_fix <- rbind(update1, update2)
  TW_fix <- rbind(TW_fix, TW_df_2804)
+
+ rm(update1,update2,backup,TW_df_2804)
  
+ #update for 19.05 batch
+ update3 <- read.csv("1905.csv", as.is = TRUE, sep = ",")
+ update3$Id <- as.factor(update3$Id)
+ update3 <- update3[, which(names(update3) %!in% c("X.1","X","X.2"))]
+ update3$From.User <- conv_fun(update3$From.User)
+ 
+ TW_fix <- rbind(TW_fix, update3)
+ rm(update3)
+ 
+ # Scan language for TW_fix 1905
+
+ TW_fix$Language <- sapply(TW_fix$Language, function(x) ifelse(x == 'en','eng',x))
+ TW_fix$Language <- sapply(TW_fix$Language, function(x) ifelse(x == 'de','deu',x))
+ TW_fix$Language <- sapply(TW_fix$Language, function(x) ifelse(x %in% c('eng','deu'),x,'eng'))
+
+ agg <- dplyr::summarize(dplyr::group_by(TW_fix, Language),n())
+ 
+ 
+ # Write CSV for TW_fix on 19.05
+ # + CONVERTED From.UserID
+ # + RAW text for messages
+ # + Parse date time with HOURS
+ # + FULL language features
+ # + UPDATED with 19.05 TW weekly
+ write.csv(TW_df, file = "Final_TW_1905_prep.csv",
+           quote = TRUE, row.names=FALSE,
+            fileEncoding = "UTF-8", na = "NA")
  
  
  #####

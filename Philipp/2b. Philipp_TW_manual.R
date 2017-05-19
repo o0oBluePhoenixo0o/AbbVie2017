@@ -104,14 +104,23 @@ TW_T <- TW_T[!duplicated(TW_T[,c('message')]),]
 
 ############################################
 
+# 19.05
+# Extract TW for manual label (2nd) from TW update 1205 and 1905
 
-# Test set 15.05.17
-testdf <- read.csv("Final_Manual_1505.csv", as.is = TRUE, sep = ",") 
+update1205 <- read.csv("1205.csv", as.is = TRUE, sep = ",")
+update1905 <- read.csv("1905.csv", as.is = TRUE, sep = ",")
 
-test <- testdf[,which(names(testdf) %in% c("message","From.User","created_time"))]
+TW_Manual <- rbind(update1205,update1905)
 
-original <- TW_T[,which(names(TW_T) %in% c("message","Id","From.User"))]
-original$From.User <- conv_fun(original$From.User)
-result <- dplyr::left_join(testdf,original, by = c("message","From.User"))
-result <- unique(result)
+sentiment <- NA
+sarcastic <- NA
+context <- NA
+topic <- NA
 
+TW_Manual <- TW_Manual[, which(names(TW_Manual) %in% c("key","created_time","message","From.User","Id"))]
+TW_Manual <- cbind(TW_Manual,sentiment,sarcastic,context,topic)
+
+# Write NEW TW Manual set (non-label) for manual tasks on 19.05
+write.csv(TW_Manual, file = "TW_MANUAL_1905.csv",
+          quote=TRUE, row.names = FALSE,
+          fileEncoding = "UTF-8", na = "NA")
