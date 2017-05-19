@@ -1,3 +1,7 @@
+
+#Set R to read ID normally
+options(scipen=999)
+
 setwd("~/GitHub/AbbVie2017/Philipp")
 #Read data from final consolidate dataset
 #FaceBook
@@ -15,11 +19,6 @@ colnames(commentdf)[2] <- "id"
 colnames(commentdf)[3] <- "message"
 colnames(commentdf)[4] <- "created_time"
 commentdf <- subset(commentdf, !duplicated(message))
-
-# ## convert date format to R date format
-# format.date <- function(datestring) {
-#   date <- as.POSIXct(datestring, format = "%Y-%m-%dT%H:%M:%S+0000", tz = "GMT")
-# }
 
 ###############################################################################
 #Twitter
@@ -51,11 +50,9 @@ TW_df<- TW_df[which(TW_df$Geo.Location.Latitude %!in% c('ibrutinib','humira')),]
 # Using Final_TW_2804.csv
 
 TW_df_2804 <- read.csv("Final_TW_2804.csv", as.is = TRUE, sep = ",")
-TW_df_2804 <- unique(TW_df_2804)
-
 #cleanning some irrelevant data
 TW_df_2804$Id <- as.factor(TW_df_2804$Id)
-
+TW_df_2804 <- unique(TW_df_2804)
 TW_df_2804 <- TW_df_2804[which(TW_df_2804$Id %!in% c('Id',NA)),]
 TW_df_2804<- TW_df_2804[which(TW_df_2804$Geo.Location.Latitude %!in% c('ibrutinib','humira')),]
 TW_df_2804 <- TW_df_2804[, which(names(TW_df_2804) %in% c("Created.At","Text","Id"))]
@@ -228,28 +225,22 @@ colnames(TW_df_2804) <- c("created_time","message","Id")
 ######################################
 # 
 # prep_fun <- tolower
-# conv_fun <- function(x) iconv(x, "latin1", "ASCII", "")
+conv_fun <- function(x) iconv(x, "latin1", "ASCII", "")
 # 
 # TW_df$message <- conv_fun(prep_fun(TW_df$message))
 # 
 # backup <- TW_df
 
-###################
+#####################################################################################
 # 18.05 Modify to reclean the data
 
 backup <- TW_df_2804
 
+#get backup
 
- TW_df_2804$created_time<-gsub("/17/2003", "-03-2017", TW_df_2804$created_time)
+TW_df_2804 <- backup
 
- # This one mixed up between both d/m/y and m/d/y
- TW_df_2804$created_time <- lubridate::parse_date_time(TW_df_2804$created_time,
-                                                 c("%m/%d/%y %H:%M",
-                                                   "%d-%m-%y %H:%M",
-                                                   "%y-%m-%d %H:%M:%S"))
-
- # Test Olga's method to check how many were left out
- # About 600 tweets missing...
+#Start parsing time-date
 
  TW_df_28041 <- TW_df_2804
  TW_df_28041<-TW_df_28041[grep("[0-9]*/[0-9]{2}/2017",TW_df_28041$created_time),]
@@ -260,37 +251,96 @@ backup <- TW_df_2804
  TW_df_28042$created_time<-gsub("/17/2003", "-03-2017", TW_df_28042$created_time)
  TW_df_28042$created_time <- lubridate::parse_date_time(TW_df_28042$created_time, "dmy HM")
 
- #stop here 18.05 1900
  TW_df_28043 <- TW_df_2804
- TW_df_28043$created_time <- as.Date(TW_df_28043$created_time, format="%Y-%m-%d")
-
- #lubridate::parse_date_time(TW_df_28043$created_time, "ymd HM")
+ tmp <- rbind(TW_df_28041,TW_df_28042)
+ TW_df_28043 <- dplyr::anti_join(TW_df_28043,tmp, by = "Id")
  
  
- 
+ #### Merge to get final file
  test <- rbind(TW_df_28041,TW_df_28042,TW_df_28043)
  test<- test[!(is.na(test$created_time)),]
 
  TW_df_2804 <- test
- # differences <- test[!(test$created_time %in% TW_df_2804$created_time),]
-
+ 
+ #remove df
+ rm(TW_df_28041,TW_df_28042,TW_df_28043,test,tmp)
+ 
+ 
  #Add diseases_28_04.csv and delete duplicates
 
  disease <- read.csv("diseases_28_04.csv",sep = ",", as.is = TRUE)
+ disease$Id  <- as.factor(disease$Id)
  
- created <- lubridate::parse_date_time(disease$Created.At, "%m/%d/%y HM") 
+ disease <- disease[which(disease$Id %!in% c('Id',NA)),]
+ disease <- disease[, which(names(disease) %in% c("Created.At","Text","Id"))]
+ colnames(disease) <- c("created_time","message","Id")
+ ###### 
+ # Apply same method for "disease" dataset
+ disease1 <- disease
+ disease1<-disease1[grep("[0-9]*/[0-9]*/2017",disease1$created_time),]
+ disease1$created_time <- lubridate::parse_date_time(disease1$created_time, "mdy HM")
  
- key <- disease$label
- disease <- disease[ , -which(names(disease) %in% c("created","Created.At","X.1","X","label"))]
- disease<-cbind(created,disease)
- colnames(disease)[1]<- "created_time"
- colnames(disease)[8] <- "message"
- disease <- cbind(key,disease)
- #disease$message <- conv_fun(prep_fun(disease$message))
-
+ disease2 <- disease
+ disease2<-disease2[grep("[0-9]*/[0-9]*/2003",disease2$created_time),]
+ disease2$created_time<-gsub("/17/2003", "-03-2017", disease2$created_time)
+ disease2$created_time <- lubridate::parse_date_time(disease2$created_time, "dmy HM")
+ 
+ disease3 <- disease
+ tmp <- rbind(disease1,disease2)
+ disease3 <- dplyr::anti_join(disease3,tmp, by = "Id")
+ 
+ #### Merge to get final file
+ test <- rbind(disease1,disease2,disease3)
+ 
  #Merge and delete duplicates
- TW_df_2804 <- rbind(TW_df_2804, disease)
+ TW_df_2804 <- rbind(TW_df_2804, test)
  TW_df_2804 <- unique(TW_df_2804)
+ TW_df_2804$Id <- as.factor(TW_df_2804$Id)
+ #Remove dataset
+ rm(disease1,disease2,disease3,tmp,test, disease)
+ 
+ #####################################################
+ # Add update of first 2 weeks of May 2017
+ 
+ update1 <- read.csv("0405.csv", as.is = TRUE, sep = ",")
+ update2 <- read.csv("1205.csv", as.is = TRUE, sep = ",")
+ 
+ #Clean updates
+ 
+ update1$id <- as.factor(update1$id)
+ update1 <- update1[which(update1$id %!in% c('Id',NA)),]
+ update1 <- update1[, which(names(update1) %in% c("created","text","id"))]
+ colnames(update1) <- c("message","created_time","Id")
+ created_time <- update1$created_time
+ update1 <- update1[,-2]
+ update1 <- cbind(created_time,update1)
+ update1 <- unique(update1)
+ 
+ update2$id <- as.factor(update2$Id)
+ update2 <- update2[which(update2$Id %!in% c('Id',NA)),]
+ update2 <- update2[, which(names(update2) %in% c("created_time","message","Id"))]
+ colnames(update2) <- c("created_time","message","Id")
+ update2 <- unique(update2)
+ 
+ 
+ TW_fix <- rbind(update1, update2)
+ TW_fix <- rbind(TW_fix, TW_df_2804)
+ 
+ 
+ 
+ #####
+ # 
+ # disease$Created.At <- lubridate::parse_date_time(disease$Created.At, "%m/%d/%y HM") 
+ # 
+ # created <- lubridate::parse_date_time(disease$Created.At, "%m/%d/%y HM") 
+ # 
+ # key <- disease$label
+ # disease <- disease[ , -which(names(disease) %in% c("created","Created.At","X.1","X","label"))]
+ # disease<-cbind(created,disease)
+ # colnames(disease)[1]<- "created_time"
+ # colnames(disease)[8] <- "message"
+ # disease <- cbind(key,disease)
+ # disease$message <- conv_fun(prep_fun(disease$message))
 # 
 # #Filter only ENGLISH tweets
 # TW_df <- TW_df[TW_df$Language == 'eng',]
