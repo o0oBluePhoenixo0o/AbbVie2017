@@ -21,6 +21,7 @@ In general nearly every programming language can be used for Sentiment Analysis 
 The first goal of this project was and still is to built up a sufficient database which can be used to analyze during the project. This was done simultaneously for Facebook and for Twitter. For both data crawling tasks we used the web APIs and the corresporending R packages to crawl the data we needed (Facebook [Rfacebook](https://cran.r-project.org/web/packages/Rfacebook/Rfacebook.pdf) and Twitter [twitteR](https://cran.r-project.org/web/packages/twitteR/twitteR.pdf)). We specifically search for keywords related to the pharmaceutical industry and companies in this area. 
 
 **Keywords for crawling**
+
 | Products   | Companies         | Diseases                      |
 |------------|-------------------|-------------------------------|
 | adalimumab | abbvie            | ankylosing spondylitis        |
@@ -28,7 +29,6 @@ The first goal of this project was and still is to built up a sufficient databas
 | humira     | bristol myers     | juvenile idiopathic arthritis |
 | ibrutinib  | johnson & johnson | juvenile rheumatoid arthritis |
 | trilipix   |                   |                               |
-|            |                   |                               |
 
 Because of the lack of getting public posts from the FaceBook API we quickly decided to rely more on the Twitter crawl. We also implemented a workflow to crawl the Twitter API on a weekly basis to grow our existing database.
 
