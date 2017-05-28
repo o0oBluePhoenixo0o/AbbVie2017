@@ -37,3 +37,5 @@ confusionMatrix(tweets.test$sentiment, test.sentR[,4])
 
 test.sentR[,4] <- ifelse(test.sentR[,4] == 'neutral', "pred_neutral", ifelse(test.sentR[,4] == 'positive', "pred_positive", "pred_negative")) # translate sentiments back to the original training data
 print(table(test.sentR[,4], tweets.test$sentiment))
+
+analyzeConfusinMatrix(tweets.test$sentiment,test.sentR[,4])

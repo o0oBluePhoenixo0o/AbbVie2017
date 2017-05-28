@@ -45,3 +45,5 @@ test.sentimentR$sent <- ifelse(test.sentimentR$ave_sentiment == 0, "pred_neutral
 
 print(table(test.sentimentR$sent,tweets.test$sentiment))
 
+
+analyzeConfusinMatrix(tweets.test$sentiment, test.sentimentR$sent)

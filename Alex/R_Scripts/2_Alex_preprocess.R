@@ -168,7 +168,22 @@ string2Date <- function(text, dateFormats) {
   #   A Y-m-d formated date
   
   lubriDate <- lubridate::parse_date_time(text,dateFormats, tz = "UTC")
-  return (as.Date(paste(year(lubriDate),month(lubriDate),day(lubriDate),sep="-")))
+  
+  
+  lubriYear <- year(lubriDate)
+  lubriMonth <- month(lubriDate)
+  lubriDay <- day(lubriDate)
+  
+  lubriHours <- hour(lubriDate)
+  lubriMinute <- minute(lubriDate)
+  ymd <- paste(lubriYear,lubriMonth,lubriDay,sep="-")
+  hs <- paste(lubriHours,lubriMinute,sep=":")
+  
+  return (paste(ymd,hs, sep = " "))
 }
+
+
+
+
 
 

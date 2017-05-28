@@ -1,20 +1,83 @@
-# This file provides function for analysing confusion matrixes
+# This file provides function for analysing confusion matrixes http://blog.revolutionanalytics.com/2016/03/com_class_eval_metrics_r.html#macro
 
-print_and_capture <- function(x){
-  # Print function, for printing data.frames in message(x)
+mcc <- function(cm) {
+  # Calculates the Matthew Correlation Coefficient for a given confusion matrix
+  # This is based on the Micro Average TP,TN,FP and FN values
   #
   # Args:
-  #   x: Object to print
+  #   cm: Confusion Matrix
   #
   # Returns:
-  #   Printable String of the object
+  #   MCC value
   
-  paste(capture.output(print(x)), collapse = "\n")
+
+  mcc_numerator <- 0
+  temp <- array()
+  count <- 1
+  
+  for (k in 1:nrow(cm)){
+    for (l in 1:nrow(cm)){
+      for (m in 1:nrow(cm)){
+        temp[count] <- (cm[k,k]*cm[m,l])-(cm[l,k]*cm[k,m])
+        count <- count+1}}}
+  sum(temp)
+  mcc_numerator <- sum(temp)
+  count
+  temp
+  mcc_numerator
+  mcc_denominator_1 <- 0 
+  count <- 1
+  mcc_den_1_part1 <- 0
+  mcc_den_1_part2 <- 0
+  
+  for (k in 1:nrow(cm)){
+    mcc_den_1_part1 <- 0
+    for (l in 1:nrow(cm)){
+      mcc_den_1_part1 <- mcc_den_1_part1 + cm[l,k]}
+    
+    mcc_den_1_part2 <- 0;
+    
+    for (f in 1:nrow(cm)){
+      if (f != k){
+        for (g in 1:nrow(cm)){
+          mcc_den_1_part2 <- mcc_den_1_part2+cm[g,f]
+        }}}
+    mcc_denominator_1=(mcc_denominator_1+(mcc_den_1_part1*mcc_den_1_part2));
+  }
+  
+  
+  mcc_denominator_2 <- 0 
+  count <- 1
+  mcc_den_2_part1 <- 0
+  mcc_den_2_part2 <- 0
+  
+  for (k in 1:nrow(cm)){
+    mcc_den_2_part1 <- 0
+    for (l in 1:nrow(cm)){
+      mcc_den_2_part1 <- mcc_den_2_part1 + cm[k,l]}
+    
+    mcc_den_2_part2 <- 0;
+    
+    for (f in 1:nrow(cm)){
+      if (f != k){
+        for (g in 1:nrow(cm)){
+          mcc_den_2_part2 <- mcc_den_2_part2+cm[f,g]
+        }}}
+    mcc_denominator_2=(mcc_denominator_2+(mcc_den_2_part1*mcc_den_2_part2));
+  }
+  
+  mcc = (mcc_numerator)/((mcc_denominator_1^0.5)*(mcc_denominator_2^0.5))
+  return(mcc)
 }
 
-analyzeConfusinMatrix <- function(originalSentiment, predictedSentiment) {
+analyzeConfusinMatrix <- function(cm) {
+  # Calculates basic evaluation of a cunfusion Matrix
+  #
+  # Args:
+  #   originalSentiment: original sentiment Vector
+  #   predictedSentiment: predicted sentiment Vector
   
-  cm = as.matrix(table(tweets.test$sentiment,test.syuzhet$sent)) # build confusion matrix
+  #cm = as.matrix(table(originalSentiment,predictedSentiment)) # build confusion matrix
   
   n = sum(cm) # number of instances
   nc = nrow(cm) # number of classes
@@ -66,8 +129,13 @@ analyzeConfusinMatrix <- function(originalSentiment, predictedSentiment) {
   micro_prf = (diag(s) / apply(s,1, sum))[1];
   micro_prf
   
+
   
-  print(cm)
+  #Matthew Correlation Coefficient
+  mcc <- mcc(cm)
+  
+  
+  cm
   print("Overall Statistics")
   print(paste0("Accuracy: ",accuracy ))
   cat("\n")
@@ -77,7 +145,16 @@ analyzeConfusinMatrix <- function(originalSentiment, predictedSentiment) {
   print("Macro values")
   print(data.frame(macroPrecision, macroRecall, macroF1))
   print(paste0("Average accuracy: ", avgAccuracy ))
-  
-  print(micro_prf)
+  print(paste0("MCC: ", mcc ))
+  print(paste0("Micro Performance: ", micro_prf ))
 
 }
+
+table <- matrix(c(1227,516,505,1268,1125,1060,1570,1110,3138),ncol=3,byrow=TRUE)
+colnames(table) <- c("true bad","true neutral","true good")
+rownames(table) <- c("pred. bad","pred. neutral","pred. good")
+table <- as.table(table)
+table
+
+
+analyzeConfusinMatrix(table)
