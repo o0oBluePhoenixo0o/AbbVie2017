@@ -1,9 +1,0 @@
-Package: SMTopicMonitoring
-Title: Package about Sentiment Analysis and Topic Monitoring on Facebook and Twitter
-Version: 0.0.0.9000
-Authors@R: person("Alexander", "Weiß", email = "alweiss@mail.uni-mannheim.de", role = c("aut", "cre"))
-Description: Different methods for SA and TD on Social Media
-Depends: R (>= 3.3.2)
-License: MIT
-Encoding: UTF-8
-LazyData: true
