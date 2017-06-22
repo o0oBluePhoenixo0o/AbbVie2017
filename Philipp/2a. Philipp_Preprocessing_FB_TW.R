@@ -341,15 +341,15 @@ TW_df_2804 <- backup
  update2 <- update2[which(update2$message %!in% c(NA,'')),]
  update2 <- update2[, which(names(update2) %!in% c("X.1","X","X.2"))]
  update2$From.User <- conv_fun(update2$From.User)
- colnames(update2)[1] <-"created_time"
- colnames(update2)[8] <- "message"
+ colnames(update2)[2] <-"created_time"
+ colnames(update2)[9] <- "message"
  update2 <- unique(update2)
 
  
  TW_fix <- rbind(update1, update2)
- TW_fix <- rbind(TW_fix, TW_df_2804)
+ TW_fix <- rbind(TW_df_2804,TW_fix)
 
- rm(update1,update2,backup,TW_df_2804)
+ rm(update1,update2,backup)
  
  #update for 19.05 batch
  update3 <- read.csv("1905.csv", as.is = TRUE, sep = ",")
@@ -360,25 +360,51 @@ TW_df_2804 <- backup
  TW_fix <- rbind(TW_fix, update3)
  rm(update3)
  
- # Scan language for TW_fix 1905
-
- TW_fix$Language <- sapply(TW_fix$Language, function(x) ifelse(x == 'en','eng',x))
- TW_fix$Language <- sapply(TW_fix$Language, function(x) ifelse(x == 'de','deu',x))
- TW_fix$Language <- sapply(TW_fix$Language, function(x) ifelse(x %in% c('eng','deu'),x,'eng'))
-
- agg <- dplyr::summarize(dplyr::group_by(TW_fix, Language),n())
+ #update for 26.05 batch
+ update4 <- read.csv("2605.csv", as.is = TRUE, sep = ",")
+ update4$Id <- as.factor(update4$Id)
+ update4 <- update4[, which(names(update4) %!in% c("X.1","X","X.2"))]
+ update4$From.User <- conv_fun(update4$From.User)
  
+ TW_fix <- rbind(TW_fix, update4)
+ rm(update4)
  
- # Write CSV for TW_fix on 19.05
+ # Write CSV for TW_fix on 26.05
  # + CONVERTED From.UserID
  # + RAW text for messages
  # + Parse date time with HOURS
  # + FULL language features
- # + UPDATED with 19.05 TW weekly
- write.csv(TW_df, file = "Final_TW_1905_prep.csv",
+ # + UPDATED with 26.05 TW weekly
+ write.csv(TW_fix, file = "Final_TW_2605_prep.csv",
            quote = TRUE, row.names=FALSE,
             fileEncoding = "UTF-8", na = "NA")
  
+ ############################################################3
+ # update for June (3)
+ 
+ update0206 <- read.csv("0206.csv", as.is = TRUE, sep = ",")
+ update0906 <- read.csv("0906.csv", as.is = TRUE, sep = ",")
+ update1606 <- read.csv("1606.csv", as.is = TRUE, sep = ",")
+ update <- rbind(update0206,update0906,update1606)
+ 
+ update$Id <- as.factor(update$Id)
+ update <- update[, which(names(update) %!in% c("X.1","X","X.2"))]
+ update$From.User <- conv_fun(update$From.User)
+ 
+ TW_final <- rbind(TW_fix, update)
+ 
+ # Scan language for TW_fix 1806
+ 
+ TW_final$Language <- sapply(TW_final$Language, function(x) ifelse(x == 'en','eng',x))
+ TW_final$Language <- sapply(TW_final$Language, function(x) ifelse(x == 'de','deu',x))
+ TW_final$Language <- sapply(TW_final$Language, function(x) ifelse(x %in% c('eng','deu'),x,'eng'))
+ 
+ agg <- dplyr::summarize(dplyr::group_by(TW_final, Language),n())
+ 
+ 
+ write.csv(TW_final, file = "Final_TW_1806_prep.csv",
+           quote = TRUE, row.names=FALSE,
+           fileEncoding = "UTF-8", na = "NA")
  
  #####
  # 
