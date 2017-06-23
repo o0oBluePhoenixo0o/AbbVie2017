@@ -1,11 +1,17 @@
 package sentiment;
 
 import cc.mallet.classify.*;
+import cc.mallet.classify.evaluate.ConfusionMatrix;
 import cc.mallet.pipe.*;
 import cc.mallet.pipe.iterator.CsvIterator;
+import cc.mallet.types.CrossValidationIterator;
+import cc.mallet.types.Instance;
 import cc.mallet.types.InstanceList;
 import cc.mallet.types.Labeling;
 import cc.mallet.util.Randoms;
+import org.apache.log4j.Logger;
+import td.CharSequenceRemoveURL;
+import td.TokenSequenceRemoveURL;
 
 
 import java.io.*;
@@ -18,87 +24,55 @@ import java.util.regex.Pattern;
  */
 public class Sentiment {
 
-
+    private static final Logger log = Logger.getLogger(Sentiment.class);
     protected Pipe pipe;
     protected InstanceList trainInstances;
 
     Sentiment(){
+        log.info("Getting sentiment class ready");
         pipe = buildPipe();
+        log.info("Sentiment class initialized");
     }
 
 
     /**
-     * Train a classifier with a training instance list
-     * @param trainingInstances
+     * Train a classifier with the training instance
      * @return Classifier
      */
-    public Classifier trainClassifier(InstanceList trainingInstances){
-
-        ClassifierTrainer trainer = new NaiveBayesTrainer();
-        return trainer.train(trainInstances);
-    }
-
-    /**
-     * Load a CLassifier from an serialized file
-     * @param serializedFile
-     * @return
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
-    public Classifier loadClassifier(File serializedFile)
-            throws FileNotFoundException, IOException, ClassNotFoundException {
-
-
-        Classifier classifier;
-        ObjectInputStream ois =
-                new ObjectInputStream (new FileInputStream(serializedFile));
-        classifier = (Classifier) ois.readObject();
-        ois.close();
-
-        return classifier;
-    }
-
-    /**
-     * Serialize a classifier and save it to a file
-     * @param classifier
-     * @param serializedFile
-     * @throws IOException
-     */
-    public void saveClassifier(Classifier classifier, File serializedFile)
-            throws IOException {
-
-        ObjectOutputStream oos =
-                new ObjectOutputStream(new FileOutputStream(serializedFile));
-        oos.writeObject(classifier);
-        oos.close();
+    public Classifier trainClassifier(InstanceList trainInstances, SentimentClassifierType sentimentClassifierType){
+        ClassifierTrainer trainer = null;
+        switch (sentimentClassifierType){
+            case NAIVE_BAYES: trainer = new NaiveBayesTrainer(); break;
+            case SVM: break;
+            default: break;
+        }
+            return trainer.train(trainInstances);
     }
 
     protected Pipe buildPipe() {
-        ArrayList<Pipe> pipeList = new ArrayList<Pipe>();
-
+        ArrayList<Pipe>  pipeList = new ArrayList<Pipe> ();
+        log.info("Building Pipe");
         pipeList.add(new Input2CharSequence("UTF-8"));
-
-        Pattern patternToken = Pattern.compile("[\\p{L}\\p{N}_]+");
+        Pattern patternToken = Pattern.compile("[\\p{L}\\p{N}_]+"); // every word is a token
         pipeList.add(new CharSequence2TokenSequence(patternToken));
         pipeList.add(new TokenSequenceLowercase());
         pipeList.add(new TokenSequenceRemoveStopwords(false, false));
-//        pipeList.add(new TokenSequenceRemoveNonAlpha());
+        //pipeList.add(new TokenSequenceRemoveURL());
         pipeList.add(new TokenSequence2FeatureSequence());
-
         pipeList.add(new Target2Label());
         pipeList.add(new FeatureSequence2FeatureVector());
-
         return new SerialPipes(pipeList);
     }
 
-    protected void importFile() {
+    protected void importFile(File file) {
+        log.info("Importing file : " + file.getAbsolutePath());
         CsvIterator iter = null;
         try {
             trainInstances = new InstanceList(pipe);
-            Reader fileReader = new InputStreamReader(new FileInputStream(new File("tweets_manual_sentiment_training.txt")), "UTF-8");
+            Reader fileReader = new InputStreamReader(new FileInputStream(file), "UTF-8");
             trainInstances.addThruPipe(new CsvIterator (fileReader, Pattern.compile("^(\\S*)[\\s,]*(\\S*)[\\s,]*(.*)$"),
                     3, 2, 1)); // data, label, name fields
+            log.info("File imported and training instances set");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -188,7 +162,8 @@ public class Sentiment {
                 trial.getPrecision(1));
     }
 
-    public Trial testTrainSplit(InstanceList instances) {
+    //TODO: Add stratified sampling to n fold cross validation
+    public Trial testTrainSplit(InstanceList instances, SentimentClassifierType sentimentClassifierType) {
 
         int TRAINING = 0;
         int TESTING = 1;
@@ -199,58 +174,185 @@ public class Sentiment {
         //  randomly shuffling the copy, and then allocating
         //  instances to each sub-list based on the provided proportions.
 
+        System.out.println(instances.targetLabelDistribution());
+
         InstanceList[] instanceLists =
                 instances.split(new Randoms(),
-                        new double[] {0.9, 0.1, 0.0});
+                        new double[] {0.8, 0.2, 0.0});
+        
 
-        // The third position is for the "validation" set,
+        //  The third position is for the "validation" set,
         //  which is a set of instances not used directly
         //  for training, but available for determining
         //  when to stop training and for estimating optimal
         //  settings of nuisance parameters.
-        // Most Mallet ClassifierTrainers can not currently take advantage
+        //  Most Mallet ClassifierTrainers can not currently take advantage
         //  of validation sets.
 
-        Classifier classifier = trainClassifier( instanceLists[TRAINING] );
+        Classifier classifier = trainClassifier( instanceLists[TRAINING], sentimentClassifierType );
         return new Trial(classifier, instanceLists[TESTING]);
     }
 
+    /**
+     * Uses random subsampling
+     * @param n
+     * @param sentimentClassifierType
+     * @return
+     */
+    public Trial randomCrossValidation(int n, SentimentClassifierType sentimentClassifierType){
 
-    public void crossValidate(int n, InstanceList instanceList){
-        for (int i = 0 ; i<n; i++){
-            System.out.println("We are in the " + i + "th  Fold");
-            Trial crossFoldTrial = this.testTrainSplit(instanceList);
+        log.info("Using " + sentimentClassifierType.name()+  " for classification");
+        Trial bestTrial = null;
+        double bestF1 = 0.0;
 
-            System.out.println("Accuracy: " + crossFoldTrial.getAccuracy());
+        CrossValidationIterator crossValidationIterator = new CrossValidationIterator(this.trainInstances, n, new Randoms() );
+        while(crossValidationIterator.hasNext()){
+            InstanceList[] nextSplit = crossValidationIterator.nextSplit();
+            InstanceList training = nextSplit[0];
+            InstanceList testing = nextSplit[1];
 
-            // precision, recall, and F1 are calcuated for a specific
-            //  class, which can be identified by an object (usually
-            //  a String) or the integer ID of the class
+            System.out.println(training.size());
+            System.out.println(testing.size());
 
-            System.out.println("F1 for class 'very positive': " + crossFoldTrial.getF1("4"));
-            System.out.println("F1 for class 'slightly positive': " + crossFoldTrial.getF1("3"));
-            System.out.println("F1 for class 'neutral': " + crossFoldTrial.getF1("N"));
-            System.out.println("F1 for class 'slightly negative': " + crossFoldTrial.getF1("2"));
-            System.out.println("F1 for class 'very negative': " + crossFoldTrial.getF1("1"));
+            Classifier classifier = trainClassifier( training, sentimentClassifierType );
+            Trial crossFoldTrial = new Trial(classifier, testing);
 
+            if (crossFoldTrial.getF1("negative") >  bestF1){
+                bestF1 = crossFoldTrial.getF1("negative");
+                bestTrial = crossFoldTrial;
+            }
+            
         }
+        return bestTrial;
+    }
+    
+
+    //http://permalink.gmane.org/gmane.comp.ai.mallet.devel/1163
+
+    /**
+     * Uses stratified sampling
+     * @param r
+     * @param data
+     * @param numFolds
+     * @param sentimentClassifierType
+     * @return
+     */
+    public Trial stratifiedCrossValidation(Randoms r, InstanceList data, int numFolds, SentimentClassifierType sentimentClassifierType) {
+
+        log.info("Using " + sentimentClassifierType.name()+  " for classification");
+        Trial bestTrial = null;
+        double bestF1 = 0.0;
+
+        int numLabels = data.getTargetAlphabet().size();
+        // stratify the original data
+        InstanceList dataPerClass[] = new InstanceList[numLabels];
+        for (int i = 0; i < dataPerClass.length; i++) dataPerClass[i] = data.cloneEmpty();
+
+        // shuffle the data initially and split by class
+        data.shuffle(r);
+        for (int ii = 0; ii < data.size(); ii++) {
+            Instance inst = data.get(ii);
+            int li = ((Labeling) inst.getTarget()).getBestIndex();
+            dataPerClass[li].add(inst);
+        }
+
+        // create cross-validation iterators per class
+        InstanceList.CrossValidationIterator cvIters[] = new InstanceList.CrossValidationIterator[numLabels];
+        for (int i = 0; i < dataPerClass.length; i++) {
+            if (dataPerClass[i].size() == 0) {
+                System.out.println("ERROR: No examples forlabel: " + i);
+            }
+            cvIters[i] = dataPerClass[i].crossValidationIterator(numFolds);
+        }
+
+        // iterate over folds
+        int count = 0;
+        while (cvIters[0].hasNext()) {
+            System.out.println(count++);
+            InstanceList[][] foldsPerClass = new InstanceList[numLabels][2];
+            for (int i = 0; i < numLabels; i++)
+                foldsPerClass[i] =
+                        cvIters[i].next();
+            InstanceList training = data.cloneEmpty();
+            InstanceList testing = data.cloneEmpty();
+            for (int i = 0; i < numLabels; i++) {
+                training.addAll(foldsPerClass[i][0]); // add training fold for class
+                testing.addAll(foldsPerClass[i][1]); // add testing fold for class
+            }
+            Classifier classifier = trainClassifier( training, SentimentClassifierType.NAIVE_BAYES );
+            Trial crossFoldTrial = new Trial(classifier, testing);
+
+            if (crossFoldTrial.getF1("negative") >  bestF1){
+                bestF1 = crossFoldTrial.getF1("negative");
+                bestTrial = crossFoldTrial;
+            }
+        }
+        return bestTrial;
     }
 
+    /**
+     * Load a CLassifier from an serialized file
+     * @param serializedFile
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public Classifier loadClassifier(File serializedFile) throws FileNotFoundException, IOException, ClassNotFoundException {
 
+        Classifier classifier;
+        ObjectInputStream ois =
+                new ObjectInputStream (new FileInputStream(serializedFile));
+        classifier = (Classifier) ois.readObject();
+        ois.close();
+
+        return classifier;
+    }
+
+    /**
+     * Serialize a classifier and save it to a file
+     * @param classifier
+     * @param serializedFile
+     * @throws IOException
+     */
+    public void saveClassifier(Classifier classifier, File serializedFile) throws IOException {
+        ObjectOutputStream oos =
+                new ObjectOutputStream(new FileOutputStream(serializedFile));
+        oos.writeObject(classifier);
+        oos.close();
+    }
 
     public static void main (String [] args) throws IOException, ClassNotFoundException {
-        System.out.println("Sentiment analysis\n\n\n");
-        System.out.println("Reading data...");
-
         Sentiment snt = new Sentiment();
-        snt.importFile();
-        snt.crossValidate(10, snt.trainInstances);
-        Classifier nbClassifier = snt.trainClassifier(null);
-        System.out.println(nbClassifier.classify("I love you").getLabeling().getBestLabel());
-        //Classifier nbClassifier = snt.loadClassifier(new File("naivebayes.bin"));
-        snt.saveClassifier(nbClassifier, new File("naivebayes.bin"));
+        snt.importFile(new File("tweets_manual_sentiment_training.txt"));
 
-        snt.evaluate(nbClassifier, new File("tweets_sentiment.txt"));
+        System.out.println();
+        log.info("Evaluate classifier");
+        System.out.println();
+
+
+        System.out.println(snt.trainInstances.targetLabelDistribution());
+
+        Trial stratifiedBestNB = snt.stratifiedCrossValidation(new Randoms(), snt.trainInstances, 10, SentimentClassifierType.NAIVE_BAYES);
+        Trial randomBestNB = snt.randomCrossValidation(10, SentimentClassifierType.NAIVE_BAYES);
+
+        System.out.println("STRATIFIED SAMPLING - 10 FOLDS");
+
+        ConfusionMatrix stratifiedConfusionMatrix = new ConfusionMatrix(stratifiedBestNB);
+        System.out.println(stratifiedConfusionMatrix.toString());
+        System.out.println(stratifiedBestNB.getF1("positive"));
+        System.out.println(stratifiedBestNB.getF1("neutral"));
+        System.out.println(stratifiedBestNB.getF1("negative"));
+
+
+        System.out.println("RANDOM SAMPLING - 10 FOLDS");
+
+        ConfusionMatrix randomConfusionMatrix = new ConfusionMatrix(randomBestNB);
+        System.out.println(randomConfusionMatrix.toString());
+        System.out.println(randomBestNB.getF1("positive"));
+        System.out.println(randomBestNB.getF1("neutral"));
+        System.out.println(randomBestNB.getF1("negative"));
+
 
     }
 
