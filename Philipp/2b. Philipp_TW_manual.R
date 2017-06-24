@@ -124,3 +124,26 @@ TW_Manual <- cbind(TW_Manual,sentiment,sarcastic,context,topic)
 write.csv(TW_Manual, file = "TW_MANUAL_1905.csv",
           quote=TRUE, row.names = FALSE,
           fileEncoding = "UTF-8", na = "NA")
+
+###################################
+
+#25.06 Merge to get new manual 1905
+
+p1 <- read.csv("1.csv", as.is = TRUE, sep = ",")
+p2 <- read.csv("2.csv", as.is = TRUE, sep = ",")
+p3 <- read.csv("3.csv", as.is = TRUE, sep = ",")
+p4 <- read.csv("4.csv", as.is = TRUE, sep = ",")
+
+merge <- rbind(p1,p2,p3,p4)
+old <- read.csv("Final_Manual_1505.csv",as.is = TRUE, sep =",")
+
+final <- rbind(merge,old)
+
+final$sentiment <- sapply(final$sentiment, function(x) ifelse(x == '5'|is.na(x),'N',x))
+
+
+
+# Write manual label dataset 1905
+write.csv(final, file = "Final_Manual_1905.csv",
+          quote=TRUE, row.names = FALSE,
+          fileEncoding = "UTF-8", na = "NA")
