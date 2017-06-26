@@ -6,6 +6,9 @@ library(Unicode)
 library(tm)
 library(ggplot2)
 
+# clear the environment
+rm(list= ls())
+setwd("~/GitHub/AbbVie2017/Philipp")
 # reference website
 url <- "http://apps.timwhitlock.info/emoji/tables/unicode"
 
@@ -181,21 +184,15 @@ emojis_matching <- function(texts, matchto, description, sentiment = NA) {
 #######################
 
 #Need to capitalize all messages
-tmp <- read.csv("Final_TW_2804.csv",as.is = TRUE, sep = ",")
-tmp <- subset(tmp,select = c("Text","Id"))
+tmp <- read.csv("Final_Manual_1905.csv",as.is = TRUE, sep = ",")
+tmp <- subset(tmp,select = c("message","Id"))
 # tmp$message <- toupper(tmp$message)
+
 tmp <- tmp %>%
-  mutate(Text = iconv(Text, from = "latin1", to = "ASCII", sub = "byte"))
+  mutate(message = iconv(message, from = "UTF-8", to = "latin1", sub = "byte"))
 tmp$Id <- as.factor(tmp$Id)
 
 tmp <- unique(tmp)
 
-tmp <- tmp[1:10000,]
-
-tmp <- "\xF0\x9F\x98\x8A"
-tmp <- data.frame(text = iconv(tmp, "latin1", "ASCII", "byte"), 
-                  stringsAsFactors = FALSE)
-
-tmp
-result <- emojis_matching(tmp$Text, matchto, description,sentiment)
+result <- emojis_matching(tmp$message, matchto, description,sentiment)
 
