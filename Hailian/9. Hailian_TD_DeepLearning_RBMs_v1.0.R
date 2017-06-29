@@ -182,12 +182,11 @@ rbm <- function(num_hidden, training_data, learning_rate, n_iterations, mini_bat
     model = model + momentum_speed * learning_rate
   }
   
-  ###the followling 4 rows helps to add terms as dimension names, 
-  ###but if the dimension names is changed to terms, it can not be directly applied in the weights visualization part
-  #terms<- as.matrix(dimnames(training_data)[1])
-  #terms<- as.matrix(unlist(terms))
-  #terms<- t(terms)
-  #colnames(model)<- terms
+  #change the colname from number to terms
+  terms<- as.matrix(dimnames(training_data)[1])
+  terms<- as.matrix(unlist(terms))
+  terms<- t(terms)
+  colnames(model)<- terms
   
   return(model)
   
@@ -200,14 +199,29 @@ weightMatrix<- as.matrix(weightMatrix)
 #topic number = 10
 weightsBinary_Product_10<- rbm(num_hidden=10, training_data=weightMatrix, learning_rate=.09, n_iterations=5000,
             mini_batch_size=213, momentum=0.9)
+
+#convert the columns and rows
 weightsBinary_Product_10_T<- t(weightsBinary_Product_10)
 
-#visualization of weights
+#######visualization of weights
 library(ggplot2)
 library(reshape2)
-mw=melt(weightsBinary_Product_10_model); mw$Var3=floor((mw$Var2 - 1)/33)+1; mw$Var2=(mw$Var2-1)%%33 + 1; mw$Var3=33-mw$Var3;
-ggplot(data=mw)+geom_tile(aes(Var2,Var3,fill=value))+facet_wrap(~Var1,nrow=100)+
-  scale_fill_continuous(low='white',high='red')+coord_equal()+
-  labs(x=NULL,y=NULL,title="Visualization of Weights K=10")+
-  theme(legend.position="none")
+                       
+visualizationOfWeights<- function(rbmWeightsMatrix){
+ 
+  #change the colname from terms to number
+  rbmWeightsMatrix<-rbmWeightsMatrix
+  colnames(rbmWeightsMatrix)<- c(1:dim(rbmWeightsMatrix)[2])
+  
+  mw=melt(rbmWeightsMatrix)
+  mw$Var3=floor((mw$Var2 - 1)/33)+1
+  mw$Var2=(mw$Var2-1)%%33 + 1
+  mw$Var3=33-mw$Var3
+  
+  ggplot(data=mw)+geom_tile(aes(Var2,Var3,fill=value))+facet_wrap(~Var1,nrow=100)+
+    scale_fill_continuous(low='white',high='red')+coord_equal()+
+    labs(x=NULL,y=NULL,title="Visualization of Weights K=10")+
+    theme(legend.position="none") 
+}
 
+visualizationOfWeights(weightsBinary_Product_10)
