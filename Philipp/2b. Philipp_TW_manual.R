@@ -147,3 +147,38 @@ final$sentiment <- sapply(final$sentiment, function(x) ifelse(x == '5'|is.na(x),
 write.csv(final, file = "Final_Manual_1905.csv",
           quote=TRUE, row.names = FALSE,
           fileEncoding = "UTF-8", na = "NA")
+
+######################################
+
+#30.06 Create new manual TW 
+
+p1 <- read.csv("2605.csv", as.is = TRUE, sep = ",")
+p2 <- read.csv("0206.csv", as.is = TRUE, sep = ",")
+p3 <- read.csv("0906.csv", as.is = TRUE, sep = ",")
+p4 <- read.csv("1606.csv", as.is = TRUE, sep = ",")
+p5 <- read.csv("2306.csv", as.is = TRUE, sep = ",")
+
+Manual3006 <- rbind(p1,p2,p3,p4,p5)
+
+#preprocessing
+Manual3006$Id <- as.factor(Manual3006$Id)
+Manual3006 <- Manual3006[, which(names(Manual3006) %!in% c("X.1","X","X.2"))]
+Manual3006$From.User <- conv_fun(Manual3006$From.User)
+Manual3006 <- unique(Manual3006)
+
+
+sentiment <- NA
+sarcastic <- NA
+context <- NA
+topic <- NA
+
+Manual3006 <- Manual3006[, which(names(Manual3006) %in% c("key","created_time","message","From.User","Id"))]
+Manual3006 <- cbind(Manual3006,sentiment,sarcastic,context,topic)
+
+#filter duplicated base on message column
+Manual3006 <- Manual3006[!duplicated(Manual3006[,c('message')]),]
+
+# Write NEW TW Manual set (non-label) for manual tasks on 30.06
+write.csv(Manual3006, file = "TW_MANUAL_3006.csv",
+          quote=TRUE, row.names = FALSE,
+          fileEncoding = "UTF-8", na = "NA")

@@ -15,7 +15,7 @@ require(tm)           # for text mining
 require(dtplyr)   # for faster data operations
 
 # reading the data set from current working directory
-TW_df <- read.csv("Final_Manual_1905.csv",as.is = TRUE, sep = ",")
+TW_df <- read.csv("TweetsDataSet.csv",as.is = TRUE, sep = ",")
 TW_df <- unique(TW_df)
 # checking structure and summary
 dim(TW_df)

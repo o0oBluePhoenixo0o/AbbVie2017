@@ -406,6 +406,26 @@ TW_df_2804 <- backup
            quote = TRUE, row.names=FALSE,
            fileEncoding = "UTF-8", na = "NA")
  
+ #######################################
+ # update June 30
+ 
+ update3006 <- read.csv("2306.csv", as.is = TRUE, sep = ",")
+ update3006$Id <- as.factor(update3006$Id)
+ update3006 <- update3006[, which(names(update3006) %!in% c("X.1","X","X.2"))]
+ update3006$From.User <- conv_fun(update3006$From.User)
+ 
+ TW_df <- read.csv("Final_TW_1806_prep.csv", as.is = TRUE, sep =",")
+ 
+ TW_final <- rbind(TW_df,update3006)
+ TW_final <- unique(TW_final)
+ 
+ #filter duplicated base on message column
+ TW_final <- TW_final[!duplicated(TW_final[,c('message')]),]
+ 
+ write.csv(TW_final, file = "Final_TW_3006_prep.csv",
+           quote = TRUE, row.names=FALSE,
+           fileEncoding = "UTF-8", na = "NA")
+ 
  #####
  # 
  # disease$Created.At <- lubridate::parse_date_time(disease$Created.At, "%m/%d/%y HM") 
