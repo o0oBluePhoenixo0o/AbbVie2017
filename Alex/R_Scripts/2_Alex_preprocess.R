@@ -183,7 +183,6 @@ string2Date <- function(text, dateFormats) {
 }
 
 
-
-
+removeURL("Hello click on https://www.google.de")
 
 

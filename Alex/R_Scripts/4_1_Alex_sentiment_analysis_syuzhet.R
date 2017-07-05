@@ -81,7 +81,8 @@ test.syuzhet$sent <- ifelse((test.syuzhet$positive - test.syuzhet$negative) == 0
 
 
 # Evlauation
-
-analyzeConfusinMatrix(tweets.test$sentiment,test.syuzhet$sent)
+cm = as.matrix(table(tweets.test$sentiment,test.syuzhet$sent))
+print(cm)
+analyzeConfusinMatrix(cm)
 
 

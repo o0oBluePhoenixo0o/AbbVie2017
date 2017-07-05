@@ -10,8 +10,7 @@ import cc.mallet.types.InstanceList;
 import cc.mallet.types.Labeling;
 import cc.mallet.util.Randoms;
 import org.apache.log4j.Logger;
-import td.CharSequenceRemoveURL;
-import td.TokenSequenceRemoveURL;
+import td.ExtentedTrial;
 
 
 import java.io.*;
@@ -76,6 +75,22 @@ public class Sentiment {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+
+    public InstanceList getInstanceListFromFile(File file){
+        log.info("Importing file : " + file.getAbsolutePath());
+        CsvIterator iter = null;
+        InstanceList instances = new InstanceList(pipe);
+        try {
+            Reader fileReader = new InputStreamReader(new FileInputStream(file), "UTF-8");
+            instances.addThruPipe(new CsvIterator (fileReader, Pattern.compile("^(\\S*)[\\s,]*(\\S*)[\\s,]*(.*)$"),
+                    3, 2, 1)); // data, label, name fields
+            log.info("File imported and training instances set");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return instances;
     }
 
     public void printLabelings(Classifier classifier, File file) throws IOException {
@@ -179,7 +194,7 @@ public class Sentiment {
         InstanceList[] instanceLists =
                 instances.split(new Randoms(),
                         new double[] {0.8, 0.2, 0.0});
-        
+
 
         //  The third position is for the "validation" set,
         //  which is a set of instances not used directly
@@ -199,10 +214,10 @@ public class Sentiment {
      * @param sentimentClassifierType
      * @return
      */
-    public Trial randomCrossValidation(int n, SentimentClassifierType sentimentClassifierType){
+    public ExtentedTrial randomCrossValidation(int n, SentimentClassifierType sentimentClassifierType){
 
         log.info("Using " + sentimentClassifierType.name()+  " for classification");
-        Trial bestTrial = null;
+        ExtentedTrial bestTrial = null;
         double bestF1 = 0.0;
 
         CrossValidationIterator crossValidationIterator = new CrossValidationIterator(this.trainInstances, n, new Randoms() );
@@ -215,7 +230,7 @@ public class Sentiment {
             System.out.println(testing.size());
 
             Classifier classifier = trainClassifier( training, sentimentClassifierType );
-            Trial crossFoldTrial = new Trial(classifier, testing);
+            ExtentedTrial crossFoldTrial = new ExtentedTrial(classifier, testing);
 
             if (crossFoldTrial.getF1("negative") >  bestF1){
                 bestF1 = crossFoldTrial.getF1("negative");
@@ -237,16 +252,20 @@ public class Sentiment {
      * @param sentimentClassifierType
      * @return
      */
-    public Trial stratifiedCrossValidation(Randoms r, InstanceList data, int numFolds, SentimentClassifierType sentimentClassifierType) {
+    public ExtentedTrial stratifiedCrossValidation(Randoms r, InstanceList data, int numFolds, SentimentClassifierType sentimentClassifierType) {
 
         log.info("Using " + sentimentClassifierType.name()+  " for classification");
-        Trial bestTrial = null;
+        ExtentedTrial bestTrial = null;
         double bestF1 = 0.0;
 
         int numLabels = data.getTargetAlphabet().size();
         // stratify the original data
         InstanceList dataPerClass[] = new InstanceList[numLabels];
-        for (int i = 0; i < dataPerClass.length; i++) dataPerClass[i] = data.cloneEmpty();
+        for (int i = 0; i < dataPerClass.length; i++) {
+            dataPerClass[i] = data.cloneEmpty();
+
+        }
+
 
         // shuffle the data initially and split by class
         data.shuffle(r);
@@ -255,6 +274,7 @@ public class Sentiment {
             int li = ((Labeling) inst.getTarget()).getBestIndex();
             dataPerClass[li].add(inst);
         }
+
 
         // create cross-validation iterators per class
         InstanceList.CrossValidationIterator cvIters[] = new InstanceList.CrossValidationIterator[numLabels];
@@ -266,9 +286,7 @@ public class Sentiment {
         }
 
         // iterate over folds
-        int count = 0;
         while (cvIters[0].hasNext()) {
-            System.out.println(count++);
             InstanceList[][] foldsPerClass = new InstanceList[numLabels][2];
             for (int i = 0; i < numLabels; i++)
                 foldsPerClass[i] =
@@ -279,11 +297,19 @@ public class Sentiment {
                 training.addAll(foldsPerClass[i][0]); // add training fold for class
                 testing.addAll(foldsPerClass[i][1]); // add testing fold for class
             }
-            Classifier classifier = trainClassifier( training, SentimentClassifierType.NAIVE_BAYES );
-            Trial crossFoldTrial = new Trial(classifier, testing);
 
-            if (crossFoldTrial.getF1("negative") >  bestF1){
-                bestF1 = crossFoldTrial.getF1("negative");
+            Classifier classifier = trainClassifier( training, SentimentClassifierType.NAIVE_BAYES );
+            ExtentedTrial crossFoldTrial = new ExtentedTrial(classifier, testing);
+
+            //Check which classifier is the best, iterate over all labels, check average F1 for the whole matrix and then decide if the current classifier is better or not
+
+            double f1sum = 0;
+            for (int i = 0; i <classifier.getLabelAlphabet().size(); i++){
+                f1sum = f1sum + (crossFoldTrial.getF1(classifier.getLabelAlphabet().lookupLabel(i)));
+            }
+            double avgF1 = f1sum/classifier.getLabelAlphabet().size();
+            if (avgF1 >  bestF1){
+                bestF1 = avgF1;
                 bestTrial = crossFoldTrial;
             }
         }
@@ -324,34 +350,77 @@ public class Sentiment {
 
     public static void main (String [] args) throws IOException, ClassNotFoundException {
         Sentiment snt = new Sentiment();
-        snt.importFile(new File("tweets_manual_sentiment_training.txt"));
+        /*snt.importFile(new File("tweets_manual_sentiment_training.txt"));
 
         System.out.println();
         log.info("Evaluate classifier");
         System.out.println();
 
+        ExtentedTrial stratifiedBestNB = snt.stratifiedCrossValidation(new Randoms(), snt.trainInstances, 10, SentimentClassifierType.NAIVE_BAYES);
+        //Trial randomBestNB = snt.randomCrossValidation(25, SentimentClassifierType.NAIVE_BAYES);
 
-        System.out.println(snt.trainInstances.targetLabelDistribution());
 
-        Trial stratifiedBestNB = snt.stratifiedCrossValidation(new Randoms(), snt.trainInstances, 10, SentimentClassifierType.NAIVE_BAYES);
-        Trial randomBestNB = snt.randomCrossValidation(10, SentimentClassifierType.NAIVE_BAYES);
+        snt.saveClassifier(stratifiedBestNB.getClassifier(), new File("naivebayes.bin"));
 
         System.out.println("STRATIFIED SAMPLING - 10 FOLDS");
 
         ConfusionMatrix stratifiedConfusionMatrix = new ConfusionMatrix(stratifiedBestNB);
         System.out.println(stratifiedConfusionMatrix.toString());
-        System.out.println(stratifiedBestNB.getF1("positive"));
-        System.out.println(stratifiedBestNB.getF1("neutral"));
-        System.out.println(stratifiedBestNB.getF1("negative"));
 
 
+        int index = 0;
+        int numCorrect = 0;
+        int numInstances = 0;
+        int trueLabel, classLabel;
+        for (int i = 0; i < stratifiedBestNB.size(); i++) {
+            trueLabel = stratifiedBestNB.get(i).getInstance().getLabeling().getBestIndex();
+            classLabel = stratifiedBestNB.get(i).getLabeling().getBestIndex();
+            if (classLabel == index) {
+                numInstances++;
+                if (trueLabel == index)
+                    numCorrect++;
+            }
+        }
+
+        System.out.println(numInstances);
+        System.out.println(numCorrect);
+
+        System.out.println("TP: " + numCorrect);
+        System.out.println("FN " + ( numInstances-numCorrect ));
+
+
+        for (int i = 0; i< stratifiedBestNB.getClassifier().getLabelAlphabet().size(); i++) {
+            System.out.println(stratifiedBestNB.getClassifier().getLabelAlphabet().lookupLabel(i).toString() + " - F1:" + stratifiedBestNB.getF1(stratifiedBestNB.getClassifier().getLabelAlphabet().lookupLabel(i)));
+            System.out.println(stratifiedBestNB.getClassifier().getLabelAlphabet().lookupLabel(i).toString() + " - Recall:" + stratifiedBestNB.getRecall(stratifiedBestNB.getClassifier().getLabelAlphabet().lookupLabel(i)));
+            System.out.println(stratifiedBestNB.getClassifier().getLabelAlphabet().lookupLabel(i).toString() + " - Precision:" + stratifiedBestNB.getPrecision(stratifiedBestNB.getClassifier().getLabelAlphabet().lookupLabel(i)));
+        }
+
+        System.out.println("Macro Precision: " + stratifiedBestNB.getMacroPrecision());
+        System.out.println("Macro Recall: " + stratifiedBestNB.getMacroRecall());
+        System.out.println("Macro F1: " + stratifiedBestNB.getMacroF1());
+        System.out.println("Accuracy " + stratifiedBestNB.getAccuracy());
+
+
+
+        /*
+
+
+
+
+        Trial trial = new Trial(stratifiedBestNB.getClassifier(), snt.getInstanceListFromFile(new File("tweets_manual_sentiment_training.txt")));
+        ConfusionMatrix testConfusionMatrix = new ConfusionMatrix(trial);
+        System.out.println(testConfusionMatrix.toString());*/
+    /*
         System.out.println("RANDOM SAMPLING - 10 FOLDS");
 
         ConfusionMatrix randomConfusionMatrix = new ConfusionMatrix(randomBestNB);
         System.out.println(randomConfusionMatrix.toString());
         System.out.println(randomBestNB.getF1("positive"));
         System.out.println(randomBestNB.getF1("neutral"));
-        System.out.println(randomBestNB.getF1("negative"));
+        System.out.println(randomBestNB.getF1("negative"));*/
+
+        Classifier nb = snt.loadClassifier(new File("naivebayes.bin"));
+        snt.printLabelings(nb, new File("Final_TW_3006_prep_java.csv"));
 
 
     }

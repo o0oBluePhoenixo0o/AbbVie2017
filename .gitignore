@@ -9,3 +9,5 @@ Alex/R_Scripts/img/*
 Alex/R_Scripts/trainingandtestdata/*
 Alex/R_Scripts/test/*
 tweets_sentiment_training.txt
+.env
+node_modules
