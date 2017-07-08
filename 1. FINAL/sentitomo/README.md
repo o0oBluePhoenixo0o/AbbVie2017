@@ -158,5 +158,8 @@ for v in sys.argv[1:]:
 
 
 
- ## Start up the server
- To start the server run `yarn start`. It uses [nodemon](https://github.com/remy/nodemon) to automatically restart the server if some source file changes.
+ ## Start up the client
+ To start the client  run `yarn start` in the client directory.
+
+  ## Start up the server
+ To start the server run `yarn start` in the server directory. It uses [nodemon](https://github.com/remy/nodemon) to automatically restart the server if some source file changes.
