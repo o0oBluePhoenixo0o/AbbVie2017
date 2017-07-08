@@ -37,5 +37,3 @@ const typeDefinitions = `
       query: Query
   }
 `;
-
-export default [typeDefinitions];

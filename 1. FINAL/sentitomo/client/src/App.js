@@ -2,18 +2,33 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import TweetsListWithData from './components/TweetsListWithData.js';
+
+import {
+  ApolloClient,
+  ApolloProvider,
+  createNetworkInterface, // <-- this line is new!
+} from 'react-apollo';
+
+const networkInterface = createNetworkInterface({ uri: 'http://localhost:8080/graphql' });
+const client = new ApolloClient({
+  networkInterface,
+});
+
+
+
+
+
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <ApolloProvider client={client}>
+        <div className="App">
+          <div className="navbar">React + GraphQL Tutorial</div>
+          <TweetsListWithData />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </ApolloProvider>
     );
   }
 }

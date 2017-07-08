@@ -8,6 +8,7 @@ import Connectors from './data/connectors';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 const path = require('path');
 var http = require('http');
@@ -29,7 +30,7 @@ const GRAPHQL_PORT = 8080;
 const graphQLServer = express();
 
 graphQLServer.use(loggingMiddleware);
-
+graphQLServer.use('*', cors({ origin: 'http://localhost:3000' }));
 const executableSchema = makeExecutableSchema({
   typeDefs: Schema,
   resolvers: Resolvers,

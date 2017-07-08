@@ -8,6 +8,9 @@ const resolvers = {
         },
         tweet(_, args) {
             return Tweet.find({ where: args });
+        },
+        tweets(_, args) {
+            return Tweet.findAll();
         }
     },
     Author: {
