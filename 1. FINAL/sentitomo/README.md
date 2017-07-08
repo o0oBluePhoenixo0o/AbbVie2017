@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Sentitomo Server is an application built with `Node.js`. We use `express.js` to built up the basic functionalities of this server. For Machine Learning tasks we use the programming languages `R`, `Python` and `Java`. We need to find a way to incorporate these languages in the server enviroment. Therefore some adjustments have to be made to our existing files.
+Sentitomo Server is an application built with `express.js`. It utilizes machine learning algorithms to analyze social media messages according to sentiment, topics, and trends. The results are saved in a MySQL database to display the results in any needed way.
 
 ## Directory Structure
 ```
@@ -34,14 +34,62 @@ Sentitomo Server is an application built with `Node.js`. We use `express.js` to 
 └── yarn.lock
 
 ```
+The server directory is separeted in 3 main parts `ML`, `data`, `service`. 
+### ML
+The ML directory contains all files which are neede to execute the different Machine Learning algorithms. In total this application uses 3 different programming languages, R, Pyhton and Java to accomplish the ML tasks. The different files containing some special lines which make them work with the Javascript enviroment this server is running in. More detail about this in the `File Preparation` part.
 
-For now we have special directory for all of your foreign Machine Learning source files called `ML`. Inside this directory we seperate the files according to their programming language. TO start the server run `yarn start`. It uses [nodemon](https://github.com/remy/nodemon) to automatically restart the server if some source file changes.
+### data
+Inside this directory the GraphQL API is living. The application offers an endpoint to query the database whith the modern solution of GraphQL. The fact that the API is built with GraphQL it makes it even possible to switch out the DBMS entirely wihtout changing the API endpoints.
 
-### Execution of foreign code
-All foreign code files are executed asynchronously in child processes so the main server thread is not influenced by the execution of these files. This makes our server work more smoothly and not get blocked if some file will fail to execute. 
+### service
+The service directory contains files for crawling different social media APIs, classifying sentiment of messages and the corresponding topics of them
+
+## GraphQL API
+To access the GraphQL API just query it with the standard Query structure to retrieve the data you want. In dev the server is listening on port 8080:
+
+```
+{
+  tweet(id: "883620904663744500") {
+    id
+    message
+    language
+    created
+    favorited
+    author{
+      id
+      screenname
+      username
+    }
+  }
+}
+
+```
+Leeds to:
+
+```
+{
+  "data": {
+    "tweet": {
+      "id": "883620904663744500",
+      "message": "RT @K0YCHEV: Create Static Sites With #Webpack https://t.co/3ca4L5D7vA #javascript #HTML #webdev #programming #devops https://t.co/aAFsavHP…",
+      "language": "en",
+      "created": "Sat Jul 08 2017 11:36:55 GMT+0200 (CEST)",
+      "favorited": false,
+      "author": {
+        "id": "802981345123299300",
+        "screenname": "K0YCHEV",
+        "username": "KOYCHEV.DE"
+      }
+    }
+  }
+}
+```
+
+## Execution of foreign code
+All foreign code files (insde the ML directory) are executed asynchronously in child processes so the main server thread is not directly influenced by the execution of these files. This makes the server work more smoothly and not get blocked if some file will fail to execute or taking a lot of time to execute. 
 
 ### File Preparation 
-To let our files work with the server they need to be adjusted a little bit. In the following there will be the instruction on how to prepare the files. 
+To let files of different programming languages work with the server they need to be adjusted a little bit. In the following there will be a small instruction on how to prepare the files. 
 
 #### R
 For R it is pretty straight forward. We use the [r-script](https://github.com/joshkatz/r-script) package. This comes with an R function called `needs()`. This is basically a combination of `install()` and `require()`. So every R file needs to use `needs()` instead of the other files. Also it is recommoned to put all needed functions at the top of the file. To send data to the R process from and back to the Javascript we can attach data to the R process like so: 
@@ -58,7 +106,7 @@ R("example/ex-async.R")
 **R**
 ```
  attach(input[[0]]) # This is needed to have access to the variables from the Javascript object
- message # this is the same variable name like in the Javascript code
+ message # this is the same variable name like in the Javascript ({message: tweet.message }) code
  ```
 
 One thing to mention is that the `r-script` package reads the console log from the R scripts. So if you want to give some value back to our server to process, for example the output of a classification task **DO NOT ASSIGN IT TO VARIABLE** just let it print to the console by writing:
@@ -108,3 +156,7 @@ for v in sys.argv[1:]:
   print v
 ```
 
+
+
+ ## Start up the server
+ To start the server run `yarn start`. It uses [nodemon](https://github.com/remy/nodemon) to automatically restart the server if some source file changes.

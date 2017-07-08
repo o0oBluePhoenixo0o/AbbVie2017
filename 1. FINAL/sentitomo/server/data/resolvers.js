@@ -17,7 +17,7 @@ const resolvers = {
     },
     Tweet: {
         author(tweet) {
-            return tweet.getAuthor();
+            return tweet.getTW_User();
         },
     },
 };
