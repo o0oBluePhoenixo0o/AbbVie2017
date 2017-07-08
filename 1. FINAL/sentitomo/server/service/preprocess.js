@@ -1,6 +1,6 @@
-var R = require("r-script");
-var PythonShell = require('python-shell');
-var franc = require('franc-min');
+import R from "r-script";
+import PythonShell from 'python-shell';
+import franc from 'franc-min';
 
 module.exports = {
     preprocessTweetMessage: function (tweetMessage) {

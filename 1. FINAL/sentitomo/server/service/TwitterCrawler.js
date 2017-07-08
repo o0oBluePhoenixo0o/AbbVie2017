@@ -1,9 +1,11 @@
-var DatabaseConnection = require("../service/database.js");
-var Twitter = require('twitter');
+import Twitter from "twitter";
+import moment from "moment";
+import { Author } from '../data/connectors';
+import { Dashboard } from '../data/connectors';
 
-var preprocess = require('./preprocess.js');
-var classify = require('./classify.js');
 
+import preprocess from './preprocess.js';
+import classify from './classify.js';
 
 module.exports = class TwitterCrawler {
 
@@ -14,29 +16,9 @@ module.exports = class TwitterCrawler {
             access_token_key: config.access_token_key,
             access_token_secret: config.access_token_secret
         });
-        console.log("Twitter API initialized successfully")
+        console.log("Twitter API initialized successfully");
 
-        this.db = new DatabaseConnection({
-            host: process.env.DB_HOST,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASS,
-            database: process.env.DB_NAME,
-            dateStrings: 'date',
-            port: process.env.DB_PORT
-        });
-
-
-        classify.sentiment("./server/ML/Java/naivebayes.bin", "i love you", (result) => {
-            console.log(result);
-        });
-
-
-        console.log(preprocess.preprocessTweetMessage("RT @TessEractica: @indgop  I really like this product humira #humira #abbvie"))
-        //this.track(process.env.TWITTER_STREAMING_FILTERS);
-
-        //this.track("abbvie")
-        //this.track("amgen")
-        //this.track("javascript")
+        this.track(process.env.TWITTER_STREAMING_FILTERS);
     }
 
     /**
@@ -98,53 +80,66 @@ module.exports = class TwitterCrawler {
         console.log("Start streaming Twitter tweets with filters: " + filters);
         this.client.stream('statuses/filter', { track: filters, tweet_mode: 'extended' }, (stream) => {
             stream.on('data', (event) => {
-                console.log("New tweet")
-
                 if (event.lang == 'en') {
-                    var tweet = {
-                        id: event.id,
-                        key: this.getKeyword(event.text, filters),
-                        created: event.created_at,
-                        from: event.user.id,
-                        to: event.in_reply_to_user_id,
-                        language: event.lang,
-                        source: event.source,
-                        message: event.text,
-                        messagePrep: preprocess.preprocessTweetMessage(event.text),
-                        latitude: event.coordinates,
-                        longitude: event.coordinates,
-                        retweet_count: event.retweet_count,
-                        favorited: event.favorited,
-                        favorite_count: event.favorite_count,
-                        is_retweet: event.retweeted_status ? true : false,
-                        retweeted: event.retweeted,
 
-                    }
+                    var messagePrep = preprocess.preprocessTweetMessage(event.text);
 
-                    this.db.insertTweet(tweet);
+                    //Insert in the normal tables                    
+                    Author
+                        .build({ id: event.user.id, username: event.user.name, screenname: event.user.screen_name })
+                        .save()
+                        .then(author => {
+                            author.createTW_Raw({
+                                id: event.id,
+                                keywordType: "Placeholder",
+                                keyword: this.getKeyword(event.text, filters),
+                                created: event.created_at,
+                                createdWeek: moment(event.created_at).week(),
+                                toUser: event.in_reply_to_user_id,
+                                language: event.lang,
+                                source: event.source,
+                                message: event.text,
+                                messagePrep: messagePrep,
+                                latitude: event.coordinates,
+                                longitude: event.coordinates,
+                                retweetCount: event.retweet_count,
+                                favorited: event.favorited,
+                                favoriteCount: event.favorite_count,
+                                isRetweet: event.retweeted_status ? true : false,
+                                retweeted: event.retweeted
+                            })
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
 
-                    classify.sentiment("./server/ML/Java/naivebayes.bin", tweet.messagePrep, (result) => {
-                        var testTweet = {
-                            id: tweet.id,
-                            key: tweet.key,
-                            created: tweet.created,
-                            from: event.user.name,  // only for testing we using the user name
-                            to: tweet.to,
-                            message: tweet.message,
-                            favorite_count: tweet.favorite_count,
-                            is_retweet: tweet.is_retweet,
-                            retweet_count: tweet.retweet_count,
-                            sentiment: result
-                        }
-                        console.log(testTweet)
-                        this.db.insertTweetFinalTest(testTweet);
+                    //Insert in the Dashboard tables                       
+                    classify.sentiment("./server/ML/Java/naivebayes.bin", messagePrep, (result) => {
 
+                        Dashboard
+                            .build({
+                                id: event.id,
+                                keywordType: "Placeholder",
+                                keyword: this.getKeyword(event.text, filters),
+                                message: event.text,
+                                created: moment(event.created).toDate(),
+                                createdWeek: moment(event.created).week(),
+                                fromScreenName: event.user.screen_name,
+                                toScreenName: event.in_reply_to_screen_name,
+                                tweetType: event.retweeted_status ? "retweet" : "tweet",
+                                sentiment: result,
+                                topicWhole: "Great topic such wow",
+                                topicWhole_C: "great, doge, content",
+                                topic3Month: "Cultural man",
+                                topic3Month_C: "i, see, cultural, man, too, you"
+                            })
+                            .save()
+                            .catch(error => {
+                                console.log(error);
+                            });
                     });
-
-                    this.db.insertTwitterUser({ id: event.user.id, name: event.user.name })
-                    console.log("-------------------------------------")
                 } else {
-                    console.log("no eng tweet");
+                    console.log("no eng tweet: " + event.lang);
                     console.log(event.lang);
                 }
             });
