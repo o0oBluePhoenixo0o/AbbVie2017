@@ -7,9 +7,7 @@ Sentitomo Server is an application built with `Node.js`. We use `express.js` to 
 
 ## Directory Structure
 ```
-├── app.js  
-├── bin
-│   └── www //Start script
+.
 ├── README.md
 ├── package.json
 ├── server
@@ -22,17 +20,22 @@ Sentitomo Server is an application built with `Node.js`. We use `express.js` to 
 │   │   └── R
 │   │       ├── abbrev.csv
 │   │       └── preprocess.R
+│   ├── data
+│   │   ├── connectors.js
+│   │   ├── resolvers.js
+│   │   └── schema.js
 │   ├── routes
 │   │   └── index.js
+│   ├── server.js
 │   └── service
 │       ├── TwitterCrawler.js
 │       ├── classify.js
-│       ├── database.js
 │       └── preprocess.js
 └── yarn.lock
+
 ```
 
-For now we have special directory for all of your foreign Machine Learning source files called `ML`. Inside this directory we seperate the files according to their programming language. Inside `./bin/www` we placed our main entry script which can be run with `PORT=30000 node bin/www` or if you want to use [nodemon](https://github.com/remy/nodemon) `PORT=30000 nodemon bin/www`.
+For now we have special directory for all of your foreign Machine Learning source files called `ML`. Inside this directory we seperate the files according to their programming language. TO start the server run `yarn start`. It uses [nodemon](https://github.com/remy/nodemon) to automatically restart the server if some source file changes.
 
 ### Execution of foreign code
 All foreign code files are executed asynchronously in child processes so the main server thread is not influenced by the execution of these files. This makes our server work more smoothly and not get blocked if some file will fail to execute. 
@@ -82,7 +85,7 @@ Also please have a look at the `preprocess.R` file to get an overview on how to 
 
 
 #### Python
- We use [python-shell](https://github.com/extrabacon/python-shell) to execute single Pyhton script files. The files need to be capable of retrieving starting arguments, for example the path to a serialized model file which is then used to classify the topic of a tweet message. The communication between Python and the server is then again managed by reading the console prints of the Python file. Make sure to not heavily use the console for prints, because our server only needs to knwo the final outcome of the script. For example you can print out the topic of a message and the corresporending contents of this topic. 
+ We use [python-shell](https://github.com/extrabacon/python-shell) to execute single Pyhton script files. The files need to be capable of retrieving starting arguments, for example the path to a serialized model file which is then used to classify the topic of a tweet message. The communication between Python and the server is then again managed by reading the console prints of the Python file. Make sure to not heavily use the console for prints, because our server only needs to knwo the final outcome of the script. For example you can print out the topic of a message and the corresponding contents of this topic. 
 
 Small Example:
 **Javascript**
