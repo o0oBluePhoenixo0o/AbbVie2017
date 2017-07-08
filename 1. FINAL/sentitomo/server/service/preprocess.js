@@ -4,7 +4,7 @@ import franc from 'franc-min';
 
 module.exports = {
     preprocessTweetMessage: function (tweetMessage) {
-        var out = R("./server/ML/R/preprocess.R")
+        var out = R("./ML/R/preprocess.R")
             .data({ message: tweetMessage })
             .callSync();
         return out;

@@ -8,7 +8,7 @@ module.exports = {
     * @return {String} sentiment string
     */
     sentiment: function (file, message, callback) {
-        var child = exec('java -jar ./server/ML/Java/sentiment_executor-1.0-SNAPSHOT-jar-with-dependencies.jar "' + file + '" "' + message + '"',
+        var child = exec('java -jar ./ML/Java/sentiment_executor-1.0-SNAPSHOT-jar-with-dependencies.jar "' + file + '" "' + message + '"',
             function (error, stdout, stderr) {
                 if (error !== null) {
                     console.log("Error -> " + error);

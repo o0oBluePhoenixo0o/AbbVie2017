@@ -114,7 +114,7 @@ module.exports = class TwitterCrawler {
                         });
 
                     //Insert in the Dashboard tables                       
-                    classify.sentiment("./server/ML/Java/naivebayes.bin", messagePrep, (result) => {
+                    classify.sentiment("./ML/Java/naivebayes.bin", messagePrep, (result) => {
 
                         Dashboard
                             .build({
