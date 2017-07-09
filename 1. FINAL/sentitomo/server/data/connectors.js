@@ -3,7 +3,6 @@ import casual from 'casual';
 import _ from 'lodash';
 require('dotenv').config();
 
-console.log(process.env.DB_HOST)
 const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
     dialect: 'mysql',
     host: process.env.DB_HOST,
@@ -31,7 +30,7 @@ const AuthorModel = db.define('TW_User', {
     screenname: { type: Sequelize.STRING },
 });
 
-const TweetModel = db.define('TW_Raw', {
+const TweetModel = db.define('TW_CORE', {
     id: { type: Sequelize.STRING, primaryKey: true },
     keywordType: { type: Sequelize.STRING },
     keyword: { type: Sequelize.STRING },
@@ -51,7 +50,7 @@ const TweetModel = db.define('TW_Raw', {
     retweeted: { type: Sequelize.INTEGER }
 });
 
-const DashboardModel = db.define('TW_Dashboard', {
+const DashboardModel = db.define('TW_DASH', {
     id: { type: Sequelize.STRING, primaryKey: true },
     keywordType: { type: Sequelize.STRING },
     keyword: { type: Sequelize.STRING },
@@ -75,8 +74,8 @@ TweetModel.belongsTo(AuthorModel);
 
 
 const Author = db.models.TW_User;
-const Tweet = db.models.TW_Raw;
-const Dashboard = db.models.TW_Dashboard;
+const Tweet = db.models.TW_CORE;
+const Dashboard = db.models.TW_DASH;
 
 //Create tables
 Author.sync()

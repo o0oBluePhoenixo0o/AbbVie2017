@@ -13,6 +13,49 @@ Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')
 #source("./translateR.R")
 attach(input[[1]])
 
+
+loadAbbrev <- function(filename) {
+  # Concates custom abbreviation dataset with the default one from qdap
+  #
+  # Args:
+  #   filename: Filename of the abbreviation lexicon
+  #
+  # Returns:
+  #   A 2-column(abv,rep) data.frame
+  
+  myAbbrevs <- read.csv(filename, sep = ",", as.is = TRUE)
+  return(rbind(abbreviations,myAbbrevs))
+}
+
+myAbbrevs <- loadAbbrev('./ML/R/abbrev.csv')
+
+convertAbbreviations <- function(text){
+  # Replaces abbreviation with the corresporending long form
+  #
+  # Args:
+  #   text: Text to remove the abbreviations from
+  #
+  # Returns:
+  #   String
+  if(is.na(text) || text == ""){
+    return(text)
+  } else {
+    return(qdap::replace_abbreviation(text, abbreviation = myAbbrevs, ignore.case = TRUE))
+  }
+} 
+
+convertLatin_ASCII <- function(text){
+  # Converts text into ASCII to avoid some text identification issues
+  #
+  # Args:
+  #   text: Text to convert
+  #
+  # Returns:
+  #   String
+  
+  return(iconv(text, "latin1", "ASCII", ""))
+} 
+
 removeURL <- function(text) {
   # Removes all urls from a given text
   #
@@ -87,4 +130,7 @@ out <- removeTwitterHandles(out)
 out <- tryTolower(out)
 out <- removeTags(out)
 out <- removeURL(out)
-removeStopWords(out) # the last expression has to NOT be assigned to a variable so that our JS can read it
+#out <- convertAbbreviations(out)
+out <- removeStopWords(out)
+ # the last expression has to NOT be assigned to a variable so that our JS can read it
+convertLatin_ASCII(out)

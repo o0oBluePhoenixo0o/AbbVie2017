@@ -72,6 +72,10 @@ module.exports = class TwitterCrawler {
         return n;
     }
 
+    getHTMLTagContent(string) {
+        return string.replace(/<\/?[^>]+(>|$)/g, "");
+    }
+
     /**
      * Starts using the twitter api with the specified filters
      * @param {String} filters 
@@ -84,12 +88,13 @@ module.exports = class TwitterCrawler {
 
                     var messagePrep = preprocess.preprocessTweetMessage(event.text);
 
-                    //Insert in the normal tables                    
+                    //Insert in the normal tables
+                    //If an author already exists an error is thrown
                     Author
                         .build({ id: event.user.id, username: event.user.name, screenname: event.user.screen_name })
                         .save()
                         .then(author => {
-                            author.createTW_Raw({
+                            author.createTW_CORE({
                                 id: event.id,
                                 keywordType: "Placeholder",
                                 keyword: this.getKeyword(event.text, filters),
@@ -97,7 +102,7 @@ module.exports = class TwitterCrawler {
                                 createdWeek: moment(event.created_at).week(),
                                 toUser: event.in_reply_to_user_id,
                                 language: event.lang,
-                                source: event.source,
+                                source: this.getHTMLTagContent(event.source),
                                 message: event.text,
                                 messagePrep: messagePrep,
                                 latitude: event.coordinates,
