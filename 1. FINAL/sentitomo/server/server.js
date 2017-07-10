@@ -1,4 +1,5 @@
 require('dotenv').config()
+require("./service/scheduling.js");
 
 import express from "express";
 import Schema from './data/schema';

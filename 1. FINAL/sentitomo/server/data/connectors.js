@@ -30,6 +30,8 @@ const AuthorModel = db.define('TW_User', {
     screenname: { type: Sequelize.STRING },
 });
 
+
+//TODO: Either constantly also feed the Dash, or use a varibale 'inDash' for Bulk insert
 const TweetModel = db.define('TW_CORE', {
     id: { type: Sequelize.STRING, primaryKey: true },
     keywordType: { type: Sequelize.STRING },
