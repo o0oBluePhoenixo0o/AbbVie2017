@@ -30,7 +30,34 @@ mergeCSVsUTF8("./products/Adalimumab.csv","./products/Enbrel.csv","./products/Hu
 
 # Read master files
 facebookMaster.df <- read_csv("Final_FB_0405_prep.csv")
-twitterMaster.df <- read_csv("Final_TW_2605_prep.csv")
+twitterMaster.df <- read_csv("Final_TW_0807_prep.csv")
+
+twitterMaster.df$Source <- gsub("<.*?>", "", twitterMaster.df$Source)
+twitterMaster.df$To.User.Id <- ifelse(is.na(twitterMaster.df$To.User.Id), NULL,twitterMaster.df$To.User.Id )
+
+twitterMaster.df[is.na(twitterMaster.df)] <- "\N"
+
+twitterMaster.df$messagePrep <- twitterMaster.df$message
+twitterMaster.df$messagePrep <- removeTwitterHandles(twitterMaster.df$messagePrep)
+twitterMaster.df$messagePrep <- tryTolower(twitterMaster.df$messagePrep)
+twitterMaster.df$messagePrep <- removeTags(twitterMaster.df$messagePrep)
+twitterMaster.df$messagePrep <- removeURL(twitterMaster.df$messagePrep)
+
+for (i in 1:nrow(twitterMaster.df)) {
+  print(i)
+  message <- twitterMaster.df[i,18]
+  twitterMaster.df[i,18] <- paste(qdap::rm_stopwords(message, tm::stopwords("english"))[[1]], sep=" ", collapse = " ")
+}
+twitterMaster.df$messagePrep <- convertLatin_ASCII(twitterMaster.df$messagePrep)
+twitterMaster.df$week <- lubridate::week(twitterMaster.df$created_time)
+
+fromUsers <- cbind(twitterMaster.df$From.User, twitterMaster.df$From.User.Id)
+toUsers <- cbind(twitterMaster.df$To.User, twitterMaster.df$To.User.Id)
+
+toUsers <- toUsers[complete.cases(toUsers), ]
+write.csv(fromUsers, file = paste("fromUsers0807",".csv", sep = ""), fileEncoding = "UTF-8", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
+write.csv(toUsers, file = paste("toUsers0807",".csv", sep = ""), fileEncoding = "UTF-8", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
+write.csv(twitterMaster.df, file = paste("dbImport0807",".csv", sep = ""), fileEncoding = "UTF-8", row.names=FALSE, qmethod='escape', quote=TRUE, sep = ",")
 
 
 # Training tweets

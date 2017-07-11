@@ -17,6 +17,8 @@ library(qdap)
 library(SnowballC)
 library(stringr)
 library(lubridate)
+library(readr)
+library(stringr)
 
 Sys.setenv(JAVA_HOME = '/Library/Java//Home')
 Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')
@@ -67,13 +69,13 @@ loadAbbrev <- function(filename) {
   # Returns:
   #   A 2-column(abv,rep) data.frame
   
-  myAbbrevs <- read.csv(filename, sep = ",", as.is = TRUE)
-  return(rbind(abbreviations,myAbbrevs))
+  myAbbrevs <- read.csv(filename, sep = ",")
+  return(myAbbrevs)
 }
 
 myAbbrevs <- loadAbbrev('abbrev.csv')
 
-convertAbbreviations <- function(text){
+convertAbbreviations <- function(message){
   # Replaces abbreviation with the corresporending long form
   #
   # Args:
@@ -81,11 +83,15 @@ convertAbbreviations <- function(text){
   #
   # Returns:
   #   String
-  
-  if(is.na(text) || text == ""){
-    return(text)
+  if(is.na(message) || message == ""){
+    return(message)
   } else {
-    return(qdap::replace_abbreviation(text, abbreviation = myAbbrevs, ignore.case = TRUE))
+        newText <- message
+        for (i in 1:nrow(myAbbrevs)){
+            newText <- gsub(paste0('\\<', myAbbrevs[[i,1]], '\\>'), paste(myAbbrevs[[i,2]]), newText)
+            cat(paste0(newText,"\n"), file="R.out", append = TRUE)
+        }
+        return (newText)
   }
 } 
 
@@ -97,7 +103,6 @@ removeTwitterHandles <- function(text){
   #
   # Returns:
   #   String
-  
   return(str_replace_all(as.character(text), "@\\w+", ""))
 } 
 
@@ -135,6 +140,7 @@ translate <- function(text, to) {
 }
 
 removeStopWords <- function(text){
+  print(text)
   # Remove stopwords from a english text
   #
   # Args:
@@ -182,7 +188,15 @@ string2Date <- function(text, dateFormats) {
   return (paste(ymd,hs, sep = " "))
 }
 
-
-removeURL("Hello click on https://www.google.de")
-
+preprocess <- function(text){
+  out <- text
+  out <- removeTwitterHandles(out)
+  out <- tryTolower(out)
+  out <- removeTags(out)
+  out <- removeURL(out)
+  out <- convertAbbreviations(out)
+  out <- convertLatin_ASCII(out)
+  out <-removeStopWords(out) # the last expression has to NOT be assigned to a variable so that our JS can read it
+  return (out);
+}
 

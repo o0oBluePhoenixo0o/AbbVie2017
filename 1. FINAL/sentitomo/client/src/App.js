@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './styles/ogo.svg';
+import logo from './styles/logo.svg';
 import './styles/App.css';
 
 import TweetsListWithData from './components/TweetsListWithData.js';

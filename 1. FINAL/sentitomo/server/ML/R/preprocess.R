@@ -29,7 +29,7 @@ loadAbbrev <- function(filename) {
 
 myAbbrevs <- loadAbbrev('./ML/R/abbrev.csv')
 
-convertAbbreviations <- function(text){
+convertAbbreviations <- function(message){
   # Replaces abbreviation with the corresporending long form
   #
   # Args:
@@ -37,12 +37,17 @@ convertAbbreviations <- function(text){
   #
   # Returns:
   #   String
-  if(is.na(text) || text == ""){
-    return(text)
+  if(is.na(message) || message == ""){
+    return(message)
   } else {
-    return(qdap::replace_abbreviation(text, abbreviation = myAbbrevs, ignore.case = TRUE))
+        newText <- message
+        for (i in 1:nrow(myAbbrevs)){
+            newText <- gsub(paste0('\\<', myAbbrevs[[i,1]], '\\>'), paste(myAbbrevs[[i,2]]), newText)
+        }
+        return (newText)
   }
 } 
+
 
 convertLatin_ASCII <- function(text){
   # Converts text into ASCII to avoid some text identification issues
@@ -130,7 +135,7 @@ out <- removeTwitterHandles(out)
 out <- tryTolower(out)
 out <- removeTags(out)
 out <- removeURL(out)
-#out <- convertAbbreviations(out)
+out <- convertAbbreviations(out)
 out <- removeStopWords(out)
  # the last expression has to NOT be assigned to a variable so that our JS can read it
 convertLatin_ASCII(out)
