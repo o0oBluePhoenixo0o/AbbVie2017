@@ -10,7 +10,10 @@ const resolvers = {
             return Tweet.find({ where: args });
         },
         tweets(_, args) {
-            return Tweet.findAll();
+            return Tweet.findAll({
+                limit: args.limit,
+                offset: args.offset
+            });
         }
     },
     Author: {

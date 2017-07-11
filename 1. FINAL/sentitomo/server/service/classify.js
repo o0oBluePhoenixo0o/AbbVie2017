@@ -14,7 +14,7 @@ module.exports = {
                     console.log("Error -> " + error);
                 }
                 console.log("Output -> " + stdout);
-                callback(stdout);
+                callback(stdout.trim());
             }
         );
     }

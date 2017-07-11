@@ -18,6 +18,7 @@ module.exports = class TwitterCrawler {
         });
         console.log("Twitter API initialized successfully");
 
+        /*Start tracking keywords */
         this.track(process.env.TWITTER_STREAMING_FILTERS);
     }
 
