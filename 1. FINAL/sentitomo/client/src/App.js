@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './styles/logo.svg';
-import './styles/App.css';
+import './styles/kube.css';
 
 import TweetsListWithData from './components/TweetsListWithData.js';
 
@@ -24,10 +24,16 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <div className="App">
-          <div className="navbar">React + GraphQL Tutorial</div>
-          <TweetsListWithData />
+        <div className="row">
+          <div className="col col-10">
+            <h1 className="title">ALl tweets</h1>
+            <TweetsListWithData />
+          </div>
+          <div className="col col-2">
+            Test
+          </div>
         </div>
+
       </ApolloProvider>
     );
   }

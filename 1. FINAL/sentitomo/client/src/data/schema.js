@@ -30,7 +30,7 @@ const typeDefinitions = `
   type Query {
     tweet(id: String): Tweet
     author(username: String): Author
-    tweets: [Tweet]
+    tweets(limit: Int, offset:Int): [Tweet]
   }
 
   schema {
