@@ -25,12 +25,12 @@ class App extends Component {
     return (
       <ApolloProvider client={client}>
         <div className="row">
-          <div className="col col-10">
-            <h1 className="title">ALl tweets</h1>
+          <div className="col col-12">
+            <nav style={{ position: "fixed", width: "100%", backgroundColor: "#2185c5", color: "#fff" }}>
+              <h1 className="title" style={{ color: "#fff" }}>All tweets</h1>
+            </nav>
+
             <TweetsListWithData />
-          </div>
-          <div className="col col-2">
-            Test
           </div>
         </div>
 

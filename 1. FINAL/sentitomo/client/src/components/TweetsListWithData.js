@@ -4,44 +4,63 @@ import {
     graphql,
 } from 'react-apollo';
 
+import styled from 'styled-components';
+
+const TweetsListWrapper = styled.div`
+    max-height: 100vh;
+    overflow:auto;
+    margin-top:64px;
+`;
 
 const TweetsList = ({ tweets, loading, error, loadMoreEntries }) => {
     if (loading) {
-        return <div className="message success" data-component="message">Loading..<span className="close small"></span></div>;
+        return <TweetsListWrapper><div className="message success" data-component="message">Loading..<span className="close small"></span></div></TweetsListWrapper>;
     }
     if (error) {
-        return <div className="message error" data-component="message">{error}<span className="close small"></span></div>;
+        return <TweetsListWrapper><div className="message error" data-component="message">{error}<span className="close small"></span></div></TweetsListWrapper>;
+    }
+
+    if (!tweets) {
+        return <TweetsListWrapper><div className="message error" data-component="message">Unable to fetch the data<span className="close small"></span></div></TweetsListWrapper>;
     }
 
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Message</th>
-                    <th>Created at</th>
-                </tr>
-            </thead>
-            <tbody>
-                {tweets.map(ch =>
-                    (
-                        <tr key={ch.id}>
-                            <td>{ch.id}</td>
-                            <td>{ch.message}</td>
-                            <td>{ch.created}</td>
+        <TweetsListWrapper>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Message</th>
+                        <th>Created at</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {tweets.map(ch =>
+                        (
+                            <tr key={ch.id}>
+                                <td>{ch.id}</td>
+                                <td>{ch.message}</td>
+                                <td>{ch.created}</td>
 
-                        </tr>
-                    )
-                )}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colSpan="2">Total tweets</td>
-                    <td>{tweets.lenght}</td>
-                </tr>
-            </tfoot>
-            <button className="button outline" onClick={() => loadMoreEntries()}>Button</button>
-        </table>
+                            </tr>
+                        )
+                    )}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colSpan="2">Total tweets</td>
+                        <td>{tweets.length}</td>
+                    </tr>
+
+                </tfoot>
+            </table>
+
+            <nav className="pagination pager align-center">
+                <ul>
+                    <li className="prev"><a onClick={() => loadMoreEntries()}>Show More</a></li>
+                </ul>
+            </nav>
+        </TweetsListWrapper>
     );
 };
 
@@ -78,13 +97,14 @@ const TweetsListQuery = graphql(tweetsListQuery, {
                     offset: tweets.length,
                 },
                 updateQuery: (previousResult, { fetchMoreResult }) => {
+                    console.log(previousResult)
                     // we will make an extra call to check if no more entries
-                    console.log(previousResult);
                     if (!fetchMoreResult) { return previousResult; }
                     // push results (older messages) to end of messages list
                     return Object.assign({}, previousResult, {
                         // Append the new feed results to the old one
                         tweets: [...previousResult.tweets, ...fetchMoreResult.tweets],
+                        loading: loading
                     });
                 },
             });

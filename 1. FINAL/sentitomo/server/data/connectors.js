@@ -28,6 +28,7 @@ const AuthorModel = db.define('TW_User', {
     id: { type: Sequelize.STRING, primaryKey: true },
     username: { type: Sequelize.STRING },
     screenname: { type: Sequelize.STRING },
+    followerCount: { type: Sequelize.INTEGER }
 });
 
 
@@ -52,17 +53,20 @@ const TweetModel = db.define('TW_CORE', {
     retweeted: { type: Sequelize.INTEGER }
 });
 
+
 const DashboardModel = db.define('TW_DASH', {
     id: { type: Sequelize.STRING, primaryKey: true },
     keywordType: { type: Sequelize.STRING },
     keyword: { type: Sequelize.STRING },
     message: { type: Sequelize.STRING },
     created: { type: Sequelize.DATE },
+    createdTime: { type: Sequelize.TIME },
+    createdDate: { type: Sequelize.INTEGER }, // date only without time
     createdWeek: { type: Sequelize.INTEGER },
-    fromScreenName: { type: Sequelize.STRING },
-    toScreenName: { type: Sequelize.STRING },
+    screenName: { type: Sequelize.STRING },
     tweetType: { type: Sequelize.STRING },
     sentiment: { type: Sequelize.STRING },
+    sarcasm: { type: Sequelize.BOOLEAN },
     topicWhole: { type: Sequelize.STRING },
     topicWhole_C: { type: Sequelize.STRING },
     topic3Month: { type: Sequelize.STRING },
@@ -71,8 +75,6 @@ const DashboardModel = db.define('TW_DASH', {
 
 AuthorModel.hasMany(TweetModel);
 TweetModel.belongsTo(AuthorModel);
-
-
 
 
 const Author = db.models.TW_User;

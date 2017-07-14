@@ -31,7 +31,7 @@ const GRAPHQL_PORT = 8080;
 const graphQLServer = express();
 
 graphQLServer.use(loggingMiddleware);
-graphQLServer.use('*', cors({ origin: 'http://localhost:3000' }));
+graphQLServer.use('*', cors({ origin: 'http://localhost:3006' }));
 const executableSchema = makeExecutableSchema({
   typeDefs: Schema,
   resolvers: Resolvers,
