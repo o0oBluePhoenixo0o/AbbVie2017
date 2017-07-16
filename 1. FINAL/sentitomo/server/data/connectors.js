@@ -28,7 +28,7 @@ const AuthorModel = db.define('TW_User', {
     id: { type: Sequelize.STRING, primaryKey: true },
     username: { type: Sequelize.STRING },
     screenname: { type: Sequelize.STRING },
-    followerCount: { type: Sequelize.INTEGER }
+    followercount: { type: Sequelize.INTEGER }
 });
 
 
@@ -61,7 +61,7 @@ const DashboardModel = db.define('TW_DASH', {
     message: { type: Sequelize.STRING },
     created: { type: Sequelize.DATE },
     createdTime: { type: Sequelize.TIME },
-    createdDate: { type: Sequelize.INTEGER }, // date only without time
+    createdDate: { type: Sequelize.DATE },
     createdWeek: { type: Sequelize.INTEGER },
     screenName: { type: Sequelize.STRING },
     tweetType: { type: Sequelize.STRING },

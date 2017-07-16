@@ -1,11 +1,20 @@
 import R from "r-script";
-import PythonShell from 'python-shell';
-import franc from 'franc-min';
+import PythonShell from "python-shell";
+import franc from "franc-min";
 
 module.exports = {
+    /**
+     * @function preprocessTweetMessage
+     * @param  {String} tweetMessage The Twitter tweet
+     * @description Preprocesses a message from Twitter
+     * @see File server/ML/R/preprocess.R
+     * @return {String} A preprocessed message
+     */
     preprocessTweetMessage: function (tweetMessage) {
         var out = R("./ML/R/preprocess.R")
-            .data({ message: tweetMessage })
+            .data({
+                message: tweetMessage
+            })
             .callSync();
         return out;
     },
@@ -13,9 +22,6 @@ module.exports = {
         return franc(message);
     }
 };
-
-
-
 
 /*
 PythonShell.run('./server/ML/Python/myscript.py', {

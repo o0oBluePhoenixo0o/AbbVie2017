@@ -2,7 +2,7 @@ import cron from "cron";
 import { Tweet } from '../data/connectors';
 import { Dashboard } from '../data/connectors';
 
-/*
+    /*
    * Runs every weekday (Monday through Friday)
    * at 11:30:00 AM. It does not run on Saturday
    * or Sunday.
@@ -22,11 +22,11 @@ var syncJob = new cron.CronJob({
             return Dashboard.findAll();
         }).then(dashTweets => {
             console.log(dashTweets) // ... in order to get the array of user objects
-        })
-        */
+        })*/
+        
     },
     start: false,
     timeZone: 'America/Los_Angeles'
 });
 
-syncJob.start(); // syncJob 1 started
+syncJob.start(); // syncJob 1 started*/

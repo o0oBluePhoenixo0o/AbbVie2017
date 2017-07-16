@@ -11,3 +11,4 @@ Alex/R_Scripts/test/*
 tweets_sentiment_training.txt
 .env
 node_modules
+*.numbers
