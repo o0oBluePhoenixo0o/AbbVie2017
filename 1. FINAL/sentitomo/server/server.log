@@ -1,0 +1,33 @@
+{"level":"info","message":"TD Sync job started!","timestamp":"2017-07-18T11:40:29.109Z"}
+{"level":"debug","message":"Start up server","timestamp":"2017-07-18T11:40:29.251Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-18T11:40:29.288Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-18T11:41:51.755Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-18T11:41:51.906Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-18T11:41:51.944Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-18T11:42:25.755Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-18T11:42:26.107Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-18T11:42:26.145Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-19T06:58:57.166Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-19T06:58:57.459Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-19T06:58:57.483Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-19T06:58:57.483Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-19T06:58:57.515Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-19T06:58:57.945Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-19T07:06:46.726Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-19T07:06:46.871Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-19T07:06:46.896Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-19T07:06:46.896Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-19T07:06:46.936Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-19T07:06:47.406Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-19T07:08:29.614Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-19T07:08:30.027Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-19T07:08:30.053Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-19T07:08:30.053Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-19T07:08:30.093Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-19T07:08:30.550Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-19T07:09:03.952Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-19T07:09:04.353Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-19T07:09:04.378Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-19T07:09:04.379Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-19T07:09:04.419Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-19T07:09:04.830Z"}

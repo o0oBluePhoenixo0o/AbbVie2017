@@ -9,6 +9,8 @@ import {
 
 import preprocess from "./preprocess.js";
 import classify from "./classify.js";
+var logger = require('./logger.js');
+
 
 module.exports = class TwitterCrawler {
     constructor(config) {
@@ -18,7 +20,7 @@ module.exports = class TwitterCrawler {
             access_token_key: config.access_token_key,
             access_token_secret: config.access_token_secret
         });
-        console.log("Twitter API initialized successfully");
+        logger.log('info', 'Twitter API initialized successfully');
         /*Start tracking keywords */
         this.track(process.env.TWITTER_STREAMING_FILTERS);
         //this.updateAuthors();
@@ -49,7 +51,6 @@ module.exports = class TwitterCrawler {
                 keyword,
                 false
             );
-            console.log(keyword + " #" + occurrences);
             if (occurrences > mostOcc) {
                 mostOcc = occurrences;
                 key = keyword;
@@ -113,7 +114,6 @@ module.exports = class TwitterCrawler {
             for (var i = 0; i <= authors.length - 1; i++) {
                 setTimeout(
                     i => {
-                        console.log("updating author " + authors[i].id);
                         this.client.get(
                             "users/search", {
                                 q: authors[i].username
@@ -136,9 +136,9 @@ module.exports = class TwitterCrawler {
                                                 " was updated"
                                             )
                                         )
-                                        .catch(err => console.log(err));
+                                        .catch(err => logger.log('error', err));
                                 } else {
-                                    console.log(error);
+                                    logger.log('error', error);
                                 }
                             }
                         );
@@ -156,7 +156,7 @@ module.exports = class TwitterCrawler {
      * @description Starts using the twitter api with the specified filters
      */
     track(filters) {
-        console.log("Start streaming Twitter tweets with filters: " + filters);
+        logger.log("info", "Start streaming Twitter tweets with filters: " + filters);
         this.client.stream(
             "statuses/filter", {
                 track: filters,
@@ -207,7 +207,7 @@ module.exports = class TwitterCrawler {
                                 });
                             })
                             .catch(error => {
-                                console.log(error);
+                                logger.log("error", error);
                             });
 
                         //Insert in the Dashboard tables
@@ -243,17 +243,17 @@ module.exports = class TwitterCrawler {
                                     })
                                     .save()
                                     .catch(error => {
-                                        console.log(error);
+                                        logger.log("error", error);
                                     });
                             }
                         );
                     } else {
-                        console.log("no eng tweet: " + event.lang);
+                        //no english tweet
                     }
                 });
 
                 stream.on("error", function (error) {
-                    console.log(error);
+                    logger.log("error", error);
                     //throw error;
                 });
             }

@@ -1,12 +1,17 @@
 import cron from "cron";
-import { Tweet } from '../data/connectors';
-import { Dashboard } from '../data/connectors';
+import {
+    Tweet
+} from '../data/connectors';
+import {
+    Dashboard
+} from '../data/connectors';
+var logger = require('./logger.js');
 
-    /*
-   * Runs every weekday (Monday through Friday)
-   * at 11:30:00 AM. It does not run on Saturday
-   * or Sunday.
-   */
+/*
+ * Runs every weekday (Monday through Friday)
+ * at 11:30:00 AM. It does not run on Saturday
+ * or Sunday.
+ */
 var syncJob = new cron.CronJob({
     cronTime: process.env.DASH_SYNC_CRON,
     onTick: function () {
@@ -23,10 +28,10 @@ var syncJob = new cron.CronJob({
         }).then(dashTweets => {
             console.log(dashTweets) // ... in order to get the array of user objects
         })*/
-        
+
     },
     start: false,
     timeZone: 'America/Los_Angeles'
 });
 
-syncJob.start(); // syncJob 1 started*/
+logger.log('info', 'Topic Detection Sync job started!');

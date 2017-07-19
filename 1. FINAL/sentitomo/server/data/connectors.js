@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 import casual from 'casual';
 import _ from 'lodash';
+import logger from './../service/logger.js';
 require('dotenv').config();
 
 const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
@@ -18,59 +19,136 @@ const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.D
 
 db.authenticate()
     .then(() => {
-        console.log('Connection has been established successfully.');
+        logger.log('info', 'Connection to database has been established successfully.');
     })
     .catch(err => {
-        console.error('Unable to connect to the database:', err);
+        logger.error('error', 'Unable to connect to the database: ' + err);
     });
 
 const AuthorModel = db.define('TW_User', {
-    id: { type: Sequelize.STRING, primaryKey: true },
-    username: { type: Sequelize.STRING },
-    screenname: { type: Sequelize.STRING },
-    followercount: { type: Sequelize.INTEGER }
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    username: {
+        type: Sequelize.STRING
+    },
+    screenname: {
+        type: Sequelize.STRING
+    },
+    followercount: {
+        type: Sequelize.INTEGER
+    }
 });
 
 
 //TODO: Either constantly also feed the Dash, or use a varibale 'inDash' for Bulk insert
 const TweetModel = db.define('TW_CORE', {
-    id: { type: Sequelize.STRING, primaryKey: true },
-    keywordType: { type: Sequelize.STRING },
-    keyword: { type: Sequelize.STRING },
-    created: { type: Sequelize.DATE },
-    createdWeek: { type: Sequelize.INTEGER },
-    toUser: { type: Sequelize.STRING },
-    language: { type: Sequelize.STRING },
-    source: { type: Sequelize.STRING },
-    message: { type: Sequelize.STRING },
-    messagePrep: { type: Sequelize.STRING },
-    latitude: { type: Sequelize.STRING },
-    longitude: { type: Sequelize.STRING },
-    retweetCount: { type: Sequelize.INTEGER },
-    favorited: { type: Sequelize.BOOLEAN },
-    favoriteCount: { type: Sequelize.INTEGER },
-    isRetweet: { type: Sequelize.BOOLEAN },
-    retweeted: { type: Sequelize.INTEGER }
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    keywordType: {
+        type: Sequelize.STRING
+    },
+    keyword: {
+        type: Sequelize.STRING
+    },
+    created: {
+        type: Sequelize.DATE
+    },
+    createdWeek: {
+        type: Sequelize.INTEGER
+    },
+    toUser: {
+        type: Sequelize.STRING
+    },
+    language: {
+        type: Sequelize.STRING
+    },
+    source: {
+        type: Sequelize.STRING
+    },
+    message: {
+        type: Sequelize.STRING
+    },
+    messagePrep: {
+        type: Sequelize.STRING
+    },
+    latitude: {
+        type: Sequelize.STRING
+    },
+    longitude: {
+        type: Sequelize.STRING
+    },
+    retweetCount: {
+        type: Sequelize.INTEGER
+    },
+    favorited: {
+        type: Sequelize.BOOLEAN
+    },
+    favoriteCount: {
+        type: Sequelize.INTEGER
+    },
+    isRetweet: {
+        type: Sequelize.BOOLEAN
+    },
+    retweeted: {
+        type: Sequelize.INTEGER
+    }
 });
 
 
 const DashboardModel = db.define('TW_DASH', {
-    id: { type: Sequelize.STRING, primaryKey: true },
-    keywordType: { type: Sequelize.STRING },
-    keyword: { type: Sequelize.STRING },
-    message: { type: Sequelize.STRING },
-    created: { type: Sequelize.DATE },
-    createdTime: { type: Sequelize.TIME },
-    createdDate: { type: Sequelize.DATE },
-    createdWeek: { type: Sequelize.INTEGER },
-    screenName: { type: Sequelize.STRING },
-    tweetType: { type: Sequelize.STRING },
-    sentiment: { type: Sequelize.STRING },
-    sarcasm: { type: Sequelize.BOOLEAN },
-    topicWhole: { type: Sequelize.STRING },
-    topicWhole_C: { type: Sequelize.STRING },
-    topic3Month: { type: Sequelize.STRING },
-    topic3Month_C: { type: Sequelize.STRING },
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    keywordType: {
+        type: Sequelize.STRING
+    },
+    keyword: {
+        type: Sequelize.STRING
+    },
+    message: {
+        type: Sequelize.STRING
+    },
+    created: {
+        type: Sequelize.DATE
+    },
+    createdTime: {
+        type: Sequelize.TIME
+    },
+    createdDate: {
+        type: Sequelize.DATE
+    },
+    createdWeek: {
+        type: Sequelize.INTEGER
+    },
+    screenName: {
+        type: Sequelize.STRING
+    },
+    tweetType: {
+        type: Sequelize.STRING
+    },
+    sentiment: {
+        type: Sequelize.STRING
+    },
+    sarcasm: {
+        type: Sequelize.BOOLEAN
+    },
+    topicWhole: {
+        type: Sequelize.STRING
+    },
+    topicWhole_C: {
+        type: Sequelize.STRING
+    },
+    topic3Month: {
+        type: Sequelize.STRING
+    },
+    topic3Month_C: {
+        type: Sequelize.STRING
+    },
 });
 
 AuthorModel.hasMany(TweetModel);
@@ -86,4 +164,8 @@ Author.sync()
 Tweet.sync()
 Dashboard.sync();
 
-export { Author, Tweet, Dashboard };
+export {
+    Author,
+    Tweet,
+    Dashboard
+};
