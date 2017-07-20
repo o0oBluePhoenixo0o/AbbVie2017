@@ -7,6 +7,8 @@ require('dotenv').config();
 const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
     dialect: 'mysql',
     host: process.env.DB_HOST,
+    /*
+        logging: false,*/
     pool: {
         max: 5,
         min: 1,
@@ -25,7 +27,8 @@ db.authenticate()
         logger.error('error', 'Unable to connect to the database: ' + err);
     });
 
-const AuthorModel = db.define('TW_User', {
+
+const Author = db.define('TW_User', {
     id: {
         type: Sequelize.STRING,
         primaryKey: true
@@ -43,10 +46,10 @@ const AuthorModel = db.define('TW_User', {
 
 
 //TODO: Either constantly also feed the Dash, or use a varibale 'inDash' for Bulk insert
-const TweetModel = db.define('TW_CORE', {
+const Tweet = db.define('TW_CORE', {
     id: {
         type: Sequelize.STRING,
-        primaryKey: true
+        primaryKey: true,
     },
     keywordType: {
         type: Sequelize.STRING
@@ -99,7 +102,7 @@ const TweetModel = db.define('TW_CORE', {
 });
 
 
-const DashboardModel = db.define('TW_DASH', {
+const Dashboard = db.define('TW_DASH', {
     id: {
         type: Sequelize.STRING,
         primaryKey: true
@@ -151,21 +154,72 @@ const DashboardModel = db.define('TW_DASH', {
     },
 });
 
-AuthorModel.hasMany(TweetModel);
-TweetModel.belongsTo(AuthorModel);
+var Sentiment = db.define('TW_SENTIMENT', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    sentiment: {
+        type: Sequelize.STRING
+    }
+})
+
+var Topic = db.define('TW_TOPIC', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    topic1Month: {
+        type: Sequelize.STRING
+    },
+    topic1Month_C: {
+        type: Sequelize.STRING
+    },
+    topic3Month: {
+        type: Sequelize.STRING
+    },
+    topic3Month_C: {
+        type: Sequelize.STRING
+    },
+    topicWhole: {
+        type: Sequelize.STRING
+    },
+    topicWhole_C: {
+        type: Sequelize.STRING
+    }
+})
+
+Author.hasMany(Tweet);
+Tweet.belongsTo(Author);
+
+Tweet.Sentiment = Tweet.hasOne(Sentiment, {
+    foreignKey: 'id',
+    onDelete: 'cascade'
+});
+
+Tweet.Topic = Tweet.hasOne(Topic, {
+    foreignKey: 'id',
+    onDelete: 'cascade'
+});
 
 
-const Author = db.models.TW_User;
-const Tweet = db.models.TW_CORE;
-const Dashboard = db.models.TW_DASH;
 
-//Create tables
+//Create tables if not exist
 Author.sync()
 Tweet.sync()
 Dashboard.sync();
+Sentiment.sync();
+Topic.sync({
+    force: true
+});
+
+Sentiment = Tweet.Sentiment;
+Topic = Tweet.Topic;
 
 export {
     Author,
     Tweet,
-    Dashboard
+    Sentiment,
+    Topic,
+    Dashboard,
 };

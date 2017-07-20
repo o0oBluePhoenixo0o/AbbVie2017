@@ -1,4 +1,6 @@
 var exec = require("child_process").exec;
+var PythonShell = require('python-shell');
+
 
 module.exports = {
     /**
@@ -23,5 +25,5 @@ module.exports = {
                 callback(stdout.trim());
             }
         );
-    }
+    },
 };

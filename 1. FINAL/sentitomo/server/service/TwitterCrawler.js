@@ -7,6 +7,19 @@ import {
     Dashboard
 } from "../data/connectors";
 
+import {
+    Tweet
+} from "../data/connectors";
+import {
+    Sentiment
+} from "../data/connectors";
+import {
+    Project,
+    User
+} from "../data/connectors";
+import PythonShell from 'python-shell';
+
+
 import preprocess from "./preprocess.js";
 import classify from "./classify.js";
 var logger = require('./logger.js');
@@ -22,16 +35,9 @@ module.exports = class TwitterCrawler {
         });
         logger.log('info', 'Twitter API initialized successfully');
         /*Start tracking keywords */
+
         this.track(process.env.TWITTER_STREAMING_FILTERS);
         //this.updateAuthors();
-
-        /*classify.sentiment("./ML/Java/naivebayes.bin",
-            "I love you",
-            result => {
-                console.log(result);
-            });*/
-
-        //console.log(preprocess.preprocessTweetMessage("RT @dude this is a cool twitter message"));
     }
 
     /**
@@ -153,7 +159,8 @@ module.exports = class TwitterCrawler {
     /**
      * @function track 
      * @param {String} filters 
-     * @description Starts using the twitter api with the specified filters
+     * @description Starts using the twitter api with the specified filters. It also inserts different information in the different tables 
+     * in the database. It upserts author data, inserts raw Tweet Data and inserts Sentiment data.
      */
     track(filters) {
         logger.log("info", "Start streaming Twitter tweets with filters: " + filters);
@@ -169,86 +176,65 @@ module.exports = class TwitterCrawler {
                             event.text
                         );
                         //Insert in the normal tables
-                        //If an author already exists an error is thrown
-                        Author.build({
-                                id: event.user.id,
-                                username: event.user.name,
-                                screenname: event.user.screen_name,
-                                followercount: event.user.followers_count
-                            })
-                            .save()
-                            .then(author => {
-                                author.createTW_CORE({
-                                    id: event.id,
-                                    keywordType: "Placeholder",
-                                    keyword: this.getKeyword(
-                                        event.text,
-                                        filters
-                                    ),
-                                    created: event.created_at,
-                                    createdWeek: moment(
-                                        event.created_at
-                                    ).week(),
-                                    toUser: event.in_reply_to_user_id,
-                                    language: event.lang,
-                                    source: this.getHTMLTagContent(
-                                        event.source
-                                    ),
-                                    message: event.text,
-                                    messagePrep: messagePrep,
-                                    latitude: event.coordinates,
-                                    longitude: event.coordinates,
-                                    retweetCount: event.retweet_count,
-                                    favorited: event.favorited,
-                                    favoriteCount: event.favorite_count,
-                                    isRetweet: event.retweeted_status ?
-                                        true : false,
-                                    retweeted: event.retweeted
-                                });
-                            })
-                            .catch(error => {
-                                logger.log("error", error);
-                            });
-
-                        //Insert in the Dashboard tables
-                        classify.sentiment(
-                            "./ML/Java/naivebayes.bin",
-                            messagePrep,
-                            result => {
-                                Dashboard.build({
-                                        id: event.id,
-                                        keywordType: "Placeholder",
-                                        keyword: this.getKeyword(
-                                            event.text,
-                                            filters
-                                        ),
-                                        message: event.text,
-                                        created: moment(event.created).toDate(),
-                                        createdTime: moment(event.created)
-                                            .utc()
-                                            .format("hh:mm:ss"),
-                                        createdDate: moment(event.created).format(
-                                            "YYYY-MM-DD"
-                                        ),
-                                        createdWeek: moment(event.created).week(),
-                                        screenName: event.user.screen_name,
-                                        tweetType: event.retweeted_status ?
-                                            "retweet" : "tweet",
-                                        sentiment: result,
-                                        sarcasm: false, //TODO: Change with sarcasm detection file result
-                                        topicWhole: "Great topic such wow",
-                                        topicWhole_C: "great, doge, content",
-                                        topic3Month: "Cultural man",
-                                        topic3Month_C: "i, see, cultural, man, too, you"
+                        //If an author already exists it is updated
+                        Author.upsert({
+                            id: event.user.id,
+                            username: event.user.name,
+                            screenname: event.user.screen_name,
+                            followercount: event.user.followers_count
+                        }).then(created => { // created is an boolean indicating whether the instance was created (1) or updated (0)
+                            Author.findOne({
+                                where: {
+                                    id: event.user.id
+                                }
+                            }).then(author => {
+                                classify.sentiment("./ML/Java/naivebayes.bin",
+                                    messagePrep,
+                                    result => {
+                                        author.createTW_CORE({
+                                            id: event.id,
+                                            keywordType: "Placeholder",
+                                            keyword: this.getKeyword(
+                                                event.text,
+                                                filters
+                                            ),
+                                            created: event.created_at,
+                                            createdWeek: moment(
+                                                event.created_at
+                                            ).week(),
+                                            toUser: event.in_reply_to_user_id,
+                                            language: event.lang,
+                                            source: this.getHTMLTagContent(
+                                                event.source
+                                            ),
+                                            message: event.text,
+                                            messagePrep: messagePrep,
+                                            latitude: event.coordinates,
+                                            longitude: event.coordinates,
+                                            retweetCount: event.retweet_count,
+                                            favorited: event.favorited,
+                                            favoriteCount: event.favorite_count,
+                                            isRetweet: event.retweeted_status ?
+                                                true : false,
+                                            retweeted: event.retweeted,
+                                            TW_SENTIMENT: {
+                                                sentiment: result,
+                                            }
+                                        }, {
+                                            include: [{
+                                                association: Sentiment
+                                            }]
+                                        })
                                     })
-                                    .save()
-                                    .catch(error => {
-                                        logger.log("error", error);
-                                    });
+                            })
+                        }).catch(error => {
+                            console.log(error);
+                            logger.log("error", error);
+                            if (error.code == 'ER_DUP_ENTRY') { // user exists
+
                             }
-                        );
-                    } else {
-                        //no english tweet
+                        });
+                    } else { //NO english tweet
                     }
                 });
 
