@@ -1,10 +1,9 @@
 import cron from "cron";
 import {
-    Tweet
-} from '../data/connectors';
-import {
+    Tweet,
     Dashboard
 } from '../data/connectors';
+
 var logger = require('./logger.js');
 
 /*

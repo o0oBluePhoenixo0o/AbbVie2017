@@ -1,28 +1,22 @@
 import Twitter from "twitter";
+import PythonShell from 'python-shell'
 import moment from "moment";
 import {
-    Author
-} from "../data/connectors";
+    Author,
+    Tweet,
+    Sentiment,
+    Topic
+} from '../data/connectors';
 import {
-    Dashboard
-} from "../data/connectors";
+    convertToCsvRaw
+} from './export';
 
-import {
-    Tweet
-} from "../data/connectors";
-import {
-    Sentiment
-} from "../data/connectors";
-import {
-    Project,
-    User
-} from "../data/connectors";
-import PythonShell from 'python-shell';
 
 
 import preprocess from "./preprocess.js";
 import classify from "./classify.js";
-var logger = require('./logger.js');
+
+import logger from './logger.js';
 
 
 module.exports = class TwitterCrawler {
@@ -35,6 +29,25 @@ module.exports = class TwitterCrawler {
         });
         logger.log('info', 'Twitter API initialized successfully');
         /*Start tracking keywords */
+
+
+        //TODO: Reference Pyhton workflow for TD
+        /*
+        Tweet.findAll({
+            limit: 1,
+            offset: 100,
+            raw: true //we use raw, we do not need to have access to the sequlize model here
+        }).then(tweets => {
+            tweets.forEach(function (tweet, index) {
+                // part and arr[index] point to the same object
+                // so changing the object that part points to changes the object that arr[index] points to
+                tweet.created = moment(tweet.created).format("YYYY-MM-DD hh:mm").toString();
+                tweet.createdAt = moment(tweet.createdAt).format('YYYY-MM-DD hh:mm')
+                tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
+            });
+            convertToCsvRaw(tweets, "./ML/Python/tweets.csv");
+        });
+        */
 
         this.track(process.env.TWITTER_STREAMING_FILTERS);
         //this.updateAuthors();

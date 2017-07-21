@@ -1,13 +1,7 @@
 import {
-    Author
-} from './connectors';
-import {
-    Tweet
-} from './connectors';
-import {
-    Sentiment
-} from './connectors';
-import {
+    Author,
+    Tweet,
+    Sentiment,
     Topic
 } from './connectors';
 
