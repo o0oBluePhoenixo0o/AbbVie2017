@@ -34,7 +34,7 @@ export function convertToCsvRaw(data, filepath) {
 export function convertToCsvModel(data, filepath) {
     var csv = json2csv({
         data: data,
-        fields: Object.keys(data[0]),
+        fields: Object.keys(data[0].dataValues),
         doubleQuotes: "",
         del: ","
     });
