@@ -73,6 +73,34 @@ A document-term matrix (DTM) or term-document matrix is a mathematical matrix th
 
 ## Sentiment Analysis
 
+### A. Methodology
+
+For the first two months of this project, we focused on the three approaches: dictionary-based (lexicon-based approach), probabilistic classifier (naive-bayes) and linear classifier (binomial regression).
+
+#### a. Lexicon-based
+
+One way to analyze the sentiment of a text is to consider the text as a combination of its individual words and the sentiment content of the whole text as the sum of the sentiment content of the individual words. It is a simple method but also mostly used in many sentiment analysis projects. **Dictionary-based approach** - We began by getting a list of relevant packages in R and Python, then picked those with highest usages and applied them to our dataset. The R packages were “**syuzhet**”, “**sentimentR**” and the Python package was “**Textblob**”. The lexicons we were applying were: _Bing Liu lexicon, NRC lexicon, AFINN and Jocker’s dictionary_.
+
+#### b. Machine Learning based
+
+Since sentiments can be placed on a scale from positive to negative, we believe this problem is then developed into a classification task in the machine learning domain. We were able to obtain a Twitter dataset from the Standford Following this approach, we have developed two models using Naive Bayes (probabilistic classifier) and one using Binomial regression (linear classifier). Furthermore, we obtained a set of more than **1.600.000 tweets** (_Sentiment140_) which is provided by Stanford NLP. The training data was automatically created, as opposed to having humans manual annotate tweets and it contains sentiments scores from the Maximum Entropy classifier and have data related to multiple domains. After trained the models, we applied them on our current available dataset and visualized the temporary results.
+
+### B. Results
+
+Due to the facts that each member tested out different models on different partitions of the available collected datasets, it was concluded that we should have a consolidated test dataset with predefined sentiment labels to make reliable comparisons. As can be seen from the graph above, using binomial regression, most of the tweets mentioned “humira” are neutral and the number of “negative” tweets is higher than “positive”. However, after digging into the results by extracting top negatives and positives, we realized that the negative tweets might not target the drug but rather the diseases or the painfulness. We would continue to analyze and develop a countermeasure against this issue in the near future.
+
+### C. Challenges & Next Steps
+
+The current challenges in sentiment analysis can be summarized into three topics: data quality, parameters tuning and methods evaluation. 
+
++ Even though the datasets are preprocessed, we still need to treat Facebook and Twitter data differently due to their uniqueness. For Facebook, because of the hierarchy of posts - comments - reactions: while a post usually raises a topic and contains a certain valence, the comments under sometimes possess multiple opinions cover different subjects and the reactions are also hard to monitor due to this diversity. Twitter, on the other hand, is limited to 140 characters and tweets are usually “hashtag-ed” with keywords; thus user’ opinions are clearly encircled only those “topics”. 
+
++ The next challenges are parameters tuning and methods evaluation. Since each methods adapt different ways to classify sentiments in texts, they require different approaches to achieve better results. We believe that this optimization step is the next step after we obtain the evaluations between all available methods. 
+
++ Last but not least, after finish tuning, we will develop common procedures to evaluate all the existing methods. A shared test dataset is crucial in this part; thus, we are going to develop a manual sentiment label test dataset as our next step. 
+
+For the next phase, after finish evaluating existing techniques and achieve certain good results, especially for Twitter dataset; we would like to invest in dealing with some of the current problems in sentiment analysis such as: building a classifier for subjective vs objective tweets, handling negation and comparison; determine context switch; building an accurate parsers for tweets; sarcasm detection and internalization.
+
 ### Packages
 
 In Sentiment Analysis we evaluated different libraries and packages from R and Python to find the best pre-trained one and also to built our own classifiers based on some packages.
