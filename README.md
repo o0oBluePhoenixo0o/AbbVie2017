@@ -36,6 +36,8 @@ Furthermore we built up a ground truth for Sentiment Analysis and Trend Detectio
 
 ## Data Preprocessing
 
+![alt text](https://github.com/BluePhoenix1908/AbbVie2017/blob/master/images/preprocessing.png "Data preprocessing workflow")
+
 The data collected from Twitter and Facebook contains a lot of noise and needed to be processed before we can move into models development. 
 
 ### A. Common data preprocessing steps
@@ -74,6 +76,8 @@ A document-term matrix (DTM) or term-document matrix is a mathematical matrix th
 ## Sentiment Analysis
 
 ### A. Methodology
+
+![alt text](https://github.com/BluePhoenix1908/AbbVie2017/blob/master/images/methodSA.png "Theoretical framework of sentiment analysis")
 
 For the first two months of this project, we focused on the three approaches: dictionary-based (lexicon-based approach), probabilistic classifier (naive-bayes) and linear classifier (binomial regression).
 
@@ -120,5 +124,40 @@ In Sentiment Analysis we evaluated different libraries and packages from R and P
 
 
 ## Topic and Trend Detection
+
+### A. Methodology
+
+Topic monitoring means identify emerging topics in real-time and provide meaningful analytics that synthesize an accurate description of each topic. In the first phase, we focused on three methods: term-based model (raw term frequency), term-based model (clustering) and semantic model (Latent Dirichlet Association).
+
+#### a. Term-Based Model
+
+1. Raw Term frequency:
+We used the R package “tm” to create the corpus and the term-document matrix based on the pre-processed data. Then the frequency of each single term in the whole data set was counted. Using the most frequent words as topics has major drawbacks, as these words do not have semantic contents. So this method was used mainly as a threshold.
+
+2. Clustering:
+Word clustering is based on the term-document matrix, each term has a vector in terms of frequency in each document. We calculated the Euclidean distance for each term after removing sparse terms and cluster them using “ward.D” method. We keep trying to find method to evaluate word clustering.
+
+**Document clustering** : Based on the term-document matrix, each document has a vector in terms of frequency in each term. K-means clustering was performed on Document-Term matrix to find the topics. But this is used to find central tweets or posts, whether this method make sense is still confusing us.
+
+#### b. Semantic Model
+
++ Latent Dirichlet Association(LDA):
+In natural language processing, latent Dirichlet allocation (LDA) is a generative statistical model that allows sets of observations to be explained by unobserved groups that explain why some parts of the data are similar. LDAl introduced sparse Dirichlet prior distributions over document-topic and topic-word distributions and encoded the intuition that documents cover a small number of topics and that topics often use a small number of words. Because of the mentioned above characteristics, the method has been widely used in the field of topic monitoring. 
+
+We used LDA package from “gensim" in Python and built our primal models by requesting 30 latent topics to be extracted from the training corpus. In order to visualize the results, we utilized “pyLDAvis” library to display correlations between each topic and distribution of different words in each topic.
+
+### B. Results
+
+#### a. Term-Based Model
+
+After selecting the top 20 terms with the highest frequency and plotting the time-line charts, we found something interesting. For instance, the term frequency of “psoriasis” is higher in winter than that in other seasons, according to the post in Facebook.
+
+![alt text](https://github.com/BluePhoenix1908/AbbVie2017/blob/master/images/psoriasisFreq.png "psoriasis frequency timeline chart")
+
+#### b. Semantic Model
+
+As can be seen from the figure, the generated latent model is able to classify products, companies and diseases into three positions on the far distance of the graph. However, there are a lot of overlapped terms for “diseases” due to the differences in data size from each “keyword”. Furthermore, separate “disease” topics into smaller chunks is also proven to be a challenge. Last but not least, the amount of topics is also needed to be reduced to a smaller number but meaningful.
+
+![alt text](https://github.com/BluePhoenix1908/AbbVie2017/blob/master/images/ldaVis.png "LDA visualization on facebook dataset by pyLDAvis")
 
 ## Combining SA and TD
