@@ -36,6 +36,41 @@ Furthermore we built up a ground truth for Sentiment Analysis and Trend Detectio
 
 ## Data Preprocessing
 
+The data collected from Twitter and Facebook contains a lot of noise and needed to be processed before we can move into models development. 
+
+### A. Common data preprocessing steps
+
+After joining datasets from Twitter and Facebook, we decided to construct a common data preprocessing framework for both sentiment analysis and topic monitoring. The combined dataset would go through a series of shared steps: missing values and duplicates would be deleted; then URLs and numbers are removed; next converted text to ASCII and time-dates are parsed.
+
+### B. Acronyms/ Abbreviation Translation
+
+In order to catch the meaning of each text in our data, we need to use acronym dictionaries to detect and convert special terms into original forms of words or sentences. At the moment, we are still developing our own decoder for emoticons and abbreviations at the moment.
+
+### C. Language Detection
+
+Though nearly 90 % of the data we collected are in English, the remaining texts are written in other languages. Concerned text analysis to be consistent, we directly dropped the data, of which the messages are not in English. Before discarding, we need to detect the languages of the text. In Python, we used the package “langdetect”, ported from Google's language-detection machine which achieved 80% accuracy. After trying to implement several packages, we decided to integrate “franc” package into our preprocessing pipeline because it uses ISO692_2 which includes more languages, has higher accuracy in compare with “textcat” and do not have limited usages as compared to API.
+
+### D. Tokenization
+
+We utilized text mining package “tm" from R and “wordpunct_tokenize” from Natural Language Toolkit(NLTK) in
+Python to extract bags of clean terms from the raw texts. 
+
+### E. Stop-words removal
+
+The general strategy for determining a stop list is to sort the terms by collection frequency (the total number of times each term appears in the document collection), and then to take the most frequent terms out. Here, we continued to use R’s “tm" package and “stopwords” from “NLTK” in Python. With the packages, there already exists the stop word dictionaries in different languages
+
+### F. Part of Speech (POS)
+
+In Python, we use the tool “pos_tag” from “NLTK” while in R, we mainly used the same text mining “tm" package. 
+
+### G. Lemmatization
+
+We used “WordNetLemmatizer” from “NLTK” for Python, which does full morphological analysis to accurately identify the lemma for each word. In R, we use a the tool called “textstem” built in the package textstem. 
+
+### H. Document-Term-Matrix
+
+A document-term matrix (DTM) or term-document matrix is a mathematical matrix that describes the frequency of terms that occur in a collection of documents. We tried to build the matrix using predefined functions in R and Python packages, but after found out that our training dataset was too large for R to grow the matrix, we are currently using texts vectorization which is creating a map from words or n-grams to a vector space to reduce memory usage. The package in R we are testing is “text2vec” for vectorization before constructing DTM and the official “tm” text mining package.
+
 ## Sentiment Analysis
 
 ### Packages
