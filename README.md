@@ -87,6 +87,8 @@ Since sentiments can be placed on a scale from positive to negative, we believe 
 
 ### B. Results
 
+![alt text](https://github.com/BluePhoenix1908/AbbVie2017/blob/master/images/results.png "Sentiment rate humira")
+
 Due to the facts that each member tested out different models on different partitions of the available collected datasets, it was concluded that we should have a consolidated test dataset with predefined sentiment labels to make reliable comparisons. As can be seen from the graph above, using binomial regression, most of the tweets mentioned “humira” are neutral and the number of “negative” tweets is higher than “positive”. However, after digging into the results by extracting top negatives and positives, we realized that the negative tweets might not target the drug but rather the diseases or the painfulness. We would continue to analyze and develop a countermeasure against this issue in the near future.
 
 ### C. Challenges & Next Steps
