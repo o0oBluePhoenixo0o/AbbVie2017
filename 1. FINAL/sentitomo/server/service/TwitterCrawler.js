@@ -31,7 +31,7 @@ module.exports = class TwitterCrawler {
         
         */
 
-        classify.topicDetection(moment('2017-03-01').toDate(), moment('2017-04-30').toDate());
+        //classify.topicDetection(moment('2017-03-01').toDate(), moment('2017-04-30').toDate());
         //this.track(process.env.TWITTER_STREAMING_FILTERS);
         //this.updateAuthors();
     }

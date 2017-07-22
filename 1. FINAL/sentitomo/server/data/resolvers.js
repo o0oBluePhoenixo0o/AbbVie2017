@@ -4,9 +4,11 @@ import {
     Sentiment,
     Topic
 } from './connectors';
-
+import moment from 'moment';
+import GraphQLMoment from './GraphQLMoment';
 
 const resolvers = {
+    Date: GraphQLMoment,
     Query: {
         author(_, args) {
             return Author.find({
@@ -21,7 +23,13 @@ const resolvers = {
         tweets(_, args) {
             return Tweet.findAll({
                 limit: args.limit,
-                offset: args.offset
+                offset: args.offset,
+                where: {
+                    created: {
+                        $lt: args.endDate, // less than
+                        $gt: args.startDate //greater than
+                    }
+                }
             });
         },
         sentiment(_, args) {

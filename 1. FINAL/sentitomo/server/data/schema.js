@@ -1,4 +1,9 @@
 const typeDefinitions = `
+
+
+  scalar Date
+
+
   type Tweet {
     id: String
     keywordType: String
@@ -49,7 +54,7 @@ const typeDefinitions = `
     sentiment(id: String): Sentiment
     topic(id: String): Topic
     author(username: String): Author
-    tweets(limit: Int, offset:Int): [Tweet]
+    tweets(limit: Int, offset:Int, startDate: Date, endDate: Date): [Tweet]
   }
 
   schema {
