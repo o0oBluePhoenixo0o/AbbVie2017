@@ -1,11 +1,10 @@
 require('dotenv').config()
 require("./service/scheduling.js");
-var logger = require('./service/logger.js');
+import logger from './service/logger.js';
 import express from "express";
 import Schema from './data/schema';
 import Resolvers from './data/resolvers';
 import Connectors from './data/connectors';
-
 import {
   graphqlExpress,
   graphiqlExpress
@@ -18,13 +17,16 @@ import {
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-const path = require('path');
-var http = require('http');
-var fs = require('fs')
-var cookieParser = require('cookie-parser');
+import cookieParser from 'cookie-parser';
 var TwitterCrawler = require('./service/TwitterCrawler.js');
 
-
+/**
+ * @function loggingMiddleware
+ * @param  {Object} req  Request object
+ * @param  {Object} res  Response object
+ * @param  {function} next Function so that the request will be passed on to the next function
+ * @return {type} {description}
+ */
 function loggingMiddleware(req, res, next) {
   logger.log('debug', 'GraphQL IP Request', {
     ip: req.ip

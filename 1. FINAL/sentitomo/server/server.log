@@ -1060,3 +1060,64 @@
 {"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-21T14:30:49.869Z"}
 {"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-21T14:30:49.917Z"}
 {"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-21T14:30:50.222Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-21T14:52:17.594Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-21T14:52:17.753Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-21T14:52:17.777Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-21T14:52:17.777Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-21T14:52:17.816Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-21T14:52:18.120Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-21T14:54:46.689Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-21T14:54:46.850Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-21T14:54:46.878Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-21T14:54:46.879Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-21T14:54:46.926Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-21T14:54:47.232Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-21T14:54:55.254Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-21T14:54:55.356Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-21T14:55:00.291Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-21T14:56:56.730Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-21T14:56:56.875Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-21T14:56:56.897Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-21T14:56:56.897Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-21T14:56:56.938Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-21T14:56:57.241Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-21T14:57:00.329Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-21T14:57:00.506Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-21T14:57:12.914Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-21T14:57:20.324Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-21T14:57:25.226Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-21T14:57:40.179Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-21T14:57:50.146Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-22T16:06:35.173Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-22T16:06:35.686Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-22T16:06:35.723Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-22T16:06:35.747Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-22T16:06:36.105Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-22T16:07:04.350Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-22T16:07:04.624Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-22T16:07:04.652Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-22T16:07:04.683Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-22T16:07:05.014Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-22T16:07:28.009Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-22T16:07:28.294Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-22T16:07:28.321Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-22T16:07:28.345Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-22T16:07:28.710Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/tweets.csv","timestamp":"2017-07-22T16:07:29.616Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-22T16:09:13.329Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-22T16:09:13.865Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-22T16:09:13.896Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-22T16:09:13.921Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-22T16:09:14.299Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/tweets.csv","timestamp":"2017-07-22T16:09:42.754Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-22T16:13:19.548Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-22T16:13:19.914Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-22T16:13:19.949Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-22T16:13:19.973Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-22T16:13:20.329Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/tweets.csv","timestamp":"2017-07-22T16:13:40.761Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-22T16:14:22.354Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-22T16:14:22.671Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-22T16:14:22.703Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-22T16:14:22.726Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-22T16:14:23.099Z"}

@@ -5,6 +5,7 @@ import {
     Topic
 } from './connectors';
 
+
 const resolvers = {
     Query: {
         author(_, args) {

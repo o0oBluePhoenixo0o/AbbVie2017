@@ -7,11 +7,6 @@ import {
     Sentiment,
     Topic
 } from '../data/connectors';
-import {
-    convertToCsvRaw
-} from './export';
-
-
 
 import preprocess from "./preprocess.js";
 import classify from "./classify.js";
@@ -33,23 +28,11 @@ module.exports = class TwitterCrawler {
 
         //TODO: Reference Pyhton workflow for TD
         /*
-        Tweet.findAll({
-            limit: 1,
-            offset: 100,
-            raw: true //we use raw, we do not need to have access to the sequlize model here
-        }).then(tweets => {
-            tweets.forEach(function (tweet, index) {
-                // part and arr[index] point to the same object
-                // so changing the object that part points to changes the object that arr[index] points to
-                tweet.created = moment(tweet.created).format("YYYY-MM-DD hh:mm").toString();
-                tweet.createdAt = moment(tweet.createdAt).format('YYYY-MM-DD hh:mm')
-                tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
-            });
-            convertToCsvRaw(tweets, "./ML/Python/tweets.csv");
-        });
+        
         */
 
-        this.track(process.env.TWITTER_STREAMING_FILTERS);
+        classify.topicDetection(moment('2017-03-01').toDate(), moment('2017-04-30').toDate());
+        //this.track(process.env.TWITTER_STREAMING_FILTERS);
         //this.updateAuthors();
     }
 
