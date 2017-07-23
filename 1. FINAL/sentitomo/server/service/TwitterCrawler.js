@@ -122,9 +122,9 @@ module.exports = class TwitterCrawler {
                                 if (!error && tweets[0]) {
                                     console.log(tweets[0]);
                                     Author.update({
-                                            followercount: tweets[0].followers_count,
-                                            screenname: tweets[0].screen_name
-                                        }, {
+                                        followercount: tweets[0].followers_count,
+                                        screenname: tweets[0].screen_name
+                                    }, {
                                             where: {
                                                 id: authors[i].id
                                             }
@@ -215,10 +215,10 @@ module.exports = class TwitterCrawler {
                                                 sentiment: result,
                                             }
                                         }, {
-                                            include: [{
-                                                association: Sentiment
-                                            }]
-                                        })
+                                                include: [{
+                                                    association: Sentiment
+                                                }]
+                                            })
                                     })
                             })
                         }).catch(error => {
