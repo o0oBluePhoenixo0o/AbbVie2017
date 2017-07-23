@@ -5,11 +5,7 @@ import {
     Topic
 } from './connectors';
 import moment from 'moment';
-<<<<<<< HEAD
 import GraphQLMoment from './scalar/GraphQLMoment';
-=======
-import GraphQLMoment from './GraphQLMoment';
->>>>>>> 5a3fd96d60defc848f10ce805646899694398973
 
 const resolvers = {
     Date: GraphQLMoment,

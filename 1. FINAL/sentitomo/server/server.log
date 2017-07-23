@@ -1740,3 +1740,34 @@
 {"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:13:26.777Z"}
 {"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:13:26.777Z"}
 {"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:13:26.816Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-23T11:22:29.268Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-23T11:22:29.276Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-23T11:22:29.288Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-23T11:22:29.329Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-23T11:22:29.655Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:22:32.056Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:22:32.073Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:22:32.075Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:22:32.238Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:22:32.240Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:22:32.279Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:22:35.258Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:22:35.443Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:22:36.346Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:22:39.098Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:27:30.586Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:27:30.589Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:31:35.385Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:31:35.396Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:31:35.397Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:31:35.553Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:31:35.555Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:31:35.582Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:32:46.559Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:32:46.596Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:32:55.147Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:32:55.168Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:33:04.621Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:33:04.648Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:34:19.076Z"}
+{"ip":"::1","level":"debug","message":"GraphQL IP Request","timestamp":"2017-07-23T11:34:19.105Z"}

@@ -1,12 +1,8 @@
 /* 
  * SCSS file for the left sidebar. Only visible on tablets and above.
  */
-@import 'color-palette.scss';
 
-.uk-nav-header {
-    padding: 8px 0;
-    border-bottom: 1px solid #e5e5e5;
-}
+ @import "./color-palette.scss";
 
 .sidebar-left {
     position: fixed;
