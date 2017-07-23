@@ -141,8 +141,6 @@ final <- rbind(merge,old)
 
 final$sentiment <- sapply(final$sentiment, function(x) ifelse(x == '5'|is.na(x),'N',x))
 
-
-
 # Write manual label dataset 1905
 write.csv(final, file = "Final_Manual_1905.csv",
           quote=TRUE, row.names = FALSE,
@@ -180,5 +178,28 @@ Manual3006 <- Manual3006[!duplicated(Manual3006[,c('message')]),]
 
 # Write NEW TW Manual set (non-label) for manual tasks on 30.06
 write.csv(Manual3006, file = "TW_MANUAL_3006.csv",
+          quote=TRUE, row.names = FALSE,
+          fileEncoding = "UTF-8", na = "NA")
+
+#########################################
+# Merge to get TW_MANUAL_3006 results
+
+p1 <- read.csv("M1.csv", as.is = TRUE, sep = ",")
+p2 <- read.csv("M2.csv", as.is = TRUE, sep = ",")
+p3 <- read.csv("M3.csv", as.is = TRUE, sep = ",")
+
+p1 <- p1[, which(names(p1) %!in% c("X.1","X","X.2"))]
+p2 <- p2[, which(names(p2) %!in% c("X.1","X","X.2"))]
+p3 <- p3[, which(names(p3) %!in% c("X.1","X","X.2"))]
+
+old <- read.csv("Final_Manual_1905.csv", as.is = TRUE, sep = ",")
+final <- rbind(old,p1,p2,p3)
+
+final$sentiment <- sapply(final$sentiment, function(x) ifelse(x == '5'|is.na(x),'N',x))
+final <- unique(final)
+final <- final[final$key != 'key',]
+
+# Write manual label dataset 3006
+write.csv(final, file = "Final_Manual_3006.csv",
           quote=TRUE, row.names = FALSE,
           fileEncoding = "UTF-8", na = "NA")

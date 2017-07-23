@@ -1,3 +1,8 @@
+# not %in% function
+'%!in%' <- function(x,y)!('%in%'(x,y))
+##
+
+conv_fun <- function(x) iconv(x, "latin1", "ASCII", "")
 
 #Set R to read ID normally
 options(scipen=999)
@@ -25,10 +30,6 @@ commentdf <- subset(commentdf, !duplicated(message))
 TW_df <- read.csv("Final_TW_1205_prep.csv", sep = ",", as.is = TRUE)
 TW_df$Id <- as.factor(TW_df$Id)
 TW_df <- unique(TW_df)
-
-# not %in% function
-'%!in%' <- function(x,y)!('%in%'(x,y))
-##
 
 TW_df <- TW_df[which(TW_df$Id %!in% c('Id',NA)),]
 TW_df<- TW_df[which(TW_df$Geo.Location.Latitude %!in% c('ibrutinib','humira')),]
@@ -225,18 +226,6 @@ clean <- function (sentence){
 #  TW_df_2804 <- TW_df_2804[!(TW_df_2804$message == "" | TW_df_2804$key == 'Label' | TW_df_2804$key == ""|
 #                     TW_df_2804$created_time ==""|is.na(TW_df_2804$key) == TRUE),]
 
-
-######################################
-# Preparation for Sentiment Analysis #
-######################################
-# 
-# prep_fun <- tolower
-conv_fun <- function(x) iconv(x, "latin1", "ASCII", "")
-# 
-# TW_df$message <- conv_fun(prep_fun(TW_df$message))
-# 
-# backup <- TW_df
-
 #####################################################################################
 # 18.05 Modify to reclean the data
 
@@ -426,31 +415,41 @@ TW_df_2804 <- backup
            quote = TRUE, row.names=FALSE,
            fileEncoding = "UTF-8", na = "NA")
  
- #####
- # 
- # disease$Created.At <- lubridate::parse_date_time(disease$Created.At, "%m/%d/%y HM") 
- # 
- # created <- lubridate::parse_date_time(disease$Created.At, "%m/%d/%y HM") 
- # 
- # key <- disease$label
- # disease <- disease[ , -which(names(disease) %in% c("created","Created.At","X.1","X","label"))]
- # disease<-cbind(created,disease)
- # colnames(disease)[1]<- "created_time"
- # colnames(disease)[8] <- "message"
- # disease <- cbind(key,disease)
- # disease$message <- conv_fun(prep_fun(disease$message))
-# 
-# #Filter only ENGLISH tweets
-# TW_df <- TW_df[TW_df$Language == 'eng',]
-# 
-# #Create a Retweet dataset
-# require(stringr)
-# TW_RT <- subset(TW_df,str_sub(TW_df$message, start = 1, end = 4) == "RT @")
-# 
-# #Tweets-only dataset
-# TW_T <- TW_df[-grep("RT @",TW_df$message),]
+ #update 08.07
+ TW_df <- read.csv("Final_TW_3006_prep.csv", as.is = TRUE, sep =",")
+ 
+ update0707 <- read.csv("0707.csv", as.is=TRUE, sep = ",")
+ update0707$Id <- as.factor(update0707$Id)
+ update0707 <- update0707[, which(names(update0707) %!in% c("X.1","X","X.2"))]
+ update0707$From.User <- conv_fun(update0707$From.User)
+ 
+ 
+ TW_final <- rbind(TW_df,update0707)
+ TW_final <- unique(TW_final)
+ 
+ #filter duplicated base on message column
+ TW_final <- TW_final[!duplicated(TW_final[,c('message')]),]
+ 
+ write.csv(TW_final, file = "Final_TW_0807_prep.csv",
+           quote = TRUE, row.names=FALSE,
+           fileEncoding = "UTF-8", na = "NA")
 
- #Write new TW_df with date-time fixed and messages to lowercase + ASCII 29.04.17
- # write.csv(TW_df, file = "Final_TW_0305_prep",
- #           quote = TRUE, row.names=FALSE,
- #            fileEncoding = "UTF-8", na = "NA")
+ #update 1507
+ 
+ TW_df <- read.csv("Final_TW_0807_prep.csv", as.is = TRUE, sep =",")
+ 
+ update1507 <- read.csv("1407.csv", as.is=TRUE, sep = ",")
+ update1507$Id <- as.factor(update1507$Id)
+ update1507 <- update1507[, which(names(update1507) %!in% c("X.1","X","X.2"))]
+ update1507$From.User <- conv_fun(update1507$From.User)
+ 
+ 
+ TW_final <- rbind(TW_df,update1507)
+ TW_final <- unique(TW_final)
+ 
+ #filter duplicated base on message column
+ TW_final <- TW_final[!duplicated(TW_final[,c('message')]),]
+ 
+ write.csv(TW_final, file = "Final_TW_1507_prep.csv",
+           quote = TRUE, row.names=FALSE,
+           fileEncoding = "UTF-8", na = "NA")

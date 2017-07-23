@@ -1,3 +1,12 @@
+# This is needed because qdap needs rJava and this seems to have some troubles to load on some OS
+# qdap needs Java 6 installed... what a old dude man...
+dyn.load('/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/server/libjvm.dylib')
+Sys.setenv(JAVA_HOME = '/Library/Java//Home')
+Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')
+
+# reading the data set from database
+
+attach(input[[1]])
 ## Unstructured to Structured
 
 # In this code, we create a corpus, clean the corpus and 
@@ -9,30 +18,39 @@ rm(list= ls())
 # check and set working directory
 setwd("~/GitHub/AbbVie2017/Philipp/")
 
-# loading required libraries
+# loading  libraries
+require(tm)      # for text mining
+require(dplyr)   # for faster data operations
+require(data.table)
+require(caTools)
+require(e1071)
 
-require(tm)           # for text mining
-require(dtplyr)   # for faster data operations
+# Get data from manual label dataset
+manual_test <- read.csv("Final_Manual_3006.csv", as.is = TRUE, sep = ",", stringsAsFactors = F)
 
-# reading the data set from current working directory
+manual_test <- manual_test[,c(5,4,7)]
+colnames(manual_test) <- c("ID","tweet","label")
+manual_test$ID <- as.factor(manual_test$ID)
+manual_test$label[manual_test$label %in% c(0,NA)] <- 'non-sarcastic'
+manual_test$label[manual_test$label == 1] <- 'sarcastic'
+
+# Get data from 91k dataset
 TW_df <- read.csv("TweetsDataSet.csv",stringsAsFactors = F)
 TW_df <- unique(TW_df)
-# checking structure and summary
-dim(TW_df)
-str(TW_df)
-summary(TW_df)
 
+# Merge manual label dataset with 91k
+TW_df <- rbind(TW_df,manual_test)
 
 ## Preprocessing the TW_df and cleaning the corpus
-
 # user defined variables and functions
-
 # Function for taking in the vector from TW_df data set and do all preprocessing steps below:
 # preprocessing steps- Case folding; Remove numbers, words and punctuation and perform stemming and stripping extra whitespaces
 
+conv_fun <- function(x) iconv(x, "latin1", "ASCII", "")
+removeURL <- function(x) gsub('"(http.*) |(http.*)$|\n', "", x)
 
-# vec2clean.corp function takes two arguments: x = vector to be cleaned, y = document number to show the process by printing
-vec2clean.corp <- function(x,y=NULL){
+# vec2clean.corp function takes two arguments: x = vector to be cleaned
+vec2clean.corp <- function(x){
   
   # As there are many languages used in the data, we consider stopwords of all the languages
   a = c(stopwords("danish"),stopwords("dutch"),stopwords("english"),
@@ -50,118 +68,55 @@ vec2clean.corp <- function(x,y=NULL){
   }
   
   x = Corpus(VectorSource(x))
-  print(x$content[[y]])
+  x = tm_map(x, conv_fun)
+  x = tm_map(x, removeURL)
   x = tm_map(x, tolower)
-  print(x$content[[y]])
   x = tm_map(x, removeNumbers)
-  print(x$content[[y]])
   x = tm_map(x, removeWords, a)
-  print(x$content[[y]])
   x = tm_map(x, AposToSpace)
-  print(x$content[[y]])
   x = tm_map(x, removePunctuation)
-  print(x$content[[y]])
   x = tm_map(x, stemDocument)
-  print(x$content[[y]])
   x = tm_map(x, stripWhitespace)
-  print(x$content[[y]])
-  
   return(x)
-  
 }
 
 # Calling the vec2clean.corp with TW_dfs(x) and we desire to check the progress with document 3(y)
 
-corp <- vec2clean.corp(TW_df$tweet,37)
-corp
+corp <- vec2clean.corp(TW_df$tweet)
 
 # Creating Document Term Matrix from the corp with TF weighting
 dtm <- DocumentTermMatrix(corp, control = 
                             list(weighting = weightTf))
-dtm
-# dtm has (documents: 91298, terms: 30554) with 100% sparsity
 
-
-# Removing Sparse term and take out those words which are more relevant
-sparse.dtm <- removeSparseTerms(dtm, 0.999 )
-sparse.dtm
-# sparse.dtm has (documents: 91298, terms: 783)
-
-# converting Document term matrix to a Data frame
-TW_dfs.df <- data.frame(as.matrix(sparse.dtm)) # TW_dfs.df has 442 features(0.9982 sparsity)
-
-############################################################################3
-## Wordcloud 
-require(data.table)
-require(wordcloud)
-require(ggplot2)
-
-## creating wordcloud for entire data set
-
-# creating word frequency data frame
-word.freq <- sort(colSums(data.table(as.matrix(sparse.dtm))), decreasing = T)
-word.freq <- data.table(Terms = names(word.freq), frequency = word.freq)
-
-# creating word cloud for top 200 words in frequency
-wordcloud(word.freq$Terms, word.freq$frequency,max.words = 150, scale = c(4,0.75),
-          random.order = F, colors=brewer.pal(8, "Dark2"))
-a <- word.freq[frequency>2000]
-
-# Bar graph for words that are more frequent appearing more than 2000 times
-ggplot(a, aes(Terms, frequency))+
-  geom_bar(stat = 'identity', colour = '#041838', fill = '#0b439e')+
-  labs(title= 'Alphabetical ordered High frequent Terms')
-#clearing graphical memory
-dev.off()
-
-## Seperate Word clouds for sarcastic and non-sarcastic TW_dfs
 # subsetting sarcasm and non sarcasm TW_dfs 
-sarcasm     <- TW_df[TW_df$sarcastic == 1,]
+sarcasm     <- TW_df[TW_df$label == 'sarcastic',]
 sarcasm <- unique(sarcasm)
-sarcasm.not <- TW_df[TW_df$sarcastic == 0,]
+sarcasm.not <- TW_df[TW_df$label == 'non-sarcastic',]
 sarcasm.not <- unique(sarcasm.not)
+
 # corpus for both sarcastic and non-sarcastic
-
 corp.sarcasm = vec2clean.corp(sarcasm$tweet, 5)
-# Wordcloud for Sarcasm subset
-wordcloud(corp.sarcasm, min.freq = 300, max.words = 300,
-          random.order = F, scale = c(5 ,0.75),  colors=brewer.pal(8, "Dark2"))
-
 corp.sarcasm.not = vec2clean.corp(sarcasm.not$tweet, 5)
-# Wordcloud for Non Sarcasm subset
-wordcloud(corp.sarcasm.not, min.freq = 200, max.words = 300,
-          random.order = F, scale = c(5 ,0.75),  colors=brewer.pal(8, "Dark2"))
 
 # DTM for sarcasm and non sarcasm corpora
 dtm.sar <- DocumentTermMatrix(corp.sarcasm)
 dtm.non <- DocumentTermMatrix(corp.sarcasm.not)
-
-# Most frequent 30 words in Sarcasm and non-sarcasm DTMs
-findFreqTerms(dtm.sar)[seq(30)]
-findFreqTerms(dtm.non)[seq(30)]
-
-# Finding out the most common words and frequent words 
-# These words should be eliminated from the master DTM
 
 common <- NULL
 for(i in findFreqTerms(dtm.non)[seq(100)]){
   for(j in findFreqTerms(dtm.sar)[seq(100)]){
     if(identical(i,j)){
       common = c(common,i)
-      print(i)
     }
   }
-}
-common # common words are passed to feature engineering code
+} # common words are passed to feature engineering code
 
 ####################################################################################
-## This code is about Feature engineering and Feature selection
+## Feature engineering and Feature selection
 # We check correlations and associations between variables.
 
 #remove sparsity and prepare data frame
 sparse <- removeSparseTerms(dtm, 0.9992)
-sparse
-
 df <- data.table(as.matrix(sparse))
 
 # Find associations 
@@ -172,14 +127,13 @@ rm(dtm,sparse) # as it is not necessary
 # we go for pearson correlation matrix to get more detailed info
 corr <- data.table(cor(df, use = "complete.obs", method= "pearson"))
 corr.terms <- NULL
+
 for(i in 1:(nrow(corr)-1)){
   for(j in (i+1):ncol(corr)){
     if((abs(corr[[i,j]])>0.49) ==T){
       corr.terms = c(corr.terms, names(corr)[i])
-      print(paste(colnames(corr)[i],',',colnames(corr)[j])) # print rows and column numbers which are correlated
-    }
-  }
-}
+    }}}
+
 # corr.terms consist of correlated terms which are more than 50% with any other variable
 # only one term out correlated pair is added while 'for' loop
 rm(corr,i,j)
@@ -194,7 +148,7 @@ df[, (del.words) := NULL]
 dim(df)
 
 # creating master data set
-master <- data.table(label = TW_df$sarcastic, df)
+master <- data.table(label = TW_df$label, df)
 master.factor <- as.data.frame(master)
 
 #Binning 
@@ -203,18 +157,13 @@ master.factor <- data.frame(lapply(master[,2:ncol(master)], function(x){ifelse(x
 # Converting numericals to factors 
 master.factor <- data.frame(lapply(master.factor, as.factor))
 # master.factor has all categorical variables 0 and 1 factors
-
 master.factor <- cbind(label = master$label, master.factor)
 
+##############################################################################################
 # This code is about Preparing samples of the master data set and 
 # splitting training and testing sets
 
-# loading necessary libraries
-require(caTools)
-
 # function to create sample and push the train and test data sets out
-# we are considering sample count as 5022(91298*0.055)
-# and 0.8 ratio as training and testing ratio
 
 sample2train.test <- function(master.x, seed.x, samp.ratio= 0.055, train.ratio= 0.8){
   set.seed(seed = seed.x)
@@ -231,17 +180,26 @@ sample2train.test <- function(master.x, seed.x, samp.ratio= 0.055, train.ratio= 
 # pass the desired master data set, seed(to produce random sample), sample ratio and train ratio
 # sample ratio and train ratio are defaulted with 0.055(5022 observations) and 0.8 respectively
 
-# For producing Training and Testing sets of master.numeric
-Train.Test.list <- sample2train.test(master,123)
-
-train.num <- Train.Test.list[[1]]
-test.num  <- Train.Test.list[[2]]
-
-# saving numeric train and test sets
-save(train.num, test.num, file = 'TrainTest_num.dat')
-
 # For producing Training and Testing sets of master.factor
 Train.Test.list <- sample2train.test(master.factor,123)
 
 train <- Train.Test.list[[1]]
 test  <- Train.Test.list[[2]]
+
+# Naive Bayes model with laplace estimator 1
+# laplace = 1 ensures a non-zero probability for every feature
+n.model.lap <- naiveBayes(label~ ., data = train, laplace = 1)
+
+# for robust Naive Bayes model with laplace estimator
+n.pred.lap <- predict(n.model.lap, test[,-1], type = 'class')
+
+xtab.lap <- table('Actual class' = test[,1], 'Predicted class' = n.pred.lap )
+caret::confusionMatrix(xtab.lap)
+#############################################################################
+
+
+#save del.word for references
+
+save(del.words, file = 'del_word.dat')
+# save the model for later use 23.07.2017
+save(n.model.lap, file= "SD_NB_2307.dat")
