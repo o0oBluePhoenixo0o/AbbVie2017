@@ -3,64 +3,55 @@ import {
     gql,
     graphql,
 } from 'react-apollo';
-
-import styled from 'styled-components';
-
-const TweetsListWrapper = styled.div`
-    max-height: 100vh;
-    overflow:auto;
-    margin-top:64px;
-`;
+import { Table, Menu } from 'semantic-ui-react'
 
 const TweetsList = ({ tweets, loading, error, loadMoreEntries }) => {
     if (loading) {
-        return <TweetsListWrapper><div className="message success" data-component="message">Loading..<span className="close small"></span></div></TweetsListWrapper>;
+        return <div className="message success" data-component="message">Loading..<span className="close small"></span></div>;
     }
     if (error) {
-        return <TweetsListWrapper><div className="message error" data-component="message">{error}<span className="close small"></span></div></TweetsListWrapper>;
+        return <div className="message error" data-component="message">{error}<span className="close small"></span></div>;
     }
 
     if (!tweets) {
-        return <TweetsListWrapper><div className="message error" data-component="message">Unable to fetch the data<span className="close small"></span></div></TweetsListWrapper>;
+        return <div className="message error" data-component="message">Unable to fetch the data<span className="close small"></span></div>;
     }
 
     return (
-        <TweetsListWrapper>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Message</th>
-                        <th>Created at</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <div>
+            <Table basic="very">
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>Id</Table.HeaderCell>
+                        <Table.HeaderCell>Message</Table.HeaderCell>
+                        <Table.HeaderCell>Created at</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+                <Table.Body>
                     {tweets.map(ch =>
                         (
-                            <tr key={ch.id}>
-                                <td>{ch.id}</td>
-                                <td>{ch.message}</td>
-                                <td>{ch.created}</td>
+                            <Table.Row key={ch.id}>
+                                <Table.Cell>{ch.id}</Table.Cell>
+                                <Table.Cell>{ch.message}</Table.Cell>
+                                <Table.Cell>{ch.created}</Table.Cell>
 
-                            </tr>
+                            </Table.Row>
                         )
                     )}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colSpan="2">Total tweets</td>
-                        <td>{tweets.length}</td>
-                    </tr>
+                </Table.Body>
+                <Table.Footer>
+                    <Table.Row>
+                        <Table.HeaderCell colSpan="2">Total tweets</Table.HeaderCell>
+                        <Table.HeaderCell>{tweets.length}</Table.HeaderCell>
+                    </Table.Row>
 
-                </tfoot>
-            </table>
+                </Table.Footer>
+            </Table>
 
-            <nav className="pagination pager align-center">
-                <ul>
-                    <li className="prev"><a onClick={() => loadMoreEntries()}>Show More</a></li>
-                </ul>
-            </nav>
-        </TweetsListWrapper>
+            <Menu pagination>
+                <Menu.Item name='Show more' onClick={() => loadMoreEntries()} />
+            </Menu>
+        </div>
     );
 };
 

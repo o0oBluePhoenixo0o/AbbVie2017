@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans|Raleway|Roboto');
+@import "sidebar.scss";
+
+
+*  {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+
+.main-content {
+    padding-top: 40px;
+   
+    @media (min-width:1200px){
+        padding-left: 40px;
+    }
+    @media (min-width: 767px){
+        padding-left: 200px;
+    }
+     @media (max-width: 767px){
+         padding-top: 60px !important;
+    }
+}

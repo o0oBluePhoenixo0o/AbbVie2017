@@ -1,0 +1,75 @@
+/* 
+ * SCSS file for the left sidebar. Only visible on tablets and above.
+ */
+@import 'color-palette.scss';
+
+.uk-nav-header {
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.sidebar-left {
+    position: fixed;
+    top: 0px;
+    bottom: 0;
+    box-sizing: border-box;
+    margin-bottom: 0px !important;
+    border-radius: 0px !important;
+    width: 200px !important;
+    border: 0px solid !important;
+    //padding: 20px 20px 20px 20px;
+    //border-right: 1px #e5e5e5 solid;
+
+    //#112233 
+    background: $base !important;
+    overflow: inherit;
+    display: flex !important;
+    flex-direction: column;
+    .grow {
+        flex-grow: 1;
+    }
+    a.active{
+        .item {
+            background: $dark-grey !important;
+        }   
+    }
+    .active.item{
+        background: $dark-grey !important;
+    }
+    .header{
+        margin-bottom: 40px !important;
+    }
+    .item {
+        width: 100%;
+        text-align: left;
+        border-radius: 3px !important;
+        color: $light-grey!important;
+        line-height: 1.5 !important;
+        
+    }
+    .item.link{
+        &:hover{
+            background: rgba(0, 0, 0, .15) !important;
+        }
+    }
+    .icon{
+        color:$white;
+    }
+    .ui.focus.search{
+        border: 1px solid #eee;
+        border-radius: 3px;
+    }
+    .input {
+        max-width: 100%;
+        input{
+            background: rgba($dark-grey, .4) !important;
+            color: $white !important;
+            &:focus{
+                border: none !important;
+            }
+        }
+        .prompt {
+            border-radius: 3px !important;  
+        }  
+    }
+}
