@@ -150,9 +150,9 @@ analyzeConfusinMatrix <- function(cm) {
 
 }
 
-table <- matrix(c(1227,516,505,1268,1125,1060,1570,1110,3138),ncol=3,byrow=TRUE)
-colnames(table) <- c("true bad","true neutral","true good")
-rownames(table) <- c("pred. bad","pred. neutral","pred. good")
+table <- matrix(c(142,27,15,28,105,12,25,13,101),ncol=3,byrow=TRUE)
+colnames(table) <- c("true neutral","true positive","true negative")
+rownames(table) <- c("pred. neutral","pred. positive","pred. negative")
 table <- as.table(table)
 table
 

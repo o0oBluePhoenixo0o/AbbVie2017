@@ -12,3 +12,5 @@ tweets_sentiment_training.txt
 .env
 node_modules
 *.numbers
+build
+*.css

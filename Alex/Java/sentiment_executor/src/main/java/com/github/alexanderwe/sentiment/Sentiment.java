@@ -404,10 +404,6 @@ public class Sentiment {
                 snt.saveClassifier(stratifiedBestNB.getClassifier(),new File("naivebayes.bin"));
 
                 /*
-
-
-
-
                 Trial trial = new Trial(stratifiedBestNB.getClassifier(), snt.getInstanceListFromFile(new File("tweets_manual_sentiment_training.txt")));
                 ConfusionMatrix testConfusionMatrix = new ConfusionMatrix(trial);
                 System.out.println(testConfusionMatrix.toString());*/

@@ -1,12 +1,16 @@
 # This files contains methods on preprocessing
 
-# install.packages("plyr")
-# install.packages("dplyr")
-# install.packages("tm")
-# install.packages("qdap")
-# install.packages("SnowballC")
-# install.packages("stringr")
-# install.packages("lubridate")
+install.packages("plyr")
+install.packages("dplyr")
+install.packages("tm")
+install.packages("qdap")
+install.packages("SnowballC")
+install.packages("stringr")
+install.packages("lubridate")
+
+Sys.setenv(JAVA_HOME = '/Library/Java//Home')
+Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')
+dyn.load('/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/server/libjvm.dylib')
 
 
 
@@ -20,8 +24,7 @@ library(lubridate)
 library(readr)
 library(stringr)
 
-Sys.setenv(JAVA_HOME = '/Library/Java//Home')
-Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')
+
 source("./translateR.R")
 
 removeURL <- function(text) {
@@ -200,3 +203,4 @@ preprocess <- function(text){
   return (out);
 }
 
+preprocess("this is a smal test to check")
