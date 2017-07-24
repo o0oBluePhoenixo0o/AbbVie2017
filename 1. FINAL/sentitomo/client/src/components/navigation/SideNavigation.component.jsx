@@ -19,12 +19,12 @@ class SideNavigation extends Component {
                             Dashboard
                         </Menu.Item>
                     </NavLink>
-                    <NavLink to={match.url + '/events'} activeClassName="active">
+                    <NavLink to={match.url + '/toolbox'} activeClassName="active">
                         <Menu.Item
                             active={false}
                             link
-                            name="events" >
-                            Events
+                            name="toolbox" >
+                            Toolbox
                         </Menu.Item>
                     </NavLink>
                 </div>

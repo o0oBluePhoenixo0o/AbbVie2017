@@ -4,7 +4,7 @@ import {
     Dashboard
 } from '../data/connectors';
 
-var logger = require('./logger.js');
+import logger from './logger';
 
 /*
  * Runs every weekday (Monday through Friday)

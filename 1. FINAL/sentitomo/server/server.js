@@ -3,7 +3,6 @@ import path from 'path'
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import SocketIO from 'socket.io';
 import {
   createServer
 } from 'http';
@@ -20,7 +19,8 @@ import loggingMiddleware from './middlewares/loggerMiddleware';
 import Schema from './data/schema';
 import Resolvers from './data/resolvers';
 import Connectors from './data/connectors';
-import TwitterCrawler from './service/TwitterCrawler.js';
+import TwitterCrawler from './service/TwitterCrawler';
+import { listenToSockets } from './service/sockets';
 
 var twitterCrawler = new TwitterCrawler({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -65,24 +65,22 @@ server.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
 }));
 
-server.get('*', function (req, res) {
+server.get('/test', (req, res) => {
+  res.sendFile(path.join(__dirname + '/index.html'));
+});
+
+server.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 });
 
 
 // Set up socket.io
 var http = createServer(server);
-var io = new SocketIO(http);
-io.on('connection', function (socket) {
-  socket.emit('news', {
-    hello: 'world'
-  });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
+listenToSockets(http);
 
 
 http.listen(GRAPHQL_PORT, () => logger.log('info',
   `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}/graphql`
 ));
+
+//twitterCrawler.start();

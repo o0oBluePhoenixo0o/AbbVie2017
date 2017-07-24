@@ -19,7 +19,7 @@ const TweetsList = ({ tweets, loading, error, loadMoreEntries }) => {
 
     return (
         <div>
-            <Table basic="very">
+            <Table basic="very" stackable>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>Id</Table.HeaderCell>

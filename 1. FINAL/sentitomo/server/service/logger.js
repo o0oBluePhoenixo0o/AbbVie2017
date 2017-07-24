@@ -1,4 +1,4 @@
-var logger = require('winston');
+import logger from 'winston';
 
 logger.setLevels({
     debug: 0,
@@ -24,4 +24,4 @@ logger.add(logger.transports.File, {
     filename: 'server.log'
 });
 
-module.exports = logger;
+export default logger;

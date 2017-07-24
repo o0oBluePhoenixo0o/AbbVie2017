@@ -7,7 +7,16 @@ import {
 } from "react-router-dom";
 import registerServiceWorker from './registerServiceWorker';
 import AppLayout from "./layouts/AppLayout.js";
+import {
+    ApolloClient,
+    ApolloProvider,
+    createNetworkInterface, // <-- this line is new!
+} from 'react-apollo';
 
+const networkInterface = createNetworkInterface({ uri: 'http://localhost:8080/graphql' });
+const client = new ApolloClient({
+    networkInterface,
+});
 
 
 const Main = () => {
@@ -20,9 +29,11 @@ const Main = () => {
 
 
 ReactDOM.render(
-        <Router>
+    <Router>
+        <ApolloProvider client={client}>
             <Main></Main>
-        </Router>,
-        document.getElementById("root")
-    );
+        </ApolloProvider>
+    </Router>,
+    document.getElementById("root")
+);
 registerServiceWorker();

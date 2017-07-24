@@ -9,16 +9,7 @@ import "../styles/main.css";
 import { Container } from "semantic-ui-react";
 import SideNavigation from '../components/navigation/SideNavigation.component.jsx';
 import Dashboard from '../components/dashboard/Dashboard.component.jsx';
-
-
-
-
-const Placeholder = () => {
-    return (
-        <p>Placeholder</p>
-    )
-}
-
+import ToolBox from '../components/toolbox/ToolBox.component.jsx';
 
 
 export const AppLayout = ({ match }) => (
@@ -27,8 +18,8 @@ export const AppLayout = ({ match }) => (
             <SideNavigation />
             <Container className="main-content">
                 <Switch>
-                    <Route exact path={match.url + '/'} component={Placeholder} />
-                    <Route path={match.url + '/dashboard'} component={Dashboard} />
+                    <Route exact path={match.url + '/dashboard'} component={Dashboard} />
+                    <Route path={match.url + '/toolbox'} component={ToolBox} />
                 </Switch>
             </Container>
         </main>

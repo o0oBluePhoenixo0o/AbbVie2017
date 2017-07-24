@@ -8,8 +8,8 @@ import {
     Topic
 } from '../data/connectors';
 
-import preprocess from "./preprocess.js";
-import classify from "./classify.js";
+import preprocess from "../ML/preprocess.js";
+import classify from "../ML/classify.js";
 
 import logger from './logger.js';
 
@@ -26,7 +26,14 @@ module.exports = class TwitterCrawler {
 
         //classify.topicDetection(moment('2017-03-01').toDate(), moment('2017-04-30').toDate()); 
         //this.updateAuthors();
+
+        /*PythonShell.run('./ML/Python/test.py', { args: ['file.csv'] }, function (err, results) {
+            if (err) throw err;
+            // results is an array consisting of messages collected during execution
+            console.log('results: %j', results);
+        });*/
     }
+
 
 
     start() {
@@ -213,6 +220,9 @@ module.exports = class TwitterCrawler {
                                             retweeted: event.retweeted,
                                             TW_SENTIMENT: {
                                                 sentiment: result,
+                                                sarcastic: 0,
+                                                r_ensemble: "",
+                                                python_ensemble: "",
                                             }
                                         }, {
                                                 include: [{

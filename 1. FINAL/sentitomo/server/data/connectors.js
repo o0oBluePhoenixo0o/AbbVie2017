@@ -161,6 +161,15 @@ var Sentiment = db.define('TW_SENTIMENT', {
     },
     sentiment: {
         type: Sequelize.STRING
+    },
+    sarcastic: {
+        type: Sequelize.BOOLEAN
+    },
+    r_ensemble: {
+        type: Sequelize.STRING
+    },
+    python_ensemble: {
+        type: Sequelize.STRING
     }
 })
 
