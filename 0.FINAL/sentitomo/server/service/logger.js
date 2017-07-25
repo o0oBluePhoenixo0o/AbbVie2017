@@ -1,3 +1,7 @@
+/** @module Logger
+ *  @description Uses winston as a logger but adding colors to the console.log() output and piping the log messages down to a log file
+ *  @see File /server/server.log
+ */
 import logger from 'winston';
 
 logger.setLevels({

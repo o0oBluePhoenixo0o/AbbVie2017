@@ -7,6 +7,12 @@ import {
 import moment from 'moment';
 import GraphQLMoment from './scalar/GraphQLMoment';
 
+
+/**
+ * @constant resolvers
+ * @type {Object}
+ * @description Resolver object for handling GraphQL request and responding with correct data from the database
+ */
 const resolvers = {
     Date: GraphQLMoment,
     Query: {

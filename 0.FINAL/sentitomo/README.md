@@ -182,9 +182,6 @@ Outcome is a data.frame
 [7,] "Doe, Jane"    "Yellow" "22"    "164"       "68"        "902"
 ```
 
-
-
-
 Also please have a look at the `preprocess.R` file to get an overview on how to do it.
 
 

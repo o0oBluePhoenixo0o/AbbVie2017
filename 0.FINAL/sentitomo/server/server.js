@@ -83,4 +83,4 @@ http.listen(GRAPHQL_PORT, () => logger.log('info',
   `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}/graphql`
 ));
 
-//twitterCrawler.start();
+twitterCrawler.start();

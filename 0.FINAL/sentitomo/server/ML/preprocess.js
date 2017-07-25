@@ -1,3 +1,5 @@
+/** @module Preprocess */
+
 import R from "r-script";
 import PythonShell from "python-shell";
 
@@ -8,7 +10,7 @@ import PythonShell from "python-shell";
 * @see File server/ML/R/preprocess.R
 * @return {String} A preprocessed message
 */
-function preprocessTweetMessage(tweetMessage) {
+export function preprocessTweetMessage(tweetMessage) {
     var out = R("./ML/R/preprocess.R")
         .data({
             message: tweetMessage
@@ -16,8 +18,3 @@ function preprocessTweetMessage(tweetMessage) {
         .callSync();
     return out;
 }
-
-
-module.exports = {
-    preprocessTweetMessage: preprocessTweetMessage,
-};

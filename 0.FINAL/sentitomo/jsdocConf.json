@@ -1,0 +1,12 @@
+{
+    "source": {
+        "include": [
+            "server/"
+        ],
+        "exclude": [
+            "server/node_modules/"
+        ],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    }
+}
