@@ -91,6 +91,16 @@ All foreign code files (insde the ML directory) are executed asynchronously in c
 ### File Preparation 
 To let files of different programming languages work with the server they need to be adjusted a little bit. In the following there will be a small instruction on how to prepare the files. 
 
+
+
+#### Forword (Important Notice)
+
+It is not possible to pass complex data types and structures from Javascript to R or Python. It can either be a **plain string** or a **JSON encoded string** which then needs to be parsed by R or Pyhton. The same applies for your output. If you want to output an array for example, be sure to first encode it as an JSON Array so that the server can easily read it. 
+
+**Possible packages and modules to use**
+* **R** with [RJSONIO](https://cran.r-project.org/web/packages/RJSONIO/index.html)
+* **Pyhton** with [JSON Module](https://docs.python.org/2/library/json.html)
+
 #### R
 For R it is pretty straight forward. We use the [r-script](https://github.com/joshkatz/r-script) package. This comes with an R function called `needs()`. This is basically a combination of `install()` and `require()`. So every R file needs to use `needs()` instead of the other files. Also it is recommoned to put all needed functions at the top of the file. To send data to the R process from and back to the Javascript we can attach data to the R process like so: 
 
@@ -124,10 +134,55 @@ attach(input[[1]]) # used to get the javascript values
 # function 2
 # *****
 
-out <- message  # assign the retrieved value to a local one
+# assign the retrieved value to a local one, this comes from the Javascript code
+# It was passed like this {message: tweet.message}. It has the same name, 'message'.
+out <- message 
 out <- gsub("ut","ot",out) # do something with it
 out # last line of the script should always print the value which you want to return to the server
 ```
+
+
+**JSON to data.frame in R**
+
+see: [Stackoverflow for this example](https://stackoverflow.com/a/16948174)
+
+Javascript
+```
+{message: "[{"name":"Doe, John","group":"Red","age (y)":24,"height (cm)":182,"wieght (kg)":74.8,"score":null},
+    {"name":"Doe, Jane","group":"Green","age (y)":30,"height (cm)":170,"wieght (kg)":70.1,"score":500},
+    {"name":"Smith, Joan","group":"Yellow","age (y)":41,"height (cm)":169,"wieght (kg)":60,"score":null},
+    {"name":"Brown, Sam","group":"Green","age (y)":22,"height (cm)":183,"wieght (kg)":75,"score":865},
+    {"name":"Jones, Larry","group":"Green","age (y)":31,"height (cm)":178,"wieght (kg)":83.9,"score":221},
+    {"name":"Murray, Seth","group":"Red","age (y)":35,"height (cm)":172,"wieght (kg)":76.2,"score":413},
+    {"name":"Doe, Jane","group":"Yellow","age (y)":22,"height (cm)":164,"wieght (kg)":68,"score":902}]'"}
+```
+
+Then in R
+```
+needs(RJSONIO)   
+json <- fromJSON(message)   # comes from Javascript {message: variable}
+json <- lapply(json, function(x) {
+  x[sapply(x, is.null)] <- NA
+  unlist(x)
+})
+do.call("rbind", json)
+
+```
+
+Outcome is a data.frame
+```
+     name           group    age (y) height (cm) wieght (kg) score
+[1,] "Doe, John"    "Red"    "24"    "182"       "74.8"      NA   
+[2,] "Doe, Jane"    "Green"  "30"    "170"       "70.1"      "500"
+[3,] "Smith, Joan"  "Yellow" "41"    "169"       "60"        NA   
+[4,] "Brown, Sam"   "Green"  "22"    "183"       "75"        "865"
+[5,] "Jones, Larry" "Green"  "31"    "178"       "83.9"      "221"
+[6,] "Murray, Seth" "Red"    "35"    "172"       "76.2"      "413"
+[7,] "Doe, Jane"    "Yellow" "22"    "164"       "68"        "902"
+```
+
+
+
 
 Also please have a look at the `preprocess.R` file to get an overview on how to do it.
 
@@ -135,12 +190,20 @@ Also please have a look at the `preprocess.R` file to get an overview on how to 
 #### Python
  We use [python-shell](https://github.com/extrabacon/python-shell) to execute single Pyhton script files. The files need to be capable of retrieving starting arguments, for example the path to a serialized model file which is then used to classify the topic of a tweet message. The communication between Python and the server is then again managed by reading the console prints of the Python file. Make sure to not heavily use the console for prints, because our server only needs to knwo the final outcome of the script. For example you can print out the topic of a message and the corresponding contents of this topic. 
 
-Small Example:
+
+If you want that your input is parsed in a JSON way you can define this in the options object of the `PyhtonShell`.
+
+
 **Javascript**
 ```
 var PythonShell = require('python-shell');
 
-PythonShell.run('echo_args.py', { args: ['hello', 'world'] }, function (err, results) {
+var options = {
+  mode: 'json', #here you can specify the mode either 'text' or 'json'
+  args: [{ a: 'b' }, null, [1, 2, 3]] #arguments for the python script
+};
+
+PythonShell.run('my_script.py', options, function (err, results) {
   if (err) throw err;
   // results is an array consisting of messages collected during execution
   console.log('results: %j', results);
@@ -149,17 +212,31 @@ PythonShell.run('echo_args.py', { args: ['hello', 'world'] }, function (err, res
 
 **Python**
 ```
-import sys
+import sys, json
 
-# simple argument echo script which prints the args specified in the Javascript
-for v in sys.argv[1:]: 
-  print v
+# simple JSON echo script
+for line in sys.argv[1:]:
+  print json.dumps(json.loads(line))
+
+
+#Plain decode JSON
+json.loads(argv[1])
+
+```
+**Output**
+```
+{"a": "b"}\nnull\n[1, 2, 3]\n
 ```
 
 
 
- ## Start up the client
- To start the client  run `yarn start` in the client directory.
 
-  ## Start up the server
- To start the server run `yarn start` in the server directory. It uses [nodemon](https://github.com/remy/nodemon) to automatically restart the server if some source file changes.
+
+  ## Start up the server and client
+ To start the server run `yarn start` in the server directory. It uses [nodemon](https://github.com/remy/nodemon) to automatically restart the server if some source file changes. 
+ 
+ * GraphQL Endpoint: [localhost:8080/graphql/](localhost:8080/graphql/)
+ * GraphiQL Endpoint for testing GraphQL: [localhost:8080/graphiql/](localhost:8080/graphiql/)
+ * Front End: [localhost:8080/app/](localhost:8080/app/)
+
+ If you want to view the client you first have to run `yarn build` in the client directory and then start up the server.
