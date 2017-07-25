@@ -109,10 +109,10 @@ export default class TwitterCrawler {
      * @param {String} filters The filters which are used to track tweets from the Twitter API
      * @description Starts using the Twitter api with the specified filters. It also inserts different information in the different tables 
      * in the database. It upserts author data, inserts raw Tweet Data and inserts Sentiment data.
-     * @see {@link ~Author}
-     * @see {@link Tweet}
-     * @see {@link Sentiment}
-     * @see {@link Connectors~Topic}
+     * @see {@link module:Connectors~Author}
+     * @see {@link module:Connectors~Tweet}
+     * @see {@link module:Connectors~Sentiment}
+     * @see {@link module:Connectors~Topic}
      * @return {void}
      * @memberof TwitterCrawler
      */
