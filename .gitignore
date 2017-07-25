@@ -14,3 +14,4 @@ node_modules
 *.numbers
 build
 *.css
+*log
