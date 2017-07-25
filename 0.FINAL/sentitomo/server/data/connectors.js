@@ -182,7 +182,7 @@ const Dashboard = db.define('TW_DASH', {
  * @type {Object}
  * @description Represents the sentiment table, is referenced from the raw tweets table
  */
-const Sentiment = db.define('TW_SENTIMENT', {
+var Sentiment = db.define('TW_SENTIMENT', {
     id: {
         type: Sequelize.STRING,
         primaryKey: true
@@ -207,7 +207,7 @@ const Topic = db.define('TW_TOPIC', {
  * @type {Object}
  * @description Represents the topic table, is referenced from the raw tweets table
  */
-const Topic = db.define('TW_TOPIC', {
+var Topic = db.define('TW_TOPIC', {
     id: {
         type: Sequelize.STRING,
         primaryKey: true
@@ -245,6 +245,8 @@ Tweet.Topic = Tweet.hasOne(Topic, {
     onDelete: 'cascade'
 });
 
+
+
 //Create tables if not exist
 Author.sync()
 Tweet.sync()
@@ -253,6 +255,9 @@ Sentiment.sync();
 Topic.sync({
     force: true
 });
+
+Sentiment = Tweet.Sentiment;
+Topic = Tweet.Topic;
 
 export {
     Author,

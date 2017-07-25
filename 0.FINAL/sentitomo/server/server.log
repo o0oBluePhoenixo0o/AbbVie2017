@@ -2086,3 +2086,72 @@
 {"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-07-25T17:25:32.535Z"}
 {"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-25T17:25:32.558Z"}
 {"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-25T17:25:32.983Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-25T18:08:45.818Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-25T18:08:45.825Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-25T18:08:45.838Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-25T18:08:45.858Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-07-25T18:08:45.883Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-25T18:08:45.911Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-25T18:08:46.327Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-25T18:08:57.237Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-25T18:08:57.255Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-25T18:08:57.261Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-25T18:08:57.262Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-25T18:08:57.262Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-25T18:08:57.263Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-25T18:09:30.738Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-25T18:09:30.746Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-25T18:09:30.760Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-25T18:09:30.782Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-07-25T18:09:30.809Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-25T18:09:30.847Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-25T18:09:31.268Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-25T18:09:42.733Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-25T18:09:42.741Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-25T18:09:42.755Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-25T18:09:42.778Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-07-25T18:09:42.805Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-25T18:09:42.847Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-25T18:09:43.260Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-25T18:11:14.305Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-25T18:11:14.313Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-25T18:11:14.327Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-25T18:11:14.351Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-07-25T18:11:14.377Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-25T18:11:14.416Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-25T18:11:14.846Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-25T18:11:20.378Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-25T18:11:20.386Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-25T18:11:20.399Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-25T18:11:20.421Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-07-25T18:11:20.447Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-25T18:11:20.488Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-25T18:11:20.919Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-25T18:12:26.269Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-25T18:12:26.277Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-25T18:12:26.291Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-25T18:12:26.316Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-07-25T18:12:26.346Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-25T18:12:26.395Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-25T18:12:26.818Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-25T18:15:21.669Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-25T18:15:21.677Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-25T18:15:21.691Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-25T18:15:21.714Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-07-25T18:15:21.740Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-25T18:15:21.781Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-25T18:15:22.210Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-25T18:15:59.068Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-25T18:15:59.076Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-25T18:15:59.090Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-25T18:15:59.113Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-07-25T18:15:59.139Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-25T18:15:59.181Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-25T18:15:59.599Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-25T18:18:41.073Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-25T18:18:41.081Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-25T18:18:41.096Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-25T18:18:41.120Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-07-25T18:18:41.146Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-25T18:18:41.184Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-25T18:18:41.589Z"}

@@ -1,5 +1,8 @@
 /** @module Utils */
 
+
+var _this = this;
+
 /** 
  * @function occurrences
  * @param {String} string The string
@@ -11,7 +14,7 @@
  * @description Function that count occurrences of a substring in a string;
  * @return {int} How many times the substring occurs
  */
-export function occurrences(string, subString, allowOverlapping) {
+var occurrences = function occurrences(string, subString, allowOverlapping) {
     string += "";
     subString += "";
     if (subString.length <= 0) return string.length + 1;
@@ -37,18 +40,18 @@ export function occurrences(string, subString, allowOverlapping) {
  * @description Extract a keyword out of a text based on possible keywords
  * @return {String} The keyword which is most likely to represent the content of this text
  */
-export function getKeyword(message, filters) {
+function getKeyword(message, filters) {
     var mostOcc = "";
     var key = "";
     var keywords = filters.split(",");
     keywords.map(keyword => {
-        var occurrences = occurrences(
+        var counts = occurrences(
             message.toLowerCase(),
             keyword,
             false
         );
-        if (occurrences > mostOcc) {
-            mostOcc = occurrences;
+        if (counts > mostOcc) {
+            mostOcc = counts;
             key = keyword;
         }
     });
@@ -61,6 +64,9 @@ export function getKeyword(message, filters) {
  * @description Parse out HTML tags
  * @return {String} String where every HTML tag is parsed out
  */
-export function stripHTMLTags(text) {
+function stripHTMLTags(text) {
     return text.replace(/<\/?[^>]+(>|$)/g, "");
 }
+
+
+export { occurrences, getKeyword, stripHTMLTags }

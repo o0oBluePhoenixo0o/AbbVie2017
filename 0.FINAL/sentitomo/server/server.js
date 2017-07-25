@@ -65,10 +65,6 @@ server.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
 }));
 
-server.get('/test', (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'));
-});
-
 server.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 });
