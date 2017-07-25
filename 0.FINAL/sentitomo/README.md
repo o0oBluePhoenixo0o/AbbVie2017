@@ -159,6 +159,7 @@ Javascript
 
 Then in R
 ```
+attach(input[[0]]) # This is needed to have access to the variables from the 
 needs(RJSONIO)   
 json <- fromJSON(message)   # comes from Javascript {message: variable}
 json <- lapply(json, function(x) {
