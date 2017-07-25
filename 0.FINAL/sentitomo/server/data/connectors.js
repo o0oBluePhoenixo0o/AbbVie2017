@@ -182,7 +182,7 @@ const Dashboard = db.define('TW_DASH', {
  * @type {Object}
  * @description Represents the sentiment table, is referenced from the raw tweets table
  */
-var Sentiment = db.define('TW_SENTIMENT', {
+const Sentiment = db.define('TW_SENTIMENT', {
     id: {
         type: Sequelize.STRING,
         primaryKey: true
@@ -207,7 +207,7 @@ const Topic = db.define('TW_TOPIC', {
  * @type {Object}
  * @description Represents the topic table, is referenced from the raw tweets table
  */
-var Topic = db.define('TW_TOPIC', {
+const Topic = db.define('TW_TOPIC', {
     id: {
         type: Sequelize.STRING,
         primaryKey: true
@@ -256,8 +256,6 @@ Topic.sync({
     force: true
 });
 
-Sentiment = Tweet.Sentiment;
-Topic = Tweet.Topic;
 
 export {
     Author,

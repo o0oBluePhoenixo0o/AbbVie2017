@@ -2155,3 +2155,17 @@
 {"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-07-25T18:18:41.146Z"}
 {"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-25T18:18:41.184Z"}
 {"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-25T18:18:41.589Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-25T18:22:49.840Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-25T18:22:49.847Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-25T18:22:49.860Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-25T18:22:49.879Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-07-25T18:22:49.904Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-25T18:22:49.927Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-25T18:22:50.386Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-25T18:23:12.060Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-25T18:23:12.069Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-25T18:23:12.082Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-07-25T18:23:12.102Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-07-25T18:23:12.129Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-25T18:23:12.165Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-25T18:23:12.577Z"}

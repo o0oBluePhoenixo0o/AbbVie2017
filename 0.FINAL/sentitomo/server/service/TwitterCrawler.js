@@ -179,7 +179,7 @@ export default class TwitterCrawler {
                                             }
                                         }, {
                                                 include: [{
-                                                    association: Sentiment
+                                                    association: Tweet.Sentiment
                                                 }]
                                             })
                                     })
