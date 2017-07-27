@@ -37,7 +37,8 @@ var occurrences = function occurrences(string, subString, allowOverlapping) {
  * @function getKeyword
  * @param  {String} message The text to extract keyword
  * @param  {String} filters Comma separated possible keywords
- * @description Extract a keyword out of a text based on possible keywords
+ * @description Extract a keyword out of a text based on possible keywords and their occurences in the message
+ * @see @see {@link module:Utils~occurrences}
  * @return {String} The keyword which is most likely to represent the content of this text
  */
 function getKeyword(message, filters) {

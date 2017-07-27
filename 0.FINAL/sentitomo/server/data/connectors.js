@@ -191,7 +191,13 @@ const Sentiment = db.define('TW_SENTIMENT', {
         type: Sequelize.STRING
     },
     sarcastic: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.DOUBLE
+    },
+    emo_senti: {
+        type: Sequelize.INTEGER
+    },
+    emo_desc: {
+        type: Sequelize.STRING
     },
     r_ensemble: {
         type: Sequelize.STRING

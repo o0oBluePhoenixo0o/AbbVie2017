@@ -1,6 +1,6 @@
 /** @module Sockets */
 import SocketIO from 'socket.io';
-import { topicDetection } from '../ML/classify';
+import { detectTopicDynamic, detectTopicStatic } from '../ML/ml_wrapper';
 import { Tweet } from '../data/connectors';
 
 

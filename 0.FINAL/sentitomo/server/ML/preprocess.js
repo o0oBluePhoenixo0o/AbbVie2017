@@ -1,7 +1,6 @@
 /** @module Preprocess */
 
 import R from "r-script";
-import PythonShell from "python-shell";
 
 /**
 * @function preprocessTweetMessage

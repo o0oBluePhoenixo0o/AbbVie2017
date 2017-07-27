@@ -1,0 +1,34 @@
+ @import "./color-palette.scss";
+
+.navbar-top {
+    box-shadow: 0 3px 10px rgba(0,0,0,.16);
+    background-color: $base !important;
+    span {
+        color:#fff;
+    }
+    .ti-icon{
+        color: #fff;
+    }
+    .ui.menu {
+        a {
+            color: #fff !important;
+        }
+    }
+    .item {
+        color: #fff !important;
+    }
+    a.active{
+        .item {
+            background: $dark-grey !important;
+        }   
+    }
+    .active.item{
+        background: $dark-grey !important;
+    }
+    .header{
+        a{
+             color: #fff !important;
+        }
+       
+    }
+}

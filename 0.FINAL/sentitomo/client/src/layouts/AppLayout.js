@@ -8,6 +8,7 @@ import "semantic-ui-css/semantic.min.css";
 import "../styles/main.css";
 import { Container } from "semantic-ui-react";
 import SideNavigation from '../components/navigation/SideNavigation.component.jsx';
+import TopNavigation from '../components/navigation/TopNavigation.component.jsx'
 import Dashboard from '../components/dashboard/Dashboard.component.jsx';
 import ToolBox from '../components/toolbox/ToolBox.component.jsx';
 
@@ -15,7 +16,9 @@ import ToolBox from '../components/toolbox/ToolBox.component.jsx';
 export const AppLayout = ({ match }) => (
     <div className="">
         <main className="main">
+
             <SideNavigation />
+            <TopNavigation />
             <Container className="main-content">
                 <Switch>
                     <Route exact path={match.url + '/dashboard'} component={Dashboard} />

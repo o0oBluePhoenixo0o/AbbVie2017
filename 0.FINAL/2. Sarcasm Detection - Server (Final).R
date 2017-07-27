@@ -14,7 +14,7 @@ attach(input[[1]])
 ## Assume CORE dataset is TW_df
 # Extract out only ID & Message
 
-TW_df <- TW_df[, which(names(TW_df) %in% c("id","message"))]
+TW_df <- message #TW_df[, which(names(TW_df) %in% c("id","message"))]
 
 ###################################################
 # Preprocessing the TW_df and cleaning the corpus #
@@ -60,7 +60,7 @@ vec2clean.corp <- function(x){
 
 # Calling the vec2clean.corp with TW_df(x)
 
-corp <- vec2clean.corp(TW_df$message)
+corp <- vec2clean.corp(TW_df)
 
 # Creating Document Term Matrix from the corp with TF weighting
 dtm <- DocumentTermMatrix(corp, control = 
@@ -85,6 +85,4 @@ df <- data.frame(lapply(df, as.factor))
 #########################################################################
 # for robust Naive Bayes model with laplace estimator
 n.pred.lap <- predict(n.model.lap, df, type = 'raw')
-
-#result will be a table with ID and probability of sarcasm
-result <- cbind(TW_df$id,as.data.frame(n.pred.lap))
+n.pred.lap

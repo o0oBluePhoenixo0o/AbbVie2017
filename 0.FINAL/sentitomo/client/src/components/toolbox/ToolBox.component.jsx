@@ -18,9 +18,23 @@ class ToolBox extends Component {
                         Manage all of the ML taks here
                     </Header.Subheader>
                 </Header>
-                <Grid>
-                    <Grid.Column width={4}>
-                        <Menu fluid vertical tabular>
+                <Grid stackable>
+                    <Grid.Column width={4} only="large screen">
+                        <Menu fluid vertical tabular stackable>
+                            <Menu.Item name='topic' active={activeItem === 'topic'} onClick={this.handleItemClick} />
+                            <Menu.Item name='sentiment' active={activeItem === 'sentiment'} onClick={this.handleItemClick} />
+                            <Menu.Item name='database' active={activeItem === 'database'} onClick={this.handleItemClick} />
+                        </Menu>
+                    </Grid.Column>
+                    <Grid.Column width={4} only="computer tablet">
+                        <Menu fluid vertical tabular stackable>
+                            <Menu.Item name='topic' active={activeItem === 'topic'} onClick={this.handleItemClick} />
+                            <Menu.Item name='sentiment' active={activeItem === 'sentiment'} onClick={this.handleItemClick} />
+                            <Menu.Item name='database' active={activeItem === 'database'} onClick={this.handleItemClick} />
+                        </Menu>
+                    </Grid.Column>
+                    <Grid.Column width={4} only="mobile">
+                        <Menu fluid stackable>
                             <Menu.Item name='topic' active={activeItem === 'topic'} onClick={this.handleItemClick} />
                             <Menu.Item name='sentiment' active={activeItem === 'sentiment'} onClick={this.handleItemClick} />
                             <Menu.Item name='database' active={activeItem === 'database'} onClick={this.handleItemClick} />

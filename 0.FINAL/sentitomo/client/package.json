@@ -14,7 +14,7 @@
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.10",
     "semantic-ui-css": "^2.2.11",
-    "semantic-ui-react": "^0.71.1",
+    "semantic-ui-react": "^0.71.2",
     "socket.io-client": "^2.0.3",
     "styled-components": "^2.1.1"
   },

@@ -13,7 +13,7 @@ import {
 } from '../data/connectors';
 import { getKeyword, stripHTMLTags } from './utils';
 import { preprocessTweetMessage } from "../ML/preprocess.js";
-import { detectSentiment } from "../ML/classify.js";
+import { detectSentiment, detectSarcasm, detectTopicStatic } from "../ML/ml_wrapper.js";
 import logger from './logger.js';
 
 
@@ -36,6 +36,14 @@ export default class TwitterCrawler {
             // results is an array consisting of messages collected during execution
             console.log('results: %j', results);
         });*/
+
+        /*detectTopicStatic(moment("2017-03-01"), moment("2017-05-01"), result => {
+            console.log(result);
+        })*/
+
+        //console.log(detectSarcasm("I hate fucking raiders"));
+
+
     }
 
 
@@ -107,8 +115,9 @@ export default class TwitterCrawler {
     /**
      * @function track 
      * @param {String} filters The filters which are used to track tweets from the Twitter API
-     * @description Starts using the Twitter api with the specified filters. It also inserts different information in the different tables 
-     * in the database. It upserts author data, inserts raw Tweet Data and inserts Sentiment data.
+     * @description Starts using the Twitter API with the specified filters. When a new tweet is crawled it upserts the author data
+     * and inserts the raw tweet data into the database. It also detects the sentiment of the tweet, along with detecting sarcasm and emoji sentiment.
+     * @see {@link module:ML_Wrapper~detectSarcasm}
      * @see {@link module:Connectors~Author}
      * @see {@link module:Connectors~Tweet}
      * @see {@link module:Connectors~Sentiment}
@@ -173,7 +182,7 @@ export default class TwitterCrawler {
                                             retweeted: event.retweeted,
                                             TW_SENTIMENT: {
                                                 sentiment: result,
-                                                sarcastic: 0,
+                                                sarcastic: detectSarcasm(messagePrep),
                                                 r_ensemble: "",
                                                 python_ensemble: "",
                                             }
