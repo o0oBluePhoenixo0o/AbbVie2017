@@ -56,7 +56,8 @@ const typeDefinitions = `
     sentiment(id: String): Sentiment
     topic(id: String): Topic
     author(username: String): Author
-    tweets(limit: Int, offset:Int, startDate: Date, endDate: Date): [Tweet]
+    tweets(limit: Int, offset: Int, startDate: Date, endDate: Date): [Tweet]
+    count(startDate: Date, endDate: Date): Int
   }
 
   schema {

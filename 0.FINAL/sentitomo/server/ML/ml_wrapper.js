@@ -64,12 +64,12 @@ export function detectTopicDynamic(startDate, endDate, callback) {
             tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
         });
 
-        const filename = "./ML/Python/tweets.csv";
+        const filename = "./ML/Python/dynamic/tweets.csv";
 
         convertToCsvRaw(tweets, filename, () => {
             console.log("Starting dynamic ")
             var child = child_process.exec(
-                'python3 ./ML/Python/dynamic/test.py ' + filename, (error, stdout, stderr) => {
+                'python3 ./ML/Python/dynamic/dynamic.py ' + filename, (error, stdout, stderr) => {
                     if (error !== null) {
                         console.log("Error -> " + error);
                     }

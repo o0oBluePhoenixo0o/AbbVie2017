@@ -18,35 +18,15 @@ class ToolBox extends Component {
                         Manage all of the ML taks here
                     </Header.Subheader>
                 </Header>
-                <Grid stackable>
-                    <Grid.Column width={4} only="large screen">
-                        <Menu fluid vertical tabular stackable>
-                            <Menu.Item name='topic' active={activeItem === 'topic'} onClick={this.handleItemClick} />
-                            <Menu.Item name='sentiment' active={activeItem === 'sentiment'} onClick={this.handleItemClick} />
-                            <Menu.Item name='database' active={activeItem === 'database'} onClick={this.handleItemClick} />
-                        </Menu>
-                    </Grid.Column>
-                    <Grid.Column width={4} only="computer tablet">
-                        <Menu fluid vertical tabular stackable>
-                            <Menu.Item name='topic' active={activeItem === 'topic'} onClick={this.handleItemClick} />
-                            <Menu.Item name='sentiment' active={activeItem === 'sentiment'} onClick={this.handleItemClick} />
-                            <Menu.Item name='database' active={activeItem === 'database'} onClick={this.handleItemClick} />
-                        </Menu>
-                    </Grid.Column>
-                    <Grid.Column width={4} only="mobile">
-                        <Menu fluid stackable>
-                            <Menu.Item name='topic' active={activeItem === 'topic'} onClick={this.handleItemClick} />
-                            <Menu.Item name='sentiment' active={activeItem === 'sentiment'} onClick={this.handleItemClick} />
-                            <Menu.Item name='database' active={activeItem === 'database'} onClick={this.handleItemClick} />
-                        </Menu>
-                    </Grid.Column>
+                <div>
+                    <Menu pointing secondary>
+                        <Menu.Item name='sentiment' active={activeItem === 'sentiment'} onClick={this.handleItemClick} />
+                        <Menu.Item name='topic' active={activeItem === 'topic'} onClick={this.handleItemClick} />
+                    </Menu>
+                    <Segment >
+                        {activeItem === "topic" ? <TopicToolBox /> : null}
+                    </Segment></div>
 
-                    <Grid.Column stretched width={12}>
-                        <Segment>
-                            {activeItem === "topic" ? <TopicToolBox /> : null}
-                        </Segment>
-                    </Grid.Column>
-                </Grid>
             </Segment>
         );
     }

@@ -13,7 +13,7 @@ import {
 } from '../data/connectors';
 import { getKeyword, stripHTMLTags } from './utils';
 import { preprocessTweetMessage } from "../ML/preprocess.js";
-import { detectSentiment, detectSarcasm, detectTopicStatic } from "../ML/ml_wrapper.js";
+import { detectSentiment, detectSarcasm, detectTopicStatic, detectTopicDynamic } from "../ML/ml_wrapper.js";
 import logger from './logger.js';
 
 
@@ -37,7 +37,7 @@ export default class TwitterCrawler {
             console.log('results: %j', results);
         });*/
 
-        /*detectTopicStatic(moment("2017-03-01"), moment("2017-05-01"), result => {
+        /*detectTopicDynamic(moment("2017-03-01"), moment("2017-04-20"), result => {
             console.log(result);
         })*/
 

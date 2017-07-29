@@ -8,11 +8,8 @@ import {
     graphql,
     withApollo
 } from 'react-apollo';
+import socket from "../../socket.js";
 
-
-
-import io from 'socket.io-client'
-let socket = io(`http://localhost:8080`)
 
 class TopicToolBox extends Component {
 
@@ -22,29 +19,26 @@ class TopicToolBox extends Component {
         tweetsSize: 0
     };
 
-    handleDayClick = day => {
-        const range = DateUtils.addDayToRange(day, this.state);
-        this.setState(range, () => {
-            this.props.client.query({
-                query: gql`
-                    query TweetsListQuery($startDate: Date, $endDate: Date) {
-                        tweets(startDate: $startDate, endDate: $endDate) {
-                            id
-                            message
-                            created
-                        }
+    handleDayClick = (day, { disabled, selected }) => {
+        if (!disabled) {
+            const range = DateUtils.addDayToRange(day, this.state);
+            this.setState(range, () => {
+                this.props.client.query({
+                    query: gql`
+                    query CountQuery($startDate: Date, $endDate: Date) {
+                        count(startDate: $startDate, endDate: $endDate)
                     }
                 `,
-                variables: { startDate: this.state.from, endDate: this.state.to },
-            }).then(data => {
-                this.setState({
-                    tweetsSize: data.data.tweets.length
-                })
+                    variables: { startDate: this.state.from, endDate: this.state.to },
+                }).then(response => {
+                    this.setState({
+                        tweetsSize: response.data.count
+                    })
+                });
             });
-            //socket.emit('client:checkTweetBagSize', { from: this.state.from, to: this.state.to })
-        });
-
+        }
     };
+
     handleResetClick = e => {
         e.preventDefault();
         this.setState({
@@ -52,15 +46,6 @@ class TopicToolBox extends Component {
             to: null,
         });
     };
-
-
-    componentDidMount() {
-        socket.on(`server:checkTweetBagSize`, data => {
-            this.setState({
-                tweetsSize: data.tweetsSize
-            })
-        })
-    }
 
     sendMessage = message => {
         socket.emit('client:runTopicDetection', message)
@@ -77,6 +62,7 @@ class TopicToolBox extends Component {
                     selectedDays={[from, { from, to }]}
                     onDayClick={this.handleDayClick}
                     fixedWeeks
+                    disabledDays={{ after: new Date() }}
                 />
                 {!from && !to && <p>Please select the <strong>first day</strong>.</p>}
                 {from && !to && <p>Please select the <strong>last day</strong>.</p>}
@@ -93,8 +79,8 @@ class TopicToolBox extends Component {
                         .
                         {' '}<a href="." onClick={this.handleResetClick}>Reset</a>
                     </p>}
-                <p>Your bag will contain {tweetsSize} tweets.</p>
-                <Button disabled={!from && !to || from && !to || !from && to} primary onClick={() => this.sendMessage({ from: from, to: to })}>Detect topics</Button>
+                <p>Your bag will contain {tweetsSize} tweets. {tweetsSize < 1000 ? "Your bag need at least 1000 tweets to detect the topic dynamically" : null}</p>
+                <Button disabled={!from && !to || from && !to || !from && to || tweetsSize < 1000} primary onClick={() => this.sendMessage({ from: from, to: to })}>Detect topics</Button>
 
                 <Divider />
             </div>

@@ -36,12 +36,12 @@ const resolvers = {
                     }
                 };
             }
-
             return Tweet.findAll({
                 limit: args.limit,
                 offset: args.offset,
                 where: where,
             });
+
         },
         sentiment(_, args) {
             return Sentiment.find({
@@ -51,6 +51,20 @@ const resolvers = {
         topic(_, args) {
             return Topic.find({
                 where: args
+            });
+        },
+        count(_, args) {
+            var where;
+            if (args.startDate && args.endDate) {
+                where = {
+                    created: {
+                        $lt: args.endDate, // less than
+                        $gt: args.startDate //greater than
+                    }
+                };
+            }
+            return Tweet.count({
+                where: where
             });
         }
     },

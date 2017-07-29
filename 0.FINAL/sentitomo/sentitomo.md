@@ -187,60 +187,12 @@ If you test locally then visit:
  - Endpoint for testing the API: [localhost:8080/graphiq](localhost:8080/graphiql)
 If you want to access the server from a remote destination just switch out localhost with your server IP or domain.
 
-
-# NOT FINAL STARTING HERE
-
-
 ### Database
 ### Server
 
-#### GraphQL API
-
-To access the GraphQL API just query it with the standard Query structure to retrieve the data you want.
-
-```
-{
-  tweet(id: "883620904663744500") {
-    id
-    message
-    language
-    created
-    favorited
-    author{
-      id
-      screenname
-      username
-    }
-  }
-}
-
-```
-Leeds to:
-
-```
-{
-  "data": {
-    "tweet": {
-      "id": "883620904663744500",
-      "message": "RT @K0YCHEV: Create Static Sites With #Webpack https://t.co/3ca4L5D7vA #javascript #HTML #webdev #programming #devops https://t.co/aAFsavHP…",
-      "language": "en",
-      "created": "Sat Jul 08 2017 11:36:55 GMT+0200 (CEST)",
-      "favorited": false,
-      "author": {
-        "id": "802981345123299300",
-        "screenname": "K0YCHEV",
-        "username": "KOYCHEV.DE"
-      }
-    }
-  }
-}
-```
-
 
 #### ML
-In the ML directory the integration of the different programming languages takes place.
-
-##### Forword (Important Notice)
+#### Forword (Important Notice)
 
 It is not possible to pass complex data types and structures from Javascript to R or Python. It can either be a **plain string** or a **JSON encoded string** which then needs to be parsed by R or Pyhton. The same applies for your output. If you want to output an array for example, be sure to first encode it as an JSON Array so that the server can easily read it. 
 
@@ -276,17 +228,17 @@ Here is an example code block in R
 needs(dplyr) # require every library so
 attach(input[[1]]) # used to get the javascript values
 
-    # Here comes all your function
-    # function 1
-    # function 2
-    # *****
-    
-    # assign the retrieved value to a local one, this comes from the Javascript code
-    # It was passed like this {message: tweet.message}. It has the same name, 'message'.
-    out <- message 
-    out <- gsub("ut","ot",out) # do something with it
-    out # last line of the script should always print the value which you want to return to the server
-    ```
+# Here comes all your function
+# function 1
+# function 2
+# *****
+
+# assign the retrieved value to a local one, this comes from the Javascript code
+# It was passed like this {message: tweet.message}. It has the same name, 'message'.
+out <- message 
+out <- gsub("ut","ot",out) # do something with it
+out # last line of the script should always print the value which you want to return to the server
+```
 
 
 **JSON to data.frame in R**

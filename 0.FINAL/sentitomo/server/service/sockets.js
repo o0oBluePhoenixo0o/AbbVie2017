@@ -22,36 +22,23 @@ export function listenToSockets(httpServer) {
             hello: 'world'
         });
 
-        socket.on("client:checkTweetBagSize", data => {
-            Tweet.findAll({
-                where: {
-                    created: {
-                        $lt: data.to, // less than
-                        $gt: data.from //greater than
-                    }
-                },
-                raw: true //we use raw, we do not need to have access to the sequlize model here
-            }).then(tweets => {
-                socket.emit("server:checkTweetBagSize", {
-                    tweetsSize: tweets.length
-                });
-            });
-
-        });
-
         socket.on('client:runTopicDetection', data => {
 
             socket.emit("server:response", {
-                task: 'Topic detection',
-                started: true,
-                time: new Date()
+                level: "success",
+                message: 'Topic detection has started at: ' + new Date(),
+                finished: false,
             });
-            topicDetection(data.from, data.to, result => {
+            detectTopicDynamic(data.from, data.to, result => {
                 console.log(result);
+                socket.emit("server:response", {
+                    level: "success",
+                    message: 'Topic detection has finished at: ' + new Date(),
+                    finished: true,
+                    result: JSON.parse(result)
+                });
             });
 
-
-            console.log(data)
         });
     });
 }
