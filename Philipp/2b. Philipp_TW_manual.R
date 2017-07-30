@@ -4,6 +4,10 @@
 
 setwd("~/GitHub/AbbVie2017/Philipp")
 
+# not %in% function
+'%!in%' <- function(x,y)!('%in%'(x,y))
+##
+
 #Twitter
 TW_df <- read.csv("Final_TW_1205_prep.csv",sep = ",", as.is = TRUE)
 TW_df <- unique(TW_df)
@@ -201,5 +205,22 @@ final <- final[final$key != 'key',]
 
 # Write manual label dataset 3006
 write.csv(final, file = "Final_Manual_3006.csv",
+          quote=TRUE, row.names = FALSE,
+          fileEncoding = "UTF-8", na = "NA")
+
+
+#########################################
+# Merge to get TW_MANUAL_3007 results
+p1 <- read.csv("manual3007.csv", as.is = TRUE, sep = ",")
+p2 <- read.csv("Final_Manual_3006.csv", as.is = TRUE, sep = ",")
+
+p1 <- p1[, which(names(p1) %!in% c("X.1","X","X.2"))]
+
+final <- rbind(p2,p1)
+final <- unique(final)
+final$Id <- as.factor(final$Id)
+
+# Write file to 3007
+write.csv(final, file = "Final_Manual_3007.csv",
           quote=TRUE, row.names = FALSE,
           fileEncoding = "UTF-8", na = "NA")
