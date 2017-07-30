@@ -561,9 +561,9 @@ For Java we followed the same approach and developed the spawning process of the
 #### data
 
 Inside the `data` directory the connection to the database and the `GraphQL` schema definitions are expressed. 
-For connecting to the database we use a package called [Sequlize.js](http://docs.sequelizejs.com/). It was very easy to set up and operates on a higher level, so that you just have to define your database schema and all necessary queries to the database are handled by the package itself. It supports  PostgreSQL, MySQL, SQLite and MSSQL dialects. Also it lets us easily combine it with the GraphQL API.
+For connecting to the database we use a package called [Sequlize.js](http://docs.sequelizejs.com/). It provides higher level methods, which just define your database schema and all necessary SQL queries to the database are handled by the package itself. It supports  PostgreSQL, MySQL, SQLite and MSSQL dialects. This package was also used in the resolver function for the GraphQL API.
 
-Another main part of the `data` directory is the set up of GraphQL which is written in `resolvers.js`, which handles all the request to the API and `schema.js` which is setting up the different endpoints of the API. We used [apollo-server](https://github.com/apollographql/apollo-server) to set up the API. `apollo-server`is a great, easy to use open-source implementation of GraphQL on the server-side. In the following we want to provide a sample request to the API and what the response looks like:
+Another main part of the `data` directory is the set up of GraphQL which is written in `resolvers.js`, which handles all the request to the API and `schema.js` which is setting up the schema of the API. For this implementation we used [apollo-server](https://github.com/apollographql/apollo-server). It is a great, easy to use open-source implementation of GraphQL on the server-side. In the following we want to provide a sample request to the API and what the response looks like:
 
 Request sent to [localhost:8080/graphql]():
 ```
@@ -606,9 +606,8 @@ Response:
 ```
 
 __What is happening ?__
-In the following we want to provide a quick look at what is happening on the server side when a request comes in.
-At first the request from the client is piped through the resolvers of `resolvers.js` and the `tweet(_,args)` method is invoked because we wanted to access the `tweet` endpoint. This takes all the arguments provied in the request. Right now this is only the `id`argument. To get the result from the database we use the database model object of sequlize.js called `Tweet` which we defined in the `connectors.js` file. It returns the exact tweet where the `id` matches. Because in the request only some fields are requested only those get responded. Only fields which are stated in the `schema.ja` can be returned.
-In the end a new data object is constructed which contains only the information that was requested.
+At first the request from the client is piped through the resolvers of `resolvers.js` and the `tweet(_,args)` method is invoked because the request accessed the `tweet` endpoint. The `args` object contains all arguments provided to the endpoint. In this example only the `id` of the tweet. To get the result from the database we use the database model object of sequlize.js called `Tweet` which we defined in the `connectors.js` file. It returns the exact tweet 'where tweet.id = args.id'. Because only a part of all tweet fields are requested only those get responded.
+In the end a new data object is constructed which contains all the information that were requested.
 
 `resolvers.js` (truncated)
 ```
