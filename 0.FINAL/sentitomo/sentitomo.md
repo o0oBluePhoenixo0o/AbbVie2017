@@ -24,15 +24,85 @@ To give you an idea which technologies were used throughout the development proc
 
 Node.js is an open-source, cross-platform framework written in C, C++ and JavaScript, which makes it possible to run JavaScript code on the server-side. The initial release was on May the 27th, 2009 and was written by Ryan Dahl. Primarily it was built because the most common web server at this time, Apache HTTP Server, has troubles with a lot of concurrent connections and normally used  blocking code executions which led to poor server performance. The idea behind Node utilizes a simplified event-driven programming paradigm where the program flow is determined by so called events (user clicks, messages from other methods etc.) to let so called callback functions take care of the result of method calls therefore main thread of a Node.js application is not blocked by method executions. Basically node is run only on thread, 
 This makes it easy build highly scalable applications without the need of threads, which often leads to poor performance.
-Hand in hand to Node there is a package manager called npm which stands for Node Packaging Manager. It is used to install, update and remove third party Node.js programs which are listed in the npm registry. npm also enables developers to easily share and distribute Node.js code, so it can be used in other projects.
+Hand in hand to Node there is a package manager called `npm` which stands for Node Packaging Manager. It is used to install, update and remove third party Node.js programs which are listed in the npm registry. npm also enables developers to easily share and distribute Node.js code, so it can be used in other projects. All installed dependencies are listed inside a file called `package.json`. It contains all neccessary information about the different packages and their version numbers. All used packages are installed inside a folder called `node_modules`.
 
 ### Yarn
+Yarn is an additional Node package manager built by Facebook upon npm, which improves npm in some important parts. One biggest flaw of `npm` is that it stores the differen packges inside the `node_modules`in a non deterministic way. That means that the order of packages inside `node_modules` can differ from person to person depending on the order of dependency installation. This can lead to the fact that bugs like 'Works on my machine' arise very quickly which makes debugging and hunting bugs very frustrating. Also the the actual dependency tree can differ from the `node_modules`directory because duplicate dependencies are merged together. All these issues are resolved by Yarn in addition to that Yarn is installing dependencies sometimes much faster than npm. That are the advantages which led to the fact that we use Yarn as our desired packahe manager.
 
 ### Express.js
 Express.js is a JavaScript framework built with Node.js and today the de-facto standard to build a web-server application with Node. It is open-source and released under the MIT License. In its fundamental form it is very lightweight and only offers the minimum functionalities to program a web-server. But the capability of adding plugins, like logging, security related ones, templating engines, server side rendering, and even more, makes Express.js very versatile and the number one solution for developing a web server with Node.js.
 
 ### GraphQL
+
+GraphQL is the definition for the combination of two things. On the one hand it is a query language for any existing API and on the other hand it is an server-side runtime for executing queries that are defined by a type system based on data from any backend storage. It is actively maintained by the the open-source community, created by Facebook and said to be next big thing after REST. GraphQL can be set up on any backend data storage option, like SQL based or document based. It is not bound to any specific programming language nor to any server implementation. It is completly decoupled from those, which makes it easy to integrate in any exiisting system. Another advantage is, that it does not dictate your backend storage option. This makes it possible to easily switch the backend without affecting the existing API. But one of the most impressing parts is, that it solves a big issue we had with REST. When querying an instance in REST, this end up very often with multiple queries to different endpoints, while with GraphQL this can be done with only one request. 
+For example in our use case. A query for an Tweet and the corresponding author of the tweet in REST would result in two calls. One to the tweet endpoint and one the author endpoint. With an GraphQL based API this would us only cost one call.
+A GraphQL service is defined by its `type definitions`. A sample one would look like the follwoing: 
+```
+type Query {
+  tweet: Tweet
+}
+
+type Tweet {
+  id: ID
+  message: String
+  author: Author
+}
+
+type Author {
+  id: ID
+  name: String
+}
+```
+Type definitions are like a schema for the API. They define which type requests are accepted by API. 
+So called `resolvers` then take care of the actual database call to get the instances needed. 
+
+```
+function Query_tweet(request) {
+  return database.getTweet();
+}
+
+function Tweet_message(tweet) {
+  return tweet.getMessage();
+}
+
+function Tweet_author(tweet) {
+  return tweet.getAuthor();
+}
+```
+An example request to the API could be:
+
+```
+{
+    tweet{
+        id
+        message
+        author{
+            id
+            name
+        }
+    }
+}    
+```
+Respone:
+```
+{
+    data: {
+        tweet: {
+            id: 123456789
+            message: "This is a test"
+            author: {
+                id: 1
+                name: "John Doe"
+            }
+        }
+    }
+}
+```
+As we can see with this example we can easily request only the data we want and do this with only one API request. This and the fact that GraphQL can work with any programming language and server implementation we decided to choose it as our standard API runtime.
+
 ### React
+React is an open source front-end JavaScript library for dynamically creating user interfaces. It is maintained by Facebook and the Open Source community and is very actively maintained. Currently it is available in Version 15 with Version 16 at beta state. Right now a lot of big companies are building their website and web application front ends with the help of React. One of the most prominent ones are AirBnB and Netflix. It uses a sepcial JavaScript syntax called `.jsx`. With that it is possible to write HTML code inside a JavaScript file. React in the end renders this HTML dynamically to the Virtual Document Object Model (Virtual DOM). Another notable feature of React. Instead of rendering directly to the HTML DOM it caches all changes inside the virtual DOM and updates the browsers displayed DOM in a efficient way accordingly. React always tries to work with a component oriented way of structuring a front-end. For example a sidebar navigation is one component. Inside this component multiple link components are nested. This makes React projects very structured and good to maintain if some features need to be added. 
+React is beside Angular, another modern front-end JavaScript library, the most versatile tool for developing dynamic front-ends. This fact makes it our to go tool for creating the client part of Sentitomo.
 
 ## The Application
 
