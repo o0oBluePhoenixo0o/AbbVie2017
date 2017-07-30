@@ -15,7 +15,7 @@ attach(input[[1]])
 ## Assume CORE dataset is TW_df
 # Extract out only ID & Message
 
-TW_df <- "This is a very specific sentence where everyone can say something about your future and other company things"
+TW_df <- message
 
 ###################################################
 # Preprocessing the TW_df and cleaning the corpus #

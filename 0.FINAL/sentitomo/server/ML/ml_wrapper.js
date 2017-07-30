@@ -142,5 +142,6 @@ export function detectSarcasm(tweetMessage) {
             message: tweetMessage
         })
         .callSync();
+    console.log("Output -> " + out)
     return out;
 }

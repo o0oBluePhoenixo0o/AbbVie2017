@@ -3573,3 +3573,148 @@
 {"level":"info","message":"Start up server","timestamp":"2017-07-29T15:09:38.317Z"}
 {"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-29T15:09:38.367Z"}
 {"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-29T15:09:38.788Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-30T08:13:22.506Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-30T08:13:22.515Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-30T08:13:22.529Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-30T08:13:22.596Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-30T08:13:24.868Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-30T08:13:30.622Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-30T08:13:30.637Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-30T08:13:30.651Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-30T08:13:30.703Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-30T08:13:32.871Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-30T08:13:53.373Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-30T08:13:53.383Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-30T08:13:53.399Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-30T08:13:53.460Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-30T08:13:55.552Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-30T08:14:20.564Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-30T08:14:20.574Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-30T08:14:20.588Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-30T08:14:20.647Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-30T08:14:22.668Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-30T08:17:52.884Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-30T08:17:52.895Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-30T08:17:52.910Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-30T08:17:52.980Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-30T08:17:55.149Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-30T08:21:03.428Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-30T08:21:03.437Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-30T08:21:03.451Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-30T08:21:03.518Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-30T08:21:05.675Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-30T08:22:51.929Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-30T08:22:51.939Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-30T08:22:51.954Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-30T08:22:52.014Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-30T08:22:54.124Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-30T08:27:44.088Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-30T08:27:44.096Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-30T08:27:44.110Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-30T08:27:44.151Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-30T08:27:46.256Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-30T08:30:34.464Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-30T08:30:34.471Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-30T08:30:34.484Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-30T08:30:34.522Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-30T08:30:36.766Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-30T08:32:57.934Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-30T08:32:57.945Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-30T08:32:57.960Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-30T08:32:58.028Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-30T08:33:00.253Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:39:49.054Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:39:50.093Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:39:50.160Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:39:52.115Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:39:56.118Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:39:56.124Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:39:57.694Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:39:57.698Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:09.796Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:09.799Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:12.381Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:12.496Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:12.610Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:12.777Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:12.919Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:13.715Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:14.269Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:16.127Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:16.131Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:16.235Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:16.462Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:16.577Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:16.734Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:17.684Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:20.087Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:20.091Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:20.093Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:21.995Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:24.029Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:24.033Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:24.035Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:24.104Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:24.535Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:24.742Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:25.548Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:25.809Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:26.225Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:28.105Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:28.110Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:28.112Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:28.142Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:28.576Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:29.699Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:29.940Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:32.134Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:32.137Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:32.139Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:32.498Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:36.631Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:38.223Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:40.064Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:40.069Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:41.554Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:41.557Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:41.560Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:44.195Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:52.101Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:52.104Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:53.711Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:53.713Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:56.078Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:56.079Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:40:56.088Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:43:42.164Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:43:44.372Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:43:45.761Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:43:45.764Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:43:48.151Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:44:58.095Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:01.779Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:01.999Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:04.163Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:04.167Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:05.902Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:08.187Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:12.048Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:12.052Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:12.055Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:12.057Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:12.166Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:12.387Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:12.684Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:13.791Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:17.706Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:17.747Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:18.180Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:20.217Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:28.108Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:28.112Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:28.133Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:28.459Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:29.653Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:29.655Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:30.011Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-07-30T11:45:32.179Z"}

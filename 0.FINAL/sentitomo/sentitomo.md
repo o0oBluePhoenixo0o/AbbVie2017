@@ -1,6 +1,11 @@
 
 # Sentitomo
 
+
+[TOC]
+
+
+
 As part of our Master Team Project named "Topic Monitoring in the Pharmaceutical Industry" we wanted to develop an application to incorporate our findings and different Machine Learning scripts so that they can be used with ease in an production environment. Our application is named "Sentitomo" as a combination of the words "Sentiment Analysis" and "Topic Monitoring".
 
 ## Idea
@@ -15,7 +20,7 @@ Because of the rising popularity and the possibility to be run on server and cli
 
 To give you an idea which technologies were used throughout the development process of Sentitomo this chapter gives an overview about the most prominent ones.
 
-###Node.js
+### Node.js
 
 Node.js is an open-source, cross-platform framework written in C, C++ and JavaScript, which makes it possible to run JavaScript code on the server-side. The initial release was on May the 27th, 2009 and was written by Ryan Dahl. Primarily it was built because the most common web server at this time, Apache HTTP Server, has troubles with a lot of concurrent connections and normally used  blocking code executions which led to poor server performance. The idea behind Node utilizes a simplified event-driven programming paradigm where the program flow is determined by so called events (user clicks, messages from other methods etc.) to let so called callback functions take care of the result of method calls therefore main thread of a Node.js application is not blocked by method executions. Basically node is run only on thread, 
 This makes it easy build highly scalable applications without the need of threads, which often leads to poor performance.
@@ -33,7 +38,7 @@ Express.js is a JavaScript framework built with Node.js and today the de-facto s
 
 Due to the fact that Sentitomo is built up with different technologies, there are some requirements that need to be fulfilled when you are trying to set up the application. To clarify the different environment settings and the overall structure an overview is given in the next section.
 
-##Overview
+### Overview
 
 The directory structure of the application can be seen in the following: *(without files except package.json and yarn.lock*):
 
@@ -81,13 +86,13 @@ The main steps to install Sentitomo are:
 
 Node.js always comes in combination with it's packaging manager npm . It can be installed on any common OS, and therefore you can use nearly any server architecture you like. Sentitomo was built on MacOS X Sierra Version 10.12.6 so we suggest using a Unix based server here.  To install Node you can either use the downloads provided by the [Node website](https://nodejs.org/en/download/) or using one of the following aproaches.
 
-**MacOS:**
+__MacOS:__
 
 Using [homebrew](https://brew.sh/):
 
     $ brew install node
 
-**Linux:**
+__Linux:__
 
 On Linux there are plenty of different installation possibilities. We suggest to use the ones provided on the [Node website](https://nodejs.org/en/download/package-manager/).
 
@@ -183,8 +188,8 @@ After that the server is listening on Port:8080.
 If you test locally then visit:
 
  - Front-End: [localhost:8080/app/dashboard](localhost:8080/app/dashboard) 
- - GraphQL Endpoint:  [localhost:8080/graphq](localhost:8080/graphql) 
- - Endpoint for testing the API: [localhost:8080/graphiq](localhost:8080/graphiql)
+ - GraphQL Endpoint:  [localhost:8080/graphql](localhost:8080/graphql) 
+ - Endpoint for testing the API: [localhost:8080/graphiql](localhost:8080/graphiql)
 If you want to access the server from a remote destination just switch out localhost with your server IP or domain.
 
 
@@ -192,43 +197,130 @@ After setting up and starting the server we will have a deeper look into the dat
 
 ### Database
 
-By default Sentitomo is using a MySQL database, but it can be used with any other DBMS. We choosed a MySQL database because for us it was the easiest and fastest way to set up. When the appilication is initially connected to the database it is creating all necessary tables automatically:
+By default Sentitomo is using a MySQL database, but it can be used with any other DBMS. We choosed a MySQL database because for us it was the easiest and fastest way to set up. When the appilication is initially connected to the database it is creating all necessary tables automatically. In the following the different CREATE statements of the tables are listed.
+
+__TW_CORE__ holds all raw information of the tweets.
+
+    CREATE TABLE `TW_CORE` (
+      `id` varchar(255) NOT NULL,
+      `keywordType` varchar(255) DEFAULT NULL,
+      `keyword` varchar(255) DEFAULT NULL,
+      `created` datetime DEFAULT NULL,
+      `createdWeek` int(11) DEFAULT NULL,
+      `toUser` varchar(255) DEFAULT NULL,
+      `language` varchar(255) DEFAULT NULL,
+      `source` varchar(255) DEFAULT NULL,
+      `message` varchar(255) DEFAULT NULL,
+      `latitude` varchar(255) DEFAULT NULL,
+      `longitude` varchar(255) DEFAULT NULL,
+      `retweetCount` int(11) DEFAULT NULL,
+      `favorited` tinyint(1) DEFAULT NULL,
+      `favoriteCount` int(11) DEFAULT NULL,
+      `isRetweet` tinyint(1) DEFAULT NULL,
+      `retweeted` int(11) DEFAULT NULL,
+      `createdAt` datetime NOT NULL,
+      `updatedAt` datetime NOT NULL,
+      `TWUserId` varchar(255) DEFAULT NULL,
+      PRIMARY KEY (`id`),
+      KEY `TWUserId` (`TWUserId`),
+      CONSTRAINT `TW_CORE_ibfk_1` FOREIGN KEY (`TWUserId`) REFERENCES `TW_User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+__TW_Users__ contains information about the tweet authors.
+
+    CREATE TABLE `TW_User` (
+      `id` varchar(255) NOT NULL,
+      `username` varchar(255) DEFAULT NULL,
+      `screenname` varchar(255) DEFAULT NULL,
+      `createdAt` datetime NOT NULL,
+      `updatedAt` datetime NOT NULL,
+      `followercount` bigint(20) DEFAULT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+
+__TW_SENTIMENT__ contains information about the sentiments of different tweets.
+
+    CREATE TABLE `TW_SENTIMENT` (
+      `id` varchar(255) NOT NULL,
+      `sarcastic` double DEFAULT NULL COMMENT 'Sarcasm probability',
+      `emo_senti` double DEFAULT NULL COMMENT 'Sentiment of emojis in the message',
+      `emo_desc` varchar(255) DEFAULT NULL COMMENT 'Emojis in the message',
+      `r_ensemble` varchar(255) DEFAULT NULL COMMENT 'Result from R sentiment analysis',
+      `python_ensemble` varchar(255) DEFAULT NULL COMMENT 'Result from Python sentiment analysis',
+      `sentiment` varchar(255) DEFAULT NULL COMMENT 'Final sentiment result',
+      `createdAt` datetime NOT NULL,
+      `updatedAt` datetime NOT NULL,
+      PRIMARY KEY (`id`),
+      CONSTRAINT `TW_SENTIMENT_ibfk_1` FOREIGN KEY (`id`) REFERENCES `TW_CORE` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+__TW_TOPIC__ contains information about the topics of different tweets.
+
+    CREATE TABLE `TW_TOPIC` (
+      `id` varchar(255) NOT NULL,
+      `topic1Month` varchar(255) DEFAULT NULL,
+      `topic1Month_C` varchar(255) DEFAULT NULL,
+      `topic3Month` varchar(255) DEFAULT NULL,
+      `topic3Month_C` varchar(255) DEFAULT NULL,
+      `topicWhole` varchar(255) DEFAULT NULL,
+      `topicWhole_C` varchar(255) DEFAULT NULL,
+      `createdAt` datetime NOT NULL,
+      `updatedAt` datetime NOT NULL,
+      PRIMARY KEY (`id`),
+      CONSTRAINT `TW_TOPIC_ibfk_1` FOREIGN KEY (`id`) REFERENCES `TW_CORE` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
 ### Server
 
+All the backend server logic is placed inside the `server`directory. We won't cover every single file or directory, but we want to introduce the most important ones which are the `ML` and `data` directories and the `server/service/TwitterCrawler.js` file.
 
 #### ML
-#### Forword (Important Notice)
+Inside the ML directory we have all code which is related to the machine learning tasks, like sentiment analysis, topic detection and trend detection. It is divided in three subdirectories `Java`, `Python` and `R` to seperate the different programming languages. Also in the top level of `ML` you can find the wrapper files for incorporating the different programming languages with Javascript, `ml_wrapper.js` and `preprocess.js`. To let the different programming files work together we use Node's opportunity to spawn child processes and capture the output of these. With that procedure we can spawn the machine learning tasks asynchronously to the main process, which leads to the fact that the main thread is blocked or influenced by executing foreign code. In the following we want to explain how we integrated the different files into the server application
 
-It is not possible to pass complex data types and structures from Javascript to R or Python. It can either be a **plain string** or a **JSON encoded string** which then needs to be parsed by R or Pyhton. The same applies for your output. If you want to output an array for example, be sure to first encode it as an JSON Array so that the server can easily read it. 
 
-**Possible packages and modules to use**
-* **R** with [RJSONIO](https://cran.r-project.org/web/packages/RJSONIO/index.html)
-* **Pyhton** with [JSON Module](https://docs.python.org/2/library/json.html)
 
-#### R
-For R it is pretty straight forward. We use the [r-script](https://github.com/joshkatz/r-script) package. This comes with an R function called `needs()`. This is basically a combination of `install()` and `require()`. So every R file needs to use `needs()` instead of the other files. Also it is recommoned to put all needed functions at the top of the file. To send data to the R process from and back to the Javascript we can attach data to the R process like so: 
 
-**Javascript**
+##### Preface (Important Notice)
+
+It is not possible to pass complex data types and structures from Javascript to R, Python or Java. It can either be a **plain string** or a **JSON encoded string** which then needs to be parsed by the executed application. The same applies for the output. If the foreign code wants to output an complex object it is the best practice to convert to a JSON representation so that the server can easily read it. 
+
+__Possible packages and modules to use__
+* __R__ with [RJSONIO](https://cran.r-project.org/web/packages/RJSONIO/index.html)
+* __Pyhton__ with [JSON Module](https://docs.python.org/2/library/json.html)
+* __Java__ with [org.json library](https://github.com/stleary/JSON-java)
+
+__Paths__
+When the foreign code needs access to some other files inside the R directory it is mandatory to know that all those files are executed in the scope of `server/`. For example if a Python file needs to load a model from the Python directory it has to do it with the relative path `./ML/Python/filename.bin`.
+
+__Examples__
+All examples in JavaScript are written in ES6.
+
+
+##### R
+For integrating R with the server we are using a package called [r-script](https://github.com/joshkatz/r-script) package. It comes with an R function called `needs()`. This is basically a combination of `install()` and `require()`.  This ensures that the different packages which are needed by our R scripts are installed and loaded in the correct way. Therefore every R file has to use `needs()` instead `ìnstall.package("packageName")` and `require("package")/load("package")`. Also it is recommended  to put all functions at the top of the R files.
+To send data to the R process from and back to the Javascript we can attach data to the R process like so: 
+
+*Javascript*
 ```
-R("example/ex-async.R")
+R("example/test.R")
   .data({message: tweet.message })
   .call(function(err, d) {
     if (err) throw err;
     console.log(d);
   });
 ```
-**R**
-```
- attach(input[[0]]) # This is needed to have access to the variables from the Javascript object
- message # this is the same variable name like in the Javascript ({message: tweet.message }) code
- ```
+*R*
 
-One thing to mention is that the `r-script` package reads the console log from the R scripts. So if you want to give some value back to our server to process, for example the output of a classification task **DO NOT ASSIGN IT TO VARIABLE** just let it print to the console by writing:
+      
+    attach(input[[0]]) # This is needed to have access to the variables from the Javascript object
+    message # this is the same variable name like in the Javascript ({message: tweet.message }) code
+
+One thing to mention is that the `r-script` package reads the console log from the R scripts. So if you want to give some value back to the server to process, for example the output of a classification task **DO NOT ASSIGN IT TO VARIABLE** just let it print to the console by writing:
+
 ```
 yourVariable
 ```
@@ -251,32 +343,38 @@ out # last line of the script should always print the value which you want to re
 ```
 
 
-**JSON to data.frame in R**
+**Example for converting JSON to data.frame in R**
 
 see: [Stackoverflow for this example](https://stackoverflow.com/a/16948174)
 
-Javascript
+*Javascript*
 ```
-{message: "[{"name":"Doe, John","group":"Red","age (y)":24,"height (cm)":182,"wieght (kg)":74.8,"score":null},
+const message = {message: "[{"name":"Doe, John","group":"Red","age (y)":24,"height (cm)":182,"wieght (kg)":74.8,"score":null},
     {"name":"Doe, Jane","group":"Green","age (y)":30,"height (cm)":170,"wieght (kg)":70.1,"score":500},
     {"name":"Smith, Joan","group":"Yellow","age (y)":41,"height (cm)":169,"wieght (kg)":60,"score":null},
     {"name":"Brown, Sam","group":"Green","age (y)":22,"height (cm)":183,"wieght (kg)":75,"score":865},
     {"name":"Jones, Larry","group":"Green","age (y)":31,"height (cm)":178,"wieght (kg)":83.9,"score":221},
     {"name":"Murray, Seth","group":"Red","age (y)":35,"height (cm)":172,"wieght (kg)":76.2,"score":413},
     {"name":"Doe, Jane","group":"Yellow","age (y)":22,"height (cm)":164,"wieght (kg)":68,"score":902}]'"}
+
+R("example/test.R")
+  .data({message: message })
+  .call(function(err, d) {
+    if (err) throw err;
+    console.log(d);
+  });
 ```
 
-Then in R
+*R*
 ```
-attach(input[[0]]) # This is needed to have access to the variables from the 
 needs(RJSONIO)   
+attach(input[[0]]) # This is needed to have access to the variables from the JS
 json <- fromJSON(message)   # comes from Javascript {message: variable}
 json <- lapply(json, function(x) {
   x[sapply(x, is.null)] <- NA
   unlist(x)
 })
 do.call("rbind", json)
-
 ```
 
 Outcome is a data.frame
@@ -291,33 +389,43 @@ Outcome is a data.frame
 [7,] "Doe, Jane"    "Yellow" "22"    "164"       "68"        "902"
 ```
 
-Also please have a look at the `preprocess.R` file to get an overview on how to do it.
 
+##### Python
+For Python we initially used a package called [python-shell](https://github.com/extrabacon/python-shell) to execute single Pyhton script files. But as we switched from Pyhton 2 to Python 3 we had some issues to tell the package to use Python 3 instead of Pyhton 2. So in the end we decided to spawn the child process of Pyhton by our own. Then we were able to set the Python version by our own. Also the files are able to retrieve command line arguments which makes the communication between JS and Python possible. The communication is then again managed by reading the console prints of the Python file. One advice to give is to make sure to not heavily use the console for prints, because the main process only needs to know the final outcome of the script. 
 
-#### Python
- We use [python-shell](https://github.com/extrabacon/python-shell) to execute single Pyhton script files. The files need to be capable of retrieving starting arguments, for example the path to a serialized model file which is then used to classify the topic of a tweet message. The communication between Python and the server is then again managed by reading the console prints of the Python file. Make sure to not heavily use the console for prints, because our server only needs to knwo the final outcome of the script. For example you can print out the topic of a message and the corresponding contents of this topic. 
-
-
-If you want that your input is parsed in a JSON way you can define this in the options object of the `PyhtonShell`.
-
-
-**Javascript**
+*Javascript*
 ```
-var PythonShell = require('python-shell');
+import child_process from 'child_process';
 
-var options = {
-  mode: 'json', #here you can specify the mode either 'text' or 'json'
-  args: [{ a: 'b' }, null, [1, 2, 3]] #arguments for the python script
-};
+/**
+ * @function test
+ * @param  {String} message  Message to the file
+ * @param  {Function} callback Function to handle the sentiment result
+ * @description Test function to show the Python procedure
+ * @return {String} Result of the 
+ */
+var test = function(filename, callback) {
+	var child = child_process.exec(
+                'python3 ./ML/Python/test.py ' + message, (error, stdout, stderr) => {
+                    if (error !== null) {
+                        console.log("Error -> " + error);
+                    }
+                    if (typeof callback === "function") {
+                        callback(stdout.trim());
+                    }
 
-PythonShell.run('my_script.py', options, function (err, results) {
-  if (err) throw err;
-  // results is an array consisting of messages collected during execution
-  console.log('results: %j', results);
+                }
+            );
+}
+
+test("{ a: 'b' }).send(null).send([1, 2, 3]", (result) => {
+	console.log(result);
 });
+
+
 ```
 
-**Python**
+*Python*
 ```
 import sys, json
 
@@ -330,11 +438,223 @@ for line in sys.argv[1:]:
 json.loads(argv[1])
 
 ```
-**Output**
+**Output in the Javascript**
 ```
 {"a": "b"}\nnull\n[1, 2, 3]\n
+```
+
+##### Java
+For Java we followed the same approach and developed the spawning process of the files by our own. It is exact the same like with Python, the only thing which is different that you have to execute the .jar instead of the Python file.
+
+*Javascript*
+
+    import child_process from 'child_process';
+    
+   
+
+     /**
+         * @function test
+         * @param  {String} message  Message to the file
+         * @param  {Function} callback Function to handle the sentiment result
+         * @description Test function to show the Java procedure
+         * @return {String} Result of the 
+         */
+        var test = function(filename, callback) {
+        	var child = child_process.exec(
+                        'java -jar ./ML/Java/test.jar ' + message, (error, stdout, stderr) => {
+                            if (error !== null) {
+                                console.log("Error -> " + error);
+                            }
+                            if (typeof callback === "function") {
+                                callback(stdout.trim());
+                            }
+        
+                        }
+                    );
+        }
+        
+    test("Hello world", result => {
+    	console.log(result)
+    });
+*Java*
+
+    public class HelloWorld {
+   
+        public static void main(String[] args) {
+            // Prints the command line argument to the terminal window.
+            System.out.println(args[0]);
+        }
+    
+    }
+
+
+#### data
+
+Inside the `data` directory the connection to the database and the `GraphQL` schema definitions are expressed. 
+For connecting to the database we use a package called [Sequlize.js](http://docs.sequelizejs.com/). It was very easy to set up and operates on a higher level, so that you just have to define your database schema and all necessary queries to the database are handled by the package itself. It supports  PostgreSQL, MySQL, SQLite and MSSQL dialects. Also it lets us easily combine it with the GraphQL API.
+
+Another main part of the `data` directory is the set up of GraphQL which is written in `resolvers.js`, which handles all the request to the API and `schema.js` which is setting up the different endpoints of the API. We used [apollo-server](https://github.com/apollographql/apollo-server) to set up the API. `apollo-server`is a great, easy to use open-source implementation of GraphQL on the server-side. In the following we want to provide a sample request to the API and what the response looks like:
+
+Request sent to [localhost:8080/graphql]():
+```
+{
+  tweet(id: "881026061806571520"){
+    id
+    message
+    sentiment {
+      id
+      sentiment
+    }
+    author{
+      id
+      screenname
+      username
+    }
+  }
+}
+```
+
+Response:
+```
+{
+  "data": {
+    "tweet": {
+      "id": "881026061806571520",
+      "message": "New2Trip: Rheumatoid arthritis-specific cardiovascular risk scores are not superior to general risk scores: va<U+2026> https://t.co/KRZDi95ctL",
+      "sentiment": {
+        "id": "881026061806571520",
+        "sentiment": "negative"
+      },
+      "author": {
+        "id": "2199494760",
+        "screenname": "TripPrimaryCare",
+        "username": "Trip Primary Care"
+      }
+    }
+  }
+}
+```
+
+__What is happening ?__
+In the following we want to provide a quick look at what is happening on the server side when a request comes in.
+At first the request from the client is piped through the resolvers of `resolvers.js` and the `tweet(_,args)` method is invoked because we wanted to access the `tweet` endpoint. This takes all the arguments provied in the request. Right now this is only the `id`argument. To get the result from the database we use the database model object of sequlize.js called `Tweet` which we defined in the `connectors.js` file. It returns the exact tweet where the `id` matches. Because in the request only some fields are requested only those get responded. Only fields which are stated in the `schema.ja` can be returned.
+In the end a new data object is constructed which contains only the information that was requested.
+
+`resolvers.js` (truncated)
+```
+import {
+    Author,
+    Tweet,
+    Sentiment,
+    Topic
+} from './connectors';
+
+
+const resolvers = {
+    Date: GraphQLMoment,
+    Query: {
+        ...,
+        tweet(_, args) {
+            return Tweet.find({
+                where: args
+            });
+        },
+        ...
+    },
+    Author: {
+        tweets(author) {
+            return author.getTweets();
+        },
+    },
+    Tweet: {
+        author(tweet) {
+            return tweet.getTW_User();
+        },
+        sentiment(tweet) {
+            return tweet.getTW_SENTIMENT();
+        },
+        topic(tweet) {
+            return tweet.getTW_TOPIC();
+        }
+    },
+};
+```
+`schema.js` (Provides the different API queries and the available fields)
+```
+/**
+ * @constant typeDefinitions
+ * @type {String}
+ * @description Type definition schema for the GraphQL API. here all types, queries and mutations are specified which the API is offering
+ */
+const typeDefinitions = `
+
+  scalar Date
+  type Tweet {
+    id: String
+    keywordType: String
+    keyword: String
+    created: String
+    createdWeek: Int
+    toUser: String
+    language: String
+    source: String
+    message: String
+    messagePrep: String
+    latitude: String
+    longitude: String
+    retweetCount: Int
+    favorited: Boolean
+    favoriteCount: Int
+    isRetweet: Boolean
+    retweeted: Int
+    author: Author
+    sentiment: Sentiment
+    topic: Topic
+  }
+
+  type Author {
+    id: String
+    username: String
+    screenname: String
+    tweets: [Tweet]
+  }
+
+  type Sentiment {
+    id: String
+    sentiment: String
+  }
+
+  type Topic {
+    id: String
+    topic1Month: String
+    topic1Month_C: String
+    topic3Month: String
+    topic3Month_C: String
+    topicWhole: String
+    topicWhole: String
+  }
+
+  type Query {
+    tweet(id: String): Tweet
+    sentiment(id: String): Sentiment
+    topic(id: String): Topic
+    author(username: String): Author
+    tweets(limit: Int, offset: Int, startDate: Date, endDate: Date): [Tweet]
+    count(startDate: Date, endDate: Date): Int
+  }
+
+  schema {
+      query: Query
+  }
+`;
+
+
+export default [typeDefinitions];
 ```
 
 
 
 ### Client
+
+## Typical Workflow
+

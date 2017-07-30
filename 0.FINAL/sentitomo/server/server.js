@@ -25,7 +25,7 @@ import TwitterCrawler from './service/TwitterCrawler';
 import { listenToSockets } from './service/sockets';
 
 
-import { Author, Tweet } from './data/connectors';
+import { Author, Tweet, Sentiment } from './data/connectors';
 import { preprocessTweetMessage } from "./ML/preprocess.js";
 import { detectSentiment, detectSarcasm, detectTopicStatic, detectTopicDynamic } from "./ML/ml_wrapper.js";
 import { getKeyword, stripHTMLTags } from './service/utils';
@@ -106,6 +106,7 @@ csv
                 setTimeout(
                     i => {
                         var messagePrep = preprocessTweetMessage(datas[i].message);
+                        console.log(datas[i]['isRetweet'])
                         twitterCrawler.client.get(
                             "users/search", {
                                 q: datas[i]['From.User']
@@ -142,27 +143,25 @@ csv
                                                     latitude: datas[i]['Geo.Location.Latitude'] == "NA" ? null : datas[i]['Geo.Location.Latitude'] == "NA",
                                                     longitude: datas[i]['Geo.Location.Longitude'] == "NA" ? null : datas[i]['Geo.Location.Longitude'] == "NA",
                                                     retweetCount: datas[i]['Retweet.Count'],
-                                                    favorited: datas[i]['favorited'],
+                                                    favorited: datas[i]['favorited'] == "TRUE",
                                                     favoriteCount: datas[i]['favoriteCount'],
-                                                    isRetweet: datas[i]['isRetweet'],
+                                                    isRetweet: datas[i]['isRetweet'] == "TRUE",
                                                     retweeted: datas[i]['retweeted'],
                                                     TWUserId: tweets[0].id,
-                                                    TW_SENTIMENT: {
+                                                }).then((created) => {
+                                                    Sentiment.upsert({
+                                                        id: datas[i]['Id'],
                                                         sentiment: result,
                                                         sarcastic: detectSarcasm(messagePrep),
-                                                        r_ensemble: "",
-                                                        python_ensemble: "",
-                                                    }
-                                                }, {
-                                                        include: [{
-                                                            association: Tweet.Sentiment
-                                                        }]
-                                                    });
+                                                        emo_senti: null,
+                                                        emo_desc: null,
+                                                        r_ensemble: null,
+                                                        python_ensemble: null,
+                                                    })
+                                                });
                                             });
                                         })
                                     })
-
-
                                 }
                             });
                     },
