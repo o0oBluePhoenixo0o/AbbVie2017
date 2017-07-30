@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>0</x>
+      <y>136</y>
+      <w>1528</w>
+      <h>392</h>
+    </coordinates>
+    <panel_attributes>title=Typical Twitter Crawl
+autoTick=false
+obj=Twitter API ~a 
+obj=TwitterCrawler~b 
+obj=preprocess:preprocessMessage~c
+obj=ml_wrapper:detectSentiment~d
+obj=ml_wrapper:detectSarcasm~e
+obj=connectors:Author~f
+obj=connectors:Tweet~g
+b -&gt; a: crawlTweets()
+on=a
+tick=
+a -&gt; b : (tweet:=Tweet):Object
+off=a
+on=b;
+tick=
+b-&gt;f : upsertAuthor(tweet.author)
+tick=
+b -&gt; c : preprocess(tweet.message)
+on=c 
+tick=
+off=c;
+c -&gt;b : (messagePrep:=result):String
+tick=
+b -&gt; d.d1 : detectSentiment(messagePrep)
+on=d
+tick=
+d -&gt; b : (sentiment:=result):String
+off=d
+tick=
+b -&gt; e : detectSarcasm(tweet.message)
+on=e
+tick=
+e-&gt;b : (sacrasm:=result):bool
+off=e
+tick=
+b -&gt; g : insertTweet(tweet)</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

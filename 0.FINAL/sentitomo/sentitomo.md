@@ -647,8 +647,6 @@ const typeDefinitions = `
       query: Query
   }
 `;
-
-
 export default [typeDefinitions];
 ```
 
@@ -657,4 +655,11 @@ export default [typeDefinitions];
 ### Client
 
 ## Typical Workflow
+
+When the server is started the typical sequence of crawling Twitter tweets is the following:
+
+![Twitter Crawl Sequence Diagram](https://rawgithub.com/)
+
+
+
 
