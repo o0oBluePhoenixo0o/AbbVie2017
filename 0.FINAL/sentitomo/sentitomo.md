@@ -658,7 +658,7 @@ export default [typeDefinitions];
 
 When the server is started the typical sequence of crawling Twitter tweets is the following:
 
-![Twitter Crawl Sequence Diagram](https://rawgithub.com/)
+![Twitter Crawl Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/e4534cd80ae05c29b5852235814339e4f963f5fc/0.FINAL/sentitomo/workflow.svg)
 
 
 
