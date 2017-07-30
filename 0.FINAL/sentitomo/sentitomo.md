@@ -61,7 +61,7 @@ The directory structure of the application can be seen in the following: *(witho
         ├── service
         └── yarn.lock
         
-Sentitomo is divided into two parts, client and server.  The main entry point of the application is from the server directory which then is starting up the server and serving files form the build directory of the client.  Before we have a deeper look into the different directories we first introduce you the installation process of Sentitomo.
+Sentitomo is divided into two parts, client and server.  The main entry point of the application lies in the server directory which then is starting up the server and serving files form the build directory of the client.  Before we have a deeper look into the different directories we first introduce you the installation process of Sentitomo.
 
 
 ### Installation
@@ -187,7 +187,17 @@ If you test locally then visit:
  - Endpoint for testing the API: [localhost:8080/graphiq](localhost:8080/graphiql)
 If you want to access the server from a remote destination just switch out localhost with your server IP or domain.
 
+
+After setting up and starting the server we will have a deeper look into the database and the directories of Sentitomo.
+
 ### Database
+
+By default Sentitomo is using a MySQL database, but it can be used with any other DBMS. We choosed a MySQL database because for us it was the easiest and fastest way to set up. When the appilication is initially connected to the database it is creating all necessary tables automatically:
+
+
+
+
+
 ### Server
 
 
