@@ -2,6 +2,7 @@
 # clear the environment
 rm(list= ls())
 
+setwd("~/GitHub/AbbVie2017/Philipp")
 #needs(tm)
 #needs(h2o)
 #needs(memisc)
@@ -81,37 +82,6 @@ vec2clean.corp <- function(x){
 }
 
 
-# vec2clean function takes two arguments: x = vector to be cleaned
-vec2clean <- function(x){
-  
-  # As there are many languages used in the data, we consider stopwords of all the languages
-  a = c(stopwords("danish"),stopwords("dutch"),stopwords("english"),
-        stopwords("finnish"),stopwords("french"), stopwords('SMART'),
-        stopwords("german"),stopwords("hungarian"),stopwords("italian"),
-        stopwords("norwegian"),stopwords("portuguese"),stopwords("russian"),
-        stopwords("spanish"),stopwords("swedish"))
-  
-  # Function to replace ' and " to spaces before removing punctuation to avoid different words from binding 
-  AposToSpace = function(x){
-    x= gsub("'", ' ', x)
-    x= gsub('"', ' ', x)
-    x =gsub('break','broke',x) # break may interrupt control flow in few functions
-    return(x)
-  }
-  
-  x = tm_map(x, conv_fun)
-  x = tm_map(x, removeURL)
-  x = tm_map(x, tolower)
-  x = tm_map(x, removeNumbers)
-  x = tm_map(x, removeWords, a)
-  x = tm_map(x, AposToSpace)
-  x = tm_map(x, removePunctuation)
-  x = tm_map(x, stemDocument)
-  x = tm_map(x, stripWhitespace)
-  return(x)
-}
-
-
 # Calling the vec2clean.corp with TW_df(x)
 
 corp <- vec2clean.corp(df$message)
@@ -122,7 +92,6 @@ findFreqTerms(frequencies, lowfreq = 20)
 
 # Remove these words that are not used very often. Keep terms that appear in 0.5% or more of tweets.
 sparse <- removeSparseTerms(frequencies, 0.995)
-
 
 tweetsSparse <- as.data.frame(as.matrix(sparse))
 colnames(tweetsSparse) <- make.names(colnames(tweetsSparse))
@@ -271,27 +240,60 @@ PT1.test2 <- predict(SVM1N, newdata=testSparse, type="class")
 cmSVM1 <- table(testSparse$sentiment, PT1.test2)
 metrics(cmSVM1)
 
-# Hyper parameters tuning
-grid2 <- tune.svm(sentiment ~ ., data=trainSparse, gamma=10^seq(-2,0,by=1), cost=10^seq(0,2,by=1))
-summary(grid2)
-
-best.gamma2 <- grid2$best.parameters[[1]]
-best.cost2 <- grid2$best.parameters[[2]]
-
-SVM4N <- svm(sentiment ~ ., type='C', data=trainSparse, kernel='radial', cost=best.cost2, gamma=best.gamma2)
-PT4.test2 <- predict(SVM4N, testSparse, type="class")
-cmSVM2 <- table(testSparse$sentiment, PT4.test2)
-
-metrics(cmSVM2)
-
-#############################################
+##########################################################################################
 # H2O DRF
 library(text2vec)
+
+# vec2clean function takes two arguments: x = vector to be cleaned
+vec2clean <- function(x){
+  
+  # As there are many languages used in the data, we consider stopwords of all the languages
+  a = c(stopwords("danish"),stopwords("dutch"),stopwords("english"),
+        stopwords("finnish"),stopwords("french"), stopwords('SMART'),
+        stopwords("german"),stopwords("hungarian"),stopwords("italian"),
+        stopwords("norwegian"),stopwords("portuguese"),stopwords("russian"),
+        stopwords("spanish"),stopwords("swedish"))
+  
+  # Function to replace ' and " to spaces before removing punctuation to avoid different words from binding 
+  AposToSpace = function(x){
+    x= gsub("'", ' ', x)
+    x= gsub('"', ' ', x)
+    x =gsub('break','broke',x) # break may interrupt control flow in few functions
+    return(x)
+  }
+  
+  x <- conv_fun(x)
+  x <- tolower(x)
+  x <- removeNumbers(x)
+  x <- removeWords(x,a)
+  x <- AposToSpace(x)
+  x <- stemDocument(x)
+  x <- stripWhitespace(x)
+    return(x)
+}
+
+# Build a training and testing set for Text2Vec
+
+set.seed(1234)
+split <- sample.split(df$sentiment, SplitRatio=0.8)
+
+train2vec <- subset(df[c("message","Id")], split==TRUE)
+test2vec <- subset(df[c("message","Id")], split==FALSE)
+
 # Word2Vec
-it_train <- itoken(vec2clean(df$message), 
+it_train <- itoken(vec2clean(train2vec$message), 
+                   ids = train2vec$Id, 
                    progressbar = TRUE)
+
+it_test <- itoken(vec2clean(test2vec$message), 
+                  ids = test2vec$Id, 
+                  progressbar = TRUE)
+
+it_train <- h2o.word2vec(h2o.tokenize(vec2clean(train2vec$message)))
+
 h2o.init()
-h2o.toFrame(trainSparse)
+h2o.toFrame(trainSparse[,-1])
+
 h2o_drf <- h2o.randomForest(    
   training_frame = trainSparse,       
   validation_frame = testSparse,     
@@ -303,3 +305,52 @@ h2o_drf <- h2o.randomForest(
   stopping_tolerance = 1e-2,    #
   score_each_iteration = T,     #
   seed=1234)                    #
+
+
+# 
+# tokenize <- function(sentences, stop.words = STOP_WORDS) {
+#   tokenized <- h2o.tokenize(sentences, "\\\\W+")
+#   
+#   # convert to lower case
+#   tokenized.lower <- h2o.tolower(tokenized)
+#   # remove short words (less than 2 characters)
+#   tokenized.lengths <- h2o.nchar(tokenized.lower)
+#   tokenized.filtered <- tokenized.lower[is.na(tokenized.lengths) || tokenized.lengths >= 2,]
+#   # remove words that contain numbers
+#   tokenized.words <- tokenized.filtered[h2o.grep("[0-9]", tokenized.filtered, invert = TRUE, output.logical = TRUE),]
+#   
+#   # remove stop words
+#   tokenized.words[is.na(tokenized.words) || (! tokenized.words %in% STOP_WORDS),]
+# }
+# 
+# predict <- function(job.title, w2v, gbm) {
+#   words <- tokenize(as.character(as.h2o(job.title)))
+#   job.title.vec <- h2o.transform(w2v, words, aggregate_method = "AVERAGE")
+#   h2o.predict(gbm, job.title.vec)
+# }
+# 
+# print("Break job titles into sequence of words")
+# words <- tokenize(job.titles$jobtitle)
+# print("Build word2vec model")
+# w2v.model <- h2o.word2vec(words, sent_sample_rate = 0, epochs = 10)
+# 
+# print("Sanity check - find synonyms for the word 'teacher'")
+# print(h2o.findSynonyms(w2v.model, "teacher", count = 5))
+# 
+# print("Calculate a vector for each job title")
+# job.title.vecs <- h2o.transform(w2v.model, words, aggregate_method = "AVERAGE")
+# 
+# print("Prepare training&validation data (keep only job titles made of known words)")
+# valid.job.titles <- ! is.na(job.title.vecs$C1)
+# data <- h2o.cbind(job.titles[valid.job.titles, "category"], job.title.vecs[valid.job.titles, ])
+# data.split <- h2o.splitFrame(data, ratios = 0.8)
+# 
+# print("Build a basic GBM model")
+# gbm.model <- h2o.gbm(x = names(job.title.vecs), y = "category",
+#                      training_frame = data.split[[1]], validation_frame = data.split[[2]])
+# 
+# print("Predict!")
+# print(predict("school teacher having holidays every month", w2v.model, gbm.model))
+# print(predict("developer with 3+ Java experience, jumping", w2v.model, gbm.model))
+# print(predict("Financial accountant CPA preferred", w2v.model, gbm.model))
+words <- tokenize(job.titles$jobtitle)
