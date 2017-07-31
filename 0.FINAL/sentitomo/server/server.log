@@ -3728,3 +3728,8 @@
 {"level":"info","message":"Start up server","timestamp":"2017-07-30T13:18:54.056Z"}
 {"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-30T13:18:54.122Z"}
 {"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-30T13:18:54.509Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-07-31T14:23:40.463Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-07-31T14:23:40.474Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-07-31T14:23:40.490Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-07-31T14:23:40.574Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-07-31T14:23:43.461Z"}

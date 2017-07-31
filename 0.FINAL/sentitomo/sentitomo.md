@@ -98,10 +98,30 @@ Respone:
     }
 }
 ```
-As we can see with this example we can easily request only the data we want and do this with only one API request. This and the fact that GraphQL can work with any programming language and server implementation we decided to choose it as our standard API runtime.
+With this example it is very clear to see that it is possible to easily request only the data we want and do this with only one API request. This and the fact that GraphQL can work with any programming language and server implementation we decided to choose it as our standard API runtime.
 
 ### React
-React is an open source front-end JavaScript library for dynamically creating user interfaces. It is maintained by Facebook and the Open Source community and is very actively maintained. Currently it is available in Version 15 with Version 16 at beta state. Right now a lot of big companies are building their website and web application front ends with the help of React. One of the most prominent ones are AirBnB and Netflix. It uses a sepcial JavaScript syntax called `.jsx`. With that it is possible to write HTML code inside a JavaScript file. React in the end renders this HTML dynamically to the Virtual Document Object Model (Virtual DOM). Another notable feature of React. Instead of rendering directly to the HTML DOM it caches all changes inside the virtual DOM and updates the browsers displayed DOM in a efficient way accordingly. React always tries to work with a component oriented way of structuring a front-end. For example a sidebar navigation is one component. Inside this component multiple link components are nested. This makes React projects very structured and good to maintain if some features need to be added. 
+React is an open source front-end JavaScript library for dynamically creating user interfaces. It is maintained by Facebook and the Open Source community and is very actively maintained. Currently it is available in Version 15 with Version 16 at beta state. Right now a lot of big companies are building their website and web application front ends with the help of React. One of the most prominent ones are AirBnB and Netflix. 
+React uses a sepcial JavaScript syntax called `.jsx`. With that it is possible to write HTML code inside a JavaScript file. A simple hello world `.jsx` example file looks like this:
+```
+import * as React from 'react';
+
+class App extends React.Component {
+   render() {
+      return (
+         <div>
+               <p>Header</p>
+               <p>Content</p>
+               <p>Footer</p>
+         </div>
+      );
+   }
+}
+
+export default App;
+
+```
+As we see inside the `render`method of this class we can write pure HTML code without breaking the code. React in the end renders this HTML dynamically to the Virtual Document Object Model (Virtual DOM). Another notable feature of React. Instead of rendering directly to the HTML DOM it caches all changes inside the virtual DOM and updates the browsers displayed DOM in a efficient way accordingly. React always tries to work with a component oriented way of structuring a front-end. For example a sidebar navigation is one component. Inside this component multiple link components are nested. This makes React projects very structured and good to maintain if some features need to be added. 
 React is beside Angular, another modern front-end JavaScript library, the most versatile tool for developing dynamic front-ends. This fact makes it our to go tool for creating the client part of Sentitomo.
 
 ## The Application
@@ -110,7 +130,7 @@ Due to the fact that Sentitomo is built up with different technologies, there ar
 
 ### Overview
 
-The directory structure of the application can be seen in the following: *(without files except package.json and yarn.lock*):
+The directory structure of the application can be seen in the following: (*without files except package.json and yarn.lock*):
 
     .
     ├── client
@@ -722,6 +742,10 @@ export default [typeDefinitions];
 
 
 ### Client
+
+Sentitomo also comes pre-shipped with an own front-end implementation written in React. Because of the GraphQL API it is even possible to totally switch out the entire client directory and develop your own implementation.
+When the application is started, the front-end is available at [localhost:8080/app/](localhost:8080/app/). It offers two different views right now, [/dashboard](localhost:8080/app/dashbaord) where a rudimentary dashboard is displayed and [/toolbox](localhost:8080/app/toolbox) where you can find different possibilities to initate some machine learning tasks dynamically. 
+
 
 ## Typical Workflow
 
