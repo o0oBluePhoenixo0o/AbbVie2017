@@ -22,11 +22,12 @@ import {
  * @return {String} sentiment string
  */
 export function detectSentiment(file, message, callback) {
+    console.log(message.replace(/"/g, '\\"').replace(/'/g, "\\'"))
     var child = child_process.exec(
         'java -jar ./ML/Java/sentiment_executor-1.0-SNAPSHOT-jar-with-dependencies.jar ' + '"2" "' +
         file +
         '" "' +
-        message +
+        message.replace(/"/g, '\\"').replace(/'/g, "\\'") +
         '"',
         function (error, stdout, stderr) {
             if (error !== null) {
