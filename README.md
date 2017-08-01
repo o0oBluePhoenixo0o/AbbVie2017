@@ -9,16 +9,16 @@ The project “Topic Monitoring in the Pharmaceutical Industry”,  consists of 
 * [Data Preprocessing](#data-preprocessing)
 * [Sentiment Analysis](#sentiment-analysis)
 * [Topic and Trend Detection](#topic-and-trend-detection)
-* [Combining SA and TD](#combining-sa-and-td)
+* [Server ](#combining-sa-and-td)
 
 
 ## Programming Languages
 
-In general nearly every programming language can be used for Sentiment Analysis and Topic Detection. But not every language has a mature set of packages and libraries  for text analysis nor a very active community. Therefore we decided to use [R](https://r-project.org) and [Pyhton](https://www.python.org) as our base programming languages. They have a very large community for Natural Language Processing and offer quite a lot packages to analyze texts. In some small secondary tasks we also use some Java based applications.
+We decided to use [R](https://r-project.org) and [Pyhton](https://www.python.org) as our machine learning programming languages since they have active supporting communities for Natural Language Processing with rich libraries and packages. For setting up the environment server-client base to generate data for the business intelligence dashboard, we use Java based applications.
 
 ## Data Collection
 
-The first goal of this project was and still is to built up a sufficient database which can be used to analyze during the project. This was done simultaneously for Facebook and for Twitter. For both data crawling tasks we used the web APIs and the corresporending R packages to crawl the data we needed (Facebook [Rfacebook](https://cran.r-project.org/web/packages/Rfacebook/Rfacebook.pdf) and Twitter [twitteR](https://cran.r-project.org/web/packages/twitteR/twitteR.pdf)). We specifically search for keywords related to the pharmaceutical industry and companies in this area. 
+The first milestone is to collect data from related social media platform. This was done simultaneously for both Facebook and Twitter. We use platform APIs and corresporending R packages to crawl (Facebook [Rfacebook](https://cran.r-project.org/web/packages/Rfacebook/Rfacebook.pdf) and Twitter [twitteR](https://cran.r-project.org/web/packages/twitteR/twitteR.pdf)). A list of keywords realted to pharmaceuticals industry, companies and products - was constructed as "anchors" for crawlers. 
 
 **Keywords for crawling**
 
@@ -30,9 +30,11 @@ The first goal of this project was and still is to built up a sufficient databas
 | ibrutinib  | johnson & johnson | juvenile rheumatoid arthritis |
 | trilipix   |                   |                               |
 
-Because of the lack of getting public posts from the FaceBook API we quickly decided to rely more on the Twitter crawl. We also implemented a workflow to crawl the Twitter API on a weekly basis to grow our existing database.
+### Facebook dataset
+Since November 2015, the new version of Graph API from Facebook no longer allow users to access to public posts base on keywords. As a result, we improvised and developed our own method to crawl available data base on public groups and pages that contain anchor keywords. Knowing this is not sufficient and there is no other way to obtain data without making financial payment to Facebook, we decided to focus our project firstly on the Twitter dataset, then apply the methods to Facebook dataset in the later phase. 
 
-Furthermore we built up a ground truth for Sentiment Analysis and Trend Detection by labeling our self-crawled tweets manually. 
+### Twitter dataset
+Because Twitter API only allow users to crawl data up to 2 weeks back by the execution time, we implement a crawling schedule every week to grow our existing database.
 
 ## Data Preprocessing
 
