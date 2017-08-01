@@ -35,6 +35,7 @@ Table of Contents
             * [data](#data)
          * [Client](#client)
       * [Typical Workflow](#typical-workflow)
+      * [Conclusion](#conclusion)
 
 
 
