@@ -178,13 +178,13 @@ For the next phase, after finish evaluating existing techniques and achieve cert
 
 In Topic and Trend Detection we evaluated different libraries and packages from R and Python to find the best pre-trained one and also to build our own model based on some packages.
 
-| Package Name                                                           | Language | Type                                |
-|------------------------------------------------------------------------|----------|-------------------------------------|
+| Package Name                                   | Language | Type                                |
+|------------------------------------------------|----------|-------------------------------------|
 | [nltk](http://www.nltk.org)                                            | Python   | Used for query preprocessing        |
 | [sklearn](sklearn)                                                     | Python   | Used for building tf-idf            |
 | [gensim](https://radimrehurek.com/gensim/index.html)                   | Python   | Topic model: LDA, LSI, ...etc       |
 | [pyLDAvis](https://github.com/bmabey/pyLDAvis)                         | Python   | Visualization tool for topic model  |
 | [text2vec](https://cran.r-project.org/web/packages/text2vec/index.html)| R        | Used for document term matrix       |
-| [topicmodels](https://cran.r-project.org/web/packages/topicmodels/index.html| R   | Topic model: CTM                    |
+| [topicmodels](https://cran.r-project.org/web/packages/topicmodels/index.html)| R  | Topic model: CTM                    |
 
 ## Combining SA and TD
