@@ -129,6 +129,8 @@ In Sentiment Analysis we evaluated different libraries and packages from R and P
 
 ### A. Methodology
 
+![alt text](https://github.com/BluePhoenix1908/AbbVie2017/blob/master/images/methodTM.png "Method of Topic Modeling")
+
 Topic monitoring means identify emerging topics in real-time and provide meaningful analytics that synthesize an accurate description of each topic. In the first phase, we focused on three methods: term-based model (raw term frequency), term-based model (clustering) and semantic model (Latent Dirichlet Association).
 
 #### a. Term-Based Model
