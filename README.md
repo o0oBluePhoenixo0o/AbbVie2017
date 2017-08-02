@@ -111,7 +111,7 @@ For the next phase, after finish evaluating existing techniques and achieve cert
 
 ### Packages
 
-In Sentiment Analysis we evaluated different libraries and packages from R and Python to find the best pre-trained one and also to built our own classifiers based on some packages.
+In Sentiment Analysis we evaluated different libraries and packages from R and Python to find the best pre-trained one and also to build our own classifiers based on some packages.
 
 | Package Name                                         | Language | Type                                |
 |------------------------------------------------------|----------|-------------------------------------|
@@ -161,5 +161,16 @@ After selecting the top 20 terms with the highest frequency and plotting the tim
 As can be seen from the figure, the generated latent model is able to classify products, companies and diseases into three positions on the far distance of the graph. However, there are a lot of overlapped terms for “diseases” due to the differences in data size from each “keyword”. Furthermore, separate “disease” topics into smaller chunks is also proven to be a challenge. Last but not least, the amount of topics is also needed to be reduced to a smaller number but meaningful.
 
 ![alt text](https://github.com/BluePhoenix1908/AbbVie2017/blob/master/images/ldaVis.png "LDA visualization on facebook dataset by pyLDAvis")
+
+### Packages
+
+In Topic and Trend Detection we evaluated different libraries and packages from R and Python to find the best pre-trained one and also to build our own model based on some packages.
+
+| Package Name                                         | Language | Type                                |
+|------------------------------------------------------|----------|-------------------------------------|
+| [nltk](http://www.nltk.org)                          | Python   | Used for query preprocessing        |
+| [sklearn](sklearn)                                   | Python   | Used for building tf-idf            |
+| [gensim](https://radimrehurek.com/gensim/index.html) | Python   | Topic model: LDA, LSI, ...etc       |
+| [pyLDAvis](https://github.com/bmabey/pyLDAvis)       | Python   | Visualization tool for topic model  |
 
 ## Combining SA and TD
