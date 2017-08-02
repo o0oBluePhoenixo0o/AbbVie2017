@@ -162,6 +162,16 @@ As can be seen from the figure, the generated latent model is able to classify p
 
 ![alt text](https://github.com/BluePhoenix1908/AbbVie2017/blob/master/images/ldaVis.png "LDA visualization on facebook dataset by pyLDAvis")
 
+### C. Challenges & Next Steps
+
+The current challenges in topic and trend detection can be summarized into two parts: parameters tuning and model evaluation. 
+
++ The first challenge is parameters tuning. Since each topic model adapts different formats and methods to generate topics from datasets, each of them requires different approaches to achieve better results. Therefore, after coming up with all accessible topic models, the optimized parameter tuning process will be our next step to obtain better performance.
+
++ The second challenge is model evaluation. Since we have different topic models, in order to compare the performance between different ones, model evaluation is necessary. However, topic model is mostly based on human interpretation to evaluate how precise the topics are. We need to select a trained topic model as our test model and compare it with our current topic model. The model evaluation process will be our last step to select the best topic model.
+
+For the next phase, after finish evaluating existing techniques and achieve certain good results, especially for Twitter dataset; we would like to invest in dealing with some of the current problems in topic and trend detection such as: improvement of silhouette score and coherence model to choose the number of topics; time period selection to detect the peak and valley.
+
 ### Packages
 
 In Topic and Trend Detection we evaluated different libraries and packages from R and Python to find the best pre-trained one and also to build our own model based on some packages.
