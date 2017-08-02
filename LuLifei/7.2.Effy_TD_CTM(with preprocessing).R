@@ -15,6 +15,7 @@ install.packages("stringr")
 
 
 # Load relevant libraries
+library(RJSONIO)
 library(NLP)
 library(tm)
 library(RColorBrewer)
