@@ -1,7 +1,7 @@
 /** @module Sockets */
 import SocketIO from 'socket.io';
 import { detectTopicDynamic, detectTopicStatic } from '../ML/ml_wrapper';
-import { Tweet } from '../data/connectors';
+import { Tweet, Sentiment } from '../data/connectors';
 
 
 /**
@@ -10,7 +10,7 @@ import { Tweet } from '../data/connectors';
  * @description Start up webserver sockets to allow a bidrectional communication between client and server. 
  * <br />  <strong>Possible events: </strong>
  *      <ul>
- *          <li>client:runTopicDetection - Runs the topic detection method with specified time range, invoked from the client</li>
+ *          <li>client:runTopicDetection - Runs the topic detection method with specified time range, and also joins it with the sentiment from the database, invoked from the client</li>
  *          <li>server:response - sends a status repsonse from server down to the client</li>
  *      </ul>
  * @return {void} 
@@ -30,13 +30,31 @@ export function listenToSockets(httpServer) {
                 finished: false,
             });
             detectTopicDynamic(data.from, data.to, result => {
-                console.log(result);
-                socket.emit("server:response", {
-                    level: "success",
-                    message: 'Topic detection has finished at: ' + new Date(),
-                    finished: true,
-                    result: JSON.parse(result)
-                });
+                var result = JSON.parse(result)
+                var tweetsIDs = result.map((entry) => { return entry.key })
+                var returnResult = new Array();
+
+                Tweet.findAll({ where: { id: tweetsIDs }, include: [Sentiment] }).then(tweets => {
+                    tweets.forEach((tweet) => {
+                        console.log(tweet);
+                        var topicTweet = result.find(x => x.key === tweet.id)
+                        returnResult.push({
+                            id: tweet.id,
+                            message: tweet.message,
+                            topicId: topicTweet.id,
+                            topic: topicTweet.topic,
+                            topicProbability: topicTweet.probability,
+                            sentiment: tweet.TW_SENTIMENT
+                        })
+                    })
+                    console.log("sending response now");
+                    socket.emit("server:response", {
+                        level: "success",
+                        message: 'Topic detection has finished at: ' + new Date(),
+                        finished: true,
+                        result: returnResult
+                    });
+                })
             });
 
         });

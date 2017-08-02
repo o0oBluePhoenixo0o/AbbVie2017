@@ -41,6 +41,15 @@ export default class TwitterCrawler {
             console.log(result);
         })*/
 
+        /* var data = {
+             id: 10000000,
+             message: "hey I need your help. I got arthristis."
+         }
+ 
+         detectTopicStatic(JSON.stringify(data), result => {
+             console.log(result);
+         })*/
+
         //console.log(detectSarcasm("I hate fucking raiders"));
 
 

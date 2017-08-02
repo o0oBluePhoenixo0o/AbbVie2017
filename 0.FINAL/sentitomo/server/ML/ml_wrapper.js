@@ -39,6 +39,15 @@ export function detectSentiment(file, message, callback) {
     );
 }
 
+export function detectSentimentPhilipp(tweetMessage) {
+    var out = R("./ML/R/sarcasmDetection.R")
+        .data({
+            message: tweetMessage
+        })
+        .callSync();
+    console.log("Output -> " + out)
+    return out;
+}
 
 /**
  * @function detectTopicDynamic
@@ -92,42 +101,20 @@ export function detectTopicDynamic(startDate, endDate, callback) {
  * @description Uses a predefined model trained on all tweets at the end of this project to detect the topics of tweets 
  * @return {String} A JSON encoded string, containing the results of the topic detection
  */
-export function detectTopicStatic(startDate, endDate, callback) {
-    Tweet.findAll({
-        where: {
-            created: {
-                $lt: endDate, // less than
-                $gt: startDate //greater than
+export function detectTopicStatic(jsonString, callback) {
+    console.log("starting static");
+    console.log('python3 ./ML/Python/static/final.py ' + "'" + jsonString + "'")
+    var child = child_process.exec(
+        'python3 ./ML/Python/static/final.py ' + "'" + jsonString + "'", (error, stdout, stderr) => {
+            if (error !== null) {
+                console.log("Error -> " + error);
             }
-        },
-        raw: true //we use raw, we do not need to have access to the sequlize model here
-    }).then(tweets => {
-        tweets.forEach(function (tweet, index) {
-            // part and arr[index] point to the same object
-            // so changing the object that part points to changes the object that arr[index] points to
-            tweet.created = moment(tweet.created).format("YYYY-MM-DD hh:mm").toString();
-            tweet.createdAt = moment(tweet.createdAt).format('YYYY-MM-DD hh:mm')
-            tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
-        });
+            if (typeof callback === "function") {
+                callback(stdout.trim());
+            }
 
-        const filename = "./ML/Python/static/tweets.csv";
-
-        convertToCsvRaw(tweets, filename, () => {
-            console.log("starting static topic detection")
-            var child = child_process.exec(
-                'python3 ./ML/Python/static/static.py ' + filename, (error, stdout, stderr) => {
-                    if (error !== null) {
-                        console.log("Error -> " + error);
-                    }
-                    if (typeof callback === "function") {
-                        callback(stdout.trim());
-                    }
-
-                }
-            );
-        });
-
-    });
+        }
+    );
 }
 
 /**
