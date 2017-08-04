@@ -30,7 +30,7 @@ conv_fun <- function(x) iconv(x, "latin1", "ASCII", "")
 # 4 - the user that tweeted
 # 5 - the text of the tweet
 
-tweets_classified <- read_csv('trainingandtestdata/training.1600000.processed.noemoticon.csv',
+tweets_classified <- read_csv('training.1600000.processed.noemoticon.csv',
                               col_names = c('sentiment', 'id', 'date', 'query', 'user', 'text')) %>%
   # converting some symbols
   dmap_at('text', conv_fun) %>%
@@ -56,11 +56,6 @@ clean <- function (sentence){
   sentence <- removeURL(sentence)
 }
 tweets_classified$text <- sapply(tweets_classified$text, function(x) clean(x))
-# 
-# #Clean message --> tolower, remove html / 10.05.17
-# write.csv(tweets_classified, "training.1600000.processed.noemoticon.prep.csv",
-#           quote = TRUE, row.names=FALSE,
-#           fileEncoding = "UTF-8", na = "NA")
 
 # data splitting on train and test
 set.seed(2340)
