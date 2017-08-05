@@ -2340,19 +2340,9 @@ punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
 
-python-shell@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/python-shell/-/python-shell-0.4.0.tgz#259c5470d885292b22e906a57b085f651752f956"
-
 qs@6.4.0, qs@~6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
-
-r-script@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/r-script/-/r-script-0.0.3.tgz#454ae9f366edf071a4867d3bb65c93c1a78bc421"
-  dependencies:
-    underscore "^1.8.3"
 
 randomatic@^1.1.3:
   version "1.1.7"

@@ -2,17 +2,17 @@
  *  @param  {Object} config Config object which contains the Twitter API credentials
  *  @classdesc Class for crawling Twitter data
 */
-import Twitter from "twitter";
-import moment from "moment";
+import Twitter from 'twitter';
+import moment from 'moment';
 import {
     Author,
     Tweet,
     Sentiment,
     Topic
 } from '../data/connectors';
-import { getKeyword, stripHTMLTags } from './utils';
-import { preprocessTweetMessage } from "../ML/preprocess.js";
-import { detectSentiment, detectSarcasm, detectTopicStatic, detectTopicDynamic, detectTopicCTM } from "../ML/ml_wrapper.js";
+import { getKeyword, stripHTMLTags } from '../util/utils';
+import { preprocessTweetMessage } from '../ML/preprocess.js';
+import { detectSentiment, detectSarcasm, detectTopicStatic, detectTopicDynamic, detectTopicCTM } from '../ML/ml_wrapper.js';
 import logger from './logger.js';
 
 
@@ -92,7 +92,7 @@ export default class TwitterCrawler {
                 setTimeout(
                     i => {
                         this.client.get(
-                            "users/search", {
+                            'users/search', {
                                 q: authors[i].username
                             },
                             (error, tweets, response) => {
@@ -108,9 +108,9 @@ export default class TwitterCrawler {
                                         })
                                         .then(result =>
                                             console.log(
-                                                "Author: " +
+                                                'Author: ' +
                                                 authors[i].id +
-                                                " was updated"
+                                                ' was updated'
                                             )
                                         )
                                         .catch(err => logger.log('error', err));
@@ -141,15 +141,15 @@ export default class TwitterCrawler {
      * @memberof TwitterCrawler
      */
     track(filters) {
-        logger.log("info", "Start streaming Twitter tweets with filters: " + filters);
+        logger.log('info', 'Start streaming Twitter tweets with filters: ' + filters);
         this.client.stream(
-            "statuses/filter", {
+            'statuses/filter', {
                 track: filters,
-                tweet_mode: "extended"
+                tweet_mode: 'extended'
             },
             stream => {
-                stream.on("data", event => {
-                    if (event.lang == "en") {
+                stream.on('data', event => {
+                    if (event.lang == 'en') {
                         var messagePrep = preprocessTweetMessage(
                             event.text
                         );
@@ -166,12 +166,12 @@ export default class TwitterCrawler {
                                     id: event.user.id
                                 }
                             }).then(author => {
-                                detectSentiment("./ML/Java/naivebayes.bin",
+                                detectSentiment('./ML/Java/naivebayes.bin',
                                     messagePrep,
                                     result => {
                                         author.createTW_CORE({
                                             id: event.id,
-                                            keywordType: "Placeholder",
+                                            keywordType: 'Placeholder',
                                             keyword: getKeyword(
                                                 event.text,
                                                 filters
@@ -198,8 +198,8 @@ export default class TwitterCrawler {
                                             TW_SENTIMENT: {
                                                 sentiment: result,
                                                 sarcastic: detectSarcasm(event.text),
-                                                r_ensemble: "",
-                                                python_ensemble: "",
+                                                r_ensemble: '',
+                                                python_ensemble: '',
                                             }
                                         }, {
                                                 include: [{
@@ -210,7 +210,7 @@ export default class TwitterCrawler {
                             })
                         }).catch(error => {
                             console.log(error);
-                            logger.log("error", error);
+                            logger.log('error', error);
                             if (error.code == 'ER_DUP_ENTRY') { // user exists
 
                             }
@@ -219,8 +219,8 @@ export default class TwitterCrawler {
                     }
                 });
 
-                stream.on("error", function (error) {
-                    logger.log("error", error);
+                stream.on('error', function (error) {
+                    logger.log('error', error);
                     //throw error;
                 });
             }

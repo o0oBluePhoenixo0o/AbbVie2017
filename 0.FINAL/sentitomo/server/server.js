@@ -1,4 +1,4 @@
-import express from "express";
+import express from 'express';
 import fs from 'fs';
 import csv from 'fast-csv';
 import path from 'path'
@@ -25,13 +25,6 @@ import TwitterCrawler from './service/TwitterCrawler';
 import { listenToSockets } from './service/sockets';
 
 
-import { Author, Tweet, Sentiment } from './data/connectors';
-import { preprocessTweetMessage } from "./ML/preprocess.js";
-import { detectSentiment, detectSarcasm, detectTopicStatic, detectTopicDynamic } from "./ML/ml_wrapper.js";
-import { getKeyword, stripHTMLTags } from './service/utils';
-import { PythonShell, JavaShell, RShell } from "./wrapper/codeWrapper";
-import R from "r-script";
-
 
 import moment from 'moment';
 
@@ -44,7 +37,7 @@ var twitterCrawler = new TwitterCrawler({
 
 
 require('dotenv').config()
-require("./service/scheduling.js");
+require('./service/scheduling.js');
 
 const GRAPHQL_PORT = 8080;
 const server = express();
@@ -54,7 +47,7 @@ const executableSchema = makeExecutableSchema({
     connectors: Connectors,
 });
 
-logger.log('info', "Start up server");
+logger.log('info', 'Start up server');
 
 // Add middlewares
 server.use(loggingMiddleware);
@@ -93,6 +86,5 @@ http.listen(GRAPHQL_PORT, () => logger.log('info',
 ));
 
 global.appRoot = __dirname;
-
 //console.log("[1] 53.42".replace(/\s*\[(.+?)\]\s*/g, ""));
 twitterCrawler.start();

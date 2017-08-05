@@ -1,16 +1,10 @@
 /** @module ML_Wrapper
  *  @description Contains function for invoking the different Machine Learning files
  */
-import child_process from 'child_process';
-import R from "r-script";
-import { PythonShell, JavaShell, RShell } from "../wrapper/codeWrapper";;
+import { PythonShell, JavaShell, RShell } from '../util/foreignCode';
+import { Tweet } from '../data/connectors';
+import { convertToCsvRaw } from '../util/export';
 import moment from 'moment';
-import {
-    Tweet
-} from '../data/connectors';
-import {
-    convertToCsvRaw
-} from '../service/export';
 
 
 /**
@@ -22,20 +16,20 @@ import {
  * @return {String} sentiment string
  */
 export function detectSentiment(file, message, callback) {
-    JavaShell("./ML/Java/sentiment_executor-1.0-SNAPSHOT-jar-with-dependencies.jar")
-        .data(["2", file, message.replace(/"/g, '\\"').replace(/'/g, "\\'")])
+    JavaShell('./ML/Java/sentiment_executor-1.0-SNAPSHOT-jar-with-dependencies.jar')
+        .data(['2', file, message.replace(/"/g, '\\"').replace(/'/g, "\\'")])
         .call(result => {
             callback(result);
         });
 }
 
 export function detectSentimentPhilipp(tweetMessage) {
-    var out = R("./ML/R/sarcasmDetection.R")
+    var out = R('./ML/R/sarcasmDetection.R')
         .data({
             message: tweetMessage
         })
         .callSync();
-    console.log("Output -> " + out)
+    console.log('Output -> ' + out)
     return out;
 }
 
@@ -47,11 +41,11 @@ export function detectSentimentPhilipp(tweetMessage) {
 * @return {String} A boolean whether the tweet is sacrastic or not
 */
 export function detectSarcasm(tweetMessage) {
-    var out = RShell("./ML/R/sarcasmDetection.R")
+    var out = RShell('./ML/R/sarcasmDetection.R')
         .data([tweetMessage])
         .callSync()
 
-    console.log("Output -> " + out)
+    console.log('Output -> ' + out)
     return out;
 }
 
@@ -69,42 +63,18 @@ export function detectTopicCTM(startDate, endDate, callback) {
         tweets.forEach(function (tweet, index) {
             // part and arr[index] point to the same object
             // so changing the object that part points to changes the object that arr[index] points to
-            tweet.created = moment(tweet.created).format("YYYY-MM-DD hh:mm").toString();
+            tweet.created = moment(tweet.created).format('YYYY-MM-DD hh:mm').toString();
             tweet.createdAt = moment(tweet.createdAt).format('YYYY-MM-DD hh:mm')
             tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
         });
-        const filename = "./ML/R/tweets.csv";
+        const filename = './ML/R/tweets.csv';
 
         //TODO: There is a problem with the filepath uUEO of json input
         convertToCsvRaw(tweets, filename, () => {
-            var string = "Rscript --vanilla ./R/ctm.R " + filename
-            console.log(string)
 
-            var child = child_process.spawn(string);
-
-            child.stdout.on('data', function (data) {
-                console.log('stdout: ' + data);
-                callback(data);
-            });
-
-            child.stderr.on('data', function (data) {
-                console.log('stderr: ' + data);
-            });
-
-            child.on('close', function (code) {
-                console.log('child process exited with code ' + code);
-            });
-
-            /*
-            var child = child_process.exec(string,
-                (error, stdout, stderr) => {
-                    if (error !== null) {
-                        console.log("Error -> " + error);
-                    }
-                    console.log("Output -> " + stdout);
-                    callback(stdout.trim());
-                }
-            );*/
+            RShell('./R/ctm.R').data([filename]).call(result => {
+                console.log(result);
+            })
         });
 
     });
@@ -132,16 +102,16 @@ export function detectTopicDynamic(startDate, endDate, callback) {
         tweets.forEach(function (tweet, index) {
             // part and arr[index] point to the same object
             // so changing the object that part points to changes the object that arr[index] points to
-            tweet.created = moment(tweet.created).format("YYYY-MM-DD hh:mm").toString();
+            tweet.created = moment(tweet.created).format('YYYY-MM-DD hh:mm').toString();
             tweet.createdAt = moment(tweet.createdAt).format('YYYY-MM-DD hh:mm')
             tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
         });
 
-        const filename = "./ML/Python/dynamic/tweets.csv";
+        const filename = './ML/Python/dynamic/tweets.csv';
 
         convertToCsvRaw(tweets, filename, () => {
-            console.log("Starting dynamic ")
-            PythonShell("./ML/Python/dynamic/dynamic.py", 3).data([filename]).call(result => {
+            console.log('Starting dynamic ')
+            PythonShell('./ML/Python/dynamic/dynamic.py', 3).data([filename]).call(result => {
                 callback(result.trim());
             });
         });
@@ -158,9 +128,9 @@ export function detectTopicDynamic(startDate, endDate, callback) {
  * @return {String} A JSON encoded string, containing the results of the topic detection
  */
 export function detectTopicStatic(jsonString, callback) {
-    console.log("starting static");
-    PythonShell("./ML/Python/static/final.py", 3).data(jsonString).call(result => {
-        if (typeof callback === "function") {
+    console.log('starting static');
+    PythonShell('./ML/Python/static/final.py', 3).data(jsonString).call(result => {
+        if (typeof callback === 'function') {
             callback(result.trim());
         }
     })

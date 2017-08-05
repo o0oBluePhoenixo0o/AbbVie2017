@@ -1,8 +1,5 @@
-import cron from "cron";
-import {
-    Tweet,
-    Dashboard
-} from '../data/connectors';
+import cron from 'cron';
+import { Tweet, Dashboard } from '../data/connectors';
 
 import logger from './logger';
 

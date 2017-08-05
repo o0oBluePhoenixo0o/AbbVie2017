@@ -24,8 +24,8 @@ export function listenToSockets(httpServer) {
 
         socket.on('client:runTopicDetection', data => {
 
-            socket.emit("server:response", {
-                level: "success",
+            socket.emit('server:response', {
+                level: 'success',
                 message: 'Topic detection has started at: ' + new Date(),
                 finished: false,
             });
@@ -47,9 +47,9 @@ export function listenToSockets(httpServer) {
                             sentiment: tweet.TW_SENTIMENT
                         })
                     })
-                    console.log("sending response now");
-                    socket.emit("server:response", {
-                        level: "success",
+                    console.log('sending response now');
+                    socket.emit('server:response', {
+                        level: 'success',
                         message: 'Topic detection has finished at: ' + new Date(),
                         finished: true,
                         result: returnResult

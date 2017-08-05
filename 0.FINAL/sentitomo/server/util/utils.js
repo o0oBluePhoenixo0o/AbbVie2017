@@ -15,8 +15,8 @@ var _this = this;
  * @return {int} How many times the substring occurs
  */
 var occurrences = function occurrences(string, subString, allowOverlapping) {
-    string += "";
-    subString += "";
+    string += '';
+    subString += '';
     if (subString.length <= 0) return string.length + 1;
 
     var n = 0,
@@ -42,9 +42,9 @@ var occurrences = function occurrences(string, subString, allowOverlapping) {
  * @return {String} The keyword which is most likely to represent the content of this text
  */
 function getKeyword(message, filters) {
-    var mostOcc = "";
-    var key = "";
-    var keywords = filters.split(",");
+    var mostOcc = '';
+    var key = '';
+    var keywords = filters.split(',');
     keywords.map(keyword => {
         var counts = occurrences(
             message.toLowerCase(),
@@ -66,7 +66,7 @@ function getKeyword(message, filters) {
  * @return {String} String where every HTML tag is parsed out
  */
 function stripHTMLTags(text) {
-    return text.replace(/<\/?[^>]+(>|$)/g, "");
+    return text.replace(/<\/?[^>]+(>|$)/g, '');
 }
 
 
@@ -77,19 +77,19 @@ function importTweetCsv(csvFile) {
     var datas = new Array();
     csv
         .fromStream(stream, { headers: true, objectMode: true })
-        .on("data", data => {
+        .on('data', data => {
             datas.push(data);
         })
-        .on("end", () => {
+        .on('end', () => {
             var interval = 10 * 400; // 1 seconds;
             for (var i = 0; i <= datas.length - 1; i++) {
-                if (datas[i]['Language'] == "eng") {
+                if (datas[i]['Language'] == 'eng') {
                     setTimeout(
                         i => {
                             var messagePrep = preprocessTweetMessage(datas[i].message);
                             console.log(datas[i]['isRetweet'])
                             twitterCrawler.client.get(
-                                "users/search", {
+                                'users/search', {
                                     q: datas[i]['From.User']
                                 },
                                 (error, tweets, response) => {
@@ -105,28 +105,28 @@ function importTweetCsv(csvFile) {
                                                     id: tweets[0].id
                                                 }
                                             }).then(author => {
-                                                detectSentiment("./ML/Java/naivebayes.bin", messagePrep, result => {
+                                                detectSentiment('./ML/Java/naivebayes.bin', messagePrep, result => {
                                                     Tweet.upsert({
                                                         id: datas[i]['Id'],
-                                                        keywordType: "Placeholder",
+                                                        keywordType: 'Placeholder',
                                                         keyword: datas[i]['key'],
                                                         created: moment(datas[i]['created_time']).toDate(),
                                                         createdWeek: moment(
                                                             datas[i]['created_at']
                                                         ).week(),
-                                                        toUser: datas[i]['To.User'] == "NA" ? null : datas[i]['To.User'],
+                                                        toUser: datas[i]['To.User'] == 'NA' ? null : datas[i]['To.User'],
                                                         language: datas[i]['Language'],
                                                         source: stripHTMLTags(
                                                             datas[i]['Source']
                                                         ),
                                                         message: datas[i]['message'],
                                                         messagePrep: null,
-                                                        latitude: datas[i]['Geo.Location.Latitude'] == "NA" ? null : datas[i]['Geo.Location.Latitude'] == "NA",
-                                                        longitude: datas[i]['Geo.Location.Longitude'] == "NA" ? null : datas[i]['Geo.Location.Longitude'] == "NA",
+                                                        latitude: datas[i]['Geo.Location.Latitude'] == 'NA' ? null : datas[i]['Geo.Location.Latitude'] == 'NA',
+                                                        longitude: datas[i]['Geo.Location.Longitude'] == 'NA' ? null : datas[i]['Geo.Location.Longitude'] == 'NA',
                                                         retweetCount: datas[i]['Retweet.Count'],
-                                                        favorited: datas[i]['favorited'] == "TRUE",
+                                                        favorited: datas[i]['favorited'] == 'TRUE',
                                                         favoriteCount: datas[i]['favoriteCount'],
-                                                        isRetweet: datas[i]['isRetweet'] == "TRUE",
+                                                        isRetweet: datas[i]['isRetweet'] == 'TRUE',
                                                         retweeted: datas[i]['retweeted'],
                                                         TWUserId: tweets[0].id,
                                                     }).then((created) => {

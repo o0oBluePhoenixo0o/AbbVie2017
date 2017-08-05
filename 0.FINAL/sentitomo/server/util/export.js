@@ -3,7 +3,7 @@
 */
 import json2csv from 'json2csv';
 import fs from 'fs';
-import logger from './logger.js';
+import logger from '../service/logger';
 
 /**
  * @function convertToCsvRaw
@@ -17,7 +17,7 @@ export function convertToCsvRaw(data, filepath, callback) {
         data: data,
         fields: Object.keys(data[0]),
         doubleQuotes: "",
-        del: ","
+        del: ','
     });
 
     fs.writeFile(filepath, csv, function (err) {
@@ -25,7 +25,7 @@ export function convertToCsvRaw(data, filepath, callback) {
         console.log('file saved');
         callback()
     });
-    logger.log('info', "CSV export was saved in " + filepath);
+    logger.log('info', 'CSV export was saved in ' + filepath);
 }
 
 /**
@@ -40,12 +40,12 @@ export function convertSequlizeModelToCsv(data, filepath) {
         data: data,
         fields: Object.keys(data[0].dataValues),
         doubleQuotes: "",
-        del: ","
+        del: ','
     });
 
     fs.writeFile(filepath, csv, function (err) {
         if (err) throw err;
         console.log('file saved');
     });
-    logger.log('info', "CSV export was saved in " + filepath);
+    logger.log('info', 'CSV export was saved in ' + filepath);
 }

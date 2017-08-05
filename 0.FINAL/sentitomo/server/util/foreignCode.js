@@ -1,36 +1,36 @@
 //TODO: DOCU memberof
 
-/** @module CodeWrapper
- *  @description Contains function for spawning child processes for different programming languages
+/** @module ForeignCode
+ *  @description Contains methods for spawning child processes for different programming languages
  */
 import child_process from 'child_process';
 import _ from 'underscore';
-import logger from "../service/logger";
+import logger from '../service/logger';
 
 const defaults = {
     cwd: global.appRoot,
     env: process.env,
-    encoding: "utf8"
+    encoding: 'utf8'
 };
 
 /**
  * @function PythonShell
  * @param  {String}  path    Path to the Python file to execute
  * @param  {Integer} version Specify the Python version to use
- * @description Instantiates a new PythonShell object
- * @return {Object}  A PythonShell object
+ * @description Instantiates a new Python object
+ * @return {Object}  A Python object
  */
 export function PythonShell(path, version) {
     var obj = new Python(path, version);
-    return _.bindAll(obj, "data", "call", );
+    return _.bindAll(obj, 'data', 'call', );
 }
 
 /**
  * @function Python
  * @param  {String} path    Path to the Python file to execute
  * @param  {Integer} version Specify the Python version to use
+ * @this Python
  * @return {void} 
- * @memberof! PythonShell#
  */
 function Python(path, version) {
     this.version = version;
@@ -42,9 +42,10 @@ function Python(path, version) {
  * @function data
  * @param  {Array} data Array of command line arguments
  * @description Add command line arguments to the execution of the file
- * @return {Object} PyhtonShell object instance
- * @memberof PythonShell
+ * @this Python
+ * @return {Object} Pyhton object instance
  */
+
 Python.prototype.data = function (data) {
     data.forEach((element) => {
         this.args.push(element.toString());
@@ -55,12 +56,12 @@ Python.prototype.data = function (data) {
 /**
  * @function call
  * @param  {Function} callback Function to handle the result of the execution
- * @description Spawns a child process and executes the specified Python file
+ * @description Spawns a child process and executes the specified Python file asynchronously
+ * @this Python
  * @return {void}
- * @memberof PythonShell
  */
 Python.prototype.call = function (callback) {
-    const process = child_process.spawn(this.version == 2 ? "python2" : "python3", this.args, defaults);
+    const process = child_process.spawn(this.version == 2 ? 'python2' : 'python3', this.args, defaults);
 
     process.stdout.on('data', (data) => {
         this.output.push(data.toString().trim());
@@ -81,21 +82,22 @@ Python.prototype.call = function (callback) {
 /**
  * @function JavaShell
  * @param  {String}  path    Path to the Jar file to execute
- * @description Instantiates a new JavaShell object
- * @return {Object}  A JavaShell object
+ * @description Instantiates a new Java object
+ * @return {Object}  A Java object
  */
 export function JavaShell(path) {
     var obj = new Java(path);
-    return _.bindAll(obj, "data", "call", );
+    return _.bindAll(obj, 'data', 'call', );
 }
 
 /**
  * @function Java
  * @param  {String} path    Path to the Jar file to execute
+ * @this Java
  * @return {void} 
  */
 function Java(path) {
-    this.args = ["-jar", path];
+    this.args = ['-jar', path];
     this.output = [];
 }
 
@@ -103,6 +105,7 @@ function Java(path) {
  * @function data
  * @param  {Array} data Array of command line arguments
  * @description Add command line arguments to the execution of the file
+ * @this Java
  * @return {Object} JavaShell object instance
  */
 Java.prototype.data = function (data) {
@@ -115,11 +118,12 @@ Java.prototype.data = function (data) {
 /**
  * @function call
  * @param  {Function} callback Function to handle the result of the execution
- * @description Spawns a child process and executes the specified Jar file
+ * @description Spawns a child process and executes the specified Jar file asynchronously
+ * @this Java
  * @return {void}
  */
 Java.prototype.call = function (callback) {
-    const process = child_process.spawn("java", this.args, defaults);
+    const process = child_process.spawn('java', this.args, defaults);
 
     process.stdout.on('data', (data) => {
         this.output.push(data.toString().trim());
@@ -138,22 +142,23 @@ Java.prototype.call = function (callback) {
 /**
  * @function RShell
  * @param  {String} path    Path to the R file to execute
- * @description Instantiates a new RShell object
- * @return {Object}  A RShell object
+ * @description Instantiates a new R object
+ * @return {Object}  A R object
  */
 export function RShell(path) {
     var obj = new R(path);
-    return _.bindAll(obj, "data", "call", );
+    return _.bindAll(obj, 'data', 'call', );
 }
 
 /**
  * @function R
  * @param  {String} path    Path to the R file to executeo use
+ * @this R
  * @return {void} 
  */
 function R(path) {
     this.path = path;
-    this.args = ["--vanilla", path];
+    this.args = ['--vanilla', path];
     this.output = [];
 }
 
@@ -161,6 +166,7 @@ function R(path) {
  * @function data
  * @param  {Array} data Array of command line arguments
  * @description Add command line arguments to the execution of the file
+ * @this R
  * @return {Object} R object instance
  */
 R.prototype.data = function (data) {
@@ -173,7 +179,8 @@ R.prototype.data = function (data) {
 /**
  * @function call
  * @param  {Function} callback Function to handle the result of the execution
- * @description Spawns a child process and executes the specified R file
+ * @description Spawns a child process and executes the specified R file asynchronously
+ * @this R
  * @return {void}
  */
 R.prototype.call = function (callback) {
@@ -193,6 +200,13 @@ R.prototype.call = function (callback) {
     });
 }
 
+/**
+ * @function callSync
+ * @description Spawns a child process and executes the specified R file synchronously
+ * @this R
+ * @memberof R
+ * @return {void}
+ */
 R.prototype.callSync = function () {
     const process = child_process.spawnSync('Rscript', this.args, defaults);
     if (process.stderr) console.log(process.stderr);
