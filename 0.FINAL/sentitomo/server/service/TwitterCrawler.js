@@ -67,8 +67,8 @@ export default class TwitterCrawler {
      * @function start
      * @description Starts the tracking function with the specified filters in the .env file
      * @see File /server/.env
-     * @return {void} 
      * @memberof TwitterCrawler
+     * @return {void} 
      */
     start() {
         this.track(process.env.TWITTER_STREAMING_FILTERS);
@@ -78,8 +78,8 @@ export default class TwitterCrawler {
     /**
      * @function updateAuthors
      * @description Updates all Twitter users in the database
-     * @return {void}
      * @memberof TwitterCrawler
+     * @return {void}
      */
     updateAuthors() {
         Author.findAll({
@@ -137,8 +137,8 @@ export default class TwitterCrawler {
      * @see {@link module:Connectors~Tweet}
      * @see {@link module:Connectors~Sentiment}
      * @see {@link module:Connectors~Topic}
-     * @return {void}
      * @memberof TwitterCrawler
+     * @return {void}
      */
     track(filters) {
         logger.log('info', 'Start streaming Twitter tweets with filters: ' + filters);

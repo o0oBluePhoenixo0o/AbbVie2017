@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: TwitterCrawler</title>
+    <title>JSDoc: Class: Java</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: TwitterCrawler</h1>
+    <h1 class="page-title">Class: Java</h1>
 
     
 
@@ -28,9 +28,10 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>TwitterCrawler<span class="signature">(config)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="module-ForeignCode.html">ForeignCode</a>~</span>Java<span class="signature">(path)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Class for crawling Twitter data</div>
+            <div class="class-description">Class for execting Jar files</div>
         
     
 </header>
@@ -45,7 +46,7 @@
     
 
     
-    <h4 class="name" id="TwitterCrawler"><span class="type-signature"></span>new TwitterCrawler<span class="signature">(config)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Java"><span class="type-signature"></span>new Java<span class="signature">(path)</span><span class="type-signature"></span></h4>
     
 
     
@@ -85,13 +86,13 @@
 
         <tr>
             
-                <td class="name"><code>config</code></td>
+                <td class="name"><code>path</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">String</span>
 
 
             
@@ -101,7 +102,7 @@
 
             
 
-            <td class="description last">Config object which contains the Twitter API credentials</td>
+            <td class="description last">Path to the Jar file to executeo use</td>
         </tr>
 
     
@@ -142,7 +143,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="service_TwitterCrawler.js.html">service/TwitterCrawler.js</a>, <a href="service_TwitterCrawler.js.html#line1">line 1</a>
+        <a href="util_foreignCode.js.html">util/foreignCode.js</a>, <a href="util_foreignCode.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -196,7 +197,7 @@
     
 
     
-    <h4 class="name" id=".start"><span class="type-signature">(static) </span>start<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id=".call"><span class="type-signature">(static) </span>call<span class="signature">(callback)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -204,119 +205,7 @@
 
 
 <div class="description">
-    Starts the tracking function with the specified filters in the .env file
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="service_TwitterCrawler.js.html">service/TwitterCrawler.js</a>, <a href="service_TwitterCrawler.js.html#line66">line 66</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li>File /server/.env</li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".track"><span class="type-signature">(static) </span>track<span class="signature">(filters)</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Starts using the Twitter API with the specified filters. When a new tweet is crawled it upserts the author data
-and inserts the raw tweet data into the database. It also detects the sentiment of the tweet, along with detecting sarcasm and emoji sentiment.
+    Spawns a child process and executes the specified Jar file asynchronously
 </div>
 
 
@@ -352,13 +241,13 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
 
         <tr>
             
-                <td class="name"><code>filters</code></td>
+                <td class="name"><code>callback</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">function</span>
 
 
             
@@ -368,7 +257,7 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
 
             
 
-            <td class="description last">The filters which are used to track tweets from the Twitter API</td>
+            <td class="description last">Function to handle the result of the execution</td>
         </tr>
 
     
@@ -409,27 +298,12 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="service_TwitterCrawler.js.html">service/TwitterCrawler.js</a>, <a href="service_TwitterCrawler.js.html#line130">line 130</a>
+        <a href="util_foreignCode.js.html">util/foreignCode.js</a>, <a href="util_foreignCode.js.html#line122">line 122</a>
     </li></ul></dd>
     
 
     
 
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="module-ML_Wrapper.html#~detectSarcasm">module:ML_Wrapper~detectSarcasm</a></li>
-        
-            <li><a href="module-Connectors.html#~Author">module:Connectors~Author</a></li>
-        
-            <li><a href="module-Connectors.html#~Tweet">module:Connectors~Tweet</a></li>
-        
-            <li><a href="module-Connectors.html#~Sentiment">module:Connectors~Sentiment</a></li>
-        
-            <li><a href="module-Connectors.html#~Topic">module:Connectors~Topic</a></li>
-        </ul>
-    </dd>
     
 
     
@@ -476,7 +350,7 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
     
 
     
-    <h4 class="name" id=".updateAuthors"><span class="type-signature">(static) </span>updateAuthors<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id=".data"><span class="type-signature">(static) </span>data<span class="signature">(data)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -484,7 +358,7 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
 
 
 <div class="description">
-    Updates all Twitter users in the database
+    Add command line arguments to the execution of the file
 </div>
 
 
@@ -493,6 +367,55 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Array of command line arguments</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -528,7 +451,7 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="service_TwitterCrawler.js.html">service/TwitterCrawler.js</a>, <a href="service_TwitterCrawler.js.html#line78">line 78</a>
+        <a href="util_foreignCode.js.html">util/foreignCode.js</a>, <a href="util_foreignCode.js.html#line108">line 108</a>
     </li></ul></dd>
     
 
@@ -554,6 +477,10 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    Java object instance
+</div>
+
 
 
 <dl>
@@ -562,7 +489,7 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
     </dt>
     <dd>
         
-<span class="param-type">void</span>
+<span class="param-type">Object</span>
 
 
     </dd>

@@ -25,7 +25,6 @@ import TwitterCrawler from './service/TwitterCrawler';
 import { listenToSockets } from './service/sockets';
 
 
-
 import moment from 'moment';
 
 var twitterCrawler = new TwitterCrawler({
@@ -87,4 +86,4 @@ http.listen(GRAPHQL_PORT, () => logger.log('info',
 
 global.appRoot = __dirname;
 //console.log("[1] 53.42".replace(/\s*\[(.+?)\]\s*/g, ""));
-twitterCrawler.start();
+//twitterCrawler.start();

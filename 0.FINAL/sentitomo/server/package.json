@@ -1,6 +1,6 @@
 {
   "name": "sentitomo-server",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "nodemon server.js --exec babel-node --presets es2015,stage-2"
