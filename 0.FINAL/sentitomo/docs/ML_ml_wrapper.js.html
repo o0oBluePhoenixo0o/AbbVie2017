@@ -30,8 +30,8 @@
  *  @description Contains function for invoking the different Machine Learning files
  */
 import child_process from 'child_process';
-import PythonShell from 'python-shell';
 import R from "r-script";
+import { PythonShell, JavaShell, RShell } from "../wrapper/codeWrapper";;
 import moment from 'moment';
 import {
     Tweet
@@ -50,20 +50,92 @@ import {
  * @return {String} sentiment string
  */
 export function detectSentiment(file, message, callback) {
-    var child = child_process.exec(
-        'java -jar ./ML/Java/sentiment_executor-1.0-SNAPSHOT-jar-with-dependencies.jar ' + '"2" "' +
-        file +
-        '" "' +
-        message +
-        '"',
-        function (error, stdout, stderr) {
-            if (error !== null) {
-                console.log("Error -> " + error);
+    JavaShell("./ML/Java/sentiment_executor-1.0-SNAPSHOT-jar-with-dependencies.jar")
+        .data(["2", file, message.replace(/"/g, '\\"').replace(/'/g, "\\'")])
+        .call(result => {
+            callback(result);
+        });
+}
+
+export function detectSentimentPhilipp(tweetMessage) {
+    var out = R("./ML/R/sarcasmDetection.R")
+        .data({
+            message: tweetMessage
+        })
+        .callSync();
+    console.log("Output -> " + out)
+    return out;
+}
+
+/**
+* @function detectSarcasm
+* @param  {String} tweetMessage The Twitter tweet
+* @description Detect if a message is meant in a saracastic way
+* @see File server/ML/R/sarcasmDetection.R
+* @return {String} A boolean whether the tweet is sacrastic or not
+*/
+export function detectSarcasm(tweetMessage) {
+    var out = RShell("./ML/R/sarcasmDetection.R")
+        .data([tweetMessage])
+        .callSync()
+
+    console.log("Output -> " + out)
+    return out;
+}
+
+
+export function detectTopicCTM(startDate, endDate, callback) {
+    Tweet.findAll({
+        where: {
+            created: {
+                $lt: endDate, // less than
+                $gt: startDate //greater than
             }
-            console.log("Output -> " + stdout);
-            callback(stdout.trim());
-        }
-    );
+        },
+        raw: true //we use raw, we do not need to have access to the sequlize model here
+    }).then(tweets => {
+        tweets.forEach(function (tweet, index) {
+            // part and arr[index] point to the same object
+            // so changing the object that part points to changes the object that arr[index] points to
+            tweet.created = moment(tweet.created).format("YYYY-MM-DD hh:mm").toString();
+            tweet.createdAt = moment(tweet.createdAt).format('YYYY-MM-DD hh:mm')
+            tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
+        });
+        const filename = "./ML/R/tweets.csv";
+
+        //TODO: There is a problem with the filepath uUEO of json input
+        convertToCsvRaw(tweets, filename, () => {
+            var string = "Rscript --vanilla ./R/ctm.R " + filename
+            console.log(string)
+
+            var child = child_process.spawn(string);
+
+            child.stdout.on('data', function (data) {
+                console.log('stdout: ' + data);
+                callback(data);
+            });
+
+            child.stderr.on('data', function (data) {
+                console.log('stderr: ' + data);
+            });
+
+            child.on('close', function (code) {
+                console.log('child process exited with code ' + code);
+            });
+
+            /*
+            var child = child_process.exec(string,
+                (error, stdout, stderr) => {
+                    if (error !== null) {
+                        console.log("Error -> " + error);
+                    }
+                    console.log("Output -> " + stdout);
+                    callback(stdout.trim());
+                }
+            );*/
+        });
+
+    });
 }
 
 
@@ -72,6 +144,7 @@ export function detectSentiment(file, message, callback) {
  * @param  {String} startDate  File path to the .csv file which contains all tweets needed for topic detection
  * @param  {Function} callback Callback function which handles the result
  * @description Creates a new topic model out of the specified time range of tweets and detects the topics on those
+ * @see File server/ML/Python/dynamic/dynamic.py
  * @return {String} A JSON encoded string, containing the results of the topic detection
  */
 export function detectTopicDynamic(startDate, endDate, callback) {
@@ -92,21 +165,13 @@ export function detectTopicDynamic(startDate, endDate, callback) {
             tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
         });
 
-        const filename = "./ML/Python/tweets.csv";
+        const filename = "./ML/Python/dynamic/tweets.csv";
 
         convertToCsvRaw(tweets, filename, () => {
             console.log("Starting dynamic ")
-            var child = child_process.exec(
-                'python3 ./ML/Python/dynamic/test.py ' + filename, (error, stdout, stderr) => {
-                    if (error !== null) {
-                        console.log("Error -> " + error);
-                    }
-                    if (typeof callback === "function") {
-                        callback(stdout.trim());
-                    }
-
-                }
-            );
+            PythonShell("./ML/Python/dynamic/dynamic.py", 3).data([filename]).call(result => {
+                callback(result.trim());
+            });
         });
 
     });
@@ -116,62 +181,20 @@ export function detectTopicDynamic(startDate, endDate, callback) {
  * @function detectTopicStatic
  * @param  {type} last100Tweets {description}
  * @param  {type} callback      {description}
- * @description Uses a predefined model trained on all tweets at the end of this project to detect the topics of tweets 
+ * @description Uses a predefined model trained on all tweets at the end of this project to detect the topics of tweets
+ * @see File server/ML/Python/static/final.py
  * @return {String} A JSON encoded string, containing the results of the topic detection
  */
-export function detectTopicStatic(startDate, endDate, callback) {
-    Tweet.findAll({
-        where: {
-            created: {
-                $lt: endDate, // less than
-                $gt: startDate //greater than
-            }
-        },
-        raw: true //we use raw, we do not need to have access to the sequlize model here
-    }).then(tweets => {
-        tweets.forEach(function (tweet, index) {
-            // part and arr[index] point to the same object
-            // so changing the object that part points to changes the object that arr[index] points to
-            tweet.created = moment(tweet.created).format("YYYY-MM-DD hh:mm").toString();
-            tweet.createdAt = moment(tweet.createdAt).format('YYYY-MM-DD hh:mm')
-            tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
-        });
-
-        const filename = "./ML/Python/static/tweets.csv";
-
-        convertToCsvRaw(tweets, filename, () => {
-            console.log("starting static topic detection")
-            var child = child_process.exec(
-                'python3 ./ML/Python/static/static.py ' + filename, (error, stdout, stderr) => {
-                    if (error !== null) {
-                        console.log("Error -> " + error);
-                    }
-                    if (typeof callback === "function") {
-                        callback(stdout.trim());
-                    }
-
-                }
-            );
-        });
-
-    });
+export function detectTopicStatic(jsonString, callback) {
+    console.log("starting static");
+    PythonShell("./ML/Python/static/final.py", 3).data(jsonString).call(result => {
+        if (typeof callback === "function") {
+            callback(result.trim());
+        }
+    })
 }
 
-/**
-* @function detectSarcasm
-* @param  {String} tweetMessage The Twitter tweet
-* @description Detect if a message is meant in a saracastic way
-* @see File server/ML/R/sarcasmDetection.R
-* @return {String} A boolean whether the tweet is sacrastic or not
-*/
-export function detectSarcasm(tweetMessage) {
-    var out = R("./ML/R/sarcasmDetection.R")
-        .data({
-            message: tweetMessage
-        })
-        .callSync();
-    return out;
-}</code></pre>
+</code></pre>
         </article>
     </section>
 
@@ -181,13 +204,13 @@ export function detectSarcasm(tweetMessage) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Connectors.html">Connectors</a></li><li><a href="module-Export.html">Export</a></li><li><a href="module-Logger.html">Logger</a></li><li><a href="module-LogginMiddleware.html">LogginMiddleware</a></li><li><a href="module-ML_Wrapper.html">ML_Wrapper</a></li><li><a href="module-Preprocess.html">Preprocess</a></li><li><a href="module-Sockets.html">Sockets</a></li><li><a href="module-Utils.html">Utils</a></li></ul><h3>Classes</h3><ul><li><a href="TwitterCrawler.html">TwitterCrawler</a></li></ul><h3>Global</h3><ul><li><a href="global.html#resolvers">resolvers</a></li><li><a href="global.html#typeDefinitions">typeDefinitions</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-CodeWrapper.html">CodeWrapper</a></li><li><a href="module-Connectors.html">Connectors</a></li><li><a href="module-Export.html">Export</a></li><li><a href="module-Logger.html">Logger</a></li><li><a href="module-LogginMiddleware.html">LogginMiddleware</a></li><li><a href="module-ML_Wrapper.html">ML_Wrapper</a></li><li><a href="module-Preprocess.html">Preprocess</a></li><li><a href="module-Sockets.html">Sockets</a></li><li><a href="module-Utils.html">Utils</a></li></ul><h3>Classes</h3><ul><li><a href="TwitterCrawler.html">TwitterCrawler</a></li></ul><h3>Global</h3><ul><li><a href="global.html#resolvers">resolvers</a></li><li><a href="global.html#typeDefinitions">typeDefinitions</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Thu Jul 27 2017 12:32:10 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Sat Aug 05 2017 13:10:00 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

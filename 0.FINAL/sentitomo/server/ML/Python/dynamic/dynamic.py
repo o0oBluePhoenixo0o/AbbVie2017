@@ -7,7 +7,6 @@ import sys
 #from nltk import wordpunct_tokenize
 from nltk.corpus import stopwords
 import time
-#print("Hello")
 #import os
 #os.remove('./ML/Python/dynamic/final_twitter_preprocessing_0720.csv')
 #os.remove('./ML/Python/dynamic/twitter_preprocessing_0720.csv')

@@ -4,6 +4,7 @@ dyn.load('/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/l
 Sys.setenv(JAVA_HOME = '/Library/Java//Home')
 Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')
 
+source("./ML/R/needs.R");
 needs(dplyr)
 needs(plyr)
 needs(dplyr)
@@ -12,8 +13,8 @@ needs(qdap)
 needs(SnowballC)
 needs(stringr)
 needs(lubridate)
-
-attach(input[[1]])
+# Get the command line arguments
+args = commandArgs(trailingOnly=TRUE)
 
 
 loadAbbrev <- function(filename) {
@@ -132,7 +133,7 @@ removeStopWords <- function(text){
 }
 
 # output of final expression is returned to node
-out <- message
+out <- args[1]
 out <- removeTwitterHandles(out)
 out <- tryTolower(out)
 out <- removeTags(out)
@@ -140,4 +141,5 @@ out <- removeURL(out)
 out <- convertAbbreviations(out)
 out <- removeStopWords(out)
  # the last expression has to NOT be assigned to a variable so that our JS can read it
-convertLatin_ASCII(out)
+out <- convertLatin_ASCII(out)
+cat(out)

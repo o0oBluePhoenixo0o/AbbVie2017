@@ -1,4 +1,5 @@
 # loading required packages
+source("./ML/R/needs.R");
 needs(e1071)
 needs(tm)
 needs(data.table)
@@ -9,13 +10,13 @@ load('./ML/R/SD_NB_2307.dat')
 # Load list of delete words 23.07
 load('./ML/R/del_word.dat')
 
-# Get data from CORE table
-attach(input[[1]])
+# Get the command line arguments
+args = commandArgs(trailingOnly=TRUE)
 
 ## Assume CORE dataset is TW_df
 # Extract out only ID & Message
 
-TW_df <- message
+TW_df <- args[1]
 
 ###################################################
 # Preprocessing the TW_df and cleaning the corpus #
@@ -25,8 +26,8 @@ TW_df <- message
 # preprocessing steps- Case folding; Remove numbers, URLs, words 
 # and punctuation and perform stemming and stripping extra whitespaces
 
-conv_fun <- function(x) iconv(x, "latin1", "ASCII", "")
-removeURL <- function(x) gsub('"(http.*) |(http.*)$|\n', "", x)
+conv_fun <- function(x) iconv(x, "latin1", "ASCII", "") 
+removeURL <- function(x) gsub('"(http.*) |(http.*)$|\n', "", x) 
 
 # vec2clean.corp function takes two arguments: x = vector to be cleaned
 vec2clean.corp <- function(x){
@@ -87,4 +88,4 @@ df <- data.frame(lapply(df, as.factor))
 # for robust Naive Bayes model with laplace estimator
 n.pred.lap <- predict(n.model.lap, df, type = 'raw')
 output <- round(n.pred.lap[1,2]*100,2)
-output
+cat(unname(output))

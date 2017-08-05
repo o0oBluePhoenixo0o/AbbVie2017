@@ -21,7 +21,7 @@ logger.addColors({
 
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
-    level: 'info',
+    level: 'error',
     colorize: true
 });
 logger.add(logger.transports.File, {

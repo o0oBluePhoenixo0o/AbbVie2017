@@ -430,23 +430,23 @@ __Paths__
 When the foreign code needs access to some other files inside a directory it is mandatory to know that all files are executed in the scope of `./server/`. For example if a Python file needs to load a model from the Python directory it has to do it with the relative path `./ML/Python/filename.bin`.
 
 __Examples__
-All examples in JavaScript are written with ES6.
+All examples in JavaScript are written with ES6. To have a look the wrapper function for calling the foreign code, have a look at `/server/wrapper/codeWrapper.js`.
 
 ##### R
-For integrating R with the server we are using a package called [r-script](https://github.com/joshkatz/r-script) package. It ships with a handy R function called `needs()`. This is basically a combination of `install()` and `require()`.  This ensures that the different packages which are required by our scripts are installed and loaded in the correct way. Therefore every R file has to use `needs()` instead of `ìnstall.package("packageName")` and `require("package")/load("package")`. Also it is recommended to place all functions at the top of the R files.
+For integrating R with the server we were at firs using a package called [r-script](https://github.com/joshkatz/r-script) package. It ships with a handy R function called `needs()`. This is basically a combination of `install()` and `require()`.  This ensured that the different packages which are required by our scripts are installed and loaded in the correct way. Therefore every R file has to use `needs()` instead of `ìnstall.package("packageName")` and `require("package")/load("package")`. Also it is recommended to place all functions at the top of the R files. But at the end of our project we faced some problems with the package so we decided to write our own implementation of calling R files. We followed the same approach as the `r-script` package did, and also included the `needs.R` file but simplified the process a little bit, so it could work with our application,
 To send data to the R process from and back to the Javascript we can call the R file from Javascript like the follwoing: 
 
 *JavaScript*
 ```
-R("example/test.R")
-  .data({message: tweet.message })
+RShell("example/test.R")
+  .data([tweet.message])
   .call(function(err, d) {
     if (err) throw err;
     console.log(d);
   });
 ```
 
-One thing to mention is that the `r-script` package reads the console output from the R files. So if a file wants to a pass a value back to the JavaScript, for example the output of a classification task it **SHOULD NOT ASSIGN IT TO VARIABLE** just print it the console by simply writing:
+One thing to mention is that the implementation of `RShell` reads the console output from the R files. So if a file wants to a pass a value back to the JavaScript, for example the output of a classification task it **SHOULD NOT ASSIGN IT TO VARIABLE** just print it the console by simply writing:
 
 ```
 yourVariable
@@ -454,8 +454,9 @@ yourVariable
 
 *R*
 ```
+source(needs.R)
 needs(dplyr) # require every library so
-attach(input[[1]]) # used to get the javascript values
+args = commandArgs(trailingOnly=TRUE) # read command line
 
 # Here comes all your function
 # function 1
@@ -464,7 +465,7 @@ attach(input[[1]]) # used to get the javascript values
 
 # assign the retrieved value to a local one, this comes from the Javascript code
 # It was passed like this {message: tweet.message}. It has the same name, 'message'.
-out <- message 
+out <- args[1] # first command line argument
 out <- gsub("ut","ot",out) # do something with it
 out # last line of the script should always print the value which you want to return to the server
 ```
@@ -485,7 +486,7 @@ const message = {message: "[{"name":"Doe, John","group":"Red","age (y)":24,"heig
     {"name":"Doe, Jane","group":"Yellow","age (y)":22,"height (cm)":164,"wieght (kg)":68,"score":902}]'"}
 
 R("example/test.R")
-  .data({message: message })
+  .data([message])
   .call(function(err, d) {
     if (err) throw err;
     console.log(d);
@@ -495,8 +496,8 @@ R("example/test.R")
 *R*
 ```
 needs(RJSONIO)   
-attach(input[[0]]) # This is needed to have access to the variables from the JS
-json <- fromJSON(message)   # comes from Javascript {message: variable}
+args = commandArgs(trailingOnly=TRUE) # read command line
+json <- fromJSON(args[1])   # comes from Javascript {message: variable}
 json <- lapply(json, function(x) {
   x[sapply(x, is.null)] <- NA
   unlist(x)
@@ -518,13 +519,13 @@ Outcome is a data.frame
 
 
 ##### Python
-For Python we initially used a package called [python-shell](https://github.com/extrabacon/python-shell) to execute single Python files. But as our Python version switched from 2 to 3 we had some issues to make this package work with the newer version. So in the end we decided to code the spawning of the child process. With our method we were able to set the Python version by our own. Additionally the files are able to retrieve command line arguments which makes the communication between JS and Python possible. This is again based on reading the console prints of the Python file. One advice to give is to make sure to not heavily use the console for prints, because the main process only needs to know the final result of the script.
+For Python we initially used a package called [python-shell](https://github.com/extrabacon/python-shell) to execute single Python files. But as our Python version switched from 2 to 3 we had some issues to make this package work with the newer version. So in the end we decided to code the spawning of the child process, specified in `/server/wrapper/codeWrapper.js`. With our method we were able to set the Python version by our own. Additionally the files are able to retrieve command line arguments which makes the communication between JS and Python possible. This is again based on reading the console prints of the Python file. One advice to give is to make sure to not heavily use the console for prints, because the main process only needs to know the final result of the script.
 
 A small example with passing JSON forth and back: 
 
 *Javascript*
 ```
-import child_process from 'child_process';
+import {PythonShell} from './wrapper/codeWrapper';
 
 /**
  * @function test
@@ -533,21 +534,13 @@ import child_process from 'child_process';
  * @description Test function to show the Python procedure
  * @return {String} Result of the 
  */
-var test = function(filename, callback) {
-	var child = child_process.exec(
-                'python3 ./ML/Python/test.py ' + message, (error, stdout, stderr) => {
-                    if (error !== null) {
-                        console.log("Error -> " + error);
-                    }
-                    if (typeof callback === "function") {
-                        callback(stdout.trim());
-                    }
-
-                }
-            );
+var test = function(message, callback) {
+    PythonShell('./ML/Python/test.p').data([message]).call(result => {
+        callback(result.trim());
+    })
 }
 
-test("{ a: 'b' }).send(null).send([1, 2, 3]", (result) => {
+test('{"message": "This is my message"}', result => {
 	console.log(result);
 });
 
@@ -569,7 +562,7 @@ json.loads(argv[1])
 ```
 **Output in the Javascript**
 ```
-{"a": "b"}\nnull\n[1, 2, 3]\n
+{"message": "This is my message"}
 ```
 
 ##### Java
@@ -577,7 +570,7 @@ For Java we followed the same approach and developed the spawning process of the
 
 *Javascript*
 
-    import child_process from 'child_process';
+    import {JavaShell} from './wrapper/codeWrapper';';
 
      /**
          * @function test
@@ -587,17 +580,9 @@ For Java we followed the same approach and developed the spawning process of the
          * @return {String} Result of the 
          */
         var test = function(filename, callback) {
-        	var child = child_process.exec(
-                        'java -jar ./ML/Java/test.jar ' + message, (error, stdout, stderr) => {
-                            if (error !== null) {
-                                console.log("Error -> " + error);
-                            }
-                            if (typeof callback === "function") {
-                                callback(stdout.trim());
-                            }
-        
-                        }
-                    );
+            JavaShell("./ML/Java/test.ja").data([message]).call(result => {
+                callback(result.trimt());
+            })
         }
         
     test("Hello world", result => {

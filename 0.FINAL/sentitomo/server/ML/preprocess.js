@@ -1,6 +1,6 @@
 /** @module Preprocess */
 
-import R from "r-script";
+import { RShell } from "../wrapper/codeWrapper";
 
 /**
 * @function preprocessTweetMessage
@@ -10,10 +10,8 @@ import R from "r-script";
 * @return {String} A preprocessed message
 */
 export function preprocessTweetMessage(tweetMessage) {
-    var out = R("./ML/R/preprocess.R")
-        .data({
-            message: tweetMessage
-        })
+    var out = RShell("./ML/R/preprocess.R")
+        .data([tweetMessage])
         .callSync();
     return out;
 }

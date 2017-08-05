@@ -3,7 +3,6 @@
  *  @classdesc Class for crawling Twitter data
 */
 import Twitter from "twitter";
-import PythonShell from 'python-shell'
 import moment from "moment";
 import {
     Author,
@@ -13,7 +12,7 @@ import {
 } from '../data/connectors';
 import { getKeyword, stripHTMLTags } from './utils';
 import { preprocessTweetMessage } from "../ML/preprocess.js";
-import { detectSentiment, detectSarcasm, detectTopicStatic, detectTopicDynamic } from "../ML/ml_wrapper.js";
+import { detectSentiment, detectSarcasm, detectTopicStatic, detectTopicDynamic, detectTopicCTM } from "../ML/ml_wrapper.js";
 import logger from './logger.js';
 
 
@@ -37,8 +36,9 @@ export default class TwitterCrawler {
             console.log('results: %j', results);
         });*/
 
-        /*detectTopicDynamic(moment("2017-03-01"), moment("2017-04-20"), result => {
-            console.log(result);
+        //TODO: DEBUG
+        /*detectTopicCTM(moment("2017-03-01"), moment("2017-04-20"), result => {
+            JSON.parse(result);
         })*/
 
         /* var data = {
@@ -52,6 +52,12 @@ export default class TwitterCrawler {
 
         //console.log(detectSarcasm("I hate fucking raiders"));
 
+
+        /*detectSentiment("./ML/Java/naivebayes.bin",
+            "I love you really much",
+            result => {
+                console.log("this is the result:" + result);
+            });*/
 
     }
 
@@ -181,8 +187,8 @@ export default class TwitterCrawler {
                                             ),
                                             message: event.text,
                                             messagePrep: messagePrep,
-                                            latitude: event.coordinates,
-                                            longitude: event.coordinates,
+                                            latitude: event.coordinates ? event.coordinates[0] : null,
+                                            longitude: event.coordinates ? event.coordinates[1] : null,
                                             retweetCount: event.retweet_count,
                                             favorited: event.favorited,
                                             favoriteCount: event.favorite_count,
@@ -191,7 +197,7 @@ export default class TwitterCrawler {
                                             retweeted: event.retweeted,
                                             TW_SENTIMENT: {
                                                 sentiment: result,
-                                                sarcastic: detectSarcasm(messagePrep),
+                                                sarcastic: detectSarcasm(event.text),
                                                 r_ensemble: "",
                                                 python_ensemble: "",
                                             }
