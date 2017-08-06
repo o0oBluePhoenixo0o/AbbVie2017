@@ -24,6 +24,8 @@ import Connectors from './data/connectors';
 import TwitterCrawler from './service/TwitterCrawler';
 import { listenToSockets } from './service/sockets';
 
+import { detectTopicStatic } from './ML/ml_wrapper';
+
 
 import moment from 'moment';
 

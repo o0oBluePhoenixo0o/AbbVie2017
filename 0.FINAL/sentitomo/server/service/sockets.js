@@ -30,13 +30,12 @@ export function listenToSockets(httpServer) {
                 finished: false,
             });
             detectTopicDynamic(data.from, data.to, result => {
-                var result = JSON.parse(result)
+                var result = JSON.parse(result.toString())
                 var tweetsIDs = result.map((entry) => { return entry.key })
                 var returnResult = new Array();
 
                 Tweet.findAll({ where: { id: tweetsIDs }, include: [Sentiment] }).then(tweets => {
                     tweets.forEach((tweet) => {
-                        console.log(tweet);
                         var topicTweet = result.find(x => x.key === tweet.id)
                         returnResult.push({
                             id: tweet.id,
@@ -44,7 +43,8 @@ export function listenToSockets(httpServer) {
                             topicId: topicTweet.id,
                             topic: topicTweet.topic,
                             topicProbability: topicTweet.probability,
-                            sentiment: tweet.TW_SENTIMENT
+                            created: tweet.created,
+                            sentiment: tweet.TW_SENTIMENT ? tweet.TW_SENTIMENT.sentiment : null
                         })
                     })
                     console.log('sending response now');

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "datalib": "^1.8.0",
     "moment": "^2.18.1",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.0.2",

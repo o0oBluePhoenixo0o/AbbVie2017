@@ -6790,3 +6790,730 @@
 {"level":"info","message":"Start up server","timestamp":"2017-08-05T22:43:39.740Z"}
 {"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-05T22:43:39.798Z"}
 {"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-05T22:43:40.113Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T09:10:40.175Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T09:10:40.182Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T09:10:40.192Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-08-06T09:10:40.216Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-08-06T09:10:40.242Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T09:10:40.276Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T09:10:40.612Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:11:06.022Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:11:15.115Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:12:54.322Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:13:02.993Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:13:21.572Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:15:00.989Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:15:04.960Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:15:40.693Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:15:41.304Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:15:55.134Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:15:55.745Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:16:02.122Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:16:20.930Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:17:08.527Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:17:14.309Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:17:20.470Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:18:03.166Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:18:17.631Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:18:20.419Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:18:32.499Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:18:35.234Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:18:41.048Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:18:41.665Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:18:59.464Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:00.075Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:00.670Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:01.275Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:01.883Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:02.481Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:03.069Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:03.670Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:04.301Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:13.716Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:16.020Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:16.616Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:17.220Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:17.830Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:18.427Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:19.630Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:24.006Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:26.195Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:33.505Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:34.104Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:37.027Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:37.651Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:38.256Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:38.864Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:48.248Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:52.047Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:52.645Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:53.242Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:53.847Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:55.055Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:55.658Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:19:58.369Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:01.091Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:05.754Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:12.586Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:13.194Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:17.828Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:25.360Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:25.969Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:26.560Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:29.338Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:29.967Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:33.759Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:36.113Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:36.751Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:39.387Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:40.015Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:43.830Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:46.590Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:20:49.304Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:21:04.411Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:21:10.862Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:21:16.859Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:21:17.517Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:21:18.117Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:21:22.865Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:21:51.248Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:21:51.865Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:22:07.133Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:22:15.149Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:22:23.071Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:22:29.824Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:22:38.504Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:22:39.622Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:22:42.474Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:22:48.023Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:22:48.637Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:22:54.767Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:22:55.381Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:23:03.343Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:23:10.081Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:23:11.199Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:24:01.068Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:24:13.023Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:24:23.190Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:24:39.774Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:24:48.650Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:24:57.264Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:25:01.146Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:25:07.757Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:25:13.881Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:25:32.142Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:25:57.499Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:26:00.201Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:26:05.163Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:26:07.918Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:26:12.201Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:26:28.840Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:26:45.240Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:26:58.936Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:27:19.349Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:27:38.584Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:28:05.014Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:29:06.420Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:29:09.154Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:29:14.534Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:29:23.944Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:30:10.330Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:30:20.771Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:30:36.614Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:30:37.258Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:30:37.851Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:30:45.225Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:30:52.226Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:30:56.723Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:30:59.458Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:31:16.370Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:31:21.293Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:31:50.799Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:32:00.802Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:32:50.982Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:34:43.598Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:34:55.106Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:36:02.086Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:36:36.145Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:36:45.367Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:37:11.823Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:38:44.028Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:38:51.230Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:39:11.978Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:39:12.592Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:39:22.237Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:39:22.849Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:39:23.444Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:39:24.033Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:39:57.423Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:41:50.841Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:41:52.589Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:41:53.192Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:41:53.781Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:41:54.385Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:41:54.979Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:41:55.577Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:41:56.182Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:41:56.785Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:41:57.388Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:41:57.999Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:41:58.595Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:41:59.189Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:41:59.782Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:00.387Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:00.987Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:01.591Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:02.206Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:02.795Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:03.400Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:04.002Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:04.595Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:05.183Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:05.772Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:06.378Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:06.995Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:07.597Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:08.193Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:11.091Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:23.319Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:35.153Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:42:37.885Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:43:19.234Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:43:27.232Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:43:33.662Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:43:39.772Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:43:55.451Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:44:11.755Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:44:40.808Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:45:06.136Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:45:08.886Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:45:13.172Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:45:13.780Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:47:45.945Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:48:25.665Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:50:21.973Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:50:22.585Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:51:45.996Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:52:08.239Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:52:30.263Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:53:08.767Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:53:22.867Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:53:44.997Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:54:13.589Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:54:31.995Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:54:34.904Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:54:44.898Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:54:47.610Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:55:08.574Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:55:23.673Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:56:25.063Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:56:28.448Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:56:42.396Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:56:45.982Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:57:07.507Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:57:34.485Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:57:47.374Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:58:09.546Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:58:23.609Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:58:29.699Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T09:58:49.706Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:00:07.435Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:00:26.806Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:00:38.820Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:00:42.387Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:00:46.792Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:00:59.406Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:01:39.017Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:01:48.898Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:02:14.305Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:03:11.227Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:03:41.505Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:04:00.986Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:04:13.274Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:04:40.874Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:04:58.708Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:08:58.796Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:10:07.216Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:10:07.830Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:11:12.890Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:11:18.108Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:11:42.692Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:13:09.432Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:13:47.391Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:14:19.650Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:15:26.659Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:15:35.631Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:15:36.242Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:16:04.408Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:16:13.979Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:16:22.071Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:17:10.138Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:17:20.576Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:17:25.398Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:17:31.045Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:17:53.621Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:18:17.437Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:18:27.280Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:18:37.220Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:18:57.018Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:20:09.309Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:21:15.321Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:21:22.879Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:21:25.846Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:21:28.570Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:23:28.360Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:23:38.465Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:23:45.956Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:24:36.700Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:25:06.973Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:25:07.591Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:25:54.550Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:26:02.989Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:26:03.604Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:26:13.923Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:26:41.577Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:27:18.557Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:27:42.712Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:28:51.842Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:29:12.729Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:29:22.882Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:30:07.430Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:30:10.186Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:30:14.120Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:30:34.741Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:30:47.530Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:32:14.266Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:32:52.239Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:33:05.703Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:33:51.645Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:35:00.150Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:35:28.700Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:36:04.394Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:36:08.372Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:37:21.915Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:38:21.043Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:38:28.559Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:39:03.441Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:40:05.029Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:40:26.710Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:41:19.088Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:41:47.837Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:42:05.491Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:42:06.106Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:42:20.166Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:42:21.321Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:42:21.933Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:42:46.503Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:43:04.919Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:43:18.963Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:43:21.712Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:43:39.429Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:44:23.022Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:44:23.619Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:44:41.401Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:45:02.298Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:45:05.965Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:45:42.835Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:45:45.522Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:45:58.834Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:46:05.234Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:46:08.207Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:46:40.276Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:46:48.364Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:46:53.300Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:46:57.233Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:47:18.065Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:47:37.103Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:48:04.156Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:48:38.848Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:50:02.716Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:50:29.434Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:52:29.386Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:53:31.004Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:53:55.681Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:53:56.292Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:54:50.392Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:55:03.491Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:55:08.731Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:56:04.320Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:57:04.649Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:57:30.930Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:57:33.111Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:57:34.219Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:57:46.427Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:58:20.776Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:58:21.390Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T10:59:55.640Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:00:06.014Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:00:09.586Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:00:10.711Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:00:11.297Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:24.613Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:26.554Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:27.163Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:27.748Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:28.351Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:28.958Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:29.558Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:30.156Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:30.754Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:31.359Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:31.972Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:32.579Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:33.200Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:33.806Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:34.424Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:35.017Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:35.606Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:36.200Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:36.830Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:37.422Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:38.027Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:38.616Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:39.219Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:39.820Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:40.416Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:41.014Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:41.614Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:42.212Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:42.811Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:43.416Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:44.031Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:44.637Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:45.250Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:01:51.466Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:03:26.402Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:04:16.147Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:04:36.446Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:04:39.785Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:05:17.429Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:05:32.657Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:05:39.064Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:06:30.388Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:07:08.197Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:07:50.970Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:07:51.584Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:08:14.183Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:08:24.674Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:08:30.817Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:08:38.965Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:08:55.708Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:09:19.536Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:09:33.778Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:09:56.198Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:11:56.054Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:12:16.443Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:14:05.068Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:14:10.921Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:17:29.962Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:18:24.042Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:18:43.980Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:18:55.693Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:19:03.036Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:19:11.359Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:20:12.832Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:20:13.437Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:21:06.119Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:21:28.339Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:22:21.200Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:22:42.416Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:23:25.090Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:24:04.085Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:24:25.146Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:25:12.132Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:25:12.328Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:25:20.800Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:25:20.805Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:25:21.173Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T11:25:23.782Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:25:53.306Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:26:13.826Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:26:14.544Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:26:28.464Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:27:10.233Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:27:10.236Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:27:10.771Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:27:11.674Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:27:13.213Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:27:14.586Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:27:16.407Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:27:16.411Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:27:16.944Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:27:18.267Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T11:27:22.242Z"}
+{"level":"info","message":"child process exited with code 1","timestamp":"2017-08-06T11:27:23.675Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T11:27:58.728Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T11:27:58.744Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T11:27:58.758Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-08-06T11:27:58.789Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-08-06T11:27:58.818Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T11:27:58.860Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T11:27:59.191Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:28:05.788Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:28:38.441Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:28:55.804Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:29:06.066Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:29:14.098Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T11:29:21.370Z"}
+{"level":"info","message":"child process exited with code 1","timestamp":"2017-08-06T11:29:23.138Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T11:29:41.683Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T11:29:41.696Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T11:29:41.718Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T11:29:41.814Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T11:29:42.150Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T11:34:43.261Z"}
+{"level":"info","message":"child process exited with code 1","timestamp":"2017-08-06T11:34:44.640Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T11:35:08.326Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T11:35:08.333Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T11:35:08.348Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T11:35:08.409Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T11:35:08.757Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T11:35:12.682Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T11:35:12.819Z"}
+{"level":"info","message":"child process exited with code 1","timestamp":"2017-08-06T11:35:14.547Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T11:38:35.549Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T11:38:35.557Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T11:38:35.571Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T11:38:35.661Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T11:38:35.958Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T11:39:52.905Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:40:29.923Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T11:41:17.013Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T11:41:17.027Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T11:41:17.047Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T11:41:17.205Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T11:41:17.530Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:41:25.456Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:41:25.463Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:41:25.840Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T11:41:27.936Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:41:54.395Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T11:42:35.009Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T11:42:35.019Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T11:42:35.033Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T11:42:35.146Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T11:42:35.656Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T11:42:44.989Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:43:14.372Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T11:43:52.471Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T11:43:52.480Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T11:43:52.496Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T11:43:52.603Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T11:43:52.913Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T11:44:05.019Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:44:33.903Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:44:53.405Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:44:53.414Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:44:54.783Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:45:39.700Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:45:39.712Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:45:41.790Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:45:42.567Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:45:42.891Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:45:44.938Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:45:44.946Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:45:46.145Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:45:49.906Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:45:50.778Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:45:50.791Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T11:45:53.505Z"}
+{"level":"info","message":"child process exited with code 1","timestamp":"2017-08-06T11:46:48.486Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:47:01.365Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T11:47:10.601Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T11:47:10.610Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T11:47:10.624Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T11:47:10.716Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T11:47:11.035Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T11:47:50.180Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T11:47:50.190Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T11:47:50.212Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T11:47:50.305Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T11:47:50.614Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T11:47:53.355Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:48:35.116Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:51:13.436Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:51:13.442Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:51:13.812Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:51:16.217Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T11:51:17.286Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T11:51:20.224Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T11:52:06.312Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T12:18:16.243Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T12:18:16.251Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T13:41:27.569Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T13:41:27.574Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T13:41:28.460Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T13:41:29.708Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T13:41:31.360Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T13:41:31.643Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T13:41:33.896Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T13:41:33.903Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T13:41:34.188Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T13:41:36.239Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T13:42:16.019Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T13:42:32.894Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T13:42:32.902Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T13:42:32.917Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T13:42:32.983Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T13:42:33.297Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T13:43:24.047Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T13:43:24.054Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T13:43:24.068Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T13:43:24.125Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T13:43:24.424Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T13:43:29.816Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T13:44:09.578Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T13:44:40.936Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T13:44:40.944Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T13:44:40.958Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T13:44:41.015Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T13:44:41.315Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T13:44:43.229Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T13:45:22.523Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T13:47:43.004Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T13:47:43.011Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T13:47:43.025Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T13:47:43.100Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T13:47:43.405Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T13:47:51.729Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T13:48:33.094Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T14:18:40.042Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T14:18:40.049Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T14:18:40.372Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T14:18:42.125Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T14:19:08.175Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T15:30:31.903Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T15:30:31.911Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T15:30:31.927Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T15:30:32.004Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T15:30:32.349Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:30:39.245Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:30:39.250Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:30:39.625Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:30:43.013Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:30:43.337Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:30:45.081Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:30:45.086Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:30:45.308Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T15:30:47.988Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T15:31:27.814Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T15:46:06.880Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T15:46:06.889Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T15:46:06.913Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T15:46:06.976Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T15:46:07.284Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T15:46:10.211Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T15:46:49.950Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:47:00.190Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:47:00.197Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T15:47:01.908Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T15:47:41.140Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:48:58.368Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:48:58.373Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:48:58.720Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:49:02.701Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:49:03.019Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:49:04.685Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:49:04.693Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:49:05.189Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:49:05.660Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:49:06.119Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:49:06.628Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:49:07.975Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T15:49:10.089Z"}
+{"level":"info","message":"child process exited with code 1","timestamp":"2017-08-06T15:49:11.665Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T15:49:24.678Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T15:49:24.688Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T15:49:24.703Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T15:49:24.764Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T15:49:25.064Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:49:28.155Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:49:28.161Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:49:28.542Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T15:49:30.547Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T15:50:07.877Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T15:53:31.721Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T15:53:31.728Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T15:53:31.744Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T15:53:31.814Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T15:53:32.120Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:55:54.766Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:55:54.772Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T15:55:54.989Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T15:55:57.986Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T15:56:43.535Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T15:57:28.107Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T15:57:28.114Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T15:57:28.128Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T15:57:28.187Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T15:57:28.489Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T15:57:32.890Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T15:58:18.174Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T16:02:28.497Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T16:02:28.514Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T16:02:28.539Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T16:02:28.635Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T16:02:28.978Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T16:02:31.313Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-06T16:02:49.117Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-06T16:02:49.125Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-06T16:02:49.140Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-06T16:02:49.191Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-06T16:02:49.495Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T16:02:50.924Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T16:03:38.381Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:10:29.703Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:10:29.713Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:10:30.051Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T16:10:32.236Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T16:11:12.158Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:18:46.790Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:18:46.799Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:18:47.070Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:18:49.805Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:18:50.070Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:18:51.500Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:18:51.816Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:18:51.821Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T16:18:53.692Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T16:19:28.136Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:21:07.672Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:21:07.677Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:21:07.953Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:21:10.576Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:21:10.824Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:21:12.981Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:21:12.987Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:21:13.220Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T16:21:14.855Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T16:21:40.920Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:22:47.875Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:22:47.880Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:22:48.127Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T16:22:49.370Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T16:23:15.286Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:24:18.656Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:24:18.690Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:24:19.018Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T16:24:23.110Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T16:24:50.264Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:26:32.755Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:26:32.760Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:26:33.062Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T16:26:34.570Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T16:27:02.438Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:28:11.542Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:28:11.547Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:28:11.848Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T16:28:12.850Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T16:28:41.007Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:35:37.531Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:35:37.535Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:35:37.814Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T16:35:39.025Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T16:36:06.939Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:39:17.142Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:39:17.147Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-06T16:39:17.542Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/dynamic/tweets.csv","timestamp":"2017-08-06T16:39:19.108Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-06T16:39:48.339Z"}

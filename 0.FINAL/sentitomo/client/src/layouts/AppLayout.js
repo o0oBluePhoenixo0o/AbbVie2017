@@ -61,7 +61,7 @@ class Applayout extends React.Component {
                     <SideNavigation />
                     <TopNavigation />
                     <NotificationSystem ref={(ref) => this.notificationSystem = ref} />
-                    <Container className="main-content">
+                    <Container className="main-content" fluid>
                         <Dimmer active={loading}>
                             <Loader>Detecting topics</Loader>
                         </Dimmer>

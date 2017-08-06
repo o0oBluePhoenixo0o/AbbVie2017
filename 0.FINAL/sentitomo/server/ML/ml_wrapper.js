@@ -112,7 +112,7 @@ export function detectTopicDynamic(startDate, endDate, callback) {
         convertToCsvRaw(tweets, filename, () => {
             console.log('Starting dynamic ')
             PythonShell('./ML/Python/dynamic/dynamic.py', 3).data([filename]).call(result => {
-                callback(result.trim());
+                callback(result);
             });
         });
 
@@ -129,9 +129,9 @@ export function detectTopicDynamic(startDate, endDate, callback) {
  */
 export function detectTopicStatic(jsonString, callback) {
     console.log('starting static');
-    PythonShell('./ML/Python/static/final.py', 3).data(jsonString).call(result => {
+    PythonShell('./ML/Python/static/final.py', 3).data([jsonString]).call(result => {
         if (typeof callback === 'function') {
-            callback(result.trim());
+            callback(result);
         }
     })
 }

@@ -1,7 +1,6 @@
-//TODO: DOCU memberof
-
 /** @module ForeignCode
- *  @description Contains methods for spawning child processes for different programming languages
+ *  @description Contains methods for spawning child processes for different programming languages. This is not an exhaustive implementation.
+ * It could provide more functionality here, but because this is not the real purpose, just only the necessary methods are available.
  */
 import child_process from 'child_process';
 import _ from 'underscore';
@@ -36,7 +35,7 @@ class Python {
     constructor(path, version) {
         this.version = version;
         this.args = [path];
-        this.output = [];
+        this.output = "";
     }
 
     /**
@@ -64,7 +63,7 @@ class Python {
         const process = child_process.spawn(this.version == 2 ? 'python2' : 'python3', this.args, defaults);
 
         process.stdout.on('data', (data) => {
-            this.output.push(data.toString().trim());
+            this.output += '' + data
 
         });
 
@@ -74,7 +73,8 @@ class Python {
 
         process.on('close', (code) => {
             logger.info(`child process exited with code ${code}`);
-            callback(this.output.join());
+            console.log(this.output);
+            callback(this.output);
         });
     }
 }
@@ -102,7 +102,7 @@ class Java {
 
     constructor(path) {
         this.args = ['-jar', path];
-        this.output = [];
+        this.output = '';
     }
 
     /**
@@ -130,7 +130,7 @@ class Java {
         const process = child_process.spawn('java', this.args, defaults);
 
         process.stdout.on('data', (data) => {
-            this.output.push(data.toString().trim());
+            this.output += '' + data
         });
 
         process.stderr.on('data', (data) => {
@@ -139,7 +139,7 @@ class Java {
 
         process.on('close', (code) => {
             logger.info(`child process exited with code ${code}`);
-            callback(this.output.join());
+            callback(this.output);
         });
     }
 
@@ -167,7 +167,7 @@ class R {
     constructor(path) {
         this.path = path;
         this.args = ['--vanilla', path];
-        this.output = [];
+        this.output = '';
     }
 
     /**
@@ -195,7 +195,7 @@ class R {
         const process = child_process.spawn('Rscript', this.args, defaults);
 
         process.stdout.on('data', (data) => {
-            this.output.push(data.toString().trim());
+            this.output += '' + data
         });
 
         process.stderr.on('data', (data) => {
@@ -204,7 +204,7 @@ class R {
 
         process.on('close', (code) => {
             console.log(`child process exited with code ${code}`);
-            callback(this.output.join());
+            callback(this.output);
         });
     }
 

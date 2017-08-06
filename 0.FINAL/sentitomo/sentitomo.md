@@ -6,19 +6,20 @@ Table of Contents
 =================
 
    * [Sentitomo](#sentitomo)
+   * [Table of Contents](#table-of-contents)
       * [Idea](#idea)
       * [Problem Statement and Way to go](#problem-statement-and-way-to-go)
       * [Fundamental technologies](#fundamental-technologies)
-         * [Node.js](#nodejs)
-         * [Yarn](#yarn)
-         * [Express.js](#expressjs)
-         * [GraphQL](#graphql)
-         * [React](#react)
+         * [Node.js (Server)](#nodejs-server)
+         * [Yarn (Server and Client)](#yarn-server-and-client)
+         * [Express.js (Server)](#expressjs-server)
+         * [GraphQL (Server API)](#graphql-server-api)
+         * [React (Client - Front-End)](#react-client---front-end)
       * [The Application](#the-application)
          * [Overview](#overview)
          * [Installation](#installation)
-            * [Install Node.js and npm](#nodejs-and-npm)
-            * [Install Yarn (optional)](#yarn-optional)
+            * [1. Install  Node.js and npm](#1-install--nodejs-and-npm)
+            * [Intall Yarn (optional)](#intall-yarn-optional)
             * [Install dependencies](#install-dependencies)
             * [Install Java Version 6 and 8](#install-java-version-6-and-8)
             * [Install Python](#install-python)
@@ -415,7 +416,8 @@ __TW_TOPIC__ contains information about the topics of different tweets.
 All the backend server logic is placed inside the `server`directory. We won't cover every single file or directory here, but we want to introduce the most important ones which are the `ML` and `data` directories and the `server/service/TwitterCrawler.js` file.
 
 #### ML
-Inside the `ML` directory we placed all files which are related to the machine learning tasks, like sentiment analysis, topic detection and trend detection. It is divided in three subdirectories `Java`, `Python` and `R` to seperate the different programming languages. In the top level of `ML` you can find the wrapper files for incorporating the different programming languages with Javascript, `ml_wrapper.js` and `preprocess.js`. To let the different programming files work together we use Node's opportunity to spawn child processes and capture the output of these. With that procedure we can spawn the machine learning tasks asynchronously to the main process, which leads to the fact that the main thread is not blocked or influenced by executing foreign code. In the following we want to explain how we integration works in detail.
+Inside the `ML` directory we placed all files which are related to the machine learning tasks, like sentiment analysis, topic detection and trend detection. It is divided in three subdirectories `Java`, `Python` and `R` to seperate the different programming languages. In the top level of `ML` you can find the wrapper files for incorporating the different programming languages with Javascript, `ml_wrapper.js` and `preprocess.js`. To let the different programming files work together we use Node's opportunity to spawn child processes and capture the output of these. To do so, we wrote a small file for calling the foreign code in a more convenient way, than directly spawning the child processes in the `ml_wrapper.js`. Those methods can be found in `/server/util/foreignCode.js`.
+With that procedure we can spawn the machine learning tasks asynchronously to the main process, which leads to the fact that the main thread is not blocked or influenced by executing foreign code. In the following we want to explain how we integration works in detail.
 
 ##### Preface (Important Notice)
 
@@ -433,11 +435,14 @@ __Examples__
 All examples in JavaScript are written with ES6. To have a look the wrapper function for calling the foreign code, have a look at `/server/wrapper/codeWrapper.js`.
 
 ##### R
-For integrating R with the server we were at firs using a package called [r-script](https://github.com/joshkatz/r-script) package. It ships with a handy R function called `needs()`. This is basically a combination of `install()` and `require()`.  This ensured that the different packages which are required by our scripts are installed and loaded in the correct way. Therefore every R file has to use `needs()` instead of `ìnstall.package("packageName")` and `require("package")/load("package")`. Also it is recommended to place all functions at the top of the R files. But at the end of our project we faced some problems with the package so we decided to write our own implementation of calling R files. We followed the same approach as the `r-script` package did, and also included the `needs.R` file but simplified the process a little bit, so it could work with our application,
+For integrating R with the server we were at first using a package called [r-script](https://github.com/joshkatz/r-script) package. It ships with a handy R function called `needs()`. This is basically a combination of `install()` and `require()`.  This ensured that the different packages which are required by our scripts are installed and loaded in the correct way. Therefore every R file has to use `needs()` instead of `ìnstall.package("packageName")` and `require("package")/load("package")`. Also it is recommended to place all functions at the top of the R files.
+At the end of our project we faced some problems with the package so we decided to write our own implementation of calling R files, as mentioned in the introduction of `ML`. We followed the same approach as the `r-script` package did, included the `needs.R` file but simplified the process a little bit, so it could work with our application,
 To send data to the R process from and back to the Javascript we can call the R file from Javascript like the follwoing: 
 
 *JavaScript*
 ```
+import { RShell } from './util/foreignCode'
+
 RShell("example/test.R")
   .data([tweet.message])
   .call(function(err, d) {
@@ -446,10 +451,15 @@ RShell("example/test.R")
   });
 ```
 
-One thing to mention is that the implementation of `RShell` reads the console output from the R files. So if a file wants to a pass a value back to the JavaScript, for example the output of a classification task it **SHOULD NOT ASSIGN IT TO VARIABLE** just print it the console by simply writing:
+One thing to mention is that the implementation of `RShell` reads the console output from the R files. So if a file wants to a pass a value back to the JavaScript, for example the output of a classification task it **SHOULD NOT ASSIGN IT TO VARIABLE** just print it the console. The best way to do it is to write:
 
 ```
-yourVariable
+cat(yourVariable)
+```
+With `cat` it is possible to remove the `[X]` identifier in front of the output. If you want to print out a named variable the best approach is to use 
+
+```
+cat(unname(yourVariable))
 ```
 
 *R*
@@ -476,7 +486,12 @@ out # last line of the script should always print the value which you want to re
 See this [great answer onStackoverflow](https://stackoverflow.com/a/16948174)
 
 *JavaScript*
+
+
 ```
+import { RShell } from './util/foreignCode'
+
+
 const message = {message: "[{"name":"Doe, John","group":"Red","age (y)":24,"height (cm)":182,"wieght (kg)":74.8,"score":null},
     {"name":"Doe, Jane","group":"Green","age (y)":30,"height (cm)":170,"wieght (kg)":70.1,"score":500},
     {"name":"Smith, Joan","group":"Yellow","age (y)":41,"height (cm)":169,"wieght (kg)":60,"score":null},
@@ -485,7 +500,7 @@ const message = {message: "[{"name":"Doe, John","group":"Red","age (y)":24,"heig
     {"name":"Murray, Seth","group":"Red","age (y)":35,"height (cm)":172,"wieght (kg)":76.2,"score":413},
     {"name":"Doe, Jane","group":"Yellow","age (y)":22,"height (cm)":164,"wieght (kg)":68,"score":902}]'"}
 
-R("example/test.R")
+RShell("example/test.R")
   .data([message])
   .call(function(err, d) {
     if (err) throw err;
@@ -519,13 +534,13 @@ Outcome is a data.frame
 
 
 ##### Python
-For Python we initially used a package called [python-shell](https://github.com/extrabacon/python-shell) to execute single Python files. But as our Python version switched from 2 to 3 we had some issues to make this package work with the newer version. So in the end we decided to code the spawning of the child process, specified in `/server/wrapper/codeWrapper.js`. With our method we were able to set the Python version by our own. Additionally the files are able to retrieve command line arguments which makes the communication between JS and Python possible. This is again based on reading the console prints of the Python file. One advice to give is to make sure to not heavily use the console for prints, because the main process only needs to know the final result of the script.
+For Python we initially used a package called [python-shell](https://github.com/extrabacon/python-shell) to execute single Python files. But as our Python version switched from 2 to 3 we had some issues to make this package work with the newer version. So in the end we decided to add the the spawning of the child process for Pyhton to  `/server/util/foreignCode.js`. With our implementation we were able to set the Python version manually. Additionally the files are able to retrieve command line arguments which makes the communication between JS and Python possible. This is again based on reading the console prints of the Python file. One advice is, to make sure to not heavily use the console for prints, because the main process only needs to know the final result of the script.
 
 A small example with passing JSON forth and back: 
 
 *Javascript*
 ```
-import {PythonShell} from './wrapper/codeWrapper';
+import { PythonShell } from './util/foreignCode';
 
 /**
  * @function test
@@ -566,7 +581,7 @@ json.loads(argv[1])
 ```
 
 ##### Java
-For Java we followed the same approach and developed the spawning process of the files by our own. It is the exact same process like with Python, the only thing which is different that you have to execute the .jar instead of the Python file.
+For Java we followed the same approach and added the spawning process of the files to our existing file for spawning foreign code. It is the exact same process like with Python, the only thing which is different that you have to execute the .jar instead of the Python file.
 
 *Javascript*
 
