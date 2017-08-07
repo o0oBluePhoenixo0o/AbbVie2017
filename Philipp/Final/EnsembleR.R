@@ -25,11 +25,10 @@ library(memisc)
 library(dplyr)
 library(data.table)
 
+#################################################
 
-#################################################3
+df <- read.csv("Final_Manual_3007.csv", as.is = TRUE, sep = ",")
 
-df <- tweets_classified[,which(names(tweets_classified) %in% c("text","sentiment"))]
-colnames(df) <- c("sentiment", "message")
 df <- unique(df)
 
 df$sentiment <- sapply(df$sentiment, function(x)
@@ -37,8 +36,10 @@ df$sentiment <- sapply(df$sentiment, function(x)
              x %in% c(3,4) -> 'Positive',
              x %in% c('N',NA,'',' ') -> 'Neutral'))
 
-agg <- summarize(group_by(df,sentiment),n())
+#delete the #4516
+df <- df[-c(4516),]
 
+agg <- summarize(group_by(df,sentiment),n())
 
 #######################################################
 # Preprocessing the dataframe and cleaning the corpus #
@@ -83,7 +84,6 @@ vec2clean.corp <- function(x){
   return(x)
 }
 
-
 # Calling the vec2clean.corp with TW_df(x)
 
 corp <- vec2clean.corp(df$message)
@@ -101,11 +101,12 @@ tweetsSparse <- cbind(sentiment = df$sentiment, tweetsSparse)
 
 # Build a training and testing set.
 set.seed(1908)
+
 split <- sample.split(tweetsSparse$sentiment, SplitRatio=0.8)
 trainSparse <- subset(tweetsSparse, split==TRUE)
 testSparse <- subset(tweetsSparse, split==FALSE)
 
-#############################################################
+##########################################################################################################
 # Function to calculate accuracy/prediction/recall
 
 metrics <- function(cm) {
@@ -293,7 +294,7 @@ cmDRF <- table(testSparse$sentiment, predictionsDRF$predict)
 
 metrics(cmDRF)
 
-#############################################################3
+#############################################################
 # e1071 Naive Bayes
 
 NB <- naiveBayes(sentiment ~., data = tweetsSparse, laplace = 3)
@@ -338,18 +339,32 @@ metrics(cmMAJOR)
 ############
 
 
-test <- "I'm really fucking sad!"
+test <- "I am sad about this disease and Humira is not good!"
 
 # clean
 corptest <- vec2clean.corp(test)
 #dtm
 prep_test <- DocumentTermMatrix(corptest)
-
 prep_test <- as.data.frame(as.matrix(prep_test))
 
-prep_test <- as.h2o(prep_test)
+tweetsSparseX <- as.data.frame(as.matrix(sparse))
+colnames(tweetsSparseX) <- make.names(colnames(tweetsSparseX))
 
-predict(SVM1N, newdata=prep_test, type="class")
+tweetsSparseX[,1:ncol(tweetsSparseX)] <- 0
 
-h2o.predict(h2o_drf,prep_test)
-h2o.predict(gbm.model, prep_test)
+xx <- left_join(prep_test,tweetsSparseX[1,])
+
+xx[,ncol(prep_test)+1:ncol(xx)] <- 0
+
+xxh2o <- as.h2o(xx)
+
+a <- as.data.frame(predict(tweetCART, newdata=xx, type='class'))
+b <- as.data.frame(predict(tweetRF, newdata=xx))
+c <- as.data.frame(predict(SVM1N, newdata=xx, type="class"))
+d <- as.data.frame(predict(NB, as.data.frame(xx)))
+e <- as.data.frame(h2o.predict(h2o_drf,xxh2o))
+f <- as.data.frame(h2o.predict(gbm.model, xxh2o))
+
+final_test <- try(cbind(a,b,c,d,e$predict,f$predict))
+
+

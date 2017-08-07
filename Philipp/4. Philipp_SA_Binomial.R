@@ -30,7 +30,7 @@ conv_fun <- function(x) iconv(x, "latin1", "ASCII", "")
 # 4 - the user that tweeted
 # 5 - the text of the tweet
 
-tweets_classified <- read_csv('training.1600000.processed.noemoticon.csv',
+tweets_classified <- read_csv('trainingandtestdata/training.1600000.processed.noemoticon.csv',
                               col_names = c('sentiment', 'id', 'date', 'query', 'user', 'text')) %>%
   # converting some symbols
   dmap_at('text', conv_fun) %>%
