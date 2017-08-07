@@ -297,7 +297,7 @@ metrics(cmDRF)
 #############################################################
 # e1071 Naive Bayes
 
-NB <- naiveBayes(sentiment ~., data = tweetsSparse, laplace = 3)
+NBayes <- naiveBayes(sentiment ~., data = tweetsSparse, laplace = 3)
 
 predictionsNB <- predict(NB, as.data.frame(testSparse))
 
@@ -306,6 +306,60 @@ cmNB <- table(testSparse$sentiment, predictionsNB)
 metrics(cmNB)
 
 ############################################
+#BingLiu Lexicon
+
+#Pulling in positive and negative wordlists
+#BingLiu
+pos.words <- scan('Models/Positive.txt', what='character', comment.char=';') #folder with positive dictionary
+neg.words <- scan('Models/Negative.txt', what='character', comment.char=';') #folder with negative dictionary
+#Adding words to positive and negative databases
+pos.words=c(pos.words, 'Congrats', 'prizes', 'prize', 'thanks', 'thnx', 'Grt', 
+            'gr8', 'plz', 'trending', 'recovering', 'brainstorm', 'leader')
+neg.words = c(neg.words, 'Fight', 'fighting', 'wtf', 'arrest', 'no', 'not')
+
+#evaluation function
+score.sentiment <- function(sentences, pos.words, neg.words, .progress='none')
+{
+  scores <- laply(sentences, function(sentence, pos.words, neg.words){
+    # clean up sentences with R's regex-driven global substitute, gsub():
+    sentence <- gsub('[[:punct:]]', "", sentence)
+    sentence <- gsub('[[:cntrl:]]', "", sentence)
+    sentence <- gsub('\\d+', "", sentence)
+    #convert to lower-case and remove punctuations with numbers
+    sentence <- removePunctuation(removeNumbers(tolower(sentence)))
+    removeURL <- function(x) gsub('"(http.*) |(http.*)$|\n', "", x)
+    sentence <- removeURL(sentence)
+    # split into words. str_split is in the stringr package
+    word.list <- str_split(sentence, '\\s+')
+    # sometimes a list() is one level of hierarchy too much
+    words <- unlist(word.list)
+    # compare our words to the dictionaries of positive & negative terms
+    pos.matches <- match(words, pos.words)
+    neg.matches <- match(words, neg.words)
+    # match() returns the position of the matched term or NA
+    # we just want a TRUE/FALSE:
+    pos.matches <- !is.na(pos.matches)
+    neg.matches <- !is.na(neg.matches)
+    score <- sum(pos.matches) - sum(neg.matches)
+    return(score)
+  }, pos.words, neg.words, .progress=.progress)
+  scores.df <- data.frame(score=scores, message=sentences)
+  return(scores.df)
+}
+require(plyr)
+require(stringr)
+scores <- score.sentiment(df$message, pos.words, neg.words, .progress='text')
+result <- scores
+
+#Add ID to result set
+result$Id <- df$Id
+#add new scores as a column
+result <- mutate(result, Id, sentiment = ifelse(result$score > 0, 'Positive', 
+                                                ifelse(result$score < 0, 'Negative', 'Neutral')))
+
+cmBL <- table(df$sentiment,result$sentiment)
+metrics(cmBL)
+
 ############################################
 # MAJORITY VOTING #
 
@@ -339,7 +393,7 @@ metrics(cmMAJOR)
 ############
 
 
-test <- "I am sad about this disease and Humira is not good!"
+test <- "I don't like this medicine"
 
 # clean
 corptest <- vec2clean.corp(test)
@@ -358,13 +412,29 @@ xx[,ncol(prep_test)+1:ncol(xx)] <- 0
 
 xxh2o <- as.h2o(xx)
 
-a <- as.data.frame(predict(tweetCART, newdata=xx, type='class'))
-b <- as.data.frame(predict(tweetRF, newdata=xx))
-c <- as.data.frame(predict(SVM1N, newdata=xx, type="class"))
-d <- as.data.frame(predict(NB, as.data.frame(xx)))
-e <- as.data.frame(h2o.predict(h2o_drf,xxh2o))
-f <- as.data.frame(h2o.predict(gbm.model, xxh2o))
+CART <- as.data.frame(predict(tweetCART, newdata=xx, type='class'))
+names(CART) <- 'CART'
 
-final_test <- try(cbind(a,b,c,d,e$predict,f$predict))
+RF <- as.data.frame(predict(tweetRF, newdata=xx))
+names(RF) <- 'RF'
+
+SVM <- as.data.frame(predict(SVM1N, newdata=xx, type="class"))
+names(SVM) <- 'SVM'
+
+NB <- as.data.frame(predict(NBayes, as.data.frame(xx)))
+names(NB) <- 'NB'
+
+DRF <- as.data.frame(h2o.predict(h2o_drf,xxh2o))
+DRF <- DRF$predict
+
+GBM <- as.data.frame(h2o.predict(gbm.model, xxh2o))
+GBM <- GBM$predict
 
 
+g <- score.sentiment(test, pos.words, neg.words, .progress='text')
+g <- mutate(g, sentiment = ifelse(g$score > 0, 'Positive', 
+                           ifelse(g$score < 0, 'Negative', 'Neutral')))
+BL <- g$sentiment
+
+final_test <- try(cbind(CART,RF,SVM,NB,DRF,GBM,BL))
+final_test
