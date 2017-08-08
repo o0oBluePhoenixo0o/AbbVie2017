@@ -1,0 +1,13 @@
+@import 'color-palette.scss';
+
+.ui.card:not(.tooltip){
+    .content{
+        &:first-child{
+            background: #617487;
+            color: $white;
+            .header{
+                color: $white;
+            }
+        }
+    }
+}

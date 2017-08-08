@@ -24,10 +24,8 @@ export function detectSentiment(file, message, callback) {
 }
 
 export function detectSentimentPhilipp(tweetMessage) {
-    var out = R('./ML/R/sarcasmDetection.R')
-        .data({
-            message: tweetMessage
-        })
+    var out = RShell('./ML/R/EnsembleR_server.R')
+        .data([tweetMessage])
         .callSync();
     console.log('Output -> ' + out)
     return out;

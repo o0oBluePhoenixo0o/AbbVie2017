@@ -182,14 +182,14 @@ df_postn.index = range(len(df_postn))
 k = []
 tp_dict = {}
 #use sys.argv[1] to change it
-print(sys.argv[1])
+#print(sys.argv[1])
 question = sys.argv[1]
 load_json = json.loads(question)
 tpid = load_json['id']
 tpmessage = load_json['message']
-print(question)
-print(tpid)
-print(tpmessage)
+#print(question)
+#print(tpid)
+#print(tpmessage)
 
 if str(tpid) == 'nan':
     tp_dict['key'] = 'nan'

@@ -24,7 +24,7 @@ import Connectors from './data/connectors';
 import TwitterCrawler from './service/TwitterCrawler';
 import { listenToSockets } from './service/sockets';
 
-import { detectTopicStatic } from './ML/ml_wrapper';
+import { detectTopicStatic, detectSentimentPhilipp } from './ML/ml_wrapper';
 
 
 import moment from 'moment';
@@ -87,5 +87,11 @@ http.listen(GRAPHQL_PORT, () => logger.log('info',
 ));
 
 global.appRoot = __dirname;
+
+/*detectTopicStatic(JSON.stringify({ id: "123123123", message: "Abbvie is such a great company with a huge sortiment of drugs!" }), result => {
+    console.log(result);
+})*/
 //console.log("[1] 53.42".replace(/\s*\[(.+?)\]\s*/g, ""));
 //twitterCrawler.start();
+
+//console.log(detectSentimentPhilipp("I really really love you that much!"))

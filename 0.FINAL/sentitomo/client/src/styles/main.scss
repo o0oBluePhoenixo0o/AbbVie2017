@@ -3,6 +3,7 @@
 @import "sidebar.scss";
 @import "topnavigation.scss";
 @import "utils.scss";
+@import "card.scss";
 @import "recharts.scss";
 @import "themify-icons.css";
 
@@ -10,22 +11,25 @@
     font-family: 'Raleway', sans-serif !important;
 }
 
-
 .main-content {
     padding-top: 40px;
    
     @media (min-width:1200px){
         padding-left: 40px;
+        padding-right: 40px;
     }
     @media (min-width: 767px){
-        padding-left: 200px;
+        padding-left: 240px;
+        padding-right: 40px;
     }
      @media (max-width: 767px){
          padding-top: 60px !important;
     }
 }
 
-.recharts-legend-wrapper{
+
+
+.ui.card{
     max-height: 500px !important;
     overflow: auto;
 }

@@ -15,7 +15,7 @@ start_time = time.time()
 #df = pd.read_csv(sys.argv[1], encoding='UTF-16LE',index_col=0)
 #disease = pd.read_csv('./ML/Python/static/Final_TW_0807_prep.csv', encoding='ISO-8859-2', low_memory=False)
 disease = pd.read_csv(sys.argv[1], encoding='UTF-8', low_memory=False)
-df = pd.DataFrame(disease, columns = ['Id','key','created_time','Language', 'message'])
+df = pd.DataFrame(disease, columns = ['id','keyword','created','language', 'message'])
 df.columns=['id', 'key', 'created_time', 'language','message']
 #df.to_csv("twitter_utf8_0720.csv", encoding='UTF-8',columns = ['id', 'key','created_time', 'language','message'])
 #df = pd.read_csv('twitter_utf16_0720.csv', encoding='UTF-16LE',index_col=0) 
@@ -110,5 +110,6 @@ with open("./ML/Python/static/doc_clean.txt", "wb") as fp:   #Pickling
 dictionary = corpora.Dictionary(doc_clean)
 dictionary.save('./ML/Python/static/corpus.dict')
 doc_term_matrix = [dictionary.doc2bow(doc) for doc in doc_clean]
+from gensim.models import CoherenceModel, LdaModel, LsiModel, HdpModel
 ldamodel = LdaModel(doc_term_matrix, num_topics=40, id2word = dictionary, update_every=10, chunksize=10000, passes=10)
 ldamodel.save('./ML/Python/static/lda.model')

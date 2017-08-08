@@ -77,6 +77,13 @@ class Python {
             callback(this.output);
         });
     }
+
+
+    callSync() {
+        const process = child_process.spawnSync(this.version == 2 ? 'python2' : 'python3', this.args, defaults);
+        if (process.stderr) console.log(process.stderr);
+        return (process.stdout);
+    }
 }
 
 
