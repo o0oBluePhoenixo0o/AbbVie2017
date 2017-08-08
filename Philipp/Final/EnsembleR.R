@@ -13,7 +13,7 @@ setwd("~/GitHub/AbbVie2017/Philipp")
 # if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
 #   install.packages(setdiff(packages, rownames(installed.packages())))
 # }
-
+library(e1071)
 library(SnowballC)
 library(caTools)
 library(rpart)
@@ -24,9 +24,40 @@ library(tm)
 library(memisc)
 library(dplyr)
 library(data.table)
+library(stringr)
 
-#################################################
+# #################################################
+# 
+# convertAbbreviations <- function(message){
+#   
+#   # Replaces abbreviation with the corresporending long form
+#   #
+#   # Args:
+#   #   text: Text to remove the abbreviations from
+#   #
+#   # Returns:
+#   #   String
+#   
+#   if(is.na(message) || message == ""){
+#     return(message)
+#   } else {
+#     newText <- message
+#     for (i in 1:nrow(myAbbrevs)){
+#       newText <- gsub(paste0('\\<', myAbbrevs[[i,1]], '\\>'), paste(myAbbrevs[[i,2]]), newText)
+#       cat(paste0(newText,"\n"), file="R.out", append = TRUE)
+#       
+#     }
+#     return (newText)
+#   }
+# } 
+# 
+# myAbbrevs <- read.csv('abbrev.csv')
+#                          
+# testabb <- "lol i don't know rofl"
+# 
+# result_testabb <- convertAbbreviations(testabb)
 
+########################################################
 df <- read.csv("Final_Manual_3007.csv", as.is = TRUE, sep = ",")
 
 df <- unique(df)
@@ -41,6 +72,7 @@ df <- df[-c(4516),]
 
 agg <- summarize(group_by(df,sentiment),n())
 
+# df$message <- convertAbbreviations(df$message)
 #######################################################
 # Preprocessing the dataframe and cleaning the corpus #
 #######################################################
@@ -235,7 +267,7 @@ metrics(cmRF) #76%
 
 ###############################################
 # SVM
-library(e1071)
+
 
 SVM1N <- svm(sentiment ~ ., type='C', data=trainSparse, kernel='radial')
 
@@ -297,9 +329,9 @@ metrics(cmDRF)
 #############################################################
 # e1071 Naive Bayes
 
-NBayes <- naiveBayes(sentiment ~., data = tweetsSparse, laplace = 3)
+NBayes <- naiveBayes(sentiment ~., data = trainSparse, laplace = 3)
 
-predictionsNB <- predict(NB, as.data.frame(testSparse))
+predictionsNB <- predict(NBayes, as.data.frame(testSparse))
 
 cmNB <- table(testSparse$sentiment, predictionsNB)
 
@@ -364,8 +396,9 @@ metrics(cmBL)
 # MAJORITY VOTING #
 
 finaldf <- cbind(testSparse$sentiment,as.data.frame(predictRF),as.data.frame(predictCART),
-                 as.data.frame(predictSVM),predictionsDRF$predict, predictionsGBM$predict)
-colnames(finaldf) <- c("Sentiment","RF","CART","SVM","DRF","GBM")
+                 as.data.frame(predictSVM),predictionsDRF$predict, predictionsGBM$predict,
+                 result$sentiment,as.data.frame(predictionsNB))
+colnames(finaldf) <- c("Sentiment","RF","CART","SVM","DRF","GBM","BL","NB")
 
 #The majority vote
 
@@ -391,10 +424,16 @@ cmMAJOR <- table(finaldf$Sentiment, finaldf$Major)
 metrics(cmMAJOR)
 
 ############
+# drop non-save objects
+rm(agg,CART,df,final_test,finaldf,g,NB,predictionsDRF,predictionsGBM,prep_test,result,RF,
+   scores,SVM,BL,cmBL,cmCART,cmGBM,cmMAJOR,cmNB,cmRF,cmSVM1,corp,corptest,DRF,frequencies,i,
+   predictCART,predictionsNB,predictRF,predictSVM,sparse,split,
+   test,testH2O,trainH2O,xxh2o,cmDRF,tweetsSparse,testSparse,trainSparse,xx)
+save.image(file="EnsembleR_objs.RData")
+############
 
-
-test <- "I don't like this medicine"
-
+test <- "I hate like this Humira It tastes funny..."
+#convertAbbreviations(test)
 # clean
 corptest <- vec2clean.corp(test)
 #dtm
@@ -438,3 +477,9 @@ BL <- g$sentiment
 
 final_test <- try(cbind(CART,RF,SVM,NB,DRF,GBM,BL))
 final_test
+
+for (i in 1:nrow(final_test)){
+  final_test$Major[i] <- find_major(finaldf,i)
+}
+final_test$Major
+
