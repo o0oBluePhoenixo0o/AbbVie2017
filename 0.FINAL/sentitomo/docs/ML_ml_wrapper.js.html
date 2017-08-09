@@ -28,56 +28,109 @@
         <article>
             <pre class="prettyprint source linenums"><code>/** @module ML_Wrapper
  *  @description Contains function for invoking the different Machine Learning files
+ * @author Alexander Weiß
  */
 import { PythonShell, JavaShell, RShell } from '../util/foreignCode';
 import { Tweet } from '../data/connectors';
 import { convertToCsvRaw } from '../util/export';
 import moment from 'moment';
 
-
 /**
  * @function detectSentiment
+ * @param  {String} modelPath Path to the model to use
  * @param  {String} message  The message you want to detect the sentiment
  * @param  {Function} callback Function to handle the sentiment result
- * @description Detects the sentiment of a message
- * @see File server/ML/Java/sentiment_executor
+ * @description Detects the sentiment of a message using Mallet and Naive Bayes
+ * @see File server/ML/Java/sentiment/sentiment_executor
  * @return {String} sentiment string
+ * @memberof module:ML_Wrapper
  */
-export function detectSentiment(file, message, callback) {
-    JavaShell('./ML/Java/sentiment_executor-1.0-SNAPSHOT-jar-with-dependencies.jar')
-        .data(['2', file, message.replace(/"/g, '\\"').replace(/'/g, "\\'")])
+export function detectSentiment(modelPath, message, callback) {
+    JavaShell('./ML/Java/sentiment/sentiment.jar')
+        .data(['2', modelPath, message.replace(/"/g, '\\"').replace(/'/g, "\\'")])
         .call(result => {
-            callback(result);
+            if (typeof callback === 'function') {
+                callback(result);
+            }
         });
 }
 
-export function detectSentimentPhilipp(tweetMessage) {
-    var out = R('./ML/R/sarcasmDetection.R')
-        .data({
-            message: tweetMessage
-        })
-        .callSync();
-    console.log('Output -> ' + out)
-    return out;
+/**
+ * @function detectSentimentEnsembleR
+ * @param  {String} message  The message to detect the sentiment
+ * @param  {Function} callback Function to handle the sentiment result
+ * @description Detects the sentiment of a message using six different sentiment analysis algorithms and pick the majority result of those. It uses:
+ *  &lt;ul>
+ *      &lt;li>Classification and Regression Trees (CART)&lt;/li>
+ *      &lt;li>Random Forest (RF)&lt;/li>
+ *      &lt;li>Support Vector Machines (SVM)&lt;/li>
+ *      &lt;li>Naive Bayes (NB)&lt;/li>
+ *      &lt;li>Distributed Random Forest (DRF)&lt;/li>
+ *      &lt;li>Gradient Boosting Machine (GBM)&lt;/li>
+ * &lt;/ul>
+ * Implemented in R
+ * @see File server/ML/R/sentiment/ensembleSentiment.R
+ * @return {String} sentiment string
+ */
+export function detectSentimentEnsembleR(tweetMessage, callback) {
+    RShell('./ML/R/sentiment/ensembleSentiment.R')
+        .data([tweetMessage])
+        .call(result => {
+            if (typeof callback === 'function') {
+                callback(result.replace(/\s*\[(.+?)\]\s*/g, "").replace(/"/g, '')); // Strip out the typical R prints 
+            }
+        });
 }
 
 /**
 * @function detectSarcasm
-* @param  {String} tweetMessage The Twitter tweet
-* @description Detect if a message is meant in a saracastic way
-* @see File server/ML/R/sarcasmDetection.R
-* @return {String} A boolean whether the tweet is sacrastic or not
+* @param  {String} message The message to detect the sarcasm
+* @param  {Function} callback Function to handle the sentiment result
+* @description Detect if a message is meant in a saracastic way. Internaly it uses a Naive Bayes based method to detect it.
+* @see File server/ML/R/sarcasm/sarcasmDetection.R
+* @return {Doube} A % number, indicating how much sarcastic this tweet is meant
 */
-export function detectSarcasm(tweetMessage) {
-    var out = RShell('./ML/R/sarcasmDetection.R')
+export function detectSarcasm(tweetMessage, callback) {
+    RShell('./ML/R/sarcasm/sarcasmDetection.R')
         .data([tweetMessage])
-        .callSync()
-
-    console.log('Output -> ' + out)
-    return out;
+        .call(result => {
+            if (typeof callback === 'function') {
+                callback(result.replace(/\s*\[(.+?)\]\s*/g, "").replace(/"/g, '')); // Strip out the typical R prints 
+            }
+        });
 }
 
+/**
+ * @function detectSentimentEnsemblePython
+ * @param  {String} message  The message to detect the sentiment
+ * @param  {Function} callback Function to handle the sentiment result
+ * @description Detects the sentiment of a message using different Python packages. It uses:
+ *  &lt;ul>
+ *      &lt;li>Vader (Lexicon Based)&lt;/li>
+ *      &lt;li>Textblob Vers. 1 (Lexcion Based)&lt;/li>
+ *      &lt;li>Textblob Vers. 2 (Naive Bayes)&lt;/li>
+ * &lt;/ul>
+ * Implemented in Python
+ * @see File server/ML/Python/sentiment/ensembleSentiment.R
+ * @return {String} sentiment string
+ */
+export function detectSentimentEnsemblePython(message, callback) {
+    PythonShell("./ML/Python/sentiment/ensembleSentiment.py", 2).data([message]).call(result => {
+        if (typeof callback === 'function') {
+            callback(result);
+        }
+    })
+}
 
+/**
+* @function detectTopicCTM
+* @param  {Date} startDate Start date of the bucket 
+* @param  {Date} endDate End date of the bucket 
+* @param  {Function} callback Callback function which handles the result
+* @description Creates a new topic model out of the specified time range of tweets and detects the topics on those. Internally it uses the Correlated Topic Models (CTM) model
+* @see File server/ML/R/topic/ctm.R
+* @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
+*/
 export function detectTopicCTM(startDate, endDate, callback) {
     Tweet.findAll({
         where: {
@@ -95,29 +148,30 @@ export function detectTopicCTM(startDate, endDate, callback) {
             tweet.createdAt = moment(tweet.createdAt).format('YYYY-MM-DD hh:mm')
             tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
         });
-        const filename = './ML/R/tweets.csv';
+        const filename = './ML/R/topic/tweets.csv';
 
         //TODO: There is a problem with the filepath uUEO of json input
         convertToCsvRaw(tweets, filename, () => {
-
-            RShell('./R/ctm.R').data([filename]).call(result => {
-                console.log(result);
+            RShell('./ML/R/topic/ctm.R').data([filename]).call(result => {
+                if (typeof callback === 'function') {
+                    callback(result);
+                }
             })
         });
 
     });
 }
 
-
 /**
  * @function detectTopicDynamic
- * @param  {String} startDate  File path to the .csv file which contains all tweets needed for topic detection
+ * @param  {String} startDate Start date of the bucket 
+ * @param  {String} endDate End date of the bucket 
  * @param  {Function} callback Callback function which handles the result
- * @description Creates a new topic model out of the specified time range of tweets and detects the topics on those
- * @see File server/ML/Python/dynamic/dynamic.py
- * @return {String} A JSON encoded string, containing the results of the topic detection
+ * @description Creates a new topic model out of the specified time range of tweets and detects the topics on those. Internally it uses LDA.
+ * @see File server/ML/Python/topic/dynamic/dynamic.py
+ * @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
  */
-export function detectTopicDynamic(startDate, endDate, callback) {
+export function detectTopicLDADynamic(startDate, endDate, callback) {
     Tweet.findAll({
         where: {
             created: {
@@ -135,12 +189,13 @@ export function detectTopicDynamic(startDate, endDate, callback) {
             tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
         });
 
-        const filename = './ML/Python/dynamic/tweets.csv';
+        const filename = './ML/Python/topic/dynamic/tweets.csv';
 
         convertToCsvRaw(tweets, filename, () => {
-            console.log('Starting dynamic ')
-            PythonShell('./ML/Python/dynamic/dynamic.py', 3).data([filename]).call(result => {
-                callback(result.trim());
+            PythonShell('./ML/Python/topic/dynamic/dynamic.py', 3).data([filename]).call(result => {
+                if (typeof callback === 'function') {
+                    callback(result);
+                }
             });
         });
 
@@ -149,17 +204,17 @@ export function detectTopicDynamic(startDate, endDate, callback) {
 
 /**
  * @function detectTopicStatic
- * @param  {type} last100Tweets {description}
- * @param  {type} callback      {description}
- * @description Uses a predefined model trained on all tweets at the end of this project to detect the topics of tweets
- * @see File server/ML/Python/static/final.py
- * @return {String} A JSON encoded string, containing the results of the topic detection
+ * @param  {String} jsonString A JSON representation of a tweet object to detect the topic
+ * @param  {type} callback Callback function which handles the result
+ * @description Uses a predefined model trained on all tweets at the end of this project to detect the topics of tweets. Internally it uses LDA.
+ * @see File server/ML/Python/topic/static/final.py
+ * @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
  */
-export function detectTopicStatic(jsonString, callback) {
+export function detectTopicLDAStatic(jsonString, callback) {
     console.log('starting static');
-    PythonShell('./ML/Python/static/final.py', 3).data(jsonString).call(result => {
+    PythonShell('./ML/Python/topic/static/final.py', 3).data([jsonString]).call(result => {
         if (typeof callback === 'function') {
-            callback(result.trim());
+            callback(result);
         }
     })
 }
@@ -174,13 +229,13 @@ export function detectTopicStatic(jsonString, callback) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Connectors.html">Connectors</a></li><li><a href="module-Export.html">Export</a></li><li><a href="module-ForeignCode.html">ForeignCode</a></li><li><a href="module-Logger.html">Logger</a></li><li><a href="module-LogginMiddleware.html">LogginMiddleware</a></li><li><a href="module-ML_Wrapper.html">ML_Wrapper</a></li><li><a href="module-Preprocess.html">Preprocess</a></li><li><a href="module-Sockets.html">Sockets</a></li><li><a href="module-Utils.html">Utils</a></li></ul><h3>Classes</h3><ul><li><a href="module-ForeignCode-Java.html">Java</a></li><li><a href="module-ForeignCode-Python.html">Python</a></li><li><a href="module-ForeignCode-R.html">R</a></li><li><a href="TwitterCrawler.html">TwitterCrawler</a></li></ul><h3>Global</h3><ul><li><a href="global.html#resolvers">resolvers</a></li><li><a href="global.html#typeDefinitions">typeDefinitions</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Connectors.html">Connectors</a></li><li><a href="module-Export.html">Export</a></li><li><a href="module-ForeignCode.html">ForeignCode</a></li><li><a href="module-Logger.html">Logger</a></li><li><a href="module-LogginMiddleware.html">LogginMiddleware</a></li><li><a href="module-ML_Wrapper.html">ML_Wrapper</a></li><li><a href="module-Preprocess.html">Preprocess</a></li><li><a href="module-Sockets.html">Sockets</a></li><li><a href="module-Utils.html">Utils</a></li></ul><h3>Classes</h3><ul><li><a href="GraphQLScalarType.html">GraphQLScalarType</a></li><li><a href="module-ForeignCode-Java.html">Java</a></li><li><a href="module-ForeignCode-Python.html">Python</a></li><li><a href="module-ForeignCode-R.html">R</a></li><li><a href="TwitterCrawler.html">TwitterCrawler</a></li></ul><h3>Global</h3><ul><li><a href="global.html#resolvers">resolvers</a></li><li><a href="global.html#typeDefinitions">typeDefinitions</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Sun Aug 06 2017 00:58:29 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Wed Aug 09 2017 20:48:34 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

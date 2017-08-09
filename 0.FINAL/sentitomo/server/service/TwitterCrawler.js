@@ -26,42 +26,7 @@ export default class TwitterCrawler {
             access_token_secret: config.access_token_secret
         });
         logger.log('info', 'Twitter API initialized successfully');
-
-        //classify.topicDetection(moment('2017-03-01').toDate(), moment('2017-04-30').toDate()); 
-        //this.updateAuthors();
-
-        /*PythonShell.run('./ML/Python/test.py', { args: ['file.csv'] }, function (err, results) {
-            if (err) throw err;
-            // results is an array consisting of messages collected during execution
-            console.log('results: %j', results);
-        });*/
-
-        //TODO: DEBUG
-        /*detectTopicCTM(moment("2017-03-01"), moment("2017-04-20"), result => {
-            JSON.parse(result);
-        })*/
-
-        /* var data = {
-             id: 10000000,
-             message: "hey I need your help. I got arthristis."
-         }
- 
-         detectTopicStatic(JSON.stringify(data), result => {
-             console.log(result);
-         })*/
-
-        //console.log(detectSarcasm("I hate fucking raiders"));
-
-
-        /*detectSentiment("./ML/Java/naivebayes.bin",
-            "I love you really much",
-            result => {
-                console.log("this is the result:" + result);
-            });*/
-
     }
-
-
 
     /**
      * @function start
@@ -166,7 +131,7 @@ export default class TwitterCrawler {
                                     id: event.user.id
                                 }
                             }).then(author => {
-                                detectSentiment('./ML/Java/naivebayes.bin',
+                                detectSentiment('./ML/Java/sentiment/naivebayes.bin',
                                     messagePrep,
                                     result => {
                                         author.createTW_CORE({

@@ -1,5 +1,12 @@
 @import 'color-palette.scss';
 
+
+.ui.card.result{
+    max-height: 500px !important;
+    overflow: auto;
+}
+
+
 .ui.card:not(.tooltip){
     .content{
         &:first-child{

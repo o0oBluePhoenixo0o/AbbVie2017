@@ -1,5 +1,7 @@
 # loading required packages
-source("./ML/R/needs.R");
+setwd("~/CloudStation/Team Project/Topic Monitoring in the Pharmaceutical Industry/AbbVie2017/0.FINAL/sentitomo/server")
+
+source("./ML/R/needs.R")
 
 needs(e1071)
 needs(SnowballC)
@@ -16,11 +18,13 @@ needs(data.table)
 needs(stringr)
 
 #load list of models
-load("./ML/R/EnsembleR_objs.RData");
+load("./ML/R/sentiment/EnsembleR_objs.RData");
 
+#disable logging
+sink("/dev/null")
 h2o.init()
-h2o.loadModel("./ML/R/DRF_model_R_1502198489493_2")
-h2o.loadModel("./ML/R/GBM_model_R_1502198489493_1")
+h2o.loadModel("./ML/R/sentiment/DRF_model_R_1502198489493_2")
+h2o.loadModel("./ML/R/sentiment/GBM_model_R_1502198489493_1")
 
 # Get the command line arguments
 args = commandArgs(trailingOnly=TRUE)
@@ -74,6 +78,10 @@ for (i in 1:nrow(final)){
   final$Major[i] <- find_major(final,i)
 }
 
+h2o.shutdown(prompt = FALSE)
+
+#Turn logging on again
+sink()
+
 #Result of Majority Voting
 final$Major
-h2o.shutdown(prompt = FALSE)

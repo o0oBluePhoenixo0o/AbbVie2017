@@ -6,9 +6,9 @@ needs(data.table)
 
 
 # Load pre-trained model 23.07
-load('./ML/R/SD_NB_2307.dat')
+load('./ML/R/sarcasm/SD_NB_2307.dat')
 # Load list of delete words 23.07
-load('./ML/R/del_word.dat')
+load('./ML/R/sarcasm/del_word.dat')
 
 # Get the command line arguments
 args = commandArgs(trailingOnly=TRUE)

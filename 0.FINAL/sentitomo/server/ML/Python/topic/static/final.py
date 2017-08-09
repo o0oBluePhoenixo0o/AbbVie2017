@@ -27,7 +27,7 @@ from nltk.stem import WordNetLemmatizer
 import string
 import time
 df_postn = pd.read_csv(
-    './ML/Python/static/final_twitter_preprocessing_0720.csv',
+    './ML/Python/topic/static/final_twitter_preprocessing_0720.csv',
     encoding='UTF-16LE',
     sep=',',
     index_col=0)
@@ -87,26 +87,28 @@ def dateselect(day):
 
 corpus = list(df_postn['re_message'])
 import pickle
-directory = "./ML/Python/static/doc_clean.txt"
+directory = "./ML/Python/topic/static/doc_clean.txt"
 if os.path.exists(directory):
-    with open("./ML/Python/static/doc_clean.txt", "rb") as fp:  # Unpickling
+    with open("./ML/Python/topic/static/doc_clean.txt",
+              "rb") as fp:  # Unpickling
         doc_clean = pickle.load(fp)
 else:
     doc_clean = [tokenize(doc).split() for doc in corpus]
-    with open("./ML/Python/static/doc_clean.txt", "wb") as fp:  #Pickling
+    with open("./ML/Python/topic/static/doc_clean.txt", "wb") as fp:  #Pickling
         pickle.dump(doc_clean, fp)
-directory = "./ML/Python/static/corpus.dict"
+directory = "./ML/Python/topic(static/corpus.dict"
 if os.path.exists(directory):
-    dictionary = corpora.Dictionary.load('./ML/Python/static/corpus.dict')
+    dictionary = corpora.Dictionary.load(
+        './ML/Python/topic/static/corpus.dict')
 else:
     dictionary = corpora.Dictionary(doc_clean)
-    dictionary.save('./ML/Python/static/corpus.dict')
+    dictionary.save('./ML/Python/topic/static/corpus.dict')
 doc_term_matrix = [dictionary.doc2bow(doc) for doc in doc_clean]
 
 from gensim.models import CoherenceModel, LdaModel, LsiModel, HdpModel
-directory = "./ML/Python/static/lda.model"
+directory = "./ML/Python/topic/static/lda.model"
 if os.path.exists(directory):
-    ldamodel = LdaModel.load('./ML/Python/static/lda.model')
+    ldamodel = LdaModel.load('./ML/Python/topic/static/lda.model')
 else:
     ldamodel = LdaModel(
         doc_term_matrix,
@@ -115,14 +117,14 @@ else:
         update_every=10,
         chunksize=10000,
         passes=10)
-    ldamodel.save('./ML/Python/static/lda.model')
+    ldamodel.save('./ML/Python/topic/static/lda.model')
 #ldamodel = LdaModel(doc_term_matrix, num_topics=40, id2word = dictionary, update_every=10, chunksize=10000, passes=10)
 #print((time.time() - start_time))
 import pyLDAvis.gensim as gensimvis
 import pyLDAvis
 #ldamodel=LdaModel.load('./ML/Python/static/lda.model')
 vis_data = gensimvis.prepare(ldamodel, doc_term_matrix, dictionary)
-pyLDAvis.save_html(vis_data, './ML/Python/static/lda_tw40_0720.html')
+pyLDAvis.save_html(vis_data, './ML/Python/topic/static/lda_tw40_0720.html')
 vistopicid = vis_data[6]
 idlist = []
 for j in range(1, len(vistopicid) + 1):

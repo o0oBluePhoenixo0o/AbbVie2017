@@ -15,9 +15,6 @@ import Dashboard from '../components/dashboard/Dashboard.component.jsx';
 import ToolBox from '../components/toolbox/ToolBox.component.jsx';
 import Result from '../components/result/Result.component.jsx';
 
-
-
-
 class Applayout extends React.Component {
 
 

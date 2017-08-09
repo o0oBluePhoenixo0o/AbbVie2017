@@ -153,8 +153,9 @@ class Result extends Component {
     }
 
     render() {
-        const result = data;
+        const { result } = this.props;
         const { selectedEntry } = this.state;
+        console.log(result);
 
         var aggregatedTopics = null;
         var aggregateSentiment = null;
@@ -184,7 +185,7 @@ class Result extends Component {
                     <Grid stackable columns={3}>
                         <Grid.Row>
                             <Grid.Column mobile={16} tablet={8} computer={4}>
-                                <Card fluid>
+                                <Card fluid className="result">
                                     <Card.Content header={"Aggregrated Topics"} />
                                     <Card.Content>
                                         <ResponsiveContainer height={400}>
@@ -204,7 +205,7 @@ class Result extends Component {
                                 </Card>
                             </Grid.Column>
                             <Grid.Column mobile={16} tablet={8} computer={4}>
-                                <Card fluid>
+                                <Card fluid className="result">
                                     <Card.Content header={"Sentiments in topic"} />
                                     <Card.Content>
                                         {this.state.selectedEntry ?
@@ -226,7 +227,7 @@ class Result extends Component {
                                 </Card>
                             </Grid.Column>
                             <Grid.Column mobile={16} tablet={16} computer={8}>
-                                <Card fluid>
+                                <Card fluid className="result">
                                     <Card.Content header={"Timeline"} />
                                     <Card.Content>
                                         {this.state.selectedEntry ?
@@ -248,7 +249,7 @@ class Result extends Component {
                         </Grid.Row>
                         <Grid.Row stretched>
                             <Grid.Column mobile={16} tablet={16} computer={8}>
-                                <Card fluid>
+                                <Card fluid className="result">
                                     <Card.Content>
                                         <Card.Header>Raw Tweets</Card.Header>
                                     </Card.Content>
@@ -260,6 +261,7 @@ class Result extends Component {
                                                     <Table.HeaderCell>Topic</Table.HeaderCell>
                                                     <Table.HeaderCell>Sentiment</Table.HeaderCell>
                                                     <Table.HeaderCell>Message</Table.HeaderCell>
+                                                    <Table.HeaderCell>Created</Table.HeaderCell>
                                                 </Table.Row>
                                             </Table.Header>
 
@@ -272,6 +274,7 @@ class Result extends Component {
                                                         <Table.Cell>{tweet.topic}</Table.Cell>
                                                         <Table.Cell>{tweet.sentiment}</Table.Cell>
                                                         <Table.Cell>{tweet.message}</Table.Cell>
+                                                        <Table.Cell>{tweet.created}</Table.Cell>
                                                     </Table.Row>)
                                                 })}
                                             </Table.Body>
@@ -285,8 +288,8 @@ class Result extends Component {
             )
         } else {
             return (
-                <Segment>
-                    No results
+                <Segment basic>
+                    No data
                 </Segment>
             );
 

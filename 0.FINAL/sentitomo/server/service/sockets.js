@@ -1,6 +1,6 @@
 /** @module Sockets */
 import SocketIO from 'socket.io';
-import { detectTopicDynamic, detectTopicStatic } from '../ML/ml_wrapper';
+import { detectTopicLDADynamic } from '../ML/ml_wrapper';
 import { Tweet, Sentiment } from '../data/connectors';
 
 
@@ -29,7 +29,7 @@ export function listenToSockets(httpServer) {
                 message: 'Topic detection has started at: ' + new Date(),
                 finished: false,
             });
-            detectTopicDynamic(data.from, data.to, result => {
+            detectTopicLDADynamic(data.from, data.to, result => {
                 var result = JSON.parse(result.toString().replace("/\r?\n|\r/g", ""))
                 var tweetsIDs = result.map((entry) => { return entry.key })
                 var returnResult = new Array();

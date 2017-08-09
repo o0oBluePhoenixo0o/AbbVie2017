@@ -1,5 +1,5 @@
 # CTM topic model 
-source("needs.R")
+source("./ML/R/needs.R")
 # Install packages #####################################################################################
 # Packages
 needs(RJSONIO)
@@ -57,8 +57,8 @@ myCorpus <- tm_map(myCorpus,removeWords,myStopwords)
 
 
 # Remove words which have less than 3 characters
-removeWords <- function(x) gsub('\\b\\w{1,3}\\b','',x)
-myCorpus <- tm_map(myCorpus,removeWords)
+#removeWords <- function(x) gsub('\\b\\w{1,3}\\b','',x)
+#myCorpus <- tm_map(myCorpus,removeWords)
 
 
 # Remove extra whitespace
@@ -79,6 +79,8 @@ preprocess_mid <- cbind(as.data.frame(df$id),
                         as.data.frame(df$created),
                         as.data.frame(df$message),
                         as.data.frame(preprocess_begining))
+
+colnames(preprocess_mid) <- c("id", "created", "message", "pre_message")
 
 # Remove null after pre processing
 preprocess_remove_null <- preprocess_mid[preprocess_mid$pre_message!='',]
@@ -148,6 +150,7 @@ models <- list(
 topic_terms <- t(as.data.frame(lapply(models, terms, m)))
 topic_names <- as.data.frame(rownames(topic_terms))
 topic_fram <- t(as.data.frame(cbind(topic_names,topic_terms)))
+topic_fram <- topic_fram[-1,]
 colnames(topic_fram) <- c(1:k)
 
 
@@ -181,14 +184,15 @@ for(i in 1:length(preprocess_final))
 
 # Final result ######################################################################################
 # Build the data fram for messages and topics
-topicmodel <- cbind(as.data.frame(preprocess_remove_blank$`df$id`), 
-                    as.data.frame(preprocess_remove_blank$`df$created`), 
-                    as.data.frame(preprocess_remove_blank$`df$message`), 
-                    assignments_change)
+topicmodel <- cbind(as.data.frame(preprocess_remove_blank$id), 
+                    as.data.frame(preprocess_remove_blank$created), 
+                    as.data.frame(preprocess_remove_blank$message), 
+                    as.data.frame(assignments),
+                    as.data.frame(assignments_change))
 
 
 # Change the columns name
-colnames(topicmodel) <- c("id","created_time","message","CTM.topic")
+colnames(topicmodel) <- c("id","created_time","message","topic_id","topic")
 
 
 # Write out as Json

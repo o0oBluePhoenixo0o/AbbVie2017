@@ -20,12 +20,12 @@ class ToolBox extends Component {
                 </Header>
                 <div>
                     <Menu pointing secondary>
-                        <Menu.Item name='sentiment' active={activeItem === 'sentiment'} onClick={this.handleItemClick} />
                         <Menu.Item name='topic' active={activeItem === 'topic'} onClick={this.handleItemClick} />
                     </Menu>
                     <Segment >
                         {activeItem === "topic" ? <TopicToolBox /> : null}
-                    </Segment></div>
+                    </Segment>
+                </div>
 
             </Segment>
         );

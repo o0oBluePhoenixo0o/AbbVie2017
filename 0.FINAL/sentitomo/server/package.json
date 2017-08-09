@@ -1,7 +1,11 @@
 {
   "name": "sentitomo-server",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
+  "author": {
+    "name": "Alexander Weiß",
+    "url": "http://github.com/alexanderwe"
+  },
   "scripts": {
     "start": "nodemon server.js --exec babel-node --presets es2015,stage-2"
   },

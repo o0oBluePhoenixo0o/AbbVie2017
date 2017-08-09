@@ -56,6 +56,7 @@ function getKeyword(message, filters) {
             key = keyword;
         }
     });
+    console.log("keyword: " + key)
     return key;
 }
 

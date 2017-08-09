@@ -60,7 +60,7 @@ class Python {
     * @return {void}
     */
     call(callback) {
-        const process = child_process.spawn(this.version == 2 ? 'python2' : 'python3', this.args, defaults);
+        const process = child_process.spawn(this.version == 2 ? 'python' : 'python3', this.args, defaults);
 
         process.stdout.on('data', (data) => {
             this.output += '' + data
@@ -73,14 +73,20 @@ class Python {
 
         process.on('close', (code) => {
             logger.info(`child process exited with code ${code}`);
-            console.log(this.output);
-            callback(this.output);
+            if (typeof callback === 'function') {
+                callback(this.output);
+            }
         });
     }
 
-
+    /**
+     * @function callSync
+     * @description Spawns a child process and executes the specified Python file synchronously
+     * @return {String} The stdout of the process
+     * @memberof module:ForeignCode~Python
+    */
     callSync() {
-        const process = child_process.spawnSync(this.version == 2 ? 'python2' : 'python3', this.args, defaults);
+        const process = child_process.spawnSync(this.version == 2 ? 'python' : 'python3', this.args, defaults);
         if (process.stderr) console.log(process.stderr);
         return (process.stdout);
     }
@@ -146,12 +152,25 @@ class Java {
 
         process.on('close', (code) => {
             logger.info(`child process exited with code ${code}`);
-            callback(this.output);
+            if (typeof callback === 'function') {
+                callback(this.output);
+            }
         });
     }
 
-}
+    /**
+     * @function callSync
+     * @description Spawns a child process and executes the specified Jar file synchronously
+     * @return {String} The stdout of the process
+     * @memberof module:ForeignCode~Java
+    */
+    callSync() {
+        const process = child_process.spawnSync('java', this.args, defaults);
+        if (process.stderr) console.log(process.stderr);
+        return (process.stdout);
+    }
 
+}
 
 /**
  * @function RShell
@@ -206,12 +225,14 @@ class R {
         });
 
         process.stderr.on('data', (data) => {
-            console.log(`stderr: ${data}`);
+            //console.log(`stderr: ${data}`);
         });
 
         process.on('close', (code) => {
             console.log(`child process exited with code ${code}`);
-            callback(this.output);
+            if (typeof callback === 'function') {
+                callback(this.output);
+            }
         });
     }
 

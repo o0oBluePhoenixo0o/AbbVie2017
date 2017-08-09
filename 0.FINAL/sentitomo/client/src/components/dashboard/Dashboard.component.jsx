@@ -5,104 +5,135 @@ import {
     withApollo
 } from 'react-apollo';
 
-import { Dimmer, Grid, Loader, Message, Segment } from 'semantic-ui-react';
+import { Button, Card, Divider, Header, Dimmer, Grid, Loader, Message, Segment } from 'semantic-ui-react';
+import DayPicker, { DateUtils } from 'react-day-picker';
+import moment from 'moment';
 import TweetsList from './TweetsList.component';
 import Timeline from './Timeline.component';
+import Result from '../result/Result.component'
 
 
-const Dashboard = ({ tweets, loading, error, loadMoreEntries }) => {
-    if (loading) {
-        return <Dimmer active>
-            <Loader indeterminate>Getting your data ready!</Loader>
-        </Dimmer>;
-    }
-    if (error) {
-        return <Message error>
-            <Message.Header>We're sorry, something went wrong!</Message.Header>
-            <p>{error}</p>
-        </Message>;
-    }
-    if (!tweets) {
-        return <Message warning>
-            <Message.Header>We're sorry, something happened</Message.Header>
-            <p>Unable to fetch the data,</p>
-        </Message>;
-    }
-    return (
-        <Segment className="dashboard" basic>
-            <Grid stackable>
-                <Grid.Row columns={2}>
-                    <Grid.Column>
-                        <TweetsList tweets={tweets} loadMoreEntries={loadMoreEntries} />
-                    </Grid.Column>
-                    <Grid.Column>
-                        <div>Here comes topic? </div>
-                    </Grid.Column>
-                </Grid.Row>
-                <Grid.Row columns={1}>
-                    <Grid.Column>
-                        <Timeline tweets={tweets} />
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
-
-        </Segment>
-    );
-
-}
 
 
-export const tweetsListQuery = gql`
-  query TweetsListQuery($offset: Int, $limit: Int) {
-                tweets(limit: $limit, offset: $offset) {
-                id
-      message
-            created
-      keyword
-      sentiment {
-                sentiment
-            }
-            }
-  }
-`;
+class Dashboard extends React.Component {
 
-const ITEMS_PER_PAGE = 20;
-const DashboadWithData = graphql(tweetsListQuery, {
-    options(props) {
-        return {
-            variables: {
-                offset: 1000,
-                limit: ITEMS_PER_PAGE,
-            },
-        };
-    },
-    props: ({ data: { fetchMore, loading, tweets } }) => ({
-        loading,
-        tweets,
-        loadMoreEntries() {
-            return fetchMore({
-                // query: ... (you can specify a different query.
-                // GROUP_QUERY is used by default)
-                variables: {
-                    // We are able to figure out offset because it matches
-                    // the current messages length
-                    offset: tweets.length,
-                },
-                updateQuery: (previousResult, { fetchMoreResult }) => {
-                    console.log(previousResult)
-                    // we will make an extra call to check if no more entries
-                    if (!fetchMoreResult) { return previousResult; }
-                    // push results (older messages) to end of messages list
-                    return Object.assign({}, previousResult, {
-                        // Append the new feed results to the old one
-                        tweets: [...previousResult.tweets, ...fetchMoreResult.tweets],
-                        loading: loading
-                    });
-                },
+
+    state = {
+        from: null,
+        to: null,
+        tweetsSize: 0,
+        data: null
+    };
+
+
+    handleDayClick = (day, { disabled, selected }) => {
+        if (!disabled) {
+            const range = DateUtils.addDayToRange(day, this.state);
+            this.setState(range, () => {
+                this.props.client.query({
+                    query: gql`
+                    query CountQuery($startDate: Date, $endDate: Date) {
+                        count(startDate: $startDate, endDate: $endDate)
+                    }
+                `,
+                    variables: { startDate: this.state.from, endDate: this.state.to },
+                }).then(response => {
+                    this.setState({
+                        tweetsSize: response.data.count
+                    })
+                });
             });
-        },
-    }),
-})(Dashboard);
+        }
+    };
 
 
-export default withApollo(DashboadWithData);
+    loadTweets() {
+        this.setState({
+            loading: true,
+        })
+        this.props.client.query({
+            query: gql`
+                    query TweetsQuery($startDate: Date, $endDate: Date) {
+                        tweets(startDate: $startDate, endDate: $endDate){
+                            id
+                            message
+                        }
+                    }
+                `,
+            variables: { startDate: this.state.from, endDate: this.state.to },
+        }).then(response => {
+            this.setState({
+                data: response,
+                loading: false,
+            })
+        });
+    }
+
+    handleResetClick = e => {
+        e.preventDefault();
+        this.setState({
+            from: null,
+            to: null,
+        });
+    };
+
+
+    render() {
+
+        const { from, to, tweetsSize, loading, data } = this.state;
+
+        return (
+            <Segment className="dashboard" basic>
+                <Dimmer active={loading}>
+                    <Loader>Set view range</Loader>
+                </Dimmer>
+                <Grid columns={2}>
+                    <Grid.Row>
+                        <Grid.Column>
+                            <Card fluid>
+                                <Card.Content header={"Aggregrated Topics"} />
+                                <Card.Content>
+                                    <Header size='medium'>Show the tweets you want</Header>
+                                    <p>First choose your date ranges to view your tweets</p>
+                                    <DayPicker
+                                        numberOfMonths={2}
+                                        selectedDays={[from, { from, to }]}
+                                        onDayClick={this.handleDayClick}
+                                        fixedWeeks
+                                        disabledDays={{ after: new Date() }}
+                                    />
+                                    {!from && !to && <p>Please select the <strong>first day</strong>.</p>}
+                                    {from && !to && <p>Please select the <strong>last day</strong>.</p>}
+                                    {from &&
+                                        to &&
+                                        <p>
+                                            You chose from
+                        {' '}
+                                            {moment(from).format('L')}
+                                            {' '}
+                                            to
+                        {' '}
+                                            {moment(to).format('L')}
+                                            .
+                        {' '}<a href="." onClick={this.handleResetClick}>Reset</a>
+                                        </p>}
+                                    <p>You will view {tweetsSize} tweets. </p>
+                                    <Button primary onClick={() => this.loadTweets()}>View tweets</Button>
+
+                                </Card.Content>
+                            </Card>
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+
+
+
+
+
+                <Result result={this.state.data ? this.state.data.data.tweets : null} />
+            </Segment>
+        );
+    }
+}
+const DashboardWithData = withApollo(Dashboard);
+export default withApollo(Dashboard);

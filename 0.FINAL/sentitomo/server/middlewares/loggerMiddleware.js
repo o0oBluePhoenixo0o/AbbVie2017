@@ -12,8 +12,6 @@ import logger from '../service/logger.js';
  * @return {type} {description}
  */
 export default function loggingMiddleware(req, res, next) {
-    logger.log('debug', 'IP Request', {
-        ip: req.ip
-    });
+    logger.log('debug', 'IP Request: ' + req.ip);
     next();
 }

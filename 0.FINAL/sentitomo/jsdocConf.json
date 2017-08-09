@@ -1,12 +1,9 @@
 {
     "source": {
-        "include": [
-            "server/"
-        ],
+        "includePattern": ".*\\.(js|jsx)$",
         "exclude": [
             "server/node_modules/"
-        ],
-        "includePattern": ".+\\.js(doc|x)?$",
-        "excludePattern": "(^|\\/|\\\\)_"
+        ]
     }
 }
+// Generate it: jsdoc ./server -r -c jsdocConf.json -d ./docs
