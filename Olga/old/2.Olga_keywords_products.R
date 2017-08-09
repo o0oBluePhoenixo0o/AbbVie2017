@@ -1,3 +1,4 @@
+#How to search for tweets in R
 #install the necessary packages
 install.packages("twitteR")
 
