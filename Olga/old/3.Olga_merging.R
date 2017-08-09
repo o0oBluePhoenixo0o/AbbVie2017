@@ -1,3 +1,6 @@
+#
+#Combine the search results in csv file
+#
 setwd("~/Desktop/Products3/word")
 #Using prevoius file
 source(keywords_products.R)
