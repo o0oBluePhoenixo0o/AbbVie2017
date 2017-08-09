@@ -154,17 +154,13 @@ dtm <- create_dtm(it_df, vectorizer)
 SEED = sample(1:length(preprocess_final),1000)
 
 
-# Different K values
-k_num = c(10, 10*c(2:9, 10)) 
-
-
 # Function for find the best k vaule
-bestK <- function(b_dtm = dtm, b_k = k_num, b_seed = SEED)
+bestK <- function(b_dtm = dtm, b_seed = SEED)
   {
   perplexity_CTM = NULL
-  for(k in b_k)
+  for(i in 1:10)
   {
-    ap_CTM <- CTM(b_dtm, k = b_k, 
+    ap_CTM <- CTM(b_dtm, k = 10*i, 
                   control = list(seed =b_seed,
                                  var = list(tol = 10^-4), 
                                  em = list(tol = 10^-2)))
@@ -179,7 +175,7 @@ bestK <- function(b_dtm = dtm, b_k = k_num, b_seed = SEED)
 
 
 # Apply function
-k_perplexity <- bestK(dtm, k_num, SEED)
+k_perplexity <- bestK(dtm, SEED)
 
 
 
