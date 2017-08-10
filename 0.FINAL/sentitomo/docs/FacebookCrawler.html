@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: Export</title>
+    <title>JSDoc: Class: FacebookCrawler</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: Export</h1>
+    <h1 class="page-title">Class: FacebookCrawler</h1>
 
     
 
@@ -28,8 +28,9 @@
 
 <header>
     
+        <h2><span class="attribs"><span class="type-signature"></span></span>FacebookCrawler<span class="signature">(config)</span><span class="type-signature"></span></h2>
         
-            
+            <div class="class-description">Class for crawling Facebook data</div>
         
     
 </header>
@@ -38,20 +39,74 @@
     <div class="container-overview">
     
         
-            <div class="description">Module which offers functions to convert JSON data to csv</div>
+
+    
+    <h2>Constructor</h2>
+    
+
+    
+    <h4 class="name" id="FacebookCrawler"><span class="type-signature"></span>new FacebookCrawler<span class="signature">(config)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
         
 
         
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
             
 
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
 
 
+            
+            </td>
 
+            
 
+            
 
+            <td class="description last">Config object which contains the Twitter API credentials</td>
+        </tr>
 
-
-
+    
+    </tbody>
+</table>
 
 
 
@@ -87,7 +142,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_export.js.html">util/export.js</a>, <a href="util_export.js.html#line1">line 1</a>
+        <a href="service_FacebookCrawler.js.html">service/FacebookCrawler.js</a>, <a href="service_FacebookCrawler.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -115,7 +170,6 @@
 
 
 
-        
     
     </div>
 
@@ -142,7 +196,7 @@
     
 
     
-    <h4 class="name" id="~convertSequlizeModelToCsv"><span class="type-signature">(inner) </span>convertSequlizeModelToCsv<span class="signature">(data, filepath)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id=".resolveResponse"><span class="type-signature">(static) </span>resolveResponse<span class="signature">(err, res)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
     
 
     
@@ -150,7 +204,7 @@
 
 
 <div class="description">
-    Writes an array of sequlize objects into a .csv file with the specified filepath
+    Resolves a response from the Facebook Graph API. Useful for resolving the pagination inside the response objects.
 </div>
 
 
@@ -186,13 +240,13 @@
 
         <tr>
             
-                <td class="name"><code>data</code></td>
+                <td class="name"><code>err</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array</span>
+<span class="param-type">Object</span>
 
 
             
@@ -202,20 +256,20 @@
 
             
 
-            <td class="description last">Data model array returned from a sequelize query</td>
+            <td class="description last">Error object</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>filepath</code></td>
+                <td class="name"><code>res</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">Object</span>
 
 
             
@@ -225,7 +279,7 @@
 
             
 
-            <td class="description last">Filepath where the csv gets stored</td>
+            <td class="description last">Response object</td>
         </tr>
 
     
@@ -266,7 +320,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_export.js.html">util/export.js</a>, <a href="util_export.js.html#line31">line 31</a>
+        <a href="service_FacebookCrawler.js.html">service/FacebookCrawler.js</a>, <a href="service_FacebookCrawler.js.html#line97">line 97</a>
     </li></ul></dd>
     
 
@@ -292,6 +346,10 @@
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    Promise, when the new result is fetched
+</div>
+
 
 
 <dl>
@@ -300,7 +358,7 @@
     </dt>
     <dd>
         
-<span class="param-type">void</span>
+<span class="param-type">Promise</span>
 
 
     </dd>
@@ -318,7 +376,7 @@
     
 
     
-    <h4 class="name" id="~convertToCsvRaw"><span class="type-signature">(inner) </span>convertToCsvRaw<span class="signature">(data, filepath)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id=".searchAndSaveFBPages"><span class="type-signature">(static) </span>searchAndSaveFBPages<span class="signature">(keyword)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -326,7 +384,8 @@
 
 
 <div class="description">
-    Writes an array JSON objects into a .csv file with the specified filepath
+    Searches for Facebook pages which match the keyword. It also inserts the found pages and their posts into the database. 
+Only pages with matching categories (.env file config) are saved.
 </div>
 
 
@@ -362,30 +421,7 @@
 
         <tr>
             
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Raw JSON Array of objects</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>filepath</code></td>
+                <td class="name"><code>keyword</code></td>
             
 
             <td class="type">
@@ -401,7 +437,7 @@
 
             
 
-            <td class="description last">Filepath where the csv gets stored</td>
+            <td class="description last">Keyword for searching Facebook pages</td>
         </tr>
 
     
@@ -442,12 +478,19 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_export.js.html">util/export.js</a>, <a href="util_export.js.html#line8">line 8</a>
+        <a href="service_FacebookCrawler.js.html">service/FacebookCrawler.js</a>, <a href="service_FacebookCrawler.js.html#line18">line 18</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>File /server/.env</li>
+        </ul>
+    </dd>
     
 
     

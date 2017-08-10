@@ -16,8 +16,7 @@ require('dotenv').config();
 const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
     dialect: 'mysql',
     host: process.env.DB_HOST,
-    /*
-        logging: false,*/
+    /*logging: false,*/
     pool: {
         max: 5,
         min: 1,
@@ -38,11 +37,11 @@ db.authenticate()
 
 
 /**
- * @constant Author
+ * @constant TweetAuthor
  * @type {Object}
  * @description Represents the Author table for tweets
  */
-const Author = db.define('TW_User', {
+const TweetAuthor = db.define('TW_User', {
     id: {
         type: Sequelize.STRING,
         primaryKey: true
@@ -58,8 +57,6 @@ const Author = db.define('TW_User', {
     }
 });
 
-
-//TODO: Either constantly also feed the Dash, or use a varibale 'inDash' for Bulk insert
 /**
  * @constant Tweet
  * @type {Object}
@@ -178,11 +175,11 @@ const Dashboard = db.define('TW_DASH', {
 });
 
 /**
- * @const Sentiment
+ * @const TweetSentiment
  * @type {Object}
  * @description Represents the sentiment table, is referenced from the raw tweets table
  */
-const Sentiment = db.define('TW_SENTIMENT', {
+const TweetSentiment = db.define('TW_SENTIMENT', {
     id: {
         type: Sequelize.STRING,
         primaryKey: true
@@ -208,12 +205,11 @@ const Sentiment = db.define('TW_SENTIMENT', {
 })
 
 /**
-const Topic = db.define('TW_TOPIC', {
- * @const Topic
+ * @const TweetTopic
  * @type {Object}
  * @description Represents the topic table, is referenced from the raw tweets table
  */
-const Topic = db.define('TW_TOPIC', {
+const TweetTopic = db.define('TW_TOPIC', {
     id: {
         type: Sequelize.STRING,
         primaryKey: true
@@ -238,35 +234,110 @@ const Topic = db.define('TW_TOPIC', {
     }
 })
 
-Author.hasMany(Tweet);
-Tweet.belongsTo(Author);
+TweetAuthor.hasMany(Tweet);
+Tweet.belongsTo(TweetAuthor);
 
-Tweet.Sentiment = Tweet.hasOne(Sentiment, {
+Tweet.Sentiment = Tweet.hasOne(TweetSentiment, {
     foreignKey: 'id',
     onDelete: 'cascade'
 });
 
-Tweet.Topic = Tweet.hasOne(Topic, {
+Tweet.Topic = Tweet.hasOne(TweetTopic, {
     foreignKey: 'id',
     onDelete: 'cascade'
 });
 
+
+/**
+ * @const FacebookPage
+ * @type {Object}
+ * @description Represents the table for Facebook pages
+ */
+const FacebookProfile = db.define('FB_Profile', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    keyword: {
+        type: Sequelize.STRING
+    },
+    name: {
+        type: Sequelize.STRING
+    },
+    category: {
+        type: Sequelize.STRING
+    },
+    likes: {
+        type: Sequelize.INTEGER
+    },
+    type: {
+        type: Sequelize.STRING
+    }
+});
+
+/**
+ * @const FacebookPost
+ * @type {Object}
+ * @description Represents the table for Facebook posts
+ */
+const FacebookPost = db.define('FB_Post', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    message: {
+        type: Sequelize.STRING
+    },
+    story: {
+        type: Sequelize.STRING
+    },
+    likes: {
+        type: Sequelize.INTEGER
+    },
+    created: {
+        type: Sequelize.DATE,
+    }
+});
+
+/**
+ * @const FacebookComment
+ * @type {Object}
+ * @description Represents the table for Facebook comments
+ */
+const FacebookComment = db.define('FB_Comment', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+});
+
+FacebookProfile.hasMany(FacebookPost);
+FacebookPost.belongsTo(FacebookProfile);
+
+FacebookPost.hasMany(FacebookComment);
+FacebookComment.belongsTo(FacebookPost);
 
 
 //Create tables if not exist
-Author.sync()
+TweetAuthor.sync()
 Tweet.sync()
 Dashboard.sync();
-Sentiment.sync();
-Topic.sync({
-    force: true
-});
+TweetSentiment.sync();
+TweetTopic.sync();
+
+
+FacebookProfile.sync();
+FacebookPost.sync();
+FacebookComment.sync();
 
 
 export {
-    Author,
+    TweetAuthor,
     Tweet,
-    Sentiment,
-    Topic,
+    TweetSentiment,
+    TweetTopic,
+    FacebookProfile,
+    FacebookPost,
+    FacebookComment,
     Dashboard,
 };

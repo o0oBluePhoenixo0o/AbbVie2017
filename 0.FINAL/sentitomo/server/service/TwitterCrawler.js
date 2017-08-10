@@ -1,21 +1,20 @@
-/** @class TwitterCrawler 
- *  @param  {Object} config Config object which contains the Twitter API credentials
- *  @classdesc Class for crawling Twitter data
-*/
 import Twitter from 'twitter';
 import moment from 'moment';
 import {
-    Author,
+    TweetAuthor,
     Tweet,
-    Sentiment,
-    Topic
+    TweetSentiment,
+    TweetTopic
 } from '../data/connectors';
 import { getKeyword, stripHTMLTags } from '../util/utils';
 import { preprocessTweetMessage } from '../ML/preprocess.js';
 import { detectSentiment, detectSarcasm, detectTopicStatic, detectTopicDynamic, detectTopicCTM } from '../ML/ml_wrapper.js';
 import logger from './logger.js';
 
-
+/** @class TwitterCrawler 
+ *  @param  {Object} config Config object which contains the Twitter API credentials
+ *  @classdesc Class for crawling Twitter data
+*/
 export default class TwitterCrawler {
 
     constructor(config) {
@@ -41,13 +40,13 @@ export default class TwitterCrawler {
     }
 
     /**
-     * @function updateAuthors
+     * @function updateTweetAuthors
      * @description Updates all Twitter users in the database
      * @memberof TwitterCrawler
      * @return {void}
      */
-    updateAuthors() {
-        Author.findAll({
+    updateTweetAuthors() {
+        TweetAuthor.findAll({
             where: {
                 followercount: null
             }
@@ -63,7 +62,7 @@ export default class TwitterCrawler {
                             (error, tweets, response) => {
                                 if (!error && tweets[0]) {
                                     console.log(tweets[0]);
-                                    Author.update({
+                                    TweetAuthor.update({
                                         followercount: tweets[0].followers_count,
                                         screenname: tweets[0].screen_name
                                     }, {
@@ -98,10 +97,10 @@ export default class TwitterCrawler {
      * @description Starts using the Twitter API with the specified filters. When a new tweet is crawled it upserts the author data
      * and inserts the raw tweet data into the database. It also detects the sentiment of the tweet, along with detecting sarcasm and emoji sentiment.
      * @see {@link module:ML_Wrapper~detectSarcasm}
-     * @see {@link module:Connectors~Author}
+     * @see {@link module:Connectors~TwitterAuthor}
      * @see {@link module:Connectors~Tweet}
-     * @see {@link module:Connectors~Sentiment}
-     * @see {@link module:Connectors~Topic}
+     * @see {@link module:Connectors~TwitterSentiment}
+     * @see {@link module:Connectors~TwitterSentiment}
      * @memberof TwitterCrawler
      * @return {void}
      */
@@ -119,14 +118,14 @@ export default class TwitterCrawler {
                             event.text
                         );
                         //Insert in the normal tables
-                        //If an author already exists it is updated
-                        Author.upsert({
+                        //If an TwitterAuthor already exists it is updated
+                        TweetAuthor.upsert({
                             id: event.user.id,
                             username: event.user.name,
                             screenname: event.user.screen_name,
                             followercount: event.user.followers_count
                         }).then(created => { // created is an boolean indicating whether the instance was created (1) or updated (0)
-                            Author.findOne({
+                            TweetAuthor.findOne({
                                 where: {
                                     id: event.user.id
                                 }

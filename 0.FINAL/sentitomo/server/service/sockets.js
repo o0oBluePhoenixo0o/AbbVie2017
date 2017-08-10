@@ -1,7 +1,7 @@
 /** @module Sockets */
 import SocketIO from 'socket.io';
 import { detectTopicLDADynamic } from '../ML/ml_wrapper';
-import { Tweet, Sentiment } from '../data/connectors';
+import { Tweet, TweetSentiment } from '../data/connectors';
 
 
 /**
@@ -34,7 +34,7 @@ export function listenToSockets(httpServer) {
                 var tweetsIDs = result.map((entry) => { return entry.key })
                 var returnResult = new Array();
 
-                Tweet.findAll({ where: { id: tweetsIDs }, include: [Sentiment] }).then(tweets => {
+                Tweet.findAll({ where: { id: tweetsIDs }, include: [TweetSentiment] }).then(tweets => {
                     tweets.forEach((tweet) => {
                         var topicTweet = result.find(x => x.key === tweet.id)
                         returnResult.push({

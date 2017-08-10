@@ -22,17 +22,8 @@ import Schema from './data/schema';
 import Resolvers from './data/resolvers';
 import Connectors from './data/connectors';
 import TwitterCrawler from './service/TwitterCrawler';
+import FacebookCrawler from './service/FacebookCrawler';
 import { listenToSockets } from './service/sockets';
-
-import {
-    detectSentiment,
-    detectSentimentEnsembleR,
-    detectSarcasm,
-    detectSentimentEnsemblePython,
-    detectTopicCTM,
-    detectTopicLDADynamic,
-    detectTopicLDAStatic
-} from './ML/ml_wrapper';
 
 
 import moment from 'moment';
@@ -44,6 +35,7 @@ var twitterCrawler = new TwitterCrawler({
     access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
+var facebookCrawler = new FacebookCrawler({});
 
 require('dotenv').config()
 require('./service/scheduling.js');
@@ -139,3 +131,5 @@ detectTopicLDADynamic(moment("2017-03-01"), moment("2017-03-31"), result => {
 //console.log(detectSentimentPhilipp("I really really love you that much!"))
 
 
+//facebookCrawler.searchAndSaveFBPages("humira");
+//facebookCrawler.searchAndSaveFBPages("enbrel");

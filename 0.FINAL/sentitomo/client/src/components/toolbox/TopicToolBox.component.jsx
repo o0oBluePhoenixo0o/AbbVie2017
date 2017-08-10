@@ -26,13 +26,14 @@ class TopicToolBox extends Component {
                 this.props.client.query({
                     query: gql`
                     query CountQuery($startDate: Date, $endDate: Date) {
-                        count(startDate: $startDate, endDate: $endDate)
+                        tweetCount(startDate: $startDate, endDate: $endDate)
                     }
                 `,
                     variables: { startDate: this.state.from, endDate: this.state.to },
                 }).then(response => {
+                    console.log(response);
                     this.setState({
-                        tweetsSize: response.data.count
+                        tweetsSize: response.data.tweetCount
                     })
                 });
             });

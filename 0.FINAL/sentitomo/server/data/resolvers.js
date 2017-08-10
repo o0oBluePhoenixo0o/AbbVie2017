@@ -1,8 +1,11 @@
 import {
-    Author,
+    TweetAuthor,
     Tweet,
-    Sentiment,
-    Topic
+    TweetSentiment,
+    TweetTopic,
+    FacebookProfile,
+    FacebookPost,
+    FacebookComment
 } from './connectors';
 import moment from 'moment';
 import GraphQLMoment from './scalar/GraphQLMoment';
@@ -16,11 +19,6 @@ import GraphQLMoment from './scalar/GraphQLMoment';
 const resolvers = {
     Date: GraphQLMoment,
     Query: {
-        author(_, args) {
-            return Author.find({
-                where: args
-            });
-        },
         tweet(_, args) {
             return Tweet.find({
                 where: args
@@ -41,19 +39,23 @@ const resolvers = {
                 offset: args.offset,
                 where: where,
             });
-
         },
-        sentiment(_, args) {
-            return Sentiment.find({
+        tweetAuthor(_, args) {
+            return TweetAuthor.find({
                 where: args
             });
         },
-        topic(_, args) {
-            return Topic.find({
+        tweetSentiment(_, args) {
+            return TweetSentiment.find({
                 where: args
             });
         },
-        count(_, args) {
+        tweetTopic(_, args) {
+            return TweetTopic.find({
+                where: args
+            });
+        },
+        tweetCount(_, args) {
             var where;
             if (args.startDate && args.endDate) {
                 where = {
@@ -66,12 +68,33 @@ const resolvers = {
             return Tweet.count({
                 where: where
             });
-        }
-    },
-    Author: {
-        tweets(author) {
-            return author.getTweets();
         },
+        facebookPost(_, args) {
+            return FacebookPost.find({
+                where: args
+            });
+        },
+        facebookPosts(_, args) {
+            var where;
+            if (args.startDate && args.endDate) {
+                where = {
+                    created: {
+                        $lt: args.endDate, // less than
+                        $gt: args.startDate //greater than
+                    }
+                };
+            }
+            return FacebookPost.findAll({
+                limit: args.limit,
+                offset: args.offset,
+                where: where,
+            });
+        },
+        facebookProfile(_, args) {
+            return FacebookProfile.find({
+                where: args
+            });
+        }
     },
     Tweet: {
         author(tweet) {
@@ -84,6 +107,23 @@ const resolvers = {
             return tweet.getTW_TOPIC();
         }
     },
+    TweetAuthor: {
+        tweets(author) {
+            return author.getTweets();
+        },
+    },
+    FacebookPost: {
+        author(facebookPost) {
+            return facebookPost.getFB_Profile();
+        }
+    },
+    FacebookProfile: {
+        posts(facebookProfile) {
+            console.log(facebookProfile)
+            return facebookProfile.getFB_Posts();
+        }
+    }
+
 };
 
 export default resolvers;

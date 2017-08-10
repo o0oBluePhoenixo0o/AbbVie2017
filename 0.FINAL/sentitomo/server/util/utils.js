@@ -1,6 +1,5 @@
 /** @module Utils */
 
-
 var _this = this;
 
 /** 
@@ -56,7 +55,6 @@ function getKeyword(message, filters) {
             key = keyword;
         }
     });
-    console.log("keyword: " + key)
     return key;
 }
 
@@ -69,8 +67,6 @@ function getKeyword(message, filters) {
 function stripHTMLTags(text) {
     return text.replace(/<\/?[^>]+(>|$)/g, '');
 }
-
-
 
 function importTweetCsv(csvFile) {
 

@@ -24,24 +24,25 @@ const typeDefinitions = `
     favoriteCount: Int
     isRetweet: Boolean
     retweeted: Int
-    author: Author
-    sentiment: Sentiment
-    topic: Topic
+    author: TweetAuthor
+    sentiment: TweetSentiment
+    topic: TweetTopic
   }
 
-  type Author {
+  type TweetAuthor {
     id: String
     username: String
     screenname: String
     tweets: [Tweet]
   }
 
-  type Sentiment {
+  type TweetSentiment {
     id: String
     sentiment: String
+    sarcastic: Float
   }
 
-  type Topic {
+  type TweetTopic {
     id: String
     topic1Month: String
     topic1Month_C: String
@@ -51,13 +52,36 @@ const typeDefinitions = `
     topicWhole: String
   }
 
+  type FacebookProfile{
+    id: String
+    keyword: String
+    name: String
+    category: String
+    likes: Int
+    type: String
+    posts: [FacebookPost]
+  }
+
+  type FacebookPost{
+    id: String
+    message: String
+    story:String
+    likes: Int
+    created: Date
+    author: FacebookProfile
+  }
+
   type Query {
     tweet(id: String): Tweet
-    sentiment(id: String): Sentiment
-    topic(id: String): Topic
-    author(username: String): Author
     tweets(limit: Int, offset: Int, startDate: Date, endDate: Date): [Tweet]
-    count(startDate: Date, endDate: Date): Int
+    tweetAuthor(username: String): TweetAuthor
+    tweetSentiment(id: String): TweetSentiment
+    tweetTopic(id: String): TweetTopic
+    tweetCount(startDate: Date, endDate: Date): Int
+    facebookPost(id: String): FacebookPost
+    facebookPosts(limit: Int, offset: Int, startDate: Date, endDate: Date): [FacebookPost]
+    facebookProfile(id: String): FacebookProfile
+
   }
 
   schema {
