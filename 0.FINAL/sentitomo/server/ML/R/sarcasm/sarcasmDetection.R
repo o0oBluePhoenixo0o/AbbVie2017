@@ -4,11 +4,8 @@ needs(e1071)
 needs(tm)
 needs(data.table)
 
-
-# Load pre-trained model 23.07
-load('./ML/R/sarcasm/SD_NB_2307.dat')
-# Load list of delete words 23.07
-load('./ML/R/sarcasm/del_word.dat')
+#load list of models
+load("./ML/R/sarcasm/Sarcasm_Obj.RData");
 
 # Get the command line arguments
 args = commandArgs(trailingOnly=TRUE)
@@ -70,22 +67,28 @@ dtm <- DocumentTermMatrix(corp, control =
 
 #remove sparsity and prepare data frame
 sparse <- removeSparseTerms(dtm, 0.9992)
-df <- data.table(as.matrix(sparse))
+prep <- data.table(as.matrix(sparse))
 
 # removing del.words features from master
-df[, (del.words) := NULL]
+prep[, (del.words) := NULL]
 
 # creating master data set
-df <- as.data.frame(df)
+prep <- as.data.frame(prep)
+
+#create new dtm that matches original dtm for training
+xx <- left_join(prep,df[1,])
+
+#put everything to 0s except the message
+xx[,ncol(prep)+1:ncol(xx)] <- 0
 
 #Binning 
-df <- data.frame(lapply(df[,1:ncol(df)], function(x){ifelse(x==0,0,1)}))
+xx <- data.frame(lapply(xx[,1:ncol(xx)], function(x){ifelse(x==0,0,1)}))
 
 # Converting numericals to factors 
-df <- data.frame(lapply(df, as.factor))
+xx <- data.frame(lapply(xx, as.factor))
 
 #########################################################################
 # for robust Naive Bayes model with laplace estimator
-n.pred.lap <- predict(n.model.lap, df, type = 'raw')
+n.pred.lap <- predict(n.model.lap, xx, type = 'raw')
 output <- round(n.pred.lap[1,2]*100,2)
 cat(unname(output))

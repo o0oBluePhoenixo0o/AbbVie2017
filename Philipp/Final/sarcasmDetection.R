@@ -1,21 +1,19 @@
 # loading required packages
+source("./ML/R/needs.R");
 needs(e1071)
 needs(tm)
 needs(data.table)
 
+#load list of models
+load("./ML/R/sarcasm/Sarcasm_Obj.RData");
 
-# Load pre-trained model 23.07
-load('./ML/R/SD_NB_2307.dat')
-# Load list of delete words 23.07
-load('./ML/R/del_word.dat')
-
-# Get data from CORE table
-attach(input[[1]])
+# Get the command line arguments
+args = commandArgs(trailingOnly=TRUE)
 
 ## Assume CORE dataset is TW_df
 # Extract out only ID & Message
 
-TW_df <- message
+TW_df <- args[1]
 
 ###################################################
 # Preprocessing the TW_df and cleaning the corpus #
@@ -25,8 +23,8 @@ TW_df <- message
 # preprocessing steps- Case folding; Remove numbers, URLs, words 
 # and punctuation and perform stemming and stripping extra whitespaces
 
-conv_fun <- function(x) iconv(x, "latin1", "ASCII", "")
-removeURL <- function(x) gsub('"(http.*) |(http.*)$|\n', "", x)
+conv_fun <- function(x) iconv(x, "latin1", "ASCII", "") 
+removeURL <- function(x) gsub('"(http.*) |(http.*)$|\n', "", x) 
 
 # vec2clean.corp function takes two arguments: x = vector to be cleaned
 vec2clean.corp <- function(x){
@@ -69,22 +67,28 @@ dtm <- DocumentTermMatrix(corp, control =
 
 #remove sparsity and prepare data frame
 sparse <- removeSparseTerms(dtm, 0.9992)
-df <- data.table(as.matrix(sparse))
+prep <- data.table(as.matrix(sparse))
 
 # removing del.words features from master
-df[, (del.words) := NULL]
+prep[, (del.words) := NULL]
 
 # creating master data set
-df <- as.data.frame(df)
+prep <- as.data.frame(prep)
+
+#create new dtm that matches original dtm for training
+xx <- left_join(prep,df[1,])
+
+#put everything to 0s except the message
+xx[,ncol(prep)+1:ncol(xx)] <- 0
 
 #Binning 
-df <- data.frame(lapply(df[,1:ncol(df)], function(x){ifelse(x==0,0,1)}))
+xx <- data.frame(lapply(xx[,1:ncol(xx)], function(x){ifelse(x==0,0,1)}))
 
 # Converting numericals to factors 
-df <- data.frame(lapply(df, as.factor))
+xx <- data.frame(lapply(xx, as.factor))
 
 #########################################################################
 # for robust Naive Bayes model with laplace estimator
-n.pred.lap <- predict(n.model.lap, df, type = 'raw')
+n.pred.lap <- predict(n.model.lap, xx, type = 'raw')
 output <- round(n.pred.lap[1,2]*100,2)
-output
+cat(unname(output))
