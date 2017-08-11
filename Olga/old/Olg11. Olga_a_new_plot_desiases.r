@@ -1,4 +1,4 @@
-
+####Code for plot with fixed date format (also from rapidminer)####
 library(ggplot2)
 library(plyr)
 library(dplyr)
@@ -36,24 +36,6 @@ nrow(tweets.psoriasis)
 
 nrow(tweets.rheumatoid)
 
-#tweets.ankylosing1 <- subset(tweets, label == "ankylosing spondylitis")
-#tweets.ankylosing1<-tweets.ankylosing[grep("2017-[0-9]{2}-[0-9]{2}",tweets.ankylosing$Created.At),]
-#tweets.ankylosing1$created <- as.Date(tweets.ankylosing1$Created.At, format="%Y-%m-%d")
-#tweets.ankylosing1$created
-
-#tweets.ankylosing1 <- subset(tweets, label == "ankylosing spondylitis")
-#tweets.ankylosing1<-tweets.ankylosing[grep("2017-[0-9]{2}-[0-9]{2}",tweets.ankylosing$Created.At),]
-#tweets.ankylosing1$Created.At
-#nrow(tweets.ankylosing1)
-
-#tweets.ankylosing2 <- subset(tweets, label == "ankylosing spondylitis")
-#tweets.ankylosing2<-tweets.ankylosing[grep("[0-9]{1}/[0-9]{2}/2017",tweets.ankylosing$Created.At),]
-#nrow(tweets.ankylosing2)
-
-#tweets.ankylosing1 <- subset(tweets, label == "ankylosing spondylitis")
-#tweets.ankylosing1<-tweets.ankylosing[-grep("2017-[0-9]{2}-[0-9]{2}",tweets.ankylosing$Created.At),]
-#tweets.ankylosing1<-tweets.ankylosing[-grep("[0-9]{1}/[0-9]{2}/2017",tweets.ankylosing$Created.At),]
-#tweets.ankylosing1$Created.At
 
 tweets.ankylosing2 <- subset(tweets, label == "ankylosing spondylitis")
 tweets.ankylosing2<-tweets.ankylosing[grep("[0-9]{1}/[0-9]*/2017",tweets.ankylosing$Created.At),]
@@ -116,9 +98,7 @@ plotTweetsByMonth <- function (tweets, keywords){
   #tweets.month$created <- as.Date(tweets.month$created) # format to only show month and year
   tweets.month<- ddply(tweets.month, 'created', function(x) c(count=nrow(x)))
   
-  #tweets.month <-  tweets.month[order(as.yearmon(as.character(tweets.month$created),"%m-%Y")),] #use zoo's as.yearmon so that we can group by month/year
-  #tweets.month$created <- factor(tweets.month$created, levels=unique(as.character(tweets.month$created)) ) #so that ggplot2 respects the order of my dates
-  
+ #Code for drawing a plot  
   
   tweets.month.plot<-ggplot(data=tweets.month, aes(x=tweets.month$created, y=count, group = 1)) +
     geom_point() +
@@ -128,7 +108,7 @@ plotTweetsByMonth <- function (tweets, keywords){
          title = paste("Tweet count on keyword", keywords, sep = " "))
   return(tweets.month.plot)
 }
-
+#Drawing for different key words
 tweets.ankylosing.plot <- plotTweetsByMonth(tweets.ankylosing, "Ankylosing spondylitis")
 tweets.ankylosing.plot
 
