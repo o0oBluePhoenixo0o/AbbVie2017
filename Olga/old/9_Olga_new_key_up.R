@@ -1,3 +1,5 @@
+#####Final merge of files into one###
+
 setwd("~/Desktop/Products3/key0405_update")
 c <- data.frame()
 
@@ -16,6 +18,7 @@ colnames(final_new)
 final_new$X <-NULL
 #final_new$X.2 <-NULL
 final_new$X.1 <-NULL
+#Rename columns
 colnames(final_new)[5]<-'created_time'
 colnames(final_new)[1]<-"message"
 colnames(final_new)[10]<-"Source"
@@ -41,7 +44,8 @@ a<- data.frame(To.User.Id=a)
 final_new <- cbind(final_new,a)
 
 
-
+#Rearrange the order
 #final_news<- subset(final_new, select=c(4,7,14,15,16,17,6,1,12,11,8,5,13,2,3,9,10))
 final_news<- subset(final_new, select=c(13,4,7,15,16,17,14,6,1,12,11,8,5,2,3,9,10))
+#Write a file
 write.csv(final_news, file = "Final_TW_weekly_0405.csv")
