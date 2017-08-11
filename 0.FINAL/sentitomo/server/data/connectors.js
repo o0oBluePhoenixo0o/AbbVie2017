@@ -288,11 +288,17 @@ const FacebookPost = db.define('FB_Post', {
     message: {
         type: Sequelize.STRING
     },
+    lang: {
+        type: Sequelize.STRING
+    },
     story: {
         type: Sequelize.STRING
     },
     likes: {
         type: Sequelize.INTEGER
+    },
+    link: {
+        type: Sequelize.STRING
     },
     created: {
         type: Sequelize.DATE,
@@ -309,6 +315,12 @@ const FacebookComment = db.define('FB_Comment', {
         type: Sequelize.STRING,
         primaryKey: true
     },
+    message: {
+        type: Sequelize.TEXT
+    },
+    lang: {
+        type: Sequelize.TEXT
+    }
 });
 
 FacebookProfile.hasMany(FacebookPost);

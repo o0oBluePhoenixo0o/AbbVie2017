@@ -67,8 +67,18 @@ const typeDefinitions = `
     message: String
     story:String
     likes: Int
+    link: String
+    lang: String
     created: Date
     author: FacebookProfile
+    comments: [FacebookComment]
+  }
+
+  type FacebookComment{
+    id: String
+    message: String
+    lang: String
+    created: Date
   }
 
   type Query {

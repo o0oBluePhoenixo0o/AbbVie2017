@@ -1,5 +1,6 @@
 /** @module Sockets */
 import SocketIO from 'socket.io';
+import fs from 'fs';
 import { detectTopicLDADynamic } from '../ML/ml_wrapper';
 import { Tweet, TweetSentiment } from '../data/connectors';
 
@@ -23,7 +24,6 @@ export function listenToSockets(httpServer) {
         });
 
         socket.on('client:runTopicDetection', data => {
-
             socket.emit('server:response', {
                 level: 'success',
                 message: 'Topic detection has started at: ' + new Date(),
@@ -52,7 +52,8 @@ export function listenToSockets(httpServer) {
                         level: 'success',
                         message: 'Topic detection has finished at: ' + new Date(),
                         finished: true,
-                        result: returnResult
+                        result: returnResult,
+                        pyhtonLDAHTML: fs.readFileSync('./ML/Python/topic/dynamic/lda_tw40_0720.html').toString(),
                     });
                 })
             });

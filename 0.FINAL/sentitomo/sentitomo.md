@@ -801,7 +801,17 @@ With this application we wanted to show one way of using our findings and algori
 The client side was implemented in React, which makes it highly dynamical from a user point of view and well structured from a programmer's point of view. With the help of different packages it was possible to built a easy to use and good looking user interface.
 All in all we hope that we could show you one possible way of how to build a good solution for monitoring topics and trends in social media today.
 
-
-
-
+```mermaid
+sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->John: Hello John, how are you?
+    loop Healthcheck
+        John->John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts <br/>prevail...
+    John-->Alice: Great!
+    John->Bob: How about you?
+    Bob-->John: Jolly good!
+```
 

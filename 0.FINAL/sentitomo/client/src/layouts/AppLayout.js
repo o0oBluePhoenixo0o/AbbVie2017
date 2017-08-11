@@ -29,7 +29,8 @@ class Applayout extends React.Component {
             });
             this.setState({
                 loading: !data.finished,
-                result: data.result
+                result: data.result,
+                html: data.pyhtonLDAHTML
             });
 
             if (data.result) {
@@ -65,7 +66,7 @@ class Applayout extends React.Component {
                         <Switch>
                             <Route exact path={match.url + '/dashboard'} component={Dashboard} />
                             <Route path={match.url + '/toolbox'} component={ToolBox} />
-                            <Route path={match.url + '/result'} render={() => <Result result={this.state.result} />} />
+                            <Route path={match.url + '/result'} render={() => <Result result={this.state.result} html={this.state.html} />} />
 
                         </Switch>
                     </Container>

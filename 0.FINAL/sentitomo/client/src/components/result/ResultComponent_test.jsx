@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Checkbox, Grid, Label, List, Segment, Table, Header } from 'semantic-ui-react'
-import { PieChart, Pie, Cell, Legend, Tooltip, LineChart, XAxis, YAxis, CartesianGrid, Line, ResponsiveContainer, ComposedChart, Bar } from 'recharts';
+import { PieChart, Pie, Cell, Legend, Tooltip, LineChart, XAxis, YAxis, CartesianGrid, Line, ResponsiveContainer } from 'recharts';
 import randomColor from 'randomcolor';
 import dl from 'datalib';
 import moment from 'moment';
@@ -13,8 +13,7 @@ const data = [
         topic: "hepatitis, psoriasis, case, pediatric, dermatitis",
         topicProbability: 0.8374999999999982,
         created: "2017-07-09T10:00:01.000Z",
-        sentiment: "positive",
-        sentimentValue: 95.23
+        sentiment: "positive"
     },
     {
         id: "884020381849444352",
@@ -23,8 +22,7 @@ const data = [
         topic: "psoriasis, treatment, arthritis, antiseptic, p4mhl7ckq9",
         topicProbability: 0.9113636363636357,
         created: "2017-07-08T10:04:17.000Z",
-        sentiment: "neutral",
-        sentimentValue: 54.13
+        sentiment: "neutral"
     }, {
         id: "884021569177227264",
         message: "RT @patientsrising: Thank you @DrBobGoldberg @feliciatemple @StaceyLWorthy @aimedalliance @RareDiseases @CureSarcoma @Celgene @IpsenGroup @<U+2026>",
@@ -32,8 +30,7 @@ const data = [
         topic: "psoriasis, tina, nature, health, front",
         topicProbability: 0.8916666666666656,
         created: "2017-07-07T10:09:01.000Z",
-        sentiment: "negative",
-        sentimentValue: 32.23
+        sentiment: null
     },
     {
         id: "884022607653343232",
@@ -42,8 +39,7 @@ const data = [
         topic: "amgn, amgen, stake, sfmg, hepatitis",
         topicProbability: 0.5251771032239684,
         created: "2017-07-09T10:13:08.000Z",
-        sentiment: "neutral",
-        sentimentValue: 49.123
+        sentiment: "neutral"
     }
     , {
         id: "884023406445961216",
@@ -52,9 +48,7 @@ const data = [
         topic: "psoriasis, health, amgen, psorcoach, hospital",
         topicProbability: 0.9187499999999996,
         created: "2017-07-09T10:16:19.000Z",
-        sentiment: "positive",
-        sentimentValue: 89.23
-
+        sentiment: "neutral"
     },
     {
         id: "88401217",
@@ -63,8 +57,7 @@ const data = [
         topic: "psoriasis, health, amgen, psorcoach, hospital",
         topicProbability: 0.9187499999999996,
         created: "2017-07-09T10:20:19.000Z",
-        sentiment: "neutral",
-        sentimentValue: 50.34
+        sentiment: "neutral"
     }
 ];
 
@@ -81,9 +74,9 @@ const renderTopicLegend = (props) => {
         <List divided selection>
             {
                 payload.map((entry, index) => {
-                    return (<List.Item key={`item-${index}`} onClick={() => props.onClick(entry.payload.payload)}>
+                    return (<List.Item key={`item-${index}`} >
                         <Label style={{ background: entry.color }} horizontal />
-                        {entry.payload.payload.topic}
+                        <Checkbox label={entry.payload.payload.topic} onClick={() => props.onClick(entry.payload.payload)} />
                     </List.Item>)
 
                 })
@@ -151,7 +144,7 @@ class CustomSentimentToolTip extends Component {
 
 class Result extends Component {
 
-    state = { selectedEntry: null }
+    state = { selectedEntries: [] }
 
     /**
      * @function aggregateTopics
@@ -159,8 +152,9 @@ class Result extends Component {
      * @return {Array} Aggregrated topic array
      */
     aggregateTopics = (data) => {
-        var myData = dl.read(data, { type: 'json', parse: 'auto' });
-        return (dl.groupby(['topicId', 'topic']).count().execute(myData));
+        var des = [...data];
+        var aggr = dl.read(des, { type: 'json', parse: 'auto' });
+        return (dl.groupby(['topicId', 'topic']).count().execute(aggr));
     }
 
     /**
@@ -169,25 +163,41 @@ class Result extends Component {
      * @return {Array} Aggregrated sentiment array
      */
     aggregateSentiment = (data) => {
-        var myData = dl.read(data, { type: 'json', parse: 'auto' });
-        return (dl.groupby(['sentiment']).count().execute(myData));
+        var des = [...data];
+        var aggr = dl.read(des, { type: 'json', parse: 'auto' });
+        return (dl.groupby(['sentiment']).count().execute(aggr));
     }
 
     /**
      * @function aggregateDate
      * @param  {type} data Array of topic detection data
-     * @return {Array} Aggregrated date array
+     * @return {Array} Aggregrated date array, aggregrated by day
      */
-    aggregateDate = (data) => {
+    aggregateByDay = (data) => {
         console.log(data);
         var des = [...data];
         des.forEach((obj, index, array) => {
             array[index].created = new Date(array[index].created).setHours(0, 0, 0, 0)
         })
-        var myData = dl.read(des, { type: 'json', parse: 'auto' });
-        return (dl.groupby(['created'])
-            .summarize({ 'created': 'count', 'sentimentValue': ['average'] })
-            .execute(myData));
+        var aggr = dl.read(des, { type: 'json', parse: 'auto' });
+        var aggrCT = dl.groupby(['created', 'topicId']).count().execute(aggr);  //1. aggregrate by created time(C) and topicId(T)
+        var aggrCCT = dl.groupby(['created']).execute(aggrCT);//2. aggregrate again to have created time(C) on the top level and values specify the timeline data(CT - see 1.)
+
+
+        var final = new Array();
+        aggrCCT.forEach((element) => {
+            var data = new Object();
+            element.values.forEach(value => {
+                data[value.topicId] = value.count;
+            })
+            data.created = element.created;
+            final.push(data);
+        }, this);
+
+        console.log(final);
+
+
+        return (aggrCCT);
     }
 
 
@@ -198,20 +208,37 @@ class Result extends Component {
     }
 
     onTopicLegendClick = (data) => {
-        this.setState({
-            selectedEntry: data
+
+        var index = this.state.selectedEntries.findIndex(el => {
+            return el.topicId == data.topicId;
+        });
+        if (index == -1) {
+            this.setState({
+                selectedEntries: [...this.state.selectedEntries, data]
+            });
+        } else {
+            const prev = this.state.selectedEntries;
+            this.setState({
+                selectedEntries: [...prev.slice(0, index), ...prev.slice(index + 1)]
+            });
+        }
+    }
+
+    inState(id) {
+        return this.state.selectedEntries.some(function (item) {
+            return item.topicId === id;
         });
     }
 
 
 
     formatDate = (data) => {
-        console.log(data);
         return moment(data).format("DD-MM-YYYY");
     }
 
     render() {
-        const { result, html } = this.props;
+        const result = data;
+        //console.log(JSON.stringify(result));
         const { selectedEntry } = this.state;
 
         var aggregatedTopics = null;
@@ -231,7 +258,7 @@ class Result extends Component {
                     return element.topicId === selectedEntry.topicId
                 }));
 
-                aggregateDate = this.aggregateDate(result.filter(element => {
+                aggregateDate = this.aggregateByDay(result.filter(element => {
                     return element.topicId === selectedEntry.topicId
                 }));
             }
@@ -255,7 +282,7 @@ class Result extends Component {
                                                     }
                                                 </Pie>
                                                 <Tooltip content={<CustomTopicToolTip />} />
-                                                <Legend content={renderTopicLegend} style={{ maxHeight: "250px !important", overflow: "auto" }} onClick={this.onTopicLegendClick} />
+                                                <Legend content={renderTopicLegend} onClick={this.onTopicLegendClick} />
                                             </PieChart>
                                         </ResponsiveContainer >
                                     </Card.Content>
@@ -289,38 +316,28 @@ class Result extends Component {
                                 <Card fluid className="result">
                                     <Card.Content header={"Timeline"} />
                                     <Card.Content>
-                                        {this.state.selectedEntry ?
+                                        {this.state.selectedEntries ?
                                             <ResponsiveContainer height={400}>
-                                                <ComposedChart height={400} data={aggregateDate}
+                                                <LineChart height={400} data={this.aggregateByDay(result.filter(element => {
+                                                    return this.inState(element.topicId);
+                                                }))}
                                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                                                     <XAxis dataKey="created" tickFormatter={this.formatDate} />
                                                     <YAxis />
                                                     <CartesianGrid />
                                                     <Tooltip />
                                                     <Legend />
-                                                    <Bar dataKey='average_sentimentValue' barSize={20} fill='#413ea0'>
-                                                        {
-                                                            aggregateDate.map((entry, index) => {
-                                                                return (<Cell key={`cell-${index}`} fill={entry.average_sentimentValue < 35.00 ? "#e74c3c" : entry.average_sentimentValue > 85.00 ? "#2ecc71" : "#f1c40f"} />)
-                                                            })
-                                                        }
-                                                    </Bar>
-                                                    <Line type="monotone" dataKey="count_created" stroke="#8884d8" />
-                                                </ComposedChart>
+
+
+
+                                                    {Object.keys(this.aggregateByDay(result.filter(element => {
+                                                        return this.inState(element.topicId);
+                                                    }))).forEach(key => {
+                                                        return <Line type="monotone" dataKey={key.toString()} stroke="#8884d8" />
+                                                    })}
+                                                </LineChart>
                                             </ResponsiveContainer >
                                             : ""}
-                                    </Card.Content>
-                                </Card>
-                            </Grid.Column>
-                        </Grid.Row>
-                        <Grid.Row>
-                            <Grid.Column mobile={16} tablet={16} computer={16}>
-                                <Card fluid>
-                                    <Card.Content>
-                                        <Card.Header>LDA HTML</Card.Header>
-                                    </Card.Content>
-                                    <Card.Content>
-                                        <iframe src="http://localhost:8080/ldaresult" frameBorder="0" style={{ width: "1250px", height: "900px" }}></iframe>
                                     </Card.Content>
                                 </Card>
                             </Grid.Column>

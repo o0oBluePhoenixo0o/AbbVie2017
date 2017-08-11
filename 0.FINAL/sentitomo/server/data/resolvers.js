@@ -115,6 +115,9 @@ const resolvers = {
     FacebookPost: {
         author(facebookPost) {
             return facebookPost.getFB_Profile();
+        },
+        comments(facebookPost) {
+            return facebookPost.getFB_Comments();
         }
     },
     FacebookProfile: {

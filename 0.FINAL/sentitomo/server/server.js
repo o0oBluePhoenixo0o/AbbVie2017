@@ -72,7 +72,11 @@ server.use('/graphiql', graphiqlExpress({
     endpointURL: '/graphql',
 }));
 
-server.get('*', (req, res) => {
+server.get('/ldaresult', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../server/ML/Python/topic/dynamic/lda_tw40_0720.html'));
+});
+
+server.get('/app/*', (req, res) => {
     res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 });
 
