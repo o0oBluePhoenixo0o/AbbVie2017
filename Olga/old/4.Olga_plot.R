@@ -1,4 +1,4 @@
-#This file is used for computating the different plots on posts and comments to differnt products
+######This file is used for computating the different plots on posts and comments to differnt products######
 library(ggplot2)
 library(plyr)
 library(dplyr)
@@ -36,7 +36,7 @@ plotTweetsByMonth <- function (tweets, keywords){
   #tweets.month <-  tweets.month[order(as.yearmon(as.character(tweets.month$created),"%m-%Y")),] #use zoo's as.yearmon so that we can group by month/year
   #tweets.month$created <- factor(tweets.month$created, levels=unique(as.character(tweets.month$created)) ) #so that ggplot2 respects the order of my dates
   
-  
+  #The code for plot
   tweets.month.plot<-ggplot(data=tweets.month, aes(x=tweets.month$created, y=count, group = 1)) +
     geom_point() +
     geom_line(aes(colour = count), stat = "identity") + scale_colour_gradient(low="red",high = "green") +
@@ -48,7 +48,7 @@ plotTweetsByMonth <- function (tweets, keywords){
 
 
 
-
+#Drawing for different keywords
 tweets.humira.plot <- plotTweetsByMonth(tweets.humira, "Humira")
 tweets.humira.plot
 ggsave("./img/humira_timeline_plot.png",tweets.humira.plot)
