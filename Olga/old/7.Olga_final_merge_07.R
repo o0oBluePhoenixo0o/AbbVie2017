@@ -1,9 +1,10 @@
+#####Merge files for keywords in one csv file#####
 setwd("~/Desktop/Products3/")
 
 
 final_old <- read.csv(file="Final_TW_3103.csv", header=TRUE, sep=",")
 final_new <- read.csv(file="key_up_07_04.csv", header=TRUE, sep=",")
-
+#Rearrange the structure
 
 final_new$X <-NULL
 final_new$X.2 <-NULL
@@ -22,7 +23,7 @@ colnames(final_new)[11]<-"Geo.Location.Longitude"
 colnames(final_new)[12]<-"Geo.Location.Latitude"
 colnames(final_old)[13]<-"key"
 
-
+#Add non-existing columns to be able to merge with old file from Rapidminer
 a<- matrix ("NA",nrow = length(final_old[,1]))
 a<- data.frame(favorited=a)
 final_old <- cbind(final_old,a)
@@ -56,7 +57,7 @@ a<- data.frame(Language=a)
 final_new <- cbind(final_new,a)
 
 final_news<- subset(final_new, select=c(4,7,14,15,16,17,6,1,12,11,8,5,13,2,3,9,10))
-
+#Change the key names
 for (i in 1:nrow(final_old)){
   if(final_old[i,]$key == "Abbvie")
   {
@@ -102,5 +103,5 @@ final <- rbind(final_old,final_news)
 
 #final <- subset(final, !duplicated(Text))
 final<-unique(final)
-
+#Write final csv
 write.csv(final, file = "Final_TW_0704.csv")
