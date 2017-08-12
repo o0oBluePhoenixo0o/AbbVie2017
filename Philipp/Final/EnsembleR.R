@@ -293,8 +293,8 @@ gbm.model <- h2o.gbm(  training_frame = trainH2O,
                        max_depth = 50, 
                        learn_rate = 0.3, 
                        seed = 1234)
-
-
+model_path <- h2o.saveModel(object=gbm.model, path=getwd(), force=TRUE)
+print(model_path)
 predictionsGBM <- as.data.frame(h2o.predict(gbm.model,testH2O))
 
 cmGBM <-   table(testSparse$sentiment, predictionsGBM$predict)
@@ -304,7 +304,7 @@ metrics(cmGBM)
 ##########################################################################################
 # H2O DRF
 
-h2o.init()
+# h2o.init() only need once
 
 # Build a training and testing set for H2O environment
 
@@ -321,6 +321,8 @@ h2o_drf <- h2o.randomForest(
   nbins_cats = 5000,            #
   seed = 1234)                  #
 
+model_path <- h2o.saveModel(object=h2o_drf, path=getwd(), force=TRUE)
+print(model_path)
 predictionsDRF <- as.data.frame(h2o.predict(h2o_drf,testH2O))
 cmDRF <- table(testSparse$sentiment, predictionsDRF$predict)
 
@@ -342,8 +344,8 @@ metrics(cmNB)
 
 #Pulling in positive and negative wordlists
 #BingLiu
-pos.words <- scan('Models/Positive.txt', what='character', comment.char=';') #folder with positive dictionary
-neg.words <- scan('Models/Negative.txt', what='character', comment.char=';') #folder with negative dictionary
+pos.words <- scan('../Models/Positive.txt', what='character', comment.char=';') #folder with positive dictionary
+neg.words <- scan('../Models/Negative.txt', what='character', comment.char=';') #folder with negative dictionary
 #Adding words to positive and negative databases
 pos.words=c(pos.words, 'Congrats', 'prizes', 'prize', 'thanks', 'thnx', 'Grt', 
             'gr8', 'plz', 'trending', 'recovering', 'brainstorm', 'leader')
@@ -422,7 +424,7 @@ for (i in 1:nrow(finaldf)){
 cmMAJOR <- table(finaldf$Sentiment, finaldf$Major)
 
 metrics(cmMAJOR)
-
+tweetsSparseX <- as.data.frame(as.matrix(sparse))
 ############
 # drop non-save objects
 rm(agg,CART,df,final_test,finaldf,g,NB,predictionsDRF,predictionsGBM,prep_test,result,RF,
@@ -440,7 +442,6 @@ corptest <- vec2clean.corp(test)
 prep_test <- DocumentTermMatrix(corptest)
 prep_test <- as.data.frame(as.matrix(prep_test))
 
-tweetsSparseX <- as.data.frame(as.matrix(sparse))
 colnames(tweetsSparseX) <- make.names(colnames(tweetsSparseX))
 
 tweetsSparseX[,1:ncol(tweetsSparseX)] <- 0
@@ -483,3 +484,4 @@ for (i in 1:nrow(final_test)){
 }
 final_test$Major
 
+h2o.shutdown(prompt = FALSE)
