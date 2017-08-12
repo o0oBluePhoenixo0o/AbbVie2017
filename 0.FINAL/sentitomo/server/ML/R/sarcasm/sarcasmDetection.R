@@ -88,4 +88,5 @@ df <- data.frame(lapply(df, as.factor))
 # for robust Naive Bayes model with laplace estimator
 n.pred.lap <- predict(n.model.lap, df, type = 'raw')
 output <- round(n.pred.lap[1,2]*100,2)
+
 cat(unname(output))

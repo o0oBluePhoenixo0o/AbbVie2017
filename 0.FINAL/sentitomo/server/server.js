@@ -25,6 +25,8 @@ import TwitterCrawler from './service/TwitterCrawler';
 import FacebookCrawler from './service/FacebookCrawler';
 import { listenToSockets } from './service/sockets';
 
+import { extractHashTags } from "./util/utils";
+import { detectSarcasmSync, detectSentimentEnsemblePythonSync, detectTopicLDAStatic } from './ML/ml_wrapper';
 
 import moment from 'moment';
 
@@ -130,10 +132,16 @@ detectTopicLDADynamic(moment("2017-03-01"), moment("2017-03-31"), result => {
 
 */
 //console.log("[1] 53.42".replace(/\s*\[(.+?)\]\s*/g, ""));
-//twitterCrawler.start();
+
+
 
 //console.log(detectSentimentPhilipp("I really really love you that much!"))
 
 
 //facebookCrawler.searchAndSaveFBPages("humira");
 //facebookCrawler.searchAndSaveFBPages("enbrel");
+
+detectTopicLDAStatic(JSON.stringify({ id: "123213", message: "Bristol-Myers Gets FDA Nod for Orencia's Label Expansion #Bristol #UK https://t.co/JYv1P37wXt" }), result => {
+    console.log(JSON.parse(result));
+})
+//twitterCrawler.start();

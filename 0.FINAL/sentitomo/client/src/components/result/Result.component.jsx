@@ -235,7 +235,7 @@ class Result extends Component {
                     return element.topicId === selectedEntry.topicId
                 }));
             }
-
+            //TODO: implement a toggle for the legend
             return (
                 <div className="result-pane">
                     {selectedEntry ? <Header size='large'>You selected: {selectedEntry.topic}</Header> : null}
@@ -245,7 +245,7 @@ class Result extends Component {
                                 <Card fluid className="result">
                                     <Card.Content header={"Aggregrated Topics"} />
                                     <Card.Content>
-                                        <ResponsiveContainer height={400}>
+                                        <ResponsiveContainer height={800}>
                                             <PieChart>
                                                 <Pie data={aggregatedTopics} dataKey="count" fill="#8884d8" label onClick={(entry, index) => this.onCellClick(entry, index)}>
                                                     {
@@ -255,7 +255,8 @@ class Result extends Component {
                                                     }
                                                 </Pie>
                                                 <Tooltip content={<CustomTopicToolTip />} />
-                                                <Legend content={renderTopicLegend} style={{ maxHeight: "250px !important", overflow: "auto" }} onClick={this.onTopicLegendClick} />
+
+                                                <Legend content={renderTopicLegend} style={{ maxHeight: "400px !important", overflow: "auto" }} onClick={this.onTopicLegendClick} />
                                             </PieChart>
                                         </ResponsiveContainer >
                                     </Card.Content>

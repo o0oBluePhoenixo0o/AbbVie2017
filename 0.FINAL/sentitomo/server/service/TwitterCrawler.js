@@ -6,9 +6,9 @@ import {
     TweetSentiment,
     TweetTopic
 } from '../data/connectors';
-import { getKeyword, stripHTMLTags } from '../util/utils';
+import { getKeyword, stripHTMLTags, extractHashTags } from '../util/utils';
 import { preprocessTweetMessage } from '../ML/preprocess.js';
-import { detectSentiment, detectSarcasm, detectTopicStatic, detectTopicDynamic, detectTopicCTM } from '../ML/ml_wrapper.js';
+import { detectSentimentEnsembleR, detectSarcasmSync, detectTopicStatic, detectSentimentEnsemblePythonSync } from '../ML/ml_wrapper.js';
 import logger from './logger.js';
 
 /** @class TwitterCrawler 
@@ -114,11 +114,10 @@ export default class TwitterCrawler {
             stream => {
                 stream.on('data', event => {
                     if (event.lang == 'en') {
-                        var messagePrep = preprocessTweetMessage(
-                            event.text
-                        );
-                        //Insert in the normal tables
-                        //If an TwitterAuthor already exists it is updated
+
+
+
+                        //If an TwitterAuthor already exists it gets updated
                         TweetAuthor.upsert({
                             id: event.user.id,
                             username: event.user.name,
@@ -130,10 +129,9 @@ export default class TwitterCrawler {
                                     id: event.user.id
                                 }
                             }).then(author => {
-                                detectSentiment('./ML/Java/sentiment/naivebayes.bin',
-                                    messagePrep,
-                                    result => {
-                                        author.createTW_CORE({
+                                detectSentimentEnsembleR(event.text,
+                                    sentiment => {
+                                        author.createTW_Tweet({
                                             id: event.id,
                                             keywordType: 'Placeholder',
                                             keyword: getKeyword(
@@ -150,7 +148,7 @@ export default class TwitterCrawler {
                                                 event.source
                                             ),
                                             message: event.text,
-                                            messagePrep: messagePrep,
+                                            hashtags: extractHashTags(event.text),
                                             latitude: event.coordinates ? event.coordinates[0] : null,
                                             longitude: event.coordinates ? event.coordinates[1] : null,
                                             retweetCount: event.retweet_count,
@@ -159,11 +157,11 @@ export default class TwitterCrawler {
                                             isRetweet: event.retweeted_status ?
                                                 true : false,
                                             retweeted: event.retweeted,
-                                            TW_SENTIMENT: {
-                                                sentiment: result,
-                                                sarcastic: detectSarcasm(event.text),
-                                                r_ensemble: '',
-                                                python_ensemble: '',
+                                            TW_Sentiment: {
+                                                sentiment: sentiment.toLowerCase().trim(), // remove whitespaces and line breaks
+                                                sarcastic: detectSarcasmSync(event.text),
+                                                r_ensemble: sentiment.toLowerCase().trim(), // remove whitespaces and line breaks
+                                                python_ensemble: detectSentimentEnsemblePythonSync(event.text).trim(), // remove whitespaces and line breaks
                                             }
                                         }, {
                                                 include: [{

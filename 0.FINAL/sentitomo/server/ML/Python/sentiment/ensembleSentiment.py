@@ -58,11 +58,11 @@ res = pd.DataFrame(index=range(0, 1), columns={'SentimentVader'})
 for i in range(1):
     vs = analyzer.polarity_scores(data_t)
     if ((vs['pos'] > 0)):
-        res.values[i] = 'pos'
+        res.values[i] = 'positive'
     elif ((vs['neg'] < 0)):
-        res.values[i] = 'neg'
+        res.values[i] = 'negative'
     else:
-        res.values[i] = 'neu'
+        res.values[i] = 'neutral'
 vader = res.SentimentVader
 
 #Use textblob to get polarity of text
@@ -72,11 +72,11 @@ res6 = testimonial.sentiment.polarity
 #Convert polarity to normal pos, neg, neu
 textblob1 = res6
 if ((res6 > 0)):
-    textblob1 = 'pos'
+    textblob1 = 'positive'
 elif ((res6 < 0)):
-    textblob1 = 'neg'
+    textblob1 = 'negative'
 else:
-    textblob1 = 'neu'
+    textblob1 = 'neutral'
 
 #Use textblob to get polarity of text with Naive Bayes analyzer
 tb = Blobber(analyzer=NaiveBayesAnalyzer())

@@ -20,7 +20,7 @@ needs(stringr)
 #load list of models
 load("./ML/R/sentiment/EnsembleR_objs.RData");
 
-#disable logging
+#disable logging, to make server life easier with reading the output, because h2o will output a lot of information messages
 sink("/dev/null")
 h2o.init()
 h2o.loadModel("./ML/R/sentiment/DRF_model_R_1502198489493_2")

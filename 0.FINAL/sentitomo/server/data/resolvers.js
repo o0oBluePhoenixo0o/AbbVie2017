@@ -101,10 +101,10 @@ const resolvers = {
             return tweet.getTW_User();
         },
         sentiment(tweet) {
-            return tweet.getTW_SENTIMENT();
+            return tweet.getTW_Sentiment();
         },
         topic(tweet) {
-            return tweet.getTW_TOPIC();
+            return tweet.getTW_Topic();
         }
     },
     TweetAuthor: {

@@ -62,7 +62,7 @@ const TweetAuthor = db.define('TW_User', {
  * @type {Object}
  * @description Represents the raw tweets table. It holds an forein key on the author table, sentiment table and topic table
  */
-const Tweet = db.define('TW_CORE', {
+const Tweet = db.define('TW_Tweet', {
     id: {
         type: Sequelize.STRING,
         primaryKey: true,
@@ -89,6 +89,9 @@ const Tweet = db.define('TW_CORE', {
         type: Sequelize.STRING
     },
     message: {
+        type: Sequelize.STRING
+    },
+    hashtags: {
         type: Sequelize.STRING
     },
     messagePrep: {
@@ -179,7 +182,7 @@ const Dashboard = db.define('TW_DASH', {
  * @type {Object}
  * @description Represents the sentiment table, is referenced from the raw tweets table
  */
-const TweetSentiment = db.define('TW_SENTIMENT', {
+const TweetSentiment = db.define('TW_Sentiment', {
     id: {
         type: Sequelize.STRING,
         primaryKey: true
@@ -209,27 +212,15 @@ const TweetSentiment = db.define('TW_SENTIMENT', {
  * @type {Object}
  * @description Represents the topic table, is referenced from the raw tweets table
  */
-const TweetTopic = db.define('TW_TOPIC', {
+const TweetTopic = db.define('TW_Topic', {
     id: {
         type: Sequelize.STRING,
         primaryKey: true
     },
-    topic1Month: {
-        type: Sequelize.STRING
+    topicId: {
+        type: Sequelize.INTEGER
     },
-    topic1Month_C: {
-        type: Sequelize.STRING
-    },
-    topic3Month: {
-        type: Sequelize.STRING
-    },
-    topic3Month_C: {
-        type: Sequelize.STRING
-    },
-    topicWhole: {
-        type: Sequelize.STRING
-    },
-    topicWhole_C: {
+    topicContent: {
         type: Sequelize.STRING
     }
 })
@@ -323,11 +314,70 @@ const FacebookComment = db.define('FB_Comment', {
     }
 });
 
+/**
+ * @const FacebookSentiment
+ * @type {Object}
+ * @description Represents the sentiment table for Facebook posts, is referenced from the Facebook posts table
+ */
+const FacebookSentiment = db.define('FB_Sentiment', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    sentiment: {
+        type: Sequelize.STRING
+    },
+    sarcastic: {
+        type: Sequelize.DOUBLE
+    },
+    emo_senti: {
+        type: Sequelize.INTEGER
+    },
+    emo_desc: {
+        type: Sequelize.STRING
+    },
+    r_ensemble: {
+        type: Sequelize.STRING
+    },
+    python_ensemble: {
+        type: Sequelize.STRING
+    }
+});
+
+/**
+ * @const FacebookTopic
+ * @type {Object}
+ * @description Represents the topic table for Facebook, is referenced from the Facebook posts table
+ */
+const FacebookTopic = db.define('FB_Topic', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    topicId: {
+        type: Sequelize.INTEGER
+    },
+    topicContent: {
+        type: Sequelize.STRING
+    }
+});
+
+
 FacebookProfile.hasMany(FacebookPost);
 FacebookPost.belongsTo(FacebookProfile);
 
 FacebookPost.hasMany(FacebookComment);
 FacebookComment.belongsTo(FacebookPost);
+
+FacebookPost.Sentiment = FacebookPost.hasOne(FacebookSentiment, {
+    foreignKey: 'id',
+    onDelete: 'cascade'
+});
+
+FacebookPost.Topic = FacebookPost.hasOne(FacebookTopic, {
+    foreignKey: 'id',
+    onDelete: 'cascade'
+});
 
 
 //Create tables if not exist
@@ -341,7 +391,8 @@ TweetTopic.sync();
 FacebookProfile.sync();
 FacebookPost.sync();
 FacebookComment.sync();
-
+FacebookSentiment.sync();
+FacebookTopic.sync();
 
 export {
     TweetAuthor,
@@ -351,5 +402,7 @@ export {
     FacebookProfile,
     FacebookPost,
     FacebookComment,
+    FacebookSentiment,
+    FacebookTopic,
     Dashboard,
 };

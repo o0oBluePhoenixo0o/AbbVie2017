@@ -54,6 +54,20 @@ export function detectSentimentEnsembleR(tweetMessage, callback) {
 }
 
 /**
+ * @function detectSentimentEnsembleRSync
+ * @param  {String} message  The message to detect the sentiment
+ * @description This is the synchronous version of {@link module:ML_Wrapper~detectSentimentEnsembleR}
+ * @see File server/ML/R/sentiment/ensembleSentiment.R
+ * @return {String} sentiment string
+ */
+export function detectSentimentEnsembleRSync(tweetMessage) {
+    var out = RShell('./ML/R/sentiment/ensembleSentiment.R')
+        .data([tweetMessage])
+        .calSync();
+    return out.replace(/\s*\[(.+?)\]\s*/g, "").replace(/"/g, ''); // Strip out the typical R prints 
+}
+
+/**
 * @function detectSarcasm
 * @param  {String} message The message to detect the sarcasm
 * @param  {Function} callback Function to handle the sentiment result
@@ -69,6 +83,20 @@ export function detectSarcasm(tweetMessage, callback) {
                 callback(result.replace(/\s*\[(.+?)\]\s*/g, "").replace(/"/g, '')); // Strip out the typical R prints 
             }
         });
+}
+
+/**
+* @function detectSarcasmSync
+* @param  {String} message The message to detect the sarcasm
+* @description This is the synchronous version of {@link module:ML_Wrapper~detectSarcasm}
+* @see File server/ML/R/sarcasm/sarcasmDetection.R
+* @return {Doube} A % number, indicating how much sarcastic this tweet is meant
+*/
+export function detectSarcasmSync(tweetMessage) {
+    var out = RShell('./ML/R/sarcasm/sarcasmDetection.R')
+        .data([tweetMessage])
+        .callSync();
+    return out.replace(/\s*\[(.+?)\]\s*/g, "").replace(/"/g, '');
 }
 
 /**
@@ -92,6 +120,21 @@ export function detectSentimentEnsemblePython(message, callback) {
         }
     })
 }
+
+/**
+ * @function detectSentimentEnsemblePythonSync
+ * @param  {String} message  The message to detect the sentiment
+ * @description This is the synchronous version of {@link module:ML_Wrapper~detectSentimentEnsemblePython}
+ * @see File server/ML/Python/sentiment/ensembleSentiment.R
+ * @return {String} sentiment string
+ */
+export function detectSentimentEnsemblePythonSync(message) {
+    var out = PythonShell("./ML/Python/sentiment/ensembleSentiment.py", 2)
+        .data([message])
+        .callSync();
+    return out;
+}
+
 
 /**
 * @function detectTopicCTM

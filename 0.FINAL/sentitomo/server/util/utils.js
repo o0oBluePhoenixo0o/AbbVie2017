@@ -61,11 +61,22 @@ function getKeyword(message, filters) {
 /**
  * @function stripHTMLTags
  * @param  {String} text A string containing HTML Tags
- * @description Parse out HTML tags
- * @return {String} String where every HTML tag is parsed out
+ * @description Remove all HTML tags
+ * @return {String} String where every HTML tag is stripped out
  */
 function stripHTMLTags(text) {
     return text.replace(/<\/?[^>]+(>|$)/g, '');
+}
+
+/**
+ * @function extractHashTags
+ * @param  {String} text A string containing hashtags
+ * @description Extract every hashtag from a given text. Returns a concatenated string of those.
+ * @return {String} Concatenated string with hashtags, separated by ','
+ */
+function extractHashTags(text) {
+    var matches = text.match(/\B\#\w\w+\b/g);
+    return matches ? matches.filter((element, index, array) => index === array.indexOf(element)).join(",") : null; // Filter array to have uniques and join them by ","
 }
 
 function importTweetCsv(csvFile) {
@@ -153,4 +164,4 @@ function importTweetCsv(csvFile) {
 
 }
 
-export { occurrences, getKeyword, stripHTMLTags, importTweetCsv }
+export { extractHashTags, occurrences, getKeyword, stripHTMLTags, importTweetCsv }
