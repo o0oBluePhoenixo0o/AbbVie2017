@@ -226,7 +226,7 @@ export function detectTopicLDADynamic(startDate, endDate, callback) {
  */
 export function detectTopicLDAStatic(jsonString, callback) {
     console.log('starting static');
-    PythonShell('./ML/Python/topic/static/final.py', 3).data([filename]).call(result => {
+    PythonShell('./ML/Python/topic/static/final.py', 3).data([jsonString]).call(result => {
         if (typeof callback === 'function') {
             callback(result);
         }

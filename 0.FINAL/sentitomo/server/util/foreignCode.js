@@ -88,8 +88,8 @@ class Python {
     */
     callSync() {
         const process = child_process.spawnSync(this.version == 2 ? 'python' : 'python3', this.args, defaults);
-        if (process.stderr) console.log(process.stderr);
-        return (process.stdout);
+        if (process.stderr) //console.log(process.stderr);
+            return (process.stdout);
     }
 }
 
@@ -167,8 +167,8 @@ class Java {
     */
     callSync() {
         const process = child_process.spawnSync('java', this.args, defaults);
-        if (process.stderr) console.log(process.stderr);
-        return (process.stdout);
+        if (process.stderr) //console.log(process.stderr);
+            return (process.stdout);
     }
 
 }
@@ -245,8 +245,8 @@ class R {
     */
     callSync() {
         const process = child_process.spawnSync('Rscript', this.args, defaults);
-        if (process.stderr) console.log(process.stderr);
-        return (process.stdout);
+        if (process.stderr) //console.log(process.stderr);
+            return (process.stdout);
     }
 }
 

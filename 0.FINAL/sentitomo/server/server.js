@@ -26,8 +26,7 @@ import FacebookCrawler from './service/FacebookCrawler';
 import TopicWorker from './service/TopicWorker';
 import { listenToSockets } from './service/sockets';
 
-import { extractHashTags } from "./util/utils";
-import { detectSarcasmSync, detectSentimentEnsemblePythonSync, detectTopicLDAStatic } from './ML/ml_wrapper';
+import { detectSentimentEnsembleR } from './ML/ml_wrapper';
 
 import moment from 'moment';
 
@@ -39,6 +38,7 @@ var twitterCrawler = new TwitterCrawler({
 });
 
 var facebookCrawler = new FacebookCrawler({});
+var topicWorker = new TopicWorker();
 
 require('dotenv').config()
 
@@ -148,7 +148,10 @@ detectTopicLDADynamic(moment("2017-03-01"), moment("2017-03-31"), result => {
 detectTopicLDAStatic(JSON.stringify({ id: "123213", message: "Bristol-Myers Gets FDA Nod for Orencia's Label Expansion #Bristol #UK https://t.co/JYv1P37wXt" }), result => {
     console.log(JSON.parse(result));
 })*/
-//twitterCrawler.start();
+twitterCrawler.start();
+//topicWorker.start();
 
-var topicWorker = new TopicWorker();
-topicWorker.start();
+
+/*detectSentimentEnsembleR('What does oppression look like? The government giving you syphilis &amp; hepatitis without your knowledge as an \"experiment\"', result => {
+    console.log(result);
+})*/
