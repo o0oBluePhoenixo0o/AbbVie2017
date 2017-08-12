@@ -26,7 +26,7 @@ require(caTools)
 require(e1071)
 
 # Get data from manual label dataset
-manual_test <- read.csv("Final_Manual_3006.csv", as.is = TRUE, sep = ",", stringsAsFactors = F)
+manual_test <- read.csv("Final_Manual_3007.csv", as.is = TRUE, sep = ",", stringsAsFactors = F)
 
 manual_test <- manual_test[,c(5,4,7)]
 colnames(manual_test) <- c("ID","tweet","label")
@@ -95,8 +95,8 @@ sarcasm.not <- TW_df[TW_df$label == 'non-sarcastic',]
 sarcasm.not <- unique(sarcasm.not)
 
 # corpus for both sarcastic and non-sarcastic
-corp.sarcasm = vec2clean.corp(sarcasm$tweet, 5)
-corp.sarcasm.not = vec2clean.corp(sarcasm.not$tweet, 5)
+corp.sarcasm = vec2clean.corp(sarcasm$tweet)
+corp.sarcasm.not = vec2clean.corp(sarcasm.not$tweet)
 
 # DTM for sarcasm and non sarcasm corpora
 dtm.sar <- DocumentTermMatrix(corp.sarcasm)
@@ -199,7 +199,9 @@ caret::confusionMatrix(xtab.lap)
 
 
 #save del.word for references
+# 
+# save(del.words, file = 'del_word.dat')
+# # save the model for later use 23.07.2017
+# save(n.model.lap, file= "SD_NB_2307.dat")
 
-save(del.words, file = 'del_word.dat')
-# save the model for later use 23.07.2017
-save(n.model.lap, file= "SD_NB_2307.dat")
+save.image(file="Sarcasm_Obj.RData")

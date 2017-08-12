@@ -9585,3 +9585,4 @@
 {"level":"info","message":"Start up server","timestamp":"2017-08-12T12:30:02.212Z"}
 {"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T12:30:02.287Z"}
 {"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T12:30:05.156Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T12:32:55.720Z"}
