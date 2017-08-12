@@ -217,7 +217,7 @@ export function detectTopicLDADynamic(startDate, endDate, callback) {
 }
 
 /**
- * @function detectTopicStatic
+ * @function detectTopicLDAStatic
  * @param  {String} jsonString A JSON representation of a tweet object to detect the topic
  * @param  {type} callback Callback function which handles the result
  * @description Uses a predefined model trained on all tweets at the end of this project to detect the topics of  a single tweet. Internally it uses LDA.
@@ -237,7 +237,7 @@ export function detectTopicLDAStatic(jsonString, callback) {
  * @function detectTopicLDAStaticBatch
  * @param  {String} filename Path to the .csv file containing the tweets
  * @description Uses a predefined model trained on all tweets at the end of this project to detect the topics of tweets inside a csv. Internally it uses LDA.
- * @see File server/ML/Python/topic/static/final.py
+ * @see File server/ML/Python/topic/static/staticBatch.py
  * @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
  */
 export function detectTopicLDAStaticBatch(csvFile, callback) {

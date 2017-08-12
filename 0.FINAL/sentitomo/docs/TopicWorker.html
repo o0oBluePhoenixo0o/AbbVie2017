@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: TwitterCrawler</title>
+    <title>JSDoc: Class: TopicWorker</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: TwitterCrawler</h1>
+    <h1 class="page-title">Class: TopicWorker</h1>
 
     
 
@@ -28,9 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>TwitterCrawler<span class="signature">(config)</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Class for crawling Twitter data</div>
+        <h2><span class="attribs"><span class="type-signature"></span></span>TopicWorker<span class="signature">()</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,18 +39,18 @@
         
 
     
-    <h2>Constructor</h2>
+
+    
+    <h4 class="name" id="TopicWorker"><span class="type-signature"></span>new TopicWorker<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
-    <h4 class="name" id="TwitterCrawler"><span class="type-signature"></span>new TwitterCrawler<span class="signature">(config)</span><span class="type-signature"></span></h4>
-    
-
-    
 
 
 
-
+<div class="description">
+    Class for simoultaneously detecting topics of tweets inside the database
+</div>
 
 
 
@@ -60,53 +58,6 @@
 
 
 
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>config</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Config object which contains the Twitter API credentials</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -142,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="service_TwitterCrawler.js.html">service/TwitterCrawler.js</a>, <a href="service_TwitterCrawler.js.html#line14">line 14</a>
+        <a href="service_TopicWorker.js.html">service/TopicWorker.js</a>, <a href="service_TopicWorker.js.html#line10">line 10</a>
     </li></ul></dd>
     
 
@@ -196,7 +147,7 @@
     
 
     
-    <h4 class="name" id=".start"><span class="type-signature">(static) </span>start<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id=".detectTopicPromise"><span class="type-signature">(static) </span>detectTopicPromise<span class="signature">(csvFile)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
     
 
     
@@ -204,119 +155,7 @@
 
 
 <div class="description">
-    Starts the tracking function with the specified filters in the .env file
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="service_TwitterCrawler.js.html">service/TwitterCrawler.js</a>, <a href="service_TwitterCrawler.js.html#line30">line 30</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li>File /server/.env</li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".track"><span class="type-signature">(static) </span>track<span class="signature">(filters)</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Starts using the Twitter API with the specified filters. When a new tweet is crawled it upserts the author data
-and inserts the raw tweet data into the database. It also detects the sentiment of the tweet, along with detecting sarcasm and emoji sentiment.
+    Wraps the result of the topic detection into a Promise to work with async and await concept
 </div>
 
 
@@ -352,7 +191,7 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
 
         <tr>
             
-                <td class="name"><code>filters</code></td>
+                <td class="name"><code>csvFile</code></td>
             
 
             <td class="type">
@@ -368,7 +207,7 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
 
             
 
-            <td class="description last">The filters which are used to track tweets from the Twitter API</td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -409,7 +248,7 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="service_TwitterCrawler.js.html">service/TwitterCrawler.js</a>, <a href="service_TwitterCrawler.js.html#line94">line 94</a>
+        <a href="service_TopicWorker.js.html">service/TopicWorker.js</a>, <a href="service_TopicWorker.js.html#line99">line 99</a>
     </li></ul></dd>
     
 
@@ -419,15 +258,123 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="module-ML_Wrapper.html#~detectSarcasm">module:ML_Wrapper~detectSarcasm</a></li>
+            <li><a href="module-ML_Wrapper.html#~detectTopicLDAStaticBatch">module:ML_Wrapper~detectTopicLDAStaticBatch</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
         
-            <li>module:Connectors~TwitterAuthor</li>
+<div class="param-desc">
+    Promise object represents sum of the topic detection
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
         
-            <li><a href="module-Connectors.html#~Tweet">module:Connectors~Tweet</a></li>
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
         
-            <li>module:Connectors~TwitterSentiment</li>
-        
-            <li>module:Connectors~TwitterSentiment</li>
+            
+
+    
+
+    
+    <h4 class="name" id=".detectTopics"><span class="type-signature">(static) </span>detectTopics<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Crawls n tweetsfrom the database where the topic is not yet detected. It will then use staticBatch.py file to detect the topics with LDA.
+If no tweets are found, where the topics are missing, the function will wait for 10 minutes to let new tweets gets crawled and then starts again.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="service_TopicWorker.js.html">service/TopicWorker.js</a>, <a href="service_TopicWorker.js.html#line42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>File server/ML/Python/topic/static/staticBatch.py</li>
         </ul>
     </dd>
     
@@ -476,7 +423,7 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
     
 
     
-    <h4 class="name" id=".updateTweetAuthors"><span class="type-signature">(static) </span>updateTweetAuthors<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id=".start"><span class="type-signature">(static) </span>start<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -484,7 +431,7 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
 
 
 <div class="description">
-    Updates all Twitter users in the database
+    Runs @see class:TopicWorker~detectTopics method to detect topics of tweets and posts inside the database
 </div>
 
 
@@ -528,7 +475,111 @@ and inserts the raw tweet data into the database. It also detects the sentiment 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="service_TwitterCrawler.js.html">service/TwitterCrawler.js</a>, <a href="service_TwitterCrawler.js.html#line42">line 42</a>
+        <a href="service_TopicWorker.js.html">service/TopicWorker.js</a>, <a href="service_TopicWorker.js.html#line19">line 19</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".start"><span class="type-signature">(static) </span>start<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Stops the topic detection of tweets
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="service_TopicWorker.js.html">service/TopicWorker.js</a>, <a href="service_TopicWorker.js.html#line31">line 31</a>
     </li></ul></dd>
     
 
