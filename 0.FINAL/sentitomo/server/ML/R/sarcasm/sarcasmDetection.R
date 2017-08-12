@@ -3,6 +3,7 @@ source("./ML/R/needs.R");
 needs(e1071)
 needs(tm)
 needs(data.table)
+needs(dplyr)
 
 #load list of models
 load("./ML/R/sarcasm/Sarcasm_Obj.RData");

@@ -70,6 +70,7 @@ const resolvers = {
             });
         },
         facebookPost(_, args) {
+            console.log(args);
             return FacebookPost.find({
                 where: args
             });
@@ -118,6 +119,12 @@ const resolvers = {
         },
         comments(facebookPost) {
             return facebookPost.getFB_Comments();
+        },
+        sentiment(facebookPost) {
+            return facebookPost.getFB_Sentiment();
+        },
+        topic(facebookPost) {
+            return facebookPost.getFB_Topic();
         }
     },
     FacebookProfile: {

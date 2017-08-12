@@ -220,16 +220,47 @@ export function detectTopicLDADynamic(startDate, endDate, callback) {
  * @function detectTopicStatic
  * @param  {String} jsonString A JSON representation of a tweet object to detect the topic
  * @param  {type} callback Callback function which handles the result
- * @description Uses a predefined model trained on all tweets at the end of this project to detect the topics of tweets. Internally it uses LDA.
+ * @description Uses a predefined model trained on all tweets at the end of this project to detect the topics of  a single tweet. Internally it uses LDA.
  * @see File server/ML/Python/topic/static/final.py
  * @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
  */
 export function detectTopicLDAStatic(jsonString, callback) {
     console.log('starting static');
-    PythonShell('./ML/Python/topic/static/final.py', 3).data([jsonString]).call(result => {
+    PythonShell('./ML/Python/topic/static/final.py', 3).data([filename]).call(result => {
         if (typeof callback === 'function') {
             callback(result);
         }
     })
 }
+
+/**
+ * @function detectTopicLDAStaticBatch
+ * @param  {String} filename Path to the .csv file containing the tweets
+ * @description Uses a predefined model trained on all tweets at the end of this project to detect the topics of tweets inside a csv. Internally it uses LDA.
+ * @see File server/ML/Python/topic/static/final.py
+ * @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
+ */
+export function detectTopicLDAStaticBatch(csvFile, callback) {
+    console.log('starting static batch');
+    var out = PythonShell('./ML/Python/topic/static/staticBatch.py', 3).data([csvFile]).call(result => {
+        if (typeof callback === 'function') {
+            callback(result);
+        }
+    })
+    return out;
+}
+
+/**
+ * @function detectTopicLDAStaticSync
+ * @param  {String} jsonString A JSON representation of a tweet object to detect the topic
+ * @description This is the synchronous version of {@link module:ML_Wrapper~detectTopicLDAStatic}
+ * @see File server/ML/Python/topic/static/final.py
+ * @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
+ */
+export function detectTopicLDAStaticSync(jsonString, callback) {
+    console.log('starting static');
+    var out = PythonShell('./ML/Python/topic/static/final.py', 3).data([jsonString]).callSync()
+    return out;
+}
+
 

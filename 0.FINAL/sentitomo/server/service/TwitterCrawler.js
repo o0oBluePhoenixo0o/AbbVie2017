@@ -8,7 +8,7 @@ import {
 } from '../data/connectors';
 import { getKeyword, stripHTMLTags, extractHashTags } from '../util/utils';
 import { preprocessTweetMessage } from '../ML/preprocess.js';
-import { detectSentimentEnsembleR, detectSarcasmSync, detectTopicStatic, detectSentimentEnsemblePythonSync } from '../ML/ml_wrapper.js';
+import { detectSentimentEnsembleR, detectSarcasmSync, detectTopicLDAStatic, detectSentimentEnsemblePythonSync } from '../ML/ml_wrapper.js';
 import logger from './logger.js';
 
 /** @class TwitterCrawler 
@@ -114,69 +114,81 @@ export default class TwitterCrawler {
             stream => {
                 stream.on('data', event => {
                     if (event.lang == 'en') {
+                        logger.log('info', 'New tweet, starting topic detection, afterwards the rest')
 
+                        detectTopicLDAStatic(JSON.stringify({ id: event.id, message: event.text }), topic => {
+                            var topic = JSON.parse(topic);
+                            console.log("Topic is here !")
+                            console.log(topic);
+                            TweetAuthor.upsert({
+                                id: event.user.id,
+                                username: event.user.name,
+                                screenname: event.user.screen_name,
+                                followercount: event.user.followers_count
+                            }).then(created => { // created is an boolean indicating whether the instance was created (1) or updated (0)
+                                TweetAuthor.findOne({
+                                    where: {
+                                        id: event.user.id
+                                    }
+                                }).then(author => {
+                                    detectSentimentEnsembleR(event.text,
+                                        sentiment => {
+                                            author.createTW_Tweet({
+                                                id: event.id,
+                                                keywordType: 'Placeholder',
+                                                keyword: getKeyword(
+                                                    event.text,
+                                                    filters
+                                                ),
+                                                created: event.created_at,
+                                                createdWeek: moment(
+                                                    event.created_at
+                                                ).week(),
+                                                toUser: event.in_reply_to_user_id,
+                                                language: event.lang,
+                                                source: stripHTMLTags(
+                                                    event.source
+                                                ),
+                                                message: event.text,
+                                                hashtags: extractHashTags(event.text),
+                                                latitude: event.coordinates ? event.coordinates[0] : null,
+                                                longitude: event.coordinates ? event.coordinates[1] : null,
+                                                retweetCount: event.retweet_count,
+                                                favorited: event.favorited,
+                                                favoriteCount: event.favorite_count,
+                                                isRetweet: event.retweeted_status ?
+                                                    true : false,
+                                                retweeted: event.retweeted,
+                                                TW_Sentiment: {
+                                                    sentiment: sentiment.toLowerCase().trim(), // remove whitespaces and line breaks
+                                                    sarcastic: detectSarcasmSync(event.text),
+                                                    r_ensemble: sentiment.toLowerCase().trim(), // remove whitespaces and line breaks
+                                                    python_ensemble: detectSentimentEnsemblePythonSync(event.text).trim(), // remove whitespaces and line breaks
+                                                },
+                                                TW_Topic: {
+                                                    topicId: topic[0].id,
+                                                    topicContent: topic[0].topic,
+                                                    probability: topic[0].probability
+                                                }
+                                            }, {
+                                                    include: [{
+                                                        association: Tweet.Sentiment,
+                                                        association: Tweet.Topic
+                                                    }]
+                                                })
+                                        })
+                                })
+                            }).catch(error => {
+                                console.log(error);
+                                logger.log('error', error);
+                                if (error.code == 'ER_DUP_ENTRY') { // user exists
 
+                                }
+                            });
+                        })
 
                         //If an TwitterAuthor already exists it gets updated
-                        TweetAuthor.upsert({
-                            id: event.user.id,
-                            username: event.user.name,
-                            screenname: event.user.screen_name,
-                            followercount: event.user.followers_count
-                        }).then(created => { // created is an boolean indicating whether the instance was created (1) or updated (0)
-                            TweetAuthor.findOne({
-                                where: {
-                                    id: event.user.id
-                                }
-                            }).then(author => {
-                                detectSentimentEnsembleR(event.text,
-                                    sentiment => {
-                                        author.createTW_Tweet({
-                                            id: event.id,
-                                            keywordType: 'Placeholder',
-                                            keyword: getKeyword(
-                                                event.text,
-                                                filters
-                                            ),
-                                            created: event.created_at,
-                                            createdWeek: moment(
-                                                event.created_at
-                                            ).week(),
-                                            toUser: event.in_reply_to_user_id,
-                                            language: event.lang,
-                                            source: stripHTMLTags(
-                                                event.source
-                                            ),
-                                            message: event.text,
-                                            hashtags: extractHashTags(event.text),
-                                            latitude: event.coordinates ? event.coordinates[0] : null,
-                                            longitude: event.coordinates ? event.coordinates[1] : null,
-                                            retweetCount: event.retweet_count,
-                                            favorited: event.favorited,
-                                            favoriteCount: event.favorite_count,
-                                            isRetweet: event.retweeted_status ?
-                                                true : false,
-                                            retweeted: event.retweeted,
-                                            TW_Sentiment: {
-                                                sentiment: sentiment.toLowerCase().trim(), // remove whitespaces and line breaks
-                                                sarcastic: detectSarcasmSync(event.text),
-                                                r_ensemble: sentiment.toLowerCase().trim(), // remove whitespaces and line breaks
-                                                python_ensemble: detectSentimentEnsemblePythonSync(event.text).trim(), // remove whitespaces and line breaks
-                                            }
-                                        }, {
-                                                include: [{
-                                                    association: Tweet.Sentiment
-                                                }]
-                                            })
-                                    })
-                            })
-                        }).catch(error => {
-                            console.log(error);
-                            logger.log('error', error);
-                            if (error.code == 'ER_DUP_ENTRY') { // user exists
 
-                            }
-                        });
                     } else { //NO english tweet
                     }
                 });

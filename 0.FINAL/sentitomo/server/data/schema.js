@@ -40,19 +40,20 @@ const typeDefinitions = `
     id: String
     sentiment: String
     sarcastic: Float
+    emojiSentiment: Float
+    emojiDesc: String
+    rEnsemble: String
+    pythonEnsemble: String
   }
 
   type TweetTopic {
     id: String
-    topic1Month: String
-    topic1Month_C: String
-    topic3Month: String
-    topic3Month_C: String
-    topicWhole: String
-    topicWhole: String
+    topicId: String
+    topicContent: String
+    probability: Float
   }
 
-  type FacebookProfile{
+  type FacebookProfile {
     id: String
     keyword: String
     name: String
@@ -62,7 +63,7 @@ const typeDefinitions = `
     posts: [FacebookPost]
   }
 
-  type FacebookPost{
+  type FacebookPost {
     id: String
     message: String
     story:String
@@ -72,13 +73,32 @@ const typeDefinitions = `
     created: Date
     author: FacebookProfile
     comments: [FacebookComment]
+    sentiment: FacebookSentiment
+    topic: FacebookTopic
   }
 
-  type FacebookComment{
+  type FacebookComment {
     id: String
     message: String
     lang: String
     created: Date
+  }
+
+  type FacebookSentiment {
+    id: String
+    sentiment: String
+    sarcastic: Float
+    emojiSentiment: Float
+    emojiDesc: String
+    rEnsemble: String
+    pythonEnsemble: String
+  }
+
+  type FacebookTopic {
+    id: String
+    topicId: String
+    topicContent: String
+    probability: Float
   }
 
   type Query {

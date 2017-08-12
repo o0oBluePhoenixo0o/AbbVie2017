@@ -63,6 +63,7 @@ class Python {
         const process = child_process.spawn(this.version == 2 ? 'python' : 'python3', this.args, defaults);
 
         process.stdout.on('data', (data) => {
+            console.log(data);
             this.output += '' + data
 
         });

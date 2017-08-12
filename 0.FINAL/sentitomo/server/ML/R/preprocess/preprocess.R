@@ -43,13 +43,13 @@ convertAbbreviations <- function(message){
   if(is.na(message) || message == ""){
     return(message)
   } else {
-        newText <- message
-        for (i in 1:nrow(myAbbrevs)){
-            newText <- gsub(paste0('\\<', myAbbrevs[[i,1]], '\\>'), paste(myAbbrevs[[i,2]]), newText)
-        }
-        return (newText)
+    newText <- message
+    for (i in 1:nrow(myAbbrevs)){
+      newText <- gsub(paste0('\\<', myAbbrevs[[i,1]], '\\>'), paste(myAbbrevs[[i,2]]), newText)
+    }
+    return (newText)
   }
-} 
+}
 
 
 convertLatin_ASCII <- function(text){

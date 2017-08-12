@@ -193,16 +193,16 @@ const TweetSentiment = db.define('TW_Sentiment', {
     sarcastic: {
         type: Sequelize.DOUBLE
     },
-    emo_senti: {
+    emojiSentiment: {
         type: Sequelize.INTEGER
     },
-    emo_desc: {
+    emojiDesc: {
         type: Sequelize.STRING
     },
-    r_ensemble: {
+    rEnsemble: {
         type: Sequelize.STRING
     },
-    python_ensemble: {
+    pythonEnsemble: {
         type: Sequelize.STRING
     }
 })
@@ -222,6 +222,9 @@ const TweetTopic = db.define('TW_Topic', {
     },
     topicContent: {
         type: Sequelize.STRING
+    },
+    probability: {
+        type: Sequelize.DOUBLE
     }
 })
 
@@ -330,16 +333,16 @@ const FacebookSentiment = db.define('FB_Sentiment', {
     sarcastic: {
         type: Sequelize.DOUBLE
     },
-    emo_senti: {
+    emojiSentiment: {
         type: Sequelize.INTEGER
     },
-    emo_desc: {
+    emojiDesc: {
         type: Sequelize.STRING
     },
-    r_ensemble: {
+    rEnsemble: {
         type: Sequelize.STRING
     },
-    python_ensemble: {
+    pythonEnsemble: {
         type: Sequelize.STRING
     }
 });
@@ -359,6 +362,9 @@ const FacebookTopic = db.define('FB_Topic', {
     },
     topicContent: {
         type: Sequelize.STRING
+    },
+    probability: {
+        type: Sequelize.DOUBLE
     }
 });
 

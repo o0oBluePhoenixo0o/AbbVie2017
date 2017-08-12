@@ -867,6 +867,10 @@ chalk@^1.0.0, chalk@^1.1.0:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
+childprocess-queue@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/childprocess-queue/-/childprocess-queue-1.0.1.tgz#f55bfd47350a6eaa7c85953f2decba161c20e6c4"
+
 chokidar@^1.4.3, chokidar@^1.6.1:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"

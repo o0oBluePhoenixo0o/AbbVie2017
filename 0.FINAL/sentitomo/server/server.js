@@ -23,6 +23,7 @@ import Resolvers from './data/resolvers';
 import Connectors from './data/connectors';
 import TwitterCrawler from './service/TwitterCrawler';
 import FacebookCrawler from './service/FacebookCrawler';
+import TopicWorker from './service/TopicWorker';
 import { listenToSockets } from './service/sockets';
 
 import { extractHashTags } from "./util/utils";
@@ -40,7 +41,6 @@ var twitterCrawler = new TwitterCrawler({
 var facebookCrawler = new FacebookCrawler({});
 
 require('dotenv').config()
-require('./service/scheduling.js');
 
 const GRAPHQL_PORT = 8080;
 const server = express();
@@ -141,7 +141,14 @@ detectTopicLDADynamic(moment("2017-03-01"), moment("2017-03-31"), result => {
 //facebookCrawler.searchAndSaveFBPages("humira");
 //facebookCrawler.searchAndSaveFBPages("enbrel");
 
+
+//console.log(detectSarcasmSync("Bristol-Myers Gets FDA Nod for Orencia's Label Expansion #Bristol #UK https://t.co/JYv1P37wXt"));
+
+/*
 detectTopicLDAStatic(JSON.stringify({ id: "123213", message: "Bristol-Myers Gets FDA Nod for Orencia's Label Expansion #Bristol #UK https://t.co/JYv1P37wXt" }), result => {
     console.log(JSON.parse(result));
-})
+})*/
 //twitterCrawler.start();
+
+var topicWorker = new TopicWorker();
+topicWorker.start();

@@ -9586,3 +9586,913 @@
 {"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T12:30:02.287Z"}
 {"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T12:30:05.156Z"}
 {"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T12:32:55.720Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T12:35:47.341Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T12:35:47.351Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T12:35:47.365Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T12:35:54.485Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T12:35:54.831Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T12:37:02.324Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T12:37:02.333Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T12:37:02.347Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T12:37:10.333Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T12:37:10.662Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T12:49:33.498Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T12:49:33.506Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T12:49:33.520Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T12:49:41.611Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T12:49:41.969Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T12:50:26.152Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T12:50:26.159Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T12:50:26.172Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T12:50:34.363Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T12:50:34.692Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T12:50:39.298Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T12:50:39.306Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T12:50:39.321Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T12:50:39.366Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T12:50:39.682Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T12:51:03.564Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T12:51:03.571Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T12:51:03.584Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T12:51:03.633Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T12:51:03.958Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T12:51:09.631Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T12:51:09.638Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T12:51:09.654Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-08-12T12:51:09.674Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-08-12T12:51:09.700Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T12:51:09.727Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T12:51:10.050Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T12:51:59.415Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T12:51:59.423Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T12:51:59.437Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-08-12T12:51:59.457Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-08-12T12:51:59.486Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T12:51:59.515Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T12:51:59.978Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:52:22.532Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:52:34.401Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:53:12.069Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:53:12.179Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:53:13.514Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:54:11.796Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:54:35.500Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:54:37.444Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:54:40.505Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:54:45.228Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:55:03.396Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:55:15.347Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:55:16.617Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:56:26.158Z"}
+{"level":"info","message":"New tweet, starting topic detection, afterwards the rest","timestamp":"2017-08-12T12:56:34.632Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T13:46:35.614Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T13:46:35.642Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T13:46:35.656Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T13:46:35.712Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T13:46:36.059Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T13:50:28.400Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T13:50:28.418Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T13:50:28.432Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T13:50:28.499Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T13:50:28.821Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T13:51:31.145Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T13:51:31.165Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T13:51:31.182Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T13:51:31.244Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T13:51:31.571Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T13:52:07.525Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T13:52:07.551Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T13:52:07.572Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T13:52:07.650Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T13:52:07.992Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T13:52:21.658Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T13:52:21.676Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T13:52:21.690Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T13:52:21.736Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T13:52:22.055Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T13:52:28.636Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T13:52:28.653Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T13:52:28.666Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T13:52:28.713Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T13:52:29.062Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T13:55:49.389Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T13:55:49.407Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T13:55:49.421Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T13:55:49.466Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T13:55:49.815Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T13:56:11.976Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T13:56:11.996Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T13:56:12.012Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T13:56:12.070Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T13:56:12.395Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T13:58:01.026Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T13:58:01.049Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T13:58:01.066Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T13:58:01.170Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T13:58:01.544Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T13:58:13.564Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T13:58:13.582Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T13:58:13.599Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T13:58:13.647Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T13:58:13.997Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T14:06:42.921Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:06:42.940Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:06:42.954Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:06:42.997Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:06:43.328Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T14:07:18.979Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:07:18.997Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:07:19.013Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:07:19.058Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:07:19.362Z"}
+{"level":"info","message":"Topic Detection Sync job started!","timestamp":"2017-08-12T14:07:36.291Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:07:36.309Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:07:36.322Z"}
+{"level":"info","message":"Topic detection is not running","timestamp":"2017-08-12T14:07:36.342Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:07:36.370Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:07:36.695Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:08:54.495Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:08:54.509Z"}
+{"level":"info","message":"Topic detection is not running","timestamp":"2017-08-12T14:08:54.528Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:08:54.554Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:08:54.876Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:09:39.692Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:09:39.706Z"}
+{"level":"info","message":"Topic detection is not running","timestamp":"2017-08-12T14:09:39.723Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:09:39.752Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:09:40.091Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:09:50.448Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:09:50.464Z"}
+{"level":"info","message":"Topic detection is not running","timestamp":"2017-08-12T14:09:50.496Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:09:50.528Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:09:50.865Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:10:03.510Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:10:03.524Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:10:03.572Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:10:03.911Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:10:34.325Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:10:34.340Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:10:34.393Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:10:34.737Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:11:15.680Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:11:15.695Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:11:15.745Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:11:16.093Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:11:39.816Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:12:41.045Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:12:41.060Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:12:41.109Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:12:41.458Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:13:20.696Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:13:20.711Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:13:20.768Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:13:21.101Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:13:42.709Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:13:42.725Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:13:42.775Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:13:43.103Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:14:03.909Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:14:03.925Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:14:03.972Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:14:04.304Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:14:17.136Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:14:17.151Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:14:17.201Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:14:17.549Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T14:14:17.713Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:14:17.716Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:14:17.718Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:14:17.724Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:14:17.724Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:14:17.726Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:14:17.727Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:14:17.727Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:14:17.728Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:14:17.728Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:14:17.729Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:15:41.743Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:15:41.775Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:15:41.891Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:15:42.265Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T14:15:42.355Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:15:59.515Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:15:59.530Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:15:59.582Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:15:59.927Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T14:16:00.103Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:20:01.326Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:20:01.351Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:20:01.413Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:20:01.800Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:20:08.247Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T14:22:51.054Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:24:39.062Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:24:39.076Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:24:39.132Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:24:39.473Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T14:27:26.672Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:27:26.673Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T14:30:06.113Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:30:06.113Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T14:32:37.356Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:32:37.357Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T14:35:09.334Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:35:09.335Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T14:37:42.235Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:37:42.235Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:41:24.417Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:41:24.432Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:41:24.487Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:41:24.858Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T14:44:09.284Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T14:44:09.284Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:45:16.570Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:45:16.586Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:45:16.657Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:45:17.014Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:45:19.164Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:45:19.533Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:45:39.634Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:45:45.056Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:53:45.575Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:53:45.592Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:53:45.649Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:53:46.000Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:54:18.942Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:54:19.180Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:54:34.052Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:55:04.154Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:55:33.297Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:55:33.312Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:55:33.357Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:55:33.717Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:55:34.952Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:55:36.723Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:55:37.103Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:55:37.308Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:55:37.465Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:56:27.506Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:56:36.833Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:57:12.970Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:57:12.985Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:57:13.031Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:57:13.378Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:57:15.575Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:57:27.672Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:57:31.845Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-12T14:57:40.260Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T14:58:12.508Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T14:58:12.525Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T14:58:12.572Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T14:58:12.909Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:01:12.459Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:01:12.460Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T15:02:32.009Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T15:02:32.026Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T15:02:32.086Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T15:02:32.439Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:05:33.325Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:05:33.326Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:08:22.984Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:08:22.984Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:11:17.192Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:11:17.192Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:14:09.334Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:14:09.334Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:17:06.511Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:17:06.511Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:20:09.463Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:20:09.464Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:23:06.885Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:23:06.885Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:26:09.598Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:26:09.598Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:29:05.310Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:29:05.310Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:32:02.396Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:32:02.398Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T15:32:02.399Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:35:05.540Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:35:05.541Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:38:01.292Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:38:01.292Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:40:52.289Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:40:52.289Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:43:47.224Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:43:47.224Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:46:43.638Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:46:43.638Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:49:31.314Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:49:31.314Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:52:12.333Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:52:12.333Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:54:50.422Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:54:50.422Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T15:57:28.044Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T15:57:28.044Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T16:00:09.707Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T16:00:09.708Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:00:09.708Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T16:02:52.057Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T16:02:52.057Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T16:05:28.932Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T16:05:28.933Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T16:08:09.242Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T16:08:09.242Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T16:10:50.770Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T16:10:50.770Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T16:13:34.736Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T16:13:34.736Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T16:16:20.874Z"}
+{"level":"info","message":"Topic detected","timestamp":"2017-08-12T16:16:20.874Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T16:28:05.536Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T16:28:05.552Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T16:28:05.614Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T16:28:06.240Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T16:28:42.863Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T16:28:42.879Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T16:28:42.928Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T16:28:43.877Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T16:29:05.337Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T16:29:05.352Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T16:29:05.400Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T16:29:06.101Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T16:29:27.212Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T16:29:27.228Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T16:29:27.278Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T16:29:27.787Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T16:29:49.929Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T16:29:49.943Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T16:29:49.995Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T16:29:50.875Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:51.138Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:51.138Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:51.252Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:51.252Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:51.301Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:51.301Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:51.374Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:51.374Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:51.459Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:51.459Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:51.528Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:51.528Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:51.609Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:51.609Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:51.686Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:51.686Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:51.749Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:51.749Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:51.786Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:51.786Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:51.845Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:51.845Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:51.917Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:51.917Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:51.995Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:51.995Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.064Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.064Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.115Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.115Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.224Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.225Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.295Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.295Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.346Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.346Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.385Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.385Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.442Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.442Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.500Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.500Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.576Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.576Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.634Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.634Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.692Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.692Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.756Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.756Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.808Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.808Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.892Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.892Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.930Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.930Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:52.991Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:52.991Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:53.035Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:53.035Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:53.112Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:53.113Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:53.185Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:53.185Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:53.248Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:53.248Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:53.327Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:53.327Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:53.401Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:53.401Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:53.491Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:53.491Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:53.568Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:53.568Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:53.621Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:53.621Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:53.715Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:53.715Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:53.787Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:53.787Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:53.844Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:53.844Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:53.892Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:53.892Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:53.996Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:53.996Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:54.040Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:54.040Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:54.187Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:54.187Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:54.336Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:54.336Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:54.501Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:54.501Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:54.588Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:54.588Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:54.696Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:54.696Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:54.798Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:54.798Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:54.849Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:54.849Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:54.896Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:54.896Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:54.938Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:54.939Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:54.983Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:54.983Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:29:55.030Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:29:55.030Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T16:31:01.025Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T16:31:01.040Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T16:31:01.091Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T16:31:01.662Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:01.788Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:01.788Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:01.918Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:01.918Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:01.964Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:01.964Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.046Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.046Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.130Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.130Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.176Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.176Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.233Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.233Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.298Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.298Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.344Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.344Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.392Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.392Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.439Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.439Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.522Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.523Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.568Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.568Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.614Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.614Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.672Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.672Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.733Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.733Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.780Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.781Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.832Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.832Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.878Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.878Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:02.934Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:02.934Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.001Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.001Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.067Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.067Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.147Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.147Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.199Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.199Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.252Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.252Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.329Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.329Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.383Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.383Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.445Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.445Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.498Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.498Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.551Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.552Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.603Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.604Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.657Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.657Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.715Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.715Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.787Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.787Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.846Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.846Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:03.926Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:03.927Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.131Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.131Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.186Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.186Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.230Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.230Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.279Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.279Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.329Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.329Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.379Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.379Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.424Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.424Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.501Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.501Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.550Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.550Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.598Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.598Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.645Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.645Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.691Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.691Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.757Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.757Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.807Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.807Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.861Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.861Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.905Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.905Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:04.956Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:04.956Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.006Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.006Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.058Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.058Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.113Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.113Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.172Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.172Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.263Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.263Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.332Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.332Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.384Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.384Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.427Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.427Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.476Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.476Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.532Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.532Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.602Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.603Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.686Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.686Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.745Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.746Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.792Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.793Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.844Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.844Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.905Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.905Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:05.953Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:05.953Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.016Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.016Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.074Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.074Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.129Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.129Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.175Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.175Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.241Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.243Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.335Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.336Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.382Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.383Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.431Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.431Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.479Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.479Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.527Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.527Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.603Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.604Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.649Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.649Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.692Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.692Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.739Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.740Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.783Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.783Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.843Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.843Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.892Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.892Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:06.935Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:06.935Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.009Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.009Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.058Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.058Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.109Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.109Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.150Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.150Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.223Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.224Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.269Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.269Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.319Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.319Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.378Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.379Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.473Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.474Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.537Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.538Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.636Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.636Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.687Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.687Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.743Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.743Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.832Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.832Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.922Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.922Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:07.985Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:07.985Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.042Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.042Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.091Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.091Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.136Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.136Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.183Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.183Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.231Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.231Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.275Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.275Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.340Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.340Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.401Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.401Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.446Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.447Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.494Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.494Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.550Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.550Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.602Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.602Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.727Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.727Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.822Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.823Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.902Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.902Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:08.966Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:08.966Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:09.018Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:09.018Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:09.085Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:09.085Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:09.153Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:09.153Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:09.198Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:09.198Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:09.243Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:09.243Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:09.323Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:09.323Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:09.441Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:09.441Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:09.506Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:09.506Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:09.628Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:09.628Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:09.717Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:09.717Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:09.803Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:09.804Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:09.850Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:09.850Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:31:09.930Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:31:09.930Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T16:36:30.608Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T16:36:30.623Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T16:36:30.672Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T16:36:31.024Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:36:33.965Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:36:33.966Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T16:53:18.400Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T16:53:18.417Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T16:53:18.475Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T16:53:18.805Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T16:53:21.728Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T16:53:21.729Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T17:00:28.576Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T17:00:28.593Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T17:00:28.648Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T17:00:29.006Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:00:32.417Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T17:00:32.417Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T17:00:47.796Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T17:00:47.811Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T17:00:47.859Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T17:00:48.195Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:00:48.279Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T17:09:47.437Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T17:09:47.452Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T17:09:47.512Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T17:09:49.322Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:09:52.235Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T17:12:29.337Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T17:19:12.842Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T17:19:12.864Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T17:19:12.924Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T17:19:13.273Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:19:16.169Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T17:22:04.820Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T17:23:13.511Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T17:23:13.527Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T17:23:13.585Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T17:23:13.939Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:23:14.029Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-12T17:26:03.327Z"}
+{"level":"info","message":"10 topics detected","timestamp":"2017-08-12T17:26:03.336Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T17:29:55.053Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T17:29:55.069Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T17:29:55.122Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T17:29:55.442Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:29:59.173Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:29:59.272Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:29:59.363Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:29:59.462Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:29:59.562Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:29:59.662Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:29:59.759Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:29:59.872Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:29:59.973Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:00.084Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:00.181Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:00.285Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:00.394Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:00.517Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:00.622Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:00.723Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:00.847Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:00.963Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:01.077Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:01.201Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:01.323Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:01.450Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:01.601Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:01.706Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:01.948Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:02.088Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:02.249Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:02.379Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:02.510Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:02.676Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:02.864Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:03.015Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:03.236Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:03.399Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:03.576Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:03.765Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:03.954Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:04.120Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:04.327Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:04.522Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:04.734Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:04.929Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:05.125Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:05.344Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:05.562Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:05.803Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:05.987Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:06.303Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:06.663Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:06.858Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:07.219Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:07.421Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:07.763Z"}
+{"level":"info","message":"child process exited with code 1","timestamp":"2017-08-12T17:30:07.926Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:08.093Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:08.305Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:08.602Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:08.916Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:09.161Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:09.447Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:09.686Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:10.174Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:10.486Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:10.743Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:11.048Z"}
+{"level":"info","message":"child process exited with code 1","timestamp":"2017-08-12T17:30:11.054Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:11.446Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:11.732Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:11.987Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:12.180Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:12.741Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:13.060Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:13.329Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:13.659Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:14.066Z"}
+{"level":"info","message":"child process exited with code 1","timestamp":"2017-08-12T17:30:14.288Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:14.433Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:14.743Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:15.148Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:15.575Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:16.119Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:16.394Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:17.359Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:18.023Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:18.675Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:19.168Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:19.637Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:20.217Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:20.915Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:21.443Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:21.967Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:22.524Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:23.394Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:23.706Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:24.491Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:24.877Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:25.360Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:26.563Z"}
+{"level":"info","message":"child process exited with code 1","timestamp":"2017-08-12T17:30:26.902Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:27.382Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:27.875Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:28.719Z"}
+{"level":"info","message":"child process exited with code 1","timestamp":"2017-08-12T17:30:29.080Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:29.412Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:29.828Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:30.419Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:31.029Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:31.641Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:32.227Z"}
+{"level":"info","message":"child process exited with code 1","timestamp":"2017-08-12T17:30:32.255Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:33.144Z"}
+{"level":"info","message":"child process exited with code 1","timestamp":"2017-08-12T17:30:33.194Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:33.837Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:34.549Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:35.540Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:36.089Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:37.208Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:38.330Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:39.812Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:40.843Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:41.494Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:42.607Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:43.234Z"}
+{"level":"info","message":"child process exited with code 1","timestamp":"2017-08-12T17:30:44.654Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:44.686Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:45.491Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:47.385Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:49.286Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:50.072Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:52.809Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:55.568Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:30:57.791Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:31:01.461Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:31:04.954Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:31:08.353Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:31:11.255Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:31:16.659Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:31:21.965Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:31:26.585Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:31:32.475Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:31:37.267Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:32:05.173Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:32:24.430Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:32:39.069Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-12T17:32:55.037Z"}
