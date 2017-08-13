@@ -29,9 +29,9 @@ export default class TopicWorker {
     }
 
     /**
-    * @function start
+    * @function stop
     * @description Stops the topic detection of tweets
-    @memberof TopicWorker
+    * @memberof TopicWorker
     * @return {void} 
     */
     stop() {
@@ -41,7 +41,7 @@ export default class TopicWorker {
 
     /**
      * @function detectTopics
-     * @description Crawls n tweetsfrom the database where the topic is not yet detected. It will then use staticBatch.py file to detect the topics with LDA.
+     * @description Crawls 100 tweets from the database where the topic is not yet detected. It will then use staticBatch.py file to detect the topics with LDA.
      * If no tweets are found, where the topics are missing, the function will wait for 10 minutes to let new tweets gets crawled and then starts again.
      * @see File server/ML/Python/topic/static/staticBatch.py
      * @memberof TopicWorker

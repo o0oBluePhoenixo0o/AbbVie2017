@@ -44,6 +44,7 @@ export function detectSentiment(modelPath, message, callback) {
  * @return {String} sentiment string
  */
 export function detectSentimentEnsembleR(tweetMessage, callback) {
+    console.log("calling ensembleR")
     RShell('./ML/R/sentiment/ensembleSentiment.R')
         .data([tweetMessage])
         .call(result => {

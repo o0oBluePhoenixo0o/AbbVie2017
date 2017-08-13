@@ -11838,3 +11838,45 @@
 {"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:33:48.205Z"}
 {"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:33:48.448Z"}
 {"level":"info","message":"Manuall killing 79171","timestamp":"2017-08-13T11:38:44.376Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T16:25:45.627Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T16:25:45.643Z"}
+{"level":"info","message":"Wait 2 minutes to let the h2o server start up","timestamp":"2017-08-13T16:25:45.680Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T16:25:45.723Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T16:25:46.079Z"}
+{"level":"info","message":"Manuall killing 85827","timestamp":"2017-08-13T16:27:19.639Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T16:27:57.868Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T16:27:57.884Z"}
+{"level":"info","message":"Wait 2 minutes to let the h2o server start up","timestamp":"2017-08-13T16:27:57.910Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T16:27:57.953Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T16:27:58.273Z"}
+{"level":"info","message":"Manuall killing 85959","timestamp":"2017-08-13T16:33:00.869Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T16:33:30.624Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T16:33:30.639Z"}
+{"level":"info","message":"Wait 2 minutes to let the h2o server start up","timestamp":"2017-08-13T16:33:30.667Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T16:33:30.708Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T16:33:31.015Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-08-13T16:35:30.672Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-08-13T16:35:30.701Z"}
+{"level":"info","message":"Topic detection worker started","timestamp":"2017-08-13T16:35:30.701Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/static/batchTweets.csv","timestamp":"2017-08-13T16:35:32.283Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-13T16:36:07.340Z"}
+{"level":"info","message":"The tweet is: Arthritis and Common Sense (Fireside Books (Holiday House)) - https://t.co/Bz4htFUu5O https://t.co/mOSQ4OVEpw","timestamp":"2017-08-13T16:36:11.936Z"}
+{"level":"info","message":"The callback sentiment is: Neutral","timestamp":"2017-08-13T16:36:11.936Z"}
+{"level":"info","message":"The sarcasm is: 56.99","timestamp":"2017-08-13T16:36:19.474Z"}
+{"level":"info","message":"The python ensemble is: neg","timestamp":"2017-08-13T16:36:26.298Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-13T16:36:26.356Z"}
+{"level":"info","message":"The tweet is: RT @knowmedge: Correct! @culiraj A4: Phosphodiesterase 4 inhibitor and used for psoriasis or psoriatic arthritis #ABIM #USMLE https://t.co/…","timestamp":"2017-08-13T16:36:29.829Z"}
+{"level":"info","message":"The callback sentiment is: Neutral","timestamp":"2017-08-13T16:36:29.829Z"}
+{"level":"info","message":"The sarcasm is: 56.99","timestamp":"2017-08-13T16:36:37.221Z"}
+{"level":"info","message":"The python ensemble is: ","timestamp":"2017-08-13T16:36:37.936Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-13T16:36:46.027Z"}
+{"level":"info","message":"The tweet is: Your rap name is your first initial and your level of plaque psoriasis. Mine is B. Moderate to Severe","timestamp":"2017-08-13T16:36:49.296Z"}
+{"level":"info","message":"The callback sentiment is: Negative","timestamp":"2017-08-13T16:36:49.296Z"}
+{"level":"info","message":"The sarcasm is: 56.99","timestamp":"2017-08-13T16:36:56.571Z"}
+{"level":"info","message":"The python ensemble is: positive","timestamp":"2017-08-13T16:37:01.634Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-13T16:37:02.909Z"}
+{"level":"info","message":"The tweet is: The two most common types of arthritis are osteoarthritis and rheumatoid arthritis but there are many other types -… https://t.co/D1yZcciVzq","timestamp":"2017-08-13T16:37:06.174Z"}
+{"level":"info","message":"The callback sentiment is: Neutral","timestamp":"2017-08-13T16:37:06.175Z"}
+{"level":"info","message":"The sarcasm is: 56.99","timestamp":"2017-08-13T16:37:19.266Z"}
+{"level":"info","message":"The python ensemble is: ","timestamp":"2017-08-13T16:37:22.838Z"}
+{"level":"info","message":"Manuall killing 86165","timestamp":"2017-08-13T16:37:31.244Z"}

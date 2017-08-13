@@ -91,6 +91,16 @@ class Python {
         if (this.process.stderr) //console.log(process.stderr);
             return (this.process.stdout);
     }
+
+    /**
+    * @function kill
+    * @description Kills the executed process by sending 'SIGINT' to it. It is like pesssing CTRL+C
+    * @memberof module:ForeignCode~Python
+   */
+    kill() {
+        logger.log('info', 'Manuall killing ' + process.pid);
+        this.process.kill('SIGINT')
+    }
 }
 
 
@@ -145,7 +155,6 @@ export class Java {
         this.process = child_process.spawn('java', this.args, defaults);
 
         this.process.stdout.on('data', (data) => {
-            console.log(data.toString());
             this.output += '' + data
         });
 
@@ -173,6 +182,11 @@ export class Java {
             return (this.process.stdout);
     }
 
+    /**
+     * @function kill
+     * @description Kills the executed process by sending 'SIGINT' to it. It is like pesssing CTRL+C
+     * @memberof module:ForeignCode~Java
+    */
     kill() {
         logger.log('info', 'Manuall killing ' + process.pid);
         this.process.kill('SIGINT')
@@ -230,7 +244,7 @@ class R {
         this.process = child_process.spawn('Rscript', this.args, defaults);
 
         this.process.stdout.on('data', (data) => {
-            console.log(data.toString())
+            //console.log(data.toString())
             this.output += '' + data
         });
 
@@ -256,6 +270,16 @@ class R {
         this.process = child_process.spawnSync('Rscript', this.args, defaults);
         if (this.process.stderr) //console.log(process.stderr);
             return (this.process.stdout);
+    }
+
+    /**
+    * @function kill
+    * @description Kills the executed process by sending 'SIGINT' to it. It is like pesssing CTRL+C
+    * @memberof module:ForeignCode~R
+   */
+    kill() {
+        logger.log('info', 'Manuall killing ' + process.pid);
+        this.process.kill('SIGINT')
     }
 }
 

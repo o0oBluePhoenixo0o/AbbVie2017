@@ -159,13 +159,12 @@ detectTopicLDAStatic(JSON.stringify({ id: "123213", message: "Bristol-Myers Gets
 var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
 console.log(h20Process);
 h20Process.call();
-console.log("wait now")
+logger.log('info', "Wait 2 minutes to let the h2o server start up")
 setTimeout(() => {
-    console.log(detectSentimentEnsembleR("Bristol-Myers Gets FDA Nod for Orencia's Label Expansion #Bristol #UK https://t.co/JYv1P37wXt", result => {
-        console.log(result);
-    }));
+    twitterCrawler.start();
+    topicWorker.start();
     //h20Process.kill()
-}, 60000) // wait 1 minute for new tweets to come ine
+}, 120000) // wait 1 minute for new tweets to come ine
 
 
 
