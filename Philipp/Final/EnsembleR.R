@@ -25,37 +25,41 @@ library(memisc)
 library(dplyr)
 library(data.table)
 library(stringr)
+library(qdap)
 
-# #################################################
-# 
-# convertAbbreviations <- function(message){
-#   
-#   # Replaces abbreviation with the corresporending long form
-#   #
-#   # Args:
-#   #   text: Text to remove the abbreviations from
-#   #
-#   # Returns:
-#   #   String
-#   
-#   if(is.na(message) || message == ""){
-#     return(message)
-#   } else {
-#     newText <- message
-#     for (i in 1:nrow(myAbbrevs)){
-#       newText <- gsub(paste0('\\<', myAbbrevs[[i,1]], '\\>'), paste(myAbbrevs[[i,2]]), newText)
-#       cat(paste0(newText,"\n"), file="R.out", append = TRUE)
-#       
-#     }
-#     return (newText)
-#   }
-# } 
-# 
-# myAbbrevs <- read.csv('abbrev.csv')
-#                          
-# testabb <- "lol i don't know rofl"
-# 
-# result_testabb <- convertAbbreviations(testabb)
+loadAbbrev <- function(filename) {
+  # Concates custom abbreviation dataset with the default one from qdap
+  #
+  # Args:
+  #   filename: Filename of the abbreviation lexicon
+  #
+  # Returns:
+  #   A 2-column(abv,rep) data.frame
+  
+  myAbbrevs <- read.csv(filename, sep = ",", as.is = TRUE)
+  return(rbind(abbreviations,myAbbrevs))
+}
+
+myAbbrevs <- loadAbbrev('abbrev.csv')
+
+convertAbbreviations <- function(message){
+  # Replaces abbreviation with the corresporending long form
+  #
+  # Args:
+  #   text: Text to remove the abbreviations from
+  #
+  # Returns:
+  #   String
+  if(is.na(message) || message == ""){
+    return(message)
+  } else {
+    newText <- message
+    for (i in 1:nrow(myAbbrevs)){
+      newText <- gsub(paste0('\\<', myAbbrevs[[i,1]], '\\>'), paste(myAbbrevs[[i,2]]), newText)
+    }
+    return (newText)
+  }
+}
 
 ########################################################
 df <- read.csv("Final_Manual_3007.csv", as.is = TRUE, sep = ",")
@@ -69,10 +73,10 @@ df$sentiment <- sapply(df$sentiment, function(x)
 
 #delete the #4516
 df <- df[-c(4516),]
-
+require(plyr)
 agg <- summarize(group_by(df,sentiment),n())
+df$message <- convertAbbreviations(df$message)
 
-# df$message <- convertAbbreviations(df$message)
 #######################################################
 # Preprocessing the dataframe and cleaning the corpus #
 #######################################################
@@ -256,7 +260,7 @@ metrics(cmCART) # 67%
 
 #####################################################
 # Random Forest
-set.seed(123)
+
 tweetRF <- randomForest(sentiment ~ ., data=trainSparse)
 
 predictRF <- predict(tweetRF, newdata=testSparse)
@@ -267,7 +271,6 @@ metrics(cmRF) #76%
 
 ###############################################
 # SVM
-
 
 SVM1N <- svm(sentiment ~ ., type='C', data=trainSparse, kernel='radial')
 
@@ -299,7 +302,7 @@ predictionsGBM <- as.data.frame(h2o.predict(gbm.model,testH2O))
 
 cmGBM <-   table(testSparse$sentiment, predictionsGBM$predict)
 
-metrics(cmGBM)
+metrics(cmGBM) #77%
 
 ##########################################################################################
 # H2O DRF
@@ -344,8 +347,8 @@ metrics(cmNB)
 
 #Pulling in positive and negative wordlists
 #BingLiu
-pos.words <- scan('../Models/Positive.txt', what='character', comment.char=';') #folder with positive dictionary
-neg.words <- scan('../Models/Negative.txt', what='character', comment.char=';') #folder with negative dictionary
+pos.words <- scan('Models/Positive.txt', what='character', comment.char=';') #folder with positive dictionary
+neg.words <- scan('Models/Negative.txt', what='character', comment.char=';') #folder with negative dictionary
 #Adding words to positive and negative databases
 pos.words=c(pos.words, 'Congrats', 'prizes', 'prize', 'thanks', 'thnx', 'Grt', 
             'gr8', 'plz', 'trending', 'recovering', 'brainstorm', 'leader')
@@ -380,7 +383,7 @@ score.sentiment <- function(sentences, pos.words, neg.words, .progress='none')
   scores.df <- data.frame(score=scores, message=sentences)
   return(scores.df)
 }
-require(plyr)
+
 require(stringr)
 scores <- score.sentiment(df$message, pos.words, neg.words, .progress='text')
 result <- scores
@@ -403,16 +406,17 @@ finaldf <- cbind(testSparse$sentiment,as.data.frame(predictRF),as.data.frame(pre
 colnames(finaldf) <- c("Sentiment","RF","CART","SVM","DRF","GBM","BL","NB")
 
 #The majority vote
-
+names(finaldf[1])
 find_major <- function(df,x){
   a <- df[x,]
   neg <- 0
   pos <- 0
   neu <- 0
-  for (i in 2:ncol(df)){
+  if (names(df[1]) == 'Sentiment'){j <- 2} else {j<-1}
+  for (i in j:ncol(a)){
     if (a[i] == 'Negative'){neg <- neg + 1}
-    if (a[i] == 'Positive'){pos <- pos + 1}
-    if (a[i] == 'Neutral'){neu <- neu + 1}
+    else if (a[i] == 'Positive'){pos <- pos + 1}
+    else if (a[i] == 'Neutral'){neu <- neu + 1}
   }
   result <- c("Positive", "Negative", "Neutral")[which.max(c(pos,neg,neu))]
 }
@@ -425,63 +429,18 @@ cmMAJOR <- table(finaldf$Sentiment, finaldf$Major)
 
 metrics(cmMAJOR)
 tweetsSparseX <- as.data.frame(as.matrix(sparse))
+
 ############
 # drop non-save objects
 rm(agg,CART,df,final_test,finaldf,g,NB,predictionsDRF,predictionsGBM,prep_test,result,RF,
    scores,SVM,BL,cmBL,cmCART,cmGBM,cmMAJOR,cmNB,cmRF,cmSVM1,corp,corptest,DRF,frequencies,i,
    predictCART,predictionsNB,predictRF,predictSVM,sparse,split,
-   test,testH2O,trainH2O,xxh2o,cmDRF,tweetsSparse,testSparse,trainSparse,xx)
-save.image(file="EnsembleR_objs.RData")
+   test,testH2O,trainH2O,xxh2o,cmDRF,tweetsSparse,testSparse,trainSparse,xx,a,j)
+
+save.image(file="EnsembleR_objs_1308.RData")
 ############
 
-test <- "I hate like this Humira It tastes funny..."
-#convertAbbreviations(test)
-# clean
-corptest <- vec2clean.corp(test)
-#dtm
-prep_test <- DocumentTermMatrix(corptest)
-prep_test <- as.data.frame(as.matrix(prep_test))
-
-colnames(tweetsSparseX) <- make.names(colnames(tweetsSparseX))
-
-tweetsSparseX[,1:ncol(tweetsSparseX)] <- 0
-
-xx <- left_join(prep_test,tweetsSparseX[1,])
-
-xx[,ncol(prep_test)+1:ncol(xx)] <- 0
-
-xxh2o <- as.h2o(xx)
-
-CART <- as.data.frame(predict(tweetCART, newdata=xx, type='class'))
-names(CART) <- 'CART'
-
-RF <- as.data.frame(predict(tweetRF, newdata=xx))
-names(RF) <- 'RF'
-
-SVM <- as.data.frame(predict(SVM1N, newdata=xx, type="class"))
-names(SVM) <- 'SVM'
-
-NB <- as.data.frame(predict(NBayes, as.data.frame(xx)))
-names(NB) <- 'NB'
-
-DRF <- as.data.frame(h2o.predict(h2o_drf,xxh2o))
-DRF <- DRF$predict
-
-GBM <- as.data.frame(h2o.predict(gbm.model, xxh2o))
-GBM <- GBM$predict
-
-
-g <- score.sentiment(test, pos.words, neg.words, .progress='text')
-g <- mutate(g, sentiment = ifelse(g$score > 0, 'Positive', 
-                           ifelse(g$score < 0, 'Negative', 'Neutral')))
-BL <- g$sentiment
-
-final_test <- try(cbind(CART,RF,SVM,NB,DRF,GBM,BL))
-final_test
-
-for (i in 1:nrow(final_test)){
-  final_test$Major[i] <- find_major(finaldf,i)
-}
-final_test$Major
-
 h2o.shutdown(prompt = FALSE)
+
+h2o.saveModel(gbm.model,"GBM_model_R_1308")
+h2o.saveModel(h2o_drf,"DRF_model_R_1308")

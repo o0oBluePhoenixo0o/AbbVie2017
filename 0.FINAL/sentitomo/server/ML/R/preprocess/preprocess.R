@@ -7,7 +7,6 @@ Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')
 source("./ML/R/needs.R");
 needs(dplyr)
 needs(plyr)
-needs(dplyr)
 needs(tm)
 needs(qdap)
 needs(SnowballC)
