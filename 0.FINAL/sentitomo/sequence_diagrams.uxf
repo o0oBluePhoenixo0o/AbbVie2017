@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>266</x>
+      <y>0</y>
+      <w>1120</w>
+      <h>343</h>
+    </coordinates>
+    <panel_attributes>title=Typical Twitter Crawl
+autoTick=false
+obj=Twitter API ~a 
+obj=TwitterCrawler~b 
+obj=ml_wrapper~c
+obj=connectors~d
+b -&gt; a: crawlTweets()
+on=a
+tick=
+a -&gt; b : (tweet:=Tweet):Object
+off=a
+tick=
+b-&gt;d : upsertAuthor(tweet.author)
+tick=
+b -&gt; c.c1 : detectSentimentEnsmembleR(messagePrep)
+on=c
+tick=
+c -&gt; b : (sentiment:=result):String
+off=c
+tick=
+on=b
+b -&gt; c : detectSarcasm(tweet.message)
+on=c
+tick=
+off=b
+c-&gt;b : (sacrasm:=result):bool
+off=c
+tick=
+on=b
+b -&gt; c : detectSentimentEnsmemblePython(messagePrep)
+on=c
+tick=
+off=b
+c -&gt; b : (pythonEnsemble:=result):String
+off=c
+tick=
+b -&gt; d : insertTweet(tweet)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>266</x>
+      <y>357</y>
+      <w>1162</w>
+      <h>476</h>
+    </coordinates>
+    <panel_attributes>title=Topic Detection Worker
+autoTick=false
+obj=TopicWorker~a
+obj=connectors~b
+obj=export~c
+obj=ml_wrapper~d
+obj=connectors~e
+combinedFragment=loop~loopId a e
+a:[running=true]
+	tick=
+	a-&gt;b: findTweets(where: {noTopic: true})
+	on=b
+	tick=
+	b-&gt;a: tweets
+	off=b
+	tick=
+	combinedFragment=alt~
+		tick=
+		a:[tweet&gt;0]
+		combinedFragment=alt~altId a e
+			tick=
+			a-&gt;c: convertToCSV(tweets)
+			on=c
+			tick=
+			off=c
+			c-&gt;a: (filename:=filename):String
+			tick=
+			a-&gt;d: detectTopiCLDAStatic(filename)
+			on=d
+			tick=
+			d-&gt;a: (result:=topicArray)
+			off=d
+			tick=
+			combinedFragment=loop~loop2Id a e
+			a:[1...result.length]
+			tick=
+			a-&gt;e: createTopic(result[i])
+			--=loop2Id
+			tick=
+			tick=
+			..
+			a:[else]
+			tick=
+			a-&gt;a +: wait(10min)
+			tick=
+			on=a
+			tick=
+			off=a
+	--=altId
+--=loopId
+tick=</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>266</x>
+      <y>847</y>
+      <w>651</w>
+      <h>399</h>
+    </coordinates>
+    <panel_attributes>title=Server Startup
+autoTick=false
+obj=server.js~a
+obj=foreignCode.js~b
+obj=TwitterCrawler.js~c CREATED_LATER
+obj=TopicWorker.js~d CREATED_LATER
+obj=child_process~e CREATED_LATER
+
+gate-&gt;a: Start
+tick=
+a-&gt;b: JavaShell(h20.jar)
+tick=
+b-&gt;e: spawn()
+tick=
+a-&gt;a + :wait till h20 is up
+tick=
+on=a;
+tick=
+off=a
+tick=
+a-&gt;c: new()
+tick=
+a-&gt;c: start()
+tick=
+a-&gt;d: new()
+tick=
+a-&gt;d: start()</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

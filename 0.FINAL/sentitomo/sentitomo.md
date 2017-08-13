@@ -263,7 +263,7 @@ Now either npm or Yarn is set up we can use it to install the dependencies. The 
 Some of the R scripts we use for machine learning need both versions of Java to work. To install the versions just follow the basic instructions of your specified distribution. You just have to ensure that the server has access to both libraries.
 
 #### Install Python
-The Python scripts for topic detection are based on Pyhton version 3. Follow the common ways to install it on your server OS and ensure that the `python3` command is in the path of the server user. 
+The Python scripts for topic detection are based on Pyhton version 3 and. Follow the common ways to install it on your server OS and ensure that `python` is the command to execute Pyhton 2 and `python3` to execute Pyhton 3 on the terminal. 
 
 **Dependencies**
 Before you can run the Python files you have to install these modules through pip3:
@@ -281,7 +281,7 @@ The same way applies for Linux, please have a look at the [r-project site](https
 
 #### Set up environment variables
 
-Sentitomo is using some environment variables to connect to different services which are necessary to let the applicaiton do its job. 
+Sentitomo is using some environment variables to connect to different services which are necessary to run the application. **Be aware to never add `.env` to your VCS**
 
 **Database**
 
@@ -312,6 +312,20 @@ Examples:
  - `"humira,abbvie"` crawls all tweets that contain `humira OR abbvie` 
  -  `"humira abbvie"` crawls all tweets that contain `humira AND abbvie`
    
+**Facebook**
+
+To have access to the Facebook API you need to set the app credentials inside the `.env` file. To create a Facebook app visit: [Facebook Dev Website](https://developers.facebook.com/apps/). After setting up your APP copy the `APP ID` and the `APP Secret` into following line:
+
+```
+FACEBOOK_APP_ID=1234567890yourAPPID
+FACEBOOK_APP_SECRET=123abcde123yourAPPSecret
+``` 
+
+Sentitomo is able to manually crawl Facebook pages based on keywords. To narrow down the results of those crawls to the pharmaceutical context there is a category filter set in `.env`. To change it just edit the following line:
+
+```
+FACEBOOK_PAGE_CATEGORY_FILTER="Medical Company,Pharmaceuticals,Biotechnology Company,Medical & Health,Community,Interest"
+```
 
 #### Start the server
 After installing all necessary software fragments you just need to start the server with the following command, assuming you are in the `sentitomo/server`directory:
@@ -334,82 +348,154 @@ In the next part we will have a deeper look into the database and the directorie
 
 ### Database
 
-By default Sentitomo is using a MySQL database, but theoretically it can be used with any other DBMS. We chose a MySQL database because for us it was the easiest and fastest way DMBS to set up. When the appilication is initially connected to the database it is creating all necessary tables and foreign keys automatically. In the following the different CREATE statements of the tables are listed.
+By default Sentitomo is using a MySQL database, but theoretically it can be used with any other DBMS. We chose a MySQL database because for us it was the easiest and fastest way DMBS to set up. When the application is initially connected to the database it is creating all necessary tables and foreign keys automatically. In the following the different CREATE statements of the tables are listed.
 
-__TW_CORE__ holds all raw information of the tweets.
+__TW_Tweets__ holds all raw information of the tweets.
 
-    CREATE TABLE `TW_CORE` (
-      `id` varchar(255) NOT NULL,
-      `keywordType` varchar(255) DEFAULT NULL,
-      `keyword` varchar(255) DEFAULT NULL,
-      `created` datetime DEFAULT NULL,
-      `createdWeek` int(11) DEFAULT NULL,
-      `toUser` varchar(255) DEFAULT NULL,
-      `language` varchar(255) DEFAULT NULL,
-      `source` varchar(255) DEFAULT NULL,
-      `message` varchar(255) DEFAULT NULL,
-      `latitude` varchar(255) DEFAULT NULL,
-      `longitude` varchar(255) DEFAULT NULL,
-      `retweetCount` int(11) DEFAULT NULL,
-      `favorited` tinyint(1) DEFAULT NULL,
-      `favoriteCount` int(11) DEFAULT NULL,
-      `isRetweet` tinyint(1) DEFAULT NULL,
-      `retweeted` int(11) DEFAULT NULL,
-      `createdAt` datetime NOT NULL,
-      `updatedAt` datetime NOT NULL,
-      `TWUserId` varchar(255) DEFAULT NULL,
-      PRIMARY KEY (`id`),
-      KEY `TWUserId` (`TWUserId`),
-      CONSTRAINT `TW_CORE_ibfk_1` FOREIGN KEY (`TWUserId`) REFERENCES `TW_User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+    CREATE TABLE `TW_Tweet` (
+    `id` varchar(255) NOT NULL,
+    `keywordType` varchar(255) DEFAULT NULL,
+    `keyword` varchar(255) DEFAULT NULL,
+    `created` datetime DEFAULT NULL,
+    `createdWeek` int(11) DEFAULT NULL,
+    `toUser` varchar(255) DEFAULT NULL,
+    `language` varchar(255) DEFAULT NULL,
+    `source` varchar(255) DEFAULT NULL,
+    `message` varchar(255) DEFAULT NULL,
+    `hashtags` varchar(255) DEFAULT NULL,
+    `messagePrep` varchar(255) DEFAULT NULL,
+    `latitude` varchar(255) DEFAULT NULL,
+    `longitude` varchar(255) DEFAULT NULL,
+    `retweetCount` int(11) DEFAULT NULL,
+    `favorited` tinyint(1) DEFAULT NULL,
+    `favoriteCount` int(11) DEFAULT NULL,
+    `isRetweet` tinyint(1) DEFAULT NULL,
+    `retweeted` int(11) DEFAULT NULL,
+    `createdAt` datetime NOT NULL,
+    `updatedAt` datetime NOT NULL,
+    `TWUserId` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `TWUserId` (`TWUserId`),
+    CONSTRAINT `TW_Tweet_ibfk_1` FOREIGN KEY (`TWUserId`) REFERENCES `TW_User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 __TW_Users__ contains information about the tweet authors.
 
     CREATE TABLE `TW_User` (
-      `id` varchar(255) NOT NULL,
-      `username` varchar(255) DEFAULT NULL,
-      `screenname` varchar(255) DEFAULT NULL,
-      `createdAt` datetime NOT NULL,
-      `updatedAt` datetime NOT NULL,
-      `followercount` bigint(20) DEFAULT NULL,
-      PRIMARY KEY (`id`)
+    `id` varchar(255) NOT NULL,
+    `username` varchar(255) DEFAULT NULL,
+    `screenname` varchar(255) DEFAULT NULL,
+    `createdAt` datetime NOT NULL,
+    `updatedAt` datetime NOT NULL,
+    `followercount` bigint(20) DEFAULT NULL,
+    PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
-__TW_SENTIMENT__ contains information about the sentiments of different tweets.
+__TW_Sentiment__ contains information about the sentiments of different tweets.
 
-    CREATE TABLE `TW_SENTIMENT` (
-      `id` varchar(255) NOT NULL,
-      `sarcastic` double DEFAULT NULL COMMENT 'Sarcasm probability',
-      `emo_senti` double DEFAULT NULL COMMENT 'Sentiment of emojis in the message',
-      `emo_desc` varchar(255) DEFAULT NULL COMMENT 'Emojis in the message',
-      `r_ensemble` varchar(255) DEFAULT NULL COMMENT 'Result from R sentiment analysis',
-      `python_ensemble` varchar(255) DEFAULT NULL COMMENT 'Result from Python sentiment analysis',
-      `sentiment` varchar(255) DEFAULT NULL COMMENT 'Final sentiment result',
-      `createdAt` datetime NOT NULL,
-      `updatedAt` datetime NOT NULL,
-      PRIMARY KEY (`id`),
-      CONSTRAINT `TW_SENTIMENT_ibfk_1` FOREIGN KEY (`id`) REFERENCES `TW_CORE` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+    CREATE TABLE `TW_Sentiment` (
+    `id` varchar(255) NOT NULL,
+    `sarcastic` double DEFAULT NULL COMMENT 'Sarcasm probability',
+    `sentiment` varchar(255) DEFAULT NULL COMMENT 'Final sentiment result',
+    `emojiSentiment` double DEFAULT NULL COMMENT 'sentiment of emojis in the message',
+    `emojiDesc` varchar(255) DEFAULT NULL COMMENT 'emojis in the message',
+    `rEnsemble` varchar(255) DEFAULT NULL COMMENT 'Result from R_algos',
+    `pythonEnsemble` varchar(255) DEFAULT NULL COMMENT 'Result from Python_algos',
+    `createdAt` datetime NOT NULL,
+    `updatedAt` datetime NOT NULL,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `TW_Sentiment_ibfk_1` FOREIGN KEY (`id`) REFERENCES `TW_Tweet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-__TW_TOPIC__ contains information about the topics of different tweets.
+__TW_Topic__ contains information about the topics of different tweets.
 
-    CREATE TABLE `TW_TOPIC` (
-      `id` varchar(255) NOT NULL,
-      `topic1Month` varchar(255) DEFAULT NULL,
-      `topic1Month_C` varchar(255) DEFAULT NULL,
-      `topic3Month` varchar(255) DEFAULT NULL,
-      `topic3Month_C` varchar(255) DEFAULT NULL,
-      `topicWhole` varchar(255) DEFAULT NULL,
-      `topicWhole_C` varchar(255) DEFAULT NULL,
-      `createdAt` datetime NOT NULL,
-      `updatedAt` datetime NOT NULL,
-      PRIMARY KEY (`id`),
-      CONSTRAINT `TW_TOPIC_ibfk_1` FOREIGN KEY (`id`) REFERENCES `TW_CORE` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+    CREATE TABLE `TW_Topic` (
+    `id` varchar(255) NOT NULL,
+    `topicId` int(11) DEFAULT NULL,
+    `topicContent` varchar(255) DEFAULT NULL,
+    `probability` double DEFAULT NULL,
+    `createdAt` datetime NOT NULL,
+    `updatedAt` datetime NOT NULL,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `TW_Topic_ibfk_1` FOREIGN KEY (`id`) REFERENCES `TW_Tweet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+__FB_Profile__ contains information about different Facebook profiles.
 
+    CREATE TABLE `FB_Profile` (
+    `id` varchar(255) NOT NULL,
+    `keyword` varchar(255) DEFAULT NULL,
+    `name` varchar(255) DEFAULT NULL,
+    `category` varchar(255) DEFAULT NULL,
+    `likes` int(11) DEFAULT NULL,
+    `type` varchar(255) DEFAULT NULL,
+    `createdAt` datetime NOT NULL,
+    `updatedAt` datetime NOT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+__FB_Post__ contains information about posts on Facebook.
+   
+     CREATE TABLE `FB_Post` (
+    `id` varchar(255) NOT NULL,
+    `message` varchar(255) DEFAULT NULL,
+    `lang` varchar(3) DEFAULT NULL,
+    `story` varchar(255) DEFAULT NULL,
+    `likes` int(11) DEFAULT NULL,
+    `link` varchar(255) DEFAULT NULL,
+    `created` datetime DEFAULT NULL,
+    `createdAt` datetime NOT NULL,
+    `updatedAt` datetime NOT NULL,
+    `FBProfileId` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `FBProfileId` (`FBProfileId`),
+    CONSTRAINT `FB_Post_ibfk_1` FOREIGN KEY (`FBProfileId`) REFERENCES `FB_Profile` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+__FB_Comment__ contains information about comments on Facebook posts.
+
+    CREATE TABLE `FB_Comment` (
+    `id` varchar(255) NOT NULL,
+    `message` text,
+    `lang` varchar(3) DEFAULT NULL,
+    `createdAt` datetime NOT NULL,
+    `updatedAt` datetime NOT NULL,
+    `FBPostId` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `FBPostId` (`FBPostId`),
+    CONSTRAINT `FB_Comment_ibfk_1` FOREIGN KEY (`FBPostId`) REFERENCES `FB_Post` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+__FB_Sentiment__ contains information about the sentiment of Facebook posts.
+
+    CREATE TABLE `FB_Sentiment` (
+    `id` varchar(255) NOT NULL,
+    `sarcastic` double DEFAULT NULL,
+    `sentiment` varchar(255) DEFAULT NULL,
+    `emojiSentiment` double DEFAULT NULL,
+    `emojiDesc` varchar(255) DEFAULT NULL,
+    `rEnsemble` varchar(255) DEFAULT NULL,
+    `pythonEnsemble` varchar(255) DEFAULT NULL,
+    `createdAt` datetime NOT NULL,
+    `updatedAt` datetime NOT NULL,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `FB_Sentiment_ibfk_1` FOREIGN KEY (`id`) REFERENCES `FB_Post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+__FB_Topic__ contains information about the topic of Facebook posts.
+
+    CREATE TABLE `FB_Topic` (
+    `id` varchar(255) NOT NULL,
+    `topicId` int(11) DEFAULT NULL,
+    `topicContent` varchar(255) DEFAULT NULL,
+    `probability` double DEFAULT NULL,
+    `createdAt` datetime NOT NULL,
+    `updatedAt` datetime NOT NULL,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `FB_Topic_ibfk_1` FOREIGN KEY (`id`) REFERENCES `FB_Post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ### Server
 
@@ -424,15 +510,27 @@ With that procedure we can spawn the machine learning tasks asynchronously to th
 It is not possible to pass complex data types and structures from Javascript to R, Python or Java. It can either be a **plain string** or a **JSON encoded string** which then needs to be parsed by the executed file. The same applies for the output. If the foreign code wants to output an complex object it is the best practice to convert it to a JSON representation so that the Node.js proceess can easily work with it. 
 
 __Possible packages and modules to use with JSON__
+
 * __R__ with [RJSONIO](https://cran.r-project.org/web/packages/RJSONIO/index.html)
 * __Pyhton__ with [JSON Module](https://docs.python.org/2/library/json.html)
 * __Java__ with [org.json library](https://github.com/stleary/JSON-java)
 
 __Paths__
+
 When the foreign code needs access to some other files inside a directory it is mandatory to know that all files are executed in the scope of `./server/`. For example if a Python file needs to load a model from the Python directory it has to do it with the relative path `./ML/Python/filename.bin`.
 
 __Examples__
+
 All examples in JavaScript are written with ES6. To have a look the wrapper function for calling the foreign code, have a look at `/server/wrapper/codeWrapper.js`.
+
+__h2o__
+Sentitomo is using [h2o](https://www.h2o.ai/h2o/) to execute some machine learning tasks for sentiment analysis. To do so it spawns a Java child process which is setting up a h2o server on port 54321. This second server is then used to execute some algorithms on it. It is gracefully shutdown when you terminate the Sentitomo process.
+
+*Important*: 
+
+The R package version and the Java h20 server verison have to exactly match, if not the sentiment detection will not execute. We use the h2o version **3.10.5.3**. 
+
+If it is needed to have a look on the h2o server front end just visit [localhost:54321](localhost:54321). Then you can have a look at the different models we used for h2o.
 
 ##### R
 For integrating R with the server we were at first using a package called [r-script](https://github.com/joshkatz/r-script) package. It ships with a handy R function called `needs()`. This is basically a combination of `install()` and `require()`.  This ensured that the different packages which are required by our scripts are installed and loaded in the correct way. Therefore every R file has to use `needs()` instead of `ìnstall.package("packageName")` and `require("package")/load("package")`. Also it is recommended to place all functions at the top of the R files.
@@ -787,12 +885,22 @@ When the application is started, the front-end is available at [localhost:8080/a
 	* [/dashboard](localhost:8080/app/dashbaord) rudimentary dashboard
 	* [/toolbox](localhost:8080/app/toolbox) different options to initate machine learning tasks dynamically 
 
-## Typical Workflow
+## Sequence Diagrams
 
-When the server is started the typical sequence of crawling Twitter tweets is the following:
 
-![Twitter Crawl Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/twitter_crawl_workflow.png)
+__Server start__:
 
+![Server Start Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/server_startup_sequence.png)
+
+__Twitter Crawl__:
+
+![Twitter Crawl Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/twitter_crawl_sequence.png)
+
+__Topic Detection__:
+
+
+
+![Topic Detection Worker Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/topic_detection_worker_sequence.png)
 
 
 ## Conclusion
@@ -800,18 +908,3 @@ When the server is started the typical sequence of crawling Twitter tweets is th
 With this application we wanted to show one way of using our findings and algorithms in an production like environment. We showed how it is possible to built a server application which is capable of integrating different programming languages and use them for machine learning in an efficient way. With Node.js it is an ease to set up an highly scalable server which can handle asynchronous execetuions of foreign code very well. With the help spawning child processes Node.js is able to communicate with those and retrieve results from them. With the help of GraphQL we set up a very modern and reliable API which any front end can use to retrieve the result the machine learning algorithms produced from the database. If it is necessary to switch out the DBMS in the future the API endpoints will not change and the front-end system would not need to be heavily restructered. 
 The client side was implemented in React, which makes it highly dynamical from a user point of view and well structured from a programmer's point of view. With the help of different packages it was possible to built a easy to use and good looking user interface.
 All in all we hope that we could show you one possible way of how to build a good solution for monitoring topics and trends in social media today.
-
-```mermaid
-sequenceDiagram
-    participant Alice
-    participant Bob
-    Alice->John: Hello John, how are you?
-    loop Healthcheck
-        John->John: Fight against hypochondria
-    end
-    Note right of John: Rational thoughts <br/>prevail...
-    John-->Alice: Great!
-    John->Bob: How about you?
-    Bob-->John: Jolly good!
-```
-
