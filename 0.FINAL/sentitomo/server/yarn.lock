@@ -1045,6 +1045,10 @@ date-extended@~0.0.3:
     extended "~0.0.3"
     is-extended "~0.0.3"
 
+death@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/death/-/death-1.1.0.tgz#01aa9c401edd92750514470b8266390c66c67318"
+
 debug@2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.3.3.tgz#40c453e67e6e13c901ddec317af8986cda9eff8c"
@@ -2132,6 +2136,10 @@ nested-error-stacks@^1.0.0:
   dependencies:
     inherits "~2.0.1"
 
+node-cleanup@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/node-cleanup/-/node-cleanup-2.1.2.tgz#7ac19abd297e09a7f72a71545d951b517e4dde2c"
+
 node-pre-gyp@^0.6.36:
   version "0.6.36"
   resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.6.36.tgz#db604112cb74e0d477554e9b505b17abddfab786"
@@ -2922,6 +2930,10 @@ tough-cookie@>=2.3.0, tough-cookie@~2.3.0:
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.3.2.tgz#f081f76e4c85720e6c37a5faced737150d84072a"
   dependencies:
     punycode "^1.4.1"
+
+tree-kill@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/tree-kill/-/tree-kill-1.1.0.tgz#c963dcf03722892ec59cba569e940b71954d1729"
 
 trigram-utils@^0.1.0:
   version "0.1.1"

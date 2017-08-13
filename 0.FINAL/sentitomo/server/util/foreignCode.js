@@ -36,6 +36,7 @@ class Python {
         this.version = version;
         this.args = [path];
         this.output = "";
+        this.process = null;
     }
 
     /**
@@ -60,19 +61,18 @@ class Python {
     * @return {void}
     */
     call(callback) {
-        const process = child_process.spawn(this.version == 2 ? 'python' : 'python3', this.args, defaults);
+        this.process = child_process.spawn(this.version == 2 ? 'python' : 'python3', this.args, defaults);
 
-        process.stdout.on('data', (data) => {
-            console.log(data);
+        this.process.stdout.on('data', (data) => {
             this.output += '' + data
 
         });
 
-        process.stderr.on('data', (data) => {
+        this.process.stderr.on('data', (data) => {
             logger.error(`stderr: ${data}`);
         });
 
-        process.on('close', (code) => {
+        this.process.on('close', (code) => {
             logger.info(`child process exited with code ${code}`);
             if (typeof callback === 'function') {
                 callback(this.output);
@@ -87,9 +87,9 @@ class Python {
      * @memberof module:ForeignCode~Python
     */
     callSync() {
-        const process = child_process.spawnSync(this.version == 2 ? 'python' : 'python3', this.args, defaults);
-        if (process.stderr) //console.log(process.stderr);
-            return (process.stdout);
+        this.process = child_process.spawnSync(this.version == 2 ? 'python' : 'python3', this.args, defaults);
+        if (this.process.stderr) //console.log(process.stderr);
+            return (this.process.stdout);
     }
 }
 
@@ -103,7 +103,7 @@ class Python {
  */
 export function JavaShell(path) {
     var obj = new Java(path);
-    return _.bindAll(obj, 'data', 'call', );
+    return _.bindAll(obj, 'data', 'call', 'kill');
 }
 
 
@@ -112,11 +112,12 @@ export function JavaShell(path) {
  * @param {String} path  Path to the Jar file to executeo use
  * @classdesc Class for execting Jar files
 */
-class Java {
+export class Java {
 
     constructor(path) {
         this.args = ['-jar', path];
         this.output = '';
+        this.process = null;
     }
 
     /**
@@ -141,17 +142,18 @@ class Java {
     * @return {void}
     */
     call(callback) {
-        const process = child_process.spawn('java', this.args, defaults);
+        this.process = child_process.spawn('java', this.args, defaults);
 
-        process.stdout.on('data', (data) => {
+        this.process.stdout.on('data', (data) => {
+            console.log(data.toString());
             this.output += '' + data
         });
 
-        process.stderr.on('data', (data) => {
+        this.process.stderr.on('data', (data) => {
             logger.error(`stderr: ${data}`);
         });
 
-        process.on('close', (code) => {
+        this.process.on('close', (code) => {
             logger.info(`child process exited with code ${code}`);
             if (typeof callback === 'function') {
                 callback(this.output);
@@ -166,9 +168,14 @@ class Java {
      * @memberof module:ForeignCode~Java
     */
     callSync() {
-        const process = child_process.spawnSync('java', this.args, defaults);
-        if (process.stderr) //console.log(process.stderr);
-            return (process.stdout);
+        this.process = child_process.spawnSync('java', this.args, defaults);
+        if (this.process.stderr) //console.log(process.stderr);
+            return (this.process.stdout);
+    }
+
+    kill() {
+        logger.log('info', 'Manuall killing ' + process.pid);
+        this.process.kill('SIGINT')
     }
 
 }
@@ -195,6 +202,7 @@ class R {
         this.path = path;
         this.args = ['--vanilla', path];
         this.output = '';
+        this.process = null;
     }
 
     /**
@@ -219,18 +227,19 @@ class R {
      * @memberof module:ForeignCode~R
      */
     call(callback) {
-        const process = child_process.spawn('Rscript', this.args, defaults);
+        this.process = child_process.spawn('Rscript', this.args, defaults);
 
-        process.stdout.on('data', (data) => {
+        this.process.stdout.on('data', (data) => {
+            console.log(data.toString())
             this.output += '' + data
         });
 
-        process.stderr.on('data', (data) => {
-            //console.log(`stderr: ${data}`);
+        this.process.stderr.on('data', (data) => {
+            console.log(`stderr: ${data}`);
         });
 
-        process.on('close', (code) => {
-            console.log(`child process exited with code ${code}`);
+        this.process.on('close', (code) => {
+            console.log(`child process ${this.process.pid} exited with code ${code}`);
             if (typeof callback === 'function') {
                 callback(this.output);
             }
@@ -244,9 +253,9 @@ class R {
      * @memberof module:ForeignCode~R
     */
     callSync() {
-        const process = child_process.spawnSync('Rscript', this.args, defaults);
-        if (process.stderr) //console.log(process.stderr);
-            return (process.stdout);
+        this.process = child_process.spawnSync('Rscript', this.args, defaults);
+        if (this.process.stderr) //console.log(process.stderr);
+            return (this.process.stdout);
     }
 }
 

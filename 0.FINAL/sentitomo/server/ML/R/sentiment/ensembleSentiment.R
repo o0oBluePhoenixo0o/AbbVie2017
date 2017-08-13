@@ -32,7 +32,7 @@ args = commandArgs(trailingOnly=TRUE)
 ## Assume CORE dataset is TW_df
 # Extract out only ID & Message
 
-TW_df <- args[1]
+TW_df <-"Bristol-Myers Gets FDA Nod for Orencia's Label Expansion #Bristol #UK https://t.co/JYv1P37wXt"
 
 # clean
 corp <- vec2clean.corp(TW_df)
@@ -41,7 +41,7 @@ prep <- DocumentTermMatrix(corp)
 prep <- as.data.frame(as.matrix(prep))
 
 #create new dtm that matches original dtm for training
-xx <- left_join(prep,tweetsSparseX[1,])
+xx <- full_join(prep,tweetsSparseX[1,])
 
 #put everything to 0s except the message
 xx[,ncol(prep)+1:ncol(xx)] <- 0
@@ -78,7 +78,7 @@ for (i in 1:nrow(final)){
   final$Major[i] <- find_major(final,i)
 }
 
-h2o.shutdown(prompt = FALSE)
+#h2o.shutdown(prompt = FALSE)
 
 #Turn logging on again
 sink()

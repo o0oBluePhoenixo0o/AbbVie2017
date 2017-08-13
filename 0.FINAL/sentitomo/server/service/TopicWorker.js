@@ -88,7 +88,7 @@ export default class TopicWorker {
 
                     })
                 } else {
-                    setTimeout(this.detectTopics(), 600000) // wait 10 minutes for new tweets to come ine
+                    setTimeout(() => this.detectTopics(), 600000) // wait 10 minutes for new tweets to come ine
                 }
             });
         } else {

@@ -63,7 +63,7 @@ export function detectSentimentEnsembleR(tweetMessage, callback) {
 export function detectSentimentEnsembleRSync(tweetMessage) {
     var out = RShell('./ML/R/sentiment/ensembleSentiment.R')
         .data([tweetMessage])
-        .calSync();
+        .callSync();
     return out.replace(/\s*\[(.+?)\]\s*/g, "").replace(/"/g, ''); // Strip out the typical R prints 
 }
 

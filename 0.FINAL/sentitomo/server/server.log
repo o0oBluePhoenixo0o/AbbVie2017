@@ -10847,3 +10847,994 @@
 {"level":"info","message":"The callback sentiment is: Neutral\n","timestamp":"2017-08-12T22:30:57.599Z"}
 {"level":"info","message":"The sarcasm is: 56.99","timestamp":"2017-08-12T22:31:05.346Z"}
 {"level":"info","message":"The python ensemble is: ","timestamp":"2017-08-12T22:31:06.273Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T22:37:31.301Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T22:37:31.315Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-08-12T22:37:31.336Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-08-12T22:37:31.362Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T22:37:31.390Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T22:37:31.729Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:37:59.606Z"}
+{"level":"info","message":"The tweet is: hepatitis b vaccine schedule adult american school teen xxx lesbian videos https://t.co/Tzc4Ejc9on","timestamp":"2017-08-12T22:38:14.072Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T22:39:42.055Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T22:39:42.069Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-08-12T22:39:42.089Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-08-12T22:39:42.115Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T22:39:42.147Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T22:39:42.489Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:39:46.032Z"}
+{"level":"info","message":"The tweet is: @KimKardashian's psoriasis looks bad in her latest snapchat! 😩😩","timestamp":"2017-08-12T22:40:01.585Z"}
+{"level":"info","message":"The callback sentiment is: Negative","timestamp":"2017-08-12T22:40:01.586Z"}
+{"level":"info","message":"The sarcasm is: 56.99","timestamp":"2017-08-12T22:40:09.159Z"}
+{"level":"info","message":"The python ensemble is: ","timestamp":"2017-08-12T22:40:09.877Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:40:09.891Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:40:11.260Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:40:12.880Z"}
+{"level":"info","message":"The tweet is: ❤Arthritis-Friendly #Yoga #DVD Arthritis Foundation #Workout #Health https://t.co/d3d5pb0SL9 https://t.co/1jjwLQYzDc https://t.co/Guhdb4N2Cw","timestamp":"2017-08-12T22:40:23.687Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T22:42:09.575Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T22:42:09.590Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-08-12T22:42:09.610Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-08-12T22:42:09.635Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T22:42:09.663Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T22:42:10.000Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:42:58.080Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T22:43:35.209Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T22:43:35.223Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-08-12T22:43:35.243Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-08-12T22:43:35.269Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T22:43:35.298Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T22:43:35.626Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:44:27.470Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T22:45:02.397Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T22:45:02.413Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-08-12T22:45:02.433Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-08-12T22:45:02.458Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T22:45:02.486Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T22:45:02.815Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:45:04.079Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:45:21.631Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:45:50.102Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:07.888Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T22:46:54.640Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T22:46:54.656Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: javascript,trump,abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-08-12T22:46:54.676Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-08-12T22:46:54.703Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T22:46:54.733Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T22:46:55.068Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.389Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.513Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.517Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.519Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.623Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.640Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.645Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.646Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.653Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.654Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.656Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.666Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.749Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.766Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.771Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.774Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.777Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.779Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.781Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.783Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.784Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.789Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.790Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.793Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.795Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.797Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.798Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.923Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.924Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.926Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.927Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.928Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.929Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.930Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.933Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.934Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.939Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.940Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.942Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.945Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.946Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.973Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:55.995Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.056Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.058Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.071Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.072Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.073Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.080Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.081Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.122Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.123Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.124Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.125Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.195Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.200Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.357Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.358Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.359Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.361Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.362Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.364Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.365Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.366Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.368Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.369Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.399Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.478Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.481Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.571Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.572Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.581Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.582Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.583Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.583Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.584Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.688Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.689Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.895Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.896Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.981Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.982Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.983Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.984Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:56.986Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.183Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.184Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.185Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.186Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.187Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.188Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.189Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.190Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.193Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.240Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.242Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.244Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.245Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.246Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.247Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.247Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.248Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.248Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.249Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.250Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.250Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.251Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.252Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.253Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.298Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.299Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.303Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.304Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.305Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.306Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.607Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.608Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.608Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.610Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.611Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.661Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.664Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.669Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.670Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.706Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.711Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.984Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.985Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.986Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:57.988Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.176Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.178Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.182Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.252Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.254Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.257Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.258Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.259Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.260Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.261Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.263Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.264Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.264Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.265Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.266Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.316Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.317Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.318Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.318Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.319Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.320Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.320Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.321Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.364Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.365Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.366Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.367Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.368Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.388Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.389Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.451Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.506Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.509Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.511Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.512Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.513Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.515Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.974Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.975Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.975Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.990Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.991Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.992Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.993Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.994Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:58.995Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.140Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.213Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.214Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.271Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.273Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.274Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.276Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.276Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.277Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.278Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.279Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.280Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.280Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.281Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.334Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.335Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.336Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.338Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.338Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.340Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.341Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.342Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.625Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.626Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.627Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.628Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.629Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.631Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.632Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.632Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.633Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.633Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.749Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.750Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.751Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.752Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.973Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.974Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:46:59.976Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.046Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.048Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.177Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.180Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.181Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.183Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.184Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.185Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.332Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.335Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.336Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.338Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.340Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.342Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.343Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.344Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.467Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.468Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.469Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.470Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.470Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.471Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.472Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.473Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.474Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.475Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.476Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.550Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.551Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.552Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.553Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.555Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.556Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.558Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.943Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.945Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.947Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.947Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:00.948Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.006Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.010Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.012Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.156Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.157Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.158Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.159Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.161Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.161Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.162Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.162Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.163Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.164Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.165Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.166Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.166Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.243Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.245Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.246Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.247Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.248Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.248Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.249Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.250Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.506Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.509Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.511Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.513Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.513Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.515Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.518Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.519Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.519Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.520Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.521Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.649Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.653Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.654Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.655Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.656Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.657Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.658Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.659Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.660Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.660Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:01.734Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.064Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.065Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.066Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.066Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.068Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.069Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.070Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.156Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.157Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.158Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.159Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.162Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.163Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.166Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.167Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.234Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.235Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.236Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.236Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.237Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.238Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.239Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.529Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.531Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.532Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.534Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.534Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.617Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.618Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.619Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.620Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.621Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.621Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.623Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.624Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.624Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.625Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.626Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.686Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.687Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.688Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.689Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.690Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.691Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.692Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.693Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:02.695Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.019Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.020Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.021Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.078Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.081Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.168Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.169Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.170Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.170Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.171Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.171Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.172Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.173Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.175Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.176Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.245Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.246Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.250Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.251Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.586Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.587Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.605Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.607Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.607Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.608Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.613Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.614Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.615Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.639Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.640Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.641Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.642Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.643Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.644Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.645Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.646Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.646Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.647Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.648Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.649Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.889Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.892Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.896Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:03.899Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.047Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.048Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.049Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.053Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.054Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.055Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.056Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.460Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.462Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.463Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.463Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.545Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.547Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.549Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.550Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.551Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.552Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.554Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.555Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.650Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.651Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.652Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.654Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.654Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.655Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.655Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.656Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.657Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.658Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.659Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.660Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.715Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.717Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.717Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.718Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.719Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.720Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.721Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.722Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.722Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.723Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.723Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:04.725Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.129Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.129Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.130Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.207Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.208Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.209Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.210Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.211Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.212Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.213Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.215Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.216Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.217Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.300Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.301Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.301Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.303Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.304Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.305Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.307Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.308Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.704Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.705Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.789Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.791Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.793Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.795Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.795Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.796Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.797Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.798Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.799Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.821Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.822Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.826Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.827Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.828Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.829Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.829Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.830Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.831Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.832Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.907Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.908Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.909Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.912Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.967Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.968Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.969Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.970Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.971Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.972Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:05.973Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.504Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.505Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.506Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.506Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.508Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.509Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.509Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.510Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.511Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.511Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.512Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.512Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.513Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.617Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.618Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.619Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.619Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.620Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.621Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.622Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.624Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.625Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.626Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.710Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.711Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.713Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.713Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.715Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.715Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.716Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.716Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.720Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.720Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.721Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.721Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.723Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.723Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.724Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.725Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.726Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.726Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.727Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:06.727Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.555Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.556Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.556Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.557Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.558Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.676Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.678Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.682Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.683Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.684Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.685Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.686Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.687Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.688Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.688Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.689Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.689Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.690Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.777Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.778Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.779Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.780Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.781Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.782Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.783Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.783Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.784Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.785Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.786Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.786Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.787Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.859Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.860Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.861Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.864Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.865Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.865Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.867Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.868Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.869Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.870Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.871Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.872Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.872Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.873Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:07.874Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.443Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.444Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.446Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.447Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.448Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.448Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.449Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.450Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.450Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.451Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.451Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.536Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.537Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.539Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.540Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.540Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.541Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.542Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.542Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.543Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.544Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.544Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.546Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.547Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.548Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.549Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.550Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.550Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.552Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.553Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.553Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.554Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.555Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.944Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.944Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.945Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.946Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.946Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.947Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.948Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.949Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:08.949Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.134Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.138Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.139Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.140Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.260Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.261Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.262Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.262Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.263Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.264Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.371Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.372Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.372Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.373Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.374Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.375Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.376Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.376Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.377Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.378Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.378Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.379Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.380Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.380Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.381Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.451Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.453Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.453Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.454Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.455Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.455Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.456Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.457Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.457Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.458Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.459Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.460Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.973Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.974Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.974Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.975Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.976Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:09.977Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.069Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.069Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.071Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.072Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.560Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.562Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.562Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.563Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.563Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.564Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.565Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.566Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.675Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.676Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.677Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.677Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.678Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.679Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.680Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.681Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.681Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.682Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.683Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.683Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.684Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.768Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.769Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.771Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.771Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.772Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.860Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.861Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.862Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.863Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.881Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.882Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.882Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.883Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.883Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.884Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.885Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.885Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.886Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.886Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.887Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.887Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:10.888Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.483Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.484Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.485Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.486Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.487Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.488Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.584Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.585Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.587Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.588Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.590Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.591Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.592Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.592Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.593Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.668Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.670Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.670Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.671Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.672Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.673Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.674Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.675Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.676Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.677Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.678Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.678Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.679Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.742Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.743Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.744Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:11.747Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.309Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.411Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.412Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.413Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.414Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.416Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.416Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.417Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.419Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.420Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.421Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.421Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.515Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.543Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.544Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.544Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.545Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.689Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.691Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.692Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.692Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.693Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.694Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.695Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.696Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.696Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.697Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.697Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.698Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.699Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.777Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.777Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.778Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.779Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.780Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.781Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.782Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.785Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.786Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:47:12.787Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-12T22:48:22.207Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-12T22:48:22.228Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: javascript,abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-08-12T22:48:22.254Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-08-12T22:48:22.283Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-12T22:48:22.327Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-12T22:48:22.697Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:48:32.262Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:48:38.355Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:48:39.340Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:48:41.437Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:48:41.677Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:48:51.349Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-12T22:49:07.911Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T09:21:58.799Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T09:21:58.815Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T09:21:58.885Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T09:21:59.278Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T09:34:46.294Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T09:34:46.311Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T09:34:46.383Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T09:34:46.710Z"}
+{"level":"info","message":"child process exited with code 255","timestamp":"2017-08-13T09:35:18.307Z"}
+{"level":"info","message":"Manuall killing 69690","timestamp":"2017-08-13T09:35:46.340Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T09:36:20.498Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T09:36:20.512Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T09:36:20.576Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T09:36:20.893Z"}
+{"level":"info","message":"child process exited with code null","timestamp":"2017-08-13T09:38:04.454Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T09:40:41.549Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T09:40:41.564Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T09:40:41.631Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T09:40:41.959Z"}
+{"level":"info","message":"Manuall killing 70181","timestamp":"2017-08-13T09:42:41.604Z"}
+{"level":"info","message":"child process exited with code 130","timestamp":"2017-08-13T09:42:41.994Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T09:47:04.538Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T09:47:04.554Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T09:47:04.616Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T09:47:04.955Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T09:57:32.748Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T09:57:32.763Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T09:57:32.834Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T09:57:33.185Z"}
+{"level":"info","message":"Manuall killing 71293","timestamp":"2017-08-13T09:59:32.792Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T10:06:13.438Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T10:06:13.452Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T10:06:13.522Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T10:06:13.855Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T10:07:09.100Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T10:07:09.115Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T10:07:09.166Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T10:07:09.484Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T10:07:27.302Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T10:07:27.316Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T10:07:27.389Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T10:07:27.723Z"}
+{"level":"info","message":"Manuall killing 72040","timestamp":"2017-08-13T10:09:27.348Z"}
+{"level":"info","message":"child process exited with code 130","timestamp":"2017-08-13T10:09:27.736Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T10:23:02.593Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T10:23:02.610Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T10:23:02.690Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T10:23:03.078Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T10:24:49.139Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T10:24:49.157Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T10:24:49.233Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T10:24:49.566Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T10:26:18.776Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T10:26:18.792Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T10:26:18.872Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T10:26:19.222Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T10:28:16.288Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T10:28:16.304Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T10:28:16.372Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T10:28:16.733Z"}
+{"level":"info","message":"Manuall killing 73559","timestamp":"2017-08-13T10:29:18.441Z"}
+{"level":"info","message":"child process exited with code 130","timestamp":"2017-08-13T10:29:18.834Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T10:30:02.844Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T10:30:02.859Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T10:30:02.930Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T10:30:03.249Z"}
+{"level":"info","message":"child process exited with code null","timestamp":"2017-08-13T10:32:17.367Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T10:32:28.302Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T10:32:28.319Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T10:32:28.399Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T10:32:28.717Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T10:32:40.903Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T10:32:40.920Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T10:32:41.004Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T10:32:41.328Z"}
+{"level":"info","message":"child process exited with code null","timestamp":"2017-08-13T10:33:39.199Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T10:33:50.004Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T10:33:50.019Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T10:33:50.090Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T10:33:50.448Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T10:36:27.454Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T10:36:27.470Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T10:36:27.542Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T10:36:27.866Z"}
+{"level":"info","message":"child process exited with code null","timestamp":"2017-08-13T10:38:40.495Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T10:45:20.508Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T10:45:20.526Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T10:45:20.623Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T10:45:20.940Z"}
+{"level":"info","message":"child process exited with code 143","timestamp":"2017-08-13T10:50:51.360Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T10:54:31.039Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T10:54:31.055Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T10:54:31.132Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T10:54:31.470Z"}
+{"level":"info","message":"child process exited with code null","timestamp":"2017-08-13T11:06:16.600Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T11:16:35.641Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T11:16:35.658Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T11:16:35.711Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T11:16:36.604Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:17:52.041Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:18:02.988Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:18:03.848Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:18:05.400Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T11:18:28.051Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T11:18:28.068Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T11:18:28.151Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T11:18:28.501Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:18:54.679Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:18:58.034Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:18:59.765Z"}
+{"level":"info","message":"Manuall killing 78067","timestamp":"2017-08-13T11:19:07.273Z"}
+{"level":"info","message":"child process exited with code 130","timestamp":"2017-08-13T11:19:07.673Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:19:22.095Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:20:12.984Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:20:13.631Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:20:22.701Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:20:23.161Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T11:22:33.324Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T11:22:33.340Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T11:22:33.384Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T11:22:33.740Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:22:54.698Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:22:54.943Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T11:25:02.594Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T11:25:02.609Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T11:25:02.693Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T11:25:03.078Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:25:06.219Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:25:06.455Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:25:33.991Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:25:34.508Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:25:46.184Z"}
+{"level":"info","message":"Manuall killing 78989","timestamp":"2017-08-13T11:25:50.670Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T11:26:46.955Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T11:26:46.970Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T11:26:47.037Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T11:26:47.359Z"}
+{"level":"info","message":"Manuall killing 79065","timestamp":"2017-08-13T11:28:19.755Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T11:28:39.669Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T11:28:39.686Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T11:28:39.770Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T11:28:40.083Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:33:48.205Z"}
+{"ip":"::1","level":"debug","message":"IP Request","timestamp":"2017-08-13T11:33:48.448Z"}
+{"level":"info","message":"Manuall killing 79171","timestamp":"2017-08-13T11:38:44.376Z"}

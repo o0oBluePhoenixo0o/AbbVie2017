@@ -128,7 +128,7 @@ export default class TwitterCrawler {
                             }).then(async author => {
                                 detectSentimentEnsembleR(event.text, sentiment => {
                                     logger.log('info', 'The tweet is: ' + event.text)
-                                    logger.log('info', 'The callback sentiment is: ' + sentiment.trimt())
+                                    logger.log('info', 'The callback sentiment is: ' + sentiment.trim())
                                     var sarcasticValue = detectSarcasmSync(event.text)
                                     logger.log('info', 'The sarcasm is: ' + sarcasticValue)
                                     var ensemblePython = detectSentimentEnsemblePythonSync(event.text).trim()

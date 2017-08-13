@@ -27,6 +27,10 @@ import TopicWorker from './service/TopicWorker';
 import { listenToSockets } from './service/sockets';
 
 import { detectSentimentEnsembleR } from './ML/ml_wrapper';
+import { Java, JavaShell } from './util/foreignCode';
+var nodeCleanup = require('node-cleanup');
+
+
 
 import moment from 'moment';
 
@@ -148,10 +152,27 @@ detectTopicLDADynamic(moment("2017-03-01"), moment("2017-03-31"), result => {
 detectTopicLDAStatic(JSON.stringify({ id: "123213", message: "Bristol-Myers Gets FDA Nod for Orencia's Label Expansion #Bristol #UK https://t.co/JYv1P37wXt" }), result => {
     console.log(JSON.parse(result));
 })*/
-twitterCrawler.start();
+//twitterCrawler.start();
 //topicWorker.start();
 
 
-/*detectSentimentEnsembleR('What does oppression look like? The government giving you syphilis &amp; hepatitis without your knowledge as an \"experiment\"', result => {
-    console.log(result);
-})*/
+var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
+console.log(h20Process);
+h20Process.call();
+console.log("wait now")
+setTimeout(() => {
+    console.log(detectSentimentEnsembleR("Bristol-Myers Gets FDA Nod for Orencia's Label Expansion #Bristol #UK https://t.co/JYv1P37wXt", result => {
+        console.log(result);
+    }));
+    //h20Process.kill()
+}, 60000) // wait 1 minute for new tweets to come ine
+
+
+
+// Gracefully kill the h2o server process
+nodeCleanup(function (exitCode, signal) {
+    h20Process.kill();
+    console.log(exitCode);
+    console.log(signal);
+    console.log("End node");
+});
