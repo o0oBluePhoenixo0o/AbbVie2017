@@ -69,7 +69,7 @@ export default class TopicWorker {
                         tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
                     });
 
-                    const filename = './ML/Python/topic/static/batchTweets.csv';
+                    const filename = './ML/Python/topic/lda/static/batchTweets.csv';
 
                     convertToCsvRaw(tweets, filename, async () => {
                         var topicArray = await this.detectTopicPromise(filename);

@@ -11880,3 +11880,89 @@
 {"level":"info","message":"The sarcasm is: 56.99","timestamp":"2017-08-13T16:37:19.266Z"}
 {"level":"info","message":"The python ensemble is: ","timestamp":"2017-08-13T16:37:22.838Z"}
 {"level":"info","message":"Manuall killing 86165","timestamp":"2017-08-13T16:37:31.244Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T20:36:49.502Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T20:36:49.518Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T20:36:49.594Z"}
+{"level":"info","message":"child process exited with code 2","timestamp":"2017-08-13T20:36:49.629Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T20:36:49.951Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T20:37:30.506Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T20:37:30.522Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T20:37:30.586Z"}
+{"level":"info","message":"child process exited with code 2","timestamp":"2017-08-13T20:37:30.612Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T20:37:30.925Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T20:37:58.453Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T20:37:58.469Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T20:37:58.534Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T20:37:58.856Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-13T20:40:42.420Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T20:42:55.947Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T20:42:55.962Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T20:42:56.033Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T20:42:56.361Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T20:56:16.440Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T20:56:16.462Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T20:56:16.527Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T20:56:16.837Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T20:57:54.860Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T20:57:54.875Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T20:57:54.943Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T20:57:55.265Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T21:02:09.636Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T21:02:09.651Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T21:02:09.729Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T21:02:10.075Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T21:05:14.579Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T21:05:14.601Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T21:05:14.665Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T21:05:15.025Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T21:05:59.894Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T21:05:59.909Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T21:05:59.984Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T21:06:00.313Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T21:07:39.056Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T21:07:39.072Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T21:07:39.120Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T21:07:39.484Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/lda/dynamic/tweets.csv","timestamp":"2017-08-13T21:07:40.196Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-13T21:09:17.066Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T21:10:08.118Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T21:10:08.133Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T21:10:08.207Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T21:10:08.535Z"}
+{"level":"info","message":"child process exited with code 0","timestamp":"2017-08-13T21:12:45.046Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T21:14:13.441Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T21:14:13.456Z"}
+{"level":"info","message":"Wait 2 minutes to let the h2o server start up","timestamp":"2017-08-13T21:14:13.492Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T21:14:13.533Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T21:14:13.891Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-08-13T21:16:13.497Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-08-13T21:16:13.537Z"}
+{"level":"info","message":"Topic detection worker started","timestamp":"2017-08-13T21:16:13.538Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/lda/static/batchTweets.csv","timestamp":"2017-08-13T21:16:14.393Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-13T21:16:29.848Z"}
+{"level":"info","message":"The tweet is: RT @stankymeat: On My Chest:\nold navy\n\nOn My Legs:\nkirkland\n\nOn My Feet:\nnew balance\n\nOn My Wrist:\narthritis\n\nOn My Mind:\nballin out at she…","timestamp":"2017-08-13T21:16:32.974Z"}
+{"level":"info","message":"The callback sentiment is: ","timestamp":"2017-08-13T21:16:32.974Z"}
+{"level":"info","message":"The sarcasm is: ","timestamp":"2017-08-13T21:16:40.165Z"}
+{"level":"info","message":"The python ensemble is: ","timestamp":"2017-08-13T21:16:41.657Z"}
+{"level":"info","message":"Manuall killing 96067","timestamp":"2017-08-13T21:16:48.401Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T21:25:52.692Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T21:25:52.708Z"}
+{"level":"info","message":"Wait 2 minutes to let the h2o server start up","timestamp":"2017-08-13T21:25:52.735Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T21:25:52.788Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T21:25:53.138Z"}
+{"level":"info","message":"Manuall killing 96472","timestamp":"2017-08-13T21:26:18.673Z"}
+{"level":"info","message":"Twitter API initialized successfully","timestamp":"2017-08-13T21:26:24.107Z"}
+{"level":"info","message":"Start up server","timestamp":"2017-08-13T21:26:24.122Z"}
+{"level":"info","message":"Wait 2 minutes to let the h2o server start up","timestamp":"2017-08-13T21:26:24.149Z"}
+{"level":"info","message":"GraphQL Server is now running on http://localhost:8080/graphql","timestamp":"2017-08-13T21:26:24.200Z"}
+{"level":"info","message":"Connection to database has been established successfully.","timestamp":"2017-08-13T21:26:24.541Z"}
+{"level":"info","message":"Start streaming Twitter tweets with filters: abbvie,adalimumab,amgen,ankylosing spondylitis,arthritis,enbrel,hepatitis,humira,ibrutinib,psoriasis,rheumatoid arthritis,trilipix","timestamp":"2017-08-13T21:27:24.154Z"}
+{"level":"info","message":"Twitter API now crawling tweets","timestamp":"2017-08-13T21:27:24.183Z"}
+{"level":"info","message":"Topic detection worker started","timestamp":"2017-08-13T21:27:24.183Z"}
+{"level":"info","message":"CSV export was saved in ./ML/Python/topic/lda/static/batchTweets.csv","timestamp":"2017-08-13T21:27:25.029Z"}
+{"level":"info","message":"New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic","timestamp":"2017-08-13T21:27:33.672Z"}
+{"level":"info","message":"The tweet is: @mmoro199 @abbvie I'm a firm believer it is GMOs. When we alter nature it destroys the bonds and creates different… https://t.co/q5CxADanj8","timestamp":"2017-08-13T21:27:37.857Z"}
+{"level":"info","message":"The callback sentiment is: Neutral","timestamp":"2017-08-13T21:27:37.857Z"}
+{"level":"info","message":"The sarcasm is: 56.99","timestamp":"2017-08-13T21:27:45.108Z"}
+{"level":"info","message":"The python ensemble is: ","timestamp":"2017-08-13T21:27:45.848Z"}
+{"level":"info","message":"Manuall killing 96526","timestamp":"2017-08-13T21:28:03.084Z"}

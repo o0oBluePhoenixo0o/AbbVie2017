@@ -61,11 +61,11 @@ class Python {
     * @return {void}
     */
     call(callback) {
+
         this.process = child_process.spawn(this.version == 2 ? 'python' : 'python3', this.args, defaults);
 
         this.process.stdout.on('data', (data) => {
             this.output += '' + data
-
         });
 
         this.process.stderr.on('data', (data) => {
@@ -88,8 +88,8 @@ class Python {
     */
     callSync() {
         this.process = child_process.spawnSync(this.version == 2 ? 'python' : 'python3', this.args, defaults);
-        if (this.process.stderr) //console.log(process.stderr);
-            return (this.process.stdout);
+        if (this.process.stderr) logger.error(`stderr: ${process.stderr}`);
+        return (this.process.stdout);
     }
 
     /**
@@ -178,8 +178,8 @@ export class Java {
     */
     callSync() {
         this.process = child_process.spawnSync('java', this.args, defaults);
-        if (this.process.stderr) //console.log(process.stderr);
-            return (this.process.stdout);
+        if (this.process.stderr) logger.error(`stderr: ${process.stderr}`);
+        return (this.process.stdout);
     }
 
     /**
@@ -244,12 +244,11 @@ class R {
         this.process = child_process.spawn('Rscript', this.args, defaults);
 
         this.process.stdout.on('data', (data) => {
-            //console.log(data.toString())
             this.output += '' + data
         });
 
         this.process.stderr.on('data', (data) => {
-            console.log(`stderr: ${data}`);
+            logger.error(`stderr: ${data}`);
         });
 
         this.process.on('close', (code) => {
@@ -268,8 +267,8 @@ class R {
     */
     callSync() {
         this.process = child_process.spawnSync('Rscript', this.args, defaults);
-        if (this.process.stderr) //console.log(process.stderr);
-            return (this.process.stdout);
+        if (this.process.stderr) logger.error(`stderr: ${process.stderr}`);
+        return (this.process.stdout);
     }
 
     /**

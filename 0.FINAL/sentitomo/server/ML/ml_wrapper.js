@@ -44,7 +44,6 @@ export function detectSentiment(modelPath, message, callback) {
  * @return {String} sentiment string
  */
 export function detectSentimentEnsembleR(tweetMessage, callback) {
-    console.log("calling ensembleR")
     RShell('./ML/R/sentiment/ensembleSentiment.R')
         .data([tweetMessage])
         .call(result => {
@@ -204,10 +203,10 @@ export function detectTopicLDADynamic(startDate, endDate, callback) {
             tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
         });
 
-        const filename = './ML/Python/topic/dynamic/tweets.csv';
+        const filename = './ML/Python/topic/lda/dynamic/tweets.csv';
 
         convertToCsvRaw(tweets, filename, () => {
-            PythonShell('./ML/Python/topic/dynamic/dynamic.py', 3).data([filename]).call(result => {
+            PythonShell('./ML/Python/topic/lda/dynamic/dynamic.py', 3).data([filename]).call(result => {
                 if (typeof callback === 'function') {
                     callback(result);
                 }
@@ -227,7 +226,7 @@ export function detectTopicLDADynamic(startDate, endDate, callback) {
  */
 export function detectTopicLDAStatic(jsonString, callback) {
     console.log('starting static');
-    PythonShell('./ML/Python/topic/static/final.py', 3).data([jsonString]).call(result => {
+    PythonShell('./ML/Python/topic/lda/static/staticSingle.py', 3).data([jsonString]).call(result => {
         if (typeof callback === 'function') {
             callback(result);
         }
@@ -243,12 +242,11 @@ export function detectTopicLDAStatic(jsonString, callback) {
  */
 export function detectTopicLDAStaticBatch(csvFile, callback) {
     console.log('starting static batch');
-    var out = PythonShell('./ML/Python/topic/static/staticBatch.py', 3).data([csvFile]).call(result => {
+    PythonShell('./ML/Python/topic/lda/static/staticBatch.py', 3).data([csvFile]).call(result => {
         if (typeof callback === 'function') {
             callback(result);
         }
     })
-    return out;
 }
 
 /**
@@ -260,7 +258,7 @@ export function detectTopicLDAStaticBatch(csvFile, callback) {
  */
 export function detectTopicLDAStaticSync(jsonString, callback) {
     console.log('starting static');
-    var out = PythonShell('./ML/Python/topic/static/final.py', 3).data([jsonString]).callSync()
+    var out = PythonShell('./ML/Python/topic/lda/static/staticSingle.py', 3).data([jsonString]).callSync()
     return out;
 }
 

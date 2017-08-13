@@ -26,8 +26,8 @@ import FacebookCrawler from './service/FacebookCrawler';
 import TopicWorker from './service/TopicWorker';
 import { listenToSockets } from './service/sockets';
 
-import { detectSentimentEnsembleR } from './ML/ml_wrapper';
-import { Java, JavaShell } from './util/foreignCode';
+import { detectSentimentEnsembleR, detectTopicLDADynamic, detectTopicLDAStatic, detectTopicLDAStaticBatch } from './ML/ml_wrapper';
+import { Java, JavaShell, PythonShell } from './util/foreignCode';
 var nodeCleanup = require('node-cleanup');
 
 
@@ -155,7 +155,6 @@ detectTopicLDAStatic(JSON.stringify({ id: "123213", message: "Bristol-Myers Gets
 //twitterCrawler.start();
 //topicWorker.start();
 
-
 var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
 console.log(h20Process);
 h20Process.call();
@@ -164,7 +163,7 @@ setTimeout(() => {
     twitterCrawler.start();
     topicWorker.start();
     //h20Process.kill()
-}, 120000) // wait 1 minute for new tweets to come ine
+}, 60000) // wait 1 minute for new tweets to come ine
 
 
 
