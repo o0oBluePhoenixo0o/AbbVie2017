@@ -32,7 +32,7 @@ args = commandArgs(trailingOnly=TRUE)
 ## Assume CORE dataset is TW_df
 # Extract out only ID & Message
 
-TW_df <-"Bristol-Myers Gets FDA Nod for Orencia's Label Expansion #Bristol #UK https://t.co/JYv1P37wXt"
+TW_df <- args[1]
 
 # clean
 corp <- vec2clean.corp(TW_df)
