@@ -1,4 +1,3 @@
-
 # Sentitomo
 
 
@@ -262,7 +261,7 @@ Now either npm or Yarn is set up we can use it to install the dependencies. The 
 
 Some of the R scripts we use for machine learning need both versions of Java to work. To install the versions just follow the basic instructions of your specified distribution. You just have to ensure that the server has access to both libraries.
 
-#### Install Python
+#### Install Python and dependencies
 The Python scripts for topic detection are based on Pyhton version 3 and. Follow the common ways to install it on your server OS and ensure that `python` is the command to execute Pyhton 2 and `python3` to execute Pyhton 3 on the terminal. 
 
 **Dependencies**
@@ -270,6 +269,26 @@ Before you can run the Python files you have to install these modules through pi
 
     $ pip3 install sklearn
     ....
+
+Some of the  Python scripts are using the `Natural language toolkit (NLTK)` to preprocess messages, detect the sentiment or the topic of those based on corpora, tokenizers, lexica etc.  from this package. In order to use this  it is mandatory to copy the folder `nltk_data` (find in /sentitomo/), to the home directory of the user who is running the application. 
+
+On MacOS:
+
+```
+/usr/<username>/nltk_data
+```
+
+On Linux:
+
+```
+/home/<username>/nltk_data
+```
+
+On Windows Vista,7,8,10
+
+```
+<root>\Users\<username>\nltk_data
+```
 
 #### Install R
 
@@ -763,17 +782,23 @@ Response:
 ```
 
 __What is happening ?__
-At first the request from the client is piped through the resolvers of `resolvers.js` and the `tweet(_,args)` method is invoked because the request accessed the `tweet` endpoint. The `args` object contains all arguments provided to the endpoint. In this example only the `id` value of the tweet. To get the result from the database we used the database model object of sequlize.js called `Tweet` which is defined in the `connectors.js` file. It returns the exact tweet 'where tweet.id = args.id'. Because only a fraction of the tweet fields were requested.
-In the end a new data object is constructed which contains all the information that were requested.
+
+At first the request from the client is piped through the resolvers of `resolvers.js` and the `tweet(_,args)` method is invoked because the request accessed the `tweet` endpoint. The `args` object contains all arguments provided to the endpoint. In this example only the `id` value of the tweet. To get the result from the database we used the database model object of sequlize.js called `Tweet` which is defined in the `connectors.js` file. It returns the exact tweet 'where tweet.id = args.id'. In the end a new data object is constructed which contains all the information that were requested.
 
 `resolvers.js` (truncated)
 ```
 import {
-    Author,
+    TweetAuthor,
     Tweet,
-    Sentiment,
-    Topic
+    TweetSentiment,
+    TweetTopic,
+    FacebookProfile,
+    FacebookPost,
+    FacebookComment
 } from './connectors';
+import moment from 'moment';
+import GraphQLMoment from './scalar/GraphQLMoment';
+
 
 
 const resolvers = {

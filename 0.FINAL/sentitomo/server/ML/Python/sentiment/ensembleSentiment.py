@@ -15,8 +15,9 @@ from textblob.sentiments import NaiveBayesAnalyzer
 from nltk.corpus import stopwords
 
 data_t = sys.argv[1]
-data_t = data_t.encode('ascii', 'replace')
+data_t = data_t.decode('utf-8')
 data_t = data_t.lower()
+
 
 # Abbriviation translation
 with open('./ML/Python/abbrev.csv', mode='r') as infile:

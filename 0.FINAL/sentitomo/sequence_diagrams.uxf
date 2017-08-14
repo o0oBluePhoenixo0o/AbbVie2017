@@ -4,7 +4,7 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>266</x>
+      <x>294</x>
       <y>0</y>
       <w>1120</w>
       <h>343</h>
@@ -51,7 +51,7 @@ b -&gt; d : insertTweet(tweet)</panel_attributes>
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>266</x>
+      <x>294</x>
       <y>357</y>
       <w>1162</w>
       <h>476</h>
@@ -112,17 +112,17 @@ tick=</panel_attributes>
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>266</x>
+      <x>294</x>
       <y>847</y>
       <w>651</w>
       <h>399</h>
     </coordinates>
     <panel_attributes>title=Server Startup
 autoTick=false
-obj=server.js~a
-obj=foreignCode.js~b
-obj=TwitterCrawler.js~c CREATED_LATER
-obj=TopicWorker.js~d CREATED_LATER
+obj=server~a
+obj=foreignCode~b
+obj=TwitterCrawler~c CREATED_LATER
+obj=TopicWorker~d CREATED_LATER
 obj=child_process~e CREATED_LATER
 
 gate-&gt;a: Start

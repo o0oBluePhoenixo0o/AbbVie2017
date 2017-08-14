@@ -1,6 +1,8 @@
-/** @module ML_Wrapper
+/** 
+ * @module ML_Wrapper
  * @description Contains function for invoking the different Machine Learning files
  */
+
 import { PythonShell, JavaShell, RShell } from '../util/foreignCode';
 import { Tweet } from '../data/connectors';
 import { convertToCsvRaw } from '../util/export';
@@ -182,7 +184,7 @@ export function detectTopicCTM(startDate, endDate, callback) {
  * @param  {String} endDate End date of the bucket 
  * @param  {Function} callback Callback function which handles the result
  * @description Creates a new topic model out of the specified time range of tweets and detects the topics on those. Internally it uses LDA.
- * @see File server/ML/Python/topic/dynamic/dynamic.py
+ * @see File server/ML/Python/topic/lda/dynamic/dynamic.py
  * @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
  */
 export function detectTopicLDADynamic(startDate, endDate, callback) {
@@ -221,7 +223,7 @@ export function detectTopicLDADynamic(startDate, endDate, callback) {
  * @param  {String} jsonString A JSON representation of a tweet object to detect the topic
  * @param  {type} callback Callback function which handles the result
  * @description Uses a predefined model trained on all tweets at the end of this project to detect the topics of  a single tweet. Internally it uses LDA.
- * @see File server/ML/Python/topic/static/final.py
+ * @see File server/ML/Python/topic/lda/static/final.py
  * @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
  */
 export function detectTopicLDAStatic(jsonString, callback) {
@@ -237,7 +239,7 @@ export function detectTopicLDAStatic(jsonString, callback) {
  * @function detectTopicLDAStaticBatch
  * @param  {String} filename Path to the .csv file containing the tweets
  * @description Uses a predefined model trained on all tweets at the end of this project to detect the topics of tweets inside a csv. Internally it uses LDA.
- * @see File server/ML/Python/topic/static/staticBatch.py
+ * @see File server/ML/Python/topic/lda/static/staticBatch.py
  * @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
  */
 export function detectTopicLDAStaticBatch(csvFile, callback) {
@@ -253,7 +255,7 @@ export function detectTopicLDAStaticBatch(csvFile, callback) {
  * @function detectTopicLDAStaticSync
  * @param  {String} jsonString A JSON representation of a tweet object to detect the topic
  * @description This is the synchronous version of {@link module:ML_Wrapper~detectTopicLDAStatic}
- * @see File server/ML/Python/topic/static/final.py
+ * @see File server/ML/Python/topic/lda/static/final.py
  * @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
  */
 export function detectTopicLDAStaticSync(jsonString, callback) {
