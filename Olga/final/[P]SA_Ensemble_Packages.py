@@ -41,7 +41,7 @@ os.chdir("/Users/imacair/Desktop/Products3/")
 # In[5]:
 
 data_t= "I like Humira, but I hate it"
-data_t = data_t.encode('ascii','replace')
+data_t = data_t.decode('ascii','replace')
 data_t
 
 

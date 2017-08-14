@@ -19,7 +19,7 @@
     "react-vis": "^1.6.7",
     "recharts": "^1.0.0-alpha.2",
     "semantic-ui-css": "^2.2.11",
-    "semantic-ui-react": "^0.71.2",
+    "semantic-ui-react": "^0.71.4",
     "socket.io-client": "^2.0.3",
     "styled-components": "^2.1.1"
   },

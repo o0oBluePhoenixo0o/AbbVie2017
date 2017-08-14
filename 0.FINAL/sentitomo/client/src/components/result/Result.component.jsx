@@ -5,7 +5,7 @@ import randomColor from 'randomcolor';
 import dl from 'datalib';
 import moment from 'moment';
 
-const data = [
+const myArray = [
     {
         id: 884019304458362880,
         message: "Hepatitis C Cases Increase More Than 3-Fold in Iowa https://t.co/UcvuFnwG7H #HCV",
@@ -14,7 +14,6 @@ const data = [
         topicProbability: 0.8374999999999982,
         created: "2017-07-09T10:00:01.000Z",
         sentiment: "positive",
-        sentimentValue: 95.23
     },
     {
         id: "884020381849444352",
@@ -24,7 +23,6 @@ const data = [
         topicProbability: 0.9113636363636357,
         created: "2017-07-08T10:04:17.000Z",
         sentiment: "neutral",
-        sentimentValue: 54.13
     }, {
         id: "884021569177227264",
         message: "RT @patientsrising: Thank you @DrBobGoldberg @feliciatemple @StaceyLWorthy @aimedalliance @RareDiseases @CureSarcoma @Celgene @IpsenGroup @<U+2026>",
@@ -33,7 +31,6 @@ const data = [
         topicProbability: 0.8916666666666656,
         created: "2017-07-07T10:09:01.000Z",
         sentiment: "negative",
-        sentimentValue: 32.23
     },
     {
         id: "884022607653343232",
@@ -43,7 +40,6 @@ const data = [
         topicProbability: 0.5251771032239684,
         created: "2017-07-09T10:13:08.000Z",
         sentiment: "neutral",
-        sentimentValue: 49.123
     }
     , {
         id: "884023406445961216",
@@ -53,8 +49,6 @@ const data = [
         topicProbability: 0.9187499999999996,
         created: "2017-07-09T10:16:19.000Z",
         sentiment: "positive",
-        sentimentValue: 89.23
-
     },
     {
         id: "88401217",
@@ -64,7 +58,6 @@ const data = [
         topicProbability: 0.9187499999999996,
         created: "2017-07-09T10:20:19.000Z",
         sentiment: "neutral",
-        sentimentValue: 50.34
     }
 ];
 
@@ -151,7 +144,7 @@ class CustomSentimentToolTip extends Component {
 
 class Result extends Component {
 
-    state = { selectedEntry: null }
+    state = { selectedTopic: null, selectedSentiment: null }
 
     /**
      * @function aggregateTopics
@@ -159,7 +152,8 @@ class Result extends Component {
      * @return {Array} Aggregrated topic array
      */
     aggregateTopics = (data) => {
-        var myData = dl.read(data, { type: 'json', parse: 'auto' });
+        var copy = JSON.parse(JSON.stringify(data)); // We need to deep copy the array, as we do not want to hold reference to the original array here
+        var myData = dl.read(copy, { type: 'json', parse: 'auto' });
         return (dl.groupby(['topicId', 'topic']).count().execute(myData));
     }
 
@@ -169,7 +163,8 @@ class Result extends Component {
      * @return {Array} Aggregrated sentiment array
      */
     aggregateSentiment = (data) => {
-        var myData = dl.read(data, { type: 'json', parse: 'auto' });
+        var copy = JSON.parse(JSON.stringify(data)); // We need to deep copy the array, as we do not want to hold reference to the original array here
+        var myData = dl.read(copy, { type: 'json', parse: 'auto' });
         return (dl.groupby(['sentiment']).count().execute(myData));
     }
 
@@ -179,75 +174,112 @@ class Result extends Component {
      * @return {Array} Aggregrated date array
      */
     aggregateDate = (data) => {
-        console.log(data);
-        var des = [...data];
-        des.forEach((obj, index, array) => {
+
+        var copy = JSON.parse(JSON.stringify(data)); // We need to deep copy the array, as we do not want to hold reference to the original array here
+        copy.forEach((obj, index, array) => {
             array[index].created = new Date(array[index].created).setHours(0, 0, 0, 0)
         })
-        var myData = dl.read(des, { type: 'json', parse: 'auto' });
+        var myData = dl.read(copy, { type: 'json', parse: 'auto' });
         return (dl.groupby(['created'])
-            .summarize({ 'created': 'count', 'sentimentValue': ['average'] })
+            .summarize({ 'created': 'count' })
             .execute(myData));
     }
 
 
-    onCellClick = (entry, index) => {
+    onTopicCellClick = (entry, index) => {
         this.setState({
-            selectedEntry: entry
+            selectedTopic: entry,
+            selectedSentiment: null // reset the sentiment selection
         })
     }
 
+
     onTopicLegendClick = (data) => {
         this.setState({
-            selectedEntry: data
+            selectedTopic: data,
+            selectedSentiment: null // reset the sentiment selection
         });
     }
 
+    onSentimentCellClick = (entry, index) => {
+        this.setState({
+            selectedSentiment: entry
+        })
+    }
 
+    resetSelection = () => {
+        this.setState({
+            selectedTopic: null,
+            selectedSentiment: null,
+        })
+    }
 
     formatDate = (data) => {
-        console.log(data);
         return moment(data).format("DD-MM-YYYY");
     }
 
+
+    test = (data) => {
+        data[0] = null;
+        return data;
+    }
+
     render() {
-        const { result, html } = this.props;
-        const { selectedEntry } = this.state;
+        const { html } = this.props;
+        const result = myArray;
+        const { selectedTopic, selectedSentiment } = this.state;
 
         var aggregatedTopics = null;
         var aggregateSentiment = null;
         var aggregateDate = null;
 
         if (result) {
-            aggregatedTopics = this.aggregateTopics(result).sort((a, b) => { return a.count - b.count });
+            aggregatedTopics = this.aggregateTopics(result.slice()).sort((a, b) => { return a.count - b.count });
 
             var colors = randomColor({
                 count: aggregatedTopics.length,
                 hue: 'random', luminosity: "random", seed: 123412
             });
 
-            if (selectedEntry) {
-                aggregateSentiment = this.aggregateSentiment(result.filter(element => {
-                    return element.topicId === selectedEntry.topicId
-                }));
 
-                aggregateDate = this.aggregateDate(result.filter(element => {
-                    return element.topicId === selectedEntry.topicId
-                }));
+            if (selectedTopic) {
+
+                if (selectedSentiment) {
+                    aggregateSentiment = this.aggregateSentiment(result.slice().filter(element => {
+                        return element.topicId === selectedTopic.topicId && element.sentiment === selectedSentiment.sentiment
+                    }));
+
+                    aggregateDate = this.aggregateDate(result.slice().filter(element => {
+                        return element.topicId === selectedTopic.topicId && element.sentiment === selectedSentiment.sentiment
+                    }))
+                } else {
+                    aggregateSentiment = this.aggregateSentiment(result.slice().filter(element => {
+                        return element.topicId === selectedTopic.topicId
+                    }));
+
+                    aggregateDate = this.aggregateDate(result.slice().filter(element => {
+                        return element.topicId === selectedTopic.topicId
+                    }))
+                }
+
+
+
+
+
             }
             //TODO: implement a toggle for the legend
             return (
                 <div className="result-pane">
-                    {selectedEntry ? <Header size='large'>You selected: {selectedEntry.topic}</Header> : null}
+
                     <Grid stackable columns={3}>
                         <Grid.Row>
-                            <Grid.Column mobile={16} tablet={8} computer={8}>
+                            <Grid.Column mobile={16} tablet={7} computer={7}>
                                 <Card fluid className="result">
                                     <Card.Content header={"Aggregrated Topics"} />
-                                    <Card.Content>
-                                        <ResponsiveContainer height={800}>
+                                    <Card.Content className={'card-body'}>
+                                        <ResponsiveContainer height={500}>
                                             <PieChart>
-                                                <Pie data={aggregatedTopics} dataKey="count" fill="#8884d8" label onClick={(entry, index) => this.onCellClick(entry, index)}>
+                                                <Pie data={aggregatedTopics} dataKey="count" fill="#8884d8" label onClick={(entry, index) => this.onTopicCellClick(entry, index)}>
                                                     {
                                                         aggregatedTopics.map((entry, index) => (
                                                             <Cell key={`cell-${index}`} fill={colors[index]} />
@@ -256,20 +288,20 @@ class Result extends Component {
                                                 </Pie>
                                                 <Tooltip content={<CustomTopicToolTip />} />
 
-                                                <Legend content={renderTopicLegend} style={{ maxHeight: "400px !important", overflow: "auto" }} onClick={this.onTopicLegendClick} />
+                                                <Legend content={renderTopicLegend} style={{ maxHeight: "250px !important", overflow: "auto" }} onClick={this.onTopicLegendClick} />
                                             </PieChart>
                                         </ResponsiveContainer >
                                     </Card.Content>
                                 </Card>
                             </Grid.Column>
-                            <Grid.Column mobile={16} tablet={8} computer={8}>
+                            <Grid.Column mobile={16} tablet={7} computer={7}>
                                 <Card fluid className="result">
                                     <Card.Content header={"Sentiments in topic"} />
-                                    <Card.Content>
-                                        {this.state.selectedEntry ?
-                                            <ResponsiveContainer height={400}>
+                                    <Card.Content className={'card-body'}>
+                                        {this.state.selectedTopic ?
+                                            <ResponsiveContainer height={500}>
                                                 <PieChart>
-                                                    <Pie data={aggregateSentiment} dataKey="count" fill="#8884d8" label >
+                                                    <Pie data={aggregateSentiment} dataKey="count" fill="#8884d8" label onClick={(entry, index) => this.onSentimentCellClick(entry, index)} >
                                                         {
                                                             aggregateSentiment.map((entry, index) => {
                                                                 return (<Cell key={`cell-${index}`} fill={entry.sentiment === 'negative' ? "#e74c3c" : entry.sentiment === 'positive' ? "#2ecc71" : "#f1c40f"} />)
@@ -284,28 +316,37 @@ class Result extends Component {
                                     </Card.Content>
                                 </Card>
                             </Grid.Column>
+                            <Grid.Column mobile={16} tablet={2} computer={2}>
+                                <Segment raised style={{ position: "fixed", marginRight: "2em" }}>
+                                    <List>
+                                        <List.Item><strong>Topic:</strong> {selectedTopic ? selectedTopic.topic : null}</List.Item>
+                                        <List.Item><strong>Sentiment:</strong> {selectedSentiment ? selectedSentiment.sentiment : null}</List.Item>
+                                    </List>
+                                    <a href="#" onClick={() => this.resetSelection()}>Reset</a>
+                                </Segment>
+                            </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>
-                            <Grid.Column mobile={16} tablet={16} computer={8}>
+                            <Grid.Column mobile={16} tablet={16} computer={7}>
                                 <Card fluid className="result">
                                     <Card.Content header={"Timeline"} />
-                                    <Card.Content>
-                                        {this.state.selectedEntry ?
-                                            <ResponsiveContainer height={400}>
-                                                <ComposedChart height={400} data={aggregateDate}
+                                    <Card.Content className={'card-body'}>
+                                        {this.state.selectedTopic ?
+                                            <ResponsiveContainer height={500}>
+                                                <ComposedChart height={500} data={aggregateDate}
                                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                                                     <XAxis dataKey="created" tickFormatter={this.formatDate} />
                                                     <YAxis />
                                                     <CartesianGrid />
                                                     <Tooltip />
                                                     <Legend />
-                                                    <Bar dataKey='average_sentimentValue' barSize={20} fill='#413ea0'>
+                                                    {/*<Bar dataKey='average_sentimentValue' barSize={20} fill='#413ea0'>
                                                         {
                                                             aggregateDate.map((entry, index) => {
                                                                 return (<Cell key={`cell-${index}`} fill={entry.average_sentimentValue < 35.00 ? "#e74c3c" : entry.average_sentimentValue > 85.00 ? "#2ecc71" : "#f1c40f"} />)
                                                             })
                                                         }
-                                                    </Bar>
+                                                    </Bar>*/}
                                                     <Line type="monotone" dataKey="count_created" stroke="#8884d8" />
                                                 </ComposedChart>
                                             </ResponsiveContainer >
@@ -315,25 +356,25 @@ class Result extends Component {
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>
-                            <Grid.Column mobile={16} tablet={16} computer={16}>
+                            <Grid.Column mobile={16} tablet={14} computer={14}>
                                 <Card fluid>
                                     <Card.Content>
                                         <Card.Header>LDA HTML</Card.Header>
                                     </Card.Content>
                                     <Card.Content>
-                                        <iframe src="http://localhost:8080/ldaresult" frameBorder="0" style={{ width: "1250px", height: "900px" }}></iframe>
+                                        <iframe src="http://localhost:8080/ldaresult" frameBorder="0" style={{ width: "100%", height: "900px" }}></iframe>
                                     </Card.Content>
                                 </Card>
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>
-                            <Grid.Column mobile={16} tablet={16} computer={16}>
+                            <Grid.Column mobile={16} tablet={14} computer={14}>
                                 <Card fluid className="result">
                                     <Card.Content>
                                         <Card.Header>Raw Tweets</Card.Header>
                                     </Card.Content>
-                                    <Card.Content>
-                                        {this.state.selectedEntry ? <Table fixed stackable>
+                                    <Card.Content className={'card-body'}>
+                                        {this.state.selectedTopic ? <Table fixed stackable>
                                             <Table.Header>
                                                 <Table.Row>
                                                     <Table.HeaderCell>Id</Table.HeaderCell>
@@ -345,15 +386,20 @@ class Result extends Component {
                                             </Table.Header>
 
                                             <Table.Body>
-                                                {result.filter(element => {
-                                                    return element.topicId === selectedEntry.topicId
-                                                }).map(tweet => {
+                                                {result.slice().filter(element => {
+                                                    if (this.state.selectedSentiment) {
+                                                        return (element.topicId === selectedTopic.topicId && element.sentiment === selectedSentiment.sentiment)
+                                                    } else {
+                                                        return (element.topicId === selectedTopic.topicId)
+                                                    }
+
+                                                }).slice().map(tweet => {
                                                     return (<Table.Row key={`table-row-${tweet.id}`}>
                                                         <Table.Cell>{tweet.id}</Table.Cell>
                                                         <Table.Cell>{tweet.topic}</Table.Cell>
                                                         <Table.Cell>{tweet.sentiment}</Table.Cell>
                                                         <Table.Cell>{tweet.message}</Table.Cell>
-                                                        <Table.Cell>{moment(tweet.created).format("DD-MM-YYYY hh:mm")}</Table.Cell>
+                                                        <Table.Cell>{moment(tweet.created).format("DD-MM-YYYY HH:mm:ss")}</Table.Cell>
                                                     </Table.Row>)
                                                 })}
                                             </Table.Body>

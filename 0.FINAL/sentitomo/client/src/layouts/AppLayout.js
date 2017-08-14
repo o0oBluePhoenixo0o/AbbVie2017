@@ -38,7 +38,7 @@ class Applayout extends React.Component {
             }
         });
 
-        socket.on('connect_error', data => {
+        /*socket.on('connect_error', data => {
             this.notificationSystem.addNotification({
                 message: "Something went wrong",
                 level: 'error'
@@ -47,7 +47,7 @@ class Applayout extends React.Component {
                 loading: false,
                 result: null
             });
-        });
+        });*/
     }
 
     render() {

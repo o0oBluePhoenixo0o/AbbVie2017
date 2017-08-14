@@ -1,5 +1,7 @@
 # This files contains methods on preprocessing
 
+install.packages("h2o", type="source", repos="http://h2o-release.s3.amazonaws.com/h2o/rel-weierstrass/1/R")
+
 install.packages("plyr")
 install.packages("dplyr")
 install.packages("tm")
@@ -23,6 +25,7 @@ library(stringr)
 library(lubridate)
 library(readr)
 library(stringr)
+library(stringi)
 
 
 source("./translateR.R")
@@ -89,14 +92,19 @@ convertAbbreviations <- function(message){
   if(is.na(message) || message == ""){
     return(message)
   } else {
-        newText <- message
-        for (i in 1:nrow(myAbbrevs)){
-            newText <- gsub(paste0('\\<', myAbbrevs[[i,1]], '\\>'), paste(myAbbrevs[[i,2]]), newText)
-            cat(paste0(newText,"\n"), file="R.out", append = TRUE)
-        }
-        return (newText)
+    newText <- message
+    for (i in 1:nrow(myAbbrevs)){
+      if(i==1){
+        print(paste0('\\<', myAbbrevs[[i,1]], '\\>'))
+        print(paste(myAbbrevs[[i,2]]))
+      }
+      newText <- gsub(paste0('\\<', myAbbrevs[[i,1]], '\\>'), paste0(myAbbrevs[[i,2]]), newText)
+    }
+    return (newText)
   }
-} 
+}
+
+convertAbbreviations("lol i don't know why this is happening Mr.James. ROFL!")
 
 removeTwitterHandles <- function(text){
   # Remove all twitter handles from a given text
@@ -202,5 +210,3 @@ preprocess <- function(text){
   out <-removeStopWords(out) # the last expression has to NOT be assigned to a variable so that our JS can read it
   return (out);
 }
-
-preprocess("this is a smal test to check")

@@ -155,7 +155,7 @@ detectTopicLDAStatic(JSON.stringify({ id: "123213", message: "Bristol-Myers Gets
 //twitterCrawler.start();
 //topicWorker.start();
 
-var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
+/*var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
 console.log(h20Process);
 h20Process.call();
 logger.log('info', "Wait 2 minutes to let the h2o server start up")
@@ -165,7 +165,7 @@ setTimeout(() => {
     //h20Process.kill()
 }, 60000) // wait 1 minute for new tweets to come ine
 
-
+*/
 
 // Gracefully kill the h2o server process
 nodeCleanup(function (exitCode, signal) {

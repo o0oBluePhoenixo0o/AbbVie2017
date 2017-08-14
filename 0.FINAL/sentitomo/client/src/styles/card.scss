@@ -3,7 +3,10 @@
 
 .ui.card.result{
     max-height: 600px !important;
-    overflow: auto;
+    .card-body{
+        overflow: auto;
+    }
+    
 }
 
 

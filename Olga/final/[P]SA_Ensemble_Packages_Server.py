@@ -42,7 +42,7 @@ from textblob.sentiments import NaiveBayesAnalyzer
 # In[5]:
 
 data_t = sys.argv[1]
-data_t = data_t.encode('ascii', 'replace')
+data_t = data_t.decode('ascii', 'replace')
 
 
 # In[6]:

@@ -14,5 +14,5 @@ node_modules
 *.numbers
 build
 *.css
-*log
+*.log
 Philipp/trainingandtestdata.zip
