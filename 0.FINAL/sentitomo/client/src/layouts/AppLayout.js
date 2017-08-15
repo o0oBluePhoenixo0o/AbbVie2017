@@ -6,14 +6,18 @@ import {
 } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css";
 import "../styles/main.css";
+import 'react-notifications/lib/notifications.css';
 import socket from "../socket.js";
 import { Container, Dimmer, Loader } from "semantic-ui-react";
 import SideNavigation from '../components/navigation/SideNavigation.component.jsx';
 import TopNavigation from '../components/navigation/TopNavigation.component.jsx'
-import NotificationSystem from 'react-notification-system';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import Dashboard from '../components/dashboard/Dashboard.component.jsx';
 import ToolBox from '../components/toolbox/ToolBox.component.jsx';
 import Result from '../components/result/Result.component.jsx';
+
+
+
 
 
 /**
@@ -22,6 +26,8 @@ import Result from '../components/result/Result.component.jsx';
  * @description Wrapper for the whole content of the app. Responsible for the route and socket message handling
  */
 class Applayout extends React.Component {
+
+
 
 
     state = { loading: false, result: null, errorMsg: null }
@@ -39,6 +45,7 @@ class Applayout extends React.Component {
                 message: data.message,
                 level: data.level
             });
+            NotificationManager.success(data.message, 'Success', 3000);
             this.setState({
                 loading: !data.finished,
                 result: data.result,
@@ -56,12 +63,13 @@ class Applayout extends React.Component {
                 result: null,
                 errorMsg: "Lost connection to the server"
             }, () => {
-                this.notificationSystem.addNotification({
-                    message: this.state.errorMsg,
-                    level: 'error'
-                })
+                NotificationManager.warning('Lost connection to the server', 'Warning', 3000);
             });
         });
+
+        socket.on('connect', data => {
+            NotificationManager.success('Connected to the server', 'Success', 3000);
+        })
     }
 
     render() {
@@ -72,7 +80,7 @@ class Applayout extends React.Component {
                 <main className="main">
                     <SideNavigation />
                     <TopNavigation />
-                    <NotificationSystem ref={(ref) => this.notificationSystem = ref} />
+                    <NotificationContainer />
                     <Container className="main-content" fluid>
                         <Dimmer active={loading}>
                             <Loader>Detecting topics</Loader>

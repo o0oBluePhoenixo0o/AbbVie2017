@@ -114,13 +114,6 @@ t   opicWorker.start();
 }, 60000) // wait 1 minute for new tweets to come ine
 
 */
-
-
-detectSentimentEnsembleR("https://t.co/Lo5kpa0Je6 *Need a Lyft coupon code? Here's one for $50 &lt;&lt; Here's the coupon code: RESERVE &gt;&gt; AbbVie").then(result => {
-    console.log(result);
-})
-
-
 // Gracefully kill the h2o server process
 nodeCleanup(function (exitCode, signal) {
     h20Process.kill();
