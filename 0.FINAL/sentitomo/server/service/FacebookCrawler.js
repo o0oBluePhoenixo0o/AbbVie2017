@@ -19,15 +19,17 @@ export default class FacebookCrawler {
     /**
      * @function searchAndSaveFBPages
      * @param  {String} keyword Keyword for searching Facebook pages
-     * @description Searches for Facebook pages which match the keyword. It also inserts the found pages and their posts into the database. 
+     * @description Searches for Facebook pages which match the keyword. It also inserts the found pages and their posts and comments into the database. 
      * Only pages with matching categories (.env file config) are saved.
      * @see File /server/.env
      * @memberof FacebookCrawler
-     * @return {void} 
+     * @returns {void} 
      */
     searchAndSaveFBPages(keyword) {
         logger.info("Started Facebook search");
+
         var pages = new Array();
+
         var searchOptions = {
             q: keyword,
             type: "page",
@@ -36,9 +38,11 @@ export default class FacebookCrawler {
 
         graph.search(searchOptions, async (err, res) => {
 
+            //Pushes the inital result to a temporary array
             pages.push(...res.data)
-            var latestRes = res;
 
+            //Iterate over the different result pages and resolve the data of them
+            var latestRes = res;
             while (latestRes.paging && latestRes.paging.next) {
                 var newRes = await this.resolveResponse(err, latestRes)
                 pages.push(...newRes.data);
@@ -58,15 +62,18 @@ export default class FacebookCrawler {
 
                 var posts = new Array();
 
-                if (page.feed) {
+                if (page.feed) { // if the page has posts
+
                     posts.push(...page.feed.data);
 
+                    //Iterate over the different result pages and resolve the data of them
                     var latestFeed = page.feed;
                     while (latestFeed.paging && latestFeed.paging.next) {
                         var newFeed = await this.resolveResponse(err, latestFeed);
                         posts.push(...newFeed.data);
                         latestFeed = newFeed;
                     }
+
                     FacebookProfile.upsert({
                         id: page.id,
                         name: page.name,
@@ -95,14 +102,17 @@ export default class FacebookCrawler {
                                         }
                                     }).then(async dbPost => {
                                         var comments = new Array();
+
                                         comments.push(...post.comments.data);
-                                        console.log(comments);
+
+                                        //Iterate over the different result pages and resolve the data of them
                                         var latestCommentFeed = post.comments.data
                                         while (latestCommentFeed.paging && latestCommentFeed.paging.next) {
                                             var newFeed = await this.resolveResponse(err, latestCommentFeed);
                                             comments.push(...newFeed.data);
                                             latestCommentFeed = newFeed;
                                         }
+                                        s
                                         comments.forEach(comment => {
                                             FacebookComment.upsert({
                                                 id: comment.id,
@@ -128,7 +138,7 @@ export default class FacebookCrawler {
      * @param  {Object} res Response object
      * @description Resolves a response from the Facebook Graph API. Useful for resolving the pagination inside the response objects.
      * @memberof FacebookCrawler
-     * @return {Promise} Promise, when the new result is fetched
+     * @return {Promise} A Promise containing the result of the fetch from the FB Graph API
      */
     resolveResponse(err, res) {
         return new Promise((resolve, reject) => {

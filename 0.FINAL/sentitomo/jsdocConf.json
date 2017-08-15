@@ -4,6 +4,9 @@
         "exclude": [
             "server/node_modules/"
         ]
-    }
+    },
+    "plugins": [
+        "node_modules/jsdoc-react-proptypes/lib/plugin"
+    ]
 }
-// Generate it: jsdoc ./server -r -c jsdocConf.json -d ./docs
+// Generate it: jsdoc ./server -r -c jsdocConf.json --readme ./README.md -d ./docs/server && jsdoc ./client/src -r -c jsdocConf.json --readme ./client/README.md -d ./docs/client

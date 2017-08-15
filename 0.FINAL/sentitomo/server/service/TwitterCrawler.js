@@ -41,7 +41,7 @@ export default class TwitterCrawler {
 
     /**
      * @function updateTweetAuthors
-     * @description Updates all Twitter users in the database
+     * @description Updates all Twitter users in the database, where the followerCount is null
      * @memberof TwitterCrawler
      * @return {void}
      */
@@ -126,7 +126,40 @@ export default class TwitterCrawler {
                                     id: event.user.id
                                 }
                             }).then(async author => {
-                                detectSentimentEnsembleR(event.text.replace(/\n|\r/g, ' ').trim(), sentiment => {
+
+                                author.createTW_Tweet({
+                                    id: event.id,
+                                    keywordType: 'Placeholder',
+                                    keyword: getKeyword(
+                                        event.text,
+                                        filters
+                                    ),
+                                    created: event.created_at,
+                                    createdWeek: moment(
+                                        event.created_at, 'dd MMM DD HH:mm:ss ZZ YYYY', 'en'
+                                    ).week(),
+                                    toUser: event.in_reply_to_user_id,
+                                    language: event.lang,
+                                    source: stripHTMLTags(
+                                        event.source
+                                    ),
+                                    message: event.text,
+                                    hashtags: extractHashTags(event.text),
+                                    latitude: event.coordinates ? event.coordinates[0] : null,
+                                    longitude: event.coordinates ? event.coordinates[1] : null,
+                                    retweetCount: event.retweet_count,
+                                    favorited: event.favorited,
+                                    favoriteCount: event.favorite_count,
+                                    isRetweet: event.retweeted_status ?
+                                        true : false,
+                                    retweeted: event.retweeted
+                                }).then(tweet => {
+                                    console.log(tweet);
+                                });
+
+                                /*
+                            detectSentimentEnsembleR(event.text.replace(/\n|\r/g, ' ').trim())
+                                .then(sentiment => {
                                     logger.log('info', 'The tweet is: ' + event.text.replace(/\n|\r/g, ' ').trim())
                                     logger.log('info', 'The callback sentiment is: ' + sentiment.trim())
                                     var sarcasticValue = detectSarcasmSync(event.text)
@@ -172,7 +205,7 @@ export default class TwitterCrawler {
                                                 association: Tweet.Sentiment
                                             }]
                                         })
-                                })
+                                })*/
                             })
                         }).catch(error => {
                             console.log(error);

@@ -23,7 +23,7 @@ off=a
 tick=
 b-&gt;d : upsertAuthor(tweet.author)
 tick=
-b -&gt; c.c1 : detectSentimentEnsmembleR(messagePrep)
+b -&gt; c.c1 : detectSentimentEnsmembleR(tweet.message)
 on=c
 tick=
 c -&gt; b : (sentiment:=result):String
@@ -52,7 +52,118 @@ b -&gt; d : insertTweet(tweet)</panel_attributes>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
       <x>294</x>
-      <y>357</y>
+      <y>350</y>
+      <w>959</w>
+      <h>511</h>
+    </coordinates>
+    <panel_attributes>title=Sentiment Detection Worker
+autoTick=false
+obj=SentimentWorker~a
+obj=ml_wrapper~c
+obj=connectors~d
+combinedFragment=loop~loopId a d
+a:[running=true]
+	tick=
+	a-&gt;d: findTweets(where: {noSentiment: true})
+	on=d
+	tick=
+	d-&gt;a: tweets
+	off=d
+	tick=
+	combinedFragment=alt~
+		tick=
+		a:[tweet&gt;0]
+		combinedFragment=alt~altId a d
+			tick=
+			combinedFragment=loop~loop2Id a d
+				on=a
+				a -&gt; c.c1 : detectSentimentEnsmembleR(tweet.message)
+				on=c
+				tick=
+				off=a
+				c -&gt; a : (sentiment.sentiment:=result):String
+				off=c
+				tick=
+				on=a
+				a -&gt; c : detectSarcasm(tweet.message)
+				on=c
+				tick=
+				off=a
+				c-&gt;a : (sentiment.sacrasm:=result):bool
+				off=c
+				tick=
+				on=a
+				a -&gt; c : detectSentimentEnsmemblePython(tweet.message)
+				on=c
+				tick=
+				off=a
+				c -&gt; a : (sentiment.pythonEnsemble:=result):String
+				off=c
+				tick=
+				a-&gt;d : insertSentiment(sentiment)	
+			--=loop2Id
+			tick=
+			tick=
+			..
+			a:[else]
+			tick=
+			a-&gt;a +: wait(10min)
+			tick=
+			on=a
+			tick=
+			off=a
+	--=altId
+--=loopId
+tick=</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>294</x>
+      <y>1365</y>
+      <w>770</w>
+      <h>455</h>
+    </coordinates>
+    <panel_attributes>title=Server Startup
+autoTick=false
+obj=server~a
+obj=foreignCode~b
+obj=TwitterCrawler~c CREATED_LATER
+obj=TopicWorker~d CREATED_LATER
+obj=SentimentWorker~e CREATED_LATER
+obj=child_process~f CREATED_LATER
+
+gate-&gt;a: Start
+tick=
+a-&gt;b: JavaShell(h20.jar)
+tick=
+b-&gt;f: spawn()
+tick=
+a-&gt;a + :wait till h20 is up
+tick=
+on=a;
+tick=
+off=a
+tick=
+a-&gt;c: new()
+tick=
+a-&gt;c: start()
+tick=
+a-&gt;d: new()
+tick=
+a-&gt;d: start()
+tick=
+a-&gt;e: new()
+tick=
+a-&gt;e: start()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>294</x>
+      <y>868</y>
       <w>1162</w>
       <h>476</h>
     </coordinates>
@@ -107,43 +218,6 @@ a:[running=true]
 	--=altId
 --=loopId
 tick=</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLSequenceAllInOne</id>
-    <coordinates>
-      <x>294</x>
-      <y>847</y>
-      <w>651</w>
-      <h>399</h>
-    </coordinates>
-    <panel_attributes>title=Server Startup
-autoTick=false
-obj=server~a
-obj=foreignCode~b
-obj=TwitterCrawler~c CREATED_LATER
-obj=TopicWorker~d CREATED_LATER
-obj=child_process~e CREATED_LATER
-
-gate-&gt;a: Start
-tick=
-a-&gt;b: JavaShell(h20.jar)
-tick=
-b-&gt;e: spawn()
-tick=
-a-&gt;a + :wait till h20 is up
-tick=
-on=a;
-tick=
-off=a
-tick=
-a-&gt;c: new()
-tick=
-a-&gt;c: start()
-tick=
-a-&gt;d: new()
-tick=
-a-&gt;d: start()</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

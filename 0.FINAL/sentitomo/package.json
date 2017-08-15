@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "jsdoc-react-proptypes": "^1.0.2",
+    "webpack": "^3.5.4"
+  }
+}

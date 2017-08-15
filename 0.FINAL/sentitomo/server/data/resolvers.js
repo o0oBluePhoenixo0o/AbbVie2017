@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
     TweetAuthor,
     Tweet,
@@ -7,7 +8,6 @@ import {
     FacebookPost,
     FacebookComment
 } from './connectors';
-import moment from 'moment';
 import GraphQLMoment from './scalar/GraphQLMoment';
 
 
@@ -70,7 +70,6 @@ const resolvers = {
             });
         },
         facebookPost(_, args) {
-            console.log(args);
             return FacebookPost.find({
                 where: args
             });
@@ -129,11 +128,9 @@ const resolvers = {
     },
     FacebookProfile: {
         posts(facebookProfile) {
-            console.log(facebookProfile)
             return facebookProfile.getFB_Posts();
         }
     }
-
 };
 
 export default resolvers;

@@ -14,7 +14,11 @@ import Result from '../result/Result.component'
 
 
 
-
+/**
+ * @class Dashboard
+ * @extends {React.Component}
+ * @description Class for displaying the main dashboard
+ */
 class Dashboard extends React.Component {
 
 
@@ -26,6 +30,16 @@ class Dashboard extends React.Component {
     };
 
 
+    /**
+     * @function handleDayClick
+     * @param  {Object} day      
+     * @param  {boolean} disabled Is the selected day disabled
+     * @param  {boolean} selected Is the day which was clicked selected
+     * @description Handles a click on the DayPicker component. Set the range state of this component and 
+     * executes a GraphQL query to the server to get the count of selected Tweets.
+     * @memberof Dashboard
+     * @return {void} 
+     */
     handleDayClick = (day, { disabled, selected }) => {
         if (!disabled) {
             const range = DateUtils.addDayToRange(day, this.state);

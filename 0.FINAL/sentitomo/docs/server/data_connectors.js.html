@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: data/connectors.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: data/connectors.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module Connectors  
+ *  @description Responsible for creating and accessing the MySQL Database
+*/
+import Sequelize from 'sequelize';
+import casual from 'casual';
+import _ from 'lodash';
+import logger from './../service/logger.js';
+require('dotenv').config();
+
+
+/**
+ * @constant db
+ * @type {Object}
+ * @description Represents the connection to the database
+ */
+const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+    dialect: 'mysql',
+    host: process.env.DB_HOST,
+    logging: false,
+    pool: {
+        max: 5,
+        min: 1,
+        idle: 10000
+    },
+    define: {
+        freezeTableName: true
+    }
+});
+
+db.authenticate()
+    .then(() => {
+        logger.log('info', 'Connection to database has been established successfully.');
+    })
+    .catch(err => {
+        logger.error('error', 'Unable to connect to the database: ' + err);
+    });
+
+
+/**
+ * @constant TweetAuthor
+ * @type {Object}
+ * @description Represents the Author table for tweets
+ */
+const TweetAuthor = db.define('TW_User', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    username: {
+        type: Sequelize.STRING
+    },
+    screenname: {
+        type: Sequelize.STRING
+    },
+    followercount: {
+        type: Sequelize.INTEGER
+    }
+});
+
+/**
+ * @constant Tweet
+ * @type {Object}
+ * @description Represents the TW_Tweet table. It holds an foreign key on TW_User, TW_Sentiment and TW_Topic
+ */
+const Tweet = db.define('TW_Tweet', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true,
+    },
+    keywordType: {
+        type: Sequelize.STRING
+    },
+    keyword: {
+        type: Sequelize.STRING
+    },
+    created: {
+        type: Sequelize.DATE
+    },
+    createdWeek: {
+        type: Sequelize.INTEGER
+    },
+    toUser: {
+        type: Sequelize.STRING
+    },
+    language: {
+        type: Sequelize.STRING
+    },
+    source: {
+        type: Sequelize.STRING
+    },
+    message: {
+        type: Sequelize.STRING
+    },
+    hashtags: {
+        type: Sequelize.STRING
+    },
+    messagePrep: {
+        type: Sequelize.STRING
+    },
+    latitude: {
+        type: Sequelize.STRING
+    },
+    longitude: {
+        type: Sequelize.STRING
+    },
+    retweetCount: {
+        type: Sequelize.INTEGER
+    },
+    favorited: {
+        type: Sequelize.BOOLEAN
+    },
+    favoriteCount: {
+        type: Sequelize.INTEGER
+    },
+    isRetweet: {
+        type: Sequelize.BOOLEAN
+    },
+    retweeted: {
+        type: Sequelize.INTEGER
+    }
+});
+
+/**
+ * @constant Dashboard
+ * @type {Object}
+ * @description Represents the dashboard table
+ */
+const Dashboard = db.define('TW_DASH', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    keywordType: {
+        type: Sequelize.STRING
+    },
+    keyword: {
+        type: Sequelize.STRING
+    },
+    message: {
+        type: Sequelize.STRING
+    },
+    created: {
+        type: Sequelize.DATE
+    },
+    createdTime: {
+        type: Sequelize.TIME
+    },
+    createdDate: {
+        type: Sequelize.DATE
+    },
+    createdWeek: {
+        type: Sequelize.INTEGER
+    },
+    screenName: {
+        type: Sequelize.STRING
+    },
+    tweetType: {
+        type: Sequelize.STRING
+    },
+    sentiment: {
+        type: Sequelize.STRING
+    },
+    sarcasm: {
+        type: Sequelize.BOOLEAN
+    },
+    topicWhole: {
+        type: Sequelize.STRING
+    },
+    topicWhole_C: {
+        type: Sequelize.STRING
+    },
+    topic3Month: {
+        type: Sequelize.STRING
+    },
+    topic3Month_C: {
+        type: Sequelize.STRING
+    },
+});
+
+/**
+ * @const TweetSentiment
+ * @type {Object}
+ * @description Represents the TW_Sentiment table, is referenced from TW_Tweet
+ */
+const TweetSentiment = db.define('TW_Sentiment', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    sentiment: {
+        type: Sequelize.STRING
+    },
+    sarcastic: {
+        type: Sequelize.DOUBLE
+    },
+    emojiSentiment: {
+        type: Sequelize.INTEGER
+    },
+    emojiDesc: {
+        type: Sequelize.STRING
+    },
+    rEnsemble: {
+        type: Sequelize.STRING
+    },
+    pythonEnsemble: {
+        type: Sequelize.STRING
+    }
+})
+
+/**
+ * @const TweetTopic
+ * @type {Object}
+ * @description Represents the TW_Topic table, is referenced from the TW_Tweet table
+ */
+const TweetTopic = db.define('TW_Topic', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    topicId: {
+        type: Sequelize.INTEGER
+    },
+    topicContent: {
+        type: Sequelize.STRING
+    },
+    probability: {
+        type: Sequelize.DOUBLE
+    }
+})
+
+TweetAuthor.hasMany(Tweet);
+Tweet.belongsTo(TweetAuthor);
+
+Tweet.Sentiment = Tweet.hasOne(TweetSentiment, {
+    foreignKey: 'id',
+    onDelete: 'cascade'
+});
+
+Tweet.Topic = Tweet.hasOne(TweetTopic, {
+    foreignKey: 'id',
+    onDelete: 'cascade'
+});
+
+/**
+ * @const FacebookPage
+ * @type {Object}
+ * @description Represents the FB_Profile table
+ */
+const FacebookProfile = db.define('FB_Profile', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    keyword: {
+        type: Sequelize.STRING
+    },
+    name: {
+        type: Sequelize.STRING
+    },
+    category: {
+        type: Sequelize.STRING
+    },
+    likes: {
+        type: Sequelize.INTEGER
+    },
+    type: {
+        type: Sequelize.STRING
+    }
+});
+
+/**
+ * @const FacebookPost
+ * @type {Object}
+ * @description Represents the FB_Post table, has foreign keys on FB_Profile, FB_Sentiment and FB_Topic
+ */
+const FacebookPost = db.define('FB_Post', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    message: {
+        type: Sequelize.STRING
+    },
+    lang: {
+        type: Sequelize.STRING
+    },
+    story: {
+        type: Sequelize.STRING
+    },
+    likes: {
+        type: Sequelize.INTEGER
+    },
+    link: {
+        type: Sequelize.STRING
+    },
+    created: {
+        type: Sequelize.DATE,
+    }
+});
+
+/**
+ * @const FacebookComment
+ * @type {Object}
+ * @description Represents the table FB_Comment table
+ */
+const FacebookComment = db.define('FB_Comment', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    message: {
+        type: Sequelize.TEXT
+    },
+    lang: {
+        type: Sequelize.TEXT
+    }
+});
+
+/**
+ * @const FacebookSentiment
+ * @type {Object}
+ * @description Represents the FB_Sentiment table, is referenced from the FB_Post table
+ */
+const FacebookSentiment = db.define('FB_Sentiment', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    sentiment: {
+        type: Sequelize.STRING
+    },
+    sarcastic: {
+        type: Sequelize.DOUBLE
+    },
+    emojiSentiment: {
+        type: Sequelize.INTEGER
+    },
+    emojiDesc: {
+        type: Sequelize.STRING
+    },
+    rEnsemble: {
+        type: Sequelize.STRING
+    },
+    pythonEnsemble: {
+        type: Sequelize.STRING
+    }
+});
+
+/**
+ * @const FacebookTopic
+ * @type {Object}
+ * @description Represents the FB_Topic table, is referenced from the FB_Post table
+ */
+const FacebookTopic = db.define('FB_Topic', {
+    id: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    topicId: {
+        type: Sequelize.INTEGER
+    },
+    topicContent: {
+        type: Sequelize.STRING
+    },
+    probability: {
+        type: Sequelize.DOUBLE
+    }
+});
+
+
+FacebookProfile.hasMany(FacebookPost);
+FacebookPost.belongsTo(FacebookProfile);
+
+FacebookPost.hasMany(FacebookComment);
+FacebookComment.belongsTo(FacebookPost);
+
+FacebookPost.Sentiment = FacebookPost.hasOne(FacebookSentiment, {
+    foreignKey: 'id',
+    onDelete: 'cascade'
+});
+
+FacebookPost.Topic = FacebookPost.hasOne(FacebookTopic, {
+    foreignKey: 'id',
+    onDelete: 'cascade'
+});
+
+//Create tables if not exist
+TweetAuthor.sync()
+Tweet.sync()
+Dashboard.sync();
+TweetSentiment.sync();
+TweetTopic.sync();
+
+FacebookProfile.sync();
+FacebookPost.sync();
+FacebookComment.sync();
+FacebookSentiment.sync();
+FacebookTopic.sync();
+
+export {
+    TweetAuthor,
+    Tweet,
+    TweetSentiment,
+    TweetTopic,
+    FacebookProfile,
+    FacebookPost,
+    FacebookComment,
+    FacebookSentiment,
+    FacebookTopic,
+    Dashboard,
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Connectors.html">Connectors</a></li><li><a href="module-Export.html">Export</a></li><li><a href="module-ForeignCode.html">ForeignCode</a></li><li><a href="module-Logger.html">Logger</a></li><li><a href="module-LogginMiddleware.html">LogginMiddleware</a></li><li><a href="module-ML_Wrapper.html">ML_Wrapper</a></li><li><a href="module-Preprocess.html">Preprocess</a></li><li><a href="module-Sockets.html">Sockets</a></li><li><a href="module-Utils.html">Utils</a></li></ul><h3>Classes</h3><ul><li><a href="FacebookCrawler.html">FacebookCrawler</a></li><li><a href="GraphQLScalarType.html">GraphQLScalarType</a></li><li><a href="module-ForeignCode-Java.html">Java</a></li><li><a href="module-ForeignCode-Python.html">Python</a></li><li><a href="module-ForeignCode-R.html">R</a></li><li><a href="SentimentWorker.html">SentimentWorker</a></li><li><a href="TopicWorker.html">TopicWorker</a></li><li><a href="TwitterCrawler.html">TwitterCrawler</a></li></ul><h3>Global</h3><ul><li><a href="global.html#resolvers">resolvers</a></li><li><a href="global.html#typeDefinitions">typeDefinitions</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Tue Aug 15 2017 16:20:57 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

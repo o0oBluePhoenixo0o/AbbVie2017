@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import classnames from "classnames";
 
 /**
  * @class Icon
- * @extends {Component}
- * @description Icon class for themify icons. Replacement for semantic ui Icon class
+ * @extends {ReactComponent}
+ * @description Icon class for themify icons. Replacement for Semantic ui Icon class
  */
 class Icon extends Component {
     render() {
@@ -26,5 +27,21 @@ class Icon extends Component {
         );
     }
 }
+
+Icon.propTypes = {
+    /** {String} Name of the of the icon */
+    name: PropTypes.string,
+    /** {boolean} Icon size big */
+    big: PropTypes.boolean,
+    /** {boolean}  Icon size large */
+    large: PropTypes.boolean,
+    /** {boolean}  Is the icon a close icon */
+    close: PropTypes.boolean,
+    /** {boolean}  Is the icon circular (round) */
+    circular: PropTypes.boolean,
+    /** {boolean} Is the icon color inverted */
+    tiInverted: PropTypes.boolean,
+}
+
 
 export default Icon;

@@ -1,10 +1,16 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import { NavLink } from "react-router-dom";
 import { Container, Menu, Image } from "semantic-ui-react";
 import Icon from '../Icon.component';
 import { withRouter } from 'react-router-dom';
 
 
+/**
+ * @class SideNavigation
+ * @extends {React.Component}
+ * @description Class for displaying the top navigation of the app if viewed on mobile
+ */
 class TopNavigation extends Component {
 
     render() {
@@ -36,6 +42,11 @@ class TopNavigation extends Component {
             </Menu >
         );
     }
+}
+
+TopNavigation.propTypes = {
+    /** {Object} The match object from react-router */
+    match: PropTypes.Object
 }
 
 export default withRouter(TopNavigation);

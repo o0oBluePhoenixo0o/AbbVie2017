@@ -1,4 +1,6 @@
-/** @module Utils */
+/** @module Utils 
+ * @description Some useful methods for working with strings or importing data
+*/
 
 var _this = this;
 

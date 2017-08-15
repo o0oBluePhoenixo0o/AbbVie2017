@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/toolbox/TopicToolBox.component.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/toolbox/TopicToolBox.component.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
+import { Button, Divider, Header } from 'semantic-ui-react'
+import DayPicker, { DateUtils } from 'react-day-picker';
+import moment from 'moment';
+import 'react-day-picker/lib/style.css';
+import {
+    gql,
+    graphql,
+    withApollo
+} from 'react-apollo';
+import socket from "../../socket.js";
+
+
+/**
+ * @class TopicToolBox
+ * @extends {React.Component}
+ * @description Class for displaying the Toolbox for initiation the dynamic topic detection
+ */
+class TopicToolBox extends Component {
+
+    state = {
+        from: null,
+        to: null,
+        tweetsSize: 0
+    };
+
+    /**
+    * @function handleDayClick
+    * @param  {Object} day      
+    * @param  {boolean} disabled Is the selected day disabled
+    * @param  {boolean} selected Is the day which was clicked selected
+    * @description Handles a click on the DayPicker component. Set the range state of this component and 
+    * executes a GraphQL query to the server to get the count of selected Tweets.
+    * @memberof TopicToolBox
+    * @return {void} 
+    */
+    handleDayClick = (day, { disabled, selected }) => {
+        if (!disabled) {
+            const range = DateUtils.addDayToRange(day, this.state);
+            this.setState(range, () => {
+                this.props.client.query({
+                    query: gql`
+                    query CountQuery($startDate: Date, $endDate: Date) {
+                        tweetCount(startDate: $startDate, endDate: $endDate)
+                    }
+                `,
+                    variables: { startDate: this.state.from, endDate: this.state.to },
+                }).then(response => {
+                    console.log(response);
+                    this.setState({
+                        tweetsSize: response.data.tweetCount
+                    })
+                });
+            });
+        }
+    };
+
+    /**
+     * @function handleResetClick
+     * @param  {Event} e Click event
+     * @description Resets the this.state.from and this.state.to
+     * @memberof TopicToolBox
+     * @return {void}
+     */
+    handleResetClick = e => {
+        e.preventDefault();
+        this.setState({
+            from: null,
+            to: null,
+        });
+    };
+
+    /**
+     * @function sendMessage
+     * @param  {Object} message Message to send to the server
+     * @description Sends a message to the server, to start the dynamic topic detection
+     * @memberof TopicToolBox
+     * @return {void}
+     */
+    sendMessage = message => {
+        socket.emit('client:runTopicDetection', message)
+    }
+
+    render() {
+        const { from, to, tweetsSize } = this.state;
+        return (
+            &lt;div>
+                &lt;Header size='medium'>Initiate new topic clustering&lt;/Header>
+                &lt;p>First choose your date ranges in which you want to analyze your tweets&lt;/p>
+                &lt;DayPicker
+                    numberOfMonths={2}
+                    selectedDays={[from, { from, to }]}
+                    onDayClick={this.handleDayClick}
+                    fixedWeeks
+                    disabledDays={{ after: new Date() }}
+                />
+                {!from &amp;&amp; !to &amp;&amp; &lt;p>Please select the &lt;strong>first day&lt;/strong>.&lt;/p>}
+                {from &amp;&amp; !to &amp;&amp; &lt;p>Please select the &lt;strong>last day&lt;/strong>.&lt;/p>}
+                {from &amp;&amp;
+                    to &amp;&amp;
+                    &lt;p>
+                        You chose from
+                        {' '}
+                        {moment(from).format('L')}
+                        {' '}
+                        to
+                        {' '}
+                        {moment(to).format('L')}
+                        .
+                        {' '}&lt;a href="." onClick={this.handleResetClick}>Reset&lt;/a>
+                    &lt;/p>}
+                &lt;p>Your bag will contain {tweetsSize} tweets. {tweetsSize &lt; 1000 ? "Your bag need at least 1000 tweets to detect the topic dynamically" : null}&lt;/p>
+                &lt;Button disabled={!from &amp;&amp; !to || from &amp;&amp; !to || !from &amp;&amp; to || tweetsSize &lt; 1000} primary onClick={() => this.sendMessage({ from: from, to: to })}>Detect topics&lt;/Button>
+
+                &lt;Divider />
+            &lt;/div>
+        );
+    }
+}
+
+export const tweetsListQuery = gql`
+  query TweetsListQuery($startDate: Date, $endDate: Date) {
+    tweets(startDate: $startDate, endDate: $endDate) {
+      id
+      message
+      created
+    }
+  }
+`;
+const TopicToolBoxWithData = withApollo(TopicToolBox);
+
+
+
+export default TopicToolBoxWithData;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Applayout.html">Applayout</a></li><li><a href="Dashboard.html">Dashboard</a></li><li><a href="Icon.html">Icon</a></li><li><a href="Result.html">Result</a></li><li><a href="SideNavigation.html">SideNavigation</a></li><li><a href="ToolBox.html">ToolBox</a></li><li><a href="TopicToolBox.html">TopicToolBox</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Tue Aug 15 2017 16:20:58 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

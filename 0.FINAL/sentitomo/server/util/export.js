@@ -10,22 +10,23 @@ import logger from '../service/logger';
  * @param  {Array} data Raw JSON Array of objects
  * @param  {String} filepath Filepath where the csv gets stored
  * @description Writes an array JSON objects into a .csv file with the specified filepath
- * @return {void}
+ * @returns {Promise<String>} A Promise that contains the path to the created file
  */
-export function convertToCsvRaw(data, filepath, callback) {
-    var csv = json2csv({
-        data: data,
-        fields: Object.keys(data[0]),
-        doubleQuotes: "",
-        del: ','
-    });
+export function convertRawToCsv(data, filepath, callback) {
+    return new Promise((resolve, reject) => {
+        var csv = json2csv({
+            data: data,
+            fields: Object.keys(data[0]),
+            doubleQuotes: "",
+            del: ','
+        });
 
-    fs.writeFile(filepath, csv, function (err) {
-        if (err) throw err;
-        console.log('file saved');
-        callback()
-    });
-    logger.log('info', 'CSV export was saved in ' + filepath);
+        fs.writeFile(filepath, csv, function (err) {
+            if (err) reject(err);
+            logger.log('info', 'CSV export was saved in ' + filepath);
+            resolve(filepath);
+        });
+    })
 }
 
 /**
@@ -33,19 +34,21 @@ export function convertToCsvRaw(data, filepath, callback) {
  * @param  {Array} data Data model array returned from a sequelize query
  * @param  {String} filepath Filepath where the csv gets stored
  * @description Writes an array of sequlize objects into a .csv file with the specified filepath
- * @return {void}
+ * @return {Promise<String>} A Promise that contains the path to the created file
  */
 export function convertSequlizeModelToCsv(data, filepath) {
-    var csv = json2csv({
-        data: data,
-        fields: Object.keys(data[0].dataValues),
-        doubleQuotes: "",
-        del: ','
-    });
+    return new Promise((resolve, reject) => {
+        var csv = json2csv({
+            data: data,
+            fields: Object.keys(data[0].dataValues),
+            doubleQuotes: "",
+            del: ','
+        });
 
-    fs.writeFile(filepath, csv, function (err) {
-        if (err) throw err;
-        console.log('file saved');
+        fs.writeFile(filepath, csv, function (err) {
+            if (err) reject(err);
+            resolve(filepath);
+        });
+        logger.log('info', 'CSV export was saved in ' + filepath);
     });
-    logger.log('info', 'CSV export was saved in ' + filepath);
 }

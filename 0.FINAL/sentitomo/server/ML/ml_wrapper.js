@@ -9,29 +9,28 @@ import { convertToCsvRaw } from '../util/export';
 import moment from 'moment';
 
 /**
- * @function detectSentiment
+ * @function detectSentimentJavaNB
  * @param  {String} modelPath Path to the model to use
  * @param  {String} message  The message you want to detect the sentiment
- * @param  {Function} callback Function to handle the sentiment result
  * @description Detects the sentiment of a message using Mallet and Naive Bayes
  * @see File server/ML/Java/sentiment/sentiment_executor
- * @return {String} sentiment string
+ * @returns {Promise<String>} A Promise that contains the sentiment of the message
+ * when fulfilled.
  * @memberof module:ML_Wrapper
  */
-export function detectSentiment(modelPath, message, callback) {
-    JavaShell('./ML/Java/sentiment/sentiment.jar')
-        .data(['2', modelPath, message.replace(/"/g, '\\"').replace(/'/g, "\\'")])
-        .call(result => {
-            if (typeof callback === 'function') {
-                callback(result);
-            }
-        });
+export function detectSentimentJavaNB(modelPath, message) {
+    return new Promise((resolve, reject) => {
+        JavaShell('./ML/Java/sentiment/sentiment.jar')
+            .data(['2', modelPath, message.replace(/"/g, '\\"').replace(/'/g, "\\'")])
+            .call(result => {
+                resolve(result);
+            });
+    });
 }
 
 /**
  * @function detectSentimentEnsembleR
  * @param  {String} message  The message to detect the sentiment
- * @param  {Function} callback Function to handle the sentiment result
  * @description Detects the sentiment of a message using six different sentiment analysis algorithms and pick the majority result of those. It uses:
  *  <ul>
  *      <li>Classification and Regression Trees (CART)</li>
@@ -43,16 +42,17 @@ export function detectSentiment(modelPath, message, callback) {
  * </ul>
  * Implemented in R
  * @see File server/ML/R/sentiment/ensembleSentiment.R
- * @return {String} sentiment string
+ * @returns {Promise<String>} A Promise that contains the sentiment of the message
+ * when fulfilled.
  */
-export function detectSentimentEnsembleR(tweetMessage, callback) {
-    RShell('./ML/R/sentiment/ensembleSentiment.R')
-        .data([tweetMessage])
-        .call(result => {
-            if (typeof callback === 'function') {
-                callback(result.replace(/\s*\[(.+?)\]\s*/g, "").replace(/"/g, '')); // Strip out the typical R prints 
-            }
-        });
+export function detectSentimentEnsembleR(tweetMessage) {
+    return new Promise((resolve, reject) => {
+        RShell('./ML/R/sentiment/ensembleSentiment.R')
+            .data([tweetMessage])
+            .call(result => {
+                resolve(result.replace(/\s*\[(.+?)\]\s*/g, "").replace(/"/g, '')); // Strip out the typical R prints 
+            });
+    })
 }
 
 /**
@@ -60,7 +60,7 @@ export function detectSentimentEnsembleR(tweetMessage, callback) {
  * @param  {String} message  The message to detect the sentiment
  * @description This is the synchronous version of {@link module:ML_Wrapper~detectSentimentEnsembleR}
  * @see File server/ML/R/sentiment/ensembleSentiment.R
- * @return {String} sentiment string
+ * @returns {String} String indicating the sentiment
  */
 export function detectSentimentEnsembleRSync(tweetMessage) {
     var out = RShell('./ML/R/sentiment/ensembleSentiment.R')
@@ -72,19 +72,18 @@ export function detectSentimentEnsembleRSync(tweetMessage) {
 /**
 * @function detectSarcasm
 * @param  {String} message The message to detect the sarcasm
-* @param  {Function} callback Function to handle the sentiment result
-* @description Detect if a message is meant in a saracastic way. Internaly it uses a Naive Bayes based method to detect it.
+* @description Detect if a message is meant in a saracastic way. Internally it uses a Naive Bayes based method to detect it.
 * @see File server/ML/R/sarcasm/sarcasmDetection.R
-* @return {Doube} A % number, indicating how much sarcastic this tweet is meant
+* @returns {Promise<Double>} A Promise that contains the probability of the message to be sarcastic when fulfilled.
 */
-export function detectSarcasm(tweetMessage, callback) {
-    RShell('./ML/R/sarcasm/sarcasmDetection.R')
-        .data([tweetMessage])
-        .call(result => {
-            if (typeof callback === 'function') {
-                callback(result.replace(/\s*\[(.+?)\]\s*/g, "").replace(/"/g, '')); // Strip out the typical R prints 
-            }
-        });
+export function detectSarcasm(tweetMessage) {
+    return new Promise((resolve, reject) => {
+        RShell('./ML/R/sarcasm/sarcasmDetection.R')
+            .data([tweetMessage])
+            .call(result => {
+                resolve(result.replace(/\s*\[(.+?)\]\s*/g, "").replace(/"/g, '')); // Strip out the typical R prints 
+            });
+    })
 }
 
 /**
@@ -92,11 +91,11 @@ export function detectSarcasm(tweetMessage, callback) {
 * @param  {String} message The message to detect the sarcasm
 * @description This is the synchronous version of {@link module:ML_Wrapper~detectSarcasm}
 * @see File server/ML/R/sarcasm/sarcasmDetection.R
-* @return {Doube} A % number, indicating how much sarcastic this tweet is meant
+* @returns {Double} Probability of the message to be sarcastic
 */
-export function detectSarcasmSync(tweetMessage) {
+export function detectSarcasmSync(message) {
     var out = RShell('./ML/R/sarcasm/sarcasmDetection.R')
-        .data([tweetMessage])
+        .data([message])
         .callSync();
     return out.replace(/\s*\[(.+?)\]\s*/g, "").replace(/"/g, '');
 }
@@ -104,7 +103,6 @@ export function detectSarcasmSync(tweetMessage) {
 /**
  * @function detectSentimentEnsemblePython
  * @param  {String} message  The message to detect the sentiment
- * @param  {Function} callback Function to handle the sentiment result
  * @description Detects the sentiment of a message using different Python packages. It uses:
  *  <ul>
  *      <li>Vader (Lexicon Based)</li>
@@ -113,13 +111,14 @@ export function detectSarcasmSync(tweetMessage) {
  * </ul>
  * Implemented in Python
  * @see File server/ML/Python/sentiment/ensembleSentiment.R
- * @return {String} sentiment string
+ * @returns {Promise<String>} A Promise that contains the sentiment of the message
+ * when fulfilled.
  */
-export function detectSentimentEnsemblePython(message, callback) {
-    PythonShell("./ML/Python/sentiment/ensembleSentiment.py", 2).data([message]).call(result => {
-        if (typeof callback === 'function') {
-            callback(result);
-        }
+export function detectSentimentEnsemblePython(message) {
+    return new Promise((resolve, reject) => {
+        PythonShell("./ML/Python/sentiment/ensembleSentiment.py", 2).data([message]).call(result => {
+            resolve(result);
+        })
     })
 }
 
@@ -128,7 +127,7 @@ export function detectSentimentEnsemblePython(message, callback) {
  * @param  {String} message  The message to detect the sentiment
  * @description This is the synchronous version of {@link module:ML_Wrapper~detectSentimentEnsemblePython}
  * @see File server/ML/Python/sentiment/ensembleSentiment.R
- * @return {String} sentiment string
+ * @returns {String} String indicating the sentiment
  */
 export function detectSentimentEnsemblePythonSync(message) {
     var out = PythonShell("./ML/Python/sentiment/ensembleSentiment.py", 2)
@@ -137,117 +136,67 @@ export function detectSentimentEnsemblePythonSync(message) {
     return out;
 }
 
-
 /**
-* @function detectTopicCTM
-* @param  {Date} startDate Start date of the bucket 
-* @param  {Date} endDate End date of the bucket 
-* @param  {Function} callback Callback function which handles the result
-* @description Creates a new topic model out of the specified time range of tweets and detects the topics on those. Internally it uses the Correlated Topic Models (CTM) model
-* @see File server/ML/R/topic/ctm.R
-* @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
+ * @function detectTopicCTM
+ * @param  {String} csvFile Path to the .csv file containing the objects to the detect the topic with
+ * @description Creates a new topic model out of the specified csv file and detects the topics on those objects inside. Internally it uses the Correlated Topic Models (CTM).
+ * @see File server/ML/R/topic/ctm.R
+ * @returns {Promise<String>} A Promise that contains an array as JSON encoded String containing the topics of the objects
+ * when fulfilled.
 */
-export function detectTopicCTM(startDate, endDate, callback) {
-    Tweet.findAll({
-        where: {
-            created: {
-                $lt: endDate, // less than
-                $gt: startDate //greater than
-            }
-        },
-        raw: true //we use raw, we do not need to have access to the sequlize model here
-    }).then(tweets => {
-        tweets.forEach(function (tweet, index) {
-            // part and arr[index] point to the same object
-            // so changing the object that part points to changes the object that arr[index] points to
-            tweet.created = moment(tweet.created).format('YYYY-MM-DD hh:mm').toString();
-            tweet.createdAt = moment(tweet.createdAt).format('YYYY-MM-DD hh:mm')
-            tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
-        });
-        const filename = './ML/R/topic/tweets.csv';
-
-        //TODO: There is a problem with the filepath uUEO of json input
-        convertToCsvRaw(tweets, filename, () => {
-            RShell('./ML/R/topic/ctm.R').data([filename]).call(result => {
-                if (typeof callback === 'function') {
-                    callback(result);
-                }
-            })
-        });
-
+export function detectTopicCTM(csvFile) {
+    return new Promise((resolve, reject) => {
+        RShell('./ML/R/topic/ctm.R').data([csvFile]).call(result => {
+            resolve(result);
+        })
     });
 }
 
 /**
- * @function detectTopicDynamic
- * @param  {String} startDate Start date of the bucket 
- * @param  {String} endDate End date of the bucket 
- * @param  {Function} callback Callback function which handles the result
- * @description Creates a new topic model out of the specified time range of tweets and detects the topics on those. Internally it uses LDA.
+ * @function detectTopicLDADynamic
+ * @param  {String} csvFile Path to the .csv file containing the objects to the detect the topic with 
+ * @description Creates a new topic model out of the specified csv file and detects the topics on those objects inside. Internally it uses LDA.
  * @see File server/ML/Python/topic/lda/dynamic/dynamic.py
- * @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
- */
-export function detectTopicLDADynamic(startDate, endDate, callback) {
-    Tweet.findAll({
-        where: {
-            created: {
-                $lt: endDate, // less than
-                $gt: startDate //greater than
-            }
-        },
-        raw: true //we use raw, we do not need to have access to the sequlize model here
-    }).then(tweets => {
-        tweets.forEach(function (tweet, index) {
-            // part and arr[index] point to the same object
-            // so changing the object that part points to changes the object that arr[index] points to
-            tweet.created = moment(tweet.created).format('YYYY-MM-DD hh:mm').toString();
-            tweet.createdAt = moment(tweet.createdAt).format('YYYY-MM-DD hh:mm')
-            tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
+ * @returns {Promise<String>} A Promise that contains an array as JSON encoded String containing the topics of tweets
+ * when fulfilled.
+*/
+export function detectTopicLDADynamic(csvFile) {
+    return new Promise((resolve, reject) => {
+        PythonShell('./ML/Python/topic/lda/dynamic/dynamic.py', 3).data([csvFile]).call(result => {
+            resolve(result);
         });
-
-        const filename = './ML/Python/topic/lda/dynamic/tweets.csv';
-
-        convertToCsvRaw(tweets, filename, () => {
-            PythonShell('./ML/Python/topic/lda/dynamic/dynamic.py', 3).data([filename]).call(result => {
-                if (typeof callback === 'function') {
-                    callback(result);
-                }
-            });
-        });
-
-    });
+    })
 }
 
 /**
  * @function detectTopicLDAStatic
  * @param  {String} jsonString A JSON representation of a tweet object to detect the topic
- * @param  {type} callback Callback function which handles the result
  * @description Uses a predefined model trained on all tweets at the end of this project to detect the topics of  a single tweet. Internally it uses LDA.
  * @see File server/ML/Python/topic/lda/static/final.py
- * @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
+ * @returns {Promise<String>} A Promise that contains an array as JSON encoded String containing the topics of tweets
+ * when fulfilled.
  */
-export function detectTopicLDAStatic(jsonString, callback) {
-    console.log('starting static');
-    PythonShell('./ML/Python/topic/lda/static/staticSingle.py', 3).data([jsonString]).call(result => {
-        if (typeof callback === 'function') {
-            callback(result);
-        }
+export function detectTopicLDAStatic(jsonString) {
+    return new Promise((resolve, reject) => {
+        PythonShell('./ML/Python/topic/lda/static/staticSingle.py', 3).data([jsonString]).call(result => {
+            resolve(result);
+        })
     })
 }
 
 /**
  * @function detectTopicLDAStaticBatch
- * @param  {String} filename Path to the .csv file containing the tweets
+ * @param  {String} csvFile Path to the .csv file containing the tweets
  * @description Uses a predefined model trained on all tweets at the end of this project to detect the topics of tweets inside a csv. Internally it uses LDA.
  * @see File server/ML/Python/topic/lda/static/staticBatch.py
- * @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
+ * @returns {Promise<String>} A Promise that contains an array as JSON encoded String containing the topics of tweets
+ * when fulfilled.
  */
 export function detectTopicLDAStaticBatch(csvFile, callback) {
-    console.log('starting static batch');
-    PythonShell('./ML/Python/topic/lda/static/staticBatch.py', 3).data([csvFile]).call(result => {
-        if (typeof callback === 'function') {
-            callback(result);
-        }
+    return new Promise((resolve, reject) => {
+        PythonShell('./ML/Python/topic/lda/static/staticBatch.py', 3).data([csvFile]).call(result => {
+            resolve(result);
+        })
     })
 }
 
@@ -256,10 +205,9 @@ export function detectTopicLDAStaticBatch(csvFile, callback) {
  * @param  {String} jsonString A JSON representation of a tweet object to detect the topic
  * @description This is the synchronous version of {@link module:ML_Wrapper~detectTopicLDAStatic}
  * @see File server/ML/Python/topic/lda/static/final.py
- * @return {String} A JSON encoded string containing an array consisting of the result of the topic detection
+ * @return {String} An array as JSON encoded String containing the topics of tweets
  */
 export function detectTopicLDAStaticSync(jsonString, callback) {
-    console.log('starting static');
     var out = PythonShell('./ML/Python/topic/lda/static/staticSingle.py', 3).data([jsonString]).callSync()
     return out;
 }

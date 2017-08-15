@@ -60,7 +60,7 @@ const TweetAuthor = db.define('TW_User', {
 /**
  * @constant Tweet
  * @type {Object}
- * @description Represents the raw tweets table. It holds an forein key on the author table, sentiment table and topic table
+ * @description Represents the TW_Tweet table. It holds an foreign key on TW_User, TW_Sentiment and TW_Topic
  */
 const Tweet = db.define('TW_Tweet', {
     id: {
@@ -180,7 +180,7 @@ const Dashboard = db.define('TW_DASH', {
 /**
  * @const TweetSentiment
  * @type {Object}
- * @description Represents the sentiment table, is referenced from the raw tweets table
+ * @description Represents the TW_Sentiment table, is referenced from TW_Tweet
  */
 const TweetSentiment = db.define('TW_Sentiment', {
     id: {
@@ -210,7 +210,7 @@ const TweetSentiment = db.define('TW_Sentiment', {
 /**
  * @const TweetTopic
  * @type {Object}
- * @description Represents the topic table, is referenced from the raw tweets table
+ * @description Represents the TW_Topic table, is referenced from the TW_Tweet table
  */
 const TweetTopic = db.define('TW_Topic', {
     id: {
@@ -241,11 +241,10 @@ Tweet.Topic = Tweet.hasOne(TweetTopic, {
     onDelete: 'cascade'
 });
 
-
 /**
  * @const FacebookPage
  * @type {Object}
- * @description Represents the table for Facebook pages
+ * @description Represents the FB_Profile table
  */
 const FacebookProfile = db.define('FB_Profile', {
     id: {
@@ -272,7 +271,7 @@ const FacebookProfile = db.define('FB_Profile', {
 /**
  * @const FacebookPost
  * @type {Object}
- * @description Represents the table for Facebook posts
+ * @description Represents the FB_Post table, has foreign keys on FB_Profile, FB_Sentiment and FB_Topic
  */
 const FacebookPost = db.define('FB_Post', {
     id: {
@@ -302,7 +301,7 @@ const FacebookPost = db.define('FB_Post', {
 /**
  * @const FacebookComment
  * @type {Object}
- * @description Represents the table for Facebook comments
+ * @description Represents the table FB_Comment table
  */
 const FacebookComment = db.define('FB_Comment', {
     id: {
@@ -320,7 +319,7 @@ const FacebookComment = db.define('FB_Comment', {
 /**
  * @const FacebookSentiment
  * @type {Object}
- * @description Represents the sentiment table for Facebook posts, is referenced from the Facebook posts table
+ * @description Represents the FB_Sentiment table, is referenced from the FB_Post table
  */
 const FacebookSentiment = db.define('FB_Sentiment', {
     id: {
@@ -350,7 +349,7 @@ const FacebookSentiment = db.define('FB_Sentiment', {
 /**
  * @const FacebookTopic
  * @type {Object}
- * @description Represents the topic table for Facebook, is referenced from the Facebook posts table
+ * @description Represents the FB_Topic table, is referenced from the FB_Post table
  */
 const FacebookTopic = db.define('FB_Topic', {
     id: {
@@ -385,14 +384,12 @@ FacebookPost.Topic = FacebookPost.hasOne(FacebookTopic, {
     onDelete: 'cascade'
 });
 
-
 //Create tables if not exist
 TweetAuthor.sync()
 Tweet.sync()
 Dashboard.sync();
 TweetSentiment.sync();
 TweetTopic.sync();
-
 
 FacebookProfile.sync();
 FacebookPost.sync();

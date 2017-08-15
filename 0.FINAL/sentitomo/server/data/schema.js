@@ -4,8 +4,8 @@
  * @description Type definition schema for the GraphQL API. here all types, queries and mutations are specified which the API is offering
  */
 const typeDefinitions = `
-
   scalar Date
+
   type Tweet {
     id: String
     keywordType: String

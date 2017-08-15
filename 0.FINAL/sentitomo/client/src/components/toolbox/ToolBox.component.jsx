@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Header, Grid, Menu, Segment } from 'semantic-ui-react'
 import TopicToolBox from './TopicToolBox.component';
 
+/**
+ * @class ToolBox
+ * @extends {React.Component}
+ * @description Class for displaying the Toolbox
+ */
 class ToolBox extends Component {
 
     state = { activeItem: 'topic' }

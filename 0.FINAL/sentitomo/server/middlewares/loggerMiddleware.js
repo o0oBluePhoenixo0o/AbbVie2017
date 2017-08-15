@@ -9,7 +9,7 @@ import logger from '../service/logger.js';
  * @param  {Object} res  Response object
  * @param  {function} next Function so that the request will be passed on to the next function
  * @description Injects a logger to an express app, which logs every request and the IP where the requests come from
- * @return {type} {description}
+ * @returns {void}
  */
 export default function loggingMiddleware(req, res, next) {
     logger.log('debug', 'IP Request', {

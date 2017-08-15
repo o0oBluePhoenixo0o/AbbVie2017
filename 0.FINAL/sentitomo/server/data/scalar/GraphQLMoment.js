@@ -1,7 +1,3 @@
-/** @class GraphQLScalarType 
- *  @description A custom GrapqhQLDate Type using moment.js
- *  @author rijvirajib https://gist.github.com/rijvirajib/2f4dbd808185e73d69ed2bfae759b51b
-*/
 import moment from 'moment';
 import {
     GraphQLScalarType,
@@ -9,6 +5,10 @@ import {
     Kind
 } from 'graphql';
 
+/** @class GraphQLScalarType 
+ *  @description A custom GrapqhQLDate Type using moment.js
+ *  @author rijvirajib https://gist.github.com/rijvirajib/2f4dbd808185e73d69ed2bfae759b51b
+*/
 export default new GraphQLScalarType({
     name: 'Date',
     /**

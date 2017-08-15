@@ -1,11 +1,8 @@
-import cron from 'cron';
 import moment from 'moment';
-import { convertToCsvRaw } from '../util/export';
+import { convertRawToCsv } from '../util/export';
 import { Tweet, TweetTopic } from '../data/connectors';
 import { detectTopicLDAStaticBatch } from "../ML/ml_wrapper";
-
 import logger from './logger';
-
 
 /**
  * @class TopicWorker
@@ -43,7 +40,7 @@ export default class TopicWorker {
      * @function detectTopics
      * @description Crawls 100 tweets from the database where the topic is not yet detected. It will then use staticBatch.py file to detect the topics with LDA.
      * If no tweets are found, where the topics are missing, the function will wait for 10 minutes to let new tweets gets crawled and then starts again.
-     * @see File server/ML/Python/topic/static/staticBatch.py
+     * @see {@link module:ML_Wrapper~detectTopicLDAStaticBatch}
      * @memberof TopicWorker
      * @return {void}
      */
@@ -71,19 +68,19 @@ export default class TopicWorker {
 
                     const filename = './ML/Python/topic/lda/static/batchTweets.csv';
 
-                    convertToCsvRaw(tweets, filename, async () => {
-                        var topicArray = await this.detectTopicPromise(filename);
+                    convertRawToCsv(tweets, filename).then(async filename => {
+                        var topicArray = await detectTopicLDAStaticBatch(filename);
                         var topicArrayObj = JSON.parse(topicArray);
                         for (let topicObj of topicArrayObj) {
                             console.log(topicObj)
-                            TweetTopic.upsert({
+                            await TweetTopic.upsert({
                                 id: topicObj.key,
                                 topicId: topicObj.id,
                                 topicContent: topicObj.topic,
                                 probability: topicObj.probability
                             })
                         }
-                        logger.log('info', '100 topics detected');
+                        logger.log('info', '100 topics of tweets detected');
                         this.detectTopics();
 
                     })
@@ -94,21 +91,5 @@ export default class TopicWorker {
         } else {
             logger.log('warn', 'Topic detection is not running');
         }
-    }
-
-    /**
-     * @function detectTopicPromise
-     * @param {String} csvFile 
-     * @description Wraps the result of the topic detection into a Promise to work with async and await concept
-     * @see {@link module:ML_Wrapper~detectTopicLDAStaticBatch}
-     * @memberof TopicWorker
-     * @return {Promise} Promise object represents sum of the topic detection
-     */
-    detectTopicPromise(csvFile) {
-        return new Promise((resolve, reject) => {
-            detectTopicLDAStaticBatch(csvFile, result => {
-                resolve(result);
-            })
-        })
     }
 }

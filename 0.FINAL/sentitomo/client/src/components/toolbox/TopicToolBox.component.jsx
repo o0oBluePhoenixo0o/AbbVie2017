@@ -11,6 +11,11 @@ import {
 import socket from "../../socket.js";
 
 
+/**
+ * @class TopicToolBox
+ * @extends {React.Component}
+ * @description Class for displaying the Toolbox for initiation the dynamic topic detection
+ */
 class TopicToolBox extends Component {
 
     state = {
@@ -19,6 +24,16 @@ class TopicToolBox extends Component {
         tweetsSize: 0
     };
 
+    /**
+    * @function handleDayClick
+    * @param  {Object} day      
+    * @param  {boolean} disabled Is the selected day disabled
+    * @param  {boolean} selected Is the day which was clicked selected
+    * @description Handles a click on the DayPicker component. Set the range state of this component and 
+    * executes a GraphQL query to the server to get the count of selected Tweets.
+    * @memberof TopicToolBox
+    * @return {void} 
+    */
     handleDayClick = (day, { disabled, selected }) => {
         if (!disabled) {
             const range = DateUtils.addDayToRange(day, this.state);
@@ -40,6 +55,13 @@ class TopicToolBox extends Component {
         }
     };
 
+    /**
+     * @function handleResetClick
+     * @param  {Event} e Click event
+     * @description Resets the this.state.from and this.state.to
+     * @memberof TopicToolBox
+     * @return {void}
+     */
     handleResetClick = e => {
         e.preventDefault();
         this.setState({
@@ -48,6 +70,13 @@ class TopicToolBox extends Component {
         });
     };
 
+    /**
+     * @function sendMessage
+     * @param  {Object} message Message to send to the server
+     * @description Sends a message to the server, to start the dynamic topic detection
+     * @memberof TopicToolBox
+     * @return {void}
+     */
     sendMessage = message => {
         socket.emit('client:runTopicDetection', message)
     }

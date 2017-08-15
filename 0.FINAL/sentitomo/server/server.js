@@ -24,9 +24,10 @@ import Connectors from './data/connectors';
 import TwitterCrawler from './service/TwitterCrawler';
 import FacebookCrawler from './service/FacebookCrawler';
 import TopicWorker from './service/TopicWorker';
+import SentimentWorker from './service/SentimentWorker';
 import { listenToSockets } from './service/sockets';
 
-import { detectSentimentEnsembleR, detectTopicLDADynamic, detectTopicLDAStatic, detectTopicLDAStaticBatch } from './ML/ml_wrapper';
+import { detectSentiment, detectSentimentEnsembleR, detectTopicLDADynamic, detectTopicLDAStatic, detectTopicLDAStaticBatch } from './ML/ml_wrapper';
 import { Java, JavaShell, PythonShell } from './util/foreignCode';
 var nodeCleanup = require('node-cleanup');
 
@@ -43,6 +44,7 @@ var twitterCrawler = new TwitterCrawler({
 
 var facebookCrawler = new FacebookCrawler({});
 var topicWorker = new TopicWorker();
+var sentimentWorker = new SentimentWorker();
 
 require('dotenv').config()
 
@@ -99,73 +101,20 @@ http.listen(GRAPHQL_PORT, () => logger.log('info',
 global.appRoot = __dirname;
 
 
-/*
-detectSentiment("./ML/Java/sentiment/naivebayes.bin", "I love you very much", result => {
-    console.log("Java Sentiment: " + result);
-})
-
-detectSentimentEnsembleR("I love you very much", result => {
-    console.log("R Sentiment: " + result);
-})
-
-detectSarcasm("I love you very much", result => {
-    console.log("Sarcasm Detection " + result);
-})
-
-detectSentimentEnsemblePython("I love you very much", result => {
-    console.log("Pyhton Sentiment: " + result);
-})*/
-
-
-
-
-
-/*detectTopicLDAStatic(JSON.stringify({ id: "123123123", message: "Abbvie is such a great company with a huge sortiment of drugs!" }), result => {
-    console.log(result);
-})
-
-detectTopicLDADynamic(moment("2017-03-01"), moment("2017-03-31"), result => {
-    console.log(result);
-});
-
-
-detectTopicLDADynamic(moment("2017-03-01"), moment("2017-03-31"), result => {
-    console.log(result);
-});
-
-
-*/
-//console.log("[1] 53.42".replace(/\s*\[(.+?)\]\s*/g, ""));
-
-
-
-//console.log(detectSentimentPhilipp("I really really love you that much!"))
-
-
-//facebookCrawler.searchAndSaveFBPages("humira");
-//facebookCrawler.searchAndSaveFBPages("enbrel");
-
-
-//console.log(detectSarcasmSync("Bristol-Myers Gets FDA Nod for Orencia's Label Expansion #Bristol #UK https://t.co/JYv1P37wXt"));
-
-/*
-detectTopicLDAStatic(JSON.stringify({ id: "123213", message: "Bristol-Myers Gets FDA Nod for Orencia's Label Expansion #Bristol #UK https://t.co/JYv1P37wXt" }), result => {
-    console.log(JSON.parse(result));
-})*/
-//twitterCrawler.start();
-//topicWorker.start();
-
 /*var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
 console.log(h20Process);
 h20Process.call();
 logger.log('info', "Wait 2 minutes to let the h2o server start up")
 setTimeout(() => {
-    twitterCrawler.start();
-    topicWorker.start();
+    twitterCrawler.start()
+    sentimentWorker.start()
+t   opicWorker.start();
     //h20Process.kill()
 }, 60000) // wait 1 minute for new tweets to come ine
 
 */
+
+
 
 // Gracefully kill the h2o server process
 nodeCleanup(function (exitCode, signal) {
@@ -174,3 +123,4 @@ nodeCleanup(function (exitCode, signal) {
     console.log(signal);
     console.log("End node");
 });
+

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Card, Checkbox, Grid, Label, List, Segment, Table, Header } from 'semantic-ui-react'
 import { PieChart, Pie, Cell, Legend, Tooltip, LineChart, XAxis, YAxis, CartesianGrid, Line, ResponsiveContainer, ComposedChart, Bar } from 'recharts';
 import randomColor from 'randomcolor';
@@ -142,13 +143,20 @@ class CustomSentimentToolTip extends Component {
     }
 }
 
+/**
+ * @class Result
+ * @extends {React.Component}
+ * @description Class for displaying the result of a dynamic topic detection
+ */
 class Result extends Component {
 
     state = { selectedTopic: null, selectedSentiment: null }
 
     /**
      * @function aggregateTopics
-     * @param  {type} data Array of topic detection data
+     * @param  {Array} data Array of topic detection data
+     * @description Aggregrates the data of the array by topics
+     * @memberof Result
      * @return {Array} Aggregrated topic array
      */
     aggregateTopics = (data) => {
@@ -159,7 +167,9 @@ class Result extends Component {
 
     /**
      * @function aggregateSentiment
-     * @param  {type} data Array of topic detection data
+     * @param  {Array} data Array of topic detection data
+     * @description Aggregrates the data of the array by sentiment
+     * @memberof Result
      * @return {Array} Aggregrated sentiment array
      */
     aggregateSentiment = (data) => {
@@ -170,7 +180,9 @@ class Result extends Component {
 
     /**
      * @function aggregateDate
-     * @param  {type} data Array of topic detection data
+     * @param  {Array} data Array of topic detection data
+     * @description Aggregrates the data of the array by date (based on days)
+     * @memberof Result
      * @return {Array} Aggregrated date array
      */
     aggregateDate = (data) => {
@@ -185,7 +197,14 @@ class Result extends Component {
             .execute(myData));
     }
 
-
+    /**
+     * @function onTopicCellClick
+     * @param  {Object} entry Entry of the graph which was clicked
+     * @param  {Integer} index Index of the selected entry inside the entries array
+     * @description Set the this.state.selectedTopic to entry
+     * @memberof Result
+     * @return {void}
+     */
     onTopicCellClick = (entry, index) => {
         this.setState({
             selectedTopic: entry,
@@ -193,7 +212,13 @@ class Result extends Component {
         })
     }
 
-
+    /**
+     * @function onTopicLegendClick
+     * @param  {Object} data Data of the legend, same as an entry of the graph
+     * @description Set the this.state.selectedTopic to data
+     * @memberof Result
+     * @return {void}
+     */
     onTopicLegendClick = (data) => {
         this.setState({
             selectedTopic: data,
@@ -201,12 +226,26 @@ class Result extends Component {
         });
     }
 
+    /**
+     * @function onSentimentCellClick
+     * @param  {Object} entry Entry of the graph which was clicked
+     * @param  {Integer} index Index of the selected entry inside the entries array
+     * @description Set the this.state.selectedSentiment to entry
+     * @memberof Result
+     * @return {void}
+     */
     onSentimentCellClick = (entry, index) => {
         this.setState({
             selectedSentiment: entry
         })
     }
 
+    /**
+   * @function resetSelection
+   * @description Sets this.state.selectedTopics and this.state.selectedSentiment to null
+   * @memberof Result
+   * @return {void}
+   */
     resetSelection = () => {
         this.setState({
             selectedTopic: null,
@@ -214,14 +253,15 @@ class Result extends Component {
         })
     }
 
+    /**
+     * @function formatDate
+     * @param  {Object} data Date from the x-axis ticks
+     * @description Formats the date of a data object in a readable format using moment.js
+     * @memberof Result
+     * @return {String} Date string encoded on "DD-MM-YYYY"
+     */
     formatDate = (data) => {
         return moment(data).format("DD-MM-YYYY");
-    }
-
-
-    test = (data) => {
-        data[0] = null;
-        return data;
     }
 
     render() {
@@ -261,13 +301,8 @@ class Result extends Component {
                         return element.topicId === selectedTopic.topicId
                     }))
                 }
-
-
-
-
-
             }
-            //TODO: implement a toggle for the legend
+
             return (
                 <div className="result-pane">
 
@@ -380,6 +415,7 @@ class Result extends Component {
                                                     <Table.HeaderCell>Id</Table.HeaderCell>
                                                     <Table.HeaderCell>Topic</Table.HeaderCell>
                                                     <Table.HeaderCell>Sentiment</Table.HeaderCell>
+                                                    <Table.HeaderCell>Topic Probability</Table.HeaderCell>
                                                     <Table.HeaderCell>Message</Table.HeaderCell>
                                                     <Table.HeaderCell>Created</Table.HeaderCell>
                                                 </Table.Row>
@@ -398,7 +434,9 @@ class Result extends Component {
                                                         <Table.Cell>{tweet.id}</Table.Cell>
                                                         <Table.Cell>{tweet.topic}</Table.Cell>
                                                         <Table.Cell>{tweet.sentiment}</Table.Cell>
+                                                        <Table.Cell>{tweet.topicProbability}</Table.Cell>
                                                         <Table.Cell>{tweet.message}</Table.Cell>
+
                                                         <Table.Cell>{moment(tweet.created).format("DD-MM-YYYY HH:mm:ss")}</Table.Cell>
                                                     </Table.Row>)
                                                 })}
@@ -420,6 +458,12 @@ class Result extends Component {
 
         }
     }
+}
+
+
+Result.propTypes = {
+    /** {Array} Array with the result containing the dynamic topic detection*/
+    result: PropTypes.Array,
 }
 
 export default Result;

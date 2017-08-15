@@ -1,13 +1,14 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import { NavLink } from "react-router-dom";
 import { Menu, Image } from "semantic-ui-react";
-import Icon from '../Icon.component';
 import { withRouter } from 'react-router-dom';
+import Icon from '../Icon.component';
 
 /**
  * @class SideNavigation
- * @extends {Component}
- * @description Side navigation for all import sections of the app
+ * @extends {React.Component}
+ * @description Class for displaying the side navigation of the app if viewed on devices not mobile
  */
 class SideNavigation extends Component {
 
@@ -40,6 +41,13 @@ class SideNavigation extends Component {
             </Menu >
         )
     }
+}
+
+
+
+SideNavigation.propTypes = {
+    /** {Object} The match object from react-router */
+    match: PropTypes.Object
 }
 
 export default withRouter(SideNavigation);

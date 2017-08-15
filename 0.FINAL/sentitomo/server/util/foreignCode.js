@@ -18,7 +18,7 @@ const defaults = {
  * @param  {Integer} version Specify the Python version to use
  * @description Instantiates a new Python object. Useful to call the Python class methods without the "new" keyword
  * @see {@link module:ForeignCode~Python}
- * @return {Object}  A Python object
+ * @returns {Object}  A Python object
  */
 export function PythonShell(path, version) {
     var obj = new Python(path, version);
@@ -44,7 +44,7 @@ class Python {
     * @param  {Array} data Array of command line arguments
     * @description Add command line arguments to the execution of the file
     * @memberof module:ForeignCode~Python
-    * @return {Object} Pyhton object instance
+    * @returns {Object} Pyhton object instance
     */
     data(data) {
         data.forEach((element) => {
@@ -58,7 +58,7 @@ class Python {
     * @param  {Function} callback Function to handle the result of the execution
     * @description Spawns a child process and executes the specified Python file asynchronously
     * @memberof module:ForeignCode~Python
-    * @return {void}
+    * @returns {void}
     */
     call(callback) {
 
@@ -83,7 +83,7 @@ class Python {
     /**
      * @function callSync
      * @description Spawns a child process and executes the specified Python file synchronously
-     * @return {String} The stdout of the process
+     * @returns {String} The stdout of the process
      * @memberof module:ForeignCode~Python
     */
     callSync() {
@@ -109,7 +109,7 @@ class Python {
  * @param  {String}  path    Path to the Jar file to execute
  * @description Instantiates a new Java object. Useful to call the Java class methods without the "new" keyword
  * @see {@link module:ForeignCode~Java}
- * @return {Object}  A Java object
+ * @returns {Object}  A Java object
  */
 export function JavaShell(path) {
     var obj = new Java(path);
@@ -135,7 +135,7 @@ export class Java {
      * @param  {Array} data Array of command line arguments
      * @description Add command line arguments to the execution of the file
      * @memberof module:ForeignCode~Java
-     * @return {Object} Java object instance
+     * @returns {Object} Java object instance
      */
     data(data) {
         data.forEach((element) => {
@@ -149,7 +149,7 @@ export class Java {
     * @param  {Function} callback Function to handle the result of the execution
     * @description Spawns a child process and executes the specified Jar file asynchronously
     * @memberof module:ForeignCode~Java
-    * @return {void}
+    * @returns {void}
     */
     call(callback) {
         this.process = child_process.spawn('java', this.args, defaults);
@@ -173,7 +173,7 @@ export class Java {
     /**
      * @function callSync
      * @description Spawns a child process and executes the specified Jar file synchronously
-     * @return {String} The stdout of the process
+     * @returns {String} The stdout of the process
      * @memberof module:ForeignCode~Java
     */
     callSync() {
@@ -191,7 +191,6 @@ export class Java {
         logger.log('info', 'Manuall killing ' + process.pid);
         this.process.kill('SIGINT')
     }
-
 }
 
 /**
@@ -199,7 +198,7 @@ export class Java {
  * @param  {String} path    Path to the R file to execute
  * @description Instantiates a new R object. Useful to call the R class methods without the "new" keyword
  * @see {@link module:ForeignCode~R}
- * @return {Object}  A R object
+ * @returns {Object}  A R object
  */
 export function RShell(path) {
     return new R(path);
@@ -223,7 +222,7 @@ class R {
      * @method data
      * @param  {Array} data Array of command line arguments
      * @description Add command line arguments to the execution of the file
-     * @return {Object} R object instance
+     * @returns {Object} R object instance
      * @memberof module:ForeignCode~R
      */
     data(data) {
@@ -237,7 +236,7 @@ class R {
      * @method call
      * @param  {Function} callback Function to handle the result of the execution
      * @description Spawns a child process and executes the specified R file asynchronously
-     * @return {void}
+     * @returns {void}
      * @memberof module:ForeignCode~R
      */
     call(callback) {
@@ -262,7 +261,7 @@ class R {
     /**
      * @function callSync
      * @description Spawns a child process and executes the specified R file synchronously
-     * @return {String} The stdout of the process
+     * @returns {String} The stdout of the process
      * @memberof module:ForeignCode~R
     */
     callSync() {

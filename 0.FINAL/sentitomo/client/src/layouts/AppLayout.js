@@ -15,12 +15,24 @@ import Dashboard from '../components/dashboard/Dashboard.component.jsx';
 import ToolBox from '../components/toolbox/ToolBox.component.jsx';
 import Result from '../components/result/Result.component.jsx';
 
+
+/**
+ * @class Applayout
+ * @extends {React.Component}
+ * @description Wrapper for the whole content of the app. Responsible for the route and socket message handling
+ */
 class Applayout extends React.Component {
 
 
-    state = { loading: false, result: null }
+    state = { loading: false, result: null, errorMsg: null }
 
 
+    /**
+     * @function componentDidMount
+     * @description Set up listener for message from the server
+     * @memberof Applayout
+     * @return {void}
+     */
     componentDidMount() {
         socket.on('server:response', data => {
             this.notificationSystem.addNotification({
@@ -38,16 +50,16 @@ class Applayout extends React.Component {
             }
         });
 
-        /*socket.on('connect_error', data => {
-            this.notificationSystem.addNotification({
-                message: "Something went wrong",
-                level: 'error'
-            });
+        socket.on('connect_error', data => {
             this.setState({
                 loading: false,
-                result: null
-            });
-        });*/
+                result: null,
+                errorMsg: "Lost connection to the server"
+            }, this.notificationSystem.addNotification({
+                message: this.state.errorMsg,
+                level: 'error'
+            }));
+        });
     }
 
     render() {
@@ -66,7 +78,7 @@ class Applayout extends React.Component {
                         <Switch>
                             <Route exact path={match.url + '/dashboard'} component={Dashboard} />
                             <Route path={match.url + '/toolbox'} component={ToolBox} />
-                            <Route path={match.url + '/result'} render={() => <Result result={this.state.result} html={this.state.html} />} />
+                            <Route path={match.url + '/result'} render={() => <Result result={this.state.result} />} />
 
                         </Switch>
                     </Container>
