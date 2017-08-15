@@ -65,15 +65,20 @@ export default class SentimentWorker {
 
                     for (var index in tweets) {
                         var tweet = tweets[index];
+                        logger.log('debug', 'Tweet message: ' + tweet.message)
                         const sentiment = await detectSentimentEnsembleR(tweet.message);
+                        logger.log('debug', 'R sentiment : ' + sentiment)
                         const sarcasticValue = await detectSarcasm(tweet.message);
+                        logger.log('debug', 'R sarcastic : ' + sarcasticValue)
                         const ensemblePython = await detectSentimentEnsemblePython(tweet.message);
+                        logger.log('debug', 'Python ensemble: ' + ensemblePython)
+
                         TweetSentiment.upsert({
                             id: tweet.id,
-                            sentiment: sentiment.toLowerCase().trim(), // remove whitespaces and line breaks
-                            sarcastic: sarcasticValue,
-                            rEnsemble: sentiment.toLowerCase().trim(), // remove whitespaces and line breaks
-                            pythonEnsemble: ensemblePython.toLowerCase().trim(), // remove whitespaces and line breaks
+                            sentiment: sentiment != '' ? sentiment.toLowerCase().trim() : null, // remove whitespaces and line breaks
+                            sarcastic: sarcasticValue != '' ? sarcasticValue : null,
+                            rEnsemble: sentiment != '' ? sentiment.toLowerCase().trim() : null, // remove whitespaces and line breaks
+                            pythonEnsemble: ensemblePython != '' ? ensemblePython.toLowerCase().trim() : null, // remove whitespaces and line breaks
                         })
                     }
                     logger.log('info', "10 Sentiments of tweets detected ")
@@ -81,6 +86,8 @@ export default class SentimentWorker {
                     setTimeout(() => this.detectSentiments(), 600000) // wait 10 minutes for new tweets to come ine
                 }
             });
+        } else {
+            logger.log('warn', 'Sentiment detection worker is not running');
         }
     }
 }

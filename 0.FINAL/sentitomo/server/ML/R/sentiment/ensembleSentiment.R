@@ -41,7 +41,7 @@ prep <- DocumentTermMatrix(corp)
 prep <- as.data.frame(as.matrix(prep))
 
 #create new dtm that matches original dtm for training
-xx <- full_join(prep,tweetsSparseX[1,])
+xx <- tryCatch({full_join(prep,tweetsSparseX[1,])}, error = function(e){message(e)})
 
 result <- NA
 # clean

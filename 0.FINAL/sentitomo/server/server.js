@@ -99,7 +99,8 @@ http.listen(GRAPHQL_PORT, () => logger.log('info',
 ));
 
 global.appRoot = __dirname;
-
+global.sentimentWorker = sentimentWorker;
+global.topicWorker = topicWorker;
 
 /*var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
 console.log(h20Process);
@@ -114,6 +115,10 @@ t   opicWorker.start();
 
 */
 
+
+detectSentimentEnsembleR("https://t.co/Lo5kpa0Je6 *Need a Lyft coupon code? Here's one for $50 &lt;&lt; Here's the coupon code: RESERVE &gt;&gt; AbbVie").then(result => {
+    console.log(result);
+})
 
 
 // Gracefully kill the h2o server process

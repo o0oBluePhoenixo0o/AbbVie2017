@@ -55,10 +55,12 @@ class Applayout extends React.Component {
                 loading: false,
                 result: null,
                 errorMsg: "Lost connection to the server"
-            }, this.notificationSystem.addNotification({
-                message: this.state.errorMsg,
-                level: 'error'
-            }));
+            }, () => {
+                this.notificationSystem.addNotification({
+                    message: this.state.errorMsg,
+                    level: 'error'
+                })
+            });
         });
     }
 

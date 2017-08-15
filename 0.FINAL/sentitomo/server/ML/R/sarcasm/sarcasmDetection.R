@@ -77,7 +77,7 @@ prep[, (del.words) := NULL]
 prep <- as.data.frame(prep)
 
 #create new dtm that matches original dtm for training
-xx <- left_join(prep,df[1,])
+xx <- tryCatch({left_join(prep,df[1,])}, error = function(e){message(e)})
 
 #put everything to 0s except the message
 xx[,ncol(prep)+1:ncol(xx)] <- 0

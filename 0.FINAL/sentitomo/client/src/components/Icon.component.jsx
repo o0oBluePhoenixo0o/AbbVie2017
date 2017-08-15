@@ -32,15 +32,15 @@ Icon.propTypes = {
     /** {String} Name of the of the icon */
     name: PropTypes.string,
     /** {boolean} Icon size big */
-    big: PropTypes.boolean,
+    big: PropTypes.bool,
     /** {boolean}  Icon size large */
-    large: PropTypes.boolean,
+    large: PropTypes.bool,
     /** {boolean}  Is the icon a close icon */
-    close: PropTypes.boolean,
+    close: PropTypes.bool,
     /** {boolean}  Is the icon circular (round) */
-    circular: PropTypes.boolean,
+    circular: PropTypes.bool,
     /** {boolean} Is the icon color inverted */
-    tiInverted: PropTypes.boolean,
+    tiInverted: PropTypes.bool,
 }
 
 

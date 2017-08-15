@@ -21,9 +21,6 @@ import { Tweet, TweetSentiment } from '../data/connectors';
 export function listenToSockets(httpServer) {
     var io = new SocketIO(httpServer);
     io.on('connection', function (socket) {
-        socket.emit('news', {
-            hello: 'world'
-        });
 
         socket.on('client:runTopicDetection', data => {
             socket.emit('server:response', {
@@ -83,6 +80,23 @@ export function listenToSockets(httpServer) {
                     })
             })
         });
+
+
+        socket.on('client:getWorkers', () => {
+            socket.emit('server:getWorkers', {
+                topicWorker: global.topicWorker.running,
+                sentimentWorker: global.sentimentWorker.running,
+            })
+        });
+
+
+        socket.on('client:toggleWorker', data => {
+            switch (data.type) {
+                case "topic": global.topicWorker.running ? global.topicWorker.stop() : global.topicWorker.start(); break;
+                case "sentiment": global.sentimentWorker.running ? global.sentimentWorker.stop() : global.sentimentWorker.start(); break;
+                default: break;
+            }
+        })
     });
 }
 

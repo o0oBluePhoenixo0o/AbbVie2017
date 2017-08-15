@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Header, Grid, Menu, Segment } from 'semantic-ui-react'
 import TopicToolBox from './TopicToolBox.component';
+import WorkerToolBox from './WorkerToolBox.component';
 
 /**
  * @class ToolBox
@@ -20,15 +21,17 @@ class ToolBox extends Component {
                 <Header size='huge'>
                     ToolBox
                     <Header.Subheader>
-                        Manage all of the ML taks here
+                        Manage all server tasks here
                     </Header.Subheader>
                 </Header>
                 <div>
                     <Menu pointing secondary>
                         <Menu.Item name='topic' active={activeItem === 'topic'} onClick={this.handleItemClick} />
+                        <Menu.Item name='worker' active={activeItem === 'worker'} onClick={this.handleItemClick} />
                     </Menu>
                     <Segment >
                         {activeItem === "topic" ? <TopicToolBox /> : null}
+                        {activeItem === "worker" ? <WorkerToolBox /> : null}
                     </Segment>
                 </div>
 

@@ -89,7 +89,7 @@ export default class TopicWorker {
                 }
             });
         } else {
-            logger.log('warn', 'Topic detection is not running');
+            logger.log('warn', 'Topic detection worker is not running');
         }
     }
 }

@@ -47,7 +47,7 @@ class SideNavigation extends Component {
 
 SideNavigation.propTypes = {
     /** {Object} The match object from react-router */
-    match: PropTypes.Object
+    match: PropTypes.object
 }
 
 export default withRouter(SideNavigation);
