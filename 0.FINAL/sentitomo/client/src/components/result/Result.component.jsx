@@ -191,7 +191,13 @@ class Result extends Component {
         copy.forEach((obj, index, array) => {
             array[index].created = new Date(array[index].created).setHours(0, 0, 0, 0)
         })
+
+        console.log(copy);
+
         var myData = dl.read(copy, { type: 'json', parse: 'auto' });
+        console.log(dl.groupby(['created'])
+            .summarize({ 'created': 'count' })
+            .execute(myData))
         return (dl.groupby(['created'])
             .summarize({ 'created': 'count' })
             .execute(myData));
@@ -261,12 +267,11 @@ class Result extends Component {
      * @return {String} Date string encoded on "DD-MM-YYYY"
      */
     formatDate = (data) => {
-        return moment(data).format("DD-MM-YYYY");
+        return moment(new Date(data)).format("DD-MM-YYYY");
     }
 
     render() {
-        const { html } = this.props;
-        const result = myArray;
+        const { result, withLDA } = this.props;
         const { selectedTopic, selectedSentiment } = this.state;
 
         var aggregatedTopics = null;
@@ -286,19 +291,19 @@ class Result extends Component {
 
                 if (selectedSentiment) {
                     aggregateSentiment = this.aggregateSentiment(result.slice().filter(element => {
-                        return element.topicId === selectedTopic.topicId && element.sentiment === selectedSentiment.sentiment
+                        return element.topicId == selectedTopic.topicId && element.sentiment == selectedSentiment.sentiment
                     }));
 
                     aggregateDate = this.aggregateDate(result.slice().filter(element => {
-                        return element.topicId === selectedTopic.topicId && element.sentiment === selectedSentiment.sentiment
+                        return element.topicId == selectedTopic.topicId && element.sentiment == selectedSentiment.sentiment
                     }))
                 } else {
                     aggregateSentiment = this.aggregateSentiment(result.slice().filter(element => {
-                        return element.topicId === selectedTopic.topicId
+                        return element.topicId == selectedTopic.topicId
                     }));
 
                     aggregateDate = this.aggregateDate(result.slice().filter(element => {
-                        return element.topicId === selectedTopic.topicId
+                        return element.topicId == selectedTopic.topicId
                     }))
                 }
             }
@@ -333,8 +338,8 @@ class Result extends Component {
                                 <Card fluid className="result">
                                     <Card.Content header={"Sentiments in topic"} />
                                     <Card.Content className={'card-body'}>
-                                        {this.state.selectedTopic ?
-                                            <ResponsiveContainer height={500}>
+                                        {this.state.selectedTopic && aggregateSentiment.length > 0 ?
+                                            < ResponsiveContainer height={500}>
                                                 <PieChart>
                                                     <Pie data={aggregateSentiment} dataKey="count" fill="#8884d8" label onClick={(entry, index) => this.onSentimentCellClick(entry, index)} >
                                                         {
@@ -347,15 +352,15 @@ class Result extends Component {
                                                     <Legend content={renderSentimentLegend} style={{ maxHeight: "250px !important", overflow: "auto" }} onClick={this.onLegendClick} />
                                                 </PieChart>
                                             </ResponsiveContainer >
-                                            : ""}
+                                            : "No sentiment values in data"}
                                     </Card.Content>
                                 </Card>
                             </Grid.Column>
                             <Grid.Column mobile={16} tablet={2} computer={2}>
-                                <Segment raised style={{ position: "fixed", marginRight: "2em" }}>
+                                <Segment raised style={{ position: "fixed", marginRight: "2em", zIndex: "100" }}>
                                     <List>
-                                        <List.Item><strong>Topic:</strong> {selectedTopic ? selectedTopic.topic : null}</List.Item>
-                                        <List.Item><strong>Sentiment:</strong> {selectedSentiment ? selectedSentiment.sentiment : null}</List.Item>
+                                        <List.Item><strong>Topic:</strong> {selectedTopic ? selectedTopic.topic : "Null"}</List.Item>
+                                        <List.Item><strong>Sentiment:</strong> {selectedSentiment ? selectedSentiment.sentiment : "Null"}</List.Item>
                                     </List>
                                     <a href="#" onClick={() => this.resetSelection()}>Reset</a>
                                 </Segment>
@@ -390,7 +395,7 @@ class Result extends Component {
                                 </Card>
                             </Grid.Column>
                         </Grid.Row>
-                        <Grid.Row>
+                        {withLDA ? <Grid.Row>
                             <Grid.Column mobile={16} tablet={14} computer={14}>
                                 <Card fluid>
                                     <Card.Content>
@@ -401,7 +406,7 @@ class Result extends Component {
                                     </Card.Content>
                                 </Card>
                             </Grid.Column>
-                        </Grid.Row>
+                        </Grid.Row> : null}
                         <Grid.Row>
                             <Grid.Column mobile={16} tablet={14} computer={14}>
                                 <Card fluid className="result">
@@ -424,9 +429,9 @@ class Result extends Component {
                                             <Table.Body>
                                                 {result.slice().filter(element => {
                                                     if (this.state.selectedSentiment) {
-                                                        return (element.topicId === selectedTopic.topicId && element.sentiment === selectedSentiment.sentiment)
+                                                        return (element.topicId == selectedTopic.topicId && element.sentiment == selectedSentiment.sentiment)
                                                     } else {
-                                                        return (element.topicId === selectedTopic.topicId)
+                                                        return (element.topicId == selectedTopic.topicId)
                                                     }
 
                                                 }).slice().map(tweet => {
@@ -463,7 +468,7 @@ class Result extends Component {
 
 Result.propTypes = {
     /** {Array} Array with the result containing the dynamic topic detection*/
-    result: PropTypes.Array,
+    result: PropTypes.array,
 }
 
 export default Result;

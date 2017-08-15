@@ -47,13 +47,13 @@ class Dashboard extends React.Component {
                 this.props.client.query({
                     query: gql`
                     query CountQuery($startDate: Date, $endDate: Date) {
-                        count(startDate: $startDate, endDate: $endDate)
+                        tweetCount(startDate: $startDate, endDate: $endDate)
                     }
                 `,
                     variables: { startDate: this.state.from, endDate: this.state.to },
                 }).then(response => {
                     this.setState({
-                        tweetsSize: response.data.count
+                        tweetsSize: response.data.tweetCount
                     })
                 });
             });
@@ -71,13 +71,32 @@ class Dashboard extends React.Component {
                         tweets(startDate: $startDate, endDate: $endDate){
                             id
                             message
+                            created
+                            sentiment{
+                                sentiment
+                            }
+                            topic{
+                                topicId
+                                topicContent
+                                probability
+                            }
                         }
                     }
                 `,
             variables: { startDate: this.state.from, endDate: this.state.to },
         }).then(response => {
+
+            var tweets = JSON.parse(JSON.stringify(response.data.tweets));
+
+            //flatten array
+            tweets.forEach(tweet => {
+                tweet.sentiment = tweet.sentiment ? tweet.sentiment.sentiment : null;
+                tweet.topicId = tweet.topic ? tweet.topic.topicId : null;
+                tweet.topicProbability = tweet.topic ? tweet.topic.probability : null;
+                tweet.topic = tweet.topic ? tweet.topic.topicContent : null;
+            })
             this.setState({
-                data: response,
+                data: tweets,
                 loading: false,
             })
         });
@@ -101,11 +120,11 @@ class Dashboard extends React.Component {
                 <Dimmer active={loading}>
                     <Loader>Set view range</Loader>
                 </Dimmer>
-                <Grid columns={2}>
+                <Grid columns={1}>
                     <Grid.Row>
                         <Grid.Column>
                             <Card fluid>
-                                <Card.Content header={"Aggregrated Topics"} />
+                                <Card.Content header={"Tweet selection"} />
                                 <Card.Content>
                                     <Header size='medium'>Show the tweets you want</Header>
                                     <p>First choose your date ranges to view your tweets</p>
@@ -138,13 +157,13 @@ class Dashboard extends React.Component {
                             </Card>
                         </Grid.Column>
                     </Grid.Row>
+                    <Grid.Column>
+                        <Grid.Row>
+                            <Result result={this.state.data} withLDA={false} />
+                        </Grid.Row>
+                    </Grid.Column>
                 </Grid>
 
-
-
-
-
-                <Result result={this.state.data ? this.state.data.data.tweets : null} />
             </Segment>
         );
     }
