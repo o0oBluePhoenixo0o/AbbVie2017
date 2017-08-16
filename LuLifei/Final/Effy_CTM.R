@@ -77,11 +77,12 @@ myCorpus <- tm_map(myCorpus,content_transformer(removeURL))
 
 # Add extra stop words
 myStopwords <- c(stopwords("SMART"),"rt","via","amp","aa","ra","im","ad","dr","dont","th","today","oz","tb",
-                 "mit","der","von","ist","und",
-                 "abbv","abbvies","amgn","boris","bmy","bristolmyers","johnson","rheum","llc","inc"
-                 #"abbvie","amgen","adalimumab","ankylosing","spondylitis",
-                 #"bristol","myers","enbrel","hepatitis","humira","trilipix",
-                 #"ibrutinib","imbruvica","johnson","psoriasis","rheumatoid","arthritis"
+                 "mit","der","von","ist","und","ein",
+                 "day","year","time","today",
+                 "abbv","abbvies","amgn","boris","bmy","bristolmyers","johnson","rheum","llc","inc",
+                 "abbvie","amgen","adalimumab","ankylosing","spondylitis",
+                 "bristol","myers","enbrel","hepatitis","humira","trilipix",
+                 "ibrutinib","imbruvica","johnson","psoriasis","rheumatoid","arthritis"
                  )
 # Remove stopwords from corpus
 myCorpus <- tm_map(myCorpus,removeWords,myStopwords)
@@ -98,7 +99,10 @@ myCorpus <- tm_map(myCorpus,stripWhitespace)
 
 # Stemming
 lemma_dictionary <- make_lemma_dictionary(myCorpus$content, engine = 'hunspell')
-stems <- lemmatize_strings(myCorpus$content, dictionary = lemma_dictionary)
+for(i in 1:length(myCorpus))
+{
+  myCorpus$content[[i]] <- lemmatize_strings(myCorpus$content[[i]], dictionary = lemma_dictionary)
+}
 
 
 # Remove stopwords from corpus again
@@ -106,14 +110,15 @@ myCorpus <- tm_map(myCorpus,removeWords,myStopwords)
 
 
 # Change list--"myCorpus" into data frame
-preprocess_begining <- do.call(rbind, lapply(stems, data.frame, stringsAsFactors=FALSE))
+preprocess_begining <- do.call(rbind, lapply(myCorpus, data.frame, stringsAsFactors=FALSE))
 
 
 # Rename the column
 colnames(preprocess_begining)<- c("pre_message")
 
 
-# Change the data type after pre preprocessing to fit the doc-term matrix function ################
+
+# Change the data type after pre preprocessing to fit the doc-term matrix function #####################
 # Build the data frame after pre processing
 preprocess_mid <- cbind(as.data.frame(df$Id),
                         as.data.frame(df$created_time),
@@ -172,7 +177,7 @@ models <- list(
                   control = list(estimate.beta = TRUE,
                                  verbose = 1,
                                  prefix = tempfile(),
-                                 save = 0,
+                                 save = 1,
                                  keep =0,
                                  seed = as.integer(Sys.time()), 
                                  nstart = 1L, 
@@ -273,7 +278,5 @@ toJSONarray <- function(dtf){
 
 # Write out as Json
 CTM_result <- toJSONarray(topicmodel)
-
-
 
 
