@@ -114,6 +114,9 @@ t   opicWorker.start();
 }, 60000) // wait 1 minute for new tweets to come ine
 
 */
+
+sentimentWorker.start();
+
 // Gracefully kill the h2o server process
 nodeCleanup(function (exitCode, signal) {
     h20Process.kill();

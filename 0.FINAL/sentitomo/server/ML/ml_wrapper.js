@@ -192,7 +192,7 @@ export function detectTopicLDAStatic(jsonString) {
  * @returns {Promise<String>} A Promise that contains an array as JSON encoded String containing the topics of tweets
  * when fulfilled.
  */
-export function detectTopicLDAStaticBatch(csvFile, callback) {
+export function detectTopicLDAStaticBatch(csvFile) {
     return new Promise((resolve, reject) => {
         PythonShell('./ML/Python/topic/lda/static/staticBatch.py', 3).data([csvFile]).call(result => {
             resolve(result);
@@ -213,3 +213,18 @@ export function detectTopicLDAStaticSync(jsonString, callback) {
 }
 
 
+/**
+ * @function detectTrends
+ * @param  {String} csvFile Path to the .csv file containing the topics of tweets
+ * @description Uses a  possion model to buid a graph containing the data points for trend detection
+ * @see File server/ML/Python/trend/trend.py
+ * @returns {Promise<String>} A Promise that contains an array as JSON encoded String containing the topics of tweets
+ * when fulfilled.
+ */
+export function detectTrends(csvFile) {
+    return new Promise((resolve, reject) => {
+        PythonShell('./ML/Python/trend/trend.py', 3).data([csvFile]).call(result => {
+            resolve(result);
+        })
+    })
+}

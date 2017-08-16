@@ -23,11 +23,7 @@ options(scipen = 999)
 args = commandArgs(trailingOnly=TRUE)
 df <- read.csv(args[1])
 
-
-# Select message to do the preprocessing
 preprocess_df <- df$message
-
-
 
 # Pre-processing #######################################################################################
 # Build the corpus
@@ -43,26 +39,51 @@ removeURL <- function(x) gsub("http[^[:space:]]*","",x)
 myCorpus <- tm_map(myCorpus,content_transformer(removeURL))
 
 
+# Add extra stop words
+myStopwords <- c(stopwords("SMART"),"rt","via","amp","aa","ra","im","ad","dr","dont","th","today","oz",
+                 "mit","der","von","ist","und",
+                 "abbv","abbvies","amgn","boris","bmy","bristolmyers","rheum","llc","inc"
+                 #"abbvie","amgen","adalimumab","ankylosing","spondylitis",
+                 #"bristol","myers","enbrel","hepatitis","humira","trilipix",
+                 #"ibrutinib","imbruvica","johnson","psoriasis","rheumatoid","arthritis"
+                 )
+# Remove stopwords from corpus
+myCorpus <- tm_map(myCorpus,removeWords,myStopwords)
+
+
 # Remove anything other than English letters or space
 removeNumPunct <-function(x) gsub("[^[:alpha:][:space:]]*","",x)
 myCorpus <- tm_map(myCorpus,content_transformer(removeNumPunct))
 
 
-# Add extra stop words
-myStopwords <- c(stopwords("SMART"),"rt","via","amp","aa","ra","und","im")
-# Remove "r" and "big" from stopwords
-#myStopwords <- setdiff(myStopwords,c("r","big"))
-# Remove stopwords from corpus
+# Remove extra whitespace
+myCorpus <- tm_map(myCorpus,stripWhitespace)
+
+
+# Stemming
+lemma_dictionary <- make_lemma_dictionary(myCorpus$content, engine = 'hunspell')
+stems <- lemmatize_strings(myCorpus$content, dictionary = lemma_dictionary)
+
+
+# Remove stopwords from corpus again
 myCorpus <- tm_map(myCorpus,removeWords,myStopwords)
 
 
 # Remove words which have less than 3 characters
-#removeWords <- function(x) gsub('\\b\\w{1,3}\\b','',x)
-#myCorpus <- tm_map(myCorpus,removeWords)
+myCorpus <- paste(str_extract_all(myCorpus, '\\w{3,}')[[1]], collapse=' ')
 
 
-# Remove extra whitespace
-myCorpus <- tm_map(myCorpus,stripWhitespace)
+# Remove other words
+clean <- function (sentence){
+  remove <- function(x) gsub('wh |ã€|ãš|â€š|Å¡ã£|ã¥|ã£Æã¦|iã£Æã¦|rt | ed| fc| bd| bc|wh |ba | ce | ar | wn | ne | it | ae | bb | fef | di | ale | ee | gt | ra | dr | s | d |cf |bf | cf|af | st ', "", x)
+  sentence <- remove(sentence)
+}
+myCorpus <- sapply(myCorpus, function(x) clean(x))
+
+
+# Remove certain words
+myCorpus <- gsub("b","",myCorpus)
+myCorpus <- gsub("th","",myCorpus)
 
 
 # Change list--"myCorpus" into data frame
@@ -122,11 +143,13 @@ dtm <- create_dtm(it_df, vectorizer)
 # Prepare for topic modeling
 
 
-# Pick a random seed for replication
-SEED = sample(1:1000000, 1)  
-#  10 topics and 10 terms for each topic
-k = 10
-m = 10
+
+
+
+
+# Modeling ####################################################################################
+# Modeling
+k = 40
 
 
 
@@ -134,9 +157,20 @@ m = 10
 # Modeling
 models <- list(
   CTM       = CTM(dtm, k = k, 
-                  control = list(seed = SEED,
-                                 var = list(tol = 10^-4), 
-                                 em = list(tol = 10^-2)))
+                  control = list(estimate.beta = TRUE,
+                                 verbose = 1,
+                                 prefix = tempfile(),
+                                 save = 0,
+                                 keep =0,
+                                 seed = as.integer(Sys.time()), 
+                                 nstart = 1L, 
+                                 best = TRUE,
+                                 var = list(iter.max = 50, tol = 10^-5), 
+                                 em = list(iter.max = 100, tol = 10^-3),
+                                 initialize = "random",
+                                 cg = list(iter.max = 1000, tol = 10^-4)
+                                 )
+                  )
   #LDA       = LDA(dtm, k = k, control = list(seed = SEED))
   #VEM_Fixed = LDA(dtm, k = k, control = list(estimate.alpha = FALSE, seed = SEED)),
   #Gibbs     = LDA(dtm, k = k, method = "Gibbs", control = list(seed = SEED, burnin = 1000,
@@ -144,9 +178,9 @@ models <- list(
 )
 
 
-
 # Write topics out ######################################################################################
 # Write topics into data fram
+m=10
 topic_terms <- t(as.data.frame(lapply(models, terms, m)))
 topic_names <- as.data.frame(rownames(topic_terms))
 topic_fram <- t(as.data.frame(cbind(topic_names,topic_terms)))

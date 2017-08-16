@@ -35,7 +35,7 @@ TW_df <- args[1]
 
 #Abbreviation translation
 
-myAbbrevs <- loadAbbrev('abbrev.csv')
+myAbbrevs <- read.csv('./ML/R/sentiment/abbrev.csv')
 TW_df <- convertAbbreviations(TW_df)
 # clean
 corp <- vec2clean.corp(TW_df)

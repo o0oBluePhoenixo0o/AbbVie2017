@@ -3,7 +3,7 @@ import fs from 'fs';
 import SocketIO from 'socket.io';
 import moment from 'moment';
 import { convertRawToCsv } from '../util/export';
-import { detectTopicLDADynamic } from '../ML/ml_wrapper';
+import { detectTopicLDADynamic, detectTrends } from '../ML/ml_wrapper';
 import { Tweet, TweetSentiment } from '../data/connectors';
 
 
@@ -53,12 +53,16 @@ export function listenToSockets(httpServer) {
                         detectTopicLDADynamic(filename).then(result => {
                             var result = JSON.parse(result.toString().replace("/\r?\n|\r/g", ""))
                             var tweetsIDs = result.map((entry) => { return entry.key })
-                            var returnResult = new Array();
+
+
+
+                            var returnResult = new Object();
+                            var returnTweets = new Array();
 
                             Tweet.findAll({ where: { id: tweetsIDs }, include: [TweetSentiment] }).then(tweets => {
                                 tweets.forEach((tweet) => {
                                     var topicTweet = result.find(x => x.key === tweet.id)
-                                    returnResult.push({
+                                    returnTweets.push({
                                         id: tweet.id,
                                         message: tweet.message,
                                         topicId: topicTweet.id,
@@ -68,6 +72,13 @@ export function listenToSockets(httpServer) {
                                         sentiment: tweet.TW_SENTIMENT ? tweet.TW_SENTIMENT.sentiment : null
                                     })
                                 })
+
+                                convertRawToCsv(returnTweets, "./ML/Python/trend/batchTopics").then(filename => {
+                                    detectTrends(filename).then(result => {
+                                        var result = JSON.parse(result.toString().replace("/\r?\n|\r/g", ""))
+                                    })
+                                })
+
                                 console.log('sending response now');
                                 socket.emit('server:response', {
                                     level: 'success',

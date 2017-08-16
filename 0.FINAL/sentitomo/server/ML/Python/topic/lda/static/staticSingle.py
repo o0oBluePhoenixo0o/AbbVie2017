@@ -52,7 +52,7 @@ def tokenize(doc):
         lemma.lemmatize(word, pos='n') for word in punc_free.split())
     normalized = " ".join(
         lemma.lemmatize(word, pos='v') for word in normalized.split())
-    word = " ".join(word for word in normalized.split() if len(word) > 3)
+    word = " ".join(word for word in normalized.split() if len(word) > 2)
     #print(word.split())
     postag = nltk.pos_tag(word.split())
     #print(postag)
@@ -63,7 +63,7 @@ def tokenize(doc):
     ]
     adjandn = [
         word for word, pos in postag
-        if pos in poslist and word not in wordlist and len(word) > 3
+        if pos in poslist and word not in wordlist and len(word) > 2
     ]
     #normalized = adjandn.split()
     return ' '.join(adjandn)
@@ -178,7 +178,7 @@ def getTopicForQuery_lda(question):
     for i in range(len(topic_prob)):
         topic_prob[i][0] = idlist[topic_prob[i][0]] + 1
     return topic_prob[0][
-        1], idlist[word_count_array[0, 0]] + 1, result.split()[0:5]
+        1], idlist[word_count_array[0, 0]] + 1, result.split()[0:10]
 
 
 import json
