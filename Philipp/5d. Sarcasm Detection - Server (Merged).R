@@ -1,17 +1,3 @@
-# This is needed because qdap needs rJava and this seems to have some troubles to load on some OS
-# qdap needs Java 6 installed... what a old dude man...
-dyn.load('/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/server/libjvm.dylib')
-Sys.setenv(JAVA_HOME = '/Library/Java//Home')
-Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')
-
-# reading the data set from database
-
-attach(input[[1]])
-## Unstructured to Structured
-
-# In this code, we create a corpus, clean the corpus and 
-# Implement tokenization by creating DTM
-
 # clear the environment
 rm(list= ls())
 
@@ -25,6 +11,41 @@ require(data.table)
 require(caTools)
 require(e1071)
 
+######################################################################
+loadAbbrev <- function(filename) {
+  # Concates custom abbreviation dataset with the default one from qdap
+  #
+  # Args:
+  #   filename: Filename of the abbreviation lexicon
+  #
+  # Returns:
+  #   A 2-column(abv,rep) data.frame
+  
+  myAbbrevs <- read.csv(filename, sep = ",", as.is = TRUE)
+  return(rbind(abbreviations,myAbbrevs))
+}
+
+myAbbrevs <- loadAbbrev('abbrev.csv')
+
+convertAbbreviations <- function(message){
+  # Replaces abbreviation with the corresporending long form
+  #
+  # Args:
+  #   text: Text to remove the abbreviations from
+  #
+  # Returns:
+  #   String
+  if(is.na(message) || message == ""){
+    return(message)
+  } else {
+    newText <- message
+    for (i in 1:nrow(myAbbrevs)){
+      newText <- gsub(paste0('\\<', myAbbrevs[[i,1]], '\\>'), paste(myAbbrevs[[i,2]]), newText)
+    }
+    return (newText)
+  }
+}
+################################################################
 # Get data from manual label dataset
 manual_test <- read.csv("Final_Manual_3007.csv", as.is = TRUE, sep = ",", stringsAsFactors = F)
 
@@ -40,6 +61,8 @@ TW_df <- unique(TW_df)
 
 # Merge manual label dataset with 91k
 TW_df <- rbind(TW_df,manual_test)
+
+TW_df$tweet <- convertAbbreviations(TW_df$tweet)
 
 ## Preprocessing the TW_df and cleaning the corpus
 # user defined variables and functions
@@ -186,17 +209,27 @@ Train.Test.list <- sample2train.test(master.factor,123)
 train <- Train.Test.list[[1]]
 test  <- Train.Test.list[[2]]
 
+# Naive Bayes model classic
+n.model <- naiveBayes(label~ ., data = train)
+
 # Naive Bayes model with laplace estimator 1
 # laplace = 1 ensures a non-zero probability for every feature
 n.model.lap <- naiveBayes(label~ ., data = train, laplace = 1)
+
+# Predicting the test target class
+# for classic Naive Bayes model
+n.pred <- predict(n.model, test[,-1], type = 'class')
+
+xtab.n <- table('Actual class' = test[,1], 'Predicted class' = n.pred )
+caret::confusionMatrix(xtab.n)
 
 # for robust Naive Bayes model with laplace estimator
 n.pred.lap <- predict(n.model.lap, test[,-1], type = 'class')
 
 xtab.lap <- table('Actual class' = test[,1], 'Predicted class' = n.pred.lap )
 caret::confusionMatrix(xtab.lap)
-#############################################################################
 
+#############################################################################
 
 #save del.word for references
 # 

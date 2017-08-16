@@ -13,7 +13,6 @@ needs(h2o)
 needs(tm)
 needs(memisc)
 needs(dplyr)
-needs(plyr)
 needs(data.table)
 needs(stringr)
 
@@ -34,28 +33,26 @@ args = commandArgs(trailingOnly=TRUE)
 
 TW_df <- args[1]
 
+#Abbreviation translation
+
+myAbbrevs <- loadAbbrev('abbrev.csv')
+TW_df <- convertAbbreviations(TW_df)
 # clean
 corp <- vec2clean.corp(TW_df)
 #dtm
 prep <- DocumentTermMatrix(corp)
 prep <- as.data.frame(as.matrix(prep))
+#get list of words from the test
+words <- names(prep)
 
 #create new dtm that matches original dtm for training
-xx <- full_join(prep,tweetsSparseX[1,])
+xx <- tryCatch({left_join(prep,tweetsSparseX[1,],by = words)}, error = function(e){message(e)})
 
 result <- NA
-# clean
-corp <- vec2clean.corp(TW_df)
-#dtm
-prep <- DocumentTermMatrix(corp)
-prep <- as.data.frame(as.matrix(prep))
-
-#create new dtm that matches original dtm for training
-xx <- try(left_join(prep,tweetsSparseX[1,]))
 
 #if the new message does not fit in the dtm of train dataset then execute only BingLiu's lexicon
 BL <- 0
-if("try-error" %in% class(xx)) {BL <- 1}
+if("try-error" %in% class(xx)|class(xx) == "NULL") {BL <- 1}
 
 if (BL == 0){
   #put everything to 0s except the message
@@ -93,7 +90,7 @@ if (BL == 0){
   result <- final$Major
   
 } else {
-  
+  require(plyr)
   g <- score.sentiment(TW_df, pos.words, neg.words, .progress='text')
   g <- mutate(g, sentiment = ifelse(g$score > 0, 'Positive', 
                                     ifelse(g$score < 0, 'Negative', 'Neutral')))
@@ -106,3 +103,4 @@ sink()
 
 #Result of EnsembleR
 result
+
