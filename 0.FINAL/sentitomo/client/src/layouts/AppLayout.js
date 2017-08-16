@@ -41,10 +41,6 @@ class Applayout extends React.Component {
      */
     componentDidMount() {
         socket.on('server:response', data => {
-            this.notificationSystem.addNotification({
-                message: data.message,
-                level: data.level
-            });
             NotificationManager.success(data.message, 'Success', 3000);
             this.setState({
                 loading: !data.finished,
@@ -88,7 +84,7 @@ class Applayout extends React.Component {
                         <Switch>
                             <Route exact path={match.url + '/dashboard'} component={Dashboard} />
                             <Route path={match.url + '/toolbox'} component={ToolBox} />
-                            <Route path={match.url + '/result'} render={() => <Result result={this.state.result} />} />
+                            <Route path={match.url + '/result'} render={() => <Result data={this.state.result} />} />
 
                         </Switch>
                     </Container>

@@ -27,7 +27,7 @@ import TopicWorker from './service/TopicWorker';
 import SentimentWorker from './service/SentimentWorker';
 import { listenToSockets } from './service/sockets';
 
-import { detectSentiment, detectSentimentEnsembleR, detectTopicLDADynamic, detectTopicLDAStatic, detectTopicLDAStaticBatch } from './ML/ml_wrapper';
+import { detectSentiment, detectSentimentEnsembleR, detectTopicLDADynamic, detectTopicLDAStatic, detectTopicLDAStaticBatch, detectTrends } from './ML/ml_wrapper';
 import { Java, JavaShell, PythonShell } from './util/foreignCode';
 var nodeCleanup = require('node-cleanup');
 
@@ -115,7 +115,7 @@ t   opicWorker.start();
 
 */
 
-sentimentWorker.start();
+//sentimentWorker.start();
 
 // Gracefully kill the h2o server process
 nodeCleanup(function (exitCode, signal) {

@@ -271,14 +271,20 @@ class Result extends Component {
     }
 
     render() {
-        const { result, withLDA } = this.props;
+        const { data, withLDA } = this.props;
         const { selectedTopic, selectedSentiment } = this.state;
 
-        var aggregatedTopics = null;
-        var aggregateSentiment = null;
-        var aggregateDate = null;
 
-        if (result) {
+
+        if (data) {
+
+            console.log(data);
+            const result = data.tweets;
+            const trend = data.trend;
+
+            var aggregatedTopics = null;
+            var aggregateSentiment = null;
+            var aggregateDate = null;
             aggregatedTopics = this.aggregateTopics(result.slice()).sort((a, b) => { return a.count - b.count });
 
             var colors = randomColor({
@@ -376,7 +382,7 @@ class Result extends Component {
                                                 <ComposedChart height={500} data={aggregateDate}
                                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                                                     <XAxis dataKey="created" tickFormatter={this.formatDate} />
-                                                    <YAxis />
+                                                    <YAxis type="number" domain={['auto', 'auto']} />
                                                     <CartesianGrid />
                                                     <Tooltip />
                                                     <Legend />
@@ -388,6 +394,26 @@ class Result extends Component {
                                                         }
                                                     </Bar>*/}
                                                     <Line type="monotone" dataKey="count_created" stroke="#8884d8" />
+                                                </ComposedChart>
+                                            </ResponsiveContainer >
+                                            : ""}
+                                    </Card.Content>
+                                </Card>
+                            </Grid.Column>
+                            <Grid.Column mobile={16} tablet={16} computer={7}>
+                                <Card fluid className="result">
+                                    <Card.Content header={"Possion"} />
+                                    <Card.Content className={'card-body'}>
+                                        {this.state.selectedTopic ?
+                                            <ResponsiveContainer height={500}>
+                                                <ComposedChart height={500} data={trend.find(element => { return element.topicId == this.state.selectedTopic.topicId }).trendGraph}
+                                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                                                    <XAxis dataKey="date" tickFormatter={this.formatDate} />
+                                                    <YAxis type="number" domain={['auto', 'dataMax']} />
+                                                    <CartesianGrid />
+                                                    <Tooltip />
+                                                    <Legend />
+                                                    <Line type="monotone" dataKey="poisson" stroke="#8884d8" />
                                                 </ComposedChart>
                                             </ResponsiveContainer >
                                             : ""}

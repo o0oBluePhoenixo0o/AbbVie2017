@@ -218,8 +218,8 @@ export function detectTopicLDAStaticSync(jsonString, callback) {
  * @param  {String} csvFile Path to the .csv file containing the topics of tweets
  * @description Uses a  possion model to buid a graph containing the data points for trend detection
  * @see File server/ML/Python/trend/trend.py
- * @returns {Promise<String>} A Promise that contains an array as JSON encoded String containing the topics of tweets
- * when fulfilled.
+ * @returns {Promise<String>} A Promise that contains an array as JSON encoded String containing the trend graphs of different
+ * topics, when fulfilled.
  */
 export function detectTrends(csvFile) {
     return new Promise((resolve, reject) => {

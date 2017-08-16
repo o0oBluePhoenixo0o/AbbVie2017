@@ -11,6 +11,7 @@ import moment from 'moment';
 import TweetsList from './TweetsList.component';
 import Timeline from './Timeline.component';
 import Result from '../result/Result.component'
+import socket from "../../socket.js";
 
 
 
@@ -26,8 +27,21 @@ class Dashboard extends React.Component {
         from: null,
         to: null,
         tweetsSize: 0,
-        data: null
+        data: new Object()
     };
+
+
+    componentDidMount() {
+        socket.on('server:getTrendsForRange', data => {
+            console.log("result from the server trend");
+            var newState = this.state.data;
+            newState.trend = data.result;
+            this.setState({
+                data: newState,
+                loading: false
+            })
+        });
+    }
 
 
     /**
@@ -95,9 +109,16 @@ class Dashboard extends React.Component {
                 tweet.topicProbability = tweet.topic ? tweet.topic.probability : null;
                 tweet.topic = tweet.topic ? tweet.topic.topicContent : null;
             })
+
+            var newState = this.state.data;
+            newState.tweets = tweets;
+
             this.setState({
-                data: tweets,
-                loading: false,
+                data: newState
+            })
+            socket.emit('client:getTrendsForRange', {
+                from: this.state.from,
+                to: this.state.to
             })
         });
     }
@@ -159,7 +180,7 @@ class Dashboard extends React.Component {
                     </Grid.Row>
                     <Grid.Column>
                         <Grid.Row>
-                            <Result result={this.state.data} withLDA={false} />
+                            <Result data={this.state.data.trend ? this.state.data : null} withLDA={false} />
                         </Grid.Row>
                     </Grid.Column>
                 </Grid>
