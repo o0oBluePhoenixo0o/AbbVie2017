@@ -28,7 +28,7 @@ cp <- Corpus(VectorSource(df$message))
 dtm.control <- list(tolower = TRUE,
                     removePunctuation = TRUE,
                     removeNumbers = TRUE,
-                    stopwords = c(stopwords("http"),
+                    stopwords = c(stopwords("SMART"),
                                   stopwords("en")),
                     stemming = TRUE,
                     wordLengths = c(3, "inf"),
