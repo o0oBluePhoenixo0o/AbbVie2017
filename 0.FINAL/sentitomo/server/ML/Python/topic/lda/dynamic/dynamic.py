@@ -25,7 +25,7 @@ rm_duplicates = df.drop_duplicates(subset=['key', 'message'])
 rm_na = rm_duplicates.dropna()
 dtime = rm_na.sort_values(['created_time'])
 dtime.index = range(len(dtime))
-dlang = dtime[dtime['language'] == 'eng']
+dlang = dtime[dtime['language'] == 'en']
 dlang.index = range(len(dlang))
 with open(
         './ML/Python/topic/lda/dynamic/twitter_preprocessing_0720.csv',

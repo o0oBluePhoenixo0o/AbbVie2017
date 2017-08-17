@@ -31,7 +31,7 @@ export function listenToSockets(httpServer) {
         socket.on('client:runTopicDetection', data => {
 
             // Send a message to the client, to inidcate the process has started
-            socket.emit('client:runTopicDetection', {
+            socket.emit('server:runTopicDetection', {
                 level: 'success',
                 message: 'Topic detection has started at: ' + new Date(),
                 finished: false,
@@ -79,15 +79,25 @@ export function listenToSockets(httpServer) {
                                     });
                                 });
 
+                                var topics = new Array();
+                                returnTweets.forEach(tweet => {
+                                    topics.push({
+                                        id: tweet.id,
+                                        topicId: tweet.topicId,
+                                        topic: tweet.topic,
+                                        created: tweet.created,
+                                    })
+                                })
+
                                 // Same procedure fot the trend detection
-                                convertRawToCsv(returnTweets, "./ML/Python/trend/batchTopics.csv").then(filename => {
+                                convertRawToCsv(topics, "./ML/Python/trend/batchTopics.csv").then(filename => {
                                     detectTrends(filename).then(trendResult => {
                                         var trendResult = JSON.parse(trendResult.toString().replace("/\r?\n|\r/g", ""))
                                         returnResult.tweets = returnTweets;
                                         returnResult.trend = trendResult;
 
                                         // If everything is in place, send the final result back to client so it can be displayed properly
-                                        socket.emit('server:response', {
+                                        socket.emit('server:runTopicDetection', {
                                             level: 'success',
                                             message: 'Topic detection has finished at: ' + new Date(),
                                             finished: true,

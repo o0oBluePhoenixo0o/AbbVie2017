@@ -20,7 +20,7 @@ class MyEncoder(json.JSONEncoder):
             return super(MyEncoder, self).default(obj)
 
 
-df = pd.read_csv(sys.argv[1], encoding='UTF-8', sep=',')
+df = pd.read_csv(sys.argv[1], encoding='UTF-8', sep=',', quotechar='"')
 final_tp = []
 
 

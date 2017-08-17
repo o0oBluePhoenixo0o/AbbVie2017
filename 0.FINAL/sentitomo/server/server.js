@@ -115,8 +115,6 @@ t   opicWorker.start();
 
 */
 
-//sentimentWorker.start();
-
 // Gracefully kill the h2o server process
 nodeCleanup(function (exitCode, signal) {
     h20Process.kill();

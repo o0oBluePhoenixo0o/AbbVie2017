@@ -4,19 +4,19 @@ import {
     Switch,
     withRouter
 } from "react-router-dom";
-import "semantic-ui-css/semantic.min.css";
-import "../styles/main.css";
-import 'react-notifications/lib/notifications.css';
-import socket from "../socket.js";
 import { Container, Dimmer, Loader } from "semantic-ui-react";
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+
+import socket from "../socket.js";
 import SideNavigation from '../components/navigation/SideNavigation.component.jsx';
 import TopNavigation from '../components/navigation/TopNavigation.component.jsx'
-import { NotificationContainer, NotificationManager } from 'react-notifications';
 import Dashboard from '../components/dashboard/Dashboard.component.jsx';
 import ToolBox from '../components/toolbox/ToolBox.component.jsx';
 import Result from '../components/result/Result.component.jsx';
 
-
+import "semantic-ui-css/semantic.min.css";
+import "../styles/main.css";
+import 'react-notifications/lib/notifications.css';
 
 
 
@@ -40,7 +40,7 @@ class Applayout extends React.Component {
      * @return {void}
      */
     componentDidMount() {
-        socket.on('client:runTopicDetection', data => {
+        socket.on('server:runTopicDetection', data => {
             NotificationManager.success(data.message, 'Success', 3000);
             this.setState({
                 loading: !data.finished,
