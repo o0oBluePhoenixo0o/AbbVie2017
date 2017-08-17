@@ -33,6 +33,7 @@
          * [Client](#client)
       * [Sequence Diagrams](#sequence-diagrams)
       * [Conclusion](#conclusion)
+      * [Questions](#questions)
 
 
 As part of our Master Team Project named "Topic Monitoring in the Pharmaceutical Industry" we wanted to develop an application to incorporate our findings and different Machine Learning scripts to show how a production environment can look like. The name of this application is "Sentitomo", a combination of the words "Sentiment Analysis" and "Topic Monitoring".
@@ -261,12 +262,129 @@ Some of the R scripts we use for machine learning need both versions of Java to 
 The Python scripts for topic detection are based on Pyhton version 3 and. Follow the common ways to install it on your server OS and ensure that `python` is the command to execute Pyhton 2 and `python3` to execute Pyhton 3 on the terminal. 
 
 **Dependencies**
-Before you can run the Python files you have to install these modules through pip3:
+Before you can run the Python files you have to ensure that all of the following modules are installed. Install module via `pip3 installl <moduleName>` for Python 3 modules and `pip2 installl <moduleName>` for Python 2 modules
 
-    $ pip3 install sklearn
-    ....
 
-Some of the  Python scripts are using the `Natural language toolkit (NLTK)` to preprocess messages, detect the sentiment or the topic of those based on corpora, tokenizers, lexica etc.  from this package. In order to use this  it is mandatory to copy the folder `nltk_data` (find in /sentitomo/), to the home directory of the user who is running the application. 
+*Python3 modules*
+
+    $ pip3 freeze
+    boto==2.48.0
+    bz2file==0.98
+    certifi==2017.4.17
+    chardet==3.0.4
+    cycler==0.10.0
+    datetime-truncate==1.0.1
+    funcy==1.8
+    future==0.16.0
+    gensim==2.3.0
+    gnip-trend-detection==0.5
+    idna==2.5
+    Jinja2==2.9.6
+    joblib==0.11
+    MarkupSafe==1.0
+    matplotlib==2.0.2
+    nltk==3.2.4
+    numexpr==2.6.2
+    numpy==1.13.1
+    pandas==0.20.3
+    py==1.4.34
+    pyLDAvis==2.1.1
+    pyparsing==2.2.0
+    pytest==3.1.3
+    python-dateutil==2.6.1
+    pytz==2017.2
+    requests==2.18.2
+    scikit-learn==0.18.2
+    scipy==0.19.1
+    six==1.10.0
+    sklearn==0.0
+    smart-open==1.5.3
+    textblob==0.12.0
+    urllib3==1.22
+
+*Python2 modules*
+
+    $ pip freeze
+    altgraph==0.10.2
+    astroid==1.5.3
+    backports.functools-lru-cache==1.4
+    bdist-mpkg==0.5.0
+    bonjour-py==0.3
+    boto==2.48.0
+    bz2file==0.98
+    certifi==2017.4.17
+    chardet==3.0.4
+    configparser==3.5.0
+    enum34==1.1.6
+    gensim==2.3.0
+    idna==2.5
+    isort==4.2.15
+    lazy-object-proxy==1.3.1
+    macholib==1.5.1
+    matplotlib==1.3.1
+    mccabe==0.6.1
+    modulegraph==0.10.4
+    nltk==3.2.4
+    numpy==1.13.1
+    pandas==0.20.3
+    py2app==0.7.3
+    pylint==1.7.2
+    pyobjc-core==2.5.1
+    pyobjc-framework-Accounts==2.5.1
+    pyobjc-framework-AddressBook==2.5.1
+    pyobjc-framework-AppleScriptKit==2.5.1
+    pyobjc-framework-AppleScriptObjC==2.5.1
+    pyobjc-framework-Automator==2.5.1
+    pyobjc-framework-CFNetwork==2.5.1
+    pyobjc-framework-Cocoa==2.5.1
+    pyobjc-framework-Collaboration==2.5.1
+    pyobjc-framework-CoreData==2.5.1
+    pyobjc-framework-CoreLocation==2.5.1
+    pyobjc-framework-CoreText==2.5.1
+    pyobjc-framework-DictionaryServices==2.5.1
+    pyobjc-framework-EventKit==2.5.1
+    pyobjc-framework-ExceptionHandling==2.5.1
+    pyobjc-framework-FSEvents==2.5.1
+    pyobjc-framework-InputMethodKit==2.5.1
+    pyobjc-framework-InstallerPlugins==2.5.1
+    pyobjc-framework-InstantMessage==2.5.1
+    pyobjc-framework-LatentSemanticMapping==2.5.1
+    pyobjc-framework-LaunchServices==2.5.1
+    pyobjc-framework-Message==2.5.1
+    pyobjc-framework-OpenDirectory==2.5.1
+    pyobjc-framework-PreferencePanes==2.5.1
+    pyobjc-framework-PubSub==2.5.1
+    pyobjc-framework-QTKit==2.5.1
+    pyobjc-framework-Quartz==2.5.1
+    pyobjc-framework-ScreenSaver==2.5.1
+    pyobjc-framework-ScriptingBridge==2.5.1
+    pyobjc-framework-SearchKit==2.5.1
+    pyobjc-framework-ServiceManagement==2.5.1
+    pyobjc-framework-Social==2.5.1
+    pyobjc-framework-SyncServices==2.5.1
+    pyobjc-framework-SystemConfiguration==2.5.1
+    pyobjc-framework-WebKit==2.5.1
+    pyOpenSSL==0.13.1
+    pyparsing==2.0.1
+    python-dateutil==1.5
+    pytz==2013.7
+    requests==2.18.2
+    scikit-learn==0.18.2
+    scipy==0.19.1
+    singledispatch==3.4.0.3
+    six==1.10.0
+    smart-open==1.5.3
+    textblob==0.12.0
+    urllib3==1.22
+    wrapt==1.10.10
+    xattr==0.6.4
+    yapf==0.16.3
+    zope.interface==4.1.1
+
+
+During the execution of some of our scripts, deprecation warnings can appear. These are only thrown for information purposes, they will not influence the execution of the code. 
+
+Some of the  Python scripts are using the `Natural language toolkit (NLTK)` to preprocess messages, detect the sentiment or the topic of those, based on corpora, tokenizers, lexica etc. . In order to use this  it is mandatory to copy the folder `nltk_data` (can be found in `sentitomo/`), to the home directory of the user who is running the application. 
 
 On MacOS:
 
@@ -289,10 +407,13 @@ On Windows Vista,7,8,10
 #### Install R
 
 **MacOS:**
-On MacOS we suggest using the `.pkg`file from the [r-project site](https://cran.r-project.org/bin/macosx/) to install R.
+On MacOS we suggest using the `.pkg` file from the [r-project site](https://cran.r-project.org/bin/macosx/) to install R.
 
 **Linux:**
 The same way applies for Linux, please have a look at the [r-project site](https://cran.r-project.org/bin/macosx/) to install R.
+
+**Windows:**
+The same way also applies for Windows, please have a look at the [r-project site](https://cran.r-project.org/bin/macosx/) to install R.
 
 #### Set up environment variables
 
@@ -708,7 +829,7 @@ For Java we followed the same approach and added the spawning process of the fil
          * @return {String} Result of the 
          */
         var test = function(filename, callback) {
-            JavaShell("./ML/Java/test.ja").data([message]).call(result => {
+            JavaShell("./ML/Java/test.jar").data([message]).call(result => {
                 callback(result.trimt());
             })
         }
@@ -732,10 +853,10 @@ For Java we followed the same approach and added the spawning process of the fil
 #### data
 
 Inside the `data` directory the connection to the database and the `GraphQL` schema defininiton are expressed. 
-For connecting to the database we use a package called [Sequlize.js](http://docs.sequelizejs.com/). It provides a higher level way to work with databases. It provides methods  which just define the database schema and the resulting SQL queries for inserting, updating and deleting records are build dynamically and fully handled by the package itself. Sequliue  supports PostgreSQL, MySQL, SQLite and MSSQL dialects. It was also used in the resolver function for the GraphQL API (`resolvers.js`).
+For connecting to the database we use a package called [Sequlize.js](http://docs.sequelizejs.com/). It offers the opportunity to work on a higher level way with databases. It provides methods which just define the database schema and the resulting SQL queries for inserting, updating and deleting records are build dynamically and fully handled by the package itself. Sequelize supports PostgreSQL, MySQL, SQLite and MSSQL dialects. It was also used in the resolver function for the GraphQL API (`sentitomo/server/data/resolvers.js`).
 
-Another main part of the `data` directory is the set up of GraphQL which is written in `resolvers.js`. It handles all the request to the API whose schema is defined in `schema.js`. For this part we used a Node.js package called [apollo-server](https://github.com/apollographql/apollo-server). It is a great, easy to use open-source implementation of GraphQL on the server-side.
- In the following we want to provide a sample request to the API and what the response looks like:
+Another main part of the `data` directory is the set up of GraphQL which is written in `sentitomo/server/data/resolvers.js`. It handles all the request to the API whose schema is defined in `sentitomo/server/data/schema.js`. For this part we used a Node.js package called [apollo-server](https://github.com/apollographql/apollo-server). It is a great, easy to use open-source implementation of GraphQL on the server-side.
+In the following we want to provide a sample request to the API and depict what the response looks like:
 
 Request sent to [localhost:8080/graphql]():
 ```
@@ -929,6 +1050,15 @@ __Sentiment Detection__:
 
 ## Conclusion
 
-With this application we wanted to show one way of using our findings and algorithms in an production like environment. We showed how it is possible to built a server application which is capable of integrating different programming languages and use them for machine learning in an efficient way. With Node.js it is an ease to set up an highly scalable server which can handle asynchronous execetuions of foreign code very well. With the help spawning child processes Node.js is able to communicate with those and retrieve results from them. With the help of GraphQL we set up a very modern and reliable API which any front end can use to retrieve the result the machine learning algorithms produced from the database. If it is necessary to switch out the DBMS in the future the API endpoints will not change and the front-end system would not need to be heavily restructered. 
+With this application we wanted to show one way of using our findings and algorithms in a production-like environment. We showed how it is possible to built a server application which is capable of integrating different programming languages and use them for machine learning in an efficient way. With Node.js it is an ease to set up an highly scalable server which can handle asynchronous execetuions of foreign code very well. With the help spawning child processes a reliable communicate with those files is possible. With the help of GraphQL it was possible to set up a very modern and reliable API which any front-end can use to retrieve the result, which are produced by the  the machine learning algorithms. If it is necessary to switch out the DBMS in the future the API endpoints will not change and the front-end system would not need to be heavily modified. 
+
 The client side was implemented in React, which makes it highly dynamical from a user point of view and well structured from a programmer's point of view. With the help of different packages it was possible to built a easy to use and good looking user interface.
 All in all we hope that we could show you one possible way of how to build a good solution for monitoring topics and trends in social media today.
+
+## Questions
+
+If you any question arise while looking trough the docs, the code or while testing the application, please do not hesitate and contact us. 
+
+__Note__
+
+We did not included application tests inside, because this is more like a showcase how the integration of such an application can be done rather than providing a fully working and mature application.

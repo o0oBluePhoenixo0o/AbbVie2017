@@ -35,12 +35,12 @@ class Applayout extends React.Component {
 
     /**
      * @function componentDidMount
-     * @description Set up listener for message from the server
+     * @description Set up socket listener for messages from the server
      * @memberof Applayout
      * @return {void}
      */
     componentDidMount() {
-        socket.on('server:response', data => {
+        socket.on('client:runTopicDetection', data => {
             NotificationManager.success(data.message, 'Success', 3000);
             this.setState({
                 loading: !data.finished,
@@ -79,13 +79,12 @@ class Applayout extends React.Component {
                     <NotificationContainer />
                     <Container className="main-content" fluid>
                         <Dimmer active={loading}>
-                            <Loader>Detecting topics</Loader>
+                            <Loader>Server is preparing result</Loader>
                         </Dimmer>
                         <Switch>
                             <Route exact path={match.url + '/dashboard'} component={Dashboard} />
                             <Route path={match.url + '/toolbox'} component={ToolBox} />
                             <Route path={match.url + '/result'} render={() => <Result data={this.state.result} />} />
-
                         </Switch>
                     </Container>
                 </main>

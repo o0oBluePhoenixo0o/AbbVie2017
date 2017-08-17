@@ -31,7 +31,7 @@ export function listenToSockets(httpServer) {
         socket.on('client:runTopicDetection', data => {
 
             // Send a message to the client, to inidcate the process has started
-            socket.emit('server:response', {
+            socket.emit('client:runTopicDetection', {
                 level: 'success',
                 message: 'Topic detection has started at: ' + new Date(),
                 finished: false,
@@ -131,35 +131,47 @@ export function listenToSockets(httpServer) {
                     created: {
                         $lt: data.to, // less than
                         $gt: data.from//greater than
-                    }
-                }, include: [TweetTopic], raw: true
+                    },
+                    '$TW_Topic.topicId$': { $ne: null }
+                }, include: [{
+                    model: TweetTopic, as: TweetTopic.tableName
+                }], raw: true
             }).then(tweets => {
-
-                //extract only the data which is needed for the trend detection
-                var exportArray = new Array();
-                tweets.forEach(tweet => {
-                    exportArray.push({
-                        id: tweet.id,
-                        topicId: tweet.topic ? tweet.topic.topicId : null,
-                        creatd: tweet.created
-                    });
-                });
-
-                /*
-                * Convert the exportArray to a .csv so it can be read by the trendDetection python file
-                * If the trend detection is finished, send the result back to the client
-                */
-                convertRawToCsv(exportArray, "./ML/Python/trend/batchTopics.csv").then(filename => {
-                    detectTrends(filename).then(trendResult => {
-                        var trendResult = JSON.parse(trendResult.toString().replace("/\r?\n|\r/g", ""))
-                        socket.emit('server:getTrendsForRange', {
-                            level: 'success',
-                            message: 'Trend detection has finished at: ' + new Date(),
-                            finished: true,
-                            result: trendResult
+                if (tweets.length > 0) {
+                    //extract only the data which is needed for the trend detection
+                    var exportArray = new Array();
+                    tweets.forEach(tweet => {
+                        exportArray.push({
+                            id: tweet.id,
+                            topicId: tweet.topic ? tweet.topic.topicId : null,
+                            creatd: tweet.created
                         });
                     });
-                });
+
+                    /*
+                    * Convert the exportArray to a .csv so it can be read by the trendDetection python file
+                    * If the trend detection is finished, send the result back to the client
+                    */
+                    convertRawToCsv(exportArray, "./ML/Python/trend/batchTopics.csv").then(filename => {
+                        detectTrends(filename).then(trendResult => {
+                            var trendResult = JSON.parse(trendResult.toString().replace("/\r?\n|\r/g", ""))
+                            socket.emit('server:getTrendsForRange', {
+                                level: 'success',
+                                message: 'Trend detection has finished at: ' + new Date(),
+                                finished: true,
+                                result: trendResult
+                            });
+                        });
+                    });
+                } else {
+                    socket.emit('server:getTrendsForRange', {
+                        level: 'error',
+                        message: 'Trend detection failed at: ' + new Date(),
+                        finished: true,
+                        result: null
+                    });
+                }
+
             });
         });
     });

@@ -35,7 +35,7 @@ class Dashboard extends React.Component {
         socket.on('server:getTrendsForRange', data => {
             console.log("result from the server trend");
             var newState = this.state.data;
-            newState.trend = data.result;
+            newState.trend = data.result ? data.result : [];
             this.setState({
                 data: newState,
                 loading: false
@@ -139,7 +139,7 @@ class Dashboard extends React.Component {
         return (
             <Segment className="dashboard" basic>
                 <Dimmer active={loading}>
-                    <Loader>Set view range</Loader>
+                    <Loader>Set view range and preparing data</Loader>
                 </Dimmer>
                 <Grid columns={1}>
                     <Grid.Row>

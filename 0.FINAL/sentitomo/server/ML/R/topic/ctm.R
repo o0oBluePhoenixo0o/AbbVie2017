@@ -1,4 +1,6 @@
 # CTM topic model 
+setwd("~/CloudStation/Team Project/Topic Monitoring in the Pharmaceutical Industry/AbbVie2017/0.FINAL/sentitomo/server")
+
 source("./ML/R/needs.R")
 # Install packages #####################################################################################
 # Packages
@@ -11,6 +13,7 @@ needs(SnowballC)
 needs(text2vec)
 needs(stringr)
 needs(jsonlite)
+needs(textstem)
 options(scipen = 999)
 # Pre-Processing
 # Load in data #######################################################################################
@@ -21,11 +24,12 @@ options(scipen = 999)
 # Read in preprocess_df
 #df <- read.csv(file.choose(), encoding = "UTF-8", header = TRUE, sep = ",")
 args = commandArgs(trailingOnly=TRUE)
-df <- read.csv(args[1])
+df <- read.csv("./ML/R/topic/tweets.csv") #read.csv(args[1])
 
 preprocess_df <- df$message
 
 # Pre-processing #######################################################################################
+# Build the corpus
 # Build the corpus
 myCorpus <- Corpus(VectorSource(preprocess_df))
 
@@ -40,9 +44,9 @@ myCorpus <- tm_map(myCorpus,content_transformer(removeURL))
 
 
 # Add extra stop words
-myStopwords <- c(stopwords("SMART"),"rt","via","amp","aa","ra","im","ad","dr","dont","th","today","oz",
-                 "mit","der","von","ist","und",
-                 "abbv","abbvies","amgn","boris","bmy","bristolmyers","rheum","llc","inc"
+myStopwords <- c(stopwords("SMART"),"rt","via","amp","aa","ra","im","ad","dr","dont","th","today","oz","tb",
+                 "mit","der","von","ist","und","ein",
+                 "abbv","abbvies","amgn","boris","bmy","bristolmyers","johnson","rheum","llc","inc"
                  #"abbvie","amgen","adalimumab","ankylosing","spondylitis",
                  #"bristol","myers","enbrel","hepatitis","humira","trilipix",
                  #"ibrutinib","imbruvica","johnson","psoriasis","rheumatoid","arthritis"
@@ -62,28 +66,14 @@ myCorpus <- tm_map(myCorpus,stripWhitespace)
 
 # Stemming
 lemma_dictionary <- make_lemma_dictionary(myCorpus$content, engine = 'hunspell')
-stems <- lemmatize_strings(myCorpus$content, dictionary = lemma_dictionary)
+for(i in 1:length(myCorpus))
+{
+  myCorpus$content[[i]] <- lemmatize_strings(myCorpus$content[[i]], dictionary = lemma_dictionary)
+}
 
 
 # Remove stopwords from corpus again
 myCorpus <- tm_map(myCorpus,removeWords,myStopwords)
-
-
-# Remove words which have less than 3 characters
-myCorpus <- paste(str_extract_all(myCorpus, '\\w{3,}')[[1]], collapse=' ')
-
-
-# Remove other words
-clean <- function (sentence){
-  remove <- function(x) gsub('wh |ã€|ãš|â€š|Å¡ã£|ã¥|ã£Æã¦|iã£Æã¦|rt | ed| fc| bd| bc|wh |ba | ce | ar | wn | ne | it | ae | bb | fef | di | ale | ee | gt | ra | dr | s | d |cf |bf | cf|af | st ', "", x)
-  sentence <- remove(sentence)
-}
-myCorpus <- sapply(myCorpus, function(x) clean(x))
-
-
-# Remove certain words
-myCorpus <- gsub("b","",myCorpus)
-myCorpus <- gsub("th","",myCorpus)
 
 
 # Change list--"myCorpus" into data frame
