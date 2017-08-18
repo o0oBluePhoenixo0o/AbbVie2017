@@ -1,4 +1,5 @@
-# This file provides function for analysing confusion matrixes http://blog.revolutionanalytics.com/2016/03/com_class_eval_metrics_r.html#macro
+# This files contains some extended mehtods to evaluate confusion matrices
+
 
 mcc <- function(cm) {
   # Calculates the Matthew Correlation Coefficient for a given confusion matrix
@@ -7,6 +8,8 @@ mcc <- function(cm) {
   # Args:
   #   cm: Confusion Matrix
   #
+  # See:
+  #   # This file provides function for analysing confusion matrixes http://blog.revolutionanalytics.com/2016/03/com_class_eval_metrics_r.html#macro
   # Returns:
   #   MCC value
   

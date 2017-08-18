@@ -86,6 +86,7 @@ class Dashboard extends React.Component {
                             id
                             message
                             created
+                            hashtags
                             sentiment{
                                 sentiment
                             }

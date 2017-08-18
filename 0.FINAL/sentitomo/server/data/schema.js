@@ -16,7 +16,7 @@ const typeDefinitions = `
     language: String
     source: String
     message: String
-    messagePrep: String
+    hashtags: String
     latitude: String
     longitude: String
     retweetCount: Int

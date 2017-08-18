@@ -77,7 +77,7 @@ const renderTopicLegend = (props) => {
                 payload.map((entry, index) => {
                     return (<List.Item key={`item-${index}`} onClick={() => props.onClick(entry.payload.payload)}>
                         <Label style={{ background: entry.color }} horizontal />
-                        {entry.payload.payload.topic}
+                        {entry.payload.payload.topic ? entry.payload.payload.topic : "Null"}
                     </List.Item>)
 
                 })
@@ -285,6 +285,7 @@ class Result extends Component {
             var aggregatedTopics = null;
             var aggregateSentiment = null;
             var aggregateDate = null;
+            var selectedTrendGraph = null;
             aggregatedTopics = this.aggregateTopics(result.slice()).sort((a, b) => { return a.count - b.count });
 
             var colors = randomColor({
@@ -304,6 +305,10 @@ class Result extends Component {
                         return element.topicId == selectedTopic.topicId && element.sentiment == selectedSentiment.sentiment
                     }))
                 } else {
+
+                    var trendDetail = trend.find(element => { return element.topicId == this.state.selectedTopic.topicId });
+                    var selectedTrendGraph = trendDetail ? trendDetail.trendGraph : null;  // If the selected topic has an trend graph, return it, if not set the value to null
+
                     aggregateSentiment = this.aggregateSentiment(result.slice().filter(element => {
                         return element.topicId == selectedTopic.topicId
                     }));
@@ -406,7 +411,7 @@ class Result extends Component {
                                     <Card.Content className={'card-body'}>
                                         {this.state.selectedTopic ?
                                             <ResponsiveContainer height={500}>
-                                                <ComposedChart height={500} data={trend.find(element => { return element.topicId == this.state.selectedTopic.topicId }).trendGraph}
+                                                <ComposedChart height={500} data={selectedTrendGraph}
                                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                                                     <XAxis dataKey="date" tickFormatter={this.formatDate} />
                                                     <YAxis type="number" domain={['auto', 'dataMax']} />
@@ -448,6 +453,7 @@ class Result extends Component {
                                                     <Table.HeaderCell>Sentiment</Table.HeaderCell>
                                                     <Table.HeaderCell>Topic Probability</Table.HeaderCell>
                                                     <Table.HeaderCell>Message</Table.HeaderCell>
+                                                    <Table.HeaderCell>Hashtags</Table.HeaderCell>
                                                     <Table.HeaderCell>Created</Table.HeaderCell>
                                                 </Table.Row>
                                             </Table.Header>
@@ -467,6 +473,7 @@ class Result extends Component {
                                                         <Table.Cell>{tweet.sentiment}</Table.Cell>
                                                         <Table.Cell>{tweet.topicProbability}</Table.Cell>
                                                         <Table.Cell>{tweet.message}</Table.Cell>
+                                                        <Table.Cell>{tweet.hashtags}</Table.Cell>
 
                                                         <Table.Cell>{moment(tweet.created).format("DD-MM-YYYY HH:mm:ss")}</Table.Cell>
                                                     </Table.Row>)

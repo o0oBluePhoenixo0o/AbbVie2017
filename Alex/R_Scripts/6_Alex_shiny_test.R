@@ -1,3 +1,10 @@
+# This is just a small test file for checking out how shiny works
+
+
+# install.package(shiny)
+# install.package(shinyBS)
+# install.package(sentR)
+
 library('shiny')
 library('shinyBS')
 library('sentR')

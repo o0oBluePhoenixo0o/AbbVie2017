@@ -81,7 +81,7 @@ server.use('/graphiql', graphiqlExpress({
 }));
 
 server.get('/ldaresult', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../server/ML/Python/topic/dynamic/lda_tw40_0720.html'));
+    res.sendFile(path.join(__dirname + '/ML/Python/topic/lda/dynamic/lda_tw40_0720.html'));
 });
 
 server.get('/app/*', (req, res) => {
@@ -102,18 +102,18 @@ global.appRoot = __dirname;
 global.sentimentWorker = sentimentWorker;
 global.topicWorker = topicWorker;
 
-/*var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
+var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
 console.log(h20Process);
 h20Process.call();
 logger.log('info', "Wait 2 minutes to let the h2o server start up")
 setTimeout(() => {
     twitterCrawler.start()
     sentimentWorker.start()
-t   opicWorker.start();
+    topicWorker.start();
     //h20Process.kill()
 }, 60000) // wait 1 minute for new tweets to come ine
 
-*/
+
 
 // Gracefully kill the h2o server process
 nodeCleanup(function (exitCode, signal) {

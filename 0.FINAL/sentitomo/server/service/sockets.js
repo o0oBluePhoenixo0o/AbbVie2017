@@ -67,15 +67,16 @@ export function listenToSockets(httpServer) {
                             // Enrich the result of the LDA topic detection with data from the database
                             Tweet.findAll({ where: { id: tweetsIDs }, include: [TweetSentiment] }).then(tweets => {
                                 tweets.forEach((tweet) => {
-                                    var topicTweet = result.find(x => x.key === tweet.id)
+                                    var topicTweet = result.find(x => x.key == tweet.id)
                                     returnTweets.push({
                                         id: tweet.id,
                                         message: tweet.message,
+                                        hashtags: tweet.hashtags,
                                         topicId: topicTweet.id,
                                         topic: topicTweet.topic,
                                         topicProbability: topicTweet.probability,
                                         created: tweet.created,
-                                        sentiment: tweet.TW_SENTIMENT ? tweet.TW_SENTIMENT.sentiment : null
+                                        sentiment: tweet.TW_Sentiment ? tweet.TW_Sentiment.sentiment : null
                                     });
                                 });
 

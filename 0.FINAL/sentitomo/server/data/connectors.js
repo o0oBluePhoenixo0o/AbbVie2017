@@ -94,9 +94,6 @@ const Tweet = db.define('TW_Tweet', {
     hashtags: {
         type: Sequelize.STRING
     },
-    messagePrep: {
-        type: Sequelize.STRING
-    },
     latitude: {
         type: Sequelize.STRING
     },

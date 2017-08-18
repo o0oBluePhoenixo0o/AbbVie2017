@@ -2,7 +2,9 @@ package com.github.alexanderwe.sentiment.types;
 
 
 /**
- * Created by alexanderweiss on 16.07.17.
+ * @author alexanderweiss
+ * @date
+ * Enum class for specifying the sentiment classifier type
  */
 public enum SentimentClassifierType {
 

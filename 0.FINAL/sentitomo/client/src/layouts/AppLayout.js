@@ -84,7 +84,7 @@ class Applayout extends React.Component {
                         <Switch>
                             <Route exact path={match.url + '/dashboard'} component={Dashboard} />
                             <Route path={match.url + '/toolbox'} component={ToolBox} />
-                            <Route path={match.url + '/result'} render={() => <Result data={this.state.result} />} />
+                            <Route path={match.url + '/result'} render={() => <Result data={this.state.result} withLDA />} />
                         </Switch>
                     </Container>
                 </main>

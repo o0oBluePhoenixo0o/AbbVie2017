@@ -1,7 +1,5 @@
 # This files contains methods on preprocessing
 
-install.packages("h2o", type="source", repos="http://h2o-release.s3.amazonaws.com/h2o/rel-weierstrass/1/R")
-
 install.packages("plyr")
 install.packages("dplyr")
 install.packages("tm")
@@ -26,7 +24,6 @@ library(lubridate)
 library(readr)
 library(stringr)
 library(stringi)
-
 
 source("./translateR.R")
 

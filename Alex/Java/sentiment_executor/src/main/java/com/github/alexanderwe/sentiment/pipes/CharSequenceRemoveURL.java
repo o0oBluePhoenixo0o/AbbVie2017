@@ -3,9 +3,19 @@ package com.github.alexanderwe.sentiment.pipes;
 import cc.mallet.types.Instance;
 
 /**
- * Created by alexanderweiss on 16.07.17.
+ * @author alexanderweiss
+ * @date 16.07.17.
+ * Extends the mallet Pipe class to remove URLs from a CharSequence
  */
 public class CharSequenceRemoveURL {
+
+
+    /**
+     * Pipe the instance through the removeUrlFromTokenSequence method
+     * @see CharSequenceRemoveURL#removeUrl(String)
+     * @param carrier The instance
+     * @return Carrier where all URLs are removed from the CharSequence data
+     */
     public Instance pipe (Instance carrier) {
 
         if (carrier.getData() instanceof CharSequence) {
@@ -20,8 +30,13 @@ public class CharSequenceRemoveURL {
     }
 
 
-    private String removeUrl(String commentstr) {
+    /**
+     * Removes all URLs from a string
+     * @param text The text to remove the URLs from
+     * @return String where all URLs are removed
+     */
+    private String removeUrl(String text) {
         String regex = "(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-        return commentstr.replaceAll(regex, "");
+        return text.replaceAll(regex, "");
     }
 }

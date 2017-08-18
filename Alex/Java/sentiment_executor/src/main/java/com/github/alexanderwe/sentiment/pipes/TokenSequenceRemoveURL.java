@@ -8,7 +8,9 @@ import cc.mallet.types.TokenSequence;
 import org.apache.log4j.Logger;
 
 /**
- * Created by alexanderweiss on 16.07.17.
+ * @author alexanderweiss
+ * @date 16.07.17.
+ * Extends the mallet Pipe class to remove URLs from a TokenSequence
  */
 public class TokenSequenceRemoveURL extends Pipe {
 
@@ -16,8 +18,13 @@ public class TokenSequenceRemoveURL extends Pipe {
     private static final Logger log = Logger.getLogger(TokenSequenceRemoveURL.class);
 
 
+    /**
+     * Pipe the instance through the removeUrlFromTokenSequence method
+     * @see TokenSequenceRemoveURL#removeUrlFromTokenSequence(TokenSequence)
+     * @param carrier The instance which carries the data
+     * @return Carrier where all URLs are removed from the TokenSequence data
+     */
     public Instance pipe (Instance carrier) {
-
         if (carrier.getData() instanceof TokenSequence) {
             TokenSequence data = (TokenSequence) carrier.getData();
             carrier.setData(removeUrlFromTokenSequence(data));
@@ -30,6 +37,11 @@ public class TokenSequenceRemoveURL extends Pipe {
     }
 
 
+    /**
+     * Removes any URL from a tokensequence
+     * @param ts TokenSequence
+     * @return TokenSequence with removed URLs
+     */
     private TokenSequence removeUrlFromTokenSequence(TokenSequence ts) {
         String regex = "(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 
@@ -45,8 +57,4 @@ public class TokenSequenceRemoveURL extends Pipe {
         }
         return ret;
     }
-
-
-
-
 }

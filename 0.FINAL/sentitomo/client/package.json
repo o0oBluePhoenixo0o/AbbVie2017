@@ -1,7 +1,11 @@
 {
-  "name": "client",
+  "name": "sentitomo client",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Alexander Weiß",
+    "url": "http://github.com/alexanderwe"
+  },
   "dependencies": {
     "datalib": "^1.8.0",
     "moment": "^2.18.1",

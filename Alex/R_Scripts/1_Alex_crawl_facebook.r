@@ -14,8 +14,8 @@ load("facebook_oauth")
 
 x<-facebook_oauth
 
-#T aken from Trung Nguyen Ngoc Nam(@BluePhoenix1908), added if-statement for checking if page has no posts
 searchFB <- function(key){
+  # Taken from Trung Nguyen Ngoc Nam(@BluePhoenix1908), added if-statement for checking if page has no posts
   # Crawls all medical Facebook pages for a specific keyword and writes the resulting data.frame into a .csv
   #
   # Args:
@@ -28,13 +28,13 @@ searchFB <- function(key){
                              category == "Biotechnology Company"| category =="Medical & Health" |
                              category == "Community" | category == "Interest"),id)
   
-  begin = "2012-01-01"
+  begin = "2012-01-01" # Start date for searching pages
   today = Sys.Date()
   
   # Initiate variables
   
   page_df <- data.frame()
-  # post_df <- data.frame()
+
   comment_df <- data.frame()
   replies_df <- data.frame()
   
@@ -42,21 +42,17 @@ searchFB <- function(key){
   for (i in 1:nrow(pagelist)) {
     target_page <- getPage(pagelist[i,],x,n=10000, since=begin , until = today,
                            feed = TRUE, reactions = TRUE)
-    
     # Adding keyword to table
     if (!empty(target_page)) {
       target_page <- cbind(key = key, target_page)
     }
-    
     page_df <- try(rbind(page_df,target_page))
     
     for (j in 1:nrow(target_page)) {
-      #print(textcat(target_page$message[j]))
       if (is.null(target_page$id[j])) {
         #doNothing
       } else {
         target_post <- getPost(target_page$id[j], n=10000,  x, comments = TRUE, likes = TRUE)
-        #post_df<- try(rbind(post_df,target_post$post))
         comment_df <-try(rbind(comment_df,target_post$comments))
         if (class(comment_df)=="try-error") next;
       }
@@ -98,6 +94,11 @@ searchFB <- function(key){
 
 
 mergeCSVsUTF8 <- function(...){
+  # Merge a list of csv files to one encoded in UTF-8
+  #
+  # Args:
+  #   ...: comma separated filenames
+  
   files <- list(...)
   print(files)
   
@@ -131,6 +132,12 @@ mergeCSVsUTF8 <- function(...){
 }
 
 mergeCSVsUTF16LE <- function(...){
+  
+  # Merge a list of csv files to one encoded in UTF-16LE
+  #
+  # Args:
+  #   ...: comma separated filenames
+  
   files <- list(...)
   print(files)
   

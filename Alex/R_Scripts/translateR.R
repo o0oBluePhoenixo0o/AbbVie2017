@@ -1,4 +1,4 @@
-#File for using text translation services
+# File for using text translation services
 
 #install.packages("httr")
 #install.packages("franc")

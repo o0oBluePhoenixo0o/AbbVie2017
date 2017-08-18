@@ -5,6 +5,7 @@ library(stringi)
 
 
 preprocessTWUpdate <- function(newData, oldData) {
+  
   # 1. delete the first column (just a duplicate of the row numbers)
   # 2. change the 'created.at' date to a standard format
   # 3. convert 'from.user' and 'text' to ASCII format
@@ -12,6 +13,7 @@ preprocessTWUpdate <- function(newData, oldData) {
   #
   # Returns:
   #   new merged dataset
+  
   options(scipen=999)
   # 1.
   newData <- newData[,-1]

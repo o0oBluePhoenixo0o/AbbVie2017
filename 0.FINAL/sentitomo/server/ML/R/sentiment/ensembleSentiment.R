@@ -12,6 +12,7 @@ needs(randomForest)
 needs(h2o)
 needs(tm)
 needs(memisc)
+needs(plyr)
 needs(dplyr)
 needs(data.table)
 needs(stringr)
@@ -90,7 +91,6 @@ if (BL == 0){
   result <- final$Major
   
 } else {
-  require(plyr)
   g <- score.sentiment(TW_df, pos.words, neg.words, .progress='text')
   g <- mutate(g, sentiment = ifelse(g$score > 0, 'Positive', 
                                     ifelse(g$score < 0, 'Negative', 'Neutral')))

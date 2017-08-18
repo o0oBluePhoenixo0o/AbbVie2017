@@ -19,6 +19,8 @@ source('./2_Alex_preprocess.R')
 source('./7_Alex_evaluation.R')
 source('./translateR.R')
 
+
+# Plot the emotions
 plotSyuzhetEmotions <- function(df) {
   sentimentTotals <- data.frame(colSums(df[,c(3:10)]))
   names(sentimentTotals) <- "count"
@@ -29,9 +31,6 @@ plotSyuzhetEmotions <- function(df) {
     theme(legend.position = "none") +
     xlab("Sentiment") + ylab("Total Count") + ggtitle("Total Sentiment Score for All Tweets")
 }
-
-
-
 
 # Sentiment analysis twitter (as we use lexicon based approach we use the stemmed text here)
 
@@ -55,8 +54,6 @@ plot
 
 
 # Model Evaluation
-
-
 tweets.test$message <- sapply(tweets.test$message, removeURL)
 tweets.test$message <- sapply(tweets.test$message, removeTwitterHandles)
 tweets.test$message <- sapply(tweets.test$message, removeTags)
@@ -72,13 +69,9 @@ test.syuzhet <- syuzhet::get_nrc_sentiment(as.character(tweets.test$message_stem
 test.syuzhet <- as.data.frame(test.syuzhet[,9:10])
 test.syuzhet$sent <- ifelse((test.syuzhet$positive - test.syuzhet$negative) == 0, "neutral", ifelse(test.syuzhet$positive - test.syuzhet$negative > 0 , "positive", "negative"))# translate sentiments back to the original training data
 
-
 message("syuzhet")
 confusionMatrix(tweets.test$sentiment, test.syuzhet$sent)
 test.syuzhet$sent <- ifelse((test.syuzhet$positive - test.syuzhet$negative) == 0, "pred_neutral", ifelse(test.syuzhet$positive - test.syuzhet$negative > 0 , "pred_positive", "pred_negative"))# translate sentiments back to the original training data
-
-
-
 
 # Evlauation
 cm = as.matrix(table(tweets.test$sentiment,test.syuzhet$sent))

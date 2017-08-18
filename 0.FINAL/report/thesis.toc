@@ -1,0 +1,22 @@
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}Problem Statement}{2}
+\contentsline {section}{\numberline {1.2}Contribution}{3}
+\contentsline {section}{\numberline {1.3}Related Work}{4}
+\contentsline {chapter}{\numberline {2}Theoretical Framework}{5}
+\contentsline {section}{\numberline {2.1}Preliminaries}{6}
+\contentsline {section}{\numberline {2.2}The Good}{7}
+\contentsline {section}{\numberline {2.3}The Evil}{9}
+\contentsline {section}{\numberline {2.4}Differences and Similarities}{11}
+\contentsline {chapter}{\numberline {3}Algorithms}{13}
+\contentsline {section}{\numberline {3.1}Computing the Good}{13}
+\contentsline {section}{\numberline {3.2}Computing the Evil}{14}
+\contentsline {section}{\numberline {3.3}Diagnosis}{15}
+\contentsline {chapter}{\numberline {4}Experimental Evaluation}{18}
+\contentsline {section}{\numberline {4.1}Settings}{19}
+\contentsline {section}{\numberline {4.2}Experiments}{20}
+\contentsline {section}{\numberline {4.3}Results}{21}
+\contentsline {chapter}{\numberline {5}Conclusion}{24}
+\contentsline {section}{\numberline {5.1}Summary}{25}
+\contentsline {section}{\numberline {5.2}Future Work}{26}
+\contentsline {chapter}{\numberline {A}Program Code / Resources}{28}
+\contentsline {chapter}{\numberline {B}Further Experimental Results}{29}
