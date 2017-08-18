@@ -26,9 +26,7 @@ import FacebookCrawler from './service/FacebookCrawler';
 import TopicWorker from './service/TopicWorker';
 import SentimentWorker from './service/SentimentWorker';
 import { listenToSockets } from './service/sockets';
-
-import { detectSentiment, detectSentimentEnsembleR, detectTopicLDADynamic, detectTopicLDAStatic, detectTopicLDAStaticBatch, detectTrends } from './ML/ml_wrapper';
-import { Java, JavaShell, PythonShell } from './util/foreignCode';
+import { JavaShell } from './util/foreignCode'
 var nodeCleanup = require('node-cleanup');
 
 

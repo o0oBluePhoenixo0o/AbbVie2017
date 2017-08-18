@@ -1032,21 +1032,19 @@ When the application is started, the front-end is available at [localhost:8080/a
 
 __Server start__:
 
-![Server Start Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/server_startup_sequence.png)
+![Server Start Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/sequence_diagrams/img/server_startup_sequence.png)
 
 __Twitter Crawl__:
 
-![Twitter Crawl Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/twitter_crawl_sequence.png)
+![Twitter Crawl Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/sequence_diagrams/img/twitter_crawl_sequence.png)
 
 __Topic Detection__:
 
-![Topic Detection Worker Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/topic_detection_worker_sequence.png)
+![Topic Detection Worker Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/sequence_diagrams/img/topic_detection_worker_sequence.png)
 
 __Sentiment Detection__:
 
-![Sentiment Detection Worker Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/sentiment_detection_worker_sequence.png)
-
-
+![Sentiment Detection Worker Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/sequence_diagrams/img/sentiment_detection_worker_sequence.png)
 
 ## Conclusion
 

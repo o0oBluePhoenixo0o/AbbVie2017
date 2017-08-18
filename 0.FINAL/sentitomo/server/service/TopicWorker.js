@@ -72,7 +72,6 @@ export default class TopicWorker {
                         var topicArray = await detectTopicLDAStaticBatch(filename);
                         var topicArrayObj = JSON.parse(topicArray);
                         for (let topicObj of topicArrayObj) {
-                            console.log(topicObj)
                             await TweetTopic.upsert({
                                 id: topicObj.key,
                                 topicId: topicObj.id,
