@@ -99,18 +99,18 @@ http.listen(GRAPHQL_PORT, () => logger.log('info',
 global.appRoot = __dirname;
 global.sentimentWorker = sentimentWorker;
 global.topicWorker = topicWorker;
-
-var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
+twitterCrawler.start()
+/*var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
 console.log(h20Process);
 h20Process.call();
 logger.log('info', "Wait 2 minutes to let the h2o server start up")
 setTimeout(() => {
-    twitterCrawler.start()
-    sentimentWorker.start()
-    topicWorker.start();
+    
+    //sentimentWorker.start()
+    //topicWorker.start();
     //h20Process.kill()
 }, 60000) // wait 1 minute for new tweets to come ine
-
+*/
 
 
 // Gracefully kill the h2o server process

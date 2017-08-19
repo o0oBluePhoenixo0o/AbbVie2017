@@ -71,15 +71,35 @@ function stripHTMLTags(text) {
 }
 
 /**
- * @function extractHashTags
+ * @function extractHashTagsFromString
  * @param  {String} text A string containing hashtags
- * @description Extract every hashtag from a given text. Returns a concatenated string of those.
+ * @description Extract every hashtag from a given text. Returns a concatenated string of those separated by ','
  * @return {String} Concatenated string with hashtags, separated by ','
  */
-function extractHashTags(text) {
+function extractHashTagsFromString(text) {
     var matches = text.match(/\B\#\w\w+\b/g);
-    return matches ? matches.filter((element, index, array) => index === array.indexOf(element)).join(",") : null; // Filter array to have uniques and join them by ","
+    return matches ? matches.filter((element, index, array) => index === array.indexOf(element)).join(',').replace('#', '') : null; // Filter array to have uniques and join them by ","*/
 }
+
+/**
+ * @function extractHashtagsFromTweet
+ * @param  {Object} hashtags Hashtags pbject from the Twitter API
+ * @description Extract every hashtag from a given Twitter API hashtags object. Returns a concatenated string of those separated by ','
+ * @return {String} Concatenated string with hashtags, separated by ','
+ */
+function extractHashtagsFromTweet(hashtags) {
+    var tags = new Array();
+
+    hashtags.forEach((hashtag) => {
+        tags.push(hashtag.text);
+    }, this);
+    if (hashtags.length == 0) {
+        return null;
+    } else {
+        return tags.join(',');
+    }
+}
+
 
 function importTweetCsv(csvFile) {
 
@@ -166,4 +186,4 @@ function importTweetCsv(csvFile) {
 
 }
 
-export { extractHashTags, occurrences, getKeyword, stripHTMLTags, importTweetCsv }
+export { extractHashTagsFromString, extractHashtagsFromTweet, occurrences, getKeyword, stripHTMLTags, importTweetCsv }

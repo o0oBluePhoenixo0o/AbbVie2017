@@ -105,7 +105,7 @@ const renderTopicLegend = (props) => {
                 payload.map((entry, index) => {
                     return (&lt;List.Item key={`item-${index}`} onClick={() => props.onClick(entry.payload.payload)}>
                         &lt;Label style={{ background: entry.color }} horizontal />
-                        {entry.payload.payload.topic}
+                        {entry.payload.payload.topic ? entry.payload.payload.topic : "Null"}
                     &lt;/List.Item>)
 
                 })
@@ -219,7 +219,13 @@ class Result extends Component {
         copy.forEach((obj, index, array) => {
             array[index].created = new Date(array[index].created).setHours(0, 0, 0, 0)
         })
+
+        console.log(copy);
+
         var myData = dl.read(copy, { type: 'json', parse: 'auto' });
+        console.log(dl.groupby(['created'])
+            .summarize({ 'created': 'count' })
+            .execute(myData))
         return (dl.groupby(['created'])
             .summarize({ 'created': 'count' })
             .execute(myData));
@@ -289,19 +295,25 @@ class Result extends Component {
      * @return {String} Date string encoded on "DD-MM-YYYY"
      */
     formatDate = (data) => {
-        return moment(data).format("DD-MM-YYYY");
+        return moment(new Date(data)).format("DD-MM-YYYY");
     }
 
     render() {
-        const { html } = this.props;
-        const result = myArray;
+        const { data, withLDA } = this.props;
         const { selectedTopic, selectedSentiment } = this.state;
 
-        var aggregatedTopics = null;
-        var aggregateSentiment = null;
-        var aggregateDate = null;
 
-        if (result) {
+
+        if (data) {
+
+            console.log(data);
+            const result = data.tweets;
+            const trend = data.trend;
+
+            var aggregatedTopics = null;
+            var aggregateSentiment = null;
+            var aggregateDate = null;
+            var selectedTrendGraph = null;
             aggregatedTopics = this.aggregateTopics(result.slice()).sort((a, b) => { return a.count - b.count });
 
             var colors = randomColor({
@@ -314,19 +326,23 @@ class Result extends Component {
 
                 if (selectedSentiment) {
                     aggregateSentiment = this.aggregateSentiment(result.slice().filter(element => {
-                        return element.topicId === selectedTopic.topicId &amp;&amp; element.sentiment === selectedSentiment.sentiment
+                        return element.topicId == selectedTopic.topicId &amp;&amp; element.sentiment == selectedSentiment.sentiment
                     }));
 
                     aggregateDate = this.aggregateDate(result.slice().filter(element => {
-                        return element.topicId === selectedTopic.topicId &amp;&amp; element.sentiment === selectedSentiment.sentiment
+                        return element.topicId == selectedTopic.topicId &amp;&amp; element.sentiment == selectedSentiment.sentiment
                     }))
                 } else {
+
+                    var trendDetail = trend.find(element => { return element.topicId == this.state.selectedTopic.topicId });
+                    var selectedTrendGraph = trendDetail ? trendDetail.trendGraph : null;  // If the selected topic has an trend graph, return it, if not set the value to null
+
                     aggregateSentiment = this.aggregateSentiment(result.slice().filter(element => {
-                        return element.topicId === selectedTopic.topicId
+                        return element.topicId == selectedTopic.topicId
                     }));
 
                     aggregateDate = this.aggregateDate(result.slice().filter(element => {
-                        return element.topicId === selectedTopic.topicId
+                        return element.topicId == selectedTopic.topicId
                     }))
                 }
             }
@@ -361,8 +377,8 @@ class Result extends Component {
                                 &lt;Card fluid className="result">
                                     &lt;Card.Content header={"Sentiments in topic"} />
                                     &lt;Card.Content className={'card-body'}>
-                                        {this.state.selectedTopic ?
-                                            &lt;ResponsiveContainer height={500}>
+                                        {this.state.selectedTopic &amp;&amp; aggregateSentiment.length > 0 ?
+                                            &lt; ResponsiveContainer height={500}>
                                                 &lt;PieChart>
                                                     &lt;Pie data={aggregateSentiment} dataKey="count" fill="#8884d8" label onClick={(entry, index) => this.onSentimentCellClick(entry, index)} >
                                                         {
@@ -375,15 +391,15 @@ class Result extends Component {
                                                     &lt;Legend content={renderSentimentLegend} style={{ maxHeight: "250px !important", overflow: "auto" }} onClick={this.onLegendClick} />
                                                 &lt;/PieChart>
                                             &lt;/ResponsiveContainer >
-                                            : ""}
+                                            : "No sentiment values in data"}
                                     &lt;/Card.Content>
                                 &lt;/Card>
                             &lt;/Grid.Column>
                             &lt;Grid.Column mobile={16} tablet={2} computer={2}>
-                                &lt;Segment raised style={{ position: "fixed", marginRight: "2em" }}>
+                                &lt;Segment raised style={{ position: "fixed", marginRight: "2em", zIndex: "100" }}>
                                     &lt;List>
-                                        &lt;List.Item>&lt;strong>Topic:&lt;/strong> {selectedTopic ? selectedTopic.topic : null}&lt;/List.Item>
-                                        &lt;List.Item>&lt;strong>Sentiment:&lt;/strong> {selectedSentiment ? selectedSentiment.sentiment : null}&lt;/List.Item>
+                                        &lt;List.Item>&lt;strong>Topic:&lt;/strong> {selectedTopic ? selectedTopic.topic : "Null"}&lt;/List.Item>
+                                        &lt;List.Item>&lt;strong>Sentiment:&lt;/strong> {selectedSentiment ? selectedSentiment.sentiment : "Null"}&lt;/List.Item>
                                     &lt;/List>
                                     &lt;a href="#" onClick={() => this.resetSelection()}>Reset&lt;/a>
                                 &lt;/Segment>
@@ -399,7 +415,7 @@ class Result extends Component {
                                                 &lt;ComposedChart height={500} data={aggregateDate}
                                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                                                     &lt;XAxis dataKey="created" tickFormatter={this.formatDate} />
-                                                    &lt;YAxis />
+                                                    &lt;YAxis type="number" domain={['auto', 'auto']} />
                                                     &lt;CartesianGrid />
                                                     &lt;Tooltip />
                                                     &lt;Legend />
@@ -417,8 +433,28 @@ class Result extends Component {
                                     &lt;/Card.Content>
                                 &lt;/Card>
                             &lt;/Grid.Column>
+                            &lt;Grid.Column mobile={16} tablet={16} computer={7}>
+                                &lt;Card fluid className="result">
+                                    &lt;Card.Content header={"Possion"} />
+                                    &lt;Card.Content className={'card-body'}>
+                                        {this.state.selectedTopic ?
+                                            &lt;ResponsiveContainer height={500}>
+                                                &lt;ComposedChart height={500} data={selectedTrendGraph}
+                                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                                                    &lt;XAxis dataKey="date" tickFormatter={this.formatDate} />
+                                                    &lt;YAxis type="number" domain={['auto', 'dataMax']} />
+                                                    &lt;CartesianGrid />
+                                                    &lt;Tooltip />
+                                                    &lt;Legend />
+                                                    &lt;Line type="monotone" dataKey="poisson" stroke="#8884d8" />
+                                                &lt;/ComposedChart>
+                                            &lt;/ResponsiveContainer >
+                                            : ""}
+                                    &lt;/Card.Content>
+                                &lt;/Card>
+                            &lt;/Grid.Column>
                         &lt;/Grid.Row>
-                        &lt;Grid.Row>
+                        {withLDA ? &lt;Grid.Row>
                             &lt;Grid.Column mobile={16} tablet={14} computer={14}>
                                 &lt;Card fluid>
                                     &lt;Card.Content>
@@ -429,7 +465,7 @@ class Result extends Component {
                                     &lt;/Card.Content>
                                 &lt;/Card>
                             &lt;/Grid.Column>
-                        &lt;/Grid.Row>
+                        &lt;/Grid.Row> : null}
                         &lt;Grid.Row>
                             &lt;Grid.Column mobile={16} tablet={14} computer={14}>
                                 &lt;Card fluid className="result">
@@ -445,6 +481,7 @@ class Result extends Component {
                                                     &lt;Table.HeaderCell>Sentiment&lt;/Table.HeaderCell>
                                                     &lt;Table.HeaderCell>Topic Probability&lt;/Table.HeaderCell>
                                                     &lt;Table.HeaderCell>Message&lt;/Table.HeaderCell>
+                                                    &lt;Table.HeaderCell>Hashtags&lt;/Table.HeaderCell>
                                                     &lt;Table.HeaderCell>Created&lt;/Table.HeaderCell>
                                                 &lt;/Table.Row>
                                             &lt;/Table.Header>
@@ -452,9 +489,9 @@ class Result extends Component {
                                             &lt;Table.Body>
                                                 {result.slice().filter(element => {
                                                     if (this.state.selectedSentiment) {
-                                                        return (element.topicId === selectedTopic.topicId &amp;&amp; element.sentiment === selectedSentiment.sentiment)
+                                                        return (element.topicId == selectedTopic.topicId &amp;&amp; element.sentiment == selectedSentiment.sentiment)
                                                     } else {
-                                                        return (element.topicId === selectedTopic.topicId)
+                                                        return (element.topicId == selectedTopic.topicId)
                                                     }
 
                                                 }).slice().map(tweet => {
@@ -464,6 +501,7 @@ class Result extends Component {
                                                         &lt;Table.Cell>{tweet.sentiment}&lt;/Table.Cell>
                                                         &lt;Table.Cell>{tweet.topicProbability}&lt;/Table.Cell>
                                                         &lt;Table.Cell>{tweet.message}&lt;/Table.Cell>
+                                                        &lt;Table.Cell>{tweet.hashtags}&lt;/Table.Cell>
 
                                                         &lt;Table.Cell>{moment(tweet.created).format("DD-MM-YYYY HH:mm:ss")}&lt;/Table.Cell>
                                                     &lt;/Table.Row>)
@@ -491,7 +529,7 @@ class Result extends Component {
 
 Result.propTypes = {
     /** {Array} Array with the result containing the dynamic topic detection*/
-    result: PropTypes.Array,
+    result: PropTypes.array,
 }
 
 export default Result;</code></pre>
@@ -510,7 +548,7 @@ export default Result;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Tue Aug 15 2017 16:47:43 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Sat Aug 19 2017 18:09:55 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>
