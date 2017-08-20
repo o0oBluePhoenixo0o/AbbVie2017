@@ -200,10 +200,6 @@ preprocess_remove_null <- preprocess_mid[preprocess_mid$pre_message!='',]
 preprocess_remove_blank <- preprocess_remove_null[preprocess_remove_null$pre_message!=' ',]
 
 
-# Change colunm name
-colnames(preprocess_remove_blank)<- c("id","created_time","message","pre_message")
-
-
 # Change the data type to fit the doc-term matrid function
 preprocess_final <- unlist(as.data.frame(preprocess_remove_blank$pre_message))
 
