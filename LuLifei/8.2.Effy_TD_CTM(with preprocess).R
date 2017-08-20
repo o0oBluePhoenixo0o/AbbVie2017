@@ -26,7 +26,7 @@ library(stringr)
 
 
 
-# Pre-Processing
+
 # Load in data #######################################################################################
 # Read in preprocess_df
 df <- read.csv(file.choose(), encoding = "UTF-8", header = TRUE, sep = ",")
@@ -34,7 +34,6 @@ df <- read.csv(file.choose(), encoding = "UTF-8", header = TRUE, sep = ",")
 
 # Select message to do the preprocessing
 preprocess_df <- df$message
-
 
 
 
@@ -52,26 +51,38 @@ removeURL <- function(x) gsub("http[^[:space:]]*","",x)
 myCorpus <- tm_map(myCorpus,content_transformer(removeURL))
 
 
+# Add extra stop words
+myStopwords <- c(stopwords("SMART"),"rt","via","amp","aa","ra","im","ad","dr","dont","th","today","oz","tb",
+                 "mit","der","von","ist","und","ein",
+                 "day","year","time","today",
+                 "abbv","abbvies","amgn","boris","bmy","bristolmyers","johnson","rheum","llc","inc",
+                 "abbvie","amgen","adalimumab","ankylosing","spondylitis",
+                 "bristol","myers","enbrel","hepatitis","humira","trilipix",
+                 "ibrutinib","imbruvica","johnson","psoriasis","rheumatoid","arthritis"
+                 )
+# Remove stopwords from corpus
+myCorpus <- tm_map(myCorpus,removeWords,myStopwords)
+
+
 # Remove anything other than English letters or space
 removeNumPunct <-function(x) gsub("[^[:alpha:][:space:]]*","",x)
 myCorpus <- tm_map(myCorpus,content_transformer(removeNumPunct))
 
 
-# Add extra stop words
-myStopwords <- c(stopwords("SMART"),"rt","via","amp","aa","ra","und","im")
-# Remove "r" and "big" from stopwords
-#myStopwords <- setdiff(myStopwords,c("r","big"))
-# Remove stopwords from corpus
-myCorpus <- tm_map(myCorpus,removeWords,myStopwords)
-
-
-# Remove words which have less than 3 characters
-removeWords <- function(x) gsub('\\b\\w{1,3}\\b','',x)
-myCorpus <- tm_map(myCorpus,removeWords)
-
-
 # Remove extra whitespace
 myCorpus <- tm_map(myCorpus,stripWhitespace)
+
+
+# Stemming
+lemma_dictionary <- make_lemma_dictionary(myCorpus$content, engine = 'hunspell')
+for(i in 1:length(myCorpus))
+{
+  myCorpus$content[[i]] <- lemmatize_strings(myCorpus$content[[i]], dictionary = lemma_dictionary)
+}
+
+
+# Remove stopwords from corpus again
+myCorpus <- tm_map(myCorpus,removeWords,myStopwords)
 
 
 # Change list--"myCorpus" into data frame
@@ -80,6 +91,7 @@ preprocess_begining <- do.call(rbind, lapply(myCorpus, data.frame, stringsAsFact
 
 # Rename the column
 colnames(preprocess_begining)<- c("pre_message")
+
 
 
 # Change the data type after pre preprocessing to fit the doc-term matrix function ################
