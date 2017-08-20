@@ -1,22 +1,15 @@
 
 
 
-
-
-# CTM topic model 
-
-
-
-
 # Install packages #####################################################################################
 # Use install.packages("package") to install packages which are needed in this program
-#install.packages("NLP")
-#install.packages("tm")
-#install.packages("RcolorBrewer")
+install.packages("NLP")
+install.packages("tm")
+install.packages("RcolorBrewer")
 install.packages("topicmodels")
-#install.packages("SnowballC")
+install.packages("SnowballC")
 install.packages("text2vec")
-#install.packages("stringr")
+install.packages("stringr")
 install.packages("textstem")
 install.packages("openNLP")
 install.packages("koRpus")
@@ -43,6 +36,9 @@ library(koRpus)
 
 # Read in preprocess_df
 df <- read.csv(file.choose(), encoding = "UTF-8", header = TRUE, sep = ",")
+
+
+# Select english tweets only
 df <- df[df$Language=="eng",]
 
 
@@ -226,102 +222,6 @@ vocab <- create_vocabulary(it_df)%>%
   prune_vocabulary(term_count_min = 50, doc_proportion_min = 0.001)
 vectorizer <- vocab_vectorizer(vocab)
 dtm <- create_dtm(it_df, vectorizer)
-
-
-
-# Modeling ####################################################################################
-# Modeling
-k=40
-models <- list(
-  CTM       = CTM(dtm, k = k, 
-                  control = list(estimate.beta = TRUE,
-                                 verbose = 1,
-                                 prefix = tempfile(),
-                                 save = 0,
-                                 keep = 0,
-                                 seed = as.integer(Sys.time()), 
-                                 nstart = 1L, 
-                                 best = TRUE,
-                                 var = list(iter.max = 50, tol = 10^-5), 
-                                 em = list(iter.max = 100, tol = 10^-3),
-                                 initialize = "random",
-                                 cg = list(iter.max = 1000, tol = 10^-4)
-                                 )
-                )
-  #LDA       = LDA(dtm, k = k, control = list(seed = SEED))
-  #VEM_Fixed = LDA(dtm, k = k, control = list(estimate.alpha = FALSE, seed = SEED)),
-  #Gibbs     = LDA(dtm, k = k, method = "Gibbs", control = list(seed = SEED, burnin = 1000,
-  #                                                            thin = 100,    iter = 1000)) 
-)
-
-
-
-# Write topics out ######################################################################################
-# Write topics into data fram
-m = 15
-topic_terms <- t(as.data.frame(lapply(models, terms, m)))
-topic_names <- as.data.frame(rownames(topic_terms))
-topic_fram <- t(as.data.frame(cbind(topic_names,topic_terms)))
-topic_fram <- topic_fram[-1,]
-colnames(topic_fram) <- c(1:k)
-
-
-# Combine terms into 1 string for each topic
-for(i in 1:k)
-{
-  topic_fram[,i] <- as.String(as.matrix(topic_fram[,i]))
-}
-topic <- as.data.frame(topic_fram[1,])
-for(i in 1:k)
-{
-  topic[i,1] <- as.character(topic[i,1])
-}
-colnames(topic) <- c("CTM.Topic")
-
-
-
-# Assing topic to each tweet ###############################################################################
-# Matrix of tweet assignments to predominate topic on that tweet for each of the models
-assignments <- as.data.frame(sapply(models, topics))
-assignments_change <- as.matrix(assignments)
-
-
-# Sign each message a string topic
-for(i in 1:length(preprocess_final))
-{
-  assignments_change[i,1] <- as.character(topic[(assignments_change[i,1]),1])
-}
-
-
-
-# Find the probability score for most relevant topic
-topic_score <- as.matrix(models$CTM@gamma)
-probability <- as.data.frame(apply(topic_score,1,max))
-
-
-
-
-
-
-# Final result ######################################################################################
-# Build the data fram for messages and topics
-topicmodel <- cbind(as.data.frame(preprocess_remove_blank$`df$Id`), 
-                    as.data.frame(preprocess_remove_blank$`df$created_time`), 
-                    as.data.frame(preprocess_remove_blank$`df$message`), 
-                    as.data.frame(assignments),
-                    as.data.frame(probability),
-                    assignments_change)
-
-
-# Change the columns name
-colnames(topicmodel) <- c("id","created_time","message","topic_id","topic")
-
-
-
-# Random select 1000 tweets
-spliter <- sample(1:length(topicmodel[ ,1]),1000)
-manCheck <- topicmodel[spliter, ]
-write.csv(manCheck,"LableingSet.csv")
 
 
 
