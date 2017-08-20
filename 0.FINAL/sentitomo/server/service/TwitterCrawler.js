@@ -6,7 +6,7 @@ import {
     TweetSentiment,
     TweetTopic
 } from '../data/connectors';
-import { getKeyword, stripHTMLTags, extractHashTags } from '../util/utils';
+import { getKeyword, stripHTMLTags, extractHashtagsFromTweet } from '../util/utils';
 import { preprocessTweetMessage } from '../ML/preprocess.js';
 import { detectSentimentEnsembleR, detectSarcasmSync, detectTopicLDAStatic, detectSentimentEnsemblePythonSync } from '../ML/ml_wrapper.js';
 import logger from './logger.js';
@@ -109,12 +109,14 @@ export default class TwitterCrawler {
         this.client.stream(
             'statuses/filter', {
                 track: filters,
-                tweet_mode: 'extended'
+                tweet_mode: 'extended'/*
+                filter_level: 'medium'*/
             },
             stream => {
                 stream.on('data', event => {
                     if (event.lang == 'en') {
-                        logger.log('info', 'New tweet, insert author, then tweet, then sentiment, then wait for topic worker to get the topic')
+                        /*logger.log('debug', 'Message: ' + event.text)
+                        logger.log('debug', 'Extended tweet: ' + (event.extended_tweet ? event.extended_tweet.full_text : 'No extended tweet'));*/
                         TweetAuthor.upsert({
                             id: event.user.id,
                             username: event.user.name,
@@ -131,7 +133,7 @@ export default class TwitterCrawler {
                                     id: event.id,
                                     keywordType: 'Placeholder',
                                     keyword: getKeyword(
-                                        event.text,
+                                        event.extended_tweet ? event.extended_tweet.full_text : event.text,
                                         filters
                                     ),
                                     created: event.created_at,
@@ -143,8 +145,8 @@ export default class TwitterCrawler {
                                     source: stripHTMLTags(
                                         event.source
                                     ),
-                                    message: event.text,
-                                    hashtags: extractHashTags(event.text),
+                                    message: event.extended_tweet ? event.extended_tweet.full_text : event.text,
+                                    hashtags: extractHashtagsFromTweet(event.entities.hashtags),
                                     latitude: event.coordinates ? event.coordinates[0] : null,
                                     longitude: event.coordinates ? event.coordinates[1] : null,
                                     retweetCount: event.retweet_count,
@@ -154,61 +156,10 @@ export default class TwitterCrawler {
                                         true : false,
                                     retweeted: event.retweeted
                                 }).then(tweet => {
-                                    console.log(tweet);
+                                    logger.log('debug', 'Inserted tweet: ' + tweet.message);
                                 });
-
-                                /*
-                            detectSentimentEnsembleR(event.text.replace(/\n|\r/g, ' ').trim())
-                                .then(sentiment => {
-                                    logger.log('info', 'The tweet is: ' + event.text.replace(/\n|\r/g, ' ').trim())
-                                    logger.log('info', 'The callback sentiment is: ' + sentiment.trim())
-                                    var sarcasticValue = detectSarcasmSync(event.text)
-                                    logger.log('info', 'The sarcasm is: ' + sarcasticValue)
-                                    var ensemblePython = detectSentimentEnsemblePythonSync(event.text).trim()
-                                    logger.log('info', 'The python ensemble is: ' + ensemblePython)
-
-                                    author.createTW_Tweet({
-                                        id: event.id,
-                                        keywordType: 'Placeholder',
-                                        keyword: getKeyword(
-                                            event.text,
-                                            filters
-                                        ),
-                                        created: event.created_at,
-                                        createdWeek: moment(
-                                            event.created_at, 'dd MMM DD HH:mm:ss ZZ YYYY', 'en'
-                                        ).week(),
-                                        toUser: event.in_reply_to_user_id,
-                                        language: event.lang,
-                                        source: stripHTMLTags(
-                                            event.source
-                                        ),
-                                        message: event.text,
-                                        hashtags: extractHashTags(event.text),
-                                        latitude: event.coordinates ? event.coordinates[0] : null,
-                                        longitude: event.coordinates ? event.coordinates[1] : null,
-                                        retweetCount: event.retweet_count,
-                                        favorited: event.favorited,
-                                        favoriteCount: event.favorite_count,
-                                        isRetweet: event.retweeted_status ?
-                                            true : false,
-                                        retweeted: event.retweeted,
-                                        TW_Sentiment: {
-                                            sentiment: sentiment.toLowerCase().trim(), // remove whitespaces and line breaks
-                                            sarcastic: sarcasticValue,
-                                            rEnsemble: sentiment.toLowerCase().trim(), // remove whitespaces and line breaks
-                                            pythonEnsemble: ensemblePython, // remove whitespaces and line breaks
-                                        }
-                                    }, {
-                                            logging: console.log,
-                                            include: [{
-                                                association: Tweet.Sentiment
-                                            }]
-                                        })
-                                })*/
                             })
                         }).catch(error => {
-                            console.log(error);
                             logger.log('error', error);
                             if (error.code == 'ER_DUP_ENTRY') { // user exists
 

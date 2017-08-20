@@ -3,7 +3,30 @@
 % the printed version in the accordant format
 \documentclass[11pt,titlepage,oneside,openany]{book}
 \usepackage{times}
+\usepackage[
+    backend=biber,
+    style=numeric,
+]{biblatex}
+ 
+\addbibresource{./bib/biblopgraphy.bib}
 
+\usepackage[acronym]{glossaries}
+\newacronym{api}{API}{Application Programming Interface}
+\newacronym{http}{HTTP}{Hypertext Transfer Protocol}
+\newacronym{rest}{REST}{Representational State Transfer }
+\makeglossaries
+
+
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    frame=single, % adds a frame around the code
+    xleftmargin=3.4pt,
+    xrightmargin=3.4pt,
+    breaklines=true
+}
+
+\usepackage{comment}
 
 \usepackage{graphicx}
 \usepackage{latexsym}
@@ -69,20 +92,25 @@
 \begin{titlepage}
 	\vspace*{2cm}
   \begin{center}
-   {\Large The Extremes of Good and Evil\\}
+   {\Large Topic Monitoring in the Pharmaceutical Industry\\}
    \vspace{2cm} 
-   {Master Thesis\\}
+   {Master Team Project\\}
    \vspace{2cm}
    {presented by\\
-    Earl Hickey \\
-    Matriculation Number 9083894\\
+    Hailian Hou (123456789)\\
+    Chia-Chien Hung (123456789)\\
+    Lu Lifei (123456789)\\
+    Olga Pogorelaya (123456789)\\
+    Ngoc Nam Trung Nguyen (123456789) \\
+    Md. Raziul Hasan Al Tariq (123456789)\\
+    Alexander Wei{\ss} (123456789)\\
    }
    \vspace{1cm} 
    {submitted to the\\
     Data and Web Science Group\\
-    Prof.\ Dr.\ Right Name Here\\
+    Prof.\ Dr.\ Heiko Paulheim\\
     University of Mannheim\\} \vspace{2cm}
-   {August 2014}
+   {August 2017}
   \end{center}
 \end{titlepage} 
 
@@ -95,6 +123,8 @@
 \listoffigures
 
 \listoftables
+
+\printglossary[type=\acronymtype,style=long, nonumberlist]
 
 % evntuelly you might add something like this
 % \listtheorems{definition}
@@ -109,295 +139,263 @@
 \chapter{Introduction}
 \label{cha:intro}
 
-Most of the text in this example of a master thesis is quote from 'The Extremes of Good and Evil' (Cicero). Besides this text you find some usage examples in the following sections.
+Today in 2017 social media is ubiquitous and is taken for granted in our day-to-day life. Nearly every single shop in the city to large companies own social media accounts to communicate with customers or try to engage new ones. The number of active users on the biggest social media platforms is tremendously high. On Facebook we have around 1.871 million active users as of January 2017. Whatsapp and Facebook messenger share the number of 1.000 million active users. For Twitter in comparison to Facebook, the numbers may seem small but with 317 million active users it belongs to the biggest social media platform of our time.~\cite{Chaffey2017-04-27}
+\newline More than ever people share their thoughts about current global events like conflicts between different countries, political events, terrorism, rising diseases as well as the opinions to companies and products. 
+For companies nowadays it is easier than ever to find out what customer think and talk about their company and products. With Twitter we have one the highest reactive social media platforms of our time. Almost instantly people write messages (tweet) to react accordingly to new events in the world. Due to this fact companies try to effectively monitor Twitter and other platforms to get insights into the current customer situation regarding their product and company reputation.
+In the course of the ‘Master Team Project - Topic monitoring in the pharmaceutical industry’ of University of Mannheim for Master Data Science and Master Business informatics students, this work especially focuses on the monitoring of social media for the pharmaceutical context. It is processed in cooperation with AbbVie Inc. located in Ludwigshafen, Germany, a pharmaceutical company focused on both biopharmaceuticals and small molecule drugs. The goal of this project is to find efficient and effective ways to retrieve data from different social media platforms to analyze sentiments, public opinions, emotions towards different events, find suitable topics and detect rising trends in social media. To accomplish this task, this work utilizes different machine learning algorithms to detect the requested features in the messages of users. The declared aim is to find a good combination of different of those algorithms to provide reliable results and findings so that especially AbbVie can use and incorporate them into their attempt to monitor social media.
+\newline This report describes how to gather data from different social media platforms and what restrictions will apply to them. It focuses on Facebook and Twitter, because this selection covers the most used and the most reactive social media platform today. Furthermore it deals with different machine learning algorithms, explains how they could be applied to different use cases and suggests situation when and how to use them. 
 
-\begin{itemize}
-	\item A table can be found in Section \ref{sec:results}. This example (Table \ref{tab:confonly}) is only a suggestion. You are allowed to format your tables in your preferred style.
-	\item An example of an algorithm is depicted in Section \ref{sec:diag}. Again, you are allowed to use a different style for algorithms, but the style we used to display Algorithm \ref{alg:efficient-lod} looks quite nice.
-	\item Chapter \ref{cha:intro} demontrates how to refer to chapters and algorithms and other elements of your thesis.
-	\item You should always place definitions, propositions, and whatever might be useful in an appropriate environment.  Examples can be found in section \ref{sec:prelim}.
-\end{itemize}
 
-The structure of this draft is \emph{non-binding}. The structure of your thesis - the breakup in chapters, sections, and so on - highly depends on the chosen topic and should be discussed with your adviser. In this draft we made no use of subsections. While subsections might make sense in your own thesis, we believe that subsubsections should be avoided if possible. Notice that we did not break up this template in different parts using the command \verb|\part{}|. It depends on your own style and your work wether to use this option.
-
-If you cite something, do it in the following way. 
-\begin{itemize}
-	\item Conference Proceedings: This problem is typically addressed by approaches for selecting the optimal matcher based on the nature of the matching task and the known characteristics of the different matching systems. Such an approach is described in \cite{mochol08matcher}.
-	\item Journal Article: S-Match, described in \cite{giunchiglia2008semanticmatching}, employs sound and complete reasoning procedures. Nevertheless, the underlying semantic is restricted to propositional logic due to the fact that ontologies are interpreted as tree-like structures.
-	\item Book: According to Euzenat and Shvaiko \cite{euzenat07matcherbook}, we define a correspondence as follows.
-\end{itemize}
-These are some randomly chosen examples from other works. Take a look at the end of this thesis so see how the bibliography is included.
-
-In this examples thesis you will find two chapters in the appendix. Appendix \ref{cha:appendix-a} describes the program code that might have been part of your work. It depends of the type of work wether such an appendix makes sense. Appendix \ref{cha:appendix-b} contains some additional experimental results. It might happen that most of your experimental results are presented in aggregated form; a complete listing of detailed results in the appendix might make sense. Nevertheless, there are no hard requirements with respect to the use of an appendix. It is up to you wether or not you will use an appendix (well .. as long as your adviser does not tell you something else).
-
-Some words about the list of figures, list of algorithm, and so on. Listing your figures is obligatory. It depends on your own choice, wether to include a list of other \textit{things}. Relevant aspects are the subject of your thesis and the way you develop your ideas. For example: If your work contains lots of tables with different experimental results, add a list of tables. If you develop and explicitly state algorithms, add a list of algorithms. 
-
-\emph{Very Important:} Do not forget to sign (manually) the last page, before you submit/deliver the final version of your thesis. Otherwise your work cannot be accepted for legal reasons.
  
 \section{Problem Statement}
  
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
 
 \section{Contribution}
 
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
 
 \section{Related Work}
 
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
 
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
 
 \chapter{Theoretical Framework}
 \label{cha:theory}
 
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+At first we want to provide an explanation to some fundamental terms which will be used in this report. It should give an overview what the different terms mean and in which context they are meant.
 
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
+\section{Social Media Data}
+\label{sec:socmediadat}
 
 
-\section{Preliminaries}
-\label{sec:prelim}
 
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+\section{Sentiment Analysis}
+\label{sec:sentana}
 
-Notice that your theoretical framework should be less trivial than the following one. In most cases a definition requires some explanations. In particular, you should only introduce a definition if the subject under dicussion requires a precise definition.
-\begin{definition}
-\label{def:good}
-An entity is good if it is not an evil entity.
-\end{definition}
-In a similar way an evil entity can be defined in the following way.
-\begin{definition}
-\label{def:evil}
-An entity is evil if it is not a good entity.
-\end{definition}
-Proposition \ref{pro:good-evil} follows directly from Definition \ref{def:good} and \ref{def:evil}.
-\begin{proposition}
-\label{pro:good-evil}
-There exists no such entity that is evil and good at the same time.
-\end{proposition}
 
+\section{Topic Detection}
+\label{sec:topdec}
 
+\section{Trend Detection}
+\label{sec:trenddec}
 
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
 
+\chapter{Methodology}
+\label{cha:methodology}
 
+Here we tell you something
 
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
+\section{Data Collection}
+\label{sec:datacoll}
 
-\section{The Good}
-\label{sec:good}
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-\begin{figure}
-	\begin{center}
-	\includegraphics[width=5cm]{good.png}
-	\caption[Angel]{Child Angel and a white dove.}
-	\label{fig:angel}
-	\end{center}
-\end{figure}
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-\section{The Evil}
-\label{sec:evil}
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-\begin{figure}
-	\begin{center}
-	\includegraphics[width=\linewidth]{evil.png}
-	\caption[Devil]{Knight and Devil.}
-	\label{fig:devil}
-	\end{center}
-\end{figure}
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-\section{Differences and Similarities}
-\label{sec:diff}
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-
-
-\chapter{Algorithms}
-\label{cha:alg}
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-\section{Computing the Good}
-\label{sec:comp-good}
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-\section{Computing the Evil}
-\label{sec:comp-evil}
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-\section{Diagnosis}
-\label{sec:diag}
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-\begin{algorithm}{\MYCALL{EfficientLOD}{$\ALI$, $\ONT_1$, $\ONT_2$}}
-\caption[Efficient Local Optimal Diagnosis]{}
-\label{alg:efficient-lod}
-\begin{algorithmic}[1]
-% \STATE $\ALI' \leftarrow \ALI$
-% \STATE $k \leftarrow 0$
-\LOOP
-	\FOR{$i \leftarrow k$ to  $\left|\ALI'\right| - 1 $}
-		\FOR{$j \leftarrow 0$ to $i - 1$}
-			\IF{\MYNOT \MYCALL{PossiblyCoherentPair}{$\ALI'[j]$,  $\ALI'[i]$, $\ONT_1$, $\ONT_2$}}
-				\STATE $\ALI' \leftarrow \ALI' \setminus \{\ALI'[i]\}$
-				\STATE $i \leftarrow i -1$ \ \algorithmiccomment{adjust $i$ to continue with next element of $\ALI'$}
-				\STATE \MYBREAK \ \algorithmiccomment{exit inner for loop}
-			\ENDIF
-		\ENDFOR	
-	\ENDFOR
-	\STATE $k \leftarrow$ \MYCALL{SearchIndexOfAccusedCorrespondence}{$\ALI'$, $\ONT_1$, $\ONT_2$}
-	\IF{$k = \MYNIL$}
-		\RETURN $\ALI \setminus \ALI'$
-	\ENDIF
-	\STATE \algorithmiccomment{let $k^*$ be the counterpart of $k$ adjusted for $\ALI$ such that $\ALI[k^*] = \ALI'[k]$}
-	\STATE $\ALI' \leftarrow \ALI'[\ldots k-1] \cup \ALI[k^*+1 \ldots]$ 
-\ENDLOOP
-\end{algorithmic}
-\end{algorithm}
-
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-
-\chapter{Experimental Evaluation}
-\label{cha:exp}
-
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-
-
-\section{Settings}
-\label{sec:setting}
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-\section{Experiments}
-\label{sec:exp}
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-\section{Results}
-\label{sec:results}
-
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+The first step we take is to collect data from related social media platforms, in our case Facebook and Twitter. We utilize the \acrfull{api} of those to retrieve posts, comments (Facebook) and tweets (Twitter) from users. This is done simultaneously for both Facebook and Twitter. At first R packages were used to crawl the \acrshort{api}s, later on we switched to Javascript implementations to do that. We constructed a list of keywords related to pharmaceuticals industry, companies, diseases and products as "anchors" for the crawlers, to collect suitable and appropriate data. These keywords were used for both APIs.
 
 \begin{table}[h]
 
 \begin{center}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\scriptsize}l|>{\scriptsize}c>{\scriptsize}c>{\scriptsize}c|>{\scriptsize}c>{\scriptsize}c>{\scriptsize}c>{\scriptsize}c} 
-& \multicolumn{3}{>{\scriptsize}c|}{Baselines} & \multicolumn{4}{>{\scriptsize}c}{Decision Tree} \\\hline
-Ontology & M(edian) & G(ood) & E(vil) & results & $\Delta$-M & $\Delta$-G & $\Delta$-E \\\hline\hline
-\#301 & 0.825 & 0.877 & 0.877 & 0.855 & +0.030 & -0.022 & -0.022 \\\hline
-\#302 & 0.709 & 0.753 & 0.753 & 0.753 & +0.044 & +0.000 & +0.000 \\\hline
-\#303 & 0.804 & 0.860 & 0.891 & 0.816 & +0.012 & -0.044 & -0.075 \\\hline
-\#304 & 0.940 & 0.961 & 0.961 & 0.967 & +0.027 & +0.006 & +0.006 \\\hline
-\bfseries Average & \bfseries 0.820 & \bfseries 0.863 & \bfseries 0.871 & \bfseries 0.848 & \bfseries +0.028 & \bfseries -0.015 & \bfseries -0.023 
-
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\scriptsize}>{\scriptsize}c>{\scriptsize}c>{\scriptsize}c}
+\hline
+Products   & Companies        & Diseases               \\ \hline\hline
+adalimumab & abbvie           & ankylosing spondylitis \\
+humira     & amgen            & arthritis              \\
+enbrel     & johnson\&johnson & hepatitis              \\
+ibrutinib  &                  & psoriasis              \\
+           &                  & rheumatoid arthritis   \\
+           &                  & trilipix               \\ \hline
 \end{tabular*}
-\caption[Good vs. Evil]{Comparison between the Good and the Evil}
-\label{tab:confonly}
+\caption{Anchor keywords for collecting data}
+\label{tab:collkeywords}
 \end{center}
 \end{table}
 
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
+
+\subsection{Facebook API}
+\label{subsec:fbapi}
+
+\subsubsection{Overview}
+\label{subsub:fboverview}
+Like every major web based platform, Facebook offers an \acrfull{api} to programmatically interact with Facebook. It allows developers to build application which can utilize the social connection and profile information to make them more involving. Furthermore they can have access to public data on Facebook as well as publishing posts and messages to the news feed. Officially the API is called Graph API, because it is follows the concept of a “Social Graph” \cite{Facebook2015-02-18}. It consists of three key objects:
 
 
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+\begin{enumerate}
+   \item Nodes
+   \begin{itemize}
+     \item Describe all things that are shown on the Facebook web page: User Pages, Posts, Comments and Images
+   \end{itemize}
+   \item Edges
+   \begin{itemize}
+     \item Describe the relation between these things. For example the comments to an Image posted on a Page
+   \end{itemize}
+   \item Fields
+   \begin{itemize}
+     \item Contain additional information to nodes. For example the name of pages or the relationship status of users
+   \end{itemize}
+\end{enumerate}
 
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
-
-\chapter{Conclusion}
-\label{cha:conclusion}
+\noindent The Graph API is based on the simple \acrfull{http} and can therefore work with every programming language which implements a \acrshort{http} library. Due to this fact it is very easy to implement the API into an application. It supports common \acrshort{http} request with GET for retrieving information, POST for uploading data to Facebook and DELETE for deleting data. With this report we exclusively use GET requests to get data from Facebook, as we do not want modify data on Facebook. 
 
 
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+\subsubsection{Restrictions}
+\label{subsub:fbrestrictions}
 
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
+Facebook offers a highly efficient and very good documented API for getting data from the social network. So it would be actual a very good data source for social media monitoring, but unfortunately Facebook there are some restrictions which apply. In the following the most serious ones are listed.
+
+
+\begin{enumerate}
+   \item Data scraping terms of service
+   \begin{itemize}
+     \item Facebook has a dedicated terms of service document for collecting data from Facebook 		       through automated means. Before any automatic data collection takes place, a written permission has to be obtained by Facebook. Without this permission it is not allowed to scrape any data. Also other restrictions like not selling, or transferring the collected data apply at any given time. So it is absolutely necessary to read through these terms of services before choosing Facebook as a reliable datasource.~\cite{Facebook2010-04-10}
+   \end{itemize}
+   \item Streaming API
+   \begin{itemize}
+     \item Facebook API offers no streaming endpoint, so no real time feed about new content on the platform can be obtained programmatically. It is up to the developer to create processes to constantly crawl for updated data on Facebook with static endpoints.
+   \end{itemize}
+   \item Rate limits
+   \begin{itemize}
+     \item Like every major API, also Facebook’s API has some rate limits which will apply if too many requests are sent. During this work the rate limit only appeared once while a lot of pages for one keyword were crawled. So we assume that the rate limitation will not apply many times while using the API.~\cite{Facebook2016-06-09} 
+   \end{itemize}
+   \item No access to public posts
+   \begin{itemize}
+     \item On April 30th, 2015 made a breaking change to their search API endpoint. By then it was possible to search for public posts on Facebook through \url{/search?type=post&q=foobar}. After this day the endpoint was deprecated and only exclusively available for approved companies. From then on, it was not possible to get any public user post anymore. With this change the API lost the most promising endpoint for companies for monitoring the network. Without the opportunity to crawl public posts from users the only available reliable source for getting posts about different keywords is the page endpoint. With this it is possible to search the pages directory regarding specific keywords and retrieve posts from them. 
+In fact, a company could try to apply for a license to get access to the post search endpoint, but it seems that this is only available to a limited set of media publishers.~\cite{Facebook2013-09-06} 
+   \end{itemize}
+\end{enumerate}
 
 
 
-\section{Summary}
-\label{sec:sum}
+\subsubsection{Overcome Restrictions and Workflow}
 
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+The restrictions explained in \ref{subsub:fbrestrictions} lead us to nearly drop Facebook from our workflow. But we tried to find a suitable way to get the most out of the remaining available endpoints. \par
+\noindent To overcome the restriction of the Facebook API, we tried to get as much information out of the pages search endpoint. This is the base endpoint for our dataset. It offers the opportunity to specify keywords which the pages need to match returned by the API. We used this to only get pages about AbbVie, their competitors, products from them and diseases which should be healed by those products. Afterwards it is necessary to restrict the retrieved pages to only those which are in a pharmaceutical context. Then the posts and comments from the pages can be crawled and saved for later work.\par
+\noindent One major drawback of this approach is that the number of pages and posts on these pages with pharmaceutical context are very low. Only a few conversation about adverse drug reaction, opinions about drugs and companies take place on pages. Most of those discussion arise from user posts, which are not accessible programmatically. Furthermore the conversation inside Facebook pages is very limited and seems to be very biased related to the keyword of the page.
+So this approach may not lead to a good overview about opinions on different keywords but for us it was the most suitable way to get data from Facebook.
 
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
 
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
 
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
 
-\section{Future Work}
-\label{sec:future}
 
-But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+\subsubsection{The dataset - some numbers}
+\subsubsection{Conclusion}
+At first Facebook seemed to be a good and reliable data source for this project. But quickly it became clear that this is not the case. With the restriction of the public post search it is impossible to get all user posts about a keyword. It’s only possible to get posts of pages and the corresponding comments to them. But if often occurs that posts on pages are very biased regarding the keyword of the page. Also a lot of pages in the pharmaceutical context seem to not get updated very often and some seem to be very abandoned. So the breaking point here definitely is the depreciation of the API endpoint for searching posts. This leads to the fact, that Facebook can not be used as a suitable data source for topic monitoring social media. Therefore we dropped the Facebook dataset out of the calculation and algorithms.
 
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business is will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains. 
 
-\bibliographystyle{plain}
-\bibliography{thesis-ref}
+
+\subsection{Twitter API}´
+\label{subsec:twapi}
+
+
+\subsubsection{Overview}
+\label{subsub:twoverview}
+
+
+Like Facebook, Twitter also offers \acrshort{api}s to programmatically access data. They are divided into two different parts. One part are \acrfull{rest} conform ones which use simple\acrshort{http} requests to create new tweets, read user profile, search for tweets and more.
+\par
+\noindent The second part are dynamic \acrshort{api}s, better known as the Streaming API. They give applications access to the global stream of Twitter data, without any overhead or by pulling data from the static \acrshort{api} endpoints. In total there are three different streaming endpoints.
+
+\begin{enumerate}
+   \item Public stream: For public Twitter data
+   \item User stream: For data associated with only one user
+   \item Site stream: Multi user version of user streams
+\end{enumerate}
+
+For this work the public stream is the most suitable one. It accepts keyword filter to only retrieve data of events which matches those keywords. We can use the keywords from Table~\ref{tab:collkeywords} to only crawl suitable tweets, which match our needs. \cite{Twitter2012-05-15}
+
+\subsubsection{Restriction}
+\label{subsub:twrestrictions}
+
+Unlike Facebook, Twitter does not have that many restrictions we have to respect in our use case.
+
+\begin{enumerate}
+   \item Date restriction in the search API (Static REST API)
+   \begin{itemize}
+     \item When you want to use the static search endpoint, where you can search for tweets with specific keywords only the latest two weeks from the date of the request are available to search. So it is generally impossible to search for historical tweets through the API. There are some companies like GNIP \cite{GGnip2015-10-20}, which are offering service to get access to historical data. To get access to this data you have to contact those companies to get a custom historical dataset, but this option was not suitable for this project as it would had involve payments and our goal is to avoid that.
+   \end{itemize}
+   \item Requests per minute (Static REST API)
+   \begin{itemize}
+     \item The REST endpoints, in contrast to the streaming endpoints are rate limited. So developers have to take care of the amount of requests that are sent to the API. A full overview about the different limits can be found at \url{https://dev.twitter.com/rest/public/rate-limits} \cite{Twitter2016-11-22}
+   \end{itemize}
+   \item Concurrent streaming APIs (Streaming API)
+   \begin{itemize}
+     \item Any application which is using any of the different streaming APIs can only open only one stream to Twitter. This have to be kept in the mind if a developer wants to use multiple streaming endpoint. 
+   \end{itemize}
+
+\end{enumerate}
+
+
+
+
+
+\subsubsection{Overcome Restrictions and Workflow}
+
+This work heavily utilizes the public streaming API, to get the tweets for specific keyword mentioned in table ~\ref{tab:collkeywords}. Therefore the only restriction which applies is that we do not open multiple streams at a given time. This restriction can be easily overcome by specifying multiple keywords in the API requests. The keywords can be either be separated by a comma which will work as an OR concatenation or separated by an whitespace which will work as an AND concatenation. An example request to the API could look like the following:
+\begin{lstlisting}
+https://stream.twitter.com/1.1/statuses/filter.json?&track=abbvie,humira,adalimumab...
+\end{lstlisting}
+With that request it is possible to save tweets to a database every time a new tweet matches the specified keywords.
+
+
+
+\subsubsection{The dataset - some numbers}
+
+As of August 20th 2017 we stopped crawling data from the Twitter API. At this point our dataset from Twitter contains the following amount of tweets and user:
+
+\begin{table}[h]
+
+\begin{center}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\scriptsize}>{\scriptsize}c>{\scriptsize}c}
+\hline
+Type   & Amount   		\\ \hline\hline
+Tweets & 250732     		\\
+Retweets & 27631     	\\
+Answer to tweets & 597  	\\
+User & 48555        	\\
+ \\ \hline
+\end{tabular*}
+\caption{Common numbers of the Twitter dataset}
+\label{tab:twdataset}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+
+\begin{center}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\scriptsize}>{\scriptsize}c>{\scriptsize}c>{\scriptsize}c}
+\hline
+Keyword  		& Amount    & Proportion in \%	\\ \hline\
+johnson \& johnson & 70240 &	28.0140			\\
+psoriasis & 46070      &  	18.3742			\\
+hepatitis c & 35089  &  	13.9946				\\
+rheumatoid arthritis & 28940 &   11.5422		\\
+amgen & 21404 &  8.5366						\\
+abbvie & 14149  &	5.6431					\\
+bristol myers & 13355 & 	5.3264				\\
+johnson\&johnson & 5641  &	2.2498			\\
+arthritis & 3512  &		1.4007				\\
+ankylosing spondylitis c & 3473  &	1.3851	\\
+humira & 3029  	&	1.2081					\\
+ibrutinib & 1851  	&	0.7382				\\
+hepatitis & 1662  	&	0.6629				\\
+NULL & 764 &  0.3047							\\
+enbrel & 669  &	0.2668						\\
+adalimumab & 667      &  0.2660				\\
+imbruvica & 172 & 0.0686  					\\
+trilipix & 45   &  0.0179   				\\ \hline\
+
+\end{tabular*}
+\caption{Twitter tweets per keyword}
+\label{tab:twdatasettweets}
+\end{center}
+\end{table}
+
+
+\subsubsection{Conclusion}
+After we had this massive disappointment with the Facebook dataset, Twitter is by far the better source for building up a dataset for data mining. It offers the opportunity to crawl tweets in real-time with no need to access the static endpoints. The \acrshort{api} gives us access to every user tweet matching the keywords, which ensures that at most of the time only appropriate and suitable tweets are crawled. In addition to those advantages the streaming endpoint do not have an rate limitation, which makes it even easier to programmatically crawl tweets. This advantages make sure that Twitter is the primary data source for this project.
+
+
+
+\printbibliography
 
 
 \appendix
-
+\begin{comment}
 \chapter{Program Code / Resources}
 \label{cha:appendix-a}
 
@@ -431,4 +429,34 @@ wird.
 \noindent
 Mannheim, den 31.08.2014 \hspace{4cm} Unterschrift
 
+
+
+\begin{table}[h]
+
+\begin{center}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\scriptsize}l|>{\scriptsize}c>{\scriptsize}c>{\scriptsize}c|>{\scriptsize}c>{\scriptsize}c>{\scriptsize}c>{\scriptsize}c} 
+& \multicolumn{3}{>{\scriptsize}c|}{Baselines} & \multicolumn{4}{>{\scriptsize}c}{Decision Tree} \\\hline
+Ontology & M(edian) & G(ood) & E(vil) & results & $\Delta$-M & $\Delta$-G & $\Delta$-E \\\hline\hline
+\#301 & 0.825 & 0.877 & 0.877 & 0.855 & +0.030 & -0.022 & -0.022 \\\hline
+\#302 & 0.709 & 0.753 & 0.753 & 0.753 & +0.044 & +0.000 & +0.000 \\\hline
+\#303 & 0.804 & 0.860 & 0.891 & 0.816 & +0.012 & -0.044 & -0.075 \\\hline
+\#304 & 0.940 & 0.961 & 0.961 & 0.967 & +0.027 & +0.006 & +0.006 \\\hline
+\bfseries Average & \bfseries 0.820 & \bfseries 0.863 & \bfseries 0.871 & \bfseries 0.848 & \bfseries +0.028 & \bfseries -0.015 & \bfseries -0.023 
+
+\end{tabular*}
+\caption[Good vs. Evil]{Comparison between the Good and the Evil}
+\label{tab:confonly}
+\end{center}
+\end{table}
+
+
+
+\begin{figure}
+	\begin{center}
+	\includegraphics[width=5cm]{good.png}
+	\caption[Angel]{Child Angel and a white dove.}
+	\label{fig:angel}
+	\end{center}
+\end{figure}
+\end{comment}
 \end{document}
