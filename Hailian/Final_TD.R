@@ -19,7 +19,6 @@ library(LDAvis)
 library(grepl)
 #library(topicmodels)
 
-
 #read file by navigation
 Final_TW_Newest<- read.csv(file.choose(),encoding = "UTF-8")
 ###get key, tweets, time of TW dataset
@@ -35,10 +34,9 @@ colnames(Final_TW_Tweets)<- c("key", "Text","time")
 
 
 
-
 # read in some stopwords:
 stop_words <- stopwords("SMART")
-word_bag<- c("â€š","johnson","rt","ed")
+word_bag<- c("â€š","johnson","rt","ed","fc","â","pa","sta","cdc")
 stop_words<- c(stop_words, word_bag)
 
 #deeper clean
@@ -61,7 +59,7 @@ Final_TW_Tweets$Text <- lemmatize_strings(Final_TW_Tweets$Text)
 Final_TW_Tweets$Text <- removeWords(Final_TW_Tweets$Text, stop_words)
 Final_TW_Tweets$Text <- gsub("'", "", Final_TW_Tweets$Text)  # remove apostrophes
 Final_TW_Tweets$Text <- gsub("[[:punct:]]", " ", Final_TW_Tweets$Text)  # replace punctuation with space
-#Final_TW_Tweets$Text <- sapply(Final_TW_Tweets$Text, function(x) clean(x))
+Final_TW_Tweets$Text <- sapply(Final_TW_Tweets$Text, function(x) clean(x))
 Final_TW_Tweets$Text <- removeWords(Final_TW_Tweets$Text, stop_words)
 Final_TW_Tweets$Text <- gsub("[[:cntrl:]]", " ", Final_TW_Tweets$Text)  # replace control characters with space
 Final_TW_Tweets$Text <- gsub("^[[:space:]]+", "", Final_TW_Tweets$Text) # remove whitespace at beginning of documents
@@ -245,4 +243,7 @@ Topic_20<- rbm(num_hidden=20, training_data=weightMatrix, learning_rate=.09, n_i
 
 topic_list<- top.topic.words(Topic_20, num.words = 15, by.score = FALSE)
 
-topic_list<- t(topic_list)
+topic_list_20<- as.data.frame(t(topic_list))
+topic_list_20<- paste(topic_list_20$V1,topic_list_20$V2,topic_list_20$V3,topic_list_20$V4,topic_list_20$V5,topic_list_20$V6,topic_list_20$V7,topic_list_20$V8, topic_list_20$V9, topic_list_20$V10, topic_list_20$V11, topic_list_20$V12, topic_list_20$V13, topic_list_20$V14, topic_list_20$V15, sep = ",")
+topic_list_20<- as.data.frame(topic_list_20)
+colnames(topic_list_20)<- "Terms"
