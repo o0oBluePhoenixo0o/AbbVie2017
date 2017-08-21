@@ -95,12 +95,9 @@ export default class TwitterCrawler {
      * @function track 
      * @param {String} filters The filters which are used to track tweets from the Twitter API
      * @description Starts using the Twitter API with the specified filters. When a new tweet is crawled it upserts the author data
-     * and inserts the raw tweet data into the database. It also detects the sentiment of the tweet, along with detecting sarcasm and emoji sentiment.
-     * @see {@link module:ML_Wrapper~detectSarcasm}
+     * and inserts the raw tweet data into the database.
      * @see {@link module:Connectors~TwitterAuthor}
      * @see {@link module:Connectors~Tweet}
-     * @see {@link module:Connectors~TwitterSentiment}
-     * @see {@link module:Connectors~TwitterSentiment}
      * @memberof TwitterCrawler
      * @return {void}
      */
@@ -115,6 +112,7 @@ export default class TwitterCrawler {
             stream => {
                 stream.on('data', event => {
                     if (event.lang == 'en') {
+                        console.log(event);
                         /*logger.log('debug', 'Message: ' + event.text)
                         logger.log('debug', 'Extended tweet: ' + (event.extended_tweet ? event.extended_tweet.full_text : 'No extended tweet'));*/
                         TweetAuthor.upsert({

@@ -124,7 +124,7 @@ Tweet.findAll({
     console.log(e);
 });
 
-
+twitterCrawler.start();
 /*var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
 console.log(h20Process);
 h20Process.call();

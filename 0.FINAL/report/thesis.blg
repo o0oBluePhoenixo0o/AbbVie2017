@@ -1,0 +1,17 @@
+[0] Config.pm:354> INFO - This is Biber 2.7
+[0] Config.pm:357> INFO - Logfile is 'thesis.blg'
+[44] biber-darwin:303> INFO - === Mon Aug 21, 2017, 17:56:33
+[66] Biber.pm:359> INFO - Reading 'thesis.bcf'
+[148] Biber.pm:835> INFO - Found 13 citekeys in bib section 0
+[160] Biber.pm:3670> INFO - Processing section 0
+[174] Biber.pm:3840> INFO - Looking for bibtex format file './bib/biblopgraphy.bib' for section 0
+[176] bibtex.pm:1435> INFO - Decoding LaTeX character macros into UTF-8
+[181] bibtex.pm:1292> INFO - Found BibTeX data source './bib/biblopgraphy.bib'
+[201] Utils.pm:164> WARN - Overwriting field 'year' with year value from field 'date' for entry 'Twitter2016-11-22'
+[223] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[223] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[223] Biber.pm:3499> INFO - Sorting list 'nty/global/' of type 'entry' with scheme 'nty' and locale 'en-US'
+[223] Biber.pm:3505> INFO - No sort tailoring available for locale 'en-US'
+[234] bbl.pm:608> INFO - Writing 'thesis.bbl' with encoding 'ascii'
+[237] bbl.pm:712> INFO - Output to thesis.bbl
+[237] Biber.pm:109> INFO - WARNINGS: 1

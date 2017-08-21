@@ -23,7 +23,7 @@
   author  = {Facebook},
   editor  = {Facebook},
   title   = {Graph API Overview},
-  year    = {2017},
+  year    = {2015},
   date    = {2015-02-18},
   url     = {https://developers.facebook.com/docs/graph-api/overview/},
   urldate = {2017-08-18},
@@ -33,7 +33,7 @@
   author  = {Facebook},
   editor  = {Facebook},
   title   = {Public Feed API},
-  year    = {2017},
+  year    = {2013},
   date    = {2013-09-06},
   url     = {https://developers.facebook.com/docs/public_feed?locale=en_US},
   urldate = {2017-08-19},
@@ -53,7 +53,7 @@
   author  = {Facebook},
   editor  = {Facebook},
   title   = {Graph API Rate Limit},
-  year    = {2017},
+  year    = {2016},
   date    = {2016-06-09},
   url     = {https://developers.facebook.com/docs/graph-api/advanced/rate-limiting?locale=de_DE},
   urldate = {2017-08-19},
@@ -73,13 +73,13 @@
   author  = {Gnip},
   editor  = {Gnip},
   title   = {Gnip - Unleash the Power of Social Media},
-  year    = {2017},
+  year    = {2015},
   date    = {2015-10-20},
   url     = {https://gnip.com/},
   urldate = {2017-08-19},
 }
 
-@Online{Twitter2017-08-20,
+@Online{Twitter2016-11-22,
   author  = {Twitter},
   editor  = {Twitter},
   title   = {Twitter API Rate Limits Chart},
@@ -87,6 +87,62 @@
   date    = {2016-11-22},
   url     = {https://dev.twitter.com/rest/public/rate-limits},
   urldate = {2017-08-20},
+}
+
+@Online{Rouse2016-09-15,
+  author  = {Margaret Rouse},
+  editor  = {Margaret Rouse},
+  title   = {Definition of Social Media},
+  year    = {2016},
+  date    = {2016-09-15},
+  url     = {http://whatis.techtarget.com/definition/social-media},
+  urldate = {2017-08-21},
+}
+
+@Online{Rouse2015-01-15,
+  author  = {Margaret Rouse},
+  editor  = {Margaret Rouse},
+  title   = {Definition of Web 2.0},
+  year    = {2015},
+  date    = {2015-01-15},
+  url     = {http://whatis.techtarget.com/definition/Web-20-or-Web-2},
+  urldate = {2017-08-21},
+}
+
+@Online{Morris2017-01-13,
+  author  = {Desmond Morris},
+  title   = {Node-Twitter},
+  year    = {2017},
+  date    = {2017-01-13},
+  url     = {https://github.com/desmondmorris/node-twitter},
+  urldate = {2017-08-21},
+}
+
+@Online{Barbera2017-05-25,
+  author  = {Pablo Barbera and Micheal Piccirilli and Andrew Geisler and Wouter van Atteveldt},
+  title   = {Package "Rfacebook"},
+  year    = {2017},
+  date    = {2017-05-25},
+  url     = {https://cran.r-project.org/web/packages/Rfacebook/Rfacebook.pdf},
+  urldate = {2017-08-21},
+}
+
+@Online{Grentry2015-07-29,
+  author  = {Jeff Grentry},
+  title   = {Package "twitteR"},
+  year    = {2015},
+  date    = {2015-07-29},
+  url     = {https://cran.r-project.org/web/packages/twitteR/twitteR.pdf},
+  urldate = {2017-08-21},
+}
+
+@Online{,
+  author  = {Cristiano Oliveira},
+  title   = {Node-fbgraph},
+  year    = {2017},
+  date    = {2017-01-19},
+  url     = {https://github.com/criso/fbgraph},
+  urldate = {2017-08-21},
 }
 
 @Comment{jabref-meta: databaseType:biblatex;}
