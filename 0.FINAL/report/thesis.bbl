@@ -302,6 +302,44 @@
       \verb https://cran.r-project.org/web/packages/twitteR/twitteR.pdf
       \endverb
     \endentry
+    \entry{Kolb2015-07-16}{online}{}
+      \name{author}{1}{}{%
+        {{hash=d4ad2a688350cfece2f604866c93f84d}{%
+           family={Kolb},
+           familyi={K\bibinitperiod},
+           given={Jeff},
+           giveni={J\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=d4ad2a688350cfece2f604866c93f84d}{%
+           family={Kolb},
+           familyi={K\bibinitperiod},
+           given={Jeff},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{d4ad2a688350cfece2f604866c93f84d}
+      \strng{fullhash}{d4ad2a688350cfece2f604866c93f84d}
+      \strng{authornamehash}{d4ad2a688350cfece2f604866c93f84d}
+      \strng{authorfullhash}{d4ad2a688350cfece2f604866c93f84d}
+      \strng{editornamehash}{d4ad2a688350cfece2f604866c93f84d}
+      \strng{editorfullhash}{d4ad2a688350cfece2f604866c93f84d}
+      \field{sortinit}{K}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{16}
+      \field{month}{7}
+      \field{title}{Trend detection in social data}
+      \field{urlday}{22}
+      \field{urlmonth}{8}
+      \field{urlyear}{2017}
+      \field{year}{2015}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb https://blog.twitter.com/official/en_us/a/2015/trend-detection-social-data.html
+      \endverb
+    \endentry
     \entry{Morris2017-01-13}{online}{}
       \name{author}{1}{}{%
         {{hash=09cc72078bd1ac94ac1e2816114baada}{%
@@ -435,6 +473,112 @@
       \verb{url}
       \verb http://whatis.techtarget.com/definition/Web-20-or-Web-2
       \endverb
+    \endentry
+    \entry{Seo2004}{report}{}
+      \name{author}{2}{}{%
+        {{hash=80ff99c6050c8061eb12aa961f7e3273}{%
+           family={Seo},
+           familyi={S\bibinitperiod},
+           given={Young-Woo},
+           giveni={Y\bibinithyphendelim W\bibinitperiod}}}%
+        {{hash=03c6ada8436bd8591a5165974dd0341a}{%
+           family={Sycara},
+           familyi={S\bibinitperiod},
+           given={Katia},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Robotics Institute Carnegie Mellon University Pittsburgh, Pennsylvania 15213}%
+      }
+      \strng{namehash}{bb48b4310e8c1f4cdf942afc85eda021}
+      \strng{fullhash}{bb48b4310e8c1f4cdf942afc85eda021}
+      \strng{authornamehash}{bb48b4310e8c1f4cdf942afc85eda021}
+      \strng{authorfullhash}{bb48b4310e8c1f4cdf942afc85eda021}
+      \field{sortinit}{S}
+      \field{sortinithash}{3c1547c63380458f8ca90e40ed14b83e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{31}
+      \field{month}{1}
+      \field{title}{Text Clustering for Topic Detection}
+      \field{urlday}{22}
+      \field{urlmonth}{8}
+      \field{urlyear}{2017}
+      \field{year}{2004}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb http://repository.cmu.edu/cgi/viewcontent.cgi?article=1705&context=robotics
+      \endverb
+    \endentry
+    \entry{Techopedia2014-01-21}{online}{}
+      \name{author}{1}{}{%
+        {{hash=2d0ed76dc2bb8ec0ba5cf4473f5c4c74}{%
+           family={Techopedia},
+           familyi={T\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=2d0ed76dc2bb8ec0ba5cf4473f5c4c74}{%
+           family={Techopedia},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{2d0ed76dc2bb8ec0ba5cf4473f5c4c74}
+      \strng{fullhash}{2d0ed76dc2bb8ec0ba5cf4473f5c4c74}
+      \strng{authornamehash}{2d0ed76dc2bb8ec0ba5cf4473f5c4c74}
+      \strng{authorfullhash}{2d0ed76dc2bb8ec0ba5cf4473f5c4c74}
+      \strng{editornamehash}{2d0ed76dc2bb8ec0ba5cf4473f5c4c74}
+      \strng{editorfullhash}{2d0ed76dc2bb8ec0ba5cf4473f5c4c74}
+      \field{sortinit}{T}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{21}
+      \field{month}{1}
+      \field{title}{What is Sentiment Analysis}
+      \field{urlday}{22}
+      \field{urlmonth}{8}
+      \field{urlyear}{2017}
+      \field{year}{2014}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb https://www.techopedia.com/definition/29695/sentiment-analysis
+      \endverb
+    \endentry
+    \entry{Twitter2012-05-15}{online}{}
+      \name{author}{1}{}{%
+        {{hash=2491bc9c7d8731e1ae33124093bc7026}{%
+           family={Twitter},
+           familyi={T\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=2491bc9c7d8731e1ae33124093bc7026}{%
+           family={Twitter},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{fullhash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{authornamehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{authorfullhash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{editornamehash}{2491bc9c7d8731e1ae33124093bc7026}
+      \strng{editorfullhash}{2491bc9c7d8731e1ae33124093bc7026}
+      \field{sortinit}{T}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{15}
+      \field{month}{5}
+      \field{title}{Streaming API Overview}
+      \field{urlday}{19}
+      \field{urlmonth}{8}
+      \field{urlyear}{2017}
+      \field{year}{2012}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb https://dev.twitter.com/streaming/overview
+      \endverb
+      \warn{\item Overwriting field 'year' with year value from field 'date' for entry 'Twitter2012-05-15'}
     \endentry
     \entry{Twitter2016-11-22}{online}{}
       \name{author}{1}{}{%

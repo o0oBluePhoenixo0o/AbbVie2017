@@ -73,7 +73,7 @@ class Python {
         });
 
         this.process.on('close', (code) => {
-            logger.info(`child process exited with code ${code}`);
+            logger.info(`child process ${this.process.pid} exited with code ${code}`);
             if (typeof callback === 'function') {
                 callback(this.output);
             }
@@ -163,7 +163,7 @@ export class Java {
         });
 
         this.process.on('close', (code) => {
-            logger.info(`child process exited with code ${code}`);
+            logger.info(`child process ${this.process.pid} exited with code ${code}`);
             if (typeof callback === 'function') {
                 callback(this.output);
             }
@@ -251,7 +251,7 @@ class R {
         });
 
         this.process.on('close', (code) => {
-            console.log(`child process ${this.process.pid} exited with code ${code}`);
+            logger.info(`child process ${this.process.pid} exited with code ${code}`);
             if (typeof callback === 'function') {
                 callback(this.output);
             }

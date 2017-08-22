@@ -136,13 +136,33 @@
   urldate = {2017-08-21},
 }
 
-@Online{,
+@Online{Oliveira2017-01-19,
   author  = {Cristiano Oliveira},
   title   = {Node-fbgraph},
   year    = {2017},
   date    = {2017-01-19},
   url     = {https://github.com/criso/fbgraph},
   urldate = {2017-08-21},
+}
+
+@Online{Techopedia2014-01-21,
+  author  = {Techopedia},
+  editor  = {Techopedia},
+  title   = {What is Sentiment Analysis},
+  year    = {2014},
+  date    = {2014-01-21},
+  url     = {https://www.techopedia.com/definition/29695/sentiment-analysis},
+  urldate = {2017-08-22},
+}
+
+@Online{Kolb2015-07-16,
+  author  = {Jeff Kolb},
+  editor  = {Jeff Kolb},
+  title   = {Trend detection in social data},
+  year    = {2015},
+  date    = {2015-07-16},
+  url     = {https://blog.twitter.com/official/en_us/a/2015/trend-detection-social-data.html},
+  urldate = {2017-08-22},
 }
 
 @Comment{jabref-meta: databaseType:biblatex;}

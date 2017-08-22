@@ -13,7 +13,10 @@
 \usepackage[acronym]{glossaries}
 \newacronym{api}{API}{Application Programming Interface}
 \newacronym{http}{HTTP}{Hypertext Transfer Protocol}
-\newacronym{rest}{REST}{Representational State Transfer }
+\newacronym{rest}{REST}{Representational State Transfer}
+\newacronym{sa}{SA}{Sentiment Analysis}
+\newacronym{td}{TD}{Topic Detection}
+\newacronym{trd}{TRD}{Trend Detection}
 \makeglossaries
 
 %\input{./javascript_preemble.tex}
@@ -136,11 +139,11 @@
 \chapter{Introduction}
 \label{cha:intro}
 
-Today in 2017 social media is ubiquitous and is taken for granted in our day-to-day life. Nearly every single shop in the city to large companies own social media accounts to communicate with customers or try to engage new ones. The number of active users on the biggest social media platforms is tremendously high. On Facebook we have around 1.871 million active users as of January 2017. Whatsapp and Facebook messenger share the number of 1.000 million active users. For Twitter in comparison to Facebook, the numbers may seem small but with 317 million active users it belongs to the biggest social media platform of our time.~\cite{Chaffey2017-04-27}
-\newline More than ever people share their thoughts about current global events like conflicts between different countries, political events, terrorism, rising diseases as well as the opinions to companies and products. 
-For companies nowadays it is easier than ever to find out what customer think and talk about their company and products. With Twitter we have one the highest reactive social media platforms of our time. Almost instantly people write messages (tweet) to react accordingly to new events in the world. Due to this fact companies try to effectively monitor Twitter and other platforms to get insights into the current customer situation regarding their product and company reputation.
-In the course of the ‘Master Team Project - Topic monitoring in the pharmaceutical industry’ of University of Mannheim for Master Data Science and Master Business informatics students, this work especially focuses on the monitoring of social media for the pharmaceutical context. It is processed in cooperation with AbbVie Inc. located in Ludwigshafen, Germany, a pharmaceutical company focused on both biopharmaceuticals and small molecule drugs. The goal of this project is to find efficient and effective ways to retrieve data from different social media platforms to analyze sentiments, public opinions, emotions towards different events, find suitable topics and detect rising trends in social media. To accomplish this task, this work utilizes different machine learning algorithms to detect the requested features in the messages of users. The declared aim is to find a good combination of different of those algorithms to provide reliable results and findings so that especially AbbVie can use and incorporate them into their attempt to monitor social media.
-\newline This report describes how to gather data from different social media platforms and what restrictions will apply to them. It focuses on Facebook and Twitter, because this selection covers the most used and the most reactive social media platform today. Furthermore it deals with different machine learning algorithms, explains how they could be applied to different use cases and suggests situation when and how to use them. 
+Today, in 2017 social media is ubiquitous and is taken for granted in our day-to-day life. From private person, single shops around the corner to large companies, almost everyone owns a social media account. The number of active users on the biggest social media platforms is tremendously high. Facebook has around 1.871 million active users (as of January 2017). Whatsapp and Facebook messenger share the number of 1.000 million active users. In comparison to Facebook, the number of 317 million active Twitter users may seem small but it still belongs to  the biggest social media platform of our time.~\cite{Chaffey2017-04-27}\newline 
+More than ever people share their thoughts about current global events like conflicts between different countries, political discussions, terrorism, rising diseases as well as the opinions to companies and products. 
+For companies nowadays it is easier than ever to find out what customer think and talk about them and their products. With Twitter we have one the highest reactive social media platforms of our time. Almost instantly people write messages (tweet) to react accordingly to new events in the world. Due to this fact companies try to effectively monitor Twitter and other social media platforms to get insights into the current customer situation regarding their product and company reputation.
+In the course of the ‘Master Team Project - Topic monitoring in the pharmaceutical industry by the University of Mannheim , this work especially focuses on the monitoring of social media for the pharmaceutical context. It is processed in cooperation with AbbVie Inc. located in Ludwigshafen, Germany, a pharmaceutical company focused on both biopharmaceuticals and small molecule drugs. The goal of this project is to find efficient and effective ways to retrieve data from different social media platforms to analyse sentiments, public opinions, emotions towards different events, find suitable topics and detect rising trends in social media. To accomplish this task, this work utilizes different machine learning algorithms to detect the requested features in the messages of users. The declared aim is to find a good combination of those algorithms to provide reliable results and findings so that especially AbbVie can use and incorporate them into their attempt to monitor social media.\newline 
+This report describes how to gather data from different social media platforms and what restrictions will apply to them. It focuses on Facebook and Twitter, because this selection covers the most used and the most reactive social media platforms today. Furthermore it deals with different machine learning algorithms, explains how they could be applied to different use cases and suggests situation when and how to use them. 
 
 
  
@@ -157,12 +160,12 @@ In the course of the ‘Master Team Project - Topic monitoring in the pharmaceut
 \chapter{Theoretical Framework}
 \label{cha:theory}
 
-At first we want to provide an explanation to some fundamental terms which will be used in this report. It should give an overview what the different terms mean and in which context they are meant.
+At first we want to provide an explanation to some fundamental terms which will be used in this report. This should give an overview what the different terms mean and in which context they are used.
 
 \section{Social Media Data}
 \label{sec:socmedia}
 
-The term Social media refers to all web application which are built on the technological foundations of the Web 2.0. In comparison to the beginning of the web, Web 2.0 is characterized by a huge improvement of communication channels between users and increased communications between those. Social media platforms heavily rely on this progressive development of user interaction. They offer a place where users can collaborate and interact with each other, share and create content with ease. Unlike traditional static websites, the content of social media platforms is nearly entirely made by the users, which lead to a very reactive and accurate picture of the community who is using the network. These platforms can be divided in different types. The following shows a non-exhaustive list of those. \cite{Rouse2016-09-15}\cite{Rouse2015-01-15}
+The term \textit{social media} refers to all web applications which are built on the technological foundations of the Web 2.0. In comparison to the beginning of the web, Web 2.0 is characterized by a huge improvement of communication channels between users and increased communications between those. Social media platforms heavily rely on this progressive development of user interaction. They offer a place where users can collaborate and interact with each other, share and create content with ease. Unlike traditional static websites, the content of social media platforms is nearly entirely made by the users, which lead to a very reactive and accurate picture of the community who is using the network. These platforms can be divided in different types. The following shows a non-exhaustive list of those. \cite{Rouse2016-09-15}\cite{Rouse2015-01-15}
 
 \begin{itemize}
 	\item Forums (Reddit)
@@ -173,35 +176,42 @@ The term Social media refers to all web application which are built on the techn
 	\item Video sharing (YouTube, Twitch)
 \end{itemize}
 
-
-\noindent Social media is an integral part of everyone’s life and a world without it is nearly no longer possible. For companies it offers a broad variety of possibilities to engage and get to know their customers better. Social media analytics helps to support business decisions, mostly based on the customer sentiment, which makes it a great datasource to analyze data. \cite{Rouse2016-09-15}
+Social media is an integral part of everyone’s life and a world without it is nearly no longer imagineable. For companies it offers a broad variety of possibilities to engage and get to know their customers better. Social media analytics help to support business decisions, mostly based on the customer sentiment, which makes it a great datasource to analyze data. \cite{Rouse2016-09-15}
 \par
-\noindent In this work we will mainly referring to the term social media in the context of two platforms, Twitter and Facebook, as those are building the base for our data gathering process. 
-
+In this work we will mainly referring to the term social media in the context of two platforms, Twitter and Facebook, as those are building the base for our data gathering process. 
 
 
 \section{Sentiment Analysis}
 \label{sec:sentana}
 
+\acrfull{sa} belongs to the broad field of data mining techniques. With the help of Natural Language Processing and text analytics, subjective information are extracted and quantified from texts and messages primarily from social media sources. \acrshort{sa} methods are classification algorithms which are based on labelled data. This data is curated by human annotators who define pre-train classes to different types examples of data. These annotations later then are used to train the different algorithms which quantify the sentiment of texts based on these pre-annotations. The results of those techniques can quantify the sentiment of people's opinions and feelings towards a certain subject of the text. Mostly these are products, companies, other people or current events. Sometimes sentiment analysis is also known as opinion mining or emotion AI.
+
+With the help of \acrlong{sa} companies can detect subjective key values for their organization and implement measures which take advantage of these findings. Some examples of these values are brand reputation along with the popularity of it, the company reputation overall and new product perception. This is essentially useful when new products are introduced and the acceptance of those needs to be measured as fast as possible. \cite{Techopedia2014-01-21}
+
+In this report sentiment analysis is used to determine the opinions of people regarding the pharmaceutical industry. It tries to apply suitable data mining algorithms to quantify the opinions regarding drugs, diseases and companies which are active in this sector.
 
 \section{Topic Detection}
 \label{sec:topdec}
 
+\acrfull{td} copes with the problem of identifying topics to unseen or unidentified events. It can be applied to a static collection of data ("retrospective detection") or even on real-time ("on-line detection") feed of data from different sources. To detect topics, miscellaneous data mining algorithms can be used. They are all based on using unlabeled data to train them. Unlabeled data means, that it is non curated by human annotators which detect topics beforehand. The algorithms just take raw data and try to cluster them into different groups (topics) based on common attributes among different data objects. \cite{Seo2004}
+
+Topic Detection within this work is primarily used on real-time news. It is first trained on pre-crawled data from social media platforms but later applied to the continuously stream of new data.
+
 \section{Trend Detection}
 \label{sec:trenddec}
 
+\acrfull{trd} techniques try to find out what is suddenly increasing in popularity. This is especially applicable to highly reactive social media platforms. For some types organizations it is tremendously important to know what are trends among the people, especially for news organizations, governments and retailers. 
+At most of the time a trend is coupled with a specific topic. If it possible to detect trending topics, organization can recognize what people think is noteworthy and can react to those events appropriately. \cite{Kolb2015-07-16}
 
 \chapter{Methodology}
 \label{cha:methodology}
 
-Here we tell you something
-
-
+In this section we want to discuss the different steps we took to build up our database and what algorithms we applied to them in order to fulfil the task of this work.
 
 \section{Data Collection}
 \label{sec:datacoll}
 
-The first step we take is to collect data from related social media platforms, in our case Facebook and Twitter. We utilize the \acrfull{api} of those to retrieve posts, comments (Facebook) and tweets (Twitter) from users. This is done simultaneously for both Facebook and Twitter. At first R packages were used to crawl the \acrshort{api}s, later on we switched to Javascript implementations to do that. We constructed a list of keywords related to pharmaceuticals industry, companies, diseases and products as "anchors" for the crawlers, to collect suitable and appropriate data. These keywords were used for both APIs.
+The first step we take is to collect data from related social media platforms, in our case Facebook and Twitter. We utilize the \acrfull{api}s of those to retrieve posts, comments (Facebook) and tweets (Twitter) from users. This is done simultaneously for both Facebook and Twitter. We constructed a list of keywords related to pharmaceuticals industry, companies, diseases and products as "anchors" for the crawlers, to collect suitable and appropriate data. These keywords were used for both platforms.
 
 \begin{table}[h]
 
@@ -226,8 +236,7 @@ ibrutinib  &                  & psoriasis              \\
 
 \subsubsection{Overview}
 \label{subsub:fboverview}
-Like every major web based platform, Facebook offers an \acrfull{api} to programmatically interact with Facebook. It allows developers to build application which can utilize the social connection and profile information to make them more involving. Furthermore they can have access to public data on Facebook as well as publishing posts and messages to the news feed. Officially the API is called Graph API, because it is follows the concept of a “Social Graph” \cite{Facebook2015-02-18}. It consists of three key objects:
-
+Like every major web based platform, Facebook offers an \acrfull{api} to programmatically interact with its data. This allows developers to build applications which can utilize the social connection and profile information to make them more involving. Furthermore they have access to public data on Facebook as well as the opportunity to publish posts and messages to the news feed. Officially the API is called Graph API, because it is follows the concept of a “Social Graph” \cite{Facebook2015-02-18}. It consists of three key objects:
 
 \begin{enumerate}
    \item Nodes
@@ -244,19 +253,18 @@ Like every major web based platform, Facebook offers an \acrfull{api} to program
    \end{itemize}
 \end{enumerate}
 
-\noindent The Graph API is based on the simple \acrfull{http} and can therefore work with every programming language which implements a \acrshort{http} library. Due to this fact it is very easy to implement the API into an application. It supports common \acrshort{http} request with GET for retrieving information, POST for uploading data to Facebook and DELETE for deleting data. With this report we exclusively use GET requests to get data from Facebook, as we do not want modify data on Facebook. 
+The Graph API is based on the simple \acrfull{http} and can therefore work with every programming language which implements a \acrshort{http} library. Due to this fact it is very easy to implement the API into any application. It supports common request methods like, GET for retrieving information, POST for uploading data and DELETE for deleting data. With this report we exclusively use GET requests to get data from the Graph, as we do not want modify data on Facebook. 
 
 
 \subsubsection{Restrictions}
 \label{subsub:fbrestrictions}
 
-Facebook offers a highly efficient and very good documented API for getting data from the social network. So it would be actual a very good data source for social media monitoring, but unfortunately Facebook there are some restrictions which apply. In the following the most serious ones are listed.
-
+Facebook offers a highly efficient and very good documented API for getting data from the social network. So it would be actual a very good data source for social media monitoring, but unfortunately there are some restrictions which makes it hard to work. In the following the most serious ones are listed.
 
 \begin{enumerate}
    \item Data scraping terms of service
    \begin{itemize}
-     \item Facebook has a dedicated terms of service document for collecting data from Facebook 		       through automated means. Before any automatic data collection takes place, a written permission has to be obtained by Facebook. Without this permission it is not allowed to scrape any data. Also other restrictions like not selling, or transferring the collected data apply at any given time. So it is absolutely necessary to read through these terms of services before choosing Facebook as a reliable datasource.~\cite{Facebook2010-04-10}
+     \item Facebook owns a dedicated terms of service document for collecting data from Facebook 		       through automated means. Before any automatic data collection takes place, a written permission has to be obtained by Facebook. Without this permission it is not allowed to scrape any data. Also other restrictions like not selling, or transferring the collected data apply at any given time. So it is absolutely necessary to read through these terms of services and contact Facebook before choosing it as a reliable datasource.~\cite{Facebook2010-04-10}
    \end{itemize}
    \item Streaming API
    \begin{itemize}
@@ -264,11 +272,11 @@ Facebook offers a highly efficient and very good documented API for getting data
    \end{itemize}
    \item Rate limits
    \begin{itemize}
-     \item Like every major API, also Facebook’s API has some rate limits which will apply if too many requests are sent. During this work the rate limit only appeared once while a lot of pages for one keyword were crawled. So we assume that the rate limitation will not apply many times while using the API.~\cite{Facebook2016-06-09} 
+     \item The Graph API has some rate limits which will apply if too many requests are sent to it. During this work the rate limit only appeared once while a lot of pages for one keyword were crawled. So we assume that the rate limitation will not apply many times while using the API.~\cite{Facebook2016-06-09} 
    \end{itemize}
    \item No access to public posts
    \begin{itemize}
-     \item On April 30th, 2015 made a breaking change to their search API endpoint. By then it was possible to search for public posts on Facebook through \url{/search?type=post&q=foobar}. After this day the endpoint was deprecated and only exclusively available for approved companies. From then on, it was not possible to get any public user post anymore. With this change the API lost the most promising endpoint for companies for monitoring the network. Without the opportunity to crawl public posts from users the only available reliable source for getting posts about different keywords is the page endpoint. With this it is possible to search the pages directory regarding specific keywords and retrieve posts from them. 
+     \item On April 30th, 2015 made a breaking change to their search API endpoint. By then it was possible to search for public posts on Facebook through \url{/search?type=post&q=foobar}. After this day the endpoint was deprecated and exclusively available for approved companies. From then on, it was not possible to get any public user post. With this change in the API, it lost the most promising endpoint for companies for monitoring the network. Without the opportunity to crawl public posts from users the only available reliable source for getting posts is the page endpoint. With this it is possible to search the pages directory regarding specific keywords and retrieve posts from them. 
 In fact, a company could try to apply for a license to get access to the post search endpoint, but it seems that this is only available to a limited set of media publishers.~\cite{Facebook2013-09-06} 
    \end{itemize}
 \end{enumerate}
@@ -277,29 +285,26 @@ In fact, a company could try to apply for a license to get access to the post se
 
 \subsubsection{Workflow}
 
-The restrictions explained in \autoref{subsub:fbrestrictions} lead us to nearly drop Facebook from our workflow. But we tried to find a suitable way to get the most out of the remaining available endpoints.
-To overcome the restriction of the Facebook API, we tried to get as much information out of the pages search endpoint. This is the base endpoint for our dataset. It offers the opportunity to specify keywords which the pages need to match returned by the API. We used this to only get pages about AbbVie, their competitors, products from them and diseases which should be healed by those products. Afterwards it is necessary to restrict the retrieved pages to only those which are in a pharmaceutical context. Then the posts and comments from the pages can be crawled and saved for later work.\par
-One major drawback of this approach is that the number of pages and posts on these pages with pharmaceutical context are very low. Only a few conversation about adverse drug reaction, opinions about drugs and companies take place on pages. Most of those discussion arise from user posts, which are not accessible programmatically. Furthermore the conversation inside Facebook pages is very limited and seems to be very biased related to the keyword of the page.
+The restrictions explained in \autoref{subsub:fbrestrictions} lead us to nearly drop Facebook from our workflow, but we tried to find a suitable way to get the most out of the remaining available endpoints.
+To overcome the deprecation of the post search endpoint, we tried to get as much information out of the pages search endpoint as we could. This serves the base endpoint for our work. It offers the opportunity to specify keywords which the pages need to match to be returned by the API. We used the keywords from \autoref{tab:collkeywords} to crawl the pages directory. Afterwards it was necessary to restrict the retrieved pages to only those which were in a pharmaceutical context. Then the posts and comments from the pages can be crawled and saved for later work.\par
+One major drawback of this approach is that the amount of pages and posts on these pages are very low. Only a few conversation about adverse drug reaction, opinions about drugs and companies take place on them. Furthermore the conversation inside those pages seems to be very limited and biased related to the keyword of the page.
 So this approach may not lead to a good overview about opinions on different keywords but for us it was the most suitable way to get data from Facebook.
-
 
 \subsubsection{The dataset}
 \subsubsection{Conclusion}
 At first Facebook seemed to be a good and reliable data source for this project. But quickly it became clear that this is not the case. With the restriction of the public post search it is impossible to get all user posts about a keyword. It’s only possible to get posts of pages and the corresponding comments to them. But if often occurs that posts on pages are very biased regarding the keyword of the page. Also a lot of pages in the pharmaceutical context seem to not get updated very often and some seem to be very abandoned. So the breaking point here definitely is the depreciation of the API endpoint for searching posts. This leads to the fact, that Facebook can not be used as a suitable data source for topic monitoring social media. Therefore we dropped the Facebook dataset out of the calculation and algorithms.
 
 
-
 \subsection{Twitter API}´
 \label{subsec:twapi}
-
 
 \subsubsection{Overview}
 \label{subsub:twoverview}
 
 
-Like Facebook, Twitter also offers \acrshort{api}s to programmatically access data. They are divided into two different parts. One part are \acrfull{rest} conform ones which use simple\acrshort{http} requests to create new tweets, read user profile, search for tweets and more.
+Like Facebook, Twitter also offers \acrshort{api}s to programmatically access data. They are divided into two different parts. One part are static \acrfull{rest} conform ones which use simple\acrshort{http} requests to create new tweets, read user profile, search for tweets and more.
 \par
-\noindent The second part are dynamic \acrshort{api}s, better known as the Streaming API. They give applications access to the global stream of Twitter data, without any overhead or by pulling data from the static \acrshort{api} endpoints. In total there are three different streaming endpoints.
+\noindent The second part are dynamic \acrshort{api}s, better known as the Streaming API. They give applications access to the global real-time stream of Twitter data, without any overhead or by pulling data from the static \acrshort{api} endpoints. In total Twitter offers three different streaming endpoints:
 
 \begin{enumerate}
    \item Public stream: For public Twitter data
@@ -307,7 +312,7 @@ Like Facebook, Twitter also offers \acrshort{api}s to programmatically access da
    \item Site stream: Multi user version of user streams
 \end{enumerate}
 
-This streaming endpoints differ significantly from the static endpoints. 
+This streaming endpoints differ significantly from the static endpoints. They are keeping a persistent \acrshort{http} connection open between client and server. The server then is streaming tweets as they occur and the client is responsible for processing and storing the result. This resolves into a realtime stream of twitter data which makes any application working with this model reactive and everytime up-to-date.\cite{Twitter2012-05-15}
 
 \subsubsection{Restriction}
 \label{subsub:twrestrictions}
@@ -379,8 +384,6 @@ Furthermore the response from this endpoint is very comprehensive so it is not n
   lang: 'en',
   timestamp_ms: '1503321434179' }
 \end{lstlisting}
-
-
 
 
 

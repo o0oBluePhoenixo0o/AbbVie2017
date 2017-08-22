@@ -104,38 +104,16 @@ global.sentimentWorker = sentimentWorker;
 global.topicWorker = topicWorker;
 
 
-console.log("finding tweets with no hashtag")
-Tweet.findAll({
-    where: {
-        hashtags: { $eq: null }
-    }
-}).then(async tweets => {
-    console.log(tweets.length)
-
-    for (var index in tweets) {
-        var tweet = tweets[index];
-        console.log("update tweet: " + tweet.id)
-        await Tweet.upsert({
-            id: tweet.id,
-            hashtags: extractHashTagsFromString(tweet.message)
-        })
-    }
-}).catch(e => {
-    console.log(e);
-});
-
-twitterCrawler.start();
-/*var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
+var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
 console.log(h20Process);
 h20Process.call();
-logger.log('info', "Wait 2 minutes to let the h2o server start up")
+logger.log('info', "Wait 1 minute to let the h2o server start up")
 setTimeout(() => {
-    twitterCrawler.start()
-    //sentimentWorker.start()
-    //topicWorker.start();
-    //h20Process.kill()
+    //twitterCrawler.start()
+    sentimentWorker.start()
+    topicWorker.start();
 }, 60000) // wait 1 minute for new tweets to come ine
-*/
+
 
 
 // Gracefully kill the h2o server process
