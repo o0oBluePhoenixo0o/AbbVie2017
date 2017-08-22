@@ -154,7 +154,14 @@ else:
     #Use textblob to get polarity of text with Naive Bayes analyzer
     tb = Blobber(analyzer=NaiveBayesAnalyzer())
     textblob2= pd.DataFrame( index=range(0,1),columns = {'sentimentNB'} )
-    textblob2['sentimentNB']= tb(data_t).sentiment.classification
+    #textblob2['sentimentNB']= tb(data_t).sentiment.classification
+    if(tb(data_t).sentiment.p_pos>0.7):
+        textblob2['sentimentNB']= "pos"
+    elif(tb(data_t).sentiment.p_neg>0.7):
+        textblob2['sentimentNB']= "neg"
+    else:
+        textblob2['sentimentNB']= "neu"
+
 
     vader = np.asarray(vader)
 
