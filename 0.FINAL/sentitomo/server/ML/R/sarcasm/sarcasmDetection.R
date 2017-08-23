@@ -15,7 +15,7 @@ args = commandArgs(trailingOnly=TRUE)
 # Extract out only ID & Message
 
 TW_df <- args[1]
-
+TW_df <- convertAbbreviations(TW_df)
 ###################################################
 # Preprocessing the TW_df and cleaning the corpus #
 ###################################################

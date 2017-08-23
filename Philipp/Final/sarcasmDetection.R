@@ -3,6 +3,7 @@ source("./ML/R/needs.R");
 needs(e1071)
 needs(tm)
 needs(data.table)
+needs(dplyr)
 
 #load list of models
 load("./ML/R/sarcasm/Sarcasm_Obj.RData");
@@ -14,7 +15,7 @@ args = commandArgs(trailingOnly=TRUE)
 # Extract out only ID & Message
 
 TW_df <- args[1]
-
+TW_df <- convertAbbreviations(TW_df)
 ###################################################
 # Preprocessing the TW_df and cleaning the corpus #
 ###################################################
@@ -76,7 +77,7 @@ prep[, (del.words) := NULL]
 prep <- as.data.frame(prep)
 
 #create new dtm that matches original dtm for training
-xx <- left_join(prep,df[1,])
+xx <- tryCatch({left_join(prep,df[1,])}, error = function(e){message(e)})
 
 #put everything to 0s except the message
 xx[,ncol(prep)+1:ncol(xx)] <- 0
@@ -91,4 +92,5 @@ xx <- data.frame(lapply(xx, as.factor))
 # for robust Naive Bayes model with laplace estimator
 n.pred.lap <- predict(n.model.lap, xx, type = 'raw')
 output <- round(n.pred.lap[1,2]*100,2)
+
 cat(unname(output))

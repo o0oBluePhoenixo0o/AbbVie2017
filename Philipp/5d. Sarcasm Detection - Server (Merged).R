@@ -1,3 +1,4 @@
+
 # clear the environment
 rm(list= ls())
 
@@ -10,8 +11,8 @@ require(dplyr)   # for faster data operations
 require(data.table)
 require(caTools)
 require(e1071)
+library(qdap)
 
-######################################################################
 loadAbbrev <- function(filename) {
   # Concates custom abbreviation dataset with the default one from qdap
   #
@@ -45,7 +46,7 @@ convertAbbreviations <- function(message){
     return (newText)
   }
 }
-################################################################
+
 # Get data from manual label dataset
 manual_test <- read.csv("Final_Manual_3007.csv", as.is = TRUE, sep = ",", stringsAsFactors = F)
 
@@ -61,9 +62,7 @@ TW_df <- unique(TW_df)
 
 # Merge manual label dataset with 91k
 TW_df <- rbind(TW_df,manual_test)
-
 TW_df$tweet <- convertAbbreviations(TW_df$tweet)
-
 ## Preprocessing the TW_df and cleaning the corpus
 # user defined variables and functions
 # Function for taking in the vector from TW_df data set and do all preprocessing steps below:
@@ -228,8 +227,8 @@ n.pred.lap <- predict(n.model.lap, test[,-1], type = 'class')
 
 xtab.lap <- table('Actual class' = test[,1], 'Predicted class' = n.pred.lap )
 caret::confusionMatrix(xtab.lap)
-
 #############################################################################
+
 
 #save del.word for references
 # 
