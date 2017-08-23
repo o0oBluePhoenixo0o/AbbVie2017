@@ -1,3 +1,4 @@
+#Download the libraries
 import sys
 import nltk
 import re
@@ -18,19 +19,26 @@ from textblob.sentiments import NaiveBayesAnalyzer
 data_t = sys.argv[1]
 data_t = data_t.decode('ascii', 'replace')
 
-#lowercase
 data_t = data_t.lower()
+
+# In[23]:
 
 #Abbriviation translation
 with open('./ML/Python/abbrev.csv', mode='r') as infile:
     reader = csv.reader(infile)
     replacement = {rows[0].lower(): rows[1].lower() for rows in reader}
 
+# In[24]:
+
 result = pd.DataFrame()
 result = data_t
 
+# In[25]:
+
 for i in range(len(result)):
     data_t = ' '.join([replacement.get(w, w) for w in data_t.split()])
+
+# In[26]:
 
 #lowercase
 data_t = data_t.lower()
@@ -47,9 +55,15 @@ data_t = data_t.replace(r'@[a-zA-Z0-9]*', "")
 #remove _
 #data_t = data_t.str.replace(r'\_+',"")
 
+# In[27]:
+
 vec = joblib.load('./ML/Python/sentiment/vec.pkl')
 
+# In[28]:
+
 data_tt = data_t
+
+# In[29]:
 
 data_tt = data_tt.split(" ")
 data_text = pd.DataFrame(data_tt)
@@ -57,6 +71,8 @@ old = len(data_text)
 names = vec.get_feature_names()
 names_text = pd.DataFrame(names)
 new = len(data_text.merge(names_text, how='inner'))
+
+# In[ ]:
 
 if (old == new):
     sclf = joblib.load('./ML/Python/sentiment/stacking.pkl')
@@ -69,10 +85,13 @@ if (old == new):
     prediction = prediction_sclf.item(0)
     #Convert the result to "pos",""neg" or "neu"
     if ((prediction > 0)):
+
         result = 'pos'
     elif ((prediction < 0)):
+
         result = 'neg'
     else:
+
         result = 'neu'
     #print(result)
 else:
@@ -106,13 +125,7 @@ else:
     #Use textblob to get polarity of text with Naive Bayes analyzer
     tb = Blobber(analyzer=NaiveBayesAnalyzer())
     textblob2 = pd.DataFrame(index=range(0, 1), columns={'sentimentNB'})
-    #textblob2['sentimentNB']= tb(data_t).sentiment.classification
-    if (tb(data_t).sentiment.p_pos > 0.7):
-        textblob2['sentimentNB'] = "pos"
-    elif (tb(data_t).sentiment.p_neg > 0.7):
-        textblob2['sentimentNB'] = "neg"
-    else:
-        textblob2['sentimentNB'] = "neu"
+    textblob2['sentimentNB'] = tb(data_t).sentiment.classification
 
     vader = np.asarray(vader)
 
@@ -140,3 +153,5 @@ elif (result == "neg"):
     print("negative")
 else:
     print("neutral")
+
+# In[ ]:

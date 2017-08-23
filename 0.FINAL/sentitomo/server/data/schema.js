@@ -50,6 +50,7 @@ const typeDefinitions = `
     id: String
     topicId: String
     topicContent: String
+    topicHeadline: String
     probability: Float
   }
 

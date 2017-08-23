@@ -59,14 +59,14 @@ export function listenToSockets(httpServer) {
                         detectTopicLDADynamic(filename).then(result => {
                             var result = JSON.parse(result.toString().replace("/\r?\n|\r/g", ""))
                             var tweetsIDs = result.map((entry) => { return entry.key })
-
-
                             var returnResult = new Object();
                             var returnTweets = new Array();
-
+                            console.log(tweetsIDs)
                             // Enrich the result of the LDA topic detection with data from the database
                             Tweet.findAll({ where: { id: tweetsIDs }, include: [TweetSentiment] }).then(tweets => {
+
                                 tweets.forEach((tweet) => {
+
                                     var topicTweet = result.find(x => x.key == tweet.id)
                                     returnTweets.push({
                                         id: tweet.id,
