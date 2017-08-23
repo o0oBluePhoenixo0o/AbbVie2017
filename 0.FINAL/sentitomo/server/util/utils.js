@@ -78,7 +78,7 @@ function stripHTMLTags(text) {
  */
 function extractHashTagsFromString(text) {
     var matches = text.match(/\B\#\w\w+\b/g);
-    return matches ? matches.filter((element, index, array) => index === array.indexOf(element)).join(',').replace('#', '') : null; // Filter array to have uniques and join them by ","*/
+    return matches ? matches.filter((element, index, array) => index === array.indexOf(element)).join(',').replace(/#/g, '') : null; // Filter array to have uniques and join them by ","*/
 }
 
 /**

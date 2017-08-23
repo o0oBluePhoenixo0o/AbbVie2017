@@ -37,81 +37,6 @@ preprocess_df <- df$re_message
 
 
 ########################################################################################
-#build the corpus
-#myCorpus <- Corpus(VectorSource(preprocess_df))
-
-
-#convert to lower case
-#myCorpus <- tm_map(myCorpus,content_transformer(tolower))
-
-
-#remove URLs
-#removeURL <- function(x) gsub("http[^[:space:]]*","",x)
-#myCorpus <- tm_map(myCorpus,content_transformer(removeURL))
-
-
-#remove anything other than English letters or space
-#removeNumPunct <-function(x) gsub("[^[:alpha:][:space:]]*","",x)
-#myCorpus <- tm_map(myCorpus,content_transformer(removeNumPunct))
-
-
-#add two extra stop words:"rt" and "via"
-#myStopwords <- c(stopwords("SMART"),"rt","via")
-#remove "r" and "big" from stopwords
-#myStopwords <- setdiff(myStopwords,c("r","big"))
-#remove stopwords from corpus
-#myCorpus <- tm_map(myCorpus,removeWords,myStopwords)
-
-
-#remove extra whitespace
-#myCorpus <- tm_map(myCorpus,stripWhitespace)
-
-
-# change list--"myCorpus" into data frame
-#preprocess_file <- do.call(rbind, lapply(myCorpus, data.frame, stringsAsFactors=FALSE))
-#a<-do.call(rbind,sapply(myCorpus, numeric))
-
-
-#colnames(preprocess_file)<- c("pre_message")
-
-
-#preprocess_f <- sapply(as.numeric(preprocess_file$pre_message))
-#preprocess_final <- cbind(as.data.frame(df$id),
-#                          as.data.frame(df$created_time),
-#                          as.data.frame(df$message),
-#                          as.data.frame(preprocess_file))
-
-
-#preprocess_a <- preprocess_final[preprocess_final$pre_message!='',]
-#preprocess_b <- preprocess_a[preprocess_a$pre_message!=' ',]
-
-
-#file_model <- preprocess_b$pre_message
-
-
-#for(i in 1:length(preprocess_file))
-#{
-#  if(length(preprocess_file[i,1])==1)
-#  {
-#    preprocess_file[i,1]<-'nothing'
-#  }
-#}
-
-
-
-# loop for change list--"myCorpus" into data frame
-# it takes time
-#preprocess_file <- as.data.frame(matrix(NA,length(preprocess_df),1))
-#for(i in 1:length(preprocess_df))
-#{
-#  preprocess_file[i,1] <- as.character(myCorpus[[i]][1])
-#}
-
-
-# change data type to fit the method
-#preprocess_file <- as.character(preprocess_file)
-
-
 #define preprocessing function and tokenization function
 prep_fun <- tolower
 tok_fun <- text2vec::word_tokenizer
@@ -132,6 +57,7 @@ dtm <- create_dtm(it_df, vectorizer)
 
 
 
+
 #####################################################################################
 # prepare for topic modeling
 
@@ -139,8 +65,9 @@ dtm <- create_dtm(it_df, vectorizer)
 # Pick a random seed for replication
 SEED = sample(1:1000000, 1)  
 #  10 topics and 5 terms for each topic
-k = 10
+k = 40
 m = 10
+
 
 
 
@@ -156,6 +83,7 @@ models <- list(
   #Gibbs     = LDA(dtm, k = k, method = "Gibbs", control = list(seed = SEED, burnin = 1000,
   #                                                            thin = 100,    iter = 1000)) 
 )
+
 
 
 
@@ -178,6 +106,7 @@ colnames(topic) <- c("CTM.Topic")
 
 
 
+
 #######################################################################################
 # matrix of tweet assignments to predominate topic on that tweet for each of the models
 assignments <- as.data.frame(sapply(models, topics))
@@ -192,6 +121,7 @@ for(i in 1:length(preprocess_df))
 
 
 
+
 #######################################################################################
 # build the data fram for messages and topics
 topicmodel <- cbind(as.data.frame(df$id), 
@@ -200,7 +130,4 @@ topicmodel <- cbind(as.data.frame(df$id),
                     assignments_change)
 
 
-
-
-#########################################################################################
 

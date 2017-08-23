@@ -29,6 +29,9 @@ import { listenToSockets } from './service/sockets';
 import { JavaShell } from './util/foreignCode'
 var nodeCleanup = require('node-cleanup');
 
+import { Tweet } from './data/connectors';
+import { extractHashTagsFromString } from './util/utils';
+
 
 
 import moment from 'moment';
@@ -99,18 +102,18 @@ http.listen(GRAPHQL_PORT, () => logger.log('info',
 global.appRoot = __dirname;
 global.sentimentWorker = sentimentWorker;
 global.topicWorker = topicWorker;
-twitterCrawler.start()
-/*var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
+
+
+var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
 console.log(h20Process);
 h20Process.call();
-logger.log('info', "Wait 2 minutes to let the h2o server start up")
+logger.log('info', "Wait 1 minute to let the h2o server start up")
 setTimeout(() => {
-    
-    //sentimentWorker.start()
-    //topicWorker.start();
-    //h20Process.kill()
+    //twitterCrawler.start()
+    sentimentWorker.start()
+    topicWorker.start();
 }, 60000) // wait 1 minute for new tweets to come ine
-*/
+
 
 
 // Gracefully kill the h2o server process

@@ -82,6 +82,7 @@ export default class SentimentWorker {
                         })
                     }
                     logger.log('info', "10 Sentiments of tweets detected ")
+                    this.detectSentiments();
                 } else {
                     setTimeout(() => this.detectSentiments(), 600000) // wait 10 minutes for new tweets to come ine
                 }
