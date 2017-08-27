@@ -11,16 +11,12 @@ import os
 #os.remove('./ML/Python/static/final_twitter_preprocessing_0720.csv')
 #os.remove('./ML/Python/static/twitter_preprocessing_0720.csv')
 start_time = time.time()
-#df = pd.read_csv('./ML/Python/static/twitter_utf16_0720.csv', encoding='UTF-16LE',index_col=0)
-#df = pd.read_csv(sys.argv[1], encoding='UTF-16LE',index_col=0)
 #disease = pd.read_csv('./ML/Python/static/Final_TW_0807_prep.csv', encoding='ISO-8859-2', low_memory=False)
 #disease = pd.read_csv(sys.argv[1], encoding='UTF-8', low_memory=False)
 #df = pd.DataFrame(disease, columns = ['Id','key','created_time','Language', 'message'])
 #df.columns=['id', 'key', 'created_time', 'language','message']
-#df.to_csv("twitter_utf8_0720.csv", encoding='UTF-8',columns = ['id', 'key','created_time', 'language','message'])
-#df = pd.read_csv('twitter_utf16_0720.csv', encoding='UTF-16LE',index_col=0)
 import gensim
-from gensim import corpora
+from gensim import corpora, models, similarities
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from nltk.stem import WordNetLemmatizer
@@ -32,30 +28,23 @@ df_postn = pd.read_csv(
     sep=',',
     index_col=0)
 df_postn.index = range(len(df_postn))
-#display(df_postn.head(3))
-#print(len(df_postn))
 stop = set(stopwords.words('english'))
 exclude = set(string.punctuation)
 lemma = WordNetLemmatizer()
 
 
-#corpus=list(df_postn['re_message'])
 def tokenize(doc):
     tokens = ' '.join(re.findall(r"[\w']+", str(doc))).lower().split()
     x = [''.join(c for c in s if c not in string.punctuation) for s in tokens]
     x = ' '.join(x)
-    #print(x)
     stop_free = " ".join([i for i in x.lower().split() if i not in stop])
-    #print(doc.lower().split())
     punc_free = ''.join(ch for ch in stop_free if ch not in exclude)
     normalized = " ".join(
         lemma.lemmatize(word, pos='n') for word in punc_free.split())
     normalized = " ".join(
         lemma.lemmatize(word, pos='v') for word in normalized.split())
-    word = " ".join(word for word in normalized.split() if len(word) > 2)
-    #print(word.split())
+    word = " ".join(word for word in normalized.split() if len(word) > 3)
     postag = nltk.pos_tag(word.split())
-    #print(postag)
     #irlist=[',','.',':','#',';','CD','WRB','RB','PRP','...',')','(','-','``','@']
     poslist = ['NN', 'NNP', 'NNS', 'RB', 'RBR', 'RBS', 'JJ', 'JJR', 'JJS']
     wordlist = [
@@ -63,13 +52,11 @@ def tokenize(doc):
     ]
     adjandn = [
         word for word, pos in postag
-        if pos in poslist and word not in wordlist and len(word) > 2
+        if pos in poslist and word not in wordlist and len(word) > 3
     ]
-    #normalized = adjandn.split()
     return ' '.join(adjandn)
 
 
-#type(df_postn['created_time'][0])
 import datetime
 import dateutil.relativedelta
 
@@ -86,7 +73,7 @@ def dateselect(day):
 
 
 corpus = list(df_postn['re_message'])
-import pickle
+
 directory = "./ML/Python/topic/lda/static/doc_clean.txt"
 if os.path.exists(directory):
     with open("./ML/Python/topic/lda/static/doc_clean.txt",
@@ -97,7 +84,7 @@ else:
     with open("./ML/Python/topic/lda/static/doc_clean.txt",
               "wb") as fp:  #Pickling
         pickle.dump(doc_clean, fp)
-directory = "./ML/Python/topic/lda/static/corpus.dict"
+directory = "./ML/Python/topic(static/corpus.dict"
 if os.path.exists(directory):
     dictionary = corpora.Dictionary.load(
         './ML/Python/topic/lda/static/corpus.dict')
@@ -105,6 +92,8 @@ else:
     dictionary = corpora.Dictionary(doc_clean)
     dictionary.save('./ML/Python/topic/lda/static/corpus.dict')
 doc_term_matrix = [dictionary.doc2bow(doc) for doc in doc_clean]
+tfidf = models.TfidfModel(doc_term_matrix)
+finalcorpus = tfidf[doc_term_matrix]
 
 from gensim.models import CoherenceModel, LdaModel, LsiModel, HdpModel
 directory = "./ML/Python/topic/lda/static/lda.model"
@@ -112,19 +101,20 @@ if os.path.exists(directory):
     ldamodel = LdaModel.load('./ML/Python/topic/lda/static/lda.model')
 else:
     ldamodel = LdaModel(
-        doc_term_matrix,
-        num_topics=40,
+        finalcorpus,
+        num_topics=30,
         id2word=dictionary,
         update_every=10,
         chunksize=10000,
-        passes=10)
+        passes=10,
+        eta=None,
+        alpha=0.05)
     ldamodel.save('./ML/Python/topic/lda/static/lda.model')
-#ldamodel = LdaModel(doc_term_matrix, num_topics=40, id2word = dictionary, update_every=10, chunksize=10000, passes=10)
-#print((time.time() - start_time))
+
 import pyLDAvis.gensim as gensimvis
 import pyLDAvis
 #ldamodel=LdaModel.load('./ML/Python/static/lda.model')
-vis_data = gensimvis.prepare(ldamodel, doc_term_matrix, dictionary)
+vis_data = gensimvis.prepare(ldamodel, finalcorpus, dictionary)
 pyLDAvis.save_html(vis_data,
                    './ML/Python/topic/lda/static/static_lda_result.html')
 vistopicid = vis_data[6]
@@ -133,7 +123,7 @@ for j in range(1, len(vistopicid) + 1):
     idlist.append([i for i, x in enumerate(vistopicid) if x == j][0])
 topicwords = {}
 no = 0
-for prob in ldamodel.show_topics(20, 10):
+for prob in ldamodel.show_topics(30, 10):
     tokens = ' '.join(re.findall(r"[\w']+", str(prob[1]))).lower().split()
     x = [''.join(c for c in s if c not in string.punctuation) for s in tokens]
     result = ' '.join([i for i in x if not i.isdigit()])

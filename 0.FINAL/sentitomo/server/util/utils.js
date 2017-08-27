@@ -1,6 +1,9 @@
 /** @module Utils 
  * @description Some useful methods for working with strings or importing data
 */
+import fs from 'fs';
+import csv from 'fast-csv';
+import dl from 'datalib';
 
 var _this = this;
 
@@ -111,7 +114,7 @@ function importTweetCsv(csvFile) {
             datas.push(data);
         })
         .on('end', () => {
-            var interval = 10 * 400; // 1 seconds;
+            var interval = 10 * 400; // 4 seconds;
             for (var i = 0; i <= datas.length - 1; i++) {
                 if (datas[i]['Language'] == 'eng') {
                     setTimeout(
@@ -186,4 +189,78 @@ function importTweetCsv(csvFile) {
 
 }
 
-export { extractHashTagsFromString, extractHashtagsFromTweet, occurrences, getKeyword, stripHTMLTags, importTweetCsv }
+/**
+ * @function buildCommonTopicHeader
+ * @param  {String} csvFile Path to the csv file which contains our allocation of topic contents and their respective common topic headlines
+ * @description Build an array out of our csv file which contain allocation of topic contents and their respective common topic names
+ * @return {Array} Array with topic content terms and their corresponding common topic name
+ */
+function buildCommonTopicHeader(csvFile) {
+    return new Promise((resolve, reject) => {
+        var stream = fs.createReadStream(csvFile);
+        var commonHeadlines = new Array();
+        csv
+            .fromStream(stream, { headers: true, objectMode: true })
+            .on('data', data => {
+                commonHeadlines.push(data);
+            })
+            .on('end', () => {
+                resolve(commonHeadlines);
+            })
+    })
+}
+
+/**
+ * @function commonTopicHeader
+ * @param  {String} topicContent Topic content string out of database
+ * @param  {Array} commonHeadlines  Array of topic contents with their headlines
+ * @description Tries to find a common topic header for a given topic content based on previously build array of associations bewteen topic contents and headline
+ * @see {@link module:Utils~buildCommonTopicHeader}
+ * @return {String} Common topic name for given topic content
+ */
+function commonTopicHeader(topicContent, commonHeadlines) {
+    const terms = topicContent.split(', ');
+
+    var flattened = commonHeadlines.reduce(function (result, element) {
+        let index = terms.indexOf(element.term)
+        if (index != -1) {
+            var commonName = commonHeadlines[index];
+            for (const key of Object.keys(commonName)) {
+                commonName[key] = parseInt(commonName[key])
+            }
+            delete commonName["term"]
+            return result.concat(commonName);
+
+        } else {
+            return result;
+        }
+    }, []);
+
+    //Prepare reference object for extracting keys
+    var referenceObj = commonHeadlines[1];
+    delete referenceObj["term"]
+    var termsArray = new Array();
+
+    for (const key of Object.keys(referenceObj)) {
+
+        var term = dl.groupby(key).count().execute(flattened).filter(element => {
+            return element[key] == 1;
+        })[0];
+
+        // prepare term object
+        if (term) {
+            term.term = Object.keys(term)[0];
+            delete term[Object.keys(term)[0]]
+            termsArray.push(term)
+        }
+    }
+
+    console.log(termsArray);
+    const highesTerm = termsArray.reduce((prev, current) => (prev.count > current.count) ? prev : current) //most appropriate term for list of topic content
+    console.log(highesTerm.term);
+    return highesTerm.term;
+}
+
+
+
+export { extractHashTagsFromString, extractHashtagsFromTweet, occurrences, getKeyword, stripHTMLTags, importTweetCsv, buildCommonTopicHeader, commonTopicHeader }

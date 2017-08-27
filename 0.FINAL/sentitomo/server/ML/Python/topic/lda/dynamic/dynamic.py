@@ -173,7 +173,7 @@ finalcorpus = tfidf[doc_term_matrix]
 from gensim.models import CoherenceModel, LdaModel, LsiModel, HdpModel
 ldamodel = LdaModel(
     finalcorpus,
-    num_topics=40,
+    num_topics=30,
     id2word=dictionary,
     update_every=10,
     chunksize=5000,
@@ -195,7 +195,7 @@ for j in range(1, len(vistopicid) + 1):
 
 topicwords = {}
 no = 0
-for prob in ldamodel.show_topics(40, 10):
+for prob in ldamodel.show_topics(30, 10):
     tokens = ' '.join(re.findall(r"[\w']+", str(prob[1]))).lower().split()
     x = [''.join(c for c in s if c not in string.punctuation) for s in tokens]
     result = ' '.join([i for i in x if not i.isdigit()])

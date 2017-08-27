@@ -2,6 +2,7 @@ import moment from 'moment';
 import { convertRawToCsv } from '../util/export';
 import { Tweet, TweetTopic } from '../data/connectors';
 import { detectTopicLDAStaticBatch } from "../ML/ml_wrapper";
+import { buildCommonTopicHeader, commonTopicHeader } from '../util/utils';
 import logger from './logger';
 
 /**
@@ -71,17 +72,21 @@ export default class TopicWorker {
                     convertRawToCsv(tweets, filename).then(async filename => {
                         var topicArray = await detectTopicLDAStaticBatch(filename);
                         var topicArrayObj = JSON.parse(topicArray);
-                        for (let topicObj of topicArrayObj) {
-                            await TweetTopic.upsert({
-                                id: topicObj.key,
-                                topicId: topicObj.id,
-                                topicContent: topicObj.topic,
-                                probability: topicObj.probability
-                            })
-                        }
-                        logger.log('info', '100 topics of tweets detected');
-                        this.detectTopics();
 
+                        // find out common topic headlines and then insert it 
+                        buildCommonTopicHeader('./ML/topic_dictionary.csv').then(async commonHeader => {
+                            for (let topicObj of topicArrayObj) {
+                                await TweetTopic.upsert({
+                                    id: topicObj.key,
+                                    topicId: topicObj.id,
+                                    topicContent: topicObj.topic,
+                                    topicHeadline: commonTopicHeader(topicObj.topic, commonHeader),
+                                    probability: topicObj.probability
+                                })
+                            }
+                            logger.log('info', '100 topics of tweets detected');
+                            this.detectTopics();
+                        });
                     })
                 } else {
                     setTimeout(() => this.detectTopics(), 600000) // wait 10 minutes for new tweets to come ine

@@ -11,7 +11,7 @@ import datetime
 import dateutil.relativedelta
 from nltk.corpus import stopwords
 import pickle
-from gensim import corpora
+from gensim import corpora, models, similarities
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from nltk.stem import WordNetLemmatizer
@@ -39,34 +39,28 @@ def tokenize(doc):
     x = [''.join(c for c in s if c not in string.punctuation) for s in tokens]
     x = ' '.join(x)
     stop_free = " ".join([i for i in x.lower().split() if i not in stop])
-    #print(doc.lower().split())
     punc_free = ''.join(ch for ch in stop_free if ch not in exclude)
     normalized = " ".join(
         lemma.lemmatize(word, pos='n') for word in punc_free.split())
     normalized = " ".join(
         lemma.lemmatize(word, pos='v') for word in normalized.split())
-    word = " ".join(word for word in normalized.split() if len(word) > 2)
-
+    word = " ".join(word for word in normalized.split() if len(word) > 3)
     postag = nltk.pos_tag(word.split())
-
+    #irlist=[',','.',':','#',';','CD','WRB','RB','PRP','...',')','(','-','``','@']
     poslist = ['NN', 'NNP', 'NNS', 'RB', 'RBR', 'RBS', 'JJ', 'JJR', 'JJS']
     wordlist = [
         'co', 'https', 'http', 'rt', 'www', 've', 'dont', "i'm", "it's"
     ]
     adjandn = [
         word for word, pos in postag
-        if pos in poslist and word not in wordlist and len(word) > 2
+        if pos in poslist and word not in wordlist and len(word) > 3
     ]
     return ' '.join(adjandn)
-
-
-#type(df_postn['created_time'][0])
 
 
 def dateselect(day):
     d = datetime.datetime.strptime(str(datetime.date.today()), "%Y-%m-%d")
     d2 = d - dateutil.relativedelta.relativedelta(days=day)
-    #df_postn['created_time']=pd.to_datetime(df_postn['created_time'])
     df_time = df_postn['created_time']
     df_time = pd.to_datetime(df_time)
     mask = (df_time > d2) & (df_time <= d)
@@ -86,7 +80,7 @@ else:
     with open("./ML/Python/topic/lda/static/doc_clean.txt",
               "wb") as fp:  #Pickling
         pickle.dump(doc_clean, fp)
-directory = "./ML/Python/topic(static/corpus.dict"
+directory = "./ML/Python/topic/lda/static/corpus.dict"
 if os.path.exists(directory):
     dictionary = corpora.Dictionary.load(
         './ML/Python/topic/lda/static/corpus.dict')
@@ -94,30 +88,34 @@ else:
     dictionary = corpora.Dictionary(doc_clean)
     dictionary.save('./ML/Python/topic/lda/static/corpus.dict')
 doc_term_matrix = [dictionary.doc2bow(doc) for doc in doc_clean]
-
+tfidf = models.TfidfModel(doc_term_matrix)
+finalcorpus = tfidf[doc_term_matrix]
 from gensim.models import CoherenceModel, LdaModel, LsiModel, HdpModel
 directory = "./ML/Python/topic/lda/static/lda.model"
 if os.path.exists(directory):
     ldamodel = LdaModel.load('./ML/Python/topic/lda/static/lda.model')
 else:
     ldamodel = LdaModel(
-        doc_term_matrix,
-        num_topics=40,
+        finalcorpus,
+        num_topics=30,
         id2word=dictionary,
         update_every=10,
         chunksize=10000,
-        passes=10)
+        passes=10,
+        eta=None,
+        alpha=0.05)
     ldamodel.save('./ML/Python/topic/lda/static/lda.model')
 
-vis_data = gensimvis.prepare(ldamodel, doc_term_matrix, dictionary)
-#pyLDAvis.save_html(vis_data, './ML/Python/topic/static/lda_tw40_0720.html')
+vis_data = gensimvis.prepare(ldamodel, finalcorpus, dictionary)
+pyLDAvis.save_html(vis_data,
+                   './ML/Python/topic/lda/static/static_lda_result.html')
 vistopicid = vis_data[6]
 idlist = []
 for j in range(1, len(vistopicid) + 1):
     idlist.append([i for i, x in enumerate(vistopicid) if x == j][0])
 topicwords = {}
 no = 0
-for prob in ldamodel.show_topics(20, 10):
+for prob in ldamodel.show_topics(30, 10):
     tokens = ' '.join(re.findall(r"[\w']+", str(prob[1]))).lower().split()
     x = [''.join(c for c in s if c not in string.punctuation) for s in tokens]
     result = ' '.join([i for i in x if not i.isdigit()])
@@ -171,7 +169,6 @@ def getTopicForQuery_lda(question):
 
 df_postn.index = range(len(df_postn))
 k = []
-
 for i in range(len(df)):
     tp_dict = {}
     question = df["message"][i]
@@ -184,5 +181,4 @@ for i in range(len(df)):
     tp_dict['topic'] = ', '.join(topic[2])
     tp_dict['probability'] = topic[0]
     k.append(tp_dict)
-
 print(json.dumps(k))
