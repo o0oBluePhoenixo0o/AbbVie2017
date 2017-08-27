@@ -1,32 +1,64 @@
-# This is needed because qdap needs rJava and this seems to have some troubles to load on some OS
-# qdap needs Java 6 installed... what a old dude man...
-dyn.load('/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/server/libjvm.dylib')
-Sys.setenv(JAVA_HOME = '/Library/Java//Home')
-Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')
-
-# reading the data set from database
-
-attach(input[[1]])
-## Unstructured to Structured
-
-# In this code, we create a corpus, clean the corpus and 
-# Implement tokenization by creating DTM
+#########
+# Original (model building) version of Sarcasm Detection code
+#
+# The purpose of this code is to detect "Sarcasm" message
+# - Using "Distributed Random Forest" algorithm 
+# - Data preprocessing steps: convert abbreviations, clean texts, create document-term-matrix,..etc.
+# - Obtain overall 75% accuracy, 75~80% in both precision and recall
+############
 
 # clear the environment
 rm(list= ls())
 
 # check and set working directory
-setwd("~/GitHub/AbbVie2017/0.FINAL")
+setwd("~/GitHub/AbbVie2017/Philipp/")
 
 # loading  libraries
 require(tm)      # for text mining
 require(dplyr)   # for faster data operations
 require(data.table)
 require(caTools)
-require(e1071)
+require(qdap)
+
+# loading required package
+require(h2o) # to implement random forest quick
+
+loadAbbrev <- function(filename) {
+  # Concates custom abbreviation dataset with the default one from qdap
+  #
+  # Args:
+  #   filename: Filename of the abbreviation lexicon
+  #
+  # Returns:
+  #   A 2-column(abv,rep) data.frame
+  
+  myAbbrevs <- read.csv(filename, sep = ",", as.is = TRUE)
+  return(rbind(abbreviations,myAbbrevs))
+}
+
+myAbbrevs <- loadAbbrev('abbrev.csv')
+
+convertAbbreviations <- function(message){
+  # Replaces abbreviation with the corresporending long form
+  #
+  # Args:
+  #   text: Text to remove the abbreviations from
+  #
+  # Returns:
+  #   String
+  if(is.na(message) || message == ""){
+    return(message)
+  } else {
+    newText <- message
+    for (i in 1:nrow(myAbbrevs)){
+      newText <- gsub(paste0('\\<', myAbbrevs[[i,1]], '\\>'), paste(myAbbrevs[[i,2]]), newText)
+    }
+    return (newText)
+  }
+}
 
 # Get data from manual label dataset
-manual_test <- read.csv("input_data/Final_Manual_3007.csv", as.is = TRUE, sep = ",", stringsAsFactors = F)
+manual_test <- read.csv("Final_Manual_3007.csv", as.is = TRUE, sep = ",", stringsAsFactors = F)
 
 manual_test <- manual_test[,c(5,4,7)]
 colnames(manual_test) <- c("ID","tweet","label")
@@ -40,7 +72,7 @@ TW_df <- unique(TW_df)
 
 # Merge manual label dataset with 91k
 TW_df <- rbind(TW_df,manual_test)
-
+TW_df$tweet <- convertAbbreviations(TW_df$tweet)
 ## Preprocessing the TW_df and cleaning the corpus
 # user defined variables and functions
 # Function for taking in the vector from TW_df data set and do all preprocessing steps below:
@@ -186,22 +218,30 @@ Train.Test.list <- sample2train.test(master.factor,123)
 train <- Train.Test.list[[1]]
 test  <- Train.Test.list[[2]]
 
-# Naive Bayes model with laplace estimator 1
-# laplace = 1 ensures a non-zero probability for every feature
-n.model.lap <- naiveBayes(label~ ., data = train, laplace = 1)
+# Initializing h2o cluster
+h2o.init()
 
-# for robust Naive Bayes model with laplace estimator
-n.pred.lap <- predict(n.model.lap, test[,-1], type = 'class')
+set.seed(123)
 
-xtab.lap <- table('Actual class' = test[,1], 'Predicted class' = n.pred.lap )
-caret::confusionMatrix(xtab.lap)
-#############################################################################
+# loading data to h2o clusters 
+h.train     <- as.h2o(train)
+h.test      <- as.h2o(test)
 
+#--------------------------------------------------------------------
 
-#save del.word for references
-# 
-# save(del.words, file = 'del_word.dat')
-# # save the model for later use 23.07.2017
-# save(n.model.lap, file= "SD_NB_2307.dat")
+# creating predictor and target indices
+x <- 2:ncol(train)
+y <- 1
 
-save.image(file="Sarcasm_Obj.RData")
+# Building random forest model on factor data
+rf.model     <- h2o.randomForest(x=x, y=y, training_frame = h.train, ntrees = 1000)
+
+# Random forest evaluation for Factor data
+pred <- as.data.frame(h2o.predict(rf.model, h.test))
+caret::confusionMatrix(table('Actual class' = test$label, 'Predicted class' = pred$predict))
+
+# saving model 
+h2o.saveModel(rf.model, path = "N:/")
+
+# saving data objects
+save.image(file="Sarcasm_Obj_DRF.RData")
