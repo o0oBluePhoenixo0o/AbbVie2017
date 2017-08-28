@@ -1,11 +1,29 @@
+#########
+# Server version of Sarcasm Detection code
+#
+# The purpose of this code is to detect "Sarcasm" message
+# - Using "Distributed Random Forest" algorithm 
+# - Data preprocessing steps: convert abbreviations, clean texts, create document-term-matrix,..etc.
+# - Obtain overall 75% accuracy, 75~80% in both precision and recall
+############
+
 # loading required packages
 source("./ML/R/needs.R");
-needs(e1071)
+
 needs(tm)
 needs(data.table)
+needs(dplyr)
+needs(h2o)
+
+
+#disable logging, to make server life easier with reading the output, because h2o will output a lot of information messages
+sink("/dev/null")
+
+h2o.init()
+h2o.loadModel("./ML/R/sarcasm/DRF_model_R_1503836697697_1")
 
 #load list of models
-load("./ML/R/sarcasm/Sarcasm_Obj.RData");
+load("./ML/R/sarcasm/Sarcasm_Obj_DRF.RData");
 
 # Get the command line arguments
 args = commandArgs(trailingOnly=TRUE)
@@ -14,7 +32,7 @@ args = commandArgs(trailingOnly=TRUE)
 # Extract out only ID & Message
 
 TW_df <- args[1]
-
+TW_df <- convertAbbreviations(TW_df)
 ###################################################
 # Preprocessing the TW_df and cleaning the corpus #
 ###################################################
@@ -76,7 +94,7 @@ prep[, (del.words) := NULL]
 prep <- as.data.frame(prep)
 
 #create new dtm that matches original dtm for training
-xx <- left_join(prep,df[1,])
+xx <- tryCatch({left_join(prep,df[1,])}, error = function(e){message(e)})
 
 #put everything to 0s except the message
 xx[,ncol(prep)+1:ncol(xx)] <- 0
@@ -87,8 +105,12 @@ xx <- data.frame(lapply(xx[,1:ncol(xx)], function(x){ifelse(x==0,0,1)}))
 # Converting numericals to factors 
 xx <- data.frame(lapply(xx, as.factor))
 
+#put to h2o frame
+xxh2o <- as.h2o(xx)
+
 #########################################################################
-# for robust Naive Bayes model with laplace estimator
-n.pred.lap <- predict(n.model.lap, xx, type = 'raw')
-output <- round(n.pred.lap[1,2]*100,2)
+# Random forest evaluation for Factor data
+pred <- as.data.frame(h2o.predict(rf.model, xxh2o))
+output <- round(pred[1,2]*100,2)
+sink()
 cat(unname(output))
