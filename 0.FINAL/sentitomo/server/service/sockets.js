@@ -9,14 +9,14 @@ import logger from '../service/logger';
 
 /**
  * @function listenToSockets
- * @param  {Object} httpServer Express httpServer instance
- * @description Start up webserver sockets to allow a bidrectional communication between client and server. 
+ * @param  {Object} httpServer Express http server instance
+ * @description Start up webserver sockets to allow a bidirectional communication between client and server. 
  * <br />  <strong>Possible events: </strong>
  *      <ul>
  *          <li>client:runTopicDetection - Runs the topic detection method with specified time range, and also joins it with the sentiment from the database, invoked from the client</li>
  *          <li>client:getWorkers- Client requests the status of the topic and sentiment worker threads
- *          <li>client:toggleWorker- Client requests a change of the status of the topic and sentiment worker threads
- *          <li>client:getTrendsForRange Client requests a change of the status of the topic and sentiment worker threads
+ *          <li>client:toggleWorker- Client requests a change of the status of the topic and sentiment worker functions
+ *          <li>client:getTrendsForRange Client requests a change of the status of the topic and sentiment worker functions
  *      </ul>
  * @return {void} 
  */
@@ -30,7 +30,7 @@ export function listenToSockets(httpServer) {
         */
         socket.on('client:runTopicDetection', data => {
 
-            // Send a message to the client, to inidcate the process has started
+            // Send a message to the client, to indicate the process has started
             socket.emit('server:runTopicDetection', {
                 level: 'success',
                 message: 'Topic detection has started at: ' + new Date(),
@@ -45,7 +45,7 @@ export function listenToSockets(httpServer) {
                         $gt: data.from //greater than
                     }
                 },
-                raw: true //we use raw, we do not need to have access to the sequlize model here
+                raw: true //we use raw, we do not need to have access to the sequelize model here
             }).then(tweets => {
                 tweets.forEach(function (tweet, index) {
                     tweet.created = moment(tweet.created).format('YYYY-MM-DD hh:mm').toString();
@@ -61,7 +61,7 @@ export function listenToSockets(httpServer) {
                             var tweetsIDs = result.map((entry) => { return entry.key })
                             var returnResult = new Object();
                             var returnTweets = new Array();
-                            console.log(tweetsIDs)
+
                             // Enrich the result of the LDA topic detection with data from the database
                             Tweet.findAll({ where: { id: tweetsIDs }, include: [TweetSentiment] }).then(tweets => {
 

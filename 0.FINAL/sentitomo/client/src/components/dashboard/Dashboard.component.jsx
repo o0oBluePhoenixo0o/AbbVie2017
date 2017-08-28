@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     gql,
     graphql,
     withApollo
 } from 'react-apollo';
 
-import { Button, Card, Divider, Header, Dimmer, Grid, Loader, Message, Segment } from 'semantic-ui-react';
+import { Button, Card, Header, Dimmer, Grid, Loader, Segment } from 'semantic-ui-react';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import moment from 'moment';
-import TweetsList from './TweetsList.component';
-import Timeline from './Timeline.component';
 import Result from '../result/Result.component'
 import socket from "../../socket.js";
 
@@ -43,10 +41,9 @@ class Dashboard extends React.Component {
         });
     }
 
-
     /**
      * @function handleDayClick
-     * @param  {Object} day      
+     * @param  {Object} day Selected day
      * @param  {boolean} disabled Is the selected day disabled
      * @param  {boolean} selected Is the day which was clicked selected
      * @description Handles a click on the DayPicker component. Set the range state of this component and 
@@ -75,6 +72,13 @@ class Dashboard extends React.Component {
     };
 
 
+    /**
+     * @function loadTweets
+     * @desc Loads tweets from the GraphQL API and displays them based on the selected start and end date. After 
+     * retrieving the tweets a message is sent to server to detect the trends based on the selected time. When also this
+     * result is gathered API and trend detection array get merged and set as the new component state.
+     * @return {void}
+     */
     loadTweets() {
         this.setState({
             loading: true,
@@ -124,6 +128,9 @@ class Dashboard extends React.Component {
         });
     }
 
+    /**
+     * Handles the click on the 'reset' text when the user selects dates
+     */
     handleResetClick = e => {
         e.preventDefault();
         this.setState({
@@ -163,14 +170,14 @@ class Dashboard extends React.Component {
                                         to &&
                                         <p>
                                             You chose from
-                        {' '}
+                                            {' '}
                                             {moment(from).format('L')}
                                             {' '}
                                             to
-                        {' '}
+                                            {' '}
                                             {moment(to).format('L')}
                                             .
-                        {' '}<a href="." onClick={this.handleResetClick}>Reset</a>
+                                            {' '}<a href="." onClick={this.handleResetClick}>Reset</a>
                                         </p>}
                                     <p>You will view {tweetsSize} tweets. </p>
                                     <Button primary onClick={() => this.loadTweets()}>View tweets</Button>
@@ -185,10 +192,8 @@ class Dashboard extends React.Component {
                         </Grid.Row>
                     </Grid.Column>
                 </Grid>
-
             </Segment>
         );
     }
 }
-const DashboardWithData = withApollo(Dashboard);
 export default withApollo(Dashboard);

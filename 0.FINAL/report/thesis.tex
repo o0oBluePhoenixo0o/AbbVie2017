@@ -139,31 +139,44 @@
 \chapter{Introduction}
 \label{cha:intro}
 
-Today, in 2017 social media is ubiquitous and is taken for granted in our day-to-day life. From private person, single shops around the corner to large companies, almost everyone owns a social media account. The number of active users on the biggest social media platforms is tremendously high. Facebook has around 1.871 million active users (as of January 2017). Whatsapp and Facebook messenger share the number of 1.000 million active users. In comparison to Facebook, the number of 317 million active Twitter users may seem small but it still belongs to  the biggest social media platform of our time.~\cite{Chaffey2017-04-27}\newline 
-More than ever people share their thoughts about current global events like conflicts between different countries, political discussions, terrorism, rising diseases as well as the opinions to companies and products. 
-For companies nowadays it is easier than ever to find out what customer think and talk about them and their products. With Twitter we have one the highest reactive social media platforms of our time. Almost instantly people write messages (tweet) to react accordingly to new events in the world. Due to this fact companies try to effectively monitor Twitter and other social media platforms to get insights into the current customer situation regarding their product and company reputation.
-In the course of the ‘Master Team Project - Topic monitoring in the pharmaceutical industry by the University of Mannheim , this work especially focuses on the monitoring of social media for the pharmaceutical context. It is processed in cooperation with AbbVie Inc. located in Ludwigshafen, Germany, a pharmaceutical company focused on both biopharmaceuticals and small molecule drugs. The goal of this project is to find efficient and effective ways to retrieve data from different social media platforms to analyse sentiments, public opinions, emotions towards different events, find suitable topics and detect rising trends in social media. To accomplish this task, this work utilizes different machine learning algorithms to detect the requested features in the messages of users. The declared aim is to find a good combination of those algorithms to provide reliable results and findings so that especially AbbVie can use and incorporate them into their attempt to monitor social media.\newline 
-This report describes how to gather data from different social media platforms and what restrictions will apply to them. It focuses on Facebook and Twitter, because this selection covers the most used and the most reactive social media platforms today. Furthermore it deals with different machine learning algorithms, explains how they could be applied to different use cases and suggests situation when and how to use them. 
+Today in 2017 social media is ubiquitous and is taken for granted in our day-to-day life. Nearly every single shop in the city to large companies own social media accounts to communicate with customers or try to engage new ones. The number of active users on the biggest social media platforms is tremendously high. On Facebook we have around 1.871 million active users as of January 2017. Whatsapp and Facebook messenger share the number of 1.000 million active users. For Twitter in comparison to Facebook, the numbers may seem small but with 317 million active users it belongs to the biggest social media platform of our time. (Chaffey 2017-04-2) More than ever people share their thoughts about current global events like conflicts between different countries, political events, terrorism, rising diseases as well as the opinions to companies and products. 
+
+In the course of the ‘Master Team Project - Topic monitoring in the pharmaceutical industry’ of University of Mannheim for Master Data Science and Master Business informatics students, this work especially focuses on the monitoring of social media for the pharmaceutical context. It is processed in cooperation with AbbVie Inc. located in Ludwigshafen, Germany, a pharmaceutical company focused on both biopharmaceuticals and small molecule drugs. The goal of this project is to find efficient and effective ways to retrieve data from different social media platforms to analyze sentiments, public opinions, emotions towards different events, find suitable topics and detect rising trends in social media. To accomplish this task, this work utilizes different data mining algorithms to detect the requested features in the messages of users. The declared aim is to find a good combination of different of those algorithms to provide reliable results and findings so that especially AbbVie can use and incorporate them into their attempt to monitor social media.
+
+This report describes how to gather data from different social media platforms and what restrictions will apply to them. It focuses on Facebook and Twitter, because this selection covers the most used and the most reactive social media platform today. Furthermore it deals with different machine learning algorithms, explains how they could be applied to different use cases and suggests situation when and how to use them.  
 
 
  
-\section{Problem Statement}
+\section{Motivation and Goals}
+ 
+With the rapid growth of social media platforms like Twitter and Facebook in the recent years those has become interesting for companies to find out what customer think and talk about their company and products. A lot of people share their thoughts and experience about all manner of things. With Twitter we have one the highest reactive social media platforms of our time. Almost instantly people write messages (tweet) to react accordingly to new events in the world. Due to this fact companies try to effectively monitor Twitter and other platforms to get insights into the current customer situation regarding their product and company reputation. They do not need to organize big surveys among customers to find out these key values. It is sufficient to crawl social media platforms to get user insights and use this data in combination with data mining techniques to extract user sentiments and detect rising trends. This can all be done without the users concerned noticing or being able to influence such intrusion in a high manner. 
+This work in particular focuses on the pharmaceutical industry to find out how customers react to different drugs and diseases. We want provide recommendations and workflow to utilize social media platforms to collect data and apply data mining algorithms to extract valuable results. The first goal is to detect the sentiment of users regarding drugs, diseases and different pharmacy companies. This is especially related to our partner AbbVie Inc. . With these result it shall be possible to get an overview about the reputation about AbbVie, its products and its competitors have on social media. Furthermore with the detection of sentiments in disease related texts we have the opportunity to get to know the 
+The second goal of this project is the detection of topics and rising trends inside the social media data we gather from the different platforms. This is especially useful to find out what the users talk about and in what they are interested in in specific time ranges. These results can help to plan customer engagement strategies more accurate and related to current trends. 
+
+With this project we want to provide good insights into the structure of social media data and show suitable ways to extract sentiments, topic and trends out of it. Furthermore we want to provide you with some recommendations and hints you may adopt to successfully mine social media data.
+ 
  
 
-\section{Contribution}
+\section{Paper Structure}
+
+In chapter \ref{cha:fundamentals} we discuss the fundamentals, which explains the basic understanding about social media platforms, sentiment analysis, topic detection and trend detection.
+		
+In chapter, we introduce and explain thoroughly step by step the final output of our project, namely ‘SentiTomo’. The product overview gives a general idea about SentiTomo and how it works and what it can achieve. Later we explain various modules it incorporates, like the data collection module, data preprocessing module, sentiment analysis module, topic detection module, trend detection module and finally the dashboard module.
+				
+In Chapter 3, we present our recommendations and conclude the report.
 
 
-\section{Related Work}
+In  the appendix, we have enclosed various tables and charts which we have used in this report, along with our bibliography.
 
 
 
-\chapter{Theoretical Framework}
-\label{cha:theory}
+\chapter{Fundamentals}
+\label{cha:fundamentals}
 
 At first we want to provide an explanation to some fundamental terms which will be used in this report. This should give an overview what the different terms mean and in which context they are used.
 
 \section{Social Media Data}
-\label{sec:socmedia}
+\label{sec:scoial_media}
 
 The term \textit{social media} refers to all web applications which are built on the technological foundations of the Web 2.0. In comparison to the beginning of the web, Web 2.0 is characterized by a huge improvement of communication channels between users and increased communications between those. Social media platforms heavily rely on this progressive development of user interaction. They offer a place where users can collaborate and interact with each other, share and create content with ease. Unlike traditional static websites, the content of social media platforms is nearly entirely made by the users, which lead to a very reactive and accurate picture of the community who is using the network. These platforms can be divided in different types. The following shows a non-exhaustive list of those. \cite{Rouse2016-09-15}\cite{Rouse2015-01-15}
 
@@ -182,7 +195,7 @@ In this work we will mainly referring to the term social media in the context of
 
 
 \section{Sentiment Analysis}
-\label{sec:sentana}
+\label{sec:sentiment_analysis}
 
 \acrfull{sa} belongs to the broad field of data mining techniques. With the help of Natural Language Processing and text analytics, subjective information are extracted and quantified from texts and messages primarily from social media sources. \acrshort{sa} methods are classification algorithms which are based on labelled data. This data is curated by human annotators who define pre-train classes to different types examples of data. These annotations later then are used to train the different algorithms which quantify the sentiment of texts based on these pre-annotations. The results of those techniques can quantify the sentiment of people's opinions and feelings towards a certain subject of the text. Mostly these are products, companies, other people or current events. Sometimes sentiment analysis is also known as opinion mining or emotion AI.
 
@@ -191,22 +204,35 @@ With the help of \acrlong{sa} companies can detect subjective key values for the
 In this report sentiment analysis is used to determine the opinions of people regarding the pharmaceutical industry. It tries to apply suitable data mining algorithms to quantify the opinions regarding drugs, diseases and companies which are active in this sector.
 
 \section{Topic Detection}
-\label{sec:topdec}
+\label{sec:topic_detection}
 
 \acrfull{td} copes with the problem of identifying topics to unseen or unidentified events. It can be applied to a static collection of data ("retrospective detection") or even on real-time ("on-line detection") feed of data from different sources. To detect topics, miscellaneous data mining algorithms can be used. They are all based on using unlabeled data to train them. Unlabeled data means, that it is non curated by human annotators which detect topics beforehand. The algorithms just take raw data and try to cluster them into different groups (topics) based on common attributes among different data objects. \cite{Seo2004}
 
 Topic Detection within this work is primarily used on real-time news. It is first trained on pre-crawled data from social media platforms but later applied to the continuously stream of new data.
 
 \section{Trend Detection}
-\label{sec:trenddec}
+\label{sec:trend_detection}
 
 \acrfull{trd} techniques try to find out what is suddenly increasing in popularity. This is especially applicable to highly reactive social media platforms. For some types organizations it is tremendously important to know what are trends among the people, especially for news organizations, governments and retailers. 
 At most of the time a trend is coupled with a specific topic. If it possible to detect trending topics, organization can recognize what people think is noteworthy and can react to those events appropriately. \cite{Kolb2015-07-16}
 
-\chapter{Methodology}
-\label{cha:methodology}
+\chapter{SentiTomo}
+\label{cha:sentitomo}
 
 In this section we want to discuss the different steps we took to build up our database and what algorithms we applied to them in order to fulfil the task of this work.
+
+
+\section{Overview}
+\subsection{Technical Explanation}
+
+
+As we decided to develop a small application which utilizes our findings to show a way how to integrate them into a real-world-like environment we need to find a suitable programming platform to use for this approach. For our data mining algorithms we used different programming languages. In total we had three which are R, Python and Java. But to let each of them cooperate with each other we had to find a base programming language which “wraps” around them. After a small evaluation we chose Javascript as our language to go. With the rise of Node.js, a framework for writing Javascript code on the server side, it is possible to invoke each of our machine learning languages inside Javascript. We used it to develop a Node.js based server application which can be run on any operating system which supports Node.js. Additionally to the plain server application it serves a front end view which is used to view the results of the machine learning algorithms. The whole application is backed by a MySQL database which saves the results sentiment analysis and topic detection algorithms. Additionally it is used to save raw tweets and their authors for a better evaluation of the results. We chose a SQL based database because it was the easiest one for us to set up and in this use case it does not have any serious disadvantages compared to a NoSQL database.
+
+Once the server is started it constantly uses the Twitter API to retrieve Tweets and their authors which match our keywords in table [keyword table]. These are then saved in the database. Parallel to this procedure two worker threads are running which detect sentiments and topics of tweets. The results of those are also getting saved into the database. They are separated into different tables inside the database provide a clear division between raw data and the result of data mining algorithms. 
+
+A detailed description of the implementation and structure of SentiTomo can be found in our separate sentitomo.md file. This file also includes detailed instruction of how to set up the application.
+
+
 
 \section{Data Collection}
 \label{sec:datacoll}
@@ -391,7 +417,6 @@ Furthermore the response from this endpoint is very comprehensive so it is not n
 
 As of August 20th 2017 we stopped crawling data from the Twitter API. Our base dataset for Twitter then consists of 2 types of objects: Tweets and the authors of those. The most important one of these two is the tweet object with it's message field. The message is the fundamental part which is used to build models for sentiment analysis and topic detection. It contains the the tweet message along with URLs, Emojis and hashtags. The author object was only crawled for the sake of completeness and in case if it will be needed in some circumstances. The definition of the tweet object can be seen in \autoref{lst:tweetObjDef}.
 
-
 \begin{lstlisting}[caption={Tweet object definition for the database},captionpos=b,language=json,label={lst:tweetObjDef}]
   id: {
         type: Sequelize.STRING,
@@ -473,24 +498,23 @@ User & 48555        	\\
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\scriptsize}>{\scriptsize}c>{\scriptsize}c>{\scriptsize}c}
 \hline
 Keyword  		& Amount    & Proportion in \%	\\ \hline\
-johnson \& johnson & 70240 &	28.0140			\\
-psoriasis & 46070      &  	18.3742			\\
-hepatitis c & 35089  &  	13.9946				\\
-rheumatoid arthritis & 28940 &   11.5422		\\
-amgen & 21404 &  8.5366						\\
-abbvie & 14149  &	5.6431					\\
-bristol myers & 13355 & 	5.3264				\\
-johnson\&johnson & 5641  &	2.2498			\\
-arthritis & 3512  &		1.4007				\\
-ankylosing spondylitis c & 3473  &	1.3851	\\
-humira & 3029  	&	1.2081					\\
-ibrutinib & 1851  	&	0.7382				\\
-hepatitis & 1662  	&	0.6629				\\
-NULL & 764 &  0.3047							\\
-enbrel & 669  &	0.2668						\\
-adalimumab & 667      &  0.2660				\\
-imbruvica & 172 & 0.0686  					\\
-trilipix & 45   &  0.0179   				\\ \hline\
+psoriasis & 46070      &  	25.5245		\\
+hepatitis c & 35089  &  	19.4406				\\
+rheumatoid arthritis & 28940 &   16.0339		\\
+amgen & 21404 &  11.8586					\\
+abbvie & 14149  &	7.8391					\\
+bristol myers & 13355 & 	7.3992				\\
+johnson\&johnson & 5641  &	3.1253			\\
+arthritis & 3513  &		1.9463				\\
+ankylosing spondylitis c & 3473  &	1.9242	\\
+humira & 3029  	&	1.6782					\\
+ibrutinib & 1851  	&	1.0255				\\
+hepatitis & 1662  	&	0.9208				\\
+NULL & 764 &  0.4233							\\
+enbrel & 669  &	0.3707					\\
+adalimumab & 667      &  0.3695				\\
+imbruvica & 172 & 0.0953  					\\
+trilipix & 45   &  0.0249  				\\ \hline\
 
 \end{tabular*}
 \caption{Twitter tweets per keyword}
@@ -514,6 +538,29 @@ Simultaneously to that we switched our crawling stack and implemented it based o
 The implementation of the crawling processes was done with the help of different Node packages: \textit{twitter}~\cite{Morris2017-01-13} for retrieving data from the streaming API of Twitter and \textit{fbgraph}~\cite{Oliveira2017-01-19} for Facebook. 
 
 In contrast to the \textit{twitteR} package \textit{twitter} for Node.js is able to crawl the public stream of Twitter data. With that it was able to set up an automatic crawl mechanism which saved suitable tweets, regarding the keywords in \autoref{tab:collkeywords}, into our database. Because of that the manual data collection for Twitter was postponed and only served as a backup mechanism. A truncated (left out database saving) part of the code, which was responsible for the crawling and saving can be found in \autoref{lst:twitterCrawler} 
+
+As listed in \autoref{subsub:fbrestrictions} Facebook does not offer a real-time stream to their data. Therefore the crawling of the Facebook data still had to be done manually by invoking methods from the \textit{fbgraph} package on our server. The result of those manual crawls then was upserted into the database as well. A sample code of this process can be seen in \autoref{lst:facebookCrawler}
+
+The update of our technology stack during the project led to a suitable and reliable way of crawling data from Twitter and Facebook. The centralised data consolidation inside the MySQL database additionally improved the workflow for our machine learning processes.
+
+The final technology stack based on Node.js (JavaScript):
+
+\begin{enumerate}
+	\item Node.js server running at least 8 hours a day
+	\item Twitter-Crawler for crawling data form the public stream \acrshort{api} \textit{twitter} package~\cite{Morris2017-01-13} (automatic)
+	\item Facebook-Crawler for crawling data from the GraphAPI \textit{fbgraph} package~\cite{Oliveira2017-01-19} (manual)
+	\item MySQL database for saving tweets and authors (Twitter), pages,posts and comments (Facebook)
+\end{enumerate}
+
+
+
+\printbibliography
+
+
+\appendix
+\chapter{Program Code / Resources}
+\label{cha:appendix-a}
+
 
 \begin{lstlisting}[caption={TwitterCrawler.track},captionpos=b,language=JavaScript,label={lst:twitterCrawler}]
 /**
@@ -547,7 +594,7 @@ track(filters) {
 }
 \end{lstlisting}
 
-As listed in \autoref{subsub:fbrestrictions} Facebook does not offer a real-time stream to their data. Therefore the crawling of the Facebook data still had to be done manually by invoking methods from the \textit{fbgraph} package on our server. The result of those manual crawls then was upserted into the database as well. A sample code of this process can be seen in \autoref{lst:facebookCrawler}
+
 
 \begin{lstlisting}[caption={FacebookCrawler.searchAndSaveFBPages},captionpos=b,language=JavaScript,label={lst:facebookCrawler}]
  /**
@@ -576,30 +623,11 @@ searchAndSaveFBPages(keyword) {
 }
 \end{lstlisting}
 
-The update of our technology stack during the project led to a suitable and reliable way of crawling data from Twitter and Facebook. The centralised data consolidation inside the MySQL database additionally improved the workflow for our machine learning processes.
-
-The final technology stack based on Node.js (JavaScript):
-
-\begin{enumerate}
-	\item Node.js server running at least 8 hours a day
-	\item Twitter-Crawler for crawling data form the public stream \acrshort{api} \textit{twitter} package~\cite{Morris2017-01-13} (automatic)
-	\item Facebook-Crawler for crawling data from the GraphAPI \textit{fbgraph} package~\cite{Oliveira2017-01-19} (manual)
-	\item MySQL database for saving tweets and authors (Twitter), pages,posts and comments (Facebook)
-\end{enumerate}
 
 
 
-\printbibliography
 
 
-\appendix
-\begin{comment}
-\chapter{Program Code / Resources}
-\label{cha:appendix-a}
-
-The source code, a documentation, some usage examples, and additional test results are available at ...
-
-They as well as a PDF version of this thesis is also contained on the CD-ROM attached to this thesis.
 
 \chapter{Further Experimental Results}
 \label{cha:appendix-b}
@@ -612,7 +640,7 @@ In the following further experimental results are ...
 
 \pagestyle{empty}
 
-
+\begin{comment}
 \section*{Ehrenw\"ortliche Erkl\"arung}
 Ich versichere, dass ich die beiliegende Master-/Bachelorarbeit ohne Hilfe Dritter
 und ohne Benutzung anderer als der angegebenen Quellen und Hilfsmittel

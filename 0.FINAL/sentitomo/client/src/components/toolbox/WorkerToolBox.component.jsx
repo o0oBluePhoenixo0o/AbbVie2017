@@ -18,7 +18,6 @@ class WorkerToolBox extends Component {
 
     componentDidMount() {
         socket.on('server:getWorkers', data => {
-            console.log(data);
             this.setState({
                 topicWorker: data.topicWorker,
                 sentimentWorker: data.sentimentWorker
@@ -37,6 +36,13 @@ class WorkerToolBox extends Component {
         socket.emit('client:getWorkers', null)
     }
 
+    /**
+    * @function toggleWorker
+    * @param {String} worker Specifies which worker function to toggle
+    * @description Sends a message to the server and toggles the state of the specified worker, either topic or sentiment
+    * @memberof WorkerToolBox
+    * @return {void}
+    */
     toggleWorker = (worker) => {
         socket.emit('client:toggleWorker', {
             type: worker

@@ -10,7 +10,7 @@ import AppLayout from "./layouts/AppLayout.js";
 import {
     ApolloClient,
     ApolloProvider,
-    createNetworkInterface, // <-- this line is new!
+    createNetworkInterface,
 } from 'react-apollo';
 
 const networkInterface = createNetworkInterface({ uri: 'http://localhost:8080/graphql' });
@@ -27,7 +27,7 @@ const Main = () => {
     )
 }
 
-
+//Render the dom to the HTML
 ReactDOM.render(
     <Router>
         <ApolloProvider client={client}>

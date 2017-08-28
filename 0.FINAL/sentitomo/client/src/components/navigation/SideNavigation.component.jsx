@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { NavLink } from "react-router-dom";
-import { Menu, Image } from "semantic-ui-react";
+import { Header, Menu, Image } from "semantic-ui-react";
 import { withRouter } from 'react-router-dom';
 import Icon from '../Icon.component';
 
@@ -13,10 +13,14 @@ import Icon from '../Icon.component';
 class SideNavigation extends Component {
 
     render() {
-        const { match, ...props } = this.props;
+        const { match } = this.props;
         return (
             <Menu vertical className="mobile hidden sidebar-left" >
-                <Menu.Item header ><NavLink to={'/app'}><Image src="/logo.png" style={{ margin: "0 auto" }} /></NavLink></Menu.Item>
+                <Menu.Item header>
+                    <NavLink to={'/app'}>
+                        <Header style={{ color: "#fff" }}>Sentitomo</Header>
+                    </NavLink>
+                </Menu.Item>
                 <div style={{ padding: "20px" }}>
                     <NavLink to={match.url + '/dashboard'} activeClassName="active">
                         <Menu.Item
@@ -42,8 +46,6 @@ class SideNavigation extends Component {
         )
     }
 }
-
-
 
 SideNavigation.propTypes = {
     /** {Object} The match object from react-router */

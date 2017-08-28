@@ -1,18 +1,18 @@
 [0] Config.pm:354> INFO - This is Biber 2.7
 [0] Config.pm:357> INFO - Logfile is 'thesis.blg'
-[43] biber-darwin:303> INFO - === Tue Aug 22, 2017, 12:19:14
-[69] Biber.pm:359> INFO - Reading 'thesis.bcf'
-[167] Biber.pm:835> INFO - Found 17 citekeys in bib section 0
-[181] Biber.pm:3670> INFO - Processing section 0
-[199] Biber.pm:3840> INFO - Looking for bibtex format file './bib/biblopgraphy.bib' for section 0
-[200] bibtex.pm:1435> INFO - Decoding LaTeX character macros into UTF-8
-[206] bibtex.pm:1292> INFO - Found BibTeX data source './bib/biblopgraphy.bib'
-[232] Utils.pm:164> WARN - Overwriting field 'year' with year value from field 'date' for entry 'Twitter2012-05-15'
-[238] Utils.pm:164> WARN - Overwriting field 'year' with year value from field 'date' for entry 'Twitter2016-11-22'
-[272] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[272] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[272] Biber.pm:3499> INFO - Sorting list 'nty/global/' of type 'entry' with scheme 'nty' and locale 'en-US'
-[273] Biber.pm:3505> INFO - No sort tailoring available for locale 'en-US'
-[288] bbl.pm:608> INFO - Writing 'thesis.bbl' with encoding 'ascii'
-[291] bbl.pm:712> INFO - Output to thesis.bbl
-[292] Biber.pm:109> INFO - WARNINGS: 2
+[45] biber-darwin:303> INFO - === Mon Aug 28, 2017, 13:04:56
+[72] Biber.pm:359> INFO - Reading 'thesis.bcf'
+[186] Biber.pm:835> INFO - Found 16 citekeys in bib section 0
+[209] Biber.pm:3670> INFO - Processing section 0
+[224] Biber.pm:3840> INFO - Looking for bibtex format file './bib/biblopgraphy.bib' for section 0
+[227] bibtex.pm:1435> INFO - Decoding LaTeX character macros into UTF-8
+[233] bibtex.pm:1292> INFO - Found BibTeX data source './bib/biblopgraphy.bib'
+[257] Utils.pm:164> WARN - Overwriting field 'year' with year value from field 'date' for entry 'Twitter2012-05-15'
+[260] Utils.pm:164> WARN - Overwriting field 'year' with year value from field 'date' for entry 'Twitter2016-11-22'
+[286] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[287] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[287] Biber.pm:3499> INFO - Sorting list 'nty/global/' of type 'entry' with scheme 'nty' and locale 'en-US'
+[287] Biber.pm:3505> INFO - No sort tailoring available for locale 'en-US'
+[299] bbl.pm:608> INFO - Writing 'thesis.bbl' with encoding 'ascii'
+[303] bbl.pm:712> INFO - Output to thesis.bbl
+[303] Biber.pm:109> INFO - WARNINGS: 2

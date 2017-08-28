@@ -28,10 +28,6 @@ h2o.loadModel("./ML/R/sentiment/GBM_model_R_1502640066600_1")
 
 # Get the command line arguments
 args = commandArgs(trailingOnly=TRUE)
-
-## Assume CORE dataset is TW_df
-# Extract out only ID & Message
-
 TW_df <- args[1]
 
 #Abbreviation translation

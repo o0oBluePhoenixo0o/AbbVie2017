@@ -7,7 +7,6 @@ import {
     TweetTopic
 } from '../data/connectors';
 import { getKeyword, stripHTMLTags, extractHashtagsFromTweet } from '../util/utils';
-import { preprocessTweetMessage } from '../ML/preprocess.js';
 import { detectSentimentEnsembleR, detectSarcasmSync, detectTopicLDAStatic, detectSentimentEnsemblePythonSync } from '../ML/ml_wrapper.js';
 import logger from './logger.js';
 
@@ -112,7 +111,6 @@ export default class TwitterCrawler {
             stream => {
                 stream.on('data', event => {
                     if (event.lang == 'en') {
-                        console.log(event);
                         /*logger.log('debug', 'Message: ' + event.text)
                         logger.log('debug', 'Extended tweet: ' + (event.extended_tweet ? event.extended_tweet.full_text : 'No extended tweet'));*/
                         TweetAuthor.upsert({
@@ -126,7 +124,6 @@ export default class TwitterCrawler {
                                     id: event.user.id
                                 }
                             }).then(async author => {
-
                                 author.createTW_Tweet({
                                     id: event.id,
                                     keywordType: 'Placeholder',
@@ -150,8 +147,7 @@ export default class TwitterCrawler {
                                     retweetCount: event.retweet_count,
                                     favorited: event.favorited,
                                     favoriteCount: event.favorite_count,
-                                    isRetweet: event.retweeted_status ?
-                                        true : false,
+                                    isRetweet: event.retweeted_status ? true : false,
                                     retweeted: event.retweeted
                                 }).then(tweet => {
                                     logger.log('debug', 'Inserted tweet: ' + tweet.message);

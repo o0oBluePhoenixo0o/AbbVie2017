@@ -1,6 +1,4 @@
 # CTM topic model 
-setwd("~/CloudStation/Team Project/Topic Monitoring in the Pharmaceutical Industry/AbbVie2017/0.FINAL/sentitomo/server")
-
 source("./ML/R/needs.R")
 # Install packages #####################################################################################
 # Packages

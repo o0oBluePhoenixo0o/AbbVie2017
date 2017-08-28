@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { NavLink } from "react-router-dom";
-import { Container, Menu, Image } from "semantic-ui-react";
+import { Container, Menu } from "semantic-ui-react";
 import Icon from '../Icon.component';
 import { withRouter } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ import { withRouter } from 'react-router-dom';
 class TopNavigation extends Component {
 
     render() {
-        const { match, ...props } = this.props;
+        const { match } = this.props;
 
         return (
             <Menu className="navbar-top mobile only" fixed="top">

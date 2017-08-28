@@ -29,7 +29,7 @@ export function PythonShell(path, version) {
  * @class Python
  * @param  {String} path    Path to the Python file to execute
  * @param  {Integer} version Specify the Python version to use
- * @classdesc Class for execting Jar files
+ * @classdesc Class for executing Jar files
  */
 class Python {
     constructor(path, version) {
@@ -94,11 +94,11 @@ class Python {
 
     /**
     * @function kill
-    * @description Kills the executed process by sending 'SIGINT' to it. It is like pesssing CTRL+C
+    * @description Kills the executed process by sending 'SIGINT' to it. It is like pressing CTRL+C
     * @memberof module:ForeignCode~Python
    */
     kill() {
-        logger.log('info', 'Manuall killing ' + process.pid);
+        logger.log('info', 'Manually killing ' + process.pid);
         this.process.kill('SIGINT')
     }
 }
@@ -119,8 +119,8 @@ export function JavaShell(path) {
 
 /** 
  * @class Java
- * @param {String} path  Path to the Jar file to executeo use
- * @classdesc Class for execting Jar files
+ * @param {String} path  Path to the Jar file to execute
+ * @classdesc Class for executing Jar files
 */
 export class Java {
 
@@ -184,11 +184,11 @@ export class Java {
 
     /**
      * @function kill
-     * @description Kills the executed process by sending 'SIGINT' to it. It is like pesssing CTRL+C
+     * @description Kills the executed process by sending 'SIGINT' to it. It is like pressing CTRL+C
      * @memberof module:ForeignCode~Java
     */
     kill() {
-        logger.log('info', 'Manuall killing ' + process.pid);
+        logger.log('info', 'Manually killing ' + process.pid);
         this.process.kill('SIGINT')
     }
 }
@@ -207,7 +207,7 @@ export function RShell(path) {
 /** 
  * @class R 
  * @param {String} path  Path to the R file to execute
- * @classdesc Class for execting R files
+ * @classdesc Class for executing R files
 */
 class R {
 
@@ -272,11 +272,11 @@ class R {
 
     /**
     * @function kill
-    * @description Kills the executed process by sending 'SIGINT' to it. It is like pesssing CTRL+C
+    * @description Kills the executed process by sending 'SIGINT' to it. It is like pressing CTRL+C
     * @memberof module:ForeignCode~R
    */
     kill() {
-        logger.log('info', 'Manuall killing ' + process.pid);
+        logger.log('info', 'Manually killing ' + process.pid);
         this.process.kill('SIGINT')
     }
 }

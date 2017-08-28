@@ -1,74 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Checkbox, Grid, Label, List, Segment, Table, Header } from 'semantic-ui-react'
-import { PieChart, Pie, Cell, Legend, Tooltip, LineChart, XAxis, YAxis, CartesianGrid, Line, ResponsiveContainer, ComposedChart, Bar } from 'recharts';
+import { Card, Grid, Label, List, Segment, Table } from 'semantic-ui-react'
+import { PieChart, Pie, Cell, Legend, Tooltip, XAxis, YAxis, CartesianGrid, Line, ResponsiveContainer, ComposedChart } from 'recharts';
 import randomColor from 'randomcolor';
 import dl from 'datalib';
 import moment from 'moment';
 
-const myArray = [
-    {
-        id: 884019304458362880,
-        message: "Hepatitis C Cases Increase More Than 3-Fold in Iowa https://t.co/UcvuFnwG7H #HCV",
-        topicId: 20,
-        topic: "hepatitis, psoriasis, case, pediatric, dermatitis",
-        topicProbability: 0.8374999999999982,
-        created: "2017-07-09T10:00:01.000Z",
-        sentiment: "positive",
-    },
-    {
-        id: "884020381849444352",
-        message: "RT @Celgene: Blogger Alisha tells all: \"Having a disease like psoriasis is humbling, you find strengths outside of just your looks\" #ShowMo<U+2026>",
-        topicId: 25,
-        topic: "psoriasis, treatment, arthritis, antiseptic, p4mhl7ckq9",
-        topicProbability: 0.9113636363636357,
-        created: "2017-07-08T10:04:17.000Z",
-        sentiment: "neutral",
-    }, {
-        id: "884021569177227264",
-        message: "RT @patientsrising: Thank you @DrBobGoldberg @feliciatemple @StaceyLWorthy @aimedalliance @RareDiseases @CureSarcoma @Celgene @IpsenGroup @<U+2026>",
-        topicId: 30,
-        topic: "psoriasis, tina, nature, health, front",
-        topicProbability: 0.8916666666666656,
-        created: "2017-07-07T10:09:01.000Z",
-        sentiment: "negative",
-    },
-    {
-        id: "884022607653343232",
-        message: "Ausdal Financial Partners Inc. Continues to Hold Stake in Bristol-Myers Squibb Company $BMY https://t.co/bqHVzbpy1B",
-        topicId: 10,
-        topic: "amgn, amgen, stake, sfmg, hepatitis",
-        topicProbability: 0.5251771032239684,
-        created: "2017-07-09T10:13:08.000Z",
-        sentiment: "neutral",
-    }
-    , {
-        id: "884023406445961216",
-        message: "Specialist Information Systems Engineer - Automation @amgen US <U+2013> Florida <U+2013> Tampa #dotNET #AWS #Azure https://t.co/TuthOz8Ca5",
-        topicId: 31,
-        topic: "psoriasis, health, amgen, psorcoach, hospital",
-        topicProbability: 0.9187499999999996,
-        created: "2017-07-09T10:16:19.000Z",
-        sentiment: "positive",
-    },
-    {
-        id: "88401217",
-        message: "Specialist Information Systems Engineer - Automation @amgen US <U+2013> Florida <U+2013> Tampa #dotNET #AWS #Azure https://t.co/TuthOz8Ca5",
-        topicId: 31,
-        topic: "psoriasis, health, amgen, psorcoach, hospital",
-        topicProbability: 0.9187499999999996,
-        created: "2017-07-09T10:20:19.000Z",
-        sentiment: "neutral",
-    }
-];
 
-
-var colors = [
-    "#462446", "#B05F6D", "#EB6B56", "#FFC153", "#47B39D", "#E0E4CC", "#7BB0A6", "#1DABB8", "#BADA55", "#FF6766",
-    "#953163", "#8870FF", "#2C82C9", "#F1654C", "#83D6DE", "#EEE657", "#3E4651", "#8A2D3C", "#3C3741"];
-
-
-
+/**
+ * @constant renderTopicLegend
+ * @param {Object} props Data about the different entries in the chart
+ * @type {function}
+ * @description Renders a custom topic pie chart legend
+ */
 const renderTopicLegend = (props) => {
     const { payload } = props;
     return (
@@ -86,6 +30,11 @@ const renderTopicLegend = (props) => {
     );
 }
 
+/**
+ * @class CustomTopicToolTip
+ * @extends {React.Component}
+ * @description Class for displaying customized tooltip on the topic pie chart
+ */
 class CustomTopicToolTip extends Component {
     render() {
         const { active } = this.props;
@@ -106,7 +55,12 @@ class CustomTopicToolTip extends Component {
     }
 }
 
-
+/**
+ * @constant renderSentimentLegend
+ * @param {Object} props Data about the different entries in the chart
+ * @type {function}
+ * @description Renders a custom sentiment pie chart legend
+ */
 const renderSentimentLegend = (props) => {
     const { payload } = props;
     return (
@@ -124,6 +78,11 @@ const renderSentimentLegend = (props) => {
     );
 }
 
+/**
+ * @class CustomSentimentToolTip
+ * @extends {React.Component}
+ * @description Class for displaying customized tooltip on the sentiment pie chart
+ */
 class CustomSentimentToolTip extends Component {
     render() {
         const { active } = this.props;
@@ -155,9 +114,9 @@ class Result extends Component {
     /**
      * @function aggregateTopics
      * @param  {Array} data Array of topic detection data
-     * @description Aggregrates the data of the array by topics
+     * @description Aggregates the data of the array by topics
      * @memberof Result
-     * @return {Array} Aggregrated topic array
+     * @return {Array} Aggregated topic array
      */
     aggregateTopics = (data) => {
         var copy = JSON.parse(JSON.stringify(data)); // We need to deep copy the array, as we do not want to hold reference to the original array here
@@ -168,9 +127,9 @@ class Result extends Component {
     /**
      * @function aggregateSentiment
      * @param  {Array} data Array of topic detection data
-     * @description Aggregrates the data of the array by sentiment
+     * @description Aggregates the data of the array by sentiment
      * @memberof Result
-     * @return {Array} Aggregrated sentiment array
+     * @return {Array} Aggregated sentiment array
      */
     aggregateSentiment = (data) => {
         var copy = JSON.parse(JSON.stringify(data)); // We need to deep copy the array, as we do not want to hold reference to the original array here
@@ -181,9 +140,9 @@ class Result extends Component {
     /**
      * @function aggregateDate
      * @param  {Array} data Array of topic detection data
-     * @description Aggregrates the data of the array by date (based on days)
+     * @description Aggregates the data of the array by date (based on days)
      * @memberof Result
-     * @return {Array} Aggregrated date array
+     * @return {Array} Aggregated date array
      */
     aggregateDate = (data) => {
 
@@ -192,12 +151,7 @@ class Result extends Component {
             array[index].created = new Date(array[index].created).setHours(0, 0, 0, 0)
         })
 
-        console.log(copy);
-
         var myData = dl.read(copy, { type: 'json', parse: 'auto' });
-        console.log(dl.groupby(['created'])
-            .summarize({ 'created': 'count' })
-            .execute(myData))
         return (dl.groupby(['created'])
             .summarize({ 'created': 'count' })
             .execute(myData));

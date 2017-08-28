@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header, Grid, Menu, Segment } from 'semantic-ui-react'
+import { Header, Menu, Segment } from 'semantic-ui-react'
 import TopicToolBox from './TopicToolBox.component';
 import WorkerToolBox from './WorkerToolBox.component';
 

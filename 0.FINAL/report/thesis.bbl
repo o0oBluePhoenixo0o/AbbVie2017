@@ -65,44 +65,6 @@
       \verb https://cran.r-project.org/web/packages/Rfacebook/Rfacebook.pdf
       \endverb
     \endentry
-    \entry{Chaffey2017-04-27}{online}{}
-      \name{author}{1}{}{%
-        {{hash=509332278842cf88398380b69e48fbe2}{%
-           family={Chaffey},
-           familyi={C\bibinitperiod},
-           given={Dave},
-           giveni={D\bibinitperiod}}}%
-      }
-      \name{editor}{1}{}{%
-        {{hash=509332278842cf88398380b69e48fbe2}{%
-           family={Chaffey},
-           familyi={C\bibinitperiod},
-           given={Dave},
-           giveni={D\bibinitperiod}}}%
-      }
-      \strng{namehash}{509332278842cf88398380b69e48fbe2}
-      \strng{fullhash}{509332278842cf88398380b69e48fbe2}
-      \strng{authornamehash}{509332278842cf88398380b69e48fbe2}
-      \strng{authorfullhash}{509332278842cf88398380b69e48fbe2}
-      \strng{editornamehash}{509332278842cf88398380b69e48fbe2}
-      \strng{editorfullhash}{509332278842cf88398380b69e48fbe2}
-      \field{sortinit}{C}
-      \field{sortinithash}{095692fd22cc3c74d7fe223d02314dbd}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{day}{27}
-      \field{month}{4}
-      \field{title}{Global social media research summary 2017}
-      \field{urlday}{18}
-      \field{urlmonth}{8}
-      \field{urlyear}{2017}
-      \field{year}{2017}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \verb{url}
-      \verb http://www.smartinsights.com/social-media-marketing/social-media-strategy/new-global-social-media-research/
-      \endverb
-    \endentry
     \entry{Facebook2010-04-10}{online}{}
       \name{author}{1}{}{%
         {{hash=d85544fce402c7a2a96a48078edaf203}{%

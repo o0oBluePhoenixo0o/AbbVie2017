@@ -72,7 +72,7 @@ export function detectSentimentEnsembleRSync(tweetMessage) {
 /**
 * @function detectSarcasm
 * @param  {String} message The message to detect the sarcasm
-* @description Detect if a message is meant in a saracastic way. Internally it uses a Naive Bayes based method to detect it.
+* @description Detect if a message is meant in a sarcastic way. Internally it uses a Naive Bayes based method to detect it.
 * @see File server/ML/R/sarcasm/sarcasmDetection.R
 * @returns {Promise<Double>} A Promise that contains the probability of the message to be sarcastic when fulfilled.
 */
@@ -106,7 +106,7 @@ export function detectSarcasmSync(message) {
  * @description Detects the sentiment of a message using different Python packages. It uses:
  *  <ul>
  *      <li>Vader (Lexicon Based)</li>
- *      <li>Textblob Vers. 1 (Lexcion Based)</li>
+ *      <li>Textblob Vers. 1 (Lexicon Based)</li>
  *      <li>Textblob Vers. 2 (Naive Bayes)</li>
  * </ul>
  * Implemented in Python
@@ -212,11 +212,10 @@ export function detectTopicLDAStaticSync(jsonString, callback) {
     return out;
 }
 
-
 /**
  * @function detectTrends
  * @param  {String} csvFile Path to the .csv file containing the topics of tweets
- * @description Uses a  possion model to buid a graph containing the data points for trend detection
+ * @description Uses a poisson model to build a graph containing the data points for trend detection
  * @see File server/ML/Python/trend/trend.py
  * @returns {Promise<String>} A Promise that contains an array as JSON encoded String containing the trend graphs of different
  * topics, when fulfilled.

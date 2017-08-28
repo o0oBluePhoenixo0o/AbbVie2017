@@ -1,6 +1,5 @@
 import express from 'express';
 import fs from 'fs';
-import csv from 'fast-csv';
 import path from 'path'
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -16,6 +15,9 @@ import {
     makeExecutableSchema,
     addMockFunctionsToSchema
 } from 'graphql-tools';
+var nodeCleanup = require('node-cleanup');
+require('dotenv').config();
+
 import logger from './service/logger.js';
 import loggingMiddleware from './middlewares/loggerMiddleware';
 import Schema from './data/schema';
@@ -27,16 +29,7 @@ import TopicWorker from './service/TopicWorker';
 import SentimentWorker from './service/SentimentWorker';
 import { listenToSockets } from './service/sockets';
 import { JavaShell } from './util/foreignCode'
-var nodeCleanup = require('node-cleanup');
 
-import { Tweet } from './data/connectors';
-import { extractHashTagsFromString, buildCommonTopicHeader, commonTopicHeader } from './util/utils';
-import { convertRawToCsv } from './util/export';
-import { detectSentimentEnsemblePython } from './ML/ml_wrapper';
-
-
-
-import moment from 'moment';
 
 var twitterCrawler = new TwitterCrawler({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -49,7 +42,7 @@ var facebookCrawler = new FacebookCrawler({});
 var topicWorker = new TopicWorker();
 var sentimentWorker = new SentimentWorker();
 
-require('dotenv').config()
+
 
 const GRAPHQL_PORT = 8080;
 const server = express();
@@ -91,11 +84,9 @@ server.get('/app/*', (req, res) => {
     res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 });
 
-
 // Set up socket.io
 var http = createServer(server);
 listenToSockets(http);
-
 
 http.listen(GRAPHQL_PORT, () => logger.log('info',
     `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}/graphql`
@@ -105,19 +96,17 @@ global.appRoot = __dirname;
 global.sentimentWorker = sentimentWorker;
 global.topicWorker = topicWorker;
 
-
 var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
 console.log(h20Process);
 h20Process.call();
-logger.log('info', "Wait 1 minute to let the h2o server start up")
+logger.log('info', "Wait 30 seconds to let the h2o server start up")
 setTimeout(() => {
     //twitterCrawler.start()
-    sentimentWorker.start()
-    topicWorker.start();
-}, 30000) // wait 1 minute for new tweets to come ine
+    //sentimentWorker.start()
+    //topicWorker.start();
+}, 30000) // wait 30 seconds for new tweets to come ine
 
 
-topicWorker.start();
 // Gracefully kill the h2o server process
 nodeCleanup(function (exitCode, signal) {
     h20Process.kill();

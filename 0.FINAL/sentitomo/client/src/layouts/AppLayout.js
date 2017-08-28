@@ -27,11 +27,7 @@ import 'react-notifications/lib/notifications.css';
  */
 class Applayout extends React.Component {
 
-
-
-
     state = { loading: false, result: null, errorMsg: null }
-
 
     /**
      * @function componentDidMount

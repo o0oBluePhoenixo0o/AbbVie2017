@@ -41,7 +41,7 @@ var occurrences = function occurrences(string, subString, allowOverlapping) {
  * @function getKeyword
  * @param  {String} message The text to extract keyword
  * @param  {String} filters Comma separated possible keywords
- * @description Extract a keyword out of a text based on possible keywords and their occurences in the message
+ * @description Extract a keyword out of a text based on possible keywords and their occurrences in the message
  * @see @see {@link module:Utils~occurrences}
  * @return {String} The keyword which is most likely to represent the content of this text
  */
@@ -86,7 +86,7 @@ function extractHashTagsFromString(text) {
 
 /**
  * @function extractHashtagsFromTweet
- * @param  {Object} hashtags Hashtags pbject from the Twitter API
+ * @param  {Object} hashtags Hashtags object from the Twitter API
  * @description Extract every hashtag from a given Twitter API hashtags object. Returns a concatenated string of those separated by ','
  * @return {String} Concatenated string with hashtags, separated by ','
  */
@@ -107,23 +107,21 @@ function extractHashtagsFromTweet(hashtags) {
 function importTweetCsv(csvFile) {
 
     var stream = fs.createReadStream(csvFile);
-    var datas = new Array();
+    var objects = new Array();
     csv
         .fromStream(stream, { headers: true, objectMode: true })
         .on('data', data => {
-            datas.push(data);
+            objects.push(data);
         })
         .on('end', () => {
             var interval = 10 * 400; // 4 seconds;
-            for (var i = 0; i <= datas.length - 1; i++) {
-                if (datas[i]['Language'] == 'eng') {
+            for (var i = 0; i <= objects.length - 1; i++) {
+                if (objects[i]['Language'] == 'eng') {
                     setTimeout(
                         i => {
-                            var messagePrep = preprocessTweetMessage(datas[i].message);
-                            console.log(datas[i]['isRetweet'])
                             twitterCrawler.client.get(
                                 'users/search', {
-                                    q: datas[i]['From.User']
+                                    q: objects[i]['From.User']
                                 },
                                 (error, tweets, response) => {
                                     if (!error && tweets[0]) {
@@ -138,52 +136,39 @@ function importTweetCsv(csvFile) {
                                                     id: tweets[0].id
                                                 }
                                             }).then(author => {
-                                                detectSentiment('./ML/Java/naivebayes.bin', messagePrep, result => {
-                                                    Tweet.upsert({
-                                                        id: datas[i]['Id'],
-                                                        keywordType: 'Placeholder',
-                                                        keyword: datas[i]['key'],
-                                                        created: moment(datas[i]['created_time']).toDate(),
-                                                        createdWeek: moment(
-                                                            datas[i]['created_at']
-                                                        ).week(),
-                                                        toUser: datas[i]['To.User'] == 'NA' ? null : datas[i]['To.User'],
-                                                        language: datas[i]['Language'],
-                                                        source: stripHTMLTags(
-                                                            datas[i]['Source']
-                                                        ),
-                                                        message: datas[i]['message'],
-                                                        messagePrep: null,
-                                                        latitude: datas[i]['Geo.Location.Latitude'] == 'NA' ? null : datas[i]['Geo.Location.Latitude'] == 'NA',
-                                                        longitude: datas[i]['Geo.Location.Longitude'] == 'NA' ? null : datas[i]['Geo.Location.Longitude'] == 'NA',
-                                                        retweetCount: datas[i]['Retweet.Count'],
-                                                        favorited: datas[i]['favorited'] == 'TRUE',
-                                                        favoriteCount: datas[i]['favoriteCount'],
-                                                        isRetweet: datas[i]['isRetweet'] == 'TRUE',
-                                                        retweeted: datas[i]['retweeted'],
-                                                        TWUserId: tweets[0].id,
-                                                    }).then((created) => {
-                                                        Sentiment.upsert({
-                                                            id: datas[i]['Id'],
-                                                            sentiment: result,
-                                                            sarcastic: detectSarcasm(messagePrep),
-                                                            emo_senti: null,
-                                                            emo_desc: null,
-                                                            r_ensemble: null,
-                                                            python_ensemble: null,
-                                                        })
-                                                    });
+                                                Tweet.upsert({
+                                                    id: objects[i]['Id'],
+                                                    keywordType: 'Placeholder',
+                                                    keyword: objects[i]['key'],
+                                                    created: objects[i]['created_time'],
+                                                    createdWeek: moment(
+                                                        objects[i]['created_time'], 'dd MMM DD HH:mm:ss ZZ YYYY', 'en'
+                                                    ).week(),
+                                                    toUser: objects[i]['To.User'] == 'NA' ? null : objects[i]['To.User'],
+                                                    language: objects[i]['Language'],
+                                                    source: stripHTMLTags(
+                                                        objects[i]['Source']
+                                                    ),
+                                                    message: objects[i]['message'],
+                                                    messagePrep: null,
+                                                    latitude: objects[i]['Geo.Location.Latitude'] == 'NA' ? null : objects[i]['Geo.Location.Latitude'] == 'NA',
+                                                    longitude: objects[i]['Geo.Location.Longitude'] == 'NA' ? null : objects[i]['Geo.Location.Longitude'] == 'NA',
+                                                    retweetCount: objects[i]['Retweet.Count'],
+                                                    favorited: objects[i]['favorited'] == 'TRUE',
+                                                    favoriteCount: objects[i]['favoriteCount'],
+                                                    isRetweet: objects[i]['isRetweet'] == 'TRUE',
+                                                    retweeted: objects[i]['retweeted'],
+                                                    TWUserId: tweets[0].id,
                                                 });
-                                            })
-                                        })
-                                    }
+                                            });
+                                        });
+                                    };
                                 });
                         },
                         interval * i,
                         i
                     );
                 }
-
             }
         });
 
@@ -214,13 +199,14 @@ function buildCommonTopicHeader(csvFile) {
  * @function commonTopicHeader
  * @param  {String} topicContent Topic content string out of database
  * @param  {Array} commonHeadlines  Array of topic contents with their headlines
- * @description Tries to find a common topic header for a given topic content based on previously build array of associations bewteen topic contents and headline
+ * @description Tries to find a common topic header for a given topic content based on previously build array of associations between topic contents and headline
  * @see {@link module:Utils~buildCommonTopicHeader}
  * @return {String} Common topic name for given topic content
  */
 function commonTopicHeader(topicContent, commonHeadlines) {
     const terms = topicContent.split(', ');
 
+    //flatten the result of the buildCommonTopicHeader function
     var flattened = commonHeadlines.reduce(function (result, element) {
         let index = terms.indexOf(element.term)
         if (index != -1) {
@@ -261,4 +247,13 @@ function commonTopicHeader(topicContent, commonHeadlines) {
 
 
 
-export { extractHashTagsFromString, extractHashtagsFromTweet, occurrences, getKeyword, stripHTMLTags, importTweetCsv, buildCommonTopicHeader, commonTopicHeader }
+export {
+    extractHashTagsFromString,
+    extractHashtagsFromTweet,
+    occurrences,
+    getKeyword,
+    stripHTMLTags,
+    importTweetCsv,
+    buildCommonTopicHeader,
+    commonTopicHeader
+}

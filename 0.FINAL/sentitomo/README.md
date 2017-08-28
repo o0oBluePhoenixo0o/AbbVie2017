@@ -3,6 +3,7 @@ Table of Contents
 =================
 
    * [SentiTomo](#sentitomo)
+   * [Table of Contents](#table-of-contents)
       * [Idea](#idea)
       * [Problem statement and way to go](#problem-statement-and-way-to-go)
       * [Fundamental technologies](#fundamental-technologies)
@@ -22,6 +23,7 @@ Table of Contents
             * [Install Python and dependencies](#install-python-and-dependencies)
             * [Install R](#install-r)
             * [Set up environment variables](#set-up-environment-variables)
+            * [Build the client application](#build-the-client-application)
             * [Start the server](#start-the-server)
          * [Database](#database)
          * [Server](#server)
@@ -32,34 +34,36 @@ Table of Contents
                * [Java](#java)
             * [data](#data)
          * [Client](#client)
+            * [Static view](#static-view)
+            * [Toolbox view](#toolbox-view)
       * [Sequence Diagrams](#sequence-diagrams)
       * [Conclusion](#conclusion)
       * [Questions](#questions)
 
-As part of our Master Team Project named "Topic Monitoring in the Pharmaceutical Industry" we wanted to develop an application to incorporate our findings and different Machine Learning scripts to show how a production environment can look like. The name of this application is "SentiTomo", a combination of the words "Sentiment Analysis" and "Topic Monitoring".
+As part of our Master Team Project "Topic Monitoring in the Pharmaceutical Industry" we wanted to develop an application to incorporate our findings and different machine learning scripts to show how a production environment can look like. The name of this application is "SentiTomo", a combination of the words "Sentiment Analysis" and "Topic Monitoring".
 
 ## Idea
-The basic idea of accomplish such an task was to create a client-server architecture. The server part will be responsible for crawling social media data from Twitter and Facebook, as well as executing different machine learning tasks, such as sentiment analysis (classification ), topic detection and trend detection (clustering). Besides this, the results of those tasks are saved in an database to be available through an Application Programming Interface (API). This ensures that the results are persisted over time and can be analyzed.
+The basic idea of accomplish such an task was to create a client-server architecture. The server part will be responsible for crawling social media data from Twitter and Facebook, as well as executing different machine learning tasks, such as sentiment analysis (classification ), topic detection and trend detection (clustering). Besides this, the results of those tasks are saved in a database to be available through an Application Programming Interface (API). This ensures that the results are persisted over time and can be analyzed.
 
 ## Problem statement and way to go
-Throughout our work on this project we tried out variuous algorithms for machine learning (ML) and implemented them in different programming languages. After filtering all good performing algorithms we ended up with three programming languages:  R, Python and Java. The resulting problem now was to find a common platform for the server to work with those languages. The inital attempt to solve this issue was to choose one those language as the primary one and let it work with the others. But this had one drawback. If we would have chosen one of the ML languages as the primary one we would have not been able to replace this language anymore in favor of another one in which some models may perform better. This would lead to an abandoned machine learning language just serving as a wrapper language. So we were searching for a language which not perform any machine learning but is capable of working with all the existing languages. This ensures that the different languages, and machine learning scripts can easily be switched out or updated without influencing other parts of the application because those will always interact with the wrapper language which copes with the different languages.
+Throughout our work on this project we tried out various algorithms for machine learning (ML) and implemented them in different programming languages. After filtering all good performing algorithms we ended up with three programming languages:  R, Python and Java. The resulting problem now was to find a common platform for the server to work with those languages. The initial attempt to solve this issue was to choose one those language as the primary one and let it work with the others. But this had one drawback. If we would have chosen one of the ML languages as the primary one we would have not been able to replace this language anymore in favor of another one in which some models may perform better. This would lead to an abandoned machine learning language just serving as a wrapper language. So we were searching for a language which not perform any machine learning but is capable of working with all the existing languages. This ensures that the different languages, and machine learning scripts can easily be switched out or updated without influencing other parts of the application because those will always interact with the wrapper language which copes with the different languages.
 Because of the rising popularity and the possibility to be run on server and client side we chose JavaScript as our wrapper language. With the open-source and community driven framework called 'Node.js' it is possible to create powerful server and client applications. Furthermore it is possible to easily spawn child processes, invoking other programming languages, and communicate with them. This made JavaScript our way to go wrapper language.
 Based on this, we want to provide you an overview about the main technologies which we used to built up the application, how the application is structured and how it eventually can be used in a production environment.
 
 
 ## Fundamental technologies
 
-To give you an idea which technologies were used throughout the development process of SentiTomo this chapter gives an overview about the most prominent ones. We tried to only use frameworks which experience a high support from the developer community as well as developed by reliable sources. This section should not give an exhaustive explanation of all the used framework. Much more it should give a hint on why we choosed the different solutions for our application. 
+To give you an idea which technologies were used throughout the development process of SentiTomo this chapter gives an overview about the most prominent ones. We tried to only use frameworks which experience a high support from the developer community as well as developed by reliable sources. This section should not give an exhaustive explanation of all the used framework. Much more it should give a hint on why we chose the different solutions for our application. 
 
 ### Node.js (Server)
 
 [Node.js](https://nodejs.org/en/) is an open-source, cross-platform framework written in C, C++ and JavaScript, which makes it possible to run JavaScript code on the server-side. The initial release was on May the 27th, 2009 and it was written by Ryan Dahl. Primarily it was built because the most common web server at this time, Apache HTTP Server, had troubles with a lot of concurrent connections and normally used blocking code executions which led to poor server performance.
-The idea behind Node is to utilize a simplified event-driven programming paradigm where the program flow is determined by events (user clicks, messages from other methods etc.) to let so called callback functions take care of the result of method calls. With this structure the main thread of a Node.js application is not blocked by method executions. Normally a Node based application is only running on one thread, but with non-blocking method calls it will never gets stucked at one point. This makes it easy to build highly scalable applications without the need of mulitple threads, which could result into poor performance. But if it is needed Node can also spawn different threads and is not limited to only one.
-Hand in hand to Node comes a package manager called `npm` which stands for `Node Packaging Manager`. It is used to install, update and remove third party Node.js programs which are listed in the npm registry. npm enables developers to easily share and distribute Node.js code, so it can be used in other projects. All installed dependencies are listed inside a file called `package.json` which is mandatory for every Node based project. It contains all neccessary information about the different packages and their version numbers. These are installed inside a folder called `node_modules`, which is accessed at runtime to load the different dependencies of a Node application.
+The idea behind Node is to utilize a simplified event-driven programming paradigm where the program flow is determined by events (user clicks, messages from other methods etc.) to let so called callback functions take care of the result of method calls. With this structure the main thread of a Node.js application is not blocked by method executions. Normally a Node based application is only running on one thread, but with non-blocking method calls it will never gets stuck at one point. This makes it easy to build highly scalable applications without the need of multiple threads, which could result into poor performance. But if it is needed Node can also spawn different threads and is not limited to only one.
+Hand in hand to Node comes a package manager called `npm` which stands for `Node Packaging Manager`. It is used to install, update and remove third party Node.js programs which are listed in the npm registry. npm enables developers to easily share and distribute Node.js code, so it can be used in other projects. All installed dependencies are listed inside a file called `package.json` which is mandatory for every Node based project. It contains all necessary information about the different packages and their version numbers. These are installed inside a folder called `node_modules`, which is accessed at runtime to load the different dependencies of a Node application.
 
 ### Yarn (Server and Client)
 
-[Yarn](https://yarnpkg.com/lang/en/) is an additional Node package manager built by Facebook based on npm, which improves npm in some important parts. One of the biggest flaws of `npm` is that it stores the different packges inside the `node_modules` in a non deterministic way. That means that the order of packages inside `node_modules` can differ from user to user depending on the order of installation. This can lead to bugs like 'Works on my machine' arise very quickly which makes debugging and hunting bugs down very frustrating. Also the the actual dependency tree can differ from the `node_modules` directory because duplicate dependencies are merged by Node itself. All these issues are resolved with Yarn by installing dependencies in a deterministic way and organizing duplicate ones in a better manner. Every projects that uses Yarn file called 'yarn.lock' is created. This file is used to execute the installation processes on different machines in the exact same way which makes bugs like 'Works on my machine' very unlikely.
+[Yarn](https://yarnpkg.com/lang/en/) is an additional Node package manager built by Facebook based on npm, which improves npm in some important parts. One of the biggest flaws of `npm` is that it stores the different packages inside the `node_modules` in a non deterministic way. That means that the order of packages inside `node_modules` can differ from user to user depending on the order of installation. This can lead to bugs like 'Works on my machine' arise very quickly which makes debugging and hunting bugs down very frustrating. Also the the actual dependency tree can differ from the `node_modules` directory because duplicate dependencies are merged by Node itself. All these issues are resolved with Yarn by installing dependencies in a deterministic way and organizing duplicate ones in a better manner. Every projects that uses Yarn file called 'yarn.lock' is created. This file is used to execute the installation processes on different machines in the exact same way which makes bugs like 'Works on my machine' very unlikely.
 
 ### Express.js (Server)
 
@@ -68,15 +72,15 @@ In its fundamental form it is very lightweight and only offers the minimum funct
 
 ### h20 (Server)
 
-[h20](https://www.h2o.ai/) is a software platform for big-data analysis and machine learning tasks. It can be run in Java, R and Python and offers APIs for building and using models for detection patterns in data. Inside SentiTomo it is used in the R versions and serves as a platform for running some machine learning tasks on it. Primiarly these are sentiment analysis tasks.
+[h20](https://www.h2o.ai/) is a software platform for big-data analysis and machine learning tasks. It can be run in Java, R and Python and offers APIs for building and using models for detection patterns in data. Inside SentiTomo it is used in the R versions and serves as a platform for running some machine learning tasks on it. Primarily these are sentiment analysis tasks.
 
 ### GraphQL (Server API)
 
-Because we wanted to integrate an Application Programming Interface for easy data sharing between server and client we searched for a state of the art solution and came up with [GraphQL](http://graphql.org/learn/). It is the definition for the combination of two things. On the one hand it is a query language for any existing API/connection to a database and on the other hand it is an server-side runtime for executing queries that are defined by a type system based on data from any backend storage. It is actively maintained by the the open-source community, created by Facebook and said to be next big thing after REST.
-The major key part of  GraphQL is that it  can be set up on any database management system (DBSM), like on SQL-based or document based ones. It is not bound to any specific programming language nor to any server implementation. It is completely decoupled from those, which makes it easy to integrate in any existing system. Another advantage is, that it does not dictate your backend storage option. This makes it possible to easily switch the backend without affecting the existing API. But one of the most impressing parts is, that it solves a big issue we had with REST. When querying an instance in REST, this very often ended up with multiple queries to different endpoints, while with GraphQL this can be accomplished with only one request. 
+Because we wanted to integrate an Application Programming Interface for easy data sharing between server and client we searched for a state of the art solution and came up with [GraphQL](http://graphql.org/learn/). It is the definition for the combination of two things. On the one hand it is a query language for any existing API/connection to a database and on the other hand it is an server-side runtime for executing queries that are defined by a type system based on data from any back end storage. It is actively maintained by the the open-source community, created by Facebook and said to be next big thing after REST.
+The major key part of  GraphQL is that it  can be set up on any database management system (DBSM), like on SQL-based or document based ones. It is not bound to any specific programming language nor to any server implementation. It is completely decoupled from those, which makes it easy to integrate in any existing system. Another advantage is, that it does not dictate your back end storage option. This makes it possible to easily switch the back end without affecting the existing API. But one of the most impressing parts is, that it solves a big issue we had with REST. When querying an instance in REST, this very often ended up with multiple queries to different endpoints, while with GraphQL this can be accomplished with only one request. 
 For example in our use case: A query for an tweet and the corresponding author of the tweet in REST would normally result in two calls. One to the tweet endpoint and one the author endpoint. With an GraphQL based API the request can be fulfilled with only one call:
 
-A GraphQL service is defined by its `type definitions`. A sample one would look like the follwoing: 
+A GraphQL service is defined by its `type definitions`. A sample one would look like the following: 
 ```
 type Query {
   tweet: Tweet
@@ -123,7 +127,7 @@ An example request to the API could be:
     }
 }    
 ```
-Respone:
+Response:
 ```
 {
     data: {
@@ -144,7 +148,7 @@ With this example it is very clear to see that it is possible to easily request 
 
 To develop our front-end client side we wanted to use a modern, well supported and written framework and found the best solution in [React](https://facebook.github.io/react/). React is an open source front-end JavaScript library for dynamically creating user interfaces. It is very actively maintained by Facebook and the open source community and offers a variety of additional packages which can be used to extend the functionalities of it. Currently it is available in version 15 with version 16 at beta state. A lot of big companies are building their web application based on it. One of the most prominent ones are AirBnB, Netflix and Facebook itself. 
 
-React uses a sepcial JavaScript syntax called `.jsx`. With that it is possible to write HTML code inside a JavaScript file. A simple hello world `.jsx` example file looks like this:
+React uses a special JavaScript syntax called `.jsx`. With that it is possible to write HTML code inside a JavaScript file. A simple hello world `.jsx` example file looks like this:
 ```
 import * as React from 'react';
 
@@ -212,11 +216,12 @@ The main steps to install SentiTomo are:
 5. Install Python Version 3 
 6. Install R
 7. Set up environment variables
-8. Start the server
+8. Build the client application
+9. Start the server
 
 #### 1. Install  Node.js and npm
 
-Node.js always comes in combination with it's packaging manager npm . It can be installed on any common OS, and therefore you can use nearly any server operating system you like. SentiTomo was built on MacOS X Sierra Version 10.12.6 so we suggest using a Unix based server here. To install Node you can either use the downloads provided by the [Node website](https://nodejs.org/en/download/) or using one of the following aproaches.
+Node.js always comes in combination with it's packaging manager npm . It can be installed on any common OS, and therefore you can use nearly any server operating system you like. SentiTomo was built on MacOS X Sierra Version 10.12.6 so we suggest using a Unix based server here. To install Node you can either use the downloads provided by the [Node website](https://nodejs.org/en/download/) or using one of the following approaches.
 
 __MacOS:__
 
@@ -240,6 +245,7 @@ After installing Node it comes to the decision to either stay with npm as your d
 Now that either npm or Yarn is set up we can use it to install the dependencies. The following commands assume that you are in the top level `sentitomo/` of the application.
 
 **npm:**
+
     $ # install server dependencies
     $ cd server
     $ npm install
@@ -263,10 +269,11 @@ Now that either npm or Yarn is set up we can use it to install the dependencies.
 Some of the R scripts we use for machine learning need both versions of Java to work. To install the versions just follow the basic instructions of your specified distribution. You just have to ensure that the user who executes the Node process has access to both libraries.
 
 #### Install Python and dependencies
-The Python scripts for topic detection are based on Pyhton version 2 and 3. Follow the common ways to install it on your server OS and ensure that `python` is the command to execute Pyhton 2 and `python3` to execute Pyhton 3 on the terminal. 
+The Python scripts for topic detection are based on Python version 2 and 3. Follow the common ways to install it on your server OS and ensure that `python` is the command to execute Python 2 and `python3` to execute Python 3 on the terminal. 
 
 **Dependencies**
-Before you can run the Python files you have to ensure that all of the following modules are installed. Install module via `pip3 installl <moduleName>` for Python 3 modules and `pip2 installl <moduleName>` for Python 2 modules
+
+Before you can run the Python files you have to ensure that all of the following modules are installed. Install module via `pip3 install <moduleName>` for Python 3 modules and `pip2 install <moduleName>` for Python 2 modules
 
 
 *Python3 modules*
@@ -428,7 +435,7 @@ SentiTomo is using some environment variables to connect to different services w
 
 *Database*
 
-Our application is using a MySQL database as it's backend. To use your database you have to modify the `.env` file in the root of `sentitomo/server`. This file is used for setting up some configuration settings. Just fill out the following key/value pairs to connect your database.
+Our application is using a MySQL database as it's back end. To use your database you have to modify the `.env` file in the root of `sentitomo/server`. This file is used for setting up some configuration settings. Just fill out the following key/value pairs to connect your database.
 
     DB_NAME=yourDBName
     DB_USER=yourDBUser
@@ -457,21 +464,27 @@ Examples:
    
 *Facebook*
 
-To have access to the Facebook API you need to set the app credentials inside the `.env` file. To create a Facebook app visit: [Facebook Dev Website](https://developers.facebook.com/apps/). After setting up your APP copy the `APP ID` and the `APP Secret` into following line:
+Because we dropped Facebook during our project the functionally to crawl data from it is only implemented with a temporary API key. To create such an key visit: [Facebook Graph Explorer](https://developers.facebook.com/tools/explorer/) and generate a new user API key. Copy this key and insert it into:
 
 ```
-FACEBOOK_APP_ID=1234567890yourAPPID
-FACEBOOK_APP_SECRET=123abcde123yourAPPSecret
+FACEBOOK_API_KEY=yourKeyHere
 ``` 
+After setting this up it possible to crawl data from Facebook for around 1-2 hours. After that time period the key needs to be renewed manually.
 
 SentiTomo is only able to manually crawl Facebook pages based on keywords. There is not automatic stream of new data. To narrow down the results of those crawls to the pharmaceutical context there is a category filter set in `.env`. To change it just edit the following line:
 
 ```
 FACEBOOK_PAGE_CATEGORY_FILTER="Medical Company,Pharmaceuticals,Biotechnology Company,Medical & Health,Community,Interest"
 ```
+#### Build the client application
+
+If you do not see a `build` folder inside `client` be sure to execute the following command to make the front end static. Only then it can be served from our server application.
+
+    $ cd client
+    $ yarn build
 
 #### Start the server
-After installing all necessary software fragments you just need to start the server with the following command, assuming you are in the `sentitomo/server` directory:
+After installing all necessary software fragments and building the client application you just need to start the server with the following command, assuming you are in the `sentitomo/server` directory:
 
     $ npm start
     #or 
@@ -495,8 +508,7 @@ Once the server is started four methods are executed:
 
 The first one will start the h20 platform which is needed by some machine learning tasks. It starts a second webserver at `localhost:54321`.
 
-
-The second and third one will continously search for tweets which do not have sentiment or topic assigned to them, and will detect those. The last one will crawl the Twitter streaming API based on the keywords specified inside the `.env` file and save them into the database. The whole startup sequence can also be found displayed in the sequecene diagrams sections. All of these workers are executed asynchronously, so they do not infere or block each other. 
+The second and third one will continuously search for tweets which do not have sentiment or topic assigned to them, and will detect those. The last one will crawl the Twitter streaming API based on the keywords specified inside the `.env` file and save them into the database. The whole startup sequence and the workflow of the workers can also be found displayed in the [sequence diagrams section](#sequence-diagrams). All of these workers are executed asynchronously, so they do not influence or block each other. 
 
 In the next part we will have a deeper look into the database and the directories of SentiTomo.
 
@@ -657,7 +669,7 @@ All the backend server logic is placed inside the `server` directory. We won't c
 
 #### ML
 Inside the `ML` directory we placed all files which are related to the machine learning tasks, like sentiment analysis, topic detection and trend detection. It is divided in three subdirectories `Java`, `Python` and `R` to seperate the different programming languages. In the top level of `ML` you can find the wrapper files for incorporating the different programming languages with Javascript, `ml_wrapper.js` and `preprocess.js`. To let the different programming files work together we use Node's opportunity to spawn child processes and capture the output of these. To do so, we wrote a small file for calling the foreign code in a more convenient way, than directly spawning the child processes in the `ml_wrapper.js`. Those methods can be found in `/server/util/foreignCode.js`.
-With that procedure we can spawn the machine learning tasks asynchronously to the main process, which leads to the fact that the main thread is not blocked or influenced by executing foreign code. In the following we want to explain how we integration works in detail.
+With that procedure we can spawn the machine learning tasks asynchronously to the main process, which leads to the fact that the main thread is not blocked or influenced by executing foreign code. In the following we want to explain how the integration works in detail.
 
 ##### Preface (Important Notice)
 
@@ -675,7 +687,7 @@ When the foreign code needs access to some other files inside a directory it is 
 
 __Examples__
 
-All examples in JavaScript are written with ES6. To have a look the wrapper function for calling the foreign code, have a look at `/server/wrapper/codeWrapper.js`.
+All examples in JavaScript are written with ES6. To have a look the wrapper function for calling the foreign code, have a look at `/server/util/foreignCode.js`.
 
 __h2o__
 
@@ -686,6 +698,11 @@ SentiTomo is using [h2o](https://www.h2o.ai/h2o/) to execute some machine learni
 The R package version and the Java h20 server verison have to exactly match, if they do not match the sentiment detection will not working. We use the h2o version **3.10.5.3**. 
 
 If it is needed to have a look on the h2o server front end just visit [localhost:54321](localhost:54321).
+
+
+__Integrated but not used files__
+
+Inside `ml_wrapper.js` file two function can be found which are not used in the entire application. These are  `detectSentimentJavaNB()` and `detectTopicCTM()`. They both are using models for sentiment and topic detection which have a lower evaulation score compared to the other implemented. We let them stay inside the application to have some examples for machine learning tasks in each of the programming languages. 
 
 ##### R
 For integrating R with the server we were at first using a package called [r-script](https://github.com/joshkatz/r-script) package. It ships with a handy R function called `needs()`. This is basically a combination of `install()` and `require()`. This ensured that the different packages which are required by our scripts are installed and loaded in the correct way. Therefore every R file has to use `needs()` instead of `ìnstall.package("packageName")` and `require("package")/load("package")`. Also it is recommended to place all functions at the top of the R files.
@@ -1072,22 +1089,123 @@ export default socket;
 ```
 This channel is primarily used for initiating server methods like starting and stopping the topic and sentiment worker or initating the dynamic topic model building process. This is the most outstanding feature of having a integrated front-end, because third party solutions for displaying the data do not have such an communication channel.
 
+When the application is started, the front-end is available at [localhost:8080/app/](localhost:8080/app/). It offers two different views right now:
+* [/dashboard](localhost:8080/app/dashbaord) rudimentary dashboard
+* [/toolbox](localhost:8080/app/toolbox) different options to initate machine learning tasks dynamically 
 
-The dashboard consists of two parts. The static `app/dashboard` view which can be used to view the results of topic and sentiment worker and the `app/toolbox/` view which can be used to initiate the dynamic topic model building process or controlling the workers. 
+ The static `app/dashboard` view can be used to view the results of topic and sentiment worker and the`app/toolbox/`view serves as an interface to initiate the dynamic topic model building process or controlling the workers functions. 
+
+#### Static view
+
+On the static view you can specify a time range and click the `View tweets` button. Then a request is sent to the GraphQL API which retrieves the sentiments and topic results. After succesfully getting these results a message is sent to the server to detect trends based on the specified time range. SentiTomo uses a poisson based model to predict topic trends. The outcome of this detection is then merged with the previous result from the API.
+Now the combined results are displayed beneath the time selection box.
 
 ![SentiTomo Dashboard](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_dashboard.png)
 *Static dashboard view*
 
-On the static view you can specify a time range and then tweets and their coresponding topics are displayed. The pie chart with is clickable and serving as a filter for the sentiment, timeline and trend detection values.
 
 ![SentiTomo Dashboard Topic and Sentiment](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_dashboard_topic_senti.png)
 *Static dashboard topic and sentiment*
 
+The pie chart shows all the detected topics. The parts of the charts are  clickable and serving as a filter for the sentiment, timeline and trend detection values.
 
-Because of the GraphQL API it is even possible to totally switch out the entire client directory and develop another solution.
-When the application is started, the front-end is available at [localhost:8080/app/](localhost:8080/app/). It offers two different views right now:
-* [/dashboard](localhost:8080/app/dashbaord) rudimentary dashboard
-* [/toolbox](localhost:8080/app/toolbox) different options to initate machine learning tasks dynamically 
+![SentiTomo Dashboard Trend](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_dashboard_trend.png)
+*Static dashboard trend based on topic*
+
+Additionally the raw tweets are displayed inside a table to get a better feeling for the results and be able to check for inconsistencies. 
+
+![SentiTomo Dashboard Tweets](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_dashboard_tweets.png)
+*Static dashboard tweets*
+
+
+#### Toolbox view
+
+The toolbox view in total offers two sub views:
+
+- Topic and
+- Worker
+
+The 'Topic' view shares the same layout as the dashboard view. But instead of just viewing tweets by selecting a time range, with a click on the 'Detect Topics' button, a new clustering of the selected tweets is initated on the server. For building the topic detection model only the selected tweets are used. After the server has finished building the model and detecting the topics it also applies the poisson trend detection to the fresh clustered messages. After both results are calculated the result is sent back to the client via the websocket connection and then gets displayed. 
+
+
+![SentiTomo Toolbox](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_toolbox.png)
+*Toolbox*
+
+
+The worker tab can be used to control the sentiment and topic workers on the server. When the buttons are clicked a message is sent through the websocket connection to toggle the state of the worker functions. With this mechanism it is possible to either start or stop the detection of topics and sentiments.
+
+![SentiTomo Toolbox](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_toolbox_worker.png)
+*Toolbox Worker*
+
+Most of the interactivity bewteen the client and server is managed with the socket connection. To demonstrate the common workflow we want to present some code snippets which are responsible for toggling the worker functions.
+
+On the server side, listerners are waiting for specific message indicators and executes different functions based on the data which was sent. The snippet shows two listeners. One for sending the current worker status and one for starting and stopping them.
+ ```
+    ...
+        /*
+        * Client requests the current state of the worker threads
+        */
+        socket.on('client:getWorkers', () => {
+            socket.emit('server:getWorkers', {
+                topicWorker: global.topicWorker.running,
+                sentimentWorker: global.sentimentWorker.running,
+            });
+        });
+
+        /*
+        * Client wants to either stop or start a specific worker thread
+        */
+        socket.on('client:toggleWorker', data => {
+            switch (data.type) {
+                case "topic": global.topicWorker.running ? global.topicWorker.stop() : global.topicWorker.start(); break;
+                case "sentiment": global.sentimentWorker.running ? global.sentimentWorker.stop() : global.sentimentWorker.start(); break;
+                default: break;
+            }
+        });
+    ...
+ ```
+
+On the client side we have nearly the same structure. At first we initalize a listener which waits for a message from the server. When a server message comes in, it contains information about the state of the worker functions and the state of the ToolBox component is set accordingly to indicate the state the workers on the front-end (red or green buttons). Here it is possible to send a message back to server by clicking on one of the two buttons. This click will execute the `toggleWorker()` function with the specific `worker` parameter set. When this message then reaches the server, the `client:toggleWorker listener` is called and toggles the state of the worker accordingly.
+
+```
+...
+
+    componentDidMount() {
+        socket.on('server:getWorkers', data => {
+            this.setState({
+                topicWorker: data.topicWorker,
+                sentimentWorker: data.sentimentWorker
+            })
+        })
+        setInterval(() => this.getWorkerState(), 5000)
+    }
+
+    /**
+     * @function getWorkerState
+     * @description Sends a message to the server, to get the status of the topic and sentiment workers
+     * @memberof WorkerToolBox
+     * @return {void}
+     */
+    getWorkerState = () => {
+        socket.emit('client:getWorkers', null)
+    }
+
+    /**
+    * @function toggleWorker
+    * @param {String} worker Specifies which worker function to toggle
+    * @description Sends a message to the server and toggles the state of the specified worker, either topic or sentiment
+    * @memberof WorkerToolBox
+    * @return {void}
+    */
+    toggleWorker = (worker) => {
+        socket.emit('client:toggleWorker', {
+            type: worker
+        })
+    }
+
+...
+```
+The whole procedure is also shown as a [sequence diagram](#sequence-diagrams).
 
 ## Sequence Diagrams
 
@@ -1109,6 +1227,11 @@ __Sentiment Detection__:
 
 ![Sentiment Detection Worker Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/sequence_diagrams/img/sentiment_detection_worker_sequence.png)
 
+__Toggle worker functions__:
+
+![Toggle Worker Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/sequence_diagrams/img/toggle_worker_sequence.png)
+
+
 ## Conclusion
 
 With this application we wanted to show one way of using our findings and algorithms in a production-like environment. We showed how it is possible to built a server application which is capable of integrating different programming languages and use them for machine learning in an efficient way. With Node.js it is an ease to set up an highly scalable server which can handle asynchronous executions of foreign code very well. With the help spawning child processes a reliable communicate with those files is possible. With the help of GraphQL it was possible to set up a very modern and reliable API which any front-end can use to retrieve the result, which are produced by the  the machine learning algorithms. If it is necessary to switch out the DBMS in the future the API endpoints will not change and the front-end system would not need to be heavily modified. 
@@ -1122,4 +1245,4 @@ If you any question arise while looking trough the docs, the code or while testi
 
 __Note__
 
-We did not included application tests inside, because this is more like a showcase how the integration of such an application can be done rather than providing a fully working and mature application.
+We did not include application tests inside, because this is more like a showcase how the integration of such an application can be done rather than providing a fully working and mature application.

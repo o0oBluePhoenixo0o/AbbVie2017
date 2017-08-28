@@ -7,7 +7,7 @@ import logger from './logger';
 
 /**
  * @class TopicWorker
- * @description Class for simoultaneously detecting topics of tweets inside the database
+ * @description Class for simultaneously detecting topics of tweets inside the database
  */
 export default class TopicWorker {
     constructor() {
@@ -61,7 +61,7 @@ export default class TopicWorker {
                 if (tweets.length > 0) {
                     tweets.forEach(function (tweet, index) {
 
-                        // we diretctly modify the array here
+                        // we directly modify the array here
                         tweet.created = moment(tweet.created).format('YYYY-MM-DD hh:mm').toString();
                         tweet.createdAt = moment(tweet.createdAt).format('YYYY-MM-DD hh:mm')
                         tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
@@ -89,7 +89,7 @@ export default class TopicWorker {
                         });
                     })
                 } else {
-                    setTimeout(() => this.detectTopics(), 600000) // wait 10 minutes for new tweets to come ine
+                    setTimeout(() => this.detectTopics(), 600000) // wait 10 minutes for new tweets to come in
                 }
             });
         } else {

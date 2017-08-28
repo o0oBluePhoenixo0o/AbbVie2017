@@ -165,4 +165,14 @@
   urldate = {2017-08-22},
 }
 
+@Report{Seo2004,
+  author      = {Young-Woo Seo and Katia Sycara},
+  title       = {Text Clustering for Topic Detection},
+  institution = {Robotics Institute Carnegie Mellon University Pittsburgh, Pennsylvania 15213},
+  year        = {2004},
+  date        = {2004-01-31},
+  url         = {http://repository.cmu.edu/cgi/viewcontent.cgi?article=1705&context=robotics},
+  urldate     = {2017-08-22},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}

@@ -16,11 +16,11 @@ require('dotenv').config();
 const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
     dialect: 'mysql',
     host: process.env.DB_HOST,
-    logging: true,
+    logging: process.env.LOGGING,
     pool: {
-        max: 5,
+        max: 20,
         min: 1,
-        idle: 10000
+        idle: 20000
     },
     define: {
         freezeTableName: true

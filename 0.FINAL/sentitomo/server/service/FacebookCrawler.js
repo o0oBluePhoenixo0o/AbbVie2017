@@ -12,7 +12,7 @@ export default class FacebookCrawler {
 
     constructor(config) {
         this.graph = graph;
-        this.graph.setAccessToken("EAACEdEose0cBADQK3mQlb59RGZABbZCUdMkGcgescEhPSmaukZB94dom8HhLsp8Fv7BTkLklFSbJH54pZAgEvkcz0nvlZCCoRnXhsfXTPFZAfaZAxMPF5EnhGO8jzIbHOtoEATAsHQliZAQZCZBvzmltJpledr32FelxoUG2VYGB0vbqYfhttKx61xAZAKjmLchcZB5qxWWEIu5AKAZDZD")
+        this.graph.setAccessToken(process.env.FACEBOOK_API_KEY);
         this.graph.setVersion("2.8");
     }
 
@@ -103,7 +103,8 @@ export default class FacebookCrawler {
                                     }).then(async dbPost => {
                                         var comments = new Array();
 
-                                        comments.push(...post.comments.data);
+                                        comments.push(...post.comments.data); // errors occur if the post has no comments, but they do not crash the 
+                                        //method call
 
                                         //Iterate over the different result pages and resolve the data of them
                                         var latestCommentFeed = post.comments.data
@@ -112,7 +113,6 @@ export default class FacebookCrawler {
                                             comments.push(...newFeed.data);
                                             latestCommentFeed = newFeed;
                                         }
-                                        s
                                         comments.forEach(comment => {
                                             FacebookComment.upsert({
                                                 id: comment.id,

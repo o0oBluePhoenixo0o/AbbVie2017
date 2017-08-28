@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Divider, Header } from 'semantic-ui-react'
+import { Button, Header, Divider } from 'semantic-ui-react'
 import DayPicker, { DateUtils } from 'react-day-picker';
 import moment from 'moment';
 import 'react-day-picker/lib/style.css';

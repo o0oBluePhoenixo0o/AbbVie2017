@@ -38,7 +38,7 @@ export default class SentimentWorker {
 
     /**
      * @function detectSentiments
-     * @description Crawls 100 tweets from the database where the sentiment is not yet detected. It will then use different sentiment detection algorithms to detect the sentiments
+     * @description Crawls 10 tweets from the database where the sentiment is not yet detected. It will then use different sentiment detection algorithms to detect the sentiments
      * If no tweets are found, where the sentiment is missing, the function will wait for 10 minutes to let new tweets gets crawled and then starts again.
      * @see {@link module:ML_Wrapper~detectSentimentEnsembleR}
      * @see {@link module:ML_Wrapper~detectSentimentEnsemblePython}
@@ -84,7 +84,7 @@ export default class SentimentWorker {
                     logger.log('info', "10 Sentiments of tweets detected ")
                     this.detectSentiments();
                 } else {
-                    setTimeout(() => this.detectSentiments(), 600000) // wait 10 minutes for new tweets to come ine
+                    setTimeout(() => this.detectSentiments(), 600000) // wait 10 minutes for new tweets to come in
                 }
             });
         } else {

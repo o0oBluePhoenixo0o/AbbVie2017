@@ -4,7 +4,7 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>294</x>
+      <x>343</x>
       <y>0</y>
       <w>1120</w>
       <h>343</h>
@@ -51,7 +51,7 @@ b -&gt; d : insertTweet(tweet)</panel_attributes>
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>294</x>
+      <x>343</x>
       <y>350</y>
       <w>959</w>
       <h>511</h>
@@ -120,7 +120,7 @@ tick=</panel_attributes>
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>294</x>
+      <x>343</x>
       <y>1365</y>
       <w>770</w>
       <h>455</h>
@@ -162,7 +162,7 @@ a-&gt;e: start()</panel_attributes>
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>294</x>
+      <x>343</x>
       <y>868</y>
       <w>1162</w>
       <h>476</h>
@@ -217,6 +217,63 @@ a:[running=true]
 			off=a
 	--=altId
 --=loopId
+tick=</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>336</x>
+      <y>1841</y>
+      <w>756</w>
+      <h>518</h>
+    </coordinates>
+    <panel_attributes>title=Toggle Worker Function (ex: sentiment worker)
+autoTick=false
+obj=Client~a
+obj=Server~b
+obj=Sentiment Worker~c
+obj=Topic Worker~d
+combinedFragment=loop~loop1 a d
+tick=
+a:[every 5sec]
+	tick=
+	a-&gt;b: client:getWorker
+	on=b
+	tick=
+	b-&gt;c: getStatus
+	tick=
+	c-&gt;b: status
+	tick=
+	b-&gt;d: getStatus
+	tick=
+	d -&gt; b: status
+	tick=
+	b-&gt;a: server:getWorkers
+	off=b
+	tick=
+	on=a
+	tick=
+	a-&gt; a+: setState
+	tick=
+	off=a
+--=loop1
+tick=
+combinedFragment=alt~alt1 a d
+tick=
+a:[sentiment worker is running running]
+tick=
+a-&gt; b: client:toggleWorker(sentiment)
+tick=
+b-&gt;c: stop()
+..
+a:[else (sentiment worker is not running)]
+tick=
+a-&gt; b: client:toggleWorker(sentiment)
+tick=
+b-&gt;c: start()
+--=alt1
+
 tick=</panel_attributes>
     <additional_attributes/>
   </element>
