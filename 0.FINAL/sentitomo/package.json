@@ -4,6 +4,7 @@
     "babel-loader": "^7.1.1",
     "babel-preset-env": "^1.6.0",
     "jsdoc-react-proptypes": "^1.0.2",
+    "minami": "^1.2.3",
     "webpack": "^3.5.4"
   }
 }

@@ -34,7 +34,8 @@ lemma = WordNetLemmatizer()
 
 
 def tokenize(doc):
-    tokens = ' '.join(re.findall(r"[\w']+", str(doc))).lower().split()
+    reurl = re.sub(r"http\S+", "", str(doc))
+    tokens = ' '.join(re.findall(r"[\w']+", reurl)).lower().split()
     x = [''.join(c for c in s if c not in string.punctuation) for s in tokens]
     x = ' '.join(x)
     stop_free = " ".join([i for i in x.lower().split() if i not in stop])

@@ -2,22 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: Utils</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Utils - Documentation</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
 </head>
-
 <body>
 
-<div id="main">
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
-    <h1 class="page-title">Module: Utils</h1>
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="FacebookCrawler.html">FacebookCrawler</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="FacebookCrawler.html#.resolveResponse">resolveResponse</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="FacebookCrawler.html#.searchAndSaveFBPages">searchAndSaveFBPages</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="GraphQLScalarType.html">GraphQLScalarType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="GraphQLScalarType.html#.parseLiteral">parseLiteral</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="GraphQLScalarType.html#.parseValue">parseValue</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="GraphQLScalarType.html#.serialize">serialize</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-ForeignCode-Java.html">Java</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode-Java.html#.call">call</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode-Java.html#.callSync">callSync</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode-Java.html#.data">data</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode-Java.html#.kill">kill</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-ForeignCode-Python.html">Python</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode-Python.html#.call">call</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode-Python.html#.callSync">callSync</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode-Python.html#.data">data</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode-Python.html#.kill">kill</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-ForeignCode-R.html">R</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode-R.html#.call">call</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode-R.html#.callSync">callSync</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode-R.html#.data">data</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode-R.html#.kill">kill</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="SentimentWorker.html">SentimentWorker</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SentimentWorker.html#.detectSentiments">detectSentiments</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SentimentWorker.html#.start">start</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="SentimentWorker.html#.stop">stop</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="TopicWorker.html">TopicWorker</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="TopicWorker.html#.detectTopics">detectTopics</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="TopicWorker.html#.start">start</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="TopicWorker.html#.stop">stop</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="TwitterCrawler.html">TwitterCrawler</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="TwitterCrawler.html#.start">start</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="TwitterCrawler.html#.track">track</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="TwitterCrawler.html#.updateTweetAuthors">updateTweetAuthors</a></span></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Connectors.html">Connectors</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Export.html">Export</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Export.html#~convertSequlizeModelToCsv">convertSequlizeModelToCsv</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Export.html#~convertToCsvRaw">convertToCsvRaw</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-ForeignCode.html">ForeignCode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode.html#~JavaShell">JavaShell</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode.html#~PythonShell">PythonShell</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ForeignCode.html#~RShell">RShell</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Logger.html">Logger</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-LogginMiddleware.html">LogginMiddleware</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-LogginMiddleware.html#~loggingMiddleware">loggingMiddleware</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-ML_Wrapper.html">ML_Wrapper</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ML_Wrapper.html#.detectSentimentJavaNB">detectSentimentJavaNB</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ML_Wrapper.html#~detectSarcasm">detectSarcasm</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ML_Wrapper.html#~detectSarcasmSync">detectSarcasmSync</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ML_Wrapper.html#~detectSentimentEnsemblePython">detectSentimentEnsemblePython</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ML_Wrapper.html#~detectSentimentEnsemblePythonSync">detectSentimentEnsemblePythonSync</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ML_Wrapper.html#~detectSentimentEnsembleR">detectSentimentEnsembleR</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ML_Wrapper.html#~detectSentimentEnsembleRSync">detectSentimentEnsembleRSync</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ML_Wrapper.html#~detectTopicCTM">detectTopicCTM</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ML_Wrapper.html#~detectTopicLDADynamic">detectTopicLDADynamic</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ML_Wrapper.html#~detectTopicLDAStatic">detectTopicLDAStatic</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ML_Wrapper.html#~detectTopicLDAStaticBatch">detectTopicLDAStaticBatch</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ML_Wrapper.html#~detectTopicLDAStaticSync">detectTopicLDAStaticSync</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-ML_Wrapper.html#~detectTrends">detectTrends</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Preprocess.html">Preprocess</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Preprocess.html#~preprocessTweetMessage">preprocessTweetMessage</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Sockets.html">Sockets</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Sockets.html#~listenToSockets">listenToSockets</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Utils.html">Utils</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Utils.html#~buildCommonTopicHeader">buildCommonTopicHeader</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Utils.html#~commonTopicHeader">commonTopicHeader</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Utils.html#~extractHashTagsFromString">extractHashTagsFromString</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Utils.html#~extractHashtagsFromTweet">extractHashtagsFromTweet</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Utils.html#~getKeyword">getKeyword</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Utils.html#~occurrences">occurrences</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Utils.html#~stripHTMLTags">stripHTMLTags</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#resolvers">resolvers</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#typeDefinitions">typeDefinitions</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Utils</h1>
+    
 
     
 
@@ -38,19 +51,12 @@
     <div class="container-overview">
     
         
-            <div class="description">Some useful methods for working with strings or importing data</div>
+            <div class="description"><p>Some useful methods for working with strings or importing data</p></div>
         
 
         
             
-
-
-
-
-
-
-
-
+<div class="section-method">
 
 
 
@@ -115,6 +121,12 @@
 
 
 
+
+
+
+
+
+</div>
         
     
     </div>
@@ -125,9 +137,7 @@
 
     
 
-    
-
-    
+     
 
     
 
@@ -138,20 +148,416 @@
 
         
             
+<div class="section-method">
 
     
 
-    
-    <h4 class="name" id="~extractHashTagsFromString"><span class="type-signature">(inner) </span>extractHashTagsFromString<span class="signature">(text)</span><span class="type-signature"> &rarr; {String}</span></h4>
-    
+    <h4 class="name" id="~buildCommonTopicHeader"><span class="type-signature">(inner) </span>buildCommonTopicHeader<span class="signature">(csvFile)</span><span class="type-signature"> &rarr; {Array}</span></h4>
 
     
 
 
 
 <div class="description">
-    Extract every hashtag from a given text. Returns a concatenated string of those separated by ','
+    <p>Build an array out of our csv file which contain allocation of topic contents and their respective common topic names</p>
 </div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="util_utils.js.html">util/utils.js</a>, <a href="util_utils.js.html#line192">line 192</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>csvFile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>String</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>Path to the csv file which contains our allocation of topic contents and their respective common topic headlines</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>Array</code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    <p>Array with topic content terms and their corresponding common topic name</p>
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="~commonTopicHeader"><span class="type-signature">(inner) </span>commonTopicHeader<span class="signature">(topicContent, commonHeadlines)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Tries to find a common topic header for a given topic content based on previously build array of associations bewteen topic contents and headline</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="util_utils.js.html">util/utils.js</a>, <a href="util_utils.js.html#line213">line 213</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="module-Utils.html#~buildCommonTopicHeader"><code>module:Utils~buildCommonTopicHeader</code></a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>topicContent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>String</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>Topic content string out of database</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>commonHeadlines</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Array</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>Array of topic contents with their headlines</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>String</code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    <p>Common topic name for given topic content</p>
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="~extractHashTagsFromString"><span class="type-signature">(inner) </span>extractHashTagsFromString<span class="signature">(text)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Extract every hashtag from a given text. Returns a concatenated string of those separated by ','</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="util_utils.js.html">util/utils.js</a>, <a href="util_utils.js.html#line76">line 76</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -192,7 +598,7 @@
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type"><code>String</code></span>
 
 
             
@@ -202,13 +608,72 @@
 
             
 
-            <td class="description last">A string containing hashtags</td>
+            <td class="description last">
+                <p>A string containing hashtags</p>
+                
+            </td>
         </tr>
 
     
     </tbody>
 </table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>String</code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    <p>Concatenated string with hashtags, separated by ','</p>
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="~extractHashtagsFromTweet"><span class="type-signature">(inner) </span>extractHashtagsFromTweet<span class="signature">(hashtags)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Extract every hashtag from a given Twitter API hashtags object. Returns a concatenated string of those separated by ','</p>
+</div>
 
 
 
@@ -243,7 +708,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_utils.js.html">util/utils.js</a>, <a href="util_utils.js.html#line73">line 73</a>
+        <a href="util_utils.js.html">util/utils.js</a>, <a href="util_utils.js.html#line87">line 87</a>
     </li></ul></dd>
     
 
@@ -253,62 +718,6 @@
 
     
 </dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    Concatenated string with hashtags, separated by ','
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~extractHashtagsFromTweet"><span class="type-signature">(inner) </span>extractHashtagsFromTweet<span class="signature">(hashtags)</span><span class="type-signature"> &rarr; {String}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Extract every hashtag from a given Twitter API hashtags object. Returns a concatenated string of those separated by ','
-</div>
 
 
 
@@ -349,7 +758,7 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type"><code>Object</code></span>
 
 
             
@@ -359,13 +768,72 @@
 
             
 
-            <td class="description last">Hashtags pbject from the Twitter API</td>
+            <td class="description last">
+                <p>Hashtags pbject from the Twitter API</p>
+                
+            </td>
         </tr>
 
     
     </tbody>
 </table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>String</code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    <p>Concatenated string with hashtags, separated by ','</p>
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="~getKeyword"><span class="type-signature">(inner) </span>getKeyword<span class="signature">(message, filters)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Extract a keyword out of a text based on possible keywords and their occurences in the message</p>
+</div>
 
 
 
@@ -400,72 +868,23 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_utils.js.html">util/utils.js</a>, <a href="util_utils.js.html#line84">line 84</a>
+        <a href="util_utils.js.html">util/utils.js</a>, <a href="util_utils.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
     
 
     
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    Concatenated string with hashtags, separated by ','
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>@see <a href="module-Utils.html#~occurrences"><code>module:Utils~occurrences</code></a></li>
+        </ul>
     </dd>
+    
+
+    
 </dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~getKeyword"><span class="type-signature">(inner) </span>getKeyword<span class="signature">(message, filters)</span><span class="type-signature"> &rarr; {String}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Extract a keyword out of a text based on possible keywords and their occurences in the message
-</div>
 
 
 
@@ -506,7 +925,7 @@
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type"><code>String</code></span>
 
 
             
@@ -516,7 +935,10 @@
 
             
 
-            <td class="description last">The text to extract keyword</td>
+            <td class="description last">
+                <p>The text to extract keyword</p>
+                
+            </td>
         </tr>
 
     
@@ -529,7 +951,7 @@
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type"><code>String</code></span>
 
 
             
@@ -539,7 +961,10 @@
 
             
 
-            <td class="description last">Comma separated possible keywords</td>
+            <td class="description last">
+                <p>Comma separated possible keywords</p>
+                
+            </td>
         </tr>
 
     
@@ -551,52 +976,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_utils.js.html">util/utils.js</a>, <a href="util_utils.js.html#line37">line 37</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li>@see <a href="module-Utils.html#~occurrences">module:Utils~occurrences</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
 
 
 
@@ -605,157 +984,49 @@
 
 
 
-
-
-
-
-
+<div class="section-returns">
 <h5>Returns:</h5>
 
         
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>String</code></span>
+
+
+    </dd>
+</dl>
+
+
 <div class="param-desc">
-    The keyword which is most likely to represent the content of this text
+    <p>The keyword which is most likely to represent the content of this text</p>
+</div>
+
+    
 </div>
 
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
+</div>
         
             
+<div class="section-method">
 
     
 
-    
     <h4 class="name" id="~occurrences"><span class="type-signature">(inner) </span>occurrences<span class="signature">(string, subString, allowOverlapping)</span><span class="type-signature"> &rarr; {int}</span></h4>
-    
 
     
 
 
 
 <div class="description">
-    Function that count occurrences of a substring in a string;
+    <p>Function that count occurrences of a substring in a string;</p>
 </div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>string</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The string</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>subString</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The sub string to search for</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>allowOverlapping</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Optional. (Default:false)</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
 
 
 
@@ -797,7 +1068,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_utils.js.html">util/utils.js</a>, <a href="util_utils.js.html#line7">line 7</a>
+        <a href="util_utils.js.html">util/utils.js</a>, <a href="util_utils.js.html#line10">line 10</a>
     </li></ul></dd>
     
 
@@ -825,53 +1096,209 @@
 
 
 
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>string</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>String</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>The string</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>subString</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>String</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>The sub string to search for</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>allowOverlapping</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Boolean</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>Optional. (Default:false)</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    How many times the substring occurs
-</div>
 
-
-
-<dl>
+<dl class="param-type">
     <dt>
-        Type
+        Type:
     </dt>
     <dd>
         
-<span class="param-type">int</span>
+<span class="param-type"><code>int</code></span>
 
 
     </dd>
 </dl>
 
+
+<div class="param-desc">
+    <p>How many times the substring occurs</p>
+</div>
+
     
+</div>
 
 
 
-
-
+</div>
         
             
+<div class="section-method">
 
     
 
-    
     <h4 class="name" id="~stripHTMLTags"><span class="type-signature">(inner) </span>stripHTMLTags<span class="signature">(text)</span><span class="type-signature"> &rarr; {String}</span></h4>
-    
 
     
 
 
 
 <div class="description">
-    Remove all HTML tags
+    <p>Remove all HTML tags</p>
 </div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="util_utils.js.html">util/utils.js</a>, <a href="util_utils.js.html#line66">line 66</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -912,7 +1339,7 @@
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type"><code>String</code></span>
 
 
             
@@ -922,7 +1349,10 @@
 
             
 
-            <td class="description last">A string containing HTML Tags</td>
+            <td class="description last">
+                <p>A string containing HTML Tags</p>
+                
+            </td>
         </tr>
 
     
@@ -934,45 +1364,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util_utils.js.html">util/utils.js</a>, <a href="util_utils.js.html#line63">line 63</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
 
 
 
@@ -981,38 +1372,34 @@
 
 
 
-
-
-
-
-
+<div class="section-returns">
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    String where every HTML tag is stripped out
-</div>
 
-
-
-<dl>
+<dl class="param-type">
     <dt>
-        Type
+        Type:
     </dt>
     <dd>
         
-<span class="param-type">String</span>
+<span class="param-type"><code>String</code></span>
 
 
     </dd>
 </dl>
 
+
+<div class="param-desc">
+    <p>String where every HTML tag is stripped out</p>
+</div>
+
     
+</div>
 
 
 
-
-
+</div>
         
     
 
@@ -1028,17 +1415,13 @@
 
 </div>
 
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Connectors.html">Connectors</a></li><li><a href="module-Export.html">Export</a></li><li><a href="module-ForeignCode.html">ForeignCode</a></li><li><a href="module-Logger.html">Logger</a></li><li><a href="module-LogginMiddleware.html">LogginMiddleware</a></li><li><a href="module-ML_Wrapper.html">ML_Wrapper</a></li><li><a href="module-Preprocess.html">Preprocess</a></li><li><a href="module-Sockets.html">Sockets</a></li><li><a href="module-Utils.html">Utils</a></li></ul><h3>Classes</h3><ul><li><a href="FacebookCrawler.html">FacebookCrawler</a></li><li><a href="GraphQLScalarType.html">GraphQLScalarType</a></li><li><a href="module-ForeignCode-Java.html">Java</a></li><li><a href="module-ForeignCode-Python.html">Python</a></li><li><a href="module-ForeignCode-R.html">R</a></li><li><a href="SentimentWorker.html">SentimentWorker</a></li><li><a href="TopicWorker.html">TopicWorker</a></li><li><a href="TwitterCrawler.html">TwitterCrawler</a></li></ul><h3>Global</h3><ul><li><a href="global.html#resolvers">resolvers</a></li><li><a href="global.html#typeDefinitions">typeDefinitions</a></li></ul>
-</nav>
-
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Mon Aug 21 2017 18:00:02 GMT+0200 (CEST)
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Mon Aug 28 2017 18:45:18 GMT+0200 (CEST) using the Minami theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
 </body>
 </html>

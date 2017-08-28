@@ -113,10 +113,11 @@ logger.log('info', "Wait 1 minute to let the h2o server start up")
 setTimeout(() => {
     //twitterCrawler.start()
     sentimentWorker.start()
-    //topicWorker.start();
+    topicWorker.start();
 }, 30000) // wait 1 minute for new tweets to come ine
 
 
+topicWorker.start();
 // Gracefully kill the h2o server process
 nodeCleanup(function (exitCode, signal) {
     h20Process.kill();

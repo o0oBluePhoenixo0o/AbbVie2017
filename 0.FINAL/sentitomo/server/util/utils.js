@@ -255,10 +255,8 @@ function commonTopicHeader(topicContent, commonHeadlines) {
         }
     }
 
-    console.log(termsArray);
-    const highesTerm = termsArray.reduce((prev, current) => (prev.count > current.count) ? prev : current) //most appropriate term for list of topic content
-    console.log(highesTerm.term);
-    return highesTerm.term;
+    const highestTerm = termsArray.reduce((prev, current) => (prev.count > current.count) ? prev : current) //most appropriate term for list of topic content
+    return highestTerm.term;
 }
 
 

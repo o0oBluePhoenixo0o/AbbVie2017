@@ -154,8 +154,8 @@ export function listenToSockets(httpServer) {
                     tweets.forEach(tweet => {
                         exportArray.push({
                             id: tweet.id,
-                            topicId: tweet.topic ? tweet.topic.topicId : null,
-                            creatd: tweet.created
+                            topicId: tweet['TW_Topic.topicId'] ? tweet['TW_Topic.topicId'] : null,
+                            created: tweet.created
                         });
                     });
 
@@ -165,7 +165,9 @@ export function listenToSockets(httpServer) {
                     */
                     convertRawToCsv(exportArray, "./ML/Python/trend/batchTopics.csv").then(filename => {
                         detectTrends(filename).then(trendResult => {
+                            console.log(trendResult);
                             var trendResult = JSON.parse(trendResult.toString().replace("/\r?\n|\r/g", ""))
+                            console.log(trendResult);
                             socket.emit('server:getTrendsForRange', {
                                 level: 'success',
                                 message: 'Trend detection has finished at: ' + new Date(),

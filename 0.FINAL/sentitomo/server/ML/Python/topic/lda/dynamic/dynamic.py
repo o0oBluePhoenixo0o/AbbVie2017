@@ -50,9 +50,9 @@ for i in range(len(dlang['message'])):
     features.append(dlang['created_time'][i])
     features.append(dlang['language'][i])
     features.append(dlang['message'][i])
-    k = dlang['message'][i].split()
-    tokens = ' '.join(
-        re.findall(r"[\w']+", str(dlang['message'][i]))).lower().split()
+    #k = dlang['message'][i].split()
+    reurl = re.sub(r"http\S+", "", str(dlang['message'][i]))
+    tokens = ' '.join(re.findall(r"[\w']+", reurl)).lower().split()
     x = [''.join(c for c in s if c not in string.punctuation) for s in tokens]
     x = ' '.join(x)
     stop_free = " ".join([i for i in x.lower().split() if i not in stop])

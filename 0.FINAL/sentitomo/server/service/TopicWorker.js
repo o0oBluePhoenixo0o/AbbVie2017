@@ -51,7 +51,7 @@ export default class TopicWorker {
                 where: {
                     '$TW_Topic.topicID$': { $eq: null }
                 },
-                limit: 100,
+                limit: 1000,
                 raw: true,
                 order: [['createdAt', 'ASC']],
                 include: [{
@@ -60,8 +60,8 @@ export default class TopicWorker {
             }).then(async (tweets) => {
                 if (tweets.length > 0) {
                     tweets.forEach(function (tweet, index) {
-                        // part and arr[index] point to the same object
-                        // so changing the object that part points to changes the object that arr[index] points to
+
+                        // we diretctly modify the array here
                         tweet.created = moment(tweet.created).format('YYYY-MM-DD hh:mm').toString();
                         tweet.createdAt = moment(tweet.createdAt).format('YYYY-MM-DD hh:mm')
                         tweet.updatedAt = moment(tweet.updatedAt).format('YYYY-MM-DD hh:mm')
@@ -70,7 +70,7 @@ export default class TopicWorker {
                     const filename = './ML/Python/topic/lda/static/batchTweets.csv';
 
                     convertRawToCsv(tweets, filename).then(async filename => {
-                        var topicArray = await detectTopicLDAStaticBatch(filename);
+                        var topicArray = await detectTopicLDAStaticBatch(filename); // wait for topics to get detected
                         var topicArrayObj = JSON.parse(topicArray);
 
                         // find out common topic headlines and then insert it 
