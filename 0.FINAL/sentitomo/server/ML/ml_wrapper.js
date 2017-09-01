@@ -137,7 +137,7 @@ export function detectSentimentEnsemblePythonSync(message) {
 }
 
 /**
- * @function detectTopicCTM
+ * @function detectTopicCTMDynamic
  * @param  {String} csvFile Path to the .csv file containing the objects to the detect the topic with
  * @description Creates a new topic model out of the specified csv file and detects the topics on those objects inside. Internally it uses the Correlated Topic Models (CTM).
  * @see File server/ML/R/topic/ctm.R

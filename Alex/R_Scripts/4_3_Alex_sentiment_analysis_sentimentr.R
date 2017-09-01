@@ -5,23 +5,20 @@
 # install.packages("stringr")
 
 library(sentimentr)
+library(lubridate)
+library(ggplot2)
+library(scales)
+library(reshape2)
+library(dplyr )
 library(stringr)
+library(qdap)
+library(memisc)
 source('./2_Alex_preprocess.R')
-
-# Sentiment analysis Twitter (as we use lexicon based approach we use the stemmed text here)
-
-mySentiment.sentimentr <- sentimentr::sentiment_by(as.character(twitterMaster.df$Text_stemmed))
-tweets.sentimentr <- cbind(Id=twitterMaster.df$Id, twitterMaster.df$Text, mySentiment.sentimentr , time = twitterMaster.df$Created.At)
-tweets.sentimentr$Id <- format(tweets.sent$Id, scientific=F)
-
-# Sentiment analysis Facebok (as we use lexicon based approach we use the stemmed text here)
-
-mySentiment.sentimentr.fb <- sentimentr::sentiment_by(as.character(facebook.posts.products.humira$message.x_stemmed))
-facebook.sentimentr <- cbind(Id=facebook.posts.products.humira$id.x, facebook.posts.products.humira$message.x, mySentiment.sentimentr.fb, time = facebook.posts.products.humira$created_time.x)
-facebook.sentimentr$Id <- format(facebook.sentimentr , scientific=FALSE)
-
+source('./7_Alex_evaluation.R')
 
 # Model Evaluation
+tweets.test <- read.csv("./Final_Manual_3007.csv")
+
 tweets.test$message <- removeURL(tweets.test$message)
 tweets.test$message <- convert(tweets.test$message)
 tweets.test$message <- removeTags(tweets.test$message)
@@ -30,7 +27,11 @@ tweets.test$message <- convertAbbreviations(tweets.test$message)
 tweets.test$message <- tryTolower(tweets.test$message)
 tweets.test$message_stemmed <- stemWords(tweets.test$message)
 
-tweets.test$sentiment <-  ifelse(tweets.test$sentiment == "N", "neutral", ifelse(tweets.test$sentiment > 2, "positive", "negative"))
+tweets.test$sentiment <- sapply(df$sentiment, function(x)
+  x = cases (x %in% c(1,2) -> 'negative',
+             x %in% c(3,4) -> 'positive',
+             x %in% c('N','n',NA,'',' ') -> 'neutral'))
+
 
 
 test.sentimentR <- sentimentr::sentiment_by(as.character(tweets.test$message_stemmed))

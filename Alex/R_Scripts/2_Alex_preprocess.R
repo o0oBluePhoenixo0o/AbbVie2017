@@ -7,6 +7,11 @@ install.packages("qdap")
 install.packages("SnowballC")
 install.packages("stringr")
 install.packages("lubridate")
+install.packages("readr")
+install.packages("lubridate")
+install.packages("stringr")
+install.packages("stringi")
+install.packages("franc")
 
 Sys.setenv(JAVA_HOME = '/Library/Java//Home')
 Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')
@@ -91,10 +96,6 @@ convertAbbreviations <- function(message){
   } else {
     newText <- message
     for (i in 1:nrow(myAbbrevs)){
-      if(i==1){
-        print(paste0('\\<', myAbbrevs[[i,1]], '\\>'))
-        print(paste(myAbbrevs[[i,2]]))
-      }
       newText <- gsub(paste0('\\<', myAbbrevs[[i,1]], '\\>'), paste0(myAbbrevs[[i,2]]), newText)
     }
     return (newText)
@@ -148,7 +149,6 @@ translate <- function(text, to) {
 }
 
 removeStopWords <- function(text){
-  print(text)
   # Remove stopwords from a english text
   #
   # Args:

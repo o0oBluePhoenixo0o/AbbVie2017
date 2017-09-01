@@ -30,7 +30,6 @@ import SentimentWorker from './service/SentimentWorker';
 import { listenToSockets } from './service/sockets';
 import { JavaShell } from './util/foreignCode'
 
-
 var twitterCrawler = new TwitterCrawler({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
     consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
@@ -96,15 +95,17 @@ global.appRoot = __dirname;
 global.sentimentWorker = sentimentWorker;
 global.topicWorker = topicWorker;
 
+
 var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
 console.log(h20Process);
 h20Process.call();
 logger.log('info', "Wait 30 seconds to let the h2o server start up")
 setTimeout(() => {
-    //twitterCrawler.start()
-    //sentimentWorker.start()
-    //topicWorker.start();
+    twitterCrawler.start()
+    sentimentWorker.start()
+    topicWorker.start();
 }, 30000) // wait 30 seconds for new tweets to come ine
+
 
 
 // Gracefully kill the h2o server process

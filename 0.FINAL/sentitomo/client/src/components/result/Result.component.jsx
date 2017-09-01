@@ -361,7 +361,7 @@ class Result extends Component {
                             </Grid.Column>
                             <Grid.Column mobile={16} tablet={16} computer={7}>
                                 <Card fluid className="result">
-                                    <Card.Content header={"Possion"} />
+                                    <Card.Content header={"Poisson"} />
                                     <Card.Content className={'card-body'}>
                                         {this.state.selectedTopic ?
                                             <ResponsiveContainer height={500}>

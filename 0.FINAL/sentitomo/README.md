@@ -59,7 +59,7 @@ To give you an idea which technologies were used throughout the development proc
 
 [Node.js](https://nodejs.org/en/) is an open-source, cross-platform framework written in C, C++ and JavaScript, which makes it possible to run JavaScript code on the server-side. The initial release was on May the 27th, 2009 and it was written by Ryan Dahl. Primarily it was built because the most common web server at this time, Apache HTTP Server, had troubles with a lot of concurrent connections and normally used blocking code executions which led to poor server performance.
 The idea behind Node is to utilize a simplified event-driven programming paradigm where the program flow is determined by events (user clicks, messages from other methods etc.) to let so called callback functions take care of the result of method calls. With this structure the main thread of a Node.js application is not blocked by method executions. Normally a Node based application is only running on one thread, but with non-blocking method calls it will never gets stuck at one point. This makes it easy to build highly scalable applications without the need of multiple threads, which could result into poor performance. But if it is needed Node can also spawn different threads and is not limited to only one.
-Hand in hand to Node comes a package manager called `npm` which stands for `Node Packaging Manager`. It is used to install, update and remove third party Node.js programs which are listed in the npm registry. npm enables developers to easily share and distribute Node.js code, so it can be used in other projects. All installed dependencies are listed inside a file called `package.json` which is mandatory for every Node based project. It contains all necessary information about the different packages and their version numbers. These are installed inside a folder called `node_modules`, which is accessed at runtime to load the different dependencies of a Node application.
+Hand in hand to Node comes a package manager called `npm` which stands for `Node Package Manager`. It is used to install, update and remove third party Node.js programs which are listed in the npm registry. npm enables developers to easily share and distribute Node.js code, so it can be used in other projects. All installed dependencies are listed inside a file called `package.json` which is mandatory for every Node based project. It contains all necessary information about the different packages and their version numbers. These are installed inside a folder called `node_modules`, which is accessed at runtime to load the different dependencies of a Node application.
 
 ### Yarn (Server and Client)
 
@@ -695,14 +695,13 @@ SentiTomo is using [h2o](https://www.h2o.ai/h2o/) to execute some machine learni
 
 *Important*: 
 
-The R package version and the Java h20 server verison have to exactly match, if they do not match the sentiment detection will not working. We use the h2o version **3.10.5.3**. 
+The R package version and the Java h20 server verison have to exactly match, if they do not match the sentiment detection will not work. We use the h2o version **3.10.5.3**. 
 
 If it is needed to have a look on the h2o server front end just visit [localhost:54321](localhost:54321).
 
-
 __Integrated but not used files__
 
-Inside `ml_wrapper.js` file two function can be found which are not used in the entire application. These are  `detectSentimentJavaNB()` and `detectTopicCTM()`. They both are using models for sentiment and topic detection which have a lower evaulation score compared to the other implemented. We let them stay inside the application to have some examples for machine learning tasks in each of the programming languages. 
+Inside the `./ML/R/topic` directory we have files which are integrated into `ml_wrapper.js` but they are not executed inside the server. We left it there to show a way to integrate topic detection in R to the server.
 
 ##### R
 For integrating R with the server we were at first using a package called [r-script](https://github.com/joshkatz/r-script) package. It ships with a handy R function called `needs()`. This is basically a combination of `install()` and `require()`. This ensured that the different packages which are required by our scripts are installed and loaded in the correct way. Therefore every R file has to use `needs()` instead of `ìnstall.package("packageName")` and `require("package")/load("package")`. Also it is recommended to place all functions at the top of the R files.
@@ -1101,20 +1100,24 @@ On the static view you can specify a time range and click the `View tweets` butt
 Now the combined results are displayed beneath the time selection box.
 
 ![SentiTomo Dashboard](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_dashboard.png)
+
 *Static dashboard view*
 
 
 ![SentiTomo Dashboard Topic and Sentiment](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_dashboard_topic_senti.png)
+
 *Static dashboard topic and sentiment*
 
 The pie chart shows all the detected topics. The parts of the charts are  clickable and serving as a filter for the sentiment, timeline and trend detection values.
 
 ![SentiTomo Dashboard Trend](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_dashboard_trend.png)
+
 *Static dashboard trend based on topic*
 
 Additionally the raw tweets are displayed inside a table to get a better feeling for the results and be able to check for inconsistencies. 
 
 ![SentiTomo Dashboard Tweets](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_dashboard_tweets.png)
+
 *Static dashboard tweets*
 
 
@@ -1129,12 +1132,14 @@ The 'Topic' view shares the same layout as the dashboard view. But instead of ju
 
 
 ![SentiTomo Toolbox](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_toolbox.png)
+
 *Toolbox*
 
 
 The worker tab can be used to control the sentiment and topic workers on the server. When the buttons are clicked a message is sent through the websocket connection to toggle the state of the worker functions. With this mechanism it is possible to either start or stop the detection of topics and sentiments.
 
 ![SentiTomo Toolbox](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_toolbox_worker.png)
+
 *Toolbox Worker*
 
 Most of the interactivity bewteen the client and server is managed with the socket connection. To demonstrate the common workflow we want to present some code snippets which are responsible for toggling the worker functions.
@@ -1207,8 +1212,20 @@ On the client side we have nearly the same structure. At first we initalize a li
 ```
 The whole procedure is also shown as a [sequence diagram](#sequence-diagrams).
 
-## Sequence Diagrams
 
+## Known Issues
+
+![Issue count](https://img.shields.io/badge/issues-2-yellow.svg)
+
+There are some issues inside the server application we could not fix till the end of the project. They are primarily related to the connection to the database. It seems that the database is under heavily load it rejects requests to it and therefore our functions time out. Because this is a matter of testing out different configurations and we did not had a fully configurable MySQL we could not figure out how to resolve this issues.  
+
+| Id  | Issue                                                              | Potential solution                                | Status                                                    |
+| --- | ------------------------------------------------------------------ | ------------------------------------------------- | --------------------------------------------------------- |
+| 1   | Timeouts to database when requesting a lot object from the GraphQL | Modify sequelize.js config or DB server config    | ![Solved](https://img.shields.io/badge/solved-no-red.svg) |
+| 2   | Timeouts when the sentiment worker is running for a long time      | Modify sequelize.js config or DB server config    | ![Solved](https://img.shields.io/badge/solved-no-red.svg) |
+| 3   | Node server crashes when loading a lot of tweets from the database | Caching results or inetgrate better API resolvers | ![Solved](https://img.shields.io/badge/solved-no-red.svg) |
+
+## Sequence Diagrams
 
 __Server start__:
 

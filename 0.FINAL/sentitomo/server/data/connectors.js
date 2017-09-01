@@ -15,8 +15,11 @@ require('dotenv').config();
  */
 const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
     dialect: 'mysql',
+    dialectOptions: {
+        timeout: 30
+    },
     host: process.env.DB_HOST,
-    logging: process.env.LOGGING,
+    logging: true,
     pool: {
         max: 20,
         min: 1,
@@ -200,6 +203,9 @@ const TweetSentiment = db.define('TW_Sentiment', {
         type: Sequelize.STRING
     },
     pythonEnsemble: {
+        type: Sequelize.STRING
+    },
+    javaSentiment: {
         type: Sequelize.STRING
     }
 })

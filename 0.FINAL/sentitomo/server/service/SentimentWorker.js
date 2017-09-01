@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { convertRawToCsv } from '../util/export';
 import { Tweet, TweetSentiment } from '../data/connectors';
-import { detectSentimentEnsembleR, detectSarcasm, detectSentimentEnsemblePython } from "../ML/ml_wrapper";
+import { detectSentimentEnsembleR, detectSarcasm, detectSentimentEnsemblePython, detectSentimentJavaNB } from "../ML/ml_wrapper";
 import logger from './logger';
 
 /**
@@ -72,13 +72,16 @@ export default class SentimentWorker {
                         logger.log('debug', 'R sarcastic : ' + sarcasticValue)
                         const ensemblePython = await detectSentimentEnsemblePython(tweet.message);
                         logger.log('debug', 'Python ensemble: ' + ensemblePython)
+                        const javaSentiment = await detectSentimentJavaNB("./ML/Java/sentiment/naivebayes.bin", tweet.message); // remove whitespaces and line breaks
+                        logger.log('debug', 'Java NB: ' + javaSentiment)
 
                         TweetSentiment.upsert({
                             id: tweet.id,
                             sentiment: sentiment != '' ? sentiment.toLowerCase().trim() : null, // remove whitespaces and line breaks
                             sarcastic: sarcasticValue != '' ? sarcasticValue : null,
                             rEnsemble: sentiment != '' ? sentiment.toLowerCase().trim() : null, // remove whitespaces and line breaks
-                            pythonEnsemble: ensemblePython != '' ? ensemblePython.toLowerCase().trim() : null, // remove whitespaces and line breaks
+                            pythonEnsemble: ensemblePython != '' ? ensemblePython.toLowerCase().trim() : null,
+                            javaSentiment: javaSentiment != '' ? javaSentiment.toLowerCase().trim() : null
                         })
                     }
                     logger.log('info', "10 Sentiments of tweets detected ")

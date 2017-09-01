@@ -53,6 +53,7 @@ export default class FacebookCrawler {
             var filteredPages = pages.filter((page) => {
                 return process.env.FACEBOOK_PAGE_CATEGORY_FILTER.split(",").includes(page.category)
             });
+            console.log("WE GOT : " + filteredPages.length + "PAGES TO SCRAPE")
 
             //Start inserting pages and posts into the db
             //profile --> posts --> comments
@@ -127,6 +128,7 @@ export default class FacebookCrawler {
                         });
                     })
                 }
+                logger.log('info', 'All pages for keyword: ' + keyword + ' crawled!');
             })
         });
     }

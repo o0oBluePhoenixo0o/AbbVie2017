@@ -371,7 +371,7 @@ public class Sentiment {
                 snt.importFile(new File(args[1]));
 
                 //Train and test classifier
-                ExtendedTrial stratifiedBestNB = snt.stratifiedCrossValidation(new Randoms(), snt.trainInstances, 10, SentimentClassifierType.NAIVE_BAYES);
+                ExtendedTrial stratifiedBestNB = snt.stratifiedCrossValidation(new Randoms(4331), snt.trainInstances, 10, SentimentClassifierType.NAIVE_BAYES);
 
 
                 log.info("Evaluate classifier");
