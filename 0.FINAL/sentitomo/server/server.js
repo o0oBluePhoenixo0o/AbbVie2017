@@ -95,7 +95,7 @@ global.appRoot = __dirname;
 global.sentimentWorker = sentimentWorker;
 global.topicWorker = topicWorker;
 
-
+/*
 var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
 console.log(h20Process);
 h20Process.call();
@@ -105,7 +105,9 @@ setTimeout(() => {
     sentimentWorker.start()
     topicWorker.start();
 }, 30000) // wait 30 seconds for new tweets to come ine
+*/
 
+facebookCrawler.searchAndSaveFBPages("enbrel")
 
 
 // Gracefully kill the h2o server process

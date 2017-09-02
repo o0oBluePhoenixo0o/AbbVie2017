@@ -57,7 +57,9 @@ export default class FacebookCrawler {
 
             //Start inserting pages and posts into the db
             //profile --> posts --> comments
-            filteredPages.forEach(async page => {
+            for (var index in filteredPages) {
+                var page = filteredPages[index]
+                logger.log('info', 'Start to insert Page data from : ' + page.id);
                 page.type = "page";
                 page.keyword = keyword;
 
@@ -87,7 +89,9 @@ export default class FacebookCrawler {
                                 id: page.id
                             }
                         }).then(profile => {
-                            posts.forEach(post => {
+
+                            for (var index in posts) {
+                                var post = posts[index];
                                 FacebookPost.upsert({
                                     id: post.id,
                                     message: post.message,
@@ -103,33 +107,35 @@ export default class FacebookCrawler {
                                         }
                                     }).then(async dbPost => {
                                         var comments = new Array();
+                                        if (post.comments) {
+                                            comments.push(...post.comments.data);
 
-                                        comments.push(...post.comments.data); // errors occur if the post has no comments, but they do not crash the 
-                                        //method call
-
-                                        //Iterate over the different result pages and resolve the data of them
-                                        var latestCommentFeed = post.comments.data
-                                        while (latestCommentFeed.paging && latestCommentFeed.paging.next) {
-                                            var newFeed = await this.resolveResponse(err, latestCommentFeed);
-                                            comments.push(...newFeed.data);
-                                            latestCommentFeed = newFeed;
-                                        }
-                                        comments.forEach(comment => {
-                                            FacebookComment.upsert({
-                                                id: comment.id,
-                                                message: comment.message,
-                                                lang: franc(comment.message),
-                                                FBPostId: dbPost.id,
+                                            //Iterate over the different result pages and resolve the data of them
+                                            var latestCommentFeed = post.comments.data
+                                            while (latestCommentFeed.paging && latestCommentFeed.paging.next) {
+                                                var newFeed = await this.resolveResponse(err, latestCommentFeed);
+                                                comments.push(...newFeed.data);
+                                                latestCommentFeed = newFeed;
+                                            }
+                                            comments.forEach(comment => {
+                                                FacebookComment.upsert({
+                                                    id: comment.id,
+                                                    message: comment.message,
+                                                    lang: franc(comment.message),
+                                                    FBPostId: dbPost.id,
+                                                })
                                             })
-                                        })
+                                        }
                                     })
                                 })
-                            });
+                                //logger.log('info', 'Post with id: ' + post.id + ' inserted');
+                            }
+                            logger.log('info', 'Post data from : ' + page.id + ' inserted');
                         });
                     })
+
                 }
-                logger.log('info', 'All pages for keyword: ' + keyword + ' crawled!');
-            })
+            }
         });
     }
 

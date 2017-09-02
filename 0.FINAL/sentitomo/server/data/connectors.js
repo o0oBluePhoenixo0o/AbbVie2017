@@ -19,7 +19,7 @@ const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.D
         timeout: 30
     },
     host: process.env.DB_HOST,
-    logging: true,
+    logging: Boolean(Number(process.env.DB_LOGGING)),
     pool: {
         max: 20,
         min: 1,
