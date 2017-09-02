@@ -1,3 +1,5 @@
+### Before running this script, please put this file into the data repository so as to run it.
+
 import pandas as pd
 import numpy as np
 import os
