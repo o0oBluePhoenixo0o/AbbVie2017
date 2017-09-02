@@ -1,3 +1,5 @@
+##### Before running this script, please put this file into the data repository so as to run it.
+
 #### Determine number of topics K for topic model: LDA & LSI
 ### Silhouette score is built by "sklearn" package & K-means
 '''
