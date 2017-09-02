@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { NavLink } from "react-router-dom";
 import { Header, Menu, Image } from "semantic-ui-react";
 import { withRouter } from 'react-router-dom';
-import Icon from '../Icon.component';
 
 /**
  * @class SideNavigation
@@ -27,7 +26,6 @@ class SideNavigation extends Component {
                             active={false}
                             link
                             name="dashboard" >
-                            <Icon name='home' large />
                             Dashboard
                         </Menu.Item>
                     </NavLink>
@@ -36,7 +34,6 @@ class SideNavigation extends Component {
                             active={false}
                             link
                             name="toolbox" >
-                            <Icon name='settings' large />
                             Toolbox
                         </Menu.Item>
                     </NavLink>

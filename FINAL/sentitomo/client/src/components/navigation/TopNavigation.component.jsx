@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { NavLink } from "react-router-dom";
 import { Container, Menu } from "semantic-ui-react";
-import Icon from '../Icon.component';
 import { withRouter } from 'react-router-dom';
 
 
@@ -25,7 +24,6 @@ class TopNavigation extends Component {
                             active={false}
                             link
                             name="dashboard" >
-                            <Icon name='home' large />
                             Dashboard
                         </Menu.Item>
                     </NavLink>
@@ -34,7 +32,6 @@ class TopNavigation extends Component {
                             active={false}
                             link
                             name="toolbox" >
-                            <Icon name='settings' large />
                             Toolbox
                         </Menu.Item>
                     </NavLink>

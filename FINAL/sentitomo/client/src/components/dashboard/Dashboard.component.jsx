@@ -11,8 +11,6 @@ import moment from 'moment';
 import Result from '../result/Result.component'
 import socket from "../../socket.js";
 
-
-
 /**
  * @class Dashboard
  * @extends {React.Component}
@@ -20,14 +18,12 @@ import socket from "../../socket.js";
  */
 class Dashboard extends React.Component {
 
-
     state = {
         from: null,
         to: null,
         tweetsSize: 0,
         data: new Object()
     };
-
 
     componentDidMount() {
         socket.on('server:getTrendsForRange', data => {

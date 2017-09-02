@@ -246,6 +246,8 @@ Now that either npm or Yarn is set up we can use it to install the dependencies.
 
 **npm:**
 
+    $ # install top level dependencies
+    $ npm install
     $ # install server dependencies
     $ cd server
     $ npm install
@@ -255,7 +257,9 @@ Now that either npm or Yarn is set up we can use it to install the dependencies.
     $ npm install
 
 **Yarn:**
-    
+
+    $ # install top level dependencies
+    $ yarn install
     $ # install server dependencies
     $ cd server
     $ yarn install
@@ -1099,24 +1103,24 @@ When the application is started, the front-end is available at [localhost:8080/a
 On the static view you can specify a time range and click the `View tweets` button. Then a request is sent to the GraphQL API which retrieves the sentiments and topic results. After succesfully getting these results a message is sent to the server to detect trends based on the specified time range. SentiTomo uses a poisson based model to predict topic trends. The outcome of this detection is then merged with the previous result from the API.
 Now the combined results are displayed beneath the time selection box.
 
-![SentiTomo Dashboard](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_dashboard.png)
+![SentiTomo Dashboard](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/FINAL/sentitomo/img/sentitomo_dashboard.png)
 
 *Static dashboard view*
 
 
-![SentiTomo Dashboard Topic and Sentiment](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_dashboard_topic_senti.png)
+![SentiTomo Dashboard Topic and Sentiment](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/FINAL/sentitomo/img/sentitomo_dashboard_topic_senti.png)
 
 *Static dashboard topic and sentiment*
 
 The pie chart shows all the detected topics. The parts of the charts are  clickable and serving as a filter for the sentiment, timeline and trend detection values.
 
-![SentiTomo Dashboard Trend](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_dashboard_trend.png)
+![SentiTomo Dashboard Trend](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/FINAL/sentitomo/img/sentitomo_dashboard_trend.png)
 
 *Static dashboard trend based on topic*
 
 Additionally the raw tweets are displayed inside a table to get a better feeling for the results and be able to check for inconsistencies. 
 
-![SentiTomo Dashboard Tweets](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_dashboard_tweets.png)
+![SentiTomo Dashboard Tweets](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/FINAL/sentitomo/img/sentitomo_dashboard_tweets.png)
 
 *Static dashboard tweets*
 
@@ -1131,14 +1135,14 @@ The toolbox view in total offers two sub views:
 The 'Topic' view shares the same layout as the dashboard view. But instead of just viewing tweets by selecting a time range, with a click on the 'Detect Topics' button, a new clustering of the selected tweets is initated on the server. For building the topic detection model only the selected tweets are used. After the server has finished building the model and detecting the topics it also applies the poisson trend detection to the fresh clustered messages. After both results are calculated the result is sent back to the client via the websocket connection and then gets displayed. 
 
 
-![SentiTomo Toolbox](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_toolbox.png)
+![SentiTomo Toolbox](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/FINAL/sentitomo/img/sentitomo_toolbox.png)
 
 *Toolbox*
 
 
 The worker tab can be used to control the sentiment and topic workers on the server. When the buttons are clicked a message is sent through the websocket connection to toggle the state of the worker functions. With this mechanism it is possible to either start or stop the detection of topics and sentiments.
 
-![SentiTomo Toolbox](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/img/sentitomo_toolbox_worker.png)
+![SentiTomo Toolbox](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/FINAL/sentitomo/img/sentitomo_toolbox_worker.png)
 
 *Toolbox Worker*
 
@@ -1229,24 +1233,24 @@ There are some issues inside the server application we could not fix till the en
 
 __Server start__:
 
-![Server Start Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/sequence_diagrams/img/server_startup_sequence.png)
+![Server Start Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/FINAL/sentitomo/sequence_diagrams/img/server_startup_sequence.png)
 
 
 __Twitter Crawl__:
 
-![Twitter Crawl Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/sequence_diagrams/img/twitter_crawl_sequence.png)
+![Twitter Crawl Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/FINAL/sentitomo/sequence_diagrams/img/twitter_crawl_sequence.png)
 
 __Topic Detection__:
 
-![Topic Detection Worker Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/sequence_diagrams/img/topic_detection_worker_sequence.png)
+![Topic Detection Worker Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/FINAL/sentitomo/sequence_diagrams/img/topic_detection_worker_sequence.png)
 
 __Sentiment Detection__:
 
-![Sentiment Detection Worker Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/sequence_diagrams/img/sentiment_detection_worker_sequence.png)
+![Sentiment Detection Worker Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/FINAL/sentitomo/sequence_diagrams/img/sentiment_detection_worker_sequence.png)
 
 __Toggle worker functions__:
 
-![Toggle Worker Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/0.FINAL/sentitomo/sequence_diagrams/img/toggle_worker_sequence.png)
+![Toggle Worker Sequence Diagram](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/FINAL/sentitomo/sequence_diagrams/img/toggle_worker_sequence.png)
 
 
 ## Conclusion

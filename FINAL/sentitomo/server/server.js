@@ -107,9 +107,6 @@ setTimeout(() => {
 }, 30000) // wait 30 seconds for new tweets to come ine
 */
 
-facebookCrawler.searchAndSaveFBPages("enbrel")
-
-
 // Gracefully kill the h2o server process
 nodeCleanup(function (exitCode, signal) {
     h20Process.kill();
