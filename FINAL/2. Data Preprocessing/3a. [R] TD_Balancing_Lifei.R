@@ -116,8 +116,14 @@ training_set <- rbind(abbvie_sub,
                       rheumatoid_sub)
 
 
+# view "training_set)
 view(training_set)
 
 
+# Write out "training_set)
+write.csv(training_set,"training_set.csv")
 
+
+
+           
 
