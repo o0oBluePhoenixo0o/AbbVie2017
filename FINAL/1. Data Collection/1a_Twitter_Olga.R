@@ -339,6 +339,7 @@ colnames(final_new)[8]<-"Retweet.Count"
 colnames(final_new)[11]<-"Geo.Location.Longitude"
 colnames(final_new)[12]<-"Geo.Location.Latitude"
 
+
 #Add From.User.Id, To.User, To.User.Id column
 a<- matrix ("NA",nrow = length(final_new[,1]))
 a<- data.frame(From.User.Id=a)
