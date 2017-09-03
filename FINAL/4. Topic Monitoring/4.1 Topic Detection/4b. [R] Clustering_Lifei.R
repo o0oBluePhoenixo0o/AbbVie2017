@@ -24,7 +24,8 @@ library("fpc")
 
 
 # Load in data that already preprocessed well ###############################
-# The dataset that has been pre-processed well is needed here. Please choose the csv file "CTM_preprocess_final.csv" in our dataset
+# The dataset that has been pre-processed well is needed here.
+# Please choose the csv file "CTM_preprocess_final.csv" in our dataset which has been finished pre-processing.
 df <- read.csv(file.choose(), encoding = "UTF-8", header = TRUE, sep = ",")
 
 
@@ -68,42 +69,43 @@ plot(fit)
 
 
 # Clustering Tweets with the k-means algrithm #######################################
+# Method below has not been used 
 # Transpose the matrix to cluster documents(tweets)
-dtm <- t(tdm_clustering)
+#dtm <- t(tdm_clustering)
 
 
 # Set a fixed random seed
-set.seed(88)
+#set.seed(88)
 
 
 # K-means clustering of tweets
-k <- 8
-kmeansResult <- kmeans(dtm,k)
+#k <- 8
+#kmeansResult <- kmeans(dtm,k)
 
 
 # Cluster centers
-round(kmeansResult$centers,digits=3) 
+#round(kmeansResult$centers,digits=3) 
 
 
 # Check the top three words in every cluster
-for(i in 1:k)
-{
-  cat(paste("cluster",i,":",sep=""))
-  s <- sort(kmeansResult$centers[i,],decreasing=T)
-  cat(names(s)[1:5],"\n")
+#for(i in 1:k)
+#{
+#  cat(paste("cluster",i,":",sep=""))
+#  s <- sort(kmeansResult$centers[i,],decreasing=T)
+#  cat(names(s)[1:5],"\n")
   # Print the tweets of every cluster)
   # Print(rdmTweets[which(kmeansResult$cluster==i)])
-}
+#}
 
 
 # Clustering Tweets with the k-medoids algorithm
 # Partitioning around medoids with estimation fo number of clusters
-pamResult <- pamk(dtm,metric="manhattan")
+#pamResult <- pamk(dtm,metric="manhattan")
 
 
 # Number of clusters identified
-(k <- pamResult$nc)
-pamResult <- pamResult$pamobject
+#(k <- pamResult$nc)
+#pamResult <- pamResult$pamobject
 
 
 # Print cluster medoids
@@ -116,7 +118,7 @@ pamResult <- pamResult$pamobject
 #}
 
 
-pamResult
+#pamResult
 
 
 
