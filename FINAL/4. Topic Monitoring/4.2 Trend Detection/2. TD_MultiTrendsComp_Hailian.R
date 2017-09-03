@@ -5,9 +5,9 @@
 # multi-trends comparison is used to make comparison for trends of different topics
 
 ## generate post dataset for each topic
-dataset_topic1<- subset(Final_TW_Tweets, Topic="1")
-dataset_topic2<- subset(Final_TW_Tweets, Topic="2")
-dataset_topic3<- subset(Final_TW_Tweets, Topic="3")
+dataset_topic1<- subset(Final_TW_Tweets_Topic_Final, TopicID="1")
+dataset_topic2<- subset(Final_TW_Tweets_Topic_Final, TopicID="2")
+dataset_topic3<- subset(Final_TW_Tweets_Topic_Final, TopicID="3")
 
 library(zoo)
 library(reshape2)
