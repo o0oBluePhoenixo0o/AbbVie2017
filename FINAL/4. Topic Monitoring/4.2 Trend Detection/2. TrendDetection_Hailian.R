@@ -59,4 +59,4 @@ trendComparisonByDay <- function (dataset1,dataset2,dataset3, keyword1, keyword2
 }
 
 ## apply multi-trends comparison graph
-trendComparisonByDay(dataset_topic1,dataset_topic2,datasetopic3,'Topic1','Topic2','Topic3')
+trendComparisonByDay(dataset_topic1,dataset_topic2,datase_topic3,'Topic1','Topic2','Topic3')
