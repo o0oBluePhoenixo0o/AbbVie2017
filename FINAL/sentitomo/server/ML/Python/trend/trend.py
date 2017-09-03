@@ -4,9 +4,6 @@ import json
 import sys
 import numpy
 
-#from IPython.display import Image
-#from IPython.display import display
-
 
 class MyEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -36,13 +33,13 @@ def trend_detection(topicid):
     #M #D #H #T #S
     df_count['counter name'] = '#topic' + str(topicid)
     df_count['interval start time'] = df_count.index
-    #print(df_count['interval start time'][1])
+
     import datetime
     c = 86400.0
 
     df_count['interval duration in sec.'] = c
     df_count.index = range(len(df_count))
-    #display(df_count)
+
     df_count['interval start time'] = df_count[
         'interval start time'].dt.strftime('%Y-%m-%d %H:%M:%S')
     df_count.to_csv(
@@ -56,12 +53,6 @@ def trend_detection(topicid):
     os.system(
         "cat ./ML/PYthon/trend/result/trend_detection_topics.csv | trend_analyze.py -c ./ML/PYthon/trend/result/config_poisson.cfg > ./ML/Python/trend/result/topics_analyzed_poisson.csv"
     )
-    #os.system("cat ./ML/PYthon/trend/result/trend_detection_topics.csv | trend_analyze.py -c ./ML/PYthon/trend/result/config_MannKendall.cfg > ./ML/Python/trend/result/topics_analyzed_MannKendall.csv")
-    #os.system("cat ./ML/PYthon/trend/result/trend_detection_topics.csv | trend_analyze.py -c ./ML/PYthon/trend/result/config_LinearRegressionModel.cfg > ./ML/Python/trend/result/topics_analyzed_LinearRegressionModel.csv")
-    #headers = ['interval start time','count','result']
-    #poisson=pd.read_csv('./ML/Python/trend/result/topics_analyzed_Poisson.csv', encoding = 'UTF-8', sep=',',names=headers)
-    #lr=pd.read_csv('./ML/Python/trend/result/topics_analyzed_LinearRegressionModel.csv', encoding = 'UTF-8', sep=',',names=headers)
-    #mannkendall=pd.read_csv('./ML/Python/trend/result/topics_analyzed_MannKendall.csv', encoding = 'UTF-8', sep=',',names=headers)
 
 
 for k in range(1, 41):
@@ -69,14 +60,13 @@ for k in range(1, 41):
     topic = pd.DataFrame(selectid, columns=['created', 'topicId'])
     if (len(topic) != 0):
         trend_detection(k)
-        #tp_plot(k)
+
         count = pd.read_csv(
             './ML/Python/trend/result/topics_analyzed_poisson.csv',
             encoding='UTF-8',
             sep=',',
             header=None)
-        #count=pd.read_csv('./ML/Python/trend/result/topics_analyzed_MannKendall.csv', encoding = 'UTF-8', sep=',',header=None)
-        #count=pd.read_csv('./ML/Python/trend/result/topics_analyzed_LinearRegressionModel.csv', encoding = 'UTF-8', sep=',',header=None)
+
         count.columns = ['date', 'count', 'result']
         count['date'] = pd.to_datetime(count['date']).dt.strftime('%Y-%m-%d')
         tp_dict = {}
@@ -87,8 +77,6 @@ for k in range(1, 41):
             freq_dict['date'] = count['date'][i]
             freq_dict['count'] = str(int(count['count'][i]))
             freq_dict['poisson'] = count['result'][i]
-            #freq_dict['MannKendall']=lr['result'][i]
-            #freq_dict['LinearRegressionModel']=mannkendall['result'][i]
             tp_dict['trendGraph'].append(freq_dict)
         final_tp.append(tp_dict)
 print(json.dumps(final_tp, cls=MyEncoder))

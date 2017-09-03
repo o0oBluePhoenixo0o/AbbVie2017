@@ -8,11 +8,9 @@ import sys
 from nltk.corpus import stopwords
 import time
 import os
-#os.remove('./ML/Python/static/final_twitter_preprocessing_0720.csv')
-#os.remove('./ML/Python/static/twitter_preprocessing_0720.csv')
+
 start_time = time.time()
-#disease = pd.read_csv('Final_TW_0807_prep.csv', encoding='ISO-8859-2', low_memory=False)
-#df = pd.DataFrame(disease, columns = ['Id','key','created_time','Language', 'message'])
+
 disease = pd.read_csv(sys.argv[1], encoding='UTF-8', low_memory=False)
 df = pd.DataFrame(
     disease, columns=['id', 'keyword', 'created', 'language', 'message'])
@@ -50,7 +48,7 @@ for i in range(len(dlang['message'])):
     features.append(dlang['created_time'][i])
     features.append(dlang['language'][i])
     features.append(dlang['message'][i])
-    #k = dlang['message'][i].split()
+
     reurl = re.sub(r"http\S+", "", str(dlang['message'][i]))
     tokens = ' '.join(re.findall(r"[\w']+", reurl)).lower().split()
     x = [''.join(c for c in s if c not in string.punctuation) for s in tokens]
@@ -78,7 +76,7 @@ for i in range(len(dlang['message'])):
     ]
     stop = set(stopwords.words('english'))
     wordlist = [i for i in adjandn if i not in stop]
-    #print(wordlist)
+
     features.append(' '.join(wordlist))
     with open(
             './ML/Python/topic/lda/dynamic/twitter_preprocessing_0720.csv',
@@ -183,7 +181,7 @@ ldamodel = LdaModel(
 ldamodel.save('./ML/Python/topic/lda/dynamic/lda.model')
 import pyLDAvis.gensim as gensimvis
 import pyLDAvis
-#ldamodel=LdaModel.load('./ML/Python/dynamic/lda.model')
+
 vis_data = gensimvis.prepare(ldamodel, finalcorpus, dictionary)
 pyLDAvis.save_html(vis_data,
                    './ML/Python/topic/lda/dynamic/lda_tw40_0720.html')
@@ -231,8 +229,7 @@ def getTopicForQuery_lda(question):
     topic_prob = [list(t) for t in topic_prob]
     for i in range(len(topic_prob)):
         topic_prob[i][0] = idlist[topic_prob[i][0]] + 1
-    #print("(Topic, Probability): ",topic_prob)
-    #print(result.split()[0:10])
+
     return topic_prob[0][
         1], idlist[word_count_array[0, 0]] + 1, result.split()[0:10]
 
@@ -240,7 +237,7 @@ def getTopicForQuery_lda(question):
 import json
 df_postn.index = range(len(df_postn))
 k = []
-#for i in range(100):
+
 for i in range(len(df)):
     tp_dict = {}
     question = df["message"][i]

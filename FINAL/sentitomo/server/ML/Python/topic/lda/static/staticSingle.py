@@ -8,13 +8,9 @@ import sys
 from nltk.corpus import stopwords
 import time
 import os
-#os.remove('./ML/Python/static/final_twitter_preprocessing_0720.csv')
-#os.remove('./ML/Python/static/twitter_preprocessing_0720.csv')
+
 start_time = time.time()
-#disease = pd.read_csv('./ML/Python/static/Final_TW_0807_prep.csv', encoding='ISO-8859-2', low_memory=False)
-#disease = pd.read_csv(sys.argv[1], encoding='UTF-8', low_memory=False)
-#df = pd.DataFrame(disease, columns = ['Id','key','created_time','Language', 'message'])
-#df.columns=['id', 'key', 'created_time', 'language','message']
+
 import gensim
 from gensim import corpora, models, similarities
 from nltk.corpus import stopwords
@@ -65,7 +61,7 @@ import dateutil.relativedelta
 def dateselect(day):
     d = datetime.datetime.strptime(str(datetime.date.today()), "%Y-%m-%d")
     d2 = d - dateutil.relativedelta.relativedelta(days=day)
-    #df_postn['created_time']=pd.to_datetime(df_postn['created_time'])
+
     df_time = df_postn['created_time']
     df_time = pd.to_datetime(df_time)
     mask = (df_time > d2) & (df_time <= d)
@@ -114,7 +110,7 @@ else:
 
 import pyLDAvis.gensim as gensimvis
 import pyLDAvis
-#ldamodel=LdaModel.load('./ML/Python/static/lda.model')
+
 vis_data = gensimvis.prepare(ldamodel, finalcorpus, dictionary)
 pyLDAvis.save_html(vis_data,
                    './ML/Python/topic/lda/static/static_lda_result.html')
@@ -132,14 +128,6 @@ for prob in ldamodel.show_topics(30, 10):
     no += 1
 
 
-#import json
-#tp=[]
-#for i in range(40):
-#    tw={}
-#    tw['id']=i+1
-#    tw['topic']=', '.join(topicwords[i])
-#    tp.append(tw)
-#print(json.dumps(tp))
 def getTopicForQuery_lda(question):
     temp = tokenize(question).split()
     ques_vec = []
@@ -176,15 +164,11 @@ import json
 df_postn.index = range(len(df_postn))
 k = []
 tp_dict = {}
-#use sys.argv[1] to change it
-#print(sys.argv[1])
+
 question = sys.argv[1]
 load_json = json.loads(question)
 tpid = load_json['id']
 tpmessage = load_json['message']
-#print(question)
-#print(tpid)
-#print(tpmessage)
 
 if str(tpid) == 'nan':
     tp_dict['key'] = 'nan'

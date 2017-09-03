@@ -43,7 +43,7 @@ Table of Contents
 As part of our Master Team Project "Topic Monitoring in the Pharmaceutical Industry" we wanted to develop an application to incorporate our findings and different machine learning scripts to show how a production environment can look like. The name of this application is "SentiTomo", a combination of the words "Sentiment Analysis" and "Topic Monitoring".
 
 ## Idea
-The basic idea of accomplish such an task was to create a client-server architecture. The server part will be responsible for crawling social media data from Twitter and Facebook, as well as executing different machine learning tasks, such as sentiment analysis (classification ), topic detection and trend detection (clustering). Besides this, the results of those tasks are saved in a database to be available through an Application Programming Interface (API). This ensures that the results are persisted over time and can be analyzed.
+The basic idea of accomplish such an task was to create a client-server architecture. The server part will be responsible for crawling social media data from Twitter and Facebook, as well as executing different machine learning tasks, such as sentiment analysis (classification ), topic detection and trend detection (clustering). Besides this, the results of those tasks are saved in a database to be available through an Application Programming Interface (API). This ensures that the results are persisted over time and can be accessed in an easy way.
 
 ## Problem statement and way to go
 Throughout our work on this project we tried out various algorithms for machine learning (ML) and implemented them in different programming languages. After filtering all good performing algorithms we ended up with three programming languages:  R, Python and Java. The resulting problem now was to find a common platform for the server to work with those languages. The initial attempt to solve this issue was to choose one those language as the primary one and let it work with the others. But this had one drawback. If we would have chosen one of the ML languages as the primary one we would have not been able to replace this language anymore in favor of another one in which some models may perform better. This would lead to an abandoned machine learning language just serving as a wrapper language. So we were searching for a language which not perform any machine learning but is capable of working with all the existing languages. This ensures that the different languages, and machine learning scripts can easily be switched out or updated without influencing other parts of the application because those will always interact with the wrapper language which copes with the different languages.
@@ -63,11 +63,11 @@ Hand in hand to Node comes a package manager called `npm` which stands for `Node
 
 ### Yarn (Server and Client)
 
-[Yarn](https://yarnpkg.com/lang/en/) is an additional Node package manager built by Facebook based on npm, which improves npm in some important parts. One of the biggest flaws of `npm` is that it stores the different packages inside the `node_modules` in a non deterministic way. That means that the order of packages inside `node_modules` can differ from user to user depending on the order of installation. This can lead to bugs like 'Works on my machine' arise very quickly which makes debugging and hunting bugs down very frustrating. Also the the actual dependency tree can differ from the `node_modules` directory because duplicate dependencies are merged by Node itself. All these issues are resolved with Yarn by installing dependencies in a deterministic way and organizing duplicate ones in a better manner. Every projects that uses Yarn file called 'yarn.lock' is created. This file is used to execute the installation processes on different machines in the exact same way which makes bugs like 'Works on my machine' very unlikely.
+[Yarn](https://yarnpkg.com/lang/en/) is an additional Node package manager built by Facebook based on npm, which improves npm in some important parts. One of the biggest flaws of `npm` is that it stores the different packages inside the `node_modules` in a non deterministic way. That means that the order of packages inside `node_modules` can differ from user to user depending on the order of installation. This can lead to bugs like 'Works on my machine' arise very quickly which makes debugging and hunting bugs down very frustrating. Also the the actual dependency tree can differ from the `node_modules` directory because duplicate dependencies are merged by Node itself. All these issues are solved with Yarn by installing dependencies in a deterministic way and organizing duplicate ones in a better manner. Every projects that uses Yarn file called `yarn.lock` is created. This file is used to execute the installation processes on different machines in the exact same way which makes bugs like 'Works on my machine' very unlikely.
 
 ### Express.js (Server)
 
-[Express.js](https://expressjs.com/) is a JavaScript framework built with Node.js and today the de-facto standard to build a web-server application with Node. It is an MIT licensed, open-source published directly from the developers of Node.js.
+[Express.js](https://expressjs.com/) is a JavaScript framework built with Node.js and today the de-facto standard to build a web-server application with Node. It is MIT licensed, open-source and published directly from the developers of Node.js.
 In its fundamental form it is very lightweight and only offers the minimum functionalities to build a web-server. But it offers great ways to integrate all kind of plugins, like logging, templating engines, server side rendering, and even more. This makes it very versatile and the number one solution for developing a web server with Node.js. Therefore we chose it as the framework to build our server architecture.
 
 ### h20 (Server)
@@ -235,7 +235,7 @@ On Linux there are plenty of different installation possibilities but here we su
 
 #### Install Yarn (optional)
 
-After installing Node it comes to the decision to either stay with npm as your desired dependency manager or additionally install Yarn. If you decide to go with yarn this has the advantage that you will get exact the same dependency version as we had while testing SentiTomo. This is ensured with the `yarn.lock` files. This is a non- mandatory step but when you are using npm it can be the case that you will get a slightly different dependency tree than with npm.
+After installing Node it comes to the decision to either stay with npm as your desired dependency manager or additionally install Yarn. If you decide to go with yarn this has the advantage that you will get exact the same dependency version as we had while testing SentiTomo. This is ensured by the  `yarn.lock` files. This is a non-mandatory step but when you are using npm it can be the case that you will get a slightly different dependency tree than with yarn.
 
  Yarn is installed via npm with the following command.
 
@@ -450,7 +450,7 @@ Our application is using a MySQL database as it's back end. To use your database
 
 *Twitter*
 
-In order have access to the Twitter Streaming API you have to obtain your client credentials by creating a new Twitter APP on the [Twitter Dev Website](https://apps.twitter.com/app/new). After doing so, also save your credentials in the `.env`file:
+In order have access to the Twitter Streaming API you have to obtain your client credentials by creating a new Twitter APP on the [Twitter Dev Website](https://apps.twitter.com/app/new). After doing so, also save your credentials in the `.env` file:
 
     TWITTER_CONSUMER_KEY=yourConsumerKey
     TWITTER_CONSUMER_SECRET=yourConsumerSecret
@@ -687,11 +687,11 @@ __Possible packages and modules to use with JSON__
 
 __Paths__
 
-When the foreign code needs access to some other files inside a directory it is mandatory to know that all files are executed in the scope of `./server/`. For example if a Python file needs to load a model from the Python directory it has to do it with the relative path `./ML/Python/filename.bin`.
+When foreign codes need access to some other files inside a directory it is mandatory to know that all files are executed in the scope of `./server/`. For example if a Python file needs to load a model from the Python directory it has to do it with the relative path `./ML/Python/filename.bin`.
 
 __Examples__
 
-All examples in JavaScript are written with ES6. To have a look the wrapper function for calling the foreign code, have a look at `/server/util/foreignCode.js`.
+All examples in JavaScript are written with ES6. To get a better understanding for the functions that `ml_wrapper.js` is using  have a look at `/server/util/foreignCode.js`.
 
 __h2o__
 
@@ -705,11 +705,11 @@ If it is needed to have a look on the h2o server front end just visit [localhost
 
 __Integrated but not used files__
 
-Inside the `./ML/R/topic` directory we have files which are integrated into `ml_wrapper.js` but they are not executed inside the server. We left it there to show a way to integrate topic detection in R to the server.
+Inside the `./ML/R/topic` directory we have files which are integrated into `ml_wrapper.js` but  are not executed inside the server. We left it there to show a way to integrate topic detection in R to the server.
 
 ##### R
-For integrating R with the server we were at first using a package called [r-script](https://github.com/joshkatz/r-script) package. It ships with a handy R function called `needs()`. This is basically a combination of `install()` and `require()`. This ensured that the different packages which are required by our scripts are installed and loaded in the correct way. Therefore every R file has to use `needs()` instead of `ìnstall.package("packageName")` and `require("package")/load("package")`. Also it is recommended to place all functions at the top of the R files.
-At the end of our project we faced some problems with the package so we decided to write our own implementation of calling R files, as mentioned in the introduction of `ML`. We followed the same approach as the `r-script` package did and included the `needs.R` file but simplified the process a little bit, so it could work with our application.
+For integrating R with the server we were at first using a package called [r-script](https://github.com/joshkatz/r-script) package. It ships with a handy R function called `needs()`. This is basically a combination of `install()` and `require()`. It ensures that the different packages which are required by our scripts are installed and loaded in the correct way. Therefore every R file has to use `needs()` instead of `ìnstall.package("packageName")` and `require("package")/load("package")`. Also it is recommended to place all functions at the top of the R files.
+At the end of our project we faced some problems with this package so we decided to write our own implementation of calling R files, as mentioned in the introduction of `ML`. We followed the same approach as the `r-script` package did and included the `needs.R` file but simplified the process a little bit, so it could work with our application.
 To provide data to the R process and retrieve it from it we can execute the R file from Javascript with the following command: 
 
 *In JavaScript*
@@ -807,7 +807,7 @@ Outcome is a data.frame
 
 
 ##### Python
-For Python we initially used a package called [python-shell](https://github.com/extrabacon/python-shell) to execute single Python files. But as our Python scripts need both, Python 2 and 3, we had some issues to make this package work with version 3. So in the end we decided to develop on our own and addd it to the `/server/util/foreignCode.js` module. With our implementation we were able to set the Python version manually. Additionally the files are able to retrieve command line arguments which makes the communication between JS and Python possible. This is again based on reading the console prints of the Python file. One advice is, to make sure to not heavily use the console for prints, because the main JavaScript process only needs to know the final result of the Python script.
+For Python we initially used a package called [python-shell](https://github.com/extrabacon/python-shell) to execute single Python files. But as our Python scripts need both, Python 2 and 3, we had some issues to make this package work with version 3. So in the end we decided to develop implementation and add it to the `/server/util/foreignCode.js` module. With our code we were able to set the Python version manually. Additionally the files are able to retrieve command line arguments which makes the communication between JS and Python possible. This is again based on reading the console prints of the Python file. One advice is, to make sure to not heavily use the console for prints, because the main JavaScript process only needs to know the final result of the Python script.
 
 A small example with passing JSON forth and back: 
 
@@ -893,7 +893,7 @@ The `JavShell` is only used for executing the `h20.jar`, to set up the h20 serve
 #### data
 
 Inside the `data` directory the connection to the database and the `GraphQL` schema defininiton are expressed. 
-For connecting to the database we use a package called [Sequlize.js](http://docs.sequelizejs.com/). It offers the opportunity to work on a higher level way with databases. It provides methods which just define the database schema and the resulting SQL queries for inserting, updating and deleting records are build dynamically and fully handled by the package itself. Sequelize supports PostgreSQL, MySQL, SQLite and MSSQL dialects. It was also used in the resolver function for the GraphQL API (`sentitomo/server/data/resolvers.js`).
+For connecting to the database we use a package called [Sequlize.js](http://docs.sequelizejs.com/). It offers the opportunity to work on a higher level way with databases. Sequlize provides methods which just define the database schema and the resulting SQL queries for inserting, updating and deleting records are build dynamically and are fully handled by the package itself. It supports PostgreSQL, MySQL, SQLite and MSSQL dialects. It was also used in the resolver function for the GraphQL API (`sentitomo/server/data/resolvers.js`).
 
 Another main part of the `data` directory is the set up of GraphQL which is written in `sentitomo/server/data/resolvers.js`. It handles all the requests to the API whose schema is defined in `sentitomo/server/data/schema.js`. For this part we used a Node.js package called [apollo-server](https://github.com/apollographql/apollo-server). It is a great, easy to use open-source implementation of GraphQL on the server-side.
 In the following we want to provide a sample request to the API and depict what the response looks like:
@@ -940,7 +940,7 @@ Response:
 
 __What is happening ?__
 
-At first the request from the client is piped through the resolvers of `resolvers.js` and the `tweet(_,args)` method is invoked because the request accessed the `tweet` endpoint. The `args` object contains all arguments provided to the endpoint. In this example only the `id` value of the tweet. To get the result from the database we used the database model object of sequlize.js called `Tweet` which is defined in the `connectors.js` file. It returns the exact tweet 'where tweet.id = args.id'. In the end a new data object is constructed which contains all the information that were requested.
+At first the request from the client is piped through the resolvers of `resolvers.js` and the `tweet(_,args)` method is invoked because the request accessed the `tweet` endpoint. The `args` object contains all arguments  which are provided to the endpoint. In this example only the `id` value of the tweet. To get the result from the database we use the database model object of sequlize.js, called `Tweet`, which is defined in the `connectors.js` file. It returns the tweet 'where tweet.id = args.id'. In the end a new data object is constructed which contains all the information that were requested.
 
 `resolvers.js` (truncated)
 ```
@@ -955,8 +955,6 @@ import {
 } from './connectors';
 import moment from 'moment';
 import GraphQLMoment from './scalar/GraphQLMoment';
-
-
 
 const resolvers = {
     Date: GraphQLMoment,
@@ -1058,13 +1056,11 @@ const typeDefinitions = `
 export default [typeDefinitions];
 ```
 
-
-
 ### Client
 
 SentiTomo comes pre-shipped with an own front-end implementation written with the React framework and build with the [create-react-app](https://github.com/facebookincubator/create-react-app) configuration. This makes it possible to integrate the app into any static HTML site you want. 
 
-We created it to show a way of how to integrate a fully customizable front-end to our server. The fact that the React app is converted into a static `.js` file makes it very easy to integrate it into the express Node.js server. Express.js is able to send a static HTML file down to the client if some specific URL is visited. We configured the server to serve the dashboard app to the client if the `/app/*` URL is visited. Furthermore we added a static endpoint for serving CSS, JS and web fonts which are used in the React app. 
+We created it to show a way of how to integrate a fully customizable front-end to our server. The fact that the React app is converted into a static `.js` file makes it very easy to integrate it into the express Node.js server. It is able to send a static HTML file down to the client if some specific URL is visited. We configured the server to serve the dashboard app to the client if the `/app/*` URL is visited. Furthermore we added a static endpoint for serving CSS, JS and web fonts which are used in the React app. 
 
 ```
 server.use('/static', express.static(path.join(__dirname + '/../client/build/static')));
@@ -1096,11 +1092,11 @@ When the application is started, the front-end is available at [localhost:8080/a
 * [/dashboard](localhost:8080/app/dashbaord) rudimentary dashboard
 * [/toolbox](localhost:8080/app/toolbox) different options to initate machine learning tasks dynamically 
 
- The static `app/dashboard` view can be used to view the results of topic and sentiment worker and the`app/toolbox/`view serves as an interface to initiate the dynamic topic model building process or controlling the workers functions. 
+ The static `app/dashboard` view can be used to view the results of topic and sentiment worker and the` app/toolbox/`view serves as an interface to initiate the dynamic topic model building process or controlling the workers functions. 
 
 #### Static view
 
-On the static view you can specify a time range and click the `View tweets` button. Then a request is sent to the GraphQL API which retrieves the sentiments and topic results. After succesfully getting these results a message is sent to the server to detect trends based on the specified time range. SentiTomo uses a poisson based model to predict topic trends. The outcome of this detection is then merged with the previous result from the API.
+On the static view you can specify a time range and click the `View tweets` button. A request is made to the GraphQL API which retrieves the sentiments and topic results. After succesfully getting these results a message is sent to the server to detect trends based on the specified time range by using a poisson based model to predict topic trends. The outcome of this detection is then merged with the previous result from the API.
 Now the combined results are displayed beneath the time selection box.
 
 ![SentiTomo Dashboard](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/FINAL/sentitomo/img/sentitomo_dashboard.png)
@@ -1132,7 +1128,7 @@ The toolbox view in total offers two sub views:
 - Topic and
 - Worker
 
-The 'Topic' view shares the same layout as the dashboard view. But instead of just viewing tweets by selecting a time range, with a click on the 'Detect Topics' button, a new clustering of the selected tweets is initated on the server. For building the topic detection model only the selected tweets are used. After the server has finished building the model and detecting the topics it also applies the poisson trend detection to the fresh clustered messages. After both results are calculated the result is sent back to the client via the websocket connection and then gets displayed. 
+The 'Topic' view shares the same layout as the dashboard view. But instead of just viewing tweets by selecting a time range, with a click on the 'Detect Topics' button, a new clustering of the selected tweets is initated on the server. For building the topic detection model only the selected tweets are used. After the server has finished building the model and detecting the topics, it also applies the poisson trend detection to the fresh clustered messages. After both results are calculated the result is sent back to the client via the websocket connection and gets displayed. 
 
 
 ![SentiTomo Toolbox](https://raw.githubusercontent.com/BluePhoenix1908/AbbVie2017/master/FINAL/sentitomo/img/sentitomo_toolbox.png)
@@ -1146,7 +1142,7 @@ The worker tab can be used to control the sentiment and topic workers on the ser
 
 *Toolbox Worker*
 
-Most of the interactivity bewteen the client and server is managed with the socket connection. To demonstrate the common workflow we want to present some code snippets which are responsible for toggling the worker functions.
+Most of the interactivity bewteen the client and server is managed with websocket connections. To demonstrate the common workflow we want to present some code snippets which are responsible for toggling the worker functions.
 
 On the server side, listerners are waiting for specific message indicators and executes different functions based on the data which was sent. The snippet shows two listeners. One for sending the current worker status and one for starting and stopping them.
  ```
@@ -1219,9 +1215,9 @@ The whole procedure is also shown as a [sequence diagram](#sequence-diagrams).
 
 ## Known Issues
 
-![Issue count](https://img.shields.io/badge/issues-2-yellow.svg)
+![Issue count](https://img.shields.io/badge/issues-3-yellow.svg)
 
-There are some issues inside the server application we could not fix till the end of the project. They are primarily related to the connection to the database. It seems that the database is under heavily load it rejects requests to it and therefore our functions time out. Because this is a matter of testing out different configurations and we did not had a fully configurable MySQL we could not figure out how to resolve this issues.  
+There are some issues inside the server application we could not fix till the end of the project. They are primarily related to the connection to the database. It seems that if the database is under heavily load it rejects requests to it and therefore our functions time out. Because this is a matter of testing out different configurations and we did not had a fully configurable MySQL server hat we could not figure out how to resolve this issues.  
 
 | Id  | Issue                                                              | Potential solution                                | Status                                                    |
 | --- | ------------------------------------------------------------------ | ------------------------------------------------- | --------------------------------------------------------- |
@@ -1255,10 +1251,11 @@ __Toggle worker functions__:
 
 ## Conclusion
 
-With this application we wanted to show one way of using our findings and algorithms in a production-like environment. We showed how it is possible to built a server application which is capable of integrating different programming languages and use them for machine learning in an efficient way. With Node.js it is an ease to set up an highly scalable server which can handle asynchronous executions of foreign code very well. With the help spawning child processes a reliable communicate with those files is possible. With the help of GraphQL it was possible to set up a very modern and reliable API which any front-end can use to retrieve the result, which are produced by the  the machine learning algorithms. If it is necessary to switch out the DBMS in the future the API endpoints will not change and the front-end system would not need to be heavily modified. 
+With this application we wanted to show one way of using our findings and algorithms in a production-like environment. We showed how it is possible to built a server application which is capable of integrating different programming languages and use them for machine learning in an efficient way. With Node.js it is an ease to set up an highly scalable server which can handle asynchronous executions of foreign code very well. The ability to spawn child processes offers a reliable way to communicate with those foreign code files. GraphQL makes it it possible to set up a very modern and reliable API which any front-end can use to retrieve the result, from  the SentiTomo database. Due to the implementation of it, possible changes to the database management system will very like not affect the API endpoints which lead to the fact that changes to the client side has not be updated accordingly. This drastically reduces maintenance costs.
 
-The client side was implemented in React, which makes it highly dynamical from a user point of view and well structured from a programmer's point of view. With the help of different packages it was possible to built a easy to use and good looking user interface.
-All in all we hope that we could show you one possible way of how to build a good solution for monitoring topics and trends in social media today.
+On the client side we implemented React, which makes the appearence highly dynamical and the codebase is well structured. With the help of different packages it was possible to built a easy to use and good looking user interface.
+
+We hope that we could show you one possible way of how to build a good solution for monitoring topics and trends in social media today.
 
 ## Questions
 

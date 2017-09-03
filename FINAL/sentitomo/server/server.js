@@ -30,6 +30,13 @@ import SentimentWorker from './service/SentimentWorker';
 import { listenToSockets } from './service/sockets';
 import { JavaShell } from './util/foreignCode'
 
+
+
+import { Tweet } from './data/connectors';
+import { convertRawToCsv } from './util/export';
+import { detectTopicCTM } from './ML/ml_wrapper';
+
+
 var twitterCrawler = new TwitterCrawler({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
     consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
@@ -95,7 +102,26 @@ global.appRoot = __dirname;
 global.sentimentWorker = sentimentWorker;
 global.topicWorker = topicWorker;
 
-/*
+
+
+Tweet.findAll({
+    where: {
+        created: {
+            $lt: "2017-08-06", // less than
+            $gt: "2017-08-01" //greater than
+        }
+    },
+    raw: true //we use raw, we do not need to have access to the sequelize model here
+}).then(tweets => {
+    console.log(tweets.length);
+    // Convert the tweets to a .csv file, so that it can serve as the input to the python LDA file 
+    convertRawToCsv(tweets, './ML/R/topic/tweets.csv').then(filename => {
+        detectTopicCTM(filename).then(results => {
+            console.log(results);
+        })
+    })
+})
+
 var h20Process = JavaShell("./ML/Java/h2o_3.10.5.3.jar");
 console.log(h20Process);
 h20Process.call();
@@ -105,7 +131,6 @@ setTimeout(() => {
     sentimentWorker.start()
     topicWorker.start();
 }, 30000) // wait 30 seconds for new tweets to come ine
-*/
 
 // Gracefully kill the h2o server process
 nodeCleanup(function (exitCode, signal) {

@@ -1,5 +1,5 @@
 # This is needed because qdap needs rJava and this seems to have some troubles to load on some OS
-# qdap needs Java 6 installed... what a old dude man...
+# # MACHINE SPECIFC JAVA LOCATION
 dyn.load('/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/server/libjvm.dylib')
 Sys.setenv(JAVA_HOME = '/Library/Java//Home')
 Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')

@@ -1,23 +1,22 @@
 # This files contains methods on preprocessing
 
-install.packages("plyr")
-install.packages("dplyr")
-install.packages("tm")
-install.packages("qdap")
-install.packages("SnowballC")
-install.packages("stringr")
-install.packages("lubridate")
-install.packages("readr")
-install.packages("lubridate")
-install.packages("stringr")
-install.packages("stringi")
-install.packages("franc")
-
+#install.packages("plyr")
+#install.packages("dplyr")
+#install.packages("tm")
+#install.packages("qdap")
+#install.packages("SnowballC")
+#install.packages("stringr")
+#install.packages("lubridate")
+#install.packages("readr")
+#install.packages("lubridate")
+#install.packages("stringr")
+#install.packages("stringi")
+#install.packages("franc")
+#install.packages("ISOcodes")
+#install.packages("textcat")
 Sys.setenv(JAVA_HOME = '/Library/Java//Home')
 Sys.setenv(LD_LIBRARY_PATH = '$LD_LIBRARY_PATH:$JAVA_HOME/lib')
 dyn.load('/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/server/libjvm.dylib')
-
-
 
 library(plyr)
 library(dplyr)
@@ -29,6 +28,8 @@ library(lubridate)
 library(readr)
 library(stringr)
 library(stringi)
+library(ISOcodes)
+library(textcat)
 
 source("./translateR.R")
 
@@ -81,7 +82,8 @@ loadAbbrev <- function(filename) {
   return(myAbbrevs)
 }
 
-myAbbrevs <- loadAbbrev('abbrev.csv')
+# Choose 'abbrev.csv' from 5. Dataset
+myAbbrevs <- loadAbbrev(file.choose())
 
 convertAbbreviations <- function(message){
   # Replaces abbreviation with the corresporending long form
@@ -101,8 +103,6 @@ convertAbbreviations <- function(message){
     return (newText)
   }
 }
-
-convertAbbreviations("lol i don't know why this is happening Mr.James. ROFL!")
 
 removeTwitterHandles <- function(text){
   # Remove all twitter handles from a given text
@@ -194,16 +194,4 @@ string2Date <- function(text, dateFormats) {
   hs <- paste(lubriHours,lubriMinute,sep=":")
   
   return (paste(ymd,hs, sep = " "))
-}
-
-preprocess <- function(text){
-  out <- text
-  out <- removeTwitterHandles(out)
-  out <- tryTolower(out)
-  out <- removeTags(out)
-  out <- removeURL(out)
-  out <- convertAbbreviations(out)
-  out <- convertLatin_ASCII(out)
-  out <-removeStopWords(out) # the last expression has to NOT be assigned to a variable so that our JS can read it
-  return (out);
 }

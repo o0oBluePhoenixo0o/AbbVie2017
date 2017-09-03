@@ -152,12 +152,3 @@ analyzeConfusinMatrix <- function(cm) {
   print(paste0("Micro Performance: ", micro_prf ))
 
 }
-
-table <- matrix(c(142,27,15,28,105,12,25,13,101),ncol=3,byrow=TRUE)
-colnames(table) <- c("true neutral","true positive","true negative")
-rownames(table) <- c("pred. neutral","pred. positive","pred. negative")
-table <- as.table(table)
-table
-
-
-analyzeConfusinMatrix(table)

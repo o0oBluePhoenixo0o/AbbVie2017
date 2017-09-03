@@ -24,7 +24,7 @@ options(scipen = 999)
 args = commandArgs(trailingOnly=TRUE)
 df <- read.csv("./ML/R/topic/tweets.csv") #read.csv(args[1])
 
-df <- df[df$language=="eng",]
+df <- df[df$language=="en",]
 
 
 df <- cbind(as.data.frame(df$id),
@@ -336,8 +336,8 @@ colnames(preprocess_final) <- c("id","key","created_time","message","pre_message
 
 
 # Creating vocabulary and document-term matrix ####################################################
-# Change the data type to fit the doc-term matrid function
-prepare_train_dtm <- unlist(as.data.frame(training_set$pre_message))
+# Change the data type to fit the doc-term matrix function
+prepare_train_dtm <- unlist(as.data.frame(preprocess_final$pre_message))
 
 
 # Define preprocessing function and tokenization function
@@ -429,9 +429,9 @@ for(i in 1:length(preprocess_final))
 
 # Final result ######################################################################################
 # Build the data fram for messages and topics
-topicmodel <- cbind(as.data.frame(preprocess_remove_blank$id), 
-                    as.data.frame(preprocess_remove_blank$created), 
-                    as.data.frame(preprocess_remove_blank$message), 
+topicmodel <- cbind(as.data.frame(preprocess_final$id), 
+                    as.data.frame(preprocess_final$created), 
+                    as.data.frame(preprocess_final$message), 
                     as.data.frame(assignments),
                     as.data.frame(assignments_change))
 
@@ -443,4 +443,3 @@ colnames(topicmodel) <- c("id","created_time","message","topic_id","topic")
 # Write out as Json
 CTM_result <- toJSON(topicmodel)
 CTM_result
-
