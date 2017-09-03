@@ -22,7 +22,8 @@ library("ggplot2")
 
 
 # Load in data that already preprocessed well ###############################
-# The dataset that has been pre-processed well is needed here. Please choose the csv file "CTM_preprocess_final.csv" in our dataset
+# The dataset that has been pre-processed well is needed here.
+# Please choose the csv file "CTM_preprocess_final.csv" in our dataset which has already finished pre-processing.
 df <- read.csv(file.choose(), encoding = "UTF-8", header = TRUE, sep = ",")
 
 
