@@ -52,8 +52,13 @@ library(openNLP)
 #df <- attach(input[[1]])
 
 
+# !!!!
 # Read in data
-# Choose the file "Final_TW_0807_prep.csv" in the dataset folder
+# There are two datasets need to do the preprocessing
+# Please choose the file "Final_TW_0807_prep.csv" in the dataset folder. 
+# After pre-processing, this data set is used to assign topics back.
+# Choose the file "CTM_training_set.csv" in the dataset folder.
+# After pre-processing, this data set is used to do the CTM modeling.
 df <- read.csv(file.choose(), encoding = "UTF-8", header = TRUE, sep = ",")
 df <- df[df$Language=="eng",]
 
@@ -386,6 +391,8 @@ colnames(preprocess_final) <- c("id","key","created_time","message","pre_message
 
 # Pre-processing final data frame
 write.csv(preprocess_final,"preprocess_final.csv")
+
+
 
 
 
