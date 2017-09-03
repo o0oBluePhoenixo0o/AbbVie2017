@@ -57,7 +57,7 @@ library(openNLP)
 # There are two datasets need to do the preprocessing
 # Please choose the file "Final_TW_0807_prep.csv" in the dataset folder. 
 # After pre-processing, this data set is used to assign topics back.
-# Choose the file "CTM_training_set.csv" in the dataset folder.
+# Choose the dataset which is finishing balancing in the previous "3a.[R] balancing_Lifei.R" file.
 # After pre-processing, this data set is used to do the CTM modeling.
 df <- read.csv(file.choose(), encoding = "UTF-8", header = TRUE, sep = ",")
 df <- df[df$Language=="eng",]
@@ -387,6 +387,10 @@ preprocess_final <- na.omit(preprocess_remove_blank)
 
 # Change the columns names
 colnames(preprocess_final) <- c("id","key","created_time","message","pre_message")
+
+
+# view "preprocess_final"
+view(preprocess_final)
 
 
 # Pre-processing final data frame
