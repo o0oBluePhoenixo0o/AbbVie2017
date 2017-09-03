@@ -120,18 +120,37 @@ json <- createJSON(phi = datasetReviews$phi,
 # display visualization
 serVis(json, out.dir = 'vi', open.browser = TRUE)
 
-# get topic list
+#get topic list
 topic_list<- top.topic.words(fit$topics, num.words = 10, by.score = FALSE)
+topic_list_LDA<- t(topic_list)
+
+topic_list_LDA<- as.data.frame(topic_list_LDA)
+topic_list_LDA<-paste(topic_list_LDA$V1,topic_list_LDA$V2,topic_list_LDA$V3,topic_list_LDA$V4,topic_list_LDA$V5,
+                     topic_list_LDA$V6,topic_list_LDA$V7,topic_list_LDA$V8, topic_list_LDA$V9, topic_list_LDA$V30, sep = ', ')
+topic_list_LDA<- as.data.frame(topic_list_LDA)
+colnames(topic_list_LDA)<- 'Terms'
+
+Topic<- as.data.frame(list(1:dim.data.frame(topic_list_LDA)[1]))
+colnames(Topic)<- "TopicID"
+topic_list_LDA<- cbind(Topic,topic_list_LDA)
+
+# export topic list
+write.csv(topic_list_LDA, file = "topic_list_LDA.csv", quote = TRUE, sep= ",",
+          row.names=FALSE, qmethod='escape',
+          fileEncoding = "UTF-8", na = "NA")
+
+
+###################################### Assign Topics Back to each Post##################################
                
-## topic assignment
-# get topic-post assignment weight matrix
+# get weighted topic-post assignment matrix
 pridicDoc<- slda.predict.docsums(documents=documents, 
-                                    fit$topics, 
-                                    alpha, 
-                                    eta, 
-                                    num.iterations = 10000, 
-                                    average.iterations = 5000, 
-                                    trace = 0L)
+                                 fit$topics, 
+                                 alpha, 
+                                 eta, 
+                                 num.iterations = 10000, 
+                                 average.iterations = 5000, 
+                                 trace = 0L)
+
 #get top1 topic for each post
 getTopTopic<- function(pridicDoc){
   
@@ -149,13 +168,17 @@ getTopTopic<- function(pridicDoc){
   
   return(t)
 }
-#apply the function and get topic assignment list
+               
+# apply the function and get topic assignment list
 topic<- getTopTopic(pridic)
+               
 topic<- as.data.frame(topic)
+               
+# Combine the post dataset with topic
 Final_TW_Tweets_Topic<- cbind(Final_TW_Tweets, topic)
-colnames(Final_TW_Tweets)[4]<- "Topic"
-
-
+colnames(Final_TW_Tweets)[4]<- "TopicID"
+# link TopicID with topic Content
+Final_TW_Tweets_Topic_Final<- merge(x = Final_TW_Tweets_Topic, y = topic_list_LDA, by = "TopicID", all.x = TRUE)
 
 
 
