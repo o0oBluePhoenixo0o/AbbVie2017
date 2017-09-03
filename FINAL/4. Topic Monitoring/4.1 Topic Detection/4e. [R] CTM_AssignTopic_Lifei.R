@@ -69,6 +69,10 @@ labeling_set <- cbind(as.data.frame(preprocess_final$id),
 colnames(labeling_set) <- c("id","created_time","message","topic_id","topic")
 
 
+# View result
+view(labeling_set)
+
+
 
 # Write out as json ###################################################################################
 # Function--write data frame as json
