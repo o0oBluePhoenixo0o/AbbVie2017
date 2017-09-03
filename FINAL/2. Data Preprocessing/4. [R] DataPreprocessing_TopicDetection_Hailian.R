@@ -1,6 +1,7 @@
 
 ##########################################Data Preprocessing##########################################
-
+install.packages('tm')
+library(tm)
 # This preprocess method suits both for RawTermFrequency and DeepLearning methods
 
 # read in some stopwords:
