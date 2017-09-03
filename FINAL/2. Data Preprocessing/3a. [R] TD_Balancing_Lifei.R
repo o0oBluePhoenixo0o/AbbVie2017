@@ -116,3 +116,8 @@ training_set <- rbind(abbvie_sub,
                       rheumatoid_sub)
 
 
+view(training_set)
+
+
+
+
