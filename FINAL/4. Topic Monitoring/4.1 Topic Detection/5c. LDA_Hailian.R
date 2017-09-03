@@ -142,7 +142,7 @@ getTopTopic<- function(pridicDoc){
       
       if(pridic[j,i]==max(pridic[,i])){
         
-        t<- cbind(t,j)
+        t<- rbind(t,j)
       }
     }
   }
