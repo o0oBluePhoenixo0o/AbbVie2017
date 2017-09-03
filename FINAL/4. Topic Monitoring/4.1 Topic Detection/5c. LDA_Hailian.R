@@ -122,6 +122,40 @@ serVis(json, out.dir = 'vi', open.browser = TRUE)
 
 # get topic list
 topic_list<- top.topic.words(fit$topics, num.words = 10, by.score = FALSE)
+               
+## topic assignment
+# get topic-post assignment weight matrix
+pridicDoc<- slda.predict.docsums(documents=documents, 
+                                    fit$topics, 
+                                    alpha, 
+                                    eta, 
+                                    num.iterations = 10000, 
+                                    average.iterations = 5000, 
+                                    trace = 0L)
+#get top1 topic for each post
+getTopTopic<- function(pridicDoc){
+  
+  t<- list()
+  for(i in 1:dim(pridic)[2]){
+    
+    for(j in 1:dim(pridic)[1]){
+      
+      if(pridic[j,i]==max(pridic[,i])){
+        
+        t<- cbind(t,j)
+      }
+    }
+  }
+  
+  return(t)
+}
+#apply the function and get topic assignment list
+topic<- getTopTopic(pridic)
+topic<- as.data.frame(topic)
+Final_TW_Tweets_Topic<- cbind(Final_TW_Tweets, topic)
+colnames(Final_TW_Tweets)[4]<- "Topic"
+
+
 
 
 
