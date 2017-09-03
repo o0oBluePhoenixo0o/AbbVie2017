@@ -1,7 +1,10 @@
 
 ##########################################Data Preprocessing##########################################
 install.packages('tm')
+install.packages('textstem')
+
 library(tm)
+library(textstem)
 # This preprocess method suits both for RawTermFrequency and DeepLearning methods
 
 # read in some stopwords:
