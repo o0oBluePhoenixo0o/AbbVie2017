@@ -1,6 +1,14 @@
 #####################################################################################################
 ################################## Multi Trends Comparison ##########################################
 
+# After LDA on R detect out the topics and assign topic back to each post, 
+# multi-trends comparison is used to make comparison for trends of different topics
+
+## generate post dataset for each topic
+dataset_topic1<- subset(Final_TW_Tweets, Topic="1")
+dataset_topic2<- subset(Final_TW_Tweets, Topic="2")
+dataset_topic3<- subset(Final_TW_Tweets, Topic="3")
+
 library(zoo)
 library(reshape2)
 library(ggplot2)  
@@ -51,4 +59,4 @@ trendComparisonByDay <- function (dataset1,dataset2,dataset3, keyword1, keyword2
 }
 
 ## apply multi-trends comparison graph
-trendComparisonByDay(topic_abbv_201704,topic_amgn_201704,topic_bmy_201704,'ABBV','AMGN','BMY')
+trendComparisonByDay(dataset_topic1,dataset_topic2,datasetopic3,'Topic1','Topic2','Topic3')
