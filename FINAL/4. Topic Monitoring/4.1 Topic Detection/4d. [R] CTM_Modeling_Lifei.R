@@ -3,6 +3,7 @@
 
 
 # Correlated topic models
+# There is an example in data folder "CTM30.RData"
 
 
 
