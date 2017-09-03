@@ -71,8 +71,11 @@ train_dtm_tfidf@x <- ceiling(train_dtm_tfidf@x)
 
 
 # Modeling ######################################################################################
-# Modeling
+# If the best K is changed, you can change the k here.
 k = 30
+
+
+# Modeling
 models <- list(
   CTM       = CTM(train_dtm_tfidf, k = k, 
                   control = list(estimate.beta = TRUE,
@@ -120,11 +123,13 @@ for(i in 1:k)
 colnames(topic) <- c("CTM.Topic")
 
 
+# View the topics herer
+view(topic)
+
+
 # !!!
 # Save the enviroment here or just leave them in the workspace.
 # Then we will use the model here on the training dataset to assign topics back to the whole dataset.
-
-
 
 
 
