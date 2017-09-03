@@ -3,7 +3,6 @@ install.packages('text2vec')
 install.packages("servr")
 install.packages('textstem')
 install.packages("lda")
-install.packages("LDAvis")
 install.packages("ggrepl")
 install.packages("tidyverse")
 
@@ -13,7 +12,6 @@ library(servr)
 library(text2vec)
 library(textstem)
 library(lda)
-library(LDAvis)
 library(tidyverse)
 
 
